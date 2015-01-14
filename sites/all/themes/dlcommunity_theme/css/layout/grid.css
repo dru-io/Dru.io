@@ -1,0 +1,206 @@
+/**
+ * @file
+ * Grid stylesheet.
+ */
+
+/**
+ * Grid group.
+ */
+.gl-g {
+    letter-spacing: -0.3em;
+    text-rendering: optimizespeed;
+}
+
+/**
+ * Define grid system.
+ * Available scales:
+ * - 2;
+ * - 3;
+ * - 4;
+ * - 5;
+ * - 6;
+ * - 8;
+ * - 12;
+ * - 24;
+ */
+.gl-s-1,
+.gl-s-1-1,
+.gl-s-1-2,
+.gl-s-1-3,
+.gl-s-2-3,
+.gl-s-1-4,
+.gl-s-3-4,
+.gl-s-1-5,
+.gl-s-2-5,
+.gl-s-3-5,
+.gl-s-4-5,
+.gl-s-5-5,
+.gl-s-1-6,
+.gl-s-5-6,
+.gl-s-1-8,
+.gl-s-3-8,
+.gl-s-5-8,
+.gl-s-7-8,
+.gl-s-1-12,
+.gl-s-5-12,
+.gl-s-7-12,
+.gl-s-11-12,
+.gl-s-1-24,
+.gl-s-2-24,
+.gl-s-3-24,
+.gl-s-4-24,
+.gl-s-5-24,
+.gl-s-6-24,
+.gl-s-7-24,
+.gl-s-8-24,
+.gl-s-9-24,
+.gl-s-10-24,
+.gl-s-11-24,
+.gl-s-12-24,
+.gl-s-13-24,
+.gl-s-14-24,
+.gl-s-15-24,
+.gl-s-16-24,
+.gl-s-17-24,
+.gl-s-18-24,
+.gl-s-19-24,
+.gl-s-20-24,
+.gl-s-21-24,
+.gl-s-22-24,
+.gl-s-23-24,
+.gl-s-24-24 {
+    display: inline-block;
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+}
+
+.gl-s-1-24 {
+    width: 4.1667%;
+}
+
+.gl-s-1-12,
+.gl-s-2-24 {
+    width: 8.3333%;
+}
+
+.gl-s-1-8,
+.gl-s-3-24 {
+    width: 12.5%;
+}
+
+.gl-s-1-6,
+.gl-s-4-24 {
+    width: 16.6667%;
+}
+
+.gl-s-1-5 {
+    width: 20%;
+}
+
+.gl-s-5-24 {
+    width: 20.8333%;
+}
+
+.gl-s-1-4,
+.gl-s-6-24 {
+    width: 25%;
+}
+
+.gl-s-7-24 {
+    width: 29.1667%;
+}
+
+.gl-s-1-3,
+.gl-s-8-24 {
+    width: 33.3333%;
+}
+
+.gl-s-3-8,
+.gl-s-9-24 {
+    width: 37.5%;
+}
+
+.gl-s-2-5 {
+    width: 40%;
+}
+
+.gl-s-5-12,
+.gl-s-10-24 {
+    width: 41.6667%;
+}
+
+.gl-s-11-24 {
+    width: 45.8333%;
+}
+
+.gl-s-1-2,
+.gl-s-12-24 {
+    width: 50%;
+}
+
+.gl-s-13-24 {
+    width: 54.1667%;
+}
+
+.gl-s-7-12,
+.gl-s-14-24 {
+    width: 58.3333%;
+}
+
+.gl-s-3-5 {
+    width: 60%;
+}
+
+.gl-s-5-8,
+.gl-s-15-24 {
+    width: 62.5%;
+}
+
+.gl-s-2-3,
+.gl-s-16-24 {
+    width: 66.6667%;
+}
+
+.gl-s-17-24 {
+    width: 70.8333%;
+}
+
+.gl-s-3-4,
+.gl-s-18-24 {
+    width: 75%;
+}
+
+.gl-s-19-24 {
+    width: 79.1667%;
+}
+
+.gl-s-4-5 {
+    width: 80%;
+}
+
+.gl-s-5-6,
+.gl-s-20-24 {
+    width: 83.3333%;
+}
+
+.gl-s-7-8,
+.gl-s-21-24 {
+    width: 87.5%;
+}
+
+.gl-s-11-12,
+.gl-s-22-24 {
+    width: 91.6667%;
+}
+
+.gl-s-23-24 {
+    width: 95.8333%;
+}
+
+.gl-s-1,
+.gl-s-1-1,
+.gl-s-5-5,
+.gl-s-24-24 {
+    width: 100%
+}

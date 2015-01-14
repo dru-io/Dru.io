@@ -1,0 +1,82 @@
+/**
+ * @file
+ * Responsive.
+ */
+
+/**
+ * less sm
+ */
+@media screen and (max-width: 35.5em) {
+    .site-width {
+        width: 100%;
+    }
+
+    .mini-box {
+        margin-bottom: 2rem;
+    }
+
+    input[type="text"].front-search__input {
+        width: 70%;
+    }
+
+    input[type="submit"].front-search__submit {
+        width: 30%;
+    }
+
+    .welcome__title {
+        font-size: 1.5rem; 
+    }
+}
+
+
+/**
+ * sm - small - 568px
+ */
+@media screen and (min-width: 35.5em) and (max-width: 48em) {
+    .site-width {
+        width: 100%;
+    }
+
+    .mini-box {
+        margin-bottom: 2rem;
+    }
+
+    input[type="text"].front-search__input {
+        width: 70%;
+    }
+
+    input[type="submit"].front-search__submit {
+        width: 30%;
+    }
+}
+
+/**
+ * md - medium - 768px
+ */
+@media screen and (min-width: 48em) and (max-width: 64em) {
+    .site-width {
+        width: 48em;
+    }
+
+    .mini-box {
+        margin-bottom: 2rem;
+    }
+}
+
+/**
+ * lg - large - 1024px
+ */
+@media screen and (min-width: 64em) and (max-width: 80em) {
+    .site-width {
+        width: 64em;
+    }
+}
+
+/**
+ * xl - extra large - 1300px
+ */
+@media screen and (min-width: 80em) {
+    .site-width {
+        width: 80rem;
+    }
+}
