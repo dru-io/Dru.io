@@ -28,6 +28,7 @@
 @import "../fontello.css";
 @import "prism.css";
 @import "theme--animations.css";
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700&subset=latin,cyrillic);
 
 /* Theme styles */
 ::-moz-selection {
@@ -43,7 +44,28 @@ body {
     padding: 0;
     color: #363635;
     background-color: rgba(83, 176, 235, 0.02);
+    /*font: normal 1rem/1.8 'Roboto', sans-serif;*/
     font: normal 1rem/1.8 Arial, Helvetica, sans-serif;
+}
+
+blockquote {
+    position: relative;
+    font-style: italic;
+    font-size: 0.875rem;
+    background: rgb(251, 253, 254);
+    padding: 0.15rem 0 0.15rem 2rem;
+    margin: 1em 0;
+    border: 1px solid rgba(0, 0, 0, 0.03);
+}
+blockquote:before {
+    content: '„';
+    position: absolute;
+    left: 0.5rem;
+    color: rgb(110,110,110);
+    font-size: 3rem;
+    font-style: italic;
+    line-height: 1;
+    top: -0.85rem;
 }
 
 a {
@@ -1023,20 +1045,4 @@ input[type="submit"].front-search__submit:focus {
 .rss-subsribe {
     color: #FF6600;
     border: none;
-}
-
-blockquote {
-    position: relative;
-    font-style: italic;
-    font-size: 0.875rem;
-}
-blockquote:before {
-    content: '"';
-    position: absolute;
-    left: -.75em;
-    color: rgb(110, 110, 110);
-    font-size: 3rem;
-    font-style: italic;
-    line-height: 1;
-    top: 0;
 }

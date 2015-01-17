@@ -55,7 +55,7 @@
  */
 @media screen and (min-width: 48em) and (max-width: 64em) {
     .site-width {
-        width: 48em;
+        width: 47rem;
     }
 
     .mini-box {
@@ -68,7 +68,7 @@
  */
 @media screen and (min-width: 64em) and (max-width: 80em) {
     .site-width {
-        width: 64em;
+        width: 63rem;
     }
 }
 
@@ -77,6 +77,6 @@
  */
 @media screen and (min-width: 80em) {
     .site-width {
-        width: 80rem;
+        width: 79rem;
     }
 }

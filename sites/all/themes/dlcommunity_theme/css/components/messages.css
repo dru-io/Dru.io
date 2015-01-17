@@ -3,27 +3,28 @@
  * Styles for system messages.
  */
 div.messages {
-    border-width: 1px;
-    border-style: solid;
     position: relative;
-    overflow: hidden;
-    background-color: transparent;
-    background-position: 20px 50%;
-    margin: 0.5rem 0;
-    padding: 0.5rem;
-    color: rgba(0, 0, 0, 0.66);
-    font-weight: bold;
+    min-height: 1em;
+    margin: 1em 0;
+    background: #efefef;
+    padding: 1em 1.5em;
+    line-height: 1.3;
+    color: rgba(0, 0, 0, .8);
+    border-radius: .2857rem;
+    box-shadow: 0 0 0 1px rgba(39, 41, 43, .15) inset, 0 0 0 0 transparent;
 }
 div.messages.error {
-    background: #EF4836;
-    border-color: rgba(0, 0, 0, 0.22);
+    box-shadow: 0 0 0 1px #dbb1b1 inset, 0 1px 2px 0 rgba(0,0,0,.05);
+    background-color: #fff0f0;
+    color: #a94442;
 }
 div.messages.status {
-    background: none repeat scroll 0% 0% #7AAE91;
-    border-color: rgba(0, 0, 0, 0.22);
+    background-color: #eeffe7;
+    color: #3c763d;
+    box-shadow: 0 0 0 1px #b7caa7 inset, 0 1px 2px 0 rgba(0, 0, 0, .05)
 }
 div.messages.warning {
-    background: #F5AB35;
-    border-color: rgba(0, 0, 0, 0.22);
+    box-shadow: 0 0 0 1px #d9caab inset,0 1px 2px 0 rgba(0,0,0,.05);
+    background-color: #fffbe6;
+    color: #876a38;
 }
-

@@ -90,6 +90,7 @@ function dlcommunity_form_alter(&$form, &$form_state, $form_id) {
     }
     // Make title not required and hide it.
     $form['title']['#required'] = FALSE;
+    $form['title']['#value'] = 'Ответ №' . arg(1);
     hide($form['title']);
 
     // Hide field reference to question.
@@ -155,6 +156,43 @@ function dlcommunity_question_answers_count($nid) {
     ->execute()->fetchField();
 
   return $answers;
+}
+
+/**
+ * Is user answered to this question before.
+ */
+function dlcommunity_is_user_answered_to_question($qid, $uid) {
+  // Default value.
+  $result = FALSE;
+
+  // Get all answers to question.
+  $query = db_select('field_data_field_answer_question_reference', 'qr');
+  $query->condition('qr.entity_type', 'node');
+  $query->condition('qr.bundle', 'answer');
+  $query->condition('qr.field_answer_question_reference_target_id', $qid);
+  $query->fields('qr', array('entity_id'));
+  $answers = $query->execute()->fetchAllAssoc('entity_id');
+
+  // If answers exists.
+  if ($answers) {
+    // Prepare answer id's.
+    $aid = array();
+    foreach ($answers as $nid => $answer) {
+      $aid[] = $nid;
+    }
+
+    // Check whether the user is the author of at least one of the answers.
+    $query = db_select('node', 'n');
+    $query->fields('n');
+    $query->condition('n.uid', $uid);
+    $query->condition('n.nid', $aid, 'IN');
+    $query->countQuery();
+    $count = $query->execute()->fetchField();
+
+    $count ? $result = TRUE : $result = FALSE;
+  }
+
+  return $result;
 }
 
 /**
