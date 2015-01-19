@@ -78,7 +78,7 @@ function dlcommunity_theme_preprocess_page(&$variables, $hook) {
 
   // Check node checkbox.
   if (isset($variables['node'])) {
-    $is_fullpage = isset($variables['node']->field_fullpage['und'][0]['value']) ? $variables['node']->field_fullpage['und'][0]['value'] : false;
+    $is_fullpage = isset($variables['node']->field_fullpage['und'][0]['value']) ? $variables['node']->field_fullpage['und'][0]['value'] : FALSE;
   }
   else {
     $is_fullpage = FALSE;
@@ -120,7 +120,13 @@ function dlcommunity_theme_preprocess_page(&$variables, $hook) {
  */
 function dlcommunity_theme_get_auth_buttons() {
   if (user_is_anonymous()) {
-    return '<a href="/user/" id="user-register-button">Войти</a>';
+    return l('Вход', 'user', array(
+        'query' => drupal_get_destination(),
+        'attributes' => array(
+          'id' => 'user-register-button'
+        ),
+      )
+    );
   }
   else {
     return '<a href="/user" id="user-profile-button">Профиль</a>';

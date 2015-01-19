@@ -3,6 +3,17 @@
  * Form elements.
  */
 
+label {
+    display: block;
+}
+label.option {
+    display: inline-block;
+}
+
+.form-item {
+    margin-bottom: 0.5rem;
+}
+
 input,
 .container-inline .form-item,
 .container-inline .form-select {
