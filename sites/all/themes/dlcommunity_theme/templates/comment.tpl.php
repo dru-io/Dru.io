@@ -9,11 +9,11 @@
 ?>
 <article
   class="<?php print $classes; ?> clearfix gl-g"<?php print $attributes; ?>>
-  <div class="comment-left gl-s-lg-2-24">
+  <div class="comment-left gl-s-5-24 gl-s-lg-2-24">
     <?php print $picture; ?>
   </div>
 
-  <div class="comment-content gl-s-lg-22-24">
+  <div class="comment-content gl-s-19-24 gl-s-lg-22-24">
 
     <header class="comment-info">
       <div class="submitted">
