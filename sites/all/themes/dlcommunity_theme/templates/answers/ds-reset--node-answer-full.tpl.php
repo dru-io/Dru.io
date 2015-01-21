@@ -21,14 +21,6 @@ if (arg(0) == 'node') {
   <div class="gl-s-5-24 gl-s-lg-3-24 gl-s-xl-2-24">
     <?php
     print rate_embed($node, 'vote_up_down', RATE_FULL);
-    print flag_create_link('best_answer', $node->nid);
-
-    /*if ($user->uid != $node->uid) {
-      $flag = flag_get_flag('best_answer');
-      if ($flag->get_count($node->nid)) {
-        print '<span class="best-answer icon-ok-circle" title="Автор вопроса пометил данный ответ как \'Как лучший ответ\' "></span>';
-      }
-    }*/
     ?>
   </div>
 
