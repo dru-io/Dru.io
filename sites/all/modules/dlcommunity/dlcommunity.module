@@ -148,14 +148,16 @@ function dlcommunity_question_is_best_answer($nid) {
  * Returns count of answers.
  */
 function dlcommunity_question_answers_count($nid) {
-  $answers = db_select('field_data_field_answer_question_reference', 'er')
-    ->condition('er.entity_type', 'node')
-    ->condition('er.bundle', 'answer')
-    ->condition('er.field_answer_question_reference_target_id', $nid)
-    ->countQuery()
-    ->execute()->fetchField();
+  $answers = db_select('field_data_field_answer_question_reference', 'er');
+  $answers->addExpression('COUNT(*)');
+  $answers->join('node', 'n', 'n.nid = er.entity_id');
+  $answers->condition('n.status', 1);
+  $answers->condition('er.entity_type', 'node');
+  $answers->condition('er.bundle', 'answer');
+  $answers->condition('er.field_answer_question_reference_target_id', $nid);
+  $result = $answers->execute()->fetchField();
 
-  return $answers;
+  return $result;
 }
 
 /**
