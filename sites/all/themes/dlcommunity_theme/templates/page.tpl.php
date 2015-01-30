@@ -3,8 +3,9 @@
     <div class="gl-s-1 gl-s-md-8-24 gl-s-lg-6-24 gl-p-1">
       <h2 id="site-name">
         <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"
-           rel="home">Drupalife<span>Community</span></a>
+           rel="home">Dru<span>.io</span></a>
       </h2>
+      <h3 id="site-slogan"><?php print $site_slogan; ?></h3>
     </div>
 
     <div class="gl-s-1 gl-s-16-24 gl-s-lg-14-24 gl-p-1">

@@ -101,17 +101,22 @@ code {
     background: white;
 }
 #site-name {
-    font-weight: 300;
+    font-weight: bold;
     font-size: 1.5rem;
-    margin-top: .75rem;
+    line-height: 1;
+    margin: .5rem 0;
 }
 #site-name span {
-    font-weight: bold;
     color: #53B0EB;
 }
 #site-name a {
     border: none;
-    color: #BBBBBB;
+    color: #6C6C6C;
+}
+#site-slogan {
+    font-weight: 300;
+    line-height: 1;
+    font-size: 1rem;
 }
 
 #user-register-button,

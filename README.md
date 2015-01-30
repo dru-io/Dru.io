@@ -1,7 +1,7 @@
-# DrupalCommunity
+﻿# Dru.io - Drupal сообщество.
 Этот репозитарий создан для альтернативного русскоязычного Drupal сообщества. 
 
-**Текущий адрес сообщества:** http://community.drupalife.com/
+**Адрес сообщества:** http://dru.io/
 
 ### Навигация по репозитарию:
 - Обсуждения проходят в [Issues](https://github.com/Niklan/DrupalCommunity/issues).
