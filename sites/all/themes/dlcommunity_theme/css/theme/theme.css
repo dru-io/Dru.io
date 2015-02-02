@@ -907,6 +907,11 @@ input[type="submit"].front-search__submit:focus {
 .project__title {
     margin: 0;
 }
+.project__title a {
+    text-decoration: none;
+    border: medium none;
+    font-size: 0.875rem;
+}
 .project__status {
     font-size: 0.9rem;
 }

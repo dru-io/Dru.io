@@ -11,11 +11,11 @@
   <meta http-equiv="cleartype" content="on">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <?php print $styles; ?>
-  <?php print $scripts; ?>
 </head>
 <body class="<?php print $classes; ?>" <?php print $attributes; ?>>
   <?php print $page_top; ?>
   <?php print $page; ?>
+  <?php print $scripts; ?>
   <?php print $page_bottom; ?>
   <script>
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

@@ -7,7 +7,12 @@ krsort($releases_array);
 <article class="<?php print $clean_classes; ?> gl-g"<?php print $attributes; ?>>
 
   <div class="gl-s-1 gl-s-lg-12-24 project__info">
-    <h2 class="project__title"><?php print $title; ?></h2>
+    <h2 class="project__title">
+      <?php print $title; ?>
+      <a href="https://drupal.org/project/<?php print strtolower($field_project_short_name[0]['value']); ?>" target="_blank">
+        <span class="icon-link-ext"></span>
+      </a>
+    </h2>
 
     <div class="project__info-update">
       Информация о проекте обновлена <?php print format_date($node->changed, 'short'); ?>
