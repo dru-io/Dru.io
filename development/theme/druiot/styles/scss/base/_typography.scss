@@ -1,0 +1,106 @@
+/**
+ * @file
+ * Typography styles.
+ */
+
+html {
+  font-size: 1rem; // Hardcoded, because we need inherit user font-size.
+}
+
+body {
+  @include fontSize($baseFontSize);
+  font-family: $baseFontFamily;
+  line-height: $baseLineHeight;
+  color: $baseFontColor;
+}
+
+a {
+  color: $linkColor;
+  @if $linkDecoration == true {
+    text-decoration: underline;
+  }
+  @else {
+    text-decoration: none;
+  }
+
+  &:hover {
+    color: $linkColorHover;
+  }
+
+  &:visited {
+    color: $linkColorVisited;
+  }
+}
+
+ol,
+ul {
+  margin: 1em 0 1em 1.45em;
+  padding: 0;
+}
+
+p {
+  margin: 1em 0;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  margin: calc(2rem - .2em) 0 1rem;
+  line-height: $baseLineHeight
+}
+
+.subheader {
+  color: rgba(0, 0, 0, .5);
+  display: block;
+  font-weight: normal;
+}
+
+h1 {
+  @include fontSize($baseHeaderSize);
+  .subheader {
+    @extend .subheader;
+    @include fontSize($baseHeaderSize / 1.5);
+  }
+}
+
+h2 {
+  @include fontSize($baseHeaderSize * .9);
+  .subheader {
+    @extend .subheader;
+    @include fontSize(($baseHeaderSize * .9) / 1.5);
+  }
+}
+
+h3 {
+  @include fontSize($baseHeaderSize * .8);
+  .subheader {
+    @extend .subheader;
+    @include fontSize(($baseHeaderSize * .8) / 1.5);
+  }
+}
+
+h4 {
+  @include fontSize($baseHeaderSize * .7);
+  .subheader {
+    @extend .subheader;
+    @include fontSize(($baseHeaderSize * .7) / 1.5);
+  }
+}
+
+h5 {
+  @include fontSize($baseHeaderSize * .6);
+  .subheader {
+    @extend .subheader;
+    @include fontSize(($baseHeaderSize * .6) / 1.5);
+  }
+}
+
+small, .font_small {
+  font-size: 0.75em;
+}
+
+hr {
+  border: 0px solid rgba(0, 0, 0, .1);
+  border-top-width: 1px;
+}

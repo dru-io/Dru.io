@@ -1,0 +1,33 @@
+/**
+ * @file
+ * Styles for system messages.
+ */
+.messages {
+  position: relative;
+  min-height: 1em;
+  margin: 1em 0;
+  background: #efefef;
+  padding: 1em 1.5em;
+  line-height: 1.3;
+  color: rgba(0, 0, 0, .8);
+  border-radius: .2857rem;
+  box-shadow: 0 0 0 1px rgba(39, 41, 43, .15) inset, 0 0 0 0 transparent;
+
+  &.error {
+    box-shadow: 0 0 0 1px #dbb1b1 inset, 0 1px 2px 0 rgba(0,0,0,.05);
+    background-color: #fff0f0;
+    color: #a94442;
+  }
+
+  &.status {
+    background-color: #eeffe7;
+    color: #3c763d;
+    box-shadow: 0 0 0 1px #b7caa7 inset, 0 1px 2px 0 rgba(0, 0, 0, .05)
+  }
+
+  &.warning {
+    box-shadow: 0 0 0 1px #d9caab inset,0 1px 2px 0 rgba(0,0,0,.05);
+    background-color: #fffbe6;
+    color: #876a38;
+  }
+}

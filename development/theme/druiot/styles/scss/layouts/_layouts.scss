@@ -1,0 +1,15 @@
+/**
+ * @file
+ * Layout settings.
+ */
+
+// Susy settings.
+$susy: (
+  columns: 20,
+  gutters: 1/4,
+  global-box-sizing: border-box,
+);
+
+// Default sizes.
+// 1200px
+$siteWidth: 75rem;

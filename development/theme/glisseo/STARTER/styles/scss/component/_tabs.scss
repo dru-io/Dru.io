@@ -1,0 +1,116 @@
+/**
+ * Tabs style.
+ */
+ul.tabs {
+  // Primary tabs.
+  &.primary {
+    background: white;
+    letter-spacing: -0.3rem;
+    margin: 1rem 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid #ddd;
+
+    li {
+      letter-spacing: 0rem;
+      display: inline-block;
+      vertical-align: middle;
+
+      &.active {
+        color: #333;
+        border: 1px solid #ddd;
+        border-bottom: 1px solid white;
+        border-radius: 2px 2px 0 0;
+        margin-bottom: -1px;
+      }
+
+      a {
+        color: #666;
+        display: block;
+        padding: .5rem .75rem;
+        border: none;
+        text-decoration: none;
+      }
+
+      &.active a,
+      &:hover a {
+        color: #333;
+        transition: all 500ms;
+      }
+    }
+  }
+
+  // Secondary.
+  &.secondary {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-bottom: 1px solid #E0E0E0;
+
+    &:after {
+      content: '';
+      display: block;
+      float: none;
+      clear: both;
+    }
+
+    li {
+      float: left;
+      display: block;
+      border: none;
+      padding: 0;
+      margin: 0;
+
+      a {
+        display: block;
+        margin: 0;
+        color: #4E5665;
+        padding: 10px 15px;
+        border: none;
+        box-shadow: none;
+        transition: box-shadow 200ms;
+      }
+
+      &.active a {
+        background: white;
+        box-shadow: inset 0px -2px 0px #6D6D6D;
+      }
+
+      &.hover a {
+        box-shadow: inset 0px -2px 0px #6D6D6D;
+        transition: box-shadow 200ms;
+      }
+    }
+  }
+
+  &:last-child {
+    margin-bottom: 15px;
+  }
+}
+
+// Vertical tabs.
+.vertical-tabs {
+  .vertical-tabs-list {
+    * {
+      text-decoration: none !important;
+      outline: 0 !important;
+    }
+
+    .vertical-tab-button {
+      @include linear-gradient(#fefefe, #f6f7f8);
+
+      a {
+        color: rgba(80, 74, 74, 1);
+        border: none;
+      }
+
+      &.selected {
+        background: white;
+
+        strong {
+          color: $linkColor;
+        }
+      }
+    }
+  }
+}
