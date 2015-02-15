@@ -4,6 +4,13 @@
  * Main code.
  */
 
+
+ /*
+  * Tracking messages config
+  */
+
+include __DIR__ . '/dlcommunity_messages.inc';
+
 /**
  * Implements hook_menu().
  */
