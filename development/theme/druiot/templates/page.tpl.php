@@ -19,7 +19,7 @@
   </div>
 </header>
 
-<main>
+<main id="main">
   <section id="content" role="main">
     <?php print render($page['highlighted']); ?>
     <?php print $breadcrumb; ?>
@@ -39,9 +39,7 @@
   </section>
 
   <?php
-  // Print first sidebar, if it exist.
-  $sidebar_first = render($page['sidebar_first']);
-  if ($sidebar_first) {
-    print $sidebar_first;
+  if ($sidebar_right) {
+    print $sidebar_right;
   } ?>
 </main>

@@ -1,0 +1,46 @@
+/**
+ * Tables style.
+ */
+table {
+    width: 100%;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #E5E6E9 #DFE0E4 #D0D1D5;
+    color: #4E5665;
+    font-size: 100%;
+}
+table a {
+    color: rgba(40, 79, 137, 1);
+}
+table > thead {
+    border-radius: 3px 3px 0 0;
+    border-bottom: 1px solid #E5E5E5;
+    background: none repeat scroll 0% 0% #F6F7F8;
+}
+table > thead > tr > th {
+    padding: 12px;
+    color: #4E5665;
+}
+table > tbody {
+    background: white;
+}
+table > tbody > tr {
+    border: none !important;
+}
+table > tbody > tr > td {
+    background: white;
+    border-left: 1px solid rgba(0, 0, 0, 0.1);
+    padding: 12px;
+}
+table > tbody > tr > td:first-child,
+table > tbody > tr > td.permissions,
+table > tbody > tr > td.configure {
+    border: none;
+}
+table > tbody > tr:nth-child(2n) > td {
+    background-color: #F6F7F8;
+}
+table > tbody > tr:hover > td {
+    background-color: #E9EAED;
+}
+

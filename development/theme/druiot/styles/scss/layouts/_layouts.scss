@@ -5,10 +5,11 @@
 
 // Susy settings.
 $susy: (
-  columns: 20,
   gutters: 1/4,
-  global-box-sizing: border-box,
+  use-custom: (rem: true)
 );
+
+@include border-box-sizing;
 
 // Default sizes.
 // 1200px

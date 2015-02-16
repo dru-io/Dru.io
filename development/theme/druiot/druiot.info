@@ -19,8 +19,7 @@ stylesheets[all][] = styles/css/styles.css
 regions[navigation]     = Navigation bar
 regions[help]           = Help
 regions[content]        = Content
-regions[sidebar_first]  = First sidebar
-regions[sidebar_second] = Second sidebar
+regions[sidebar_right]  = Right sidebar
 regions[footer]         = Footer
 
 ; This two regions is required by Drupal Core. Don't remove them, they not display in block list.

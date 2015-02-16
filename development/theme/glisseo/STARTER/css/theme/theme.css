@@ -1,0 +1,27 @@
+/**
+ * @file
+ * Main style file for template. You can edit it on your own.
+ */
+
+/**
+ * Import our css files.
+ * You can simply remove which not needed or add own imports. Drupal cache
+ * parse them all and create one minimized file.
+ */
+
+/* Base */
+@import "../base/normalize.css";
+@import "../base/normalize--additional.css";
+
+/* Grid */
+@import "../layout/grid.css";
+@import "../layout/grid--responsive.css";
+
+/* Components */
+@import "../components/forms.css";
+@import "../components/table.css";
+@import "../components/tabs.css";
+@import "../components/pager.css";
+@import "../components/messages.css";
+
+/* Theme styles */

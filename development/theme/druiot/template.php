@@ -8,14 +8,20 @@
  */
 
 /**
- * Implements hook_preprocess_html().
+ * Implements template_preprocess_html().
  */
-/*
-function THEMENAME_preprocess_html(&$variables, $hook) {
+function druiot_preprocess_html(&$variables) {
+  // Redefine body classes.
+  $variables['classes_array'] = array();
+
+  if ($variables['page']['sidebar_right']) {
+    $variables['classes_array'][] = 'sidebar-right';
+  }
+  else {
+    $variables['classes_array'][] = 'no-sidebar';
+  }
 
 }
-*/
-
 /**
  * Implements hook_preprocess_page().
  */
