@@ -12,9 +12,11 @@ stylesheets[all][] = system.theme.css
 
 ; Here you can attach your own styles.
 stylesheets[all][] = styles/css/styles.css
+stylesheets[all][] = styles/css/highlightjs.css
 
 ; Here tou can attach your scripts.
-;scripts[] = js/script.js
+scripts[] = js/highlight.pack.js
+scripts[] = js/script.js
 
 regions[navigation]     = Navigation bar
 regions[help]           = Help

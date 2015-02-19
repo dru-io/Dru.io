@@ -7,7 +7,10 @@
 
     Drupal.behaviors.yourBehaviorName = {
         attach: function (context, settings) {
-            // Your code here.
+            // Attach highlightjs.
+            $('pre code').each(function (i, block) {
+                hljs.highlightBlock(block);
+            });
         }
     };
 
