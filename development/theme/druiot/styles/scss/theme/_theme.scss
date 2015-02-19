@@ -385,6 +385,40 @@ body {
           }
         }
       }
+
+      .flag-best-answer {
+        text-align: center;
+        font-size: 2.5rem;
+
+        .flag-action {
+          @extend .fa;
+          @extend .fa-check;
+          color: #E2E2E2;
+
+          &:hover {
+            color: #2ECC71;
+          }
+        }
+
+        .unflag-action {
+          @extend .fa;
+          @extend .fa-check;
+          color: #2ECC71;
+
+          &:hover {
+            color: #E2E2E2;
+          }
+        }
+      }
+
+      .best-answer {
+        @extend .fa;
+        @extend .fa-check;
+        color: #2ECC71;
+        text-align: center;
+        font-size: 2.5rem;
+        width: 100%; // firefox bug
+      }
     }
 
     .answer__right {
