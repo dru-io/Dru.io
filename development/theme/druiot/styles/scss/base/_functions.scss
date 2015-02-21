@@ -8,7 +8,7 @@
  * @param
  *   $size - needed font size in PX.
  */
-@function calculateRem($size) {
+@function pxToRem($size) {
   $remSize: $size / 16px;
   @return #{$remSize}rem;
 }

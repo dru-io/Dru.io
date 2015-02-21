@@ -422,7 +422,7 @@ body {
   font-size: 1rem;
   font-family: Arial, sans-serif;
   line-height: 1.4;
-  color: #111; }
+  color: #333; }
 
 a {
   color: #4a90d9;
@@ -496,6 +496,15 @@ hr {
 
 label {
   display: block; }
+
+pre code {
+  font-family: consolas, monospace, monospaced; }
+
+blockquote {
+  border-left: 4px solid #DDD;
+  margin: 0;
+  padding: 0 0 0 1rem;
+  color: #777; }
 
 /**
  * @file
@@ -776,7 +785,7 @@ input[type="reset"],
   src: url("../../fonts/font-awesome/fontawesome-webfont.eot?#iefix") format("embedded-opentype"), url("../../fonts/font-awesome/fontawesome-webfont.woff2") format("woff2"), url("../../fonts/font-awesome/fontawesome-webfont.woff") format("woff"), url("../../fonts/font-awesome/fontawesome-webfont.ttf") format("truetype"), url("../../fonts/font-awesome/fontawesome-webfont.svg#fontawesomeregular") format("svg");
   font-weight: normal;
   font-style: normal; }
-.fa, #site-search:before, #header-links .header__tracker:before, #header-links .header__github:before, #header-profile .header-profile__auth span:before, #header-profile .header-profile__profile span:before, #header-profile .header-profile__logout:before, .breadcrumb .first:before, .question.full .question__left .rate-widget .rate-plus, .question.full .question__left .rate-widget .rate-minus, .question.full .question__right .drupal-version:before, .question.full .question__right .category:before, .answer.teaser .answer__left .rate-widget .rate-plus, .answer.teaser .answer__left .rate-widget .rate-minus, .answer.teaser .answer__left .flag-best-answer .flag-action, .answer.teaser .answer__left .flag-best-answer .unflag-action, .answer.teaser .answer__left .best-answer {
+.fa, #site-search:before, #header-links .header__tracker:before, #header-links .header__github:before, #header-profile .header-profile__auth span:before, #header-profile .header-profile__profile span:before, #header-profile .header-profile__logout:before, .breadcrumb .first:before, .question.full .question__left .rate-widget .rate-plus, .question.full .question__left .rate-widget .rate-minus, .question.full .question__right .drupal-version:before, .question.full .question__right .category:before, .question.teaser .question__right h2 a:before, .answer.teaser .answer__left .rate-widget .rate-plus, .answer.full .answer__left .rate-widget .rate-plus, .answer.teaser .answer__left .rate-widget .rate-minus, .answer.full .answer__left .rate-widget .rate-minus, .answer.teaser .answer__left .flag-best-answer .flag-action, .answer.full .answer__left .flag-best-answer .flag-action, .answer.teaser .answer__left .flag-best-answer .unflag-action, .answer.full .answer__left .flag-best-answer .unflag-action, .answer.teaser .answer__left .best-answer, .answer.full .answer__left .best-answer {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -834,9 +843,9 @@ input[type="reset"],
 .pull-left {
   float: left; }
 
-.fa.pull-left, .pull-left#site-search:before, #header-links .pull-left.header__tracker:before, #header-links .pull-left.header__github:before, #header-profile .header-profile__auth span.pull-left:before, #header-profile .header-profile__profile span.pull-left:before, #header-profile .pull-left.header-profile__logout:before, .breadcrumb .pull-left.first:before, .question.full .question__left .rate-widget .pull-left.rate-plus, .question.full .question__left .rate-widget .pull-left.rate-minus, .question.full .question__right .pull-left.drupal-version:before, .question.full .question__right .pull-left.category:before, .answer.teaser .answer__left .rate-widget .pull-left.rate-plus, .answer.teaser .answer__left .rate-widget .pull-left.rate-minus, .answer.teaser .answer__left .flag-best-answer .pull-left.flag-action, .answer.teaser .answer__left .flag-best-answer .pull-left.unflag-action, .answer.teaser .answer__left .pull-left.best-answer {
+.fa.pull-left, .pull-left#site-search:before, #header-links .pull-left.header__tracker:before, #header-links .pull-left.header__github:before, #header-profile .header-profile__auth span.pull-left:before, #header-profile .header-profile__profile span.pull-left:before, #header-profile .pull-left.header-profile__logout:before, .breadcrumb .pull-left.first:before, .question.full .question__left .rate-widget .pull-left.rate-plus, .question.full .question__left .rate-widget .pull-left.rate-minus, .question.full .question__right .pull-left.drupal-version:before, .question.full .question__right .pull-left.category:before, .question.teaser .question__right h2 a.pull-left:before, .answer.teaser .answer__left .rate-widget .pull-left.rate-plus, .answer.full .answer__left .rate-widget .pull-left.rate-plus, .answer.teaser .answer__left .rate-widget .pull-left.rate-minus, .answer.full .answer__left .rate-widget .pull-left.rate-minus, .answer.teaser .answer__left .flag-best-answer .pull-left.flag-action, .answer.full .answer__left .flag-best-answer .pull-left.flag-action, .answer.teaser .answer__left .flag-best-answer .pull-left.unflag-action, .answer.full .answer__left .flag-best-answer .pull-left.unflag-action, .answer.teaser .answer__left .pull-left.best-answer, .answer.full .answer__left .pull-left.best-answer {
   margin-right: .3em; }
-.fa.pull-right, .pull-right#site-search:before, #header-links .pull-right.header__tracker:before, #header-links .pull-right.header__github:before, #header-profile .header-profile__auth span.pull-right:before, #header-profile .header-profile__profile span.pull-right:before, #header-profile .pull-right.header-profile__logout:before, .breadcrumb .pull-right.first:before, .question.full .question__left .rate-widget .pull-right.rate-plus, .question.full .question__left .rate-widget .pull-right.rate-minus, .question.full .question__right .pull-right.drupal-version:before, .question.full .question__right .pull-right.category:before, .answer.teaser .answer__left .rate-widget .pull-right.rate-plus, .answer.teaser .answer__left .rate-widget .pull-right.rate-minus, .answer.teaser .answer__left .flag-best-answer .pull-right.flag-action, .answer.teaser .answer__left .flag-best-answer .pull-right.unflag-action, .answer.teaser .answer__left .pull-right.best-answer {
+.fa.pull-right, .pull-right#site-search:before, #header-links .pull-right.header__tracker:before, #header-links .pull-right.header__github:before, #header-profile .header-profile__auth span.pull-right:before, #header-profile .header-profile__profile span.pull-right:before, #header-profile .pull-right.header-profile__logout:before, .breadcrumb .pull-right.first:before, .question.full .question__left .rate-widget .pull-right.rate-plus, .question.full .question__left .rate-widget .pull-right.rate-minus, .question.full .question__right .pull-right.drupal-version:before, .question.full .question__right .pull-right.category:before, .question.teaser .question__right h2 a.pull-right:before, .answer.teaser .answer__left .rate-widget .pull-right.rate-plus, .answer.full .answer__left .rate-widget .pull-right.rate-plus, .answer.teaser .answer__left .rate-widget .pull-right.rate-minus, .answer.full .answer__left .rate-widget .pull-right.rate-minus, .answer.teaser .answer__left .flag-best-answer .pull-right.flag-action, .answer.full .answer__left .flag-best-answer .pull-right.flag-action, .answer.teaser .answer__left .flag-best-answer .pull-right.unflag-action, .answer.full .answer__left .flag-best-answer .pull-right.unflag-action, .answer.teaser .answer__left .pull-right.best-answer, .answer.full .answer__left .pull-right.best-answer {
   margin-left: .3em; }
 
 .fa-spin {
@@ -959,7 +968,7 @@ input[type="reset"],
 .fa-th-list:before {
   content: ""; }
 
-.fa-check:before, .answer.teaser .answer__left .flag-best-answer .flag-action:before, .answer.teaser .answer__left .flag-best-answer .unflag-action:before, .answer.teaser .answer__left .best-answer:before {
+.fa-check:before, .answer.teaser .answer__left .flag-best-answer .flag-action:before, .answer.full .answer__left .flag-best-answer .flag-action:before, .answer.teaser .answer__left .flag-best-answer .unflag-action:before, .answer.full .answer__left .flag-best-answer .unflag-action:before, .answer.teaser .answer__left .best-answer:before, .answer.full .answer__left .best-answer:before {
   content: ""; }
 
 .fa-remove:before,
@@ -1183,7 +1192,7 @@ input[type="reset"],
 .fa-check-circle:before {
   content: ""; }
 
-.fa-question-circle:before {
+.fa-question-circle:before, .question.teaser .question__right h2 a:before {
   content: ""; }
 
 .fa-info-circle:before {
@@ -1269,10 +1278,10 @@ input[type="reset"],
 .fa-magnet:before {
   content: ""; }
 
-.fa-chevron-up:before, .question.full .question__left .rate-widget .rate-plus:before, .answer.teaser .answer__left .rate-widget .rate-plus:before {
+.fa-chevron-up:before, .question.full .question__left .rate-widget .rate-plus:before, .answer.teaser .answer__left .rate-widget .rate-plus:before, .answer.full .answer__left .rate-widget .rate-plus:before {
   content: ""; }
 
-.fa-chevron-down:before, .question.full .question__left .rate-widget .rate-minus:before, .answer.teaser .answer__left .rate-widget .rate-minus:before {
+.fa-chevron-down:before, .question.full .question__left .rate-widget .rate-minus:before, .answer.teaser .answer__left .rate-widget .rate-minus:before, .answer.full .answer__left .rate-widget .rate-minus:before {
   content: ""; }
 
 .fa-retweet:before {
@@ -2770,35 +2779,35 @@ select {
  * Pager styles.
  */
 .pager {
-  margin: 0px auto;
+  margin: .5rem auto;
   padding: 0px;
   list-style: none outside none;
   display: table;
-  color: #444; }
+  background: #ffffff;
+  border: 1px solid #EAEAEA;
+  border-radius: 4px;
+  overflow: hidden; }
   .pager li {
     float: left;
-    margin: 0 5px; }
-  .pager .pager-item {
-    border: 3px solid #D8D5D5;
-    padding: 0px 0.5rem;
-    border-radius: 5px;
-    background: #F8F8F8; }
-    .pager .pager-item a {
-      color: #444;
+    border-right: 1px solid #EAEAEA;
+    background: transparent;
+    transition: background 200ms; }
+    .pager li a {
+      padding: 0 1rem;
+      color: #777;
       text-decoration: none;
+      line-height: 2rem; }
+    .pager li:hover {
+      background: #F9F9F9;
+      transition: background 200ms; }
+    .pager li:last-child {
       border: none; }
   .pager .pager-current {
-    border: 3px solid #B9B9B9;
-    padding: 0px 0.5rem;
-    border-radius: 5px;
-    font-weight: bold; }
-  .pager .pager-next a,
-  .pager .pager-last a,
-  .pager .pager-first a,
-  .pager .pager-previous a {
+    padding: 0 1rem;
+    color: #777;
     text-decoration: none;
-    border: none;
-    font-weight: bold; }
+    line-height: 2rem;
+    background: #F9F9F9; }
 
 /**
  * Tabs style.
@@ -3198,7 +3207,7 @@ body {
       font-weight: bold;
       font-size: 1rem; }
     .question.full .question__right .author-and-date .created {
-      color: #B9B9B9;
+      color: #777;
       font-size: 0.875rem; }
     .question.full .question__right .drupal-version:before {
       margin-right: 0.6rem; }
@@ -3212,11 +3221,51 @@ body {
     margin-right: 0;
     margin-top: 1rem;
     border-top: 1px solid #EAEAEA; }
+  .question.full .links {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    .question.full .links li {
+      float: left;
+      margin-right: .5rem; }
+      .question.full .links li a {
+        color: #777;
+        font-size: 0.875rem; }
+.question.teaser {
+  clear: both;
+  width: 100%;
+  float: left;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom: .5rem;
+  padding-bottom: .5rem;
+  border-bottom: 1px solid #EAEAEA; }
+  .question.teaser .question__left {
+    width: 6.04027%;
+    float: left;
+    margin-right: 0.67114%; }
+    .question.teaser .question__left .avatar {
+      border-radius: 4px;
+      overflow: hidden; }
+  .question.teaser .question__right {
+    padding-left: 0.5rem;
+    width: 93.28859%;
+    float: right;
+    margin-right: 0; }
+    .question.teaser .question__right h2 {
+      margin: 0;
+      font-weight: normal;
+      font-size: 20px;
+      font-size: 1.25rem; }
+      .question.teaser .question__right h2 a {
+        color: #333; }
+        .question.teaser .question__right h2 a:before {
+          margin-right: .5rem; }
 
 /**
  * Answer node.
  */
-.answer.teaser {
+.answer.teaser, .answer.full {
   clear: both;
   width: 100%;
   float: left;
@@ -3225,56 +3274,110 @@ body {
   border-bottom: 1px solid #EAEAEA;
   padding-bottom: 0.5rem;
   margin-bottom: 1rem; }
-  .answer.teaser .answer__left {
+  .answer.teaser .answer__left, .answer.full .answer__left {
     width: 9.09091%;
     float: left;
     margin-right: 1.0101%; }
-    .answer.teaser .answer__left .avatar {
+    .answer.teaser .answer__left .avatar, .answer.full .answer__left .avatar {
       border-radius: 4px;
       overflow: hidden; }
-    .answer.teaser .answer__left .rate-widget {
+    .answer.teaser .answer__left .rate-widget, .answer.full .answer__left .rate-widget {
       text-align: center;
       font-size: 2rem;
       line-height: 1;
       margin: 0.5rem 0;
       color: #707070; }
-      .answer.teaser .answer__left .rate-widget .rate-plus.voted, .answer.teaser .answer__left .rate-widget .rate-plus:hover {
+      .answer.teaser .answer__left .rate-widget .rate-plus.voted, .answer.teaser .answer__left .rate-widget .rate-plus:hover, .answer.full .answer__left .rate-widget .rate-plus.voted, .answer.full .answer__left .rate-widget .rate-plus:hover {
         color: #2ECC71; }
-      .answer.teaser .answer__left .rate-widget .rate-minus.voted, .answer.teaser .answer__left .rate-widget .rate-minus:hover {
+      .answer.teaser .answer__left .rate-widget .rate-minus.voted, .answer.teaser .answer__left .rate-widget .rate-minus:hover, .answer.full .answer__left .rate-widget .rate-minus.voted, .answer.full .answer__left .rate-widget .rate-minus:hover {
         color: #F22613; }
       .answer.teaser .answer__left .rate-widget .rate-plus,
-      .answer.teaser .answer__left .rate-widget .rate-minus {
+      .answer.teaser .answer__left .rate-widget .rate-minus, .answer.full .answer__left .rate-widget .rate-plus,
+      .answer.full .answer__left .rate-widget .rate-minus {
         color: #E2E2E2;
         font-size: 2.5rem; }
         .answer.teaser .answer__left .rate-widget .rate-plus.disabled:hover,
-        .answer.teaser .answer__left .rate-widget .rate-minus.disabled:hover {
+        .answer.teaser .answer__left .rate-widget .rate-minus.disabled:hover, .answer.full .answer__left .rate-widget .rate-plus.disabled:hover,
+        .answer.full .answer__left .rate-widget .rate-minus.disabled:hover {
           color: #E2E2E2; }
-    .answer.teaser .answer__left .flag-best-answer {
+    .answer.teaser .answer__left .flag-best-answer, .answer.full .answer__left .flag-best-answer {
       text-align: center;
       font-size: 2.5rem; }
-      .answer.teaser .answer__left .flag-best-answer .flag-action {
+      .answer.teaser .answer__left .flag-best-answer .flag-action, .answer.full .answer__left .flag-best-answer .flag-action {
         color: #E2E2E2; }
-        .answer.teaser .answer__left .flag-best-answer .flag-action:hover {
+        .answer.teaser .answer__left .flag-best-answer .flag-action:hover, .answer.full .answer__left .flag-best-answer .flag-action:hover {
           color: #2ECC71; }
-      .answer.teaser .answer__left .flag-best-answer .unflag-action {
+      .answer.teaser .answer__left .flag-best-answer .unflag-action, .answer.full .answer__left .flag-best-answer .unflag-action {
         color: #2ECC71; }
-        .answer.teaser .answer__left .flag-best-answer .unflag-action:hover {
+        .answer.teaser .answer__left .flag-best-answer .unflag-action:hover, .answer.full .answer__left .flag-best-answer .unflag-action:hover {
           color: #E2E2E2; }
-    .answer.teaser .answer__left .best-answer {
+    .answer.teaser .answer__left .best-answer, .answer.full .answer__left .best-answer {
       color: #2ECC71;
       text-align: center;
       font-size: 2.5rem;
       width: 100%; }
-  .answer.teaser .answer__right {
+  .answer.teaser .answer__right, .answer.full .answer__right {
     padding-left: 0.5rem;
     width: 89.89899%;
     float: right;
     margin-right: 0; }
-    .answer.teaser .answer__right .author-and-date .username {
+    .answer.teaser .answer__right .author-and-date .username, .answer.full .answer__right .author-and-date .username {
       font-weight: bold;
       font-size: 1rem; }
-    .answer.teaser .answer__right .author-and-date .created {
-      color: #B9B9B9;
+    .answer.teaser .answer__right .author-and-date .created, .answer.full .answer__right .author-and-date .created {
+      color: #777;
       font-size: 0.875rem; }
+  .answer.teaser .links, .answer.full .links {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    .answer.teaser .links li, .answer.full .links li {
+      float: left;
+      margin-right: .5rem; }
+      .answer.teaser .links li a, .answer.full .links li a {
+        color: #777;
+        font-size: 0.875rem; }
+
+/**
+ * Light comment style.
+ */
+.comment-light {
+  clear: both;
+  width: 100%;
+  float: left;
+  margin-left: 0;
+  margin-right: 0;
+  border-top: 1px solid #EAEAEA;
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.875rem; }
+  .comment-light .comment-light__left {
+    width: 4.0404%;
+    float: left;
+    margin-right: 1.0101%; }
+    .comment-light .comment-light__left .avatar {
+      border-radius: 4px;
+      overflow: hidden; }
+  .comment-light .comment-light__right {
+    padding-left: 0.25rem;
+    width: 94.94949%;
+    float: right;
+    margin-right: 0; }
+    .comment-light .comment-light__right .author-and-date .username {
+      font-weight: bold;
+      font-size: 0.875rem !important; }
+    .comment-light .comment-light__right .author-and-date .created {
+      color: #777;
+      font-size: 0.875rem; }
+  .comment-light .links {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    .comment-light .links li {
+      float: left;
+      margin-right: .5rem; }
+      .comment-light .links li a {
+        color: #777;
+        font-size: 0.875rem; }
 
 /*# sourceMappingURL=styles.css.map */

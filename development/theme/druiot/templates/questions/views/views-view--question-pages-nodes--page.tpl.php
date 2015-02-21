@@ -26,7 +26,7 @@
  * @ingroup views_templates
  */
 ?>
-<section class="comments-to-answer">
+<section class="questions">
 <?php print render($title_prefix); ?>
 <?php if ($title): ?>
   <?php print $title; ?>

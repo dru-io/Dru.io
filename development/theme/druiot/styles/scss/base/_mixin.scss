@@ -11,7 +11,7 @@
  */
 @mixin fontSize($size) {
   font-size: $size;
-  font-size: calculateRem($size);
+  font-size: pxToRem($size);
 }
 
 /**

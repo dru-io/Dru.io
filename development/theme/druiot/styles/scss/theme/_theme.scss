@@ -262,7 +262,7 @@ body {
 
           &.voted,
           &:hover {
-            color: #2ECC71;
+            color: $colorShamrock;
           }
         }
 
@@ -272,17 +272,17 @@ body {
 
           &.voted,
           &:hover {
-            color: #F22613;
+            color: $colorPomegranate;
           }
         }
 
         .rate-plus,
         .rate-minus {
-          color: #E2E2E2;
+          color: $colorMercury;
           font-size: 2.5rem;
 
           &.disabled:hover {
-            color: #E2E2E2;
+            color: $colorMercury;
           }
         }
       }
@@ -299,7 +299,7 @@ body {
         }
 
         .created {
-          color: #B9B9B9;
+          color: $colorBoulder;
           font-size: 0.875rem;
         }
       }
@@ -324,9 +324,63 @@ body {
     .question__bottom {
       @include full();
       margin-top: 1rem;
-      border-top: 1px solid #EAEAEA;
+      border-top: 1px solid $colorGallery;
+    }
+
+    .links {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        float: left;
+        margin-right: .5rem;
+
+        a {
+          color: $colorBoulder;
+          font-size: 0.875rem;
+        }
+      }
     }
   }
+
+  &.teaser {
+    @include full;
+    margin-bottom: .5rem;
+    padding-bottom: .5rem;
+    border-bottom: 1px solid $colorGallery;
+
+    .question__left {
+      @include span(2 of 30);
+
+      .avatar {
+        border-radius: 4px;
+        overflow: hidden;
+      }
+    }
+
+    .question__right {
+      @include prefix(.5rem);
+      @include span(28 of 30 last);
+
+      h2 {
+        margin: 0;
+        font-weight: normal;
+        @include fontSize(20px);
+
+        a {
+          color: $baseFontColor;
+
+          &:before {
+            @extend .fa;
+            @extend .fa-question-circle;
+            margin-right: .5rem;
+          }
+        }
+      }
+    }
+  }
+
 }
 
 /**
@@ -334,9 +388,10 @@ body {
  */
 .answer {
   // Teaser view
-  &.teaser {
+  &.teaser,
+  &.full {
     @include full();
-    border-bottom: 1px solid #EAEAEA;
+    border-bottom: 1px solid $colorGallery;
     padding-bottom: 0.5rem;
     margin-bottom: 1rem;
 
@@ -361,7 +416,7 @@ body {
 
           &.voted,
           &:hover {
-            color: #2ECC71;
+            color: $colorShamrock;
           }
         }
 
@@ -371,17 +426,17 @@ body {
 
           &.voted,
           &:hover {
-            color: #F22613;
+            color: $colorPomegranate;
           }
         }
 
         .rate-plus,
         .rate-minus {
-          color: #E2E2E2;
+          color: $colorMercury;
           font-size: 2.5rem;
 
           &.disabled:hover {
-            color: #E2E2E2;
+            color: $colorMercury;
           }
         }
       }
@@ -393,20 +448,20 @@ body {
         .flag-action {
           @extend .fa;
           @extend .fa-check;
-          color: #E2E2E2;
+          color: $colorMercury;
 
           &:hover {
-            color: #2ECC71;
+            color: $colorShamrock;
           }
         }
 
         .unflag-action {
           @extend .fa;
           @extend .fa-check;
-          color: #2ECC71;
+          color: $colorShamrock;
 
           &:hover {
-            color: #E2E2E2;
+            color: $colorMercury;
           }
         }
       }
@@ -414,7 +469,7 @@ body {
       .best-answer {
         @extend .fa;
         @extend .fa-check;
-        color: #2ECC71;
+        color: $colorShamrock;
         text-align: center;
         font-size: 2.5rem;
         width: 100%; // firefox bug
@@ -432,7 +487,23 @@ body {
         }
 
         .created {
-          color: #B9B9B9;
+          color: $colorBoulder;
+          font-size: 0.875rem;
+        }
+      }
+    }
+
+    .links {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+
+      li {
+        float: left;
+        margin-right: .5rem;
+
+        a {
+          color: $colorBoulder;
           font-size: 0.875rem;
         }
       }
@@ -445,7 +516,7 @@ body {
  */
 .comment-light {
   @include full();
-  border-top: 1px solid #EAEAEA;
+  border-top: 1px solid $colorGallery;
   padding-top: 1rem;
   margin-top: 0.5rem;
   font-size: 0.875rem;
@@ -470,7 +541,23 @@ body {
       }
 
       .created {
-        color: #B9B9B9;
+        color: $colorBoulder;
+        font-size: 0.875rem;
+      }
+    }
+  }
+
+  .links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      float: left;
+      margin-right: .5rem;
+
+      a {
+        color: $colorBoulder;
         font-size: 0.875rem;
       }
     }

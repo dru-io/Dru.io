@@ -137,3 +137,19 @@ function druiot_theme() {
 
   return $theme;
 }
+
+/**
+ * Implements hook_node_view_alter().
+ */
+function druiot_node_view_alter(&$build) {
+  // Hide 'New comments', 'Comment count' and 'Read more' in links for answer.
+  if (
+    $build['#entity_type'] == 'node' &&
+    $build['#bundle'] == 'answer' &&
+    $build['#view_mode'] == 'teaser'
+  ) {
+    unset($build['links']['node']['#links']['node-readmore']);
+    unset($build['links']['comment']['#links']['comment-comments']);
+    unset($build['links']['comment']['#links']['comment-new-comments']);
+  }
+}
