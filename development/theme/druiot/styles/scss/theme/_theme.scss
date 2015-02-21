@@ -439,3 +439,40 @@ body {
     }
   }
 }
+
+/**
+ * Light comment style.
+ */
+.comment-light {
+  @include full();
+  border-top: 1px solid #EAEAEA;
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+
+  .comment-light__left {
+    @include span(1 of 20);
+
+    .avatar {
+      border-radius: 4px;
+      overflow: hidden;
+    }
+  }
+
+  .comment-light__right {
+    @include prefix(.25rem);
+    @include span(19 of 20 last);
+
+    .author-and-date {
+      .username {
+        font-weight: bold;
+        font-size: 0.875rem !important;
+      }
+
+      .created {
+        color: #B9B9B9;
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
