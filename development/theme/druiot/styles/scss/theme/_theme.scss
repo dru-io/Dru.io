@@ -7,14 +7,18 @@ body {
   background: url('../../images/bg.png') repeat;
 }
 
+.divider {
+  width: 100%;
+  clear: both;
+}
+
 #header {
   font-size: 0.875rem;
-  background: #374c77;
+  background: $headerBackground;
   box-shadow: inset 0 2.5rem 0 0 rgba(0, 0, 0, 0.5);
 
   .header__wrapper {
     @include container($siteWidth);
-    padding: 0 2.5rem;
   }
 }
 
@@ -192,6 +196,10 @@ body {
         color: white;
         padding: 0 .75rem;
         font-size: 1.1rem;
+        transition: all .2s ease-out;
+        &:hover {
+          background-color: lighten($headerBackground, 10%);
+        }
       }
     }
   }
@@ -199,7 +207,7 @@ body {
 
 #main {
   @include container($siteWidth);
-  padding: 0 2.5rem;
+  padding: 2rem 2.5rem;
   background: #ffffff;
 }
 
@@ -377,6 +385,49 @@ body {
             margin-right: .5rem;
           }
         }
+      }
+    }
+    .question__bottom {
+      @include prefix(.5rem);
+      @include span(28 of 30 last);
+      font-size: 0.875rem;
+      .question__info {
+        display: inline-block;
+        padding: 0 0.8rem 0 0;
+        &:before {
+          margin-right: .25rem;
+        }
+      }
+      .vote {
+        @extend .fa;
+        @extend .fa-thumbs-o-up;
+        div {
+          display: inline;
+        }
+      }
+      .drupal {
+        @extend .fa;
+        @extend .fa-drupal;
+        a:after {
+          content: ", ";
+        }
+        a:last-child:after {
+          content: "";
+        }
+      }
+      .term {
+        @extend .fa;
+        @extend .fa-tags; 
+        a:after {
+          content: ", ";
+        }
+        a:last-child:after {
+          content: "";
+        }
+      }
+      .project {
+        @extend .fa;
+        @extend .fa-cube;  
       }
     }
   }
@@ -563,3 +614,51 @@ body {
     }
   }
 }
+
+/* Publications views */
+
+.publications {
+  .publication__title {
+     font-weight: normal;
+     a {
+      text-decoration: underline;
+     }
+  }
+  .publication__footer {
+    border: 1px solid #ECEAEA;
+    background: #FCFCFC;
+    padding: 0;
+    margin: 1rem 0;
+    font-size: .7rem;
+    border-radius: 3px;
+    padding: 1rem;
+    .created,
+    .user,
+    .more {
+      @extend .fa;
+      display: inline-block;
+      margin-right: 1rem;
+      &:before {
+        margin-right: .5rem;
+      }
+    }
+    .created {
+      @extend .fa-calendar;
+    }
+    .user {
+      @extend .fa-user;
+    }
+    .more {
+      @extend .fa-external-link;
+      float: right;
+    }
+  }
+}
+
+footer {
+  background-color: $colorLightGrey;
+  font-size: 0.875rem;
+  padding: 1rem;
+  @include container($siteWidth); 
+}
+

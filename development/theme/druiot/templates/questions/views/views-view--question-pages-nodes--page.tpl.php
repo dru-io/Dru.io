@@ -59,6 +59,7 @@
 <?php endif; ?>
 
 <?php if ($pager): ?>
+  <div class="divider"></div>
   <?php print $pager; ?>
 <?php endif; ?>
 
