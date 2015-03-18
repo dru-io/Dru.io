@@ -415,9 +415,9 @@ body {
       }
 
       .answers {
-       &:before {
-         @extend .fa-comments-o;
-       }
+        &:before {
+          @extend .fa-comments-o;
+        }
       }
 
       .vote {
@@ -642,46 +642,117 @@ body {
 }
 
 /* Publications views */
-
-.publications {
-  .publication__title {
-    font-weight: normal;
-    a {
-      text-decoration: underline;
+.post.teaser {
+  .post__content {
+    .title {
+      @include fontSize(24px);
     }
   }
-  .publication__footer {
-    border: 1px solid #ECEAEA;
-    background: #FCFCFC;
-    padding: 0;
-    margin: 1rem 0;
-    font-size: .7rem;
-    border-radius: 3px;
-    padding: 1rem;
-    .created,
-    .user,
-    .more {
-      @extend .fa;
-      display: inline-block;
-      margin-right: 1rem;
-      &:before {
-        margin-right: .5rem;
+
+  .post__footer {
+    @include layout(50 1);
+    @include susy-clearfix;
+    background: rgb(249, 249, 249);
+    padding: 5px;
+    border-radius: 2px;
+
+    .rate-widget {
+      @include span(6);
+
+      .rate {
+        background: $colorGallery;
+        color: $colorBoulder;
+        display: inline-block;
+        padding: pxToRem(5px);
+        border-radius: 2px;
+        @extend .fa;
+        @include fontSize(14px);
+
+        &--minus {
+          @extend .fa-arrow-down;
+
+          &:hover:not(.disabled),
+          &.voted {
+            background: $colorPomegranate;
+            color: white;
+          }
+        }
+
+        &--plus {
+          @extend .fa-arrow-up;
+
+          &:hover:not(.disabled),
+          &.voted {
+            background: $colorShamrock;
+            color: white;
+          }
+        }
+      }
+
+      .rate-result {
+        display: inline-block;
+        padding: 0 pxToRem(7px);
+        font-weight: bold;
+
+        &.good {
+          color: $colorShamrock;
+        }
+
+        &.bad {
+          color: $colorPomegranate;
+        }
       }
     }
-    .created {
-      @extend .fa-calendar;
+
+    .comment-count {
+      @include span(3);
+      color: $colorBoulder;
+      @include fontSize(14px);
+      line-height: pxToRem(24px);
+
+      &:before {
+        @extend .fa;
+        @extend .fa-comments-o;
+        margin-right: pxToRem(5px);
+      }
     }
-    .user {
-      @extend .fa-user;
+
+    .date {
+      @include span(9);
+      color: $colorBoulder;
+      @include fontSize(14px);
+      line-height: pxToRem(24px);
+
+      &:before {
+        @extend .fa;
+        @extend .fa-calendar;
+        margin-right: pxToRem(5px);
+      }
     }
-    .more {
-      @extend .fa-external-link;
-      float: right;
+
+    .avatar-and-author {
+      @include span(10);
+
+      .avatar {
+        display: inline-block;
+        vertical-align: middle;
+        overflow: hidden;
+        height: pxToRem(24px);
+        width: pxToRem(24px);
+        border-radius: 50%;
+      }
+
+      .author {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1;
+        @include fontSize(14px);
+      }
     }
   }
 }
 
-footer {
+#footer {
   background-color: $colorLightGrey;
   font-size: 0.875rem;
   padding: 1rem;

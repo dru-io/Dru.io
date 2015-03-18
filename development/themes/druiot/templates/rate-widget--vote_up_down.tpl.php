@@ -19,6 +19,9 @@ else {
 // Load not for node-type.
 $node = node_load($content_id);
 
+/**
+ * Node: Question, Answer
+ */
 if ($node && $node->type == 'question' || $node->type == 'answer'): ?>
   <?php
   if ($links[0]['href']) {
@@ -42,6 +45,35 @@ if ($node && $node->type == 'question' || $node->type == 'answer'): ?>
   }
   ?>
 <?php
+  /**
+   * Node: Post.
+   */
+elseif ($node && $node->type == 'post'): ?>
+  <?php
+  if ($links[1]['href']) {
+    $minus_class = '';
+    $user_vote == 'minus' ? $minus_class = ' voted' : '';
+    print '<a href="' . $links[1]['href'] . '" class="rate rate--minus' . $minus_class . '"></a>';
+  }
+  else {
+    print '<span class="rate rate--minus disabled"></span>';
+  }
+  ?>
+  <div class="rate-result <?php $results['rating'] >= 0 ? print 'good': print 'bad'; ?>"><?php print $results['rating']; ?></div>
+  <?php
+  if ($links[0]['href']) {
+    $plus_class = '';
+    $user_vote == 'plus' ? $plus_class = ' voted' : '';
+    print '<a href="' . $links[0]['href'] . '" class="rate rate--plus' . $plus_class . '"></a>';
+  }
+  else {
+    print '<span class="rate rate--plus disabled"></span>';
+  }
+  ?>
+<?php
+/**
+ * Other.
+ */
 else: ?>
   <div class="post-bottom__item">
     <div class="rate-item">
