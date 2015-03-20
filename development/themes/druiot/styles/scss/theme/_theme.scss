@@ -598,7 +598,7 @@ body {
   margin-top: 0.5rem;
   font-size: 0.875rem;
 
-  .comment-light__left {
+  .comment__left {
     @include span(1 of 20);
 
     .avatar {
@@ -607,7 +607,7 @@ body {
     }
   }
 
-  .comment-light__right {
+  .comment__right {
     @include prefix(.25rem);
     @include span(19 of 20 last);
 
@@ -619,7 +619,7 @@ body {
 
       .created {
         color: $colorBoulder;
-        font-size: 0.875rem;
+        @include fontSize(14px);
       }
     }
   }
@@ -628,6 +628,7 @@ body {
     margin: 0;
     padding: 0;
     list-style: none;
+    @include fontSize(12px);
 
     li {
       float: left;
@@ -635,7 +636,6 @@ body {
 
       a {
         color: $colorBoulder;
-        font-size: 0.875rem;
       }
     }
   }

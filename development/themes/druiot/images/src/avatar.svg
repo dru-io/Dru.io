@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   x="0px"
+   y="0px"
+   width="200"
+   height="200"
+   viewBox="0 0 200 200"
+   id="svg4268"
+   inkscape:version="0.91 r"
+   sodipodi:docname="avatar.svg">
+  <metadata
+     id="metadata4294">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title>Druplicon</dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <defs
+     id="defs4292" />
+  <sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1028"
+     id="namedview4290"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:zoom="1.1007176"
+     inkscape:cx="272.75512"
+     inkscape:cy="127.41585"
+     inkscape:window-x="0"
+     inkscape:window-y="-1"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg4268" />
+  <title
+     id="title4270">Druplicon</title>
+  <rect
+     style="fill:#0170b3;fill-opacity:1"
+     id="rect4296"
+     width="200"
+     height="200"
+     x="0"
+     y="0"
+     ry="100" />
+  <path
+     style="fill:#ffffff;fill-opacity:1"
+     d="m 130.95692,49.345336 c -7.2598,-4.52025 -14.10868,-6.30096 -20.95755,-10.82122 -4.24631,-2.87653 -10.136352,-9.72541 -15.067542,-15.61544 -0.95883,9.45144 -3.83536,13.28681 -7.12282,16.02637 -6.98586,5.4791 -11.36913,7.12283 -17.39615,10.41029 -5.06816,2.60257 -32.60064,19.03987 -32.60064,54.380074 0,35.34019 29.72411,61.36591 62.735692,61.36591 33.01158,0 61.63988,-23.97105 61.63988,-60.27009 0,-36.299054 -26.84759,-52.736344 -31.23087,-55.475894 z"
+     id="path4272"
+     inkscape:connector-curvature="0" />
+</svg>
