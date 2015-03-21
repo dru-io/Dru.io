@@ -11,16 +11,4 @@
     <?php print $first; ?>
   </<?php print $first_wrapper; ?>>
 <?php endif; ?>
-
-<?php if ($second): ?>
-  <<?php print $second_wrapper; ?> class="<?php print $second_classes; ?>">
-    <?php print $second; ?>
-  </<?php print $second_wrapper; ?>>
-<?php endif; ?>
-
-<?php if ($third): ?>
-  <<?php print $third_wrapper; ?> class="<?php print $third_classes; ?>">
-    <?php print $third; ?>
-  </<?php print $third_wrapper; ?>>
-<?php endif; ?>
 </<?php print $layout_wrapper; ?>>

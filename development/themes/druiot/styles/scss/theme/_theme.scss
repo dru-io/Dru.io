@@ -213,10 +213,37 @@ body {
 
 #content {
   @include span(15 of 20);
+  position: relative;
 }
 
 #sidebar-right {
   @include span(5 of 20 last);
+
+  .block {
+    .title {
+      position: relative;
+      border-top: 3px solid $colorShamrock;
+      border-bottom: 3px solid $colorMercury;
+      @include fontSize(18px);
+      padding: 5px 0;
+      font-weight: normal;
+
+      &:after {
+        display: block;
+        content: '';
+        width: pxToRem(15px);
+        height: pxToRem(15px);
+        background: white;
+        transform: rotate(45deg);
+        border: 3px solid $colorMercury;
+        border-top: none;
+        border-left: none;
+        position: absolute;
+        bottom: pxToRem(-10px);
+        left: pxToRem(10px);
+      }
+    }
+  }
 }
 
 #page-title {
@@ -642,13 +669,7 @@ body {
 }
 
 /* Publications views */
-.post.teaser {
-  .post__content {
-    .title {
-      @include fontSize(24px);
-    }
-  }
-
+.post {
   .post__footer {
     @include layout(50 1);
     @include susy-clearfix;
@@ -752,6 +773,74 @@ body {
   }
 }
 
+.post.teaser {
+  .post__content {
+    .title {
+      @include fontSize(24px);
+    }
+  }
+}
+
+.projects {
+  @include layout(2 1/20);
+  @include susy-clearfix;
+
+  .project {
+    @include span(1);
+
+    &:nth-child(2n) {
+      @include last;
+    }
+  }
+}
+
+.project.teaser {
+  border-bottom: 1px solid #EAEAEA;
+  margin-bottom: pxToRem(10px);
+  padding: pxToRem(10px);
+
+  .title {
+    @include fontSize(16px);
+    margin: 0 0 pxToRem(10px) 0;
+  }
+
+  .type,
+  .dev-status,
+  .maintenance-status,
+  .version {
+    @include fontSize(12px);
+
+    &:before {
+      @extend .fa;
+      margin-right: pxToRem(5px);
+    }
+  }
+
+  .type {
+    &:before {
+      @extend .fa-cubes;
+    }
+  }
+
+  .dev-status {
+    &:before {
+      @extend .fa-keyboard-o;
+    }
+  }
+
+  .maintenance-status {
+    &:before {
+      @extend .fa-life-ring;
+    }
+  }
+
+  .version {
+    &:before {
+      @extend .fa-drupal;
+    }
+  }
+}
+
 #footer {
   background-color: $colorLightGrey;
   font-size: 0.875rem;
@@ -759,3 +848,32 @@ body {
   @include container($siteWidth);
 }
 
+#frontpage-search {
+  background: url('../../images/frontpage-search-bg.png') no-repeat center center;
+  width: pxToRem(1200px);
+  height: pxToRem(400px);
+  position: relative;
+  left: -2.5rem;
+  top: -2rem;
+
+  .dark-layer {
+    background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.3);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .search-form {
+    position: relative;
+    z-index: 1;
+    top: 50%;
+    margin: 0px auto;
+    display: table;
+    
+    .search-input {
+      background: #ffffff;
+    }
+  }
+}

@@ -14,7 +14,7 @@ function druiot_preprocess_html(&$variables) {
   // Redefine body classes.
   $variables['classes_array'] = array();
 
-  if ($variables['page']['sidebar_right']) {
+  if (drupal_render($variables['page']['sidebar_right'])) {
     $variables['classes_array'][] = 'sidebar-right';
   }
   else {
@@ -49,7 +49,7 @@ function druiot_preprocess_page(&$variables, $hook) {
   $is_sidebar = FALSE;
 
   // Check sidebar is available?
-  $sidebar_right = render($variables['page']['sidebar_right']);
+  $sidebar_right = drupal_render($variables['page']['sidebar_right']);
   $variables['sidebar_right'] = $sidebar_right;
   if ($sidebar_right) {
     $is_sidebar = TRUE;
