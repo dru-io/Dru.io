@@ -216,6 +216,10 @@ body {
   position: relative;
 }
 
+.frontpage #content {
+  @include full();
+}
+
 #sidebar-right {
   @include span(5 of 20 last);
 
@@ -412,12 +416,11 @@ body {
         @include fontSize(17px);
 
         a {
-          color: $baseFontColor;
-
           &:before {
             @extend .fa;
             @extend .fa-question-circle;
             margin-right: .5rem;
+            color: $baseFontColor;
           }
         }
       }
@@ -848,32 +851,37 @@ body {
   @include container($siteWidth);
 }
 
-#frontpage-search {
-  background: url('../../images/frontpage-search-bg.png') no-repeat center center;
+#frontpage-top {
   width: pxToRem(1200px);
-  height: pxToRem(400px);
   position: relative;
   left: -2.5rem;
   top: -2rem;
+  background: #fff url('http://drupal.com/themes/drupalcom/images/parallax/homepage-header/full-screen.jpg');
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  @include layout(20 0);
+  @include susy-clearfix;
 
-  .dark-layer {
-    background: none repeat scroll 0% 0% rgba(0, 0, 0, 0.3);
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+  .left {
+    @include span(10);
+    padding: 2rem 2.5rem;
+
+    .welcome {
+      margin: 0;
+      text-align: center;
+    }
+
+    .community {
+      margin: 0px;
+      text-align: center;
+      font-weight: 400;
+      color: grey;
+      @include fontSize(17px);
+    }
   }
 
-  .search-form {
-    position: relative;
-    z-index: 1;
-    top: 50%;
-    margin: 0px auto;
-    display: table;
-    
-    .search-input {
-      background: #ffffff;
-    }
+  .right {
+    @include span(10 last);
+    padding: 2rem 2.5rem;
+
   }
 }

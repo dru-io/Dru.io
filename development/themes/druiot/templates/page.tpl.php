@@ -46,13 +46,7 @@
     } ?>
   <?php else: ?>
     <section id="content" role="main">
-      <section id="frontpage-search">
-        <div class="dark-layer"></div>
-
-        <form action="/search" class="search-form">
-          <input name="s" value="" maxlength="128" class="search-input" type="text" placeholder="Поиск по сообществу">
-        </form>
-      </section>
+      <?php print theme('druiot_frontpage_content'); ?>
     </section>
   <?php endif; ?>
 </main>

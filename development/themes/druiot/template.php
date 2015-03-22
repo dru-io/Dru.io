@@ -16,6 +16,10 @@ function druiot_preprocess_html(&$variables) {
 
   if (drupal_render($variables['page']['sidebar_right'])) {
     $variables['classes_array'][] = 'sidebar-right';
+
+    if (drupal_is_front_page()) {
+      $variables['classes_array'][] = 'frontpage';
+    }
   }
   else {
     $variables['classes_array'][] = 'no-sidebar';
@@ -133,6 +137,12 @@ function druiot_theme() {
   $theme['druiot_auth_user'] = array(
     'variables' => array('user' => NULL),
     'template' => 'templates/druiot-auth-user',
+  );
+
+  // Frontpage content
+  $theme['druiot_frontpage_content'] = array(
+    'variables' => array('user' => $user),
+    'template' => 'templates/druiot-frontpage-content',
   );
 
   return $theme;
