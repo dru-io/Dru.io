@@ -392,7 +392,8 @@ body {
   }
 
   &.teaser {
-    @include full;
+    @include layout(30);
+    @include susy-clearfix;
     margin-bottom: pxToRem(10px);
     padding-bottom: pxToRem(10px);
     border-bottom: 1px solid $colorGallery;
@@ -784,15 +785,17 @@ body {
   }
 }
 
-.projects {
-  @include layout(2 1/20);
-  @include susy-clearfix;
+.view.project-page-node {
+  .content {
+    @include layout(2 1/20);
+    @include susy-clearfix;
 
-  .project {
-    @include span(1);
+    .project {
+      @include span(1);
 
-    &:nth-child(2n) {
-      @include last;
+      &:nth-child(2n) {
+        @include last;
+      }
     }
   }
 }
@@ -883,5 +886,24 @@ body {
     @include span(10 last);
     padding: 2rem 2.5rem;
 
+  }
+}
+
+#frontpage-latest {
+  @include layout(20 1/4);
+  @include susy-clearfix;
+
+  .view {
+    @include span(10);
+
+    &:nth-child(2n) {
+      @include last;
+    }
+
+    .header {
+      .title {
+        margin-top: 0;
+      }
+    }
   }
 }

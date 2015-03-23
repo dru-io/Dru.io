@@ -14,5 +14,7 @@
   <div class="right"></div>
 </section>
 
-<?php print views_embed_view('posts_node', 'frontpage'); ?>
-<?php print views_embed_view('question_nodes', 'frontpage'); ?>
+<section id="frontpage-latest">
+  <?php print views_embed_view('posts_node', 'frontpage'); ?>
+  <?php print views_embed_view('question_nodes', 'frontpage'); ?>
+</section>
