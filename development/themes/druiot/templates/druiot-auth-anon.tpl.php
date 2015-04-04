@@ -10,7 +10,7 @@ $default_picture = variable_get('user_picture_default', '');
        class="header-profile__picture"
        height="40" width="40">
   <a href="/user" class="header-profile__auth">
-    Авторизация
-    <span></span>
+    <span class="label">Авторизация</span>
+    <span class="icon"></span>
   </a>
 </div>

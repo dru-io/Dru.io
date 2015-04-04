@@ -19,35 +19,31 @@ body {
 
   .header__wrapper {
     @include container($siteWidth);
+    @include layout(120 0);
   }
 }
 
 .header__logo {
-  @include span(3 of 20 no-gutters);
+  @include span(17 no-gutters);
   height: 6.875rem;
   //background: #7fcc20 url('../../images/site-name-druplicon.png') center center no-repeat;
 
   a {
     display: block;
-    text-align: center;
-    line-height: 6.875rem;
-    color: white;
-    font-weight: bold;
-    font-size: 2rem;
   }
 }
 
 .header__content {
-  @include span(17 of 20 no-gutters);
+  @include span(103 no-gutters);
 
   .header__firstline {
-    @include container(nest);
+    @include layout(10);
   }
 }
 
 #site-search {
   position: relative;
-  @include span(3 of 10 no-gutters);
+  @include span(3 no-gutters);
 
   .form-search {
     height: 2.5rem;
@@ -76,7 +72,7 @@ body {
 }
 
 #header-links {
-  @include span(5 of 10 no-gutter);
+  @include span(5 no-gutter);
   position: relative;
   color: #cccccc;
   line-height: 2.5rem;
@@ -127,7 +123,7 @@ body {
 }
 
 #header-profile {
-  @include span(2 of 10 last);
+  @include span(2 last);
   position: relative;
   background: none repeat scroll 0% 0% rgba(255, 255, 255, 0.1);
 
@@ -143,7 +139,7 @@ body {
     display: block;
     color: #D2D2D2;
 
-    span {
+    .icon {
       border-left: 1px solid rgba(255, 255, 255, 0.1);
       display: block;
       position: absolute;
@@ -890,7 +886,7 @@ body {
 }
 
 #frontpage-latest {
-  @include layout(20 1/4);
+  @include layout(20 1/2);
   @include susy-clearfix;
 
   .view {
@@ -905,5 +901,111 @@ body {
         margin-top: 0;
       }
     }
+  }
+}
+
+.post.frontpage {
+  padding-left: pxToRem(25px);
+  position: relative;
+  border-bottom: 1px solid #ECECEC;
+  padding-bottom: pxToRem(5px);
+  margin-bottom: pxToRem(5px);
+
+  &:before {
+    @extend .fa;
+    @extend .fa-file-text-o;
+    position: absolute;
+    top: pxToRem(5px);
+    left: 0;
+  }
+
+  .title {
+    margin: 0;
+    @include fontSize(16px);
+    line-height: pxToRem(27px);
+    font-weight: normal;
+
+    a {
+      color: $baseFontColor;
+    }
+  }
+}
+
+.question.frontpage {
+  padding-left: pxToRem(25px);
+  position: relative;
+  border-bottom: 1px solid #ECECEC;
+  padding-bottom: pxToRem(5px);
+  margin-bottom: pxToRem(5px);
+
+  &:before {
+    @extend .fa;
+    @extend .fa-question;
+    position: absolute;
+    top: pxToRem(5px);
+    left: 0;
+  }
+
+  .title {
+    margin: 0;
+    @include fontSize(16px);
+    line-height: pxToRem(27px);
+    font-weight: normal;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    a {
+      color: $baseFontColor;
+    }
+  }
+}
+
+.project.full {
+  @include layout(20 1/2);
+  @include susy-clearfix;
+
+  .project__first {
+    @include span(10);
+
+    .type,
+    .dev-status,
+    .maintenance-status,
+    .version {
+      &:before {
+        @extend .fa;
+        margin-right: pxToRem(5px);
+        display: inline-block;
+        width: pxToRem(20px);
+      }
+    }
+
+    .type {
+      &:before {
+        @extend .fa-cubes;
+      }
+    }
+
+    .dev-status {
+      &:before {
+        @extend .fa-keyboard-o;
+      }
+    }
+
+    .maintenance-status {
+      &:before {
+        @extend .fa-life-ring;
+      }
+    }
+
+    .version {
+      &:before {
+        @extend .fa-drupal;
+      }
+    }
+  }
+
+  .project__second {
+    @include span(10 last);
   }
 }

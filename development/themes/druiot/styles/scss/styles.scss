@@ -13,6 +13,7 @@
 @import "base/typography";
 
 // Layouts
+@import "layouts/breakpoint/breakpoint";
 @import "layouts/susy/susy";
 @import "layouts/layouts";
 
@@ -30,3 +31,5 @@
 
 // Theme
 @import "theme/theme";
+@import "layouts/oldpc";
+@import "layouts/tablet";

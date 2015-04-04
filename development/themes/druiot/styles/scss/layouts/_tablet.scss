@@ -1,0 +1,114 @@
+/**
+ * Styles for Tablets
+ */
+
+$tablet: 46.938rem 62.938rem;
+$tabletWidth: 46.938rem;
+
+@include breakpoint($tablet) {
+  #header {
+    .header__wrapper {
+      @include container($tabletWidth);
+      @include layout(100);
+    }
+  }
+
+  .header__logo {
+    height: pxToRem(90px);
+    @include span(19 no-gutters);
+  }
+
+  .header__content {
+    @include span(81 no-gutters);
+  }
+
+  #header-profile {
+    .header-profile__auth {
+      height: 2.5rem;
+      .label {
+        display: none;
+      }
+    }
+  }
+
+  .header__firstline {
+    @include layout(20 0);
+    #site-search {
+      @include span(6);
+    }
+    #header-links {
+      @include span(11);
+      @include layout(20);
+      .header__tracker {
+        @include span(7);
+      }
+      .header__github {
+        @include span(10);
+      }
+    }
+    #header-profile {
+      @include span(3 last);
+    }
+  }
+
+  #navigation {
+    .menu {
+      height: pxToRem(50px);
+      li {
+        a {
+          line-height: pxToRem(50px);
+          @include fontSize(16px);
+        }
+      }
+    }
+  }
+
+  #main {
+    @include container($tabletWidth);
+    @include layout(20 1);
+    padding: 1rem;
+
+    #content {
+      @include span(14);
+    }
+
+    #sidebar-right {
+      @include span(6 last);
+    }
+  }
+
+  #frontpage-top {
+    width: $tabletWidth;
+    height: auto;
+    left: -1rem;
+    top: -1rem;
+    .left {
+      @include full();
+    }
+    .right {
+      display: none;
+    }
+  }
+
+  .post {
+    .post__footer {
+      @include layout(50 1);
+      .rate-widget {
+        @include span(9);
+      }
+      .comment-count {
+        @include span(6);
+      }
+      .date {
+        @include span(16);
+      }
+      .avatar-and-author {
+        @include span(15);
+      }
+    }
+  }
+
+  #page-title {
+    @include fontSize(18px);
+  }
+}

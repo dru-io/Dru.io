@@ -3,13 +3,15 @@
  * Variables.
  */
 
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,700,700italic&subset=latin,cyrillic);
+
 // Typography variables.
 $baseHeaderSize: 30px;
 $baseFontSize: 16px;
-$baseFontFamily: Arial, sans-serif;
+$baseFontFamily: 'Open Sans', sans-serif;
 $baseLineHeight: 1.4;
 $baseFontColor: #3b3b3b;
-$headerBackground: #374c77;
+$headerBackground: #2E5B95;
 
 // Color-schemes.
 // Links.
