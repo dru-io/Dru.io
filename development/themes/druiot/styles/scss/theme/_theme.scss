@@ -83,13 +83,12 @@ body {
 
     a {
       color: #CCC;
-    }
-
-    &:before {
-      @extend .fa;
-      @extend .fa-bullhorn;
-      color: white;
-      margin-right: .25rem;
+      &:before {
+        @extend .fa;
+        @extend .fa-bullhorn;
+        color: white;
+        margin-right: .25rem;
+      }
     }
 
     &.new {
