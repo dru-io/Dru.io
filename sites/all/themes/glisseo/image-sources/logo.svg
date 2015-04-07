@@ -7,16 +7,57 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="205.28125"
-   height="43.339844"
+   width="57.934929mm"
+   height="12.231467mm"
+   viewBox="0 0 205.28125 43.339844"
    id="svg2"
    version="1.1"
-   inkscape:version="0.48.4 r9939"
+   inkscape:version="0.91 r"
+   inkscape:export-filename="/home/nikita/favicon.png"
+   inkscape:export-xdpi="180"
+   inkscape:export-ydpi="180"
    sodipodi:docname="logo.svg">
   <defs
-     id="defs4" />
+     id="defs4">
+    <linearGradient
+       inkscape:collect="always"
+       id="linearGradient4335">
+      <stop
+         style="stop-color:#9b59a1;stop-opacity:1"
+         offset="0"
+         id="stop4323" />
+      <stop
+         id="stop4337"
+         offset="0.23527037"
+         style="stop-color:#894c91;stop-opacity:1" />
+      <stop
+         style="stop-color:#6a3775;stop-opacity:1"
+         offset="0.48566863"
+         id="stop4341" />
+      <stop
+         style="stop-color:#4d245c;stop-opacity:1"
+         offset="0.75"
+         id="stop4339" />
+      <stop
+         style="stop-color:#3e174c;stop-opacity:1"
+         offset="1"
+         id="stop4325" />
+    </linearGradient>
+    <radialGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4335"
+       id="radialGradient4766"
+       cx="66.827911"
+       cy="504.09552"
+       fx="66.827911"
+       fy="504.09552"
+       r="102.64062"
+       gradientTransform="matrix(0,-1,0.97432287,0,-424.32388,570.92343)"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -24,23 +65,21 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8284271"
-     inkscape:cx="174.28055"
-     inkscape:cy="30.684375"
+     inkscape:zoom="1.979899"
+     inkscape:cx="91.157875"
+     inkscape:cy="-16.431985"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     showguides="true"
-     inkscape:guide-bbox="true"
-     inkscape:window-width="1920"
-     inkscape:window-height="1025"
-     inkscape:window-x="-2"
-     inkscape:window-y="-3"
-     inkscape:window-maximized="1"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
-     fit-margin-bottom="0" />
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1024"
+     inkscape:window-x="0"
+     inkscape:window-y="29"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -57,32 +96,20 @@
      inkscape:label="Layer 1"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(-59.931919,-71.958168)">
+     transform="translate(35.81271,-482.4256)">
     <text
        xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="57.142857"
-       y="114.50504"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:url(#radialGradient4766);fill-opacity:1;stroke:none"
+       x="-38.601772"
+       y="524.97247"
        id="text2985"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="57.142857"
-         y="114.50504"
+         x="-38.601772"
+         y="524.97247"
          id="tspan2993"
-         style="font-size:56px;font-weight:bold;fill:#aad400;-inkscape-font-specification:Sans Bold">Gli<tspan
-   style="font-size:48px;letter-spacing:1px"
+         style="font-weight:bold;font-size:56px;-inkscape-font-specification:'Sans Bold';fill:url(#radialGradient4766);fill-opacity:1">Gli<tspan
+   style="font-size:48px;letter-spacing:1px;fill:url(#radialGradient4766);fill-opacity:1"
    id="tspan3007">sseo</tspan></tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:8px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"
-       x="143.38962"
-       y="80.706215"
-       id="text2997"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan2999"
-         x="143.38962"
-         y="80.706215"
-         style="font-size:12px;font-style:italic;font-weight:bold;letter-spacing:8.34000015px;fill:#445500;-inkscape-font-specification:Sans Bold Italic">Logotype</tspan></text>
   </g>
 </svg>

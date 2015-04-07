@@ -1,6 +1,7 @@
 <header id="header" role="banner">
   <?php if ($logo): ?>
-    <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home" id="logo">
+    <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"
+       rel="home" id="logo">
       <img src="<?php print $logo; ?>" alt="<?php print t('Home'); ?>"/>
     </a>
   <?php endif; ?>
@@ -9,7 +10,8 @@
     <div id="name-and-slogan">
       <?php if ($site_name): ?>
         <h2 id="site-name">
-          <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"
+          <a href="<?php print $front_page; ?>"
+             title="<?php print t('Home'); ?>"
              rel="home"><span><?php print $site_name; ?></span></a>
         </h2>
       <?php endif; ?>
@@ -26,7 +28,8 @@
 
 </header>
 
-<main id="main">
+  <?php
+  ?>
 
   <?php
   // Print first sidebar, if it exist.

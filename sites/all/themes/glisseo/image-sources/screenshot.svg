@@ -8,34 +8,78 @@
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="82.973335mm"
+   height="61.806667mm"
+   viewBox="0 0 294.00001 219"
+   id="svg2"
    version="1.1"
-   width="294"
-   height="219"
-   id="svg2">
+   inkscape:version="0.91 r"
+   inkscape:export-filename="/home/nikita/Projects/pushbullet.niklan.net (Glisseo)/glisseo/screenshot.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90"
+   sodipodi:docname="screenshot.svg">
   <defs
      id="defs4">
     <linearGradient
-       id="linearGradient4141">
+       inkscape:collect="always"
+       id="linearGradient4335">
       <stop
-         id="stop4143"
-         style="stop-color:#55d400;stop-opacity:1"
-         offset="0" />
+         style="stop-color:#9b59a1;stop-opacity:1"
+         offset="0"
+         id="stop4323" />
       <stop
-         id="stop4145"
-         style="stop-color:#368d00;stop-opacity:1"
-         offset="1" />
+         id="stop4337"
+         offset="0.23527037"
+         style="stop-color:#894c91;stop-opacity:1" />
+      <stop
+         style="stop-color:#6a3775;stop-opacity:1"
+         offset="0.48566863"
+         id="stop4341" />
+      <stop
+         style="stop-color:#4d245c;stop-opacity:1"
+         offset="0.75"
+         id="stop4339" />
+      <stop
+         style="stop-color:#3e174c;stop-opacity:1"
+         offset="1"
+         id="stop4325" />
     </linearGradient>
     <radialGradient
-       cx="147.29004"
-       cy="942.72485"
-       r="147.00073"
-       fx="147.29004"
-       fy="942.72485"
-       id="radialGradient4147"
-       xlink:href="#linearGradient4141"
-       gradientUnits="userSpaceOnUse"
-       gradientTransform="matrix(0.76072309,-0.99398623,1.025455,0.78481031,-930.27645,352.84026)" />
+       inkscape:collect="always"
+       xlink:href="#linearGradient4335"
+       id="radialGradient4327"
+       cx="194.90358"
+       cy="427.0347"
+       fx="194.90358"
+       fy="427.0347"
+       r="105"
+       gradientTransform="matrix(1.4,0,0,1.0428572,-317.63002,36.218089)"
+       gradientUnits="userSpaceOnUse" />
   </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="349.28571"
+     inkscape:cy="113.40534"
+     inkscape:document-units="px"
+     inkscape:current-layer="g4355"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1024"
+     inkscape:window-x="0"
+     inkscape:window-y="29"
+     inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -49,34 +93,44 @@
     </rdf:RDF>
   </metadata>
   <g
-     transform="translate(0,-833.36218)"
-     id="layer1">
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(191.76498,-372.05426)">
     <rect
-       width="294.00146"
-       height="219.00412"
-       x="0.0010761078"
-       y="833.3631"
-       id="rect4107"
-       style="fill:url(#radialGradient4147);fill-opacity:1;fill-rule:evenodd;stroke:none" />
-    <text
-       x="18.5625"
-       y="892.17468"
-       id="text4149"
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
-         x="18.5625"
-         y="892.17468"
-         id="tspan4151"
-         style="font-weight:bold;fill:#ffffff;-inkscape-font-specification:Sans Bold">Glisseo</tspan></text>
-    <text
-       x="20.5"
-       y="921.86218"
-       id="text4155"
-       xml:space="preserve"
-       style="font-size:40px;font-style:normal;font-weight:normal;line-height:125%;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;font-family:Sans"><tspan
-         x="20.5"
-         y="921.86218"
-         id="tspan4157"
-         style="font-size:28px;font-style:italic;fill:#ffffff;-inkscape-font-specification:Sans Italic">Base theme</tspan></text>
+       style="fill:url(#radialGradient4327);fill-opacity:1"
+       id="rect4147"
+       width="294"
+       height="219"
+       x="-191.76498"
+       y="372.05426" />
+    <g
+       id="g4355"
+       transform="translate(-342.89162,94.004761)">
+      <text
+         sodipodi:linespacing="125%"
+         id="text4343"
+         y="390.20724"
+         x="225.62663"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#ffffff"
+           id="tspan4347"
+           y="390.20724"
+           x="225.62663"
+           sodipodi:role="line">Glisseo</tspan></text>
+      <text
+         sodipodi:linespacing="125%"
+         id="text4351"
+         y="410.59305"
+         x="227.18242"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         xml:space="preserve"><tspan
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.25px;font-family:Arial;-inkscape-font-specification:'Arial Italic';fill:#ffffff"
+           y="410.59305"
+           x="227.18242"
+           id="tspan4353"
+           sodipodi:role="line">Base theme</tspan></text>
+    </g>
   </g>
 </svg>
