@@ -31,6 +31,14 @@ function dlcommunity_comment_insert($comment) {
         _dlcommunity_tracker_create($nid, $uid);
       }
       break;
+    case 'post':
+      $nid = $comment->nid;
+      $post_node = node_load($nid);
+      // prevent notify for own comments
+      if ($user->uid != $post_node->uid) {
+        _dlcommunity_tracker_create($nid, $post_node->uid);
+      }
+      break;
   }
 }
 
@@ -57,7 +65,11 @@ function dlcommunity_tracker_list($uid) {
  * @param boolean $seen Status of viewed messages, default 0
  */
 
-function dlcommunity_tracker_count($uid) {
+function dlcommunity_tracker_count($uid = NULL) {
+  global $user;
+  if (!$uid) {
+    $uid = $user->uid;
+  }
   $query = db_select('eck_track_message', 'e')
     ->fields('e', array('uid'))
     ->condition('e.uid', $uid)
@@ -83,12 +95,13 @@ function dlcommunity_entity_property_info_alter(&$info) {
  */
 
 function dlcommunity_node_view($node, $view_mode, $langcode) {
-  if (user_is_logged_in() && $node->type == 'question') {
+  $valid_types = $node->type == 'question' || $node->type == 'post';
+  if (user_is_logged_in() && $valid_types && $view_mode == 'full') {
     global $user;
     _dlcommunity_tracker_delete($node->nid, $user->uid);
   }
 }
-
+ 
 /*
  * Create entity
  * @param varchar $title Entity title

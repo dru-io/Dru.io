@@ -19,3 +19,18 @@ img {
   display: block;
   vertical-align: bottom;
 }
+
+label {
+  display: block;
+  font-weight: bold;
+  margin: 0 0 0.1rem 0;
+
+  &.option {
+    font-weight: normal;
+    display: inline;
+  }
+}
+
+.form-item {
+  margin: 0.75rem 0;
+}

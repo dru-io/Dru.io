@@ -121,9 +121,6 @@ function druiot_theme() {
 
   // Tracker icon in header.
   $theme['druiot_header_links'] = array(
-    'variables' => array(
-      'tracker_count' => dlcommunity_tracker_count($user->uid)
-      ),
     'template' => 'templates/druiot-header-links',
   );
 
