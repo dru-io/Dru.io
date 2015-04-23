@@ -1,0 +1,2 @@
+src_dir: build/sites/all/modules/search_api_elasticsearch
+service_name: travis-ci

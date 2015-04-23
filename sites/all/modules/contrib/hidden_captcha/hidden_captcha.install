@@ -1,0 +1,11 @@
+<?php
+// $Id: hidden_captcha.install,v 1.1.2.1 2010/06/29 05:55:33 alexiswilke Exp $
+
+/**
+ * Implementation of hook_uninstall().
+ *
+ * On uninstall: remove module variables and clear variable cache
+ */
+function hidden_captcha_uninstall() {
+  db_query("DELETE FROM {variable} WHERE name LIKE 'hidden_captcha_%%'");
+}

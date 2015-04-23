@@ -1,0 +1,22 @@
+{
+  "name":"drupal/search_api_elasticsearch",
+  "type":"drupal-module",
+  "description":"Provides an Elasticsearch backend for the Search API module.",
+  "license":"GPL-2.0+",
+  "authors": [
+    {
+      "name":"Brian Altenhofel",
+      "email":"brian.altenhofel@vmdoh.com",
+      "homepage":"http://www.vmdoh.com"
+    }
+  ],
+  "require-dev": {
+    "satooshi/php-coveralls": "dev-master",
+    "phpmd/phpmd": "*",
+    "phpunit/phpunit": "4.3.1",
+    "sebastian/phpcpd": "*",
+    "squizlabs/php_codesniffer": ">=1.4.1",
+    "drupal/coder": ">7",
+    "drush/drush": "6.*"
+  }
+}

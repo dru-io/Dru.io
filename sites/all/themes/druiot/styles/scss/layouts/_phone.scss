@@ -1,0 +1,175 @@
+/**
+ * Styles for Tablets
+ */
+
+$tablet: 0 46.938rem;
+$phoneWidth: 18.938rem;
+
+@include breakpoint($tablet) {
+  body {
+    @include fontSize(14px);
+  }
+  #header {
+    .header__wrapper {
+      @include container($phoneWidth);
+      @include layout(100);
+    }
+  }
+
+  .header__logo {
+    display: none !important;
+  }
+
+  .header__content {
+    @include span(100 no-gutters);
+  }
+
+  #header-profile {
+    .header-profile__auth {
+      height: 2.5rem;
+      .label {
+        display: none;
+      }
+    }
+  }
+
+  .header__firstline {
+    @include layout(20 0);
+    #site-search {
+      @include span(7);
+    }
+    #header-links {
+      @include span(8);
+      @include layout(20);
+      .header__tracker {
+        @include span(6);
+        span {
+          display: none;
+        }
+      }
+      .header__github {
+        @include span(6);
+        display: block;
+        span {
+          display: none;
+        }
+      }
+    }
+    #header-profile {
+      @include span(5 last);
+    }
+  }
+
+  #navigation {
+    .menu {
+      height: pxToRem(50px);
+      li {
+        a {
+          line-height: pxToRem(50px);
+          @include fontSize(16px);
+        }
+      }
+    }
+  }
+
+  #main {
+    @include container($phoneWidth);
+    @include layout(20 1);
+    padding: 1rem;
+
+    #content {
+      width: 100%;
+    }
+
+    #sidebar-right {
+      width: 100%;
+    }
+  }
+
+  #frontpage-top {
+    width: $phoneWidth;
+    height: auto;
+    left: -1rem;
+    top: -1rem;
+    .left {
+      @include full();
+      padding: 1rem;
+    }
+    .right {
+      display: none;
+    }
+  }
+
+  #frontpage-latest {
+    @include layout(20 1/2);
+    @include susy-clearfix;
+
+    .view {
+      @include full;
+
+      .header {
+        .title {
+          margin-top: pxToRem(10px);
+          @include fontSize(18px);
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .post {
+    .post__footer {
+      @include layout(50 1);
+      .rate-widget {
+        @include span(18);
+      }
+      .comment-count {
+        @include span(7);
+        @include fontSize(12px)
+      }
+      .date {
+        @include span(25 last);
+        @include fontSize(12px);
+      }
+      .avatar-and-author {
+        @include span(50);
+        margin-top: pxToRem(10px);
+      }
+    }
+  }
+
+  #page-title {
+    @include fontSize(18px);
+  }
+
+  .question.full {
+    @include layout(20 1);
+    .question__left {
+      @include span(4);
+    }
+    .question__right {
+      @include span(16 last)
+    }
+  }
+
+  .answer.teaser {
+    @include layout(20 1);
+    .answer__left {
+      @include span(4);
+    }
+    .answer__right {
+      @include span(16 last)
+    }
+  }
+
+  .view.project-page-node {
+    .content {
+      @include layout(2 1/20);
+      @include susy-clearfix;
+
+      .project {
+        @include full();
+      }
+    }
+  }
+}

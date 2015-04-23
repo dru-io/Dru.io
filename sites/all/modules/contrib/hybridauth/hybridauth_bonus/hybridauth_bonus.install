@@ -1,0 +1,29 @@
+<?php
+/**
+ * @file
+ * Install, update and uninstall functions for the HybridAuth Bonus module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function hybridauth_bonus_uninstall() {
+  variable_del('hybridauth_bonus_registration_role_choice');
+  variable_del('hybridauth_bonus_registration_roles');
+  variable_del('hybridauth_bonus_registration_roles_required');
+  variable_del('hybridauth_bonus_registration_roles_multiple');
+  variable_del('hybridauth_bonus_customize_widget_per_form');
+
+  if (!function_exists('hybridauth_forms_list')) {
+    module_load_include('module', 'hybridauth');
+  }
+  foreach (hybridauth_forms_list() as $form_id => $form_name) {
+    variable_del('hybridauth_bonus_widget_title_' . $form_id);
+    variable_del('hybridauth_bonus_widget_type_' . $form_id);
+    variable_del('hybridauth_bonus_widget_use_overlay_' . $form_id);
+    variable_del('hybridauth_bonus_widget_link_text_' . $form_id);
+    variable_del('hybridauth_bonus_widget_link_title_' . $form_id);
+    variable_del('hybridauth_bonus_widget_icon_pack_' . $form_id);
+    variable_del('hybridauth_bonus_widget_weight_' . $form_id);
+  }
+}

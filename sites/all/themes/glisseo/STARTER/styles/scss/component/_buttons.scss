@@ -1,0 +1,153 @@
+/**
+ * @file
+ * Button styles.
+ * @TODO: reformat code more stylish to SCSS and create mixins.
+ */
+
+// Default styles for all buttons.
+input[type="submit"],
+input[type="button"],
+input[type="reset"],
+button,
+.button {
+  cursor: pointer;
+  display: inline-block;
+  vertical-align: baseline;
+  color: #2e3436;
+  text-shadow: 0px 1px 0px white;
+  margin: 0em 0.5em 0.25em 0em;
+  text-transform: none;
+  font-weight: normal;
+  line-height: 1;
+  font-style: normal;
+  font-size: 100%;
+  text-align: center;
+  text-decoration: none;;
+  padding: .5em 1em;
+  @include linear-gradient(#f8f8f8, #e0e0e0);
+  border: 1px solid #a1a1a1;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 0px rgba(255, 255, 255, 1) inset, 0 1px 0 0px rgba(255, 255, 255, 1);
+}
+
+// Normal button.
+input[type="button"],
+button,
+.button {
+  @extend .button;
+  transition: all 200ms;
+
+  &:hover {
+    @include linear-gradient(#f1f1f1, #d5d5d5);
+    border-color: #729fcf;
+    transition: all 200ms;
+  }
+
+  &:active {
+    background: #f4f4f4;
+    border-color: #729fcf;
+    transition: all 200ms;
+  }
+
+  &:disabled {
+    background: #f4f4f4;
+    border-color: #a1a1a1;
+    color: #8d9091;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+// Submit button style.
+input[type="submit"] {
+  @extend .button;
+  @include linear-gradient(#5d9cdd, #3583d5);
+  box-shadow: 0 1px 0 0px rgba(255, 255, 255, 0.3) inset, 0 1px 0 0px white;
+  border-color: #1c5187;
+  color: white;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
+  transition: all 200ms;
+
+  &:hover {
+    @include linear-gradient(#5b92d2, #3276c3);
+    border-color: #1c5187;
+    transition: all 200ms;
+  }
+
+  &:active {
+    background: #5d9cdd;
+    transition: all 200ms;
+  }
+
+  &:disabled {
+    background: #5d9cdd;
+    border-color: #1c5187;
+    color: #E9EDEF;
+    text-shadow: none;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+// Reset button style.
+input[type="reset"],
+#edit-preview {
+  @extend .button;
+  @include linear-gradient(#fcd35b, #edbe34);
+  box-shadow: 0 1px 0 0px rgba(255, 255, 255, 0.3) inset, 0 1px 0 0px white;
+  border-color: #b28a08;
+  color: #292929;
+  text-shadow: 0px 1px 0px white;
+  transition: all 200ms;
+
+  &:hover {
+    @include linear-gradient(#f2ca59, #d7aa32);
+    border-color: #b28a08;
+    transition: all 200ms;
+  }
+
+  &:active {
+    background: #f2ca59;
+    transition: all 200ms;
+  }
+
+  &:disabled {
+    background: #f2ca59;
+    border-color: #b28a08;
+    color: #8D9091;
+    text-shadow: none;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}
+
+// Delete button style.
+#edit-delete {
+  @extend .button;
+  @include linear-gradient(#FF5053, #F01E21);
+  box-shadow: 0 1px 0 0px rgba(255, 255, 255, 0.3) inset, 0 1px 0 0px white;
+  border-color: #b22b2d;
+  color: white;
+  text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.5);
+  transition: all 200ms;
+
+  &:hover {
+    @include linear-gradient(#e34a4d, #bd1d20);
+    border-color: #b22b2d;
+    transition: all 200ms;
+  }
+
+  &:active {
+    background: #e34a4d;
+    transition: all 200ms;
+  }
+
+  &:disabled {
+    background: #e34a4d;
+    border-color: #b22b2d;
+    color: #E9EDEF;
+    text-shadow: none;
+    cursor: not-allowed;
+    box-shadow: none;
+  }
+}

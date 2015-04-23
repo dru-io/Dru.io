@@ -1,0 +1,119 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+function search_api_solr_schema() {
+  // See, e.g., block_schema() for this trick. Seems to be the best way to get a
+  // cache table definition.
+  $schema['cache_search_api_solr'] = drupal_get_schema_unprocessed('system', 'cache');
+  $schema['cache_search_api_solr']['description'] = 'Cache table for the Search API Solr module to store various data related to Solr servers.';
+  return $schema;
+}
+
+/**
+ * Implements hook_requirements().
+ */
+function search_api_solr_requirements($phase) {
+  $ret = array();
+
+  if ($phase == 'runtime') {
+    $servers = search_api_server_load_multiple(FALSE, array('class' => 'search_api_solr_service', 'enabled' => TRUE));
+    $count = 0;
+    $unavailable = 0;
+    $last = NULL;
+    foreach ($servers as $server) {
+      if (!$server->ping()) {
+        ++$unavailable;
+        $last = $server;
+      }
+      ++$count;
+    }
+    if (!$count) {
+      return array();
+    }
+    $ret['search_api_solr'] = array(
+      'title' => t('Solr servers'),
+      'value' => format_plural($count, '1 server', '@count servers'),
+    );
+    if ($unavailable) {
+      if ($unavailable == 1) {
+        $ret['search_api_solr']['description'] = t('The Solr server of <a href="!url">%name</a> could not be reached.',
+            array('!url' => url('admin/config/search/search_api/server/' . $last->machine_name), '%name' => $last->name));
+      }
+      else {
+        $ret['search_api_solr']['description'] = t('@count Solr servers could not be reached.', array('@count' => $unavailable));
+      }
+      $ret['search_api_solr']['severity'] = REQUIREMENT_ERROR;
+    }
+    else {
+      $ret['search_api_solr']['description'] = format_plural($count, 'The Solr server could be reached.', 'All @count Solr servers could be reached.');
+      $ret['search_api_solr']['severity'] = REQUIREMENT_OK;
+    }
+  }
+
+  return $ret;
+}
+
+/**
+ * Implements hook_uninstall().
+ */
+function search_api_solr_uninstall() {
+  variable_del('search_api_solr_last_optimize');
+  variable_del('search_api_solr_autocomplete_max_occurrences');
+  variable_del('search_api_solr_index_prefix');
+  variable_del('search_api_solr_http_get_max_length');
+  variable_del('search_api_solr_cron_action');
+  variable_del('search_api_solr_site_hash');
+}
+
+/**
+ * Implements hook_update_dependencies().
+ */
+function search_api_solr_update_dependencies() {
+  // This update should run after primary IDs have been changed to machine names in the framework.
+  $dependencies['search_api_solr'][7101] = array(
+    'search_api' => 7102,
+  );
+  return $dependencies;
+}
+
+/**
+ * Implements transition from using the index IDs to using machine names.
+ */
+function search_api_solr_update_7101() {
+  foreach (search_api_server_load_multiple(FALSE, array('class' => 'search_api_solr_service')) as $server) {
+    if ($server->enabled) {
+      $server->deleteItems('all');
+    }
+    else {
+      $tasks = variable_get('search_api_tasks', array());
+      $tasks[$server->machine_name][''] = array('clear all');
+      variable_set('search_api_tasks', $tasks);
+    }
+    $query = db_select('search_api_index', 'i')
+      ->fields('i', array('machine_name'))
+      ->condition('server', $server->machine_name);
+    db_update('search_api_item')
+      ->fields(array(
+        'changed' => REQUEST_TIME,
+      ))
+      ->condition('index_id', $query, 'IN')
+      ->execute();
+  }
+
+  return t('The Solr search module was updated. ' .
+      'Please stop your Solr servers, replace their schema.xml with the new version and then start them again. ' .
+      'All data indexed on Solr servers will have to be reindexed.');
+}
+
+/**
+ * Create the Search API Solr cache table {cache_search_api_solr}.
+ */
+function search_api_solr_update_7102() {
+  if (!db_table_exists('cache_search_api_solr')) {
+    $table = drupal_get_schema_unprocessed('system', 'cache');
+    $table['description'] = 'Cache table for the Search API Solr module to store various data related to Solr servers.';
+    db_create_table('cache_search_api_solr', $table);
+  }
+}

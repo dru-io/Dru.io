@@ -1,0 +1,13 @@
+name = Honeypot - Entityform
+description = Honeypot integration for the Entityform module.
+package = Spam control
+core = 7.x
+dependencies[] = entityform
+dependencies[] = honeypot
+
+; Information added by Drupal.org packaging script on 2014-05-07
+version = "7.x-1.0"
+core = "7.x"
+project = "honeypot_entityform"
+datestamp = "1399456735"
+

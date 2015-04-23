@@ -1,0 +1,12 @@
+#hybridauth-modal div.ctools-modal-content .modal-header {
+  background-color: #999;
+}
+#hybridauth-modal {
+  padding: 10px;
+  background-color: #000;
+}
+#hybridauth-modal .ctools-modal-content {
+  background-color: #fff;
+  border: 0;
+  padding-bottom: 20px;
+}

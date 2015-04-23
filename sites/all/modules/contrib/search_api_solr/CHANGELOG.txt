@@ -1,0 +1,210 @@
+Search API Solr search 1.6 (09/08/2014):
+----------------------------------------
+- #2050961 by das-peter, drunken monkey: Added proximity/distance information
+  to search results.
+- #2242073 by RaF: Fixed handling of custom negative filters in filter-only
+  searches.
+- #2290601 by drunken monkey: Fixed handling of complex keywords and OR facets.
+- #2083357 by drunken monkey: Added note that Solr 4.x server paths should be
+  specified with core.
+- #2270767 by RaF: Fixed search_api_solr_views_data_alter() not always
+  returning all virtual fields.
+
+Search API Solr search 1.5 (05/23/2014):
+----------------------------------------
+- #2216895 by das-peter: Added support for empty/non-empty conditions on
+  location field types.
+- #2162627 by drunken monkey: Removed Solr 1.4 support.
+- #2175829 by danquah, drunken monkey: Fixed error when admin interface is not
+  accessible.
+- #2222037 by drunken monkey: Fixed "Files" tab in Solr 4.7.
+- #2151719 by Derimagia, drunken monkey: Added an alter hook for multi-index
+  search results.
+- #1776534 by drunken monkey, e2thex: Added support for using a Solr server
+  with multiple sites.
+- #2152337 by drunken monkey: Removed confusing "multiple text fields" section
+  from README.txt.
+- #2099559 by drunken monkey: Made optimizing the Solr server optional.
+- #2146749 by drunken monkey: Added soft commits as the default for Solr 4.
+- #1773440 by drunken monkey: Added performance improvement for “filter
+  only” queries.
+- #2147573 by drunken monkey: Improved error handling.
+
+Search API Solr search 1.4 (12/25/2013):
+----------------------------------------
+- #2157839 by drunken monkey, Nick_vh: Updated config files to the newest
+  version.
+- #2130827 by drunken monkey: Added additional Solr server information to the
+  Server overview.
+- #2126281 by drunken monkey: Update error handling according to the latest
+  Search API change.
+- #2127991 by drunken monkey: Fixed handling of negated fulltext keys.
+- #2113943 by drunken monkey: Fixed clash in specifying the HTTP method for
+  searches.
+- #2127193 by jlapp: Fixed date field values returned for multi-index searches.
+- #2122155 drunken monkey: Added the "Files" tab to contextual links.
+- #1846860 by andrewbelcher, drclaw, drunken monkey, danielnolde: Added a way
+  to easily define new dynamic field types.
+- #2064377 by Nick_vh: Made configuration files compatible with Solr Cloud.
+- #2107417 by Nick_vh: Fixed config files for Solr 4.5.
+
+Search API Solr search 1.3 (10/23/2013):
+----------------------------------------
+- #2099683 by drunken monkey: Added support for 'virtual fields' in Views.
+- #1997702 by ianthomas_uk, drunken monkey: Added "AUTO" mode for HTTP method.
+- #2033913 by drunken monkey: Fixed small error in schema.xml.
+- #2073441 by drunken monkey: Removed custom uninstall code for deleting
+  dependent servers.
+- #1882190 by corvus_ch, arnested, drunken monkey: Added optional index ID
+  prefixes.
+
+Search API Solr search 1.2 (09/01/2013):
+----------------------------------------
+- #1246730 by febbraro, maciej.zgadzaj, drunken monkey: Added a way to alter
+  the Solr document when indexing.
+- #2053553 by drunken monkey, andrewbelcher: Fixed spatial features with clean
+  field identifiers.
+- #2054373 by drunken monkey: Added the option to use clean field identifiers.
+- #1992806 by drunken monkey: Documented problems with Solr 4.3+.
+- #2045355 by drunken monkey, arpieb: Fixed result mapping of item IDs.
+- #2050157 by izus: Fixed typo in stopwords.txt.
+
+Search API Solr search 1.1 (07/21/2013):
+----------------------------------------
+- #1957730 by drunken monkey: Fixed filter query strings for negated filters.
+- #2010818 by kenorb, drunken monkey: Added new Files tab showing all used solr
+  config files.
+- #2042201 by klausi: Fixed timeouts while optimizing Solr server.
+- #2034719 by fago: Added raw term to autocompletion response.
+- #2027843 by fago, drunken monkey: Made the Solr response available as part of
+  the search results.
+- #1834614 by drunken monkey: Fixed date fields in MLT queries.
+- #1970652 by jsteggink: Fixed highlighting for text fields.
+- #2016169 by tomdearden, drunken monkey: Fixed parsing of facets on
+  multi-valued fields.
+- #2008034 by bdecarne: Fixed highlighting in multi-index searches.
+
+Search API Solr search 1.0 (06/09/2013):
+----------------------------------------
+- #1896080 by drunken monkey: Included additional required config files in the
+  module.
+- #1919572 by chaby: Fixed indexing of geohashes.
+- #2004596 by drunken monkey: Fixed "More Like This" for Solr 4.x.
+- #2007214 by drunken monkey: Fixed unsetting of object properties.
+- #1884312 by drunken monkey, mvc: Fixed resetting of HTTP password upon
+  re-saving of the configuration form.
+- #1957774 by drunken monkey: Fixed displayed link to local Solr servers.
+- #1721262 by Steven Jones, das-peter, drunken monkey: Added field collapsing
+  support.
+- #1549244 by cferthorney, drunken monkey: Added SSL Support for Solr servers.
+
+Search API Solr search 1.0, RC 5 (05/17/2013):
+----------------------------------------------
+- #1190462 by drunken monkey: Documented that enabling HTML filter makes sense.
+- #1986284 by drunken monkey: Updated common configs to the latest version.
+- #1990422 by populist, drunken monkey: Added support for custom stream contexts
+  for HTTP requests.
+- #1957890 by drunken monkey, jwilson3: Fixed several bugs for facets.
+- #1676224 by dasjo, morningtime, drunken monkey: Added support for Solr 4.x.
+- #1985522 by chaby: Fixed use of instance method in static escape() method.
+- #1979102 by drunken monkey: Fixed wrong limit for limit-less searches.
+- #1978632 by chaby, drunken monkey: Fixed wrong check on softCommit.
+- #1978600 by chaby: Fixed hook_requirements() for install phase.
+- #1976930 by drunken monkey: Fixed duplicate method in SearchApiSolrField.
+
+Search API Solr search 1.0, RC 4 (04/22/2013):
+----------------------------------------------
+- #1744250 by mollux, drunken monkey, das-peter: Added support for
+  location-based searches.
+- #1846254 by drunken monkey: Removed the SolrPhpClient dependency.
+- #1934450 by jwilson3, jlapp: Fixed reference to removed method
+  getFacetField().
+- #1900644 by Deciphered: Fixed facet handling for multi-index searches.
+- #1897386 by drunken monkey, NIck_vh: Update the common schema.
+
+Search API Solr search 1.0, RC 3 (01/06/2013):
+----------------------------------------------
+- #1828260 by drunken monkey: Fixed filtering by index in multi-index searches.
+- #1509380 by drunken monkey: Adopt common config files.
+- #1815348 by drunken monkey: Fixed queryMultiple() to not use item ID as the
+  array key.
+- #1789204 by Steven Jones: Added way to easily alter the fl parameter.
+- #1744250 by mollux, dasjo: Added support for location based search.
+- #1813670 by guillaumev: Fixed check for autocomplete configuration in form.
+- #1425910 by drunken monkey, mh86: Added setting for maximum occurence
+  threshold in autocomplete.
+- #1691132 by drunken monkey, David Stosik: Fixed calls to watchdog().
+- #1588130 by regilero, David Stosik, drunken monkey: Fixed error handling.
+- #1805720 by drunken monkey: Added additional options and improvements for the
+  autocomplete functionality.
+- #1276970 by derhasi, moonray: Fixed large queries break Solr search.
+- #1299940 by drunken monkey: Fixed handling of empty response.
+- #1507818 by larowlan: Fixed field boosts for standard request handler.
+
+Search API Solr search 1.0, RC 2 (05/23/2012):
+----------------------------------------------
+- Fixed escaping of error messages.
+- #1480170 by kotnik: Fixed return value of hook_requirements().
+- #1500210 by ezra-g, acrollet, jsacksick: Fixed errors when installing with
+  non-default installation profiles.
+- #1444432 by Damien Tournoud, jsacksick: Added field-level boosting.
+- #1302406 by Steven Jones: Fixed autoload problem during installation.
+- #1340244 by drunken monkey, alanomaly: Added more helpful error messages.
+
+Search API Solr search 1.0, RC 1 (11/10/2011):
+----------------------------------------------
+- #1308638 by drunken monkey: Adapted to new structure of field settings.
+- #1308498 by zenlan, drunken monkey: Added flexibility for facet fields.
+- #1319544 by drunken monkey: Fixed never delete contents of read-only indexes.
+- #1309650 by jonhattan, drunken monkey: Added support for the Libraries API.
+
+Search API Solr search 1.0, Beta 4 (09/08/2011):
+------------------------------------------------
+- #1230536 by thegreat, drunken monkey: Added support for OR facets.
+- #1184002 by drunken monkey: Fixed support of the latest SolrPhpClient version.
+- #1032848 by das-peter, drunken monkey: Added possibility to save SolrPhpClient
+  to the libraries directory.
+- #1225926 by drunken monkey, fago: Fixed performance problems in indexing
+  workflow.
+- #1219310 by drunken monkey: Adapted to recent API change.
+- #1203680 by klausi: Fixed use of taxonomy terms for "More like this".
+- #1181260 by klausi: Fixed mlt.maxwl in solrconfig.xml.
+- #1116896 by drunken monkey: Adapted to newer Solr versions.
+- #1190462 by drunken monkey: Added option to directly highlight retrieved data
+  from Solr.
+- #1196514 by drunken monkey, klausi: Fixed case sensitivity of input keys for
+  autocomplete.
+- #1192654 by drunken monkey: Added support for the Autocomplete module.
+- #1177648 by drunken monkey: Added option to use Solr's built-in highlighting.
+- #1154116 by drunken monkey: Added option for retrieving search results data
+  directly from Solr.
+- #1184002 by drunken monkey: Fixed INSTALL.txt to reflect that the module
+  doesn't work with the latest Solr PHP Client version.
+
+Search API Solr search 1.0, Beta 3 (06/06/2011):
+------------------------------------------------
+- #1111852 by miiimooo, drunken monkey: Added a 'More like this' feature.
+- #1153306 by JoeMcGuire, drunken monkey: Added spellchecking support.
+- #1138230 by becw, drunken monkey: Added increased flexibility to the service
+  class.
+- #1127038 by drunken monkey: Fixed handling of date facets.
+- #1110820 by becw, drunken monkey: Added support for the Luke request handler.
+- #1095956 by drunken monkey: Added Solr-specific index alter hook.
+
+Search API Solr search 1.0, Beta 2 (03/04/2011):
+------------------------------------------------
+- #1071894 by drunken monkey: Fixed incorrect handling of boolean facets.
+- #1071796: Add additional help for Solr-specific extensions.
+- #1056018: Better document Solr config customization options.
+- #1049900: Field values are sometimes not escaped properly.
+- #1043586: Allow Solr server URL to be altered.
+- #1010610 by mikejoconnor: Fix hook_requirements().
+- #1024146: Don't use file_get_contents() for contacting the Solr server.
+- #1010610: More helpful error message when SolrPhpClient is missing.
+- #915174: Remove unnecessary files[] declarations from .info file.
+- #984134: Add Solr-specific query alter hooks.
+
+Search API Solr search 1.0, Beta 1 (11/29/2010):
+------------------------------------------------
+Basic functionality is in place and quite well-tested, including support for
+facets and for multi-index searches.

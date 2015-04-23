@@ -1,0 +1,33 @@
+/**
+ * @file
+ * Styles for system messages.
+ */
+.messages {
+  position: relative;
+  min-height: 1em;
+  margin: 0 0 pxToRem(20px);
+  background: #efefef;
+  padding: 1em 1.5em;
+  line-height: 1.3;
+  color: rgba(0, 0, 0, .8);
+  border-radius: .2857rem;
+  border: 1px solid transparent;
+
+  &.error {
+    border-color: $messageErrorBorder;
+    background-color: $messageErrorBackground;
+    color: $messageErrorColor;
+  }
+
+  &.status {
+    border-color: $messageStatusBorder;
+    background-color: $messageStatusBackground;
+    color: $messageStatusColor;
+  }
+
+  &.warning {
+    border-color: $messageWarningBorder;
+    background-color: $messageWarningBackground;
+    color: $messageWarningColor;
+  }
+}

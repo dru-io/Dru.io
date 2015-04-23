@@ -1,0 +1,30 @@
+/**
+ * @file
+ * This file contain all imports and compile to final file.
+ * Here you can change priority, and replace or disable files.
+ */
+
+// Base
+@import "base/normalize";
+@import "base/normalize-additional";
+@import "base/variables";
+@import "base/functions";
+@import "base/mixin";
+@import "base/typography";
+
+// Layouts
+@import "layouts/susy/susy"; // If you don't need susy, jjust remove.
+
+// Component
+@import "component/buttons";
+@import "component/checkboxes";
+@import "component/fieldsets";
+@import "component/inputs";
+@import "component/messages";
+@import "component/pager";
+@import "component/tabs";
+@import "component/radios";
+@import "component/tables";
+
+// Theme
+@import "theme/theme";

@@ -1,0 +1,16 @@
+.hybridauth-widget-wrapper ul.hybridauth-widget {
+  margin: 0;
+  padding: 0;
+}
+.hybridauth-widget-wrapper ul.hybridauth-widget li {
+  display: inline-block;
+  margin: 1px;
+  padding: 0;
+  list-style-type: none;
+  list-style-image: none;
+  background: none;
+}
+.hybridauth-widget-wrapper ul.hybridauth-widget li a {
+  padding: 0;
+  margin: 0;
+}

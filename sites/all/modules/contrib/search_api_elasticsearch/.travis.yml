@@ -1,0 +1,92 @@
+language: php
+
+php:
+  - 5.3
+  - 5.4
+  - 5.5
+  - 5.6
+  - hhvm
+
+matrix:
+  fast_finish: true
+  allow_failures:
+    - php: hhvm
+
+env:
+  global:
+    - ES_VER=1.3.0
+    - ES_MAPPER_ATTACHMENTS_VER=2.3.2
+    - ES_TRANSPORT_THRIFT_VER=2.3.0
+    - ES_GEOCLUSTER_FACET_VER=0.0.11
+    - ES_HTTP_BASIC_AUTH_VER=1.3.2
+    - ES_WAIT_ON_MAPPING_CHANGE=true
+    - DATABASE='drupal'
+    - DB_USERNAME='root'
+    - DB_ENCODE='utf8'
+    - MODULE_PATH='build/sites/all/modules/search_api_elasticsearch'
+    - ES_REQUIRE='no-dev'
+  matrix:
+    - DRUPAL_3RD_PARTY='composer_manager'
+    - DRUPAL_3RD_PARTY='libraries'
+
+mysql:
+  database: $DATABASE
+  username: $DB_USERNAME
+  encoding: $DB_ENCODE
+
+before_install:
+  - curl -I http://ftp.drupal.org/files/projects/drupal-7.34.tar.gz --verbose
+  - sudo apt-get update > /dev/null
+  - composer self-update
+  - composer install -n --prefer-source
+
+install:
+  - sudo apt-get install -y --force-yes php5-cgi php5-mysql php5-curl
+  - phpenv rehash
+  - ./tests/bin/run_elasticsearch.sh
+
+before_script:
+  - if [[ "$TRAVIS_PHP_VERSION" != hhvm* ]]; then echo 'display_errors = stdout' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi
+  - if [[ "$TRAVIS_PHP_VERSION" != hhvm* ]]; then echo 'log_errors = 1' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi
+  - if [[ "$TRAVIS_PHP_VERSION" != hhvm* ]]; then echo 'error_log = syslog' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi
+  - if [[ "$TRAVIS_PHP_VERSION" != hhvm* ]]; then echo 'sendmail_path = /bin/true' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi
+  - if [[ "$TRAVIS_PHP_VERSION" == hhvm* ]]; then echo -e 'sendmail_path = /bin/true' | sudo tee -a /etc/hhvm/php.ini; fi
+  - if [[ "$TRAVIS_PHP_VERSION" == 5.6 ]]; then echo 'mbstring.http_input = pass' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi
+  - if [[ "$TRAVIS_PHP_VERSION" == 5.6 ]]; then echo 'mbstring.http_output = pass' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini; fi
+  - $TRAVIS_BUILD_DIR/vendor/bin/drush --debug --yes make tests/includes/search_api_elasticsearch.make build
+  - mkdir -p $MODULE_PATH
+  - git archive $(git rev-parse --abbrev-ref HEAD) | tar -x -C $MODULE_PATH
+  - cd build
+  - $TRAVIS_BUILD_DIR/vendor/bin/drush --yes site-install minimal --db-url="mysql://$DB_USERNAME@127.0.0.1/$DATABASE"
+  - $TRAVIS_BUILD_DIR/vendor/bin/drush runserver 127.0.0.1:8080 & until netstat -an 2>/dev/null | grep '8080.*LISTEN'; do true; done
+  - $TRAVIS_BUILD_DIR/vendor/bin/drush --yes dis search
+  - $TRAVIS_BUILD_DIR/vendor/bin/drush --yes en syslog
+  - $TRAVIS_BUILD_DIR/vendor/bin/drush --yes en $DRUPAL_3RD_PARTY
+  - if [[ "$DRUPAL_3RD_PARTY" == composer_manager ]]; then $TRAVIS_BUILD_DIR/vendor/bin/drush vset composer_manager_autobuild_file 0; fi
+  - if [[ "$DRUPAL_3RD_PARTY" == composer_manager ]]; then $TRAVIS_BUILD_DIR/vendor/bin/drush vset composer_manager_autobuild_packages 0; fi
+  - $TRAVIS_BUILD_DIR/vendor/bin/drush --yes en search_api_elasticsearch
+  - $TRAVIS_BUILD_DIR/vendor/bin/drush --yes en search_api_elasticsearch_elastica
+  - $TRAVIS_BUILD_DIR/vendor/bin/drush --yes en search_api_facetapi search_api_spellcheck
+  - $TRAVIS_BUILD_DIR/vendor/bin/drush --yes en simpletest
+  - if [[ "$DRUPAL_3RD_PARTY" == composer_manager ]]; then $TRAVIS_BUILD_DIR/vendor/bin/drush --yes composer-manager install --prefer-source --no-dev; fi
+  - $TRAVIS_BUILD_DIR/vendor/bin/drush cc all
+  - $TRAVIS_BUILD_DIR/vendor/bin/drush cron
+  - cd sites/all/modules/search_api_elasticsearch
+  - mkdir -p $TRAVIS_BUILD_DIR/build/logs
+
+script:
+  - $TRAVIS_BUILD_DIR/vendor/bin/phpunit --coverage-clover $TRAVIS_BUILD_DIR/build/logs/clover.xml --verbose --debug
+  - $TRAVIS_BUILD_DIR/vendor/bin/drush test-run --uri=http://127.0.0.1:8080 'Search API Elasticsearch' --debug
+
+after_script:
+  - cd $TRAVIS_BUILD_DIR
+  - php $TRAVIS_BUILD_DIR/vendor/bin/coveralls -v
+  - $TRAVIS_BUILD_DIR/vendor/bin/phpmd $TRAVIS_BUILD_DIR/$MODULE_PATH text codesize,naming,design
+  - $TRAVIS_BUILD_DIR/vendor/bin/phpcpd $TRAVIS_BUILD_DIR/$MODULE_PATH
+  - $TRAVIS_BUILD_DIR/vendor/bin/phpcs --standard=$TRAVIS_BUILD_DIR/vendor/drupal/coder/coder_sniffer/Drupal $TRAVIS_BUILD_DIR/$MODULE_PATH
+
+after_failure:
+  - sudo cat /var/log/syslog
+
+notifications:
+  irc: irc.freenode.org#vmdoh

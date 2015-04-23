@@ -1,0 +1,16 @@
+/**
+ * @file
+ * Layout settings.
+ */
+
+// Susy settings.
+$susy: (
+  gutters: 1/4,
+  use-custom: (rem: true)
+);
+
+@include border-box-sizing;
+
+// Default sizes.
+// 1200px
+$siteWidth: 75rem;

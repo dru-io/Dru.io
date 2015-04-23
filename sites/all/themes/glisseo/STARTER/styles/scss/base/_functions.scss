@@ -1,0 +1,14 @@
+/**
+ * @file
+ * Functions.
+ */
+
+/**
+ * Calculating rem font size.
+ * @param
+ *   $size - needed font size in PX.
+ */
+@function calculateRem($size) {
+  $remSize: $size / 16px;
+  @return #{$remSize}rem;
+}

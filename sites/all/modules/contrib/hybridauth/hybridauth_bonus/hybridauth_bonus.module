@@ -1,0 +1,189 @@
+<?php
+/**
+ * @file
+ * Main file for the HybridAuth Bonus module.
+ */
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function hybridauth_bonus_form_hybridauth_admin_settings_alter(&$form, &$form_state, $form_id) {
+  $roles = user_roles(TRUE);
+  unset($roles[DRUPAL_AUTHENTICATED_RID]);
+  if ($roles) {
+    $form['vtabs']['fset_bonus_roles'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('HybridAuth Bonus') . ': ' . t('Roles'),
+    );
+    $form['vtabs']['fset_bonus_roles']['hybridauth_bonus_registration_role_choice'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Suggest role choice when registering'),
+      '#description' => t('Allow users to choose their roles when registering through HybridAuth.'),
+      '#default_value' => variable_get('hybridauth_bonus_registration_role_choice', 0),
+    );
+    $form['vtabs']['fset_bonus_roles']['hybridauth_bonus_registration_roles'] = array(
+      '#type' => 'checkboxes',
+      '#title' => t('Roles to choose from'),
+      '#description' => t('Select roles to suggest to new users when registering through HybridAuth.'),
+      '#options' => $roles,
+      '#default_value' => variable_get('hybridauth_bonus_registration_roles', array()),
+      '#states' => array(
+        'visible' => array(
+          ':input[name="hybridauth_bonus_registration_role_choice"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+    $form['vtabs']['fset_bonus_roles']['hybridauth_bonus_registration_roles_required'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Make role selection required'),
+      '#description' => t('Force users to select a role when registering through HybridAuth.'),
+      '#default_value' => variable_get('hybridauth_bonus_registration_roles_required', 0),
+      '#states' => array(
+        'visible' => array(
+          ':input[name="hybridauth_bonus_registration_role_choice"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+    $form['vtabs']['fset_bonus_roles']['hybridauth_bonus_registration_roles_multiple'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Allow several roles selection'),
+      '#description' => t('Allow users to select several roles when registering through HybridAuth.'),
+      '#default_value' => variable_get('hybridauth_bonus_registration_roles_multiple', 1),
+      '#states' => array(
+        'visible' => array(
+          ':input[name="hybridauth_bonus_registration_role_choice"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+  }
+
+  $form['vtabs']['fset_bonus_forms'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('HybridAuth Bonus') . ': ' . t('Forms'),
+  );
+  $form['vtabs']['fset_bonus_forms']['hybridauth_bonus_customize_widget_per_form'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Customize HybridAuth widget per form'),
+    '#default_value' => variable_get('hybridauth_bonus_customize_widget_per_form', 0),
+  );
+  foreach (hybridauth_forms_list() as $f_id => $f_name) {
+    $form['vtabs']['fset_bonus_forms'][$f_id] = array(
+      '#type' => 'fieldset',
+      '#title' => $f_name,
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#states' => array(
+        'visible' => array(
+          ':input[name="hybridauth_bonus_customize_widget_per_form"]' => array('checked' => TRUE),
+        ),
+      ),
+    );
+    foreach (element_children($form['vtabs']['fset_widget']) as $key) {
+      $value = $form['vtabs']['fset_widget'][$key];
+      $new_key = str_replace('hybridauth_', 'hybridauth_bonus_', $key) . '_' . $f_id;
+      $form['vtabs']['fset_bonus_forms'][$f_id][$new_key] = $value;
+      $form['vtabs']['fset_bonus_forms'][$f_id][$new_key]['#default_value'] = variable_get($new_key, $value['#default_value']);
+
+      if ($key == 'hybridauth_widget_use_overlay' || $key == 'hybridauth_widget_link_title') {
+        $form['vtabs']['fset_bonus_forms'][$f_id][$new_key]['#states'] = array(
+          'invisible' => array(
+            ':input[name="hybridauth_bonus_widget_type_' . $f_id . '"]' => array('value' => 'list'),
+          ),
+        );
+      }
+      if ($key == 'hybridauth_widget_link_text') {
+        $form['vtabs']['fset_bonus_forms'][$f_id][$new_key]['#states'] = array(
+          'visible' => array(
+            ':input[name="hybridauth_bonus_widget_type_' . $f_id . '"]' => array('value' => 'link'),
+          ),
+        );
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_hybridauth_registration_form().
+ */
+function hybridauth_bonus_hybridauth_registration_form($data) {
+  if (empty($data['roles']) && variable_get('hybridauth_bonus_registration_role_choice', 0)) {
+    return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function hybridauth_bonus_form_hybridauth_additional_info_form_alter(&$form, &$form_state, $form_id) {
+  if (variable_get('hybridauth_bonus_registration_role_choice', 0)) {
+    $roles = array_intersect_key(user_roles(TRUE), array_filter(variable_get('hybridauth_bonus_registration_roles', array())));
+    $form['fset']['roles'] = array(
+      '#type' => variable_get('hybridauth_bonus_registration_roles_multiple', 1) ? 'checkboxes' : 'radios',
+      '#title' => t('Roles'),
+      '#options' => $roles,
+      '#required' => variable_get('hybridauth_bonus_registration_roles_required', 0),
+    );
+
+    // $form['#validate'][] = 'hybridauth_bonus_form_hybridauth_additional_info_form_validate';
+    array_unshift($form['#submit'], 'hybridauth_bonus_form_hybridauth_additional_info_form_submit');
+  }
+}
+
+/*function hybridauth_bonus_form_hybridauth_additional_info_form_validate($form, &$form_state) {
+}*/
+
+function hybridauth_bonus_form_hybridauth_additional_info_form_submit($form, &$form_state) {
+  if (isset($form_state['values']['roles'])) {
+    if (is_array($form_state['values']['roles'])) {
+      $form_state['values']['data']['roles'] = $form_state['values']['roles'];
+    }
+    else {
+      $form_state['values']['data']['roles'] = array(
+        $form_state['values']['roles'] => $form_state['values']['roles'],
+      );
+    }
+    if (!isset($form_state['values']['data']['manual']) || is_array($form_state['values']['data']['manual'])) {
+      $form_state['values']['data']['manual'][] = 'roles';
+    }
+  }
+}
+
+/**
+ * Implements hook_hybridauth_userinfo_alter().
+ */
+function hybridauth_bonus_hybridauth_userinfo_alter(&$userinfo, $data) {
+  if (array_key_exists('roles', $data)) {
+    $userinfo['roles'] = $data['roles'];
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function hybridauth_bonus_form_alter(&$form, &$form_state, $form_id) {
+  _hybridauth_bonus_form_alter($form, $form_state, $form_id);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function hybridauth_bonus_form_comment_form_alter(&$form, &$form_state, $form_id) {
+  _hybridauth_bonus_form_alter($form, $form_state, 'comment_form');
+}
+
+function _hybridauth_bonus_form_alter(&$form, &$form_state, $form_id) {
+  if (!variable_get('hybridauth_bonus_customize_widget_per_form', 0) || !array_key_exists($form_id, hybridauth_forms_list())) {
+    return;
+  }
+
+  if (isset($form['hybridauth'])) {
+    $form['hybridauth']['#title'] = variable_get('hybridauth_bonus_widget_title_' . $form_id, 'Or log in with...');
+    $form['hybridauth']['#hybridauth_widget_type'] = variable_get('hybridauth_bonus_widget_type_' . $form_id, 'list');
+    $form['hybridauth']['#hybridauth_widget_use_overlay'] = variable_get('hybridauth_bonus_widget_use_overlay_' . $form_id, 1);
+    $form['hybridauth']['#hybridauth_widget_link_text'] = variable_get('hybridauth_bonus_widget_link_text_' . $form_id, 'Social network account');
+    $form['hybridauth']['#hybridauth_widget_link_title'] = variable_get('hybridauth_bonus_widget_link_title_' . $form_id, 'Social network account');
+    $form['hybridauth']['#hybridauth_widget_icon_pack'] = variable_get('hybridauth_bonus_widget_icon_pack_' . $form_id, 'hybridauth_32');
+    $form['hybridauth']['#weight'] = variable_get('hybridauth_bonus_widget_weight_' . $form_id, 100);
+  }
+}

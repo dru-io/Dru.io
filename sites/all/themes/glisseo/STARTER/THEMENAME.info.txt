@@ -1,0 +1,47 @@
+; Default information about our theme.
+screenshot  = screenshot.png
+name        = Glisseo (starter theme)
+description = Glisseo starter theme. Here you journey begins.
+core        = 7.x
+base theme  = glisseo
+
+; Remove system styles, cuz we have own.
+stylesheets[all][] = system.menus.css
+stylesheets[all][] = system.messages.css
+stylesheets[all][] = system.theme.css
+
+; Here you can attach your own styles.
+stylesheets[all][] = css/theme/theme.css
+
+; Here tou can attach your scripts.
+;scripts[] = js/script.js
+
+regions[navigation]     = Navigation bar
+regions[help]           = Help
+regions[content]        = Content
+regions[sidebar_first]  = First sidebar
+regions[sidebar_second] = Second sidebar
+regions[footer]         = Footer
+
+; This two regions is required by Drupal Core. Don't remove them, they not display in block list.
+regions[page_top]       = Page top
+regions[page_bottom]    = Page bottom
+
+; Theme variables. You can remove or add new ones.
+; This is variables. F.e. first feature (logo) can be called in template file
+; by using variable $logo.
+features[] = logo
+features[] = name
+features[] = slogan
+features[] = node_user_picture
+features[] = comment_user_picture
+features[] = favicon
+features[] = main_menu
+features[] = secondary_menu
+
+; Set default values for theme-setings.php variables.
+settings[glisseo_rebuild_registry] = 0
+settings[glisseo_body_classes]     = 1
+settings[glisseo_new_checkboxes]   = 1
+settings[glisseo_new_radios]       = 1
+settings[glisseo_disable_grippie]  = 1

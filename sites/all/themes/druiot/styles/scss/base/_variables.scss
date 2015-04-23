@@ -1,0 +1,148 @@
+/**
+ * @file
+ * Variables.
+ */
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,300italic,700,700italic&subset=latin,cyrillic);
+
+// Typography variables.
+$baseHeaderSize: 30px;
+$baseFontSize: 16px;
+$baseFontFamily: 'Open Sans', sans-serif;
+$baseLineHeight: 1.4;
+$baseFontColor: #3b3b3b;
+$headerBackground: #2E5B95;
+
+/**
+ * Custom, Dru.io colors.
+ */
+$colorMercury: #E2E2E2;
+$colorGallery: #EAEAEA;
+$colorBoulder: #777;
+$colorShamrock: #2ECC71;
+$colorPomegranate: #F22613;
+$colorLightGrey: #f2f2f2;
+
+/**
+ * Messages colors.
+ */
+$messageErrorBackground: #F2DEDE;
+$messageErrorBorder: #EBCCD1;
+$messageErrorColor: #A94442;
+$messageStatusBackground: #DFF0D8;
+$messageStatusBorder: #D6E9C6;
+$messageStatusColor: #3C763D;
+$messageWarningBackground: #FCF8E3;
+$messageWarningBorder: #FAEBCC;
+$messageWarningColor: #8A6D3B;
+
+/**
+ * Link colors.
+ */
+$linkColor: #4a90d9;
+$linkColorHover: #276ea3;
+$linkColorVisited: #58a8ff;
+$linkDecoration: false;
+
+/**
+ * Predefined Flat colors.
+ */
+$colorChestnut: #D24D57;
+$colorPomegranate: #F22613;
+$colorThunderbird: #D91E18;
+$colorOldBrick: #96281B;
+$colorFlamingo: #EF4836;
+$colorValencia: #D64541;
+$colorTallPoppy: #C0392B;
+$colorMonza: #CF000F;
+$colorCinnabar: #E74C3C;
+$colorRazzmatazz: #DB0A5B;
+$colorSunsetOrange: #F64747;
+$colorWaxFlower: #F1A9A0;
+$colorCabaret: #D2527F;
+$colorNewYorkPink: #E08283;
+$colorRadicalRed: #F62459;
+$colorSunglo: #E26A6A;
+$colorSnuff: #DCC6E0;
+$colorRebeccaPurple: #663399;
+$colorHoneyFlower: #674172;
+$colorWistful: #AEA8D3;
+$colorPlum: #913D88;
+$colorSeance: #9A12B3;
+$colorMediumPurple: #BF55EC;
+$colorLightWisteria: #BE90D4;
+$colorStudio: #8E44AD;
+$colorWisteria: #9B59B6;
+$colorSanMarino: #446CB3;
+$colorAliceBlue: #E4F1FE;
+$colorRoyalBlue: #4183D7;
+$colorPictonBlue: #59ABE3;
+$colorSpray: #81CFE0;
+$colorShakespeare: #52B3D9;
+$colorHummingBird: #C5EFF7;
+$colorPictonBlue: #22A7F0;
+$colorCuriousBlue: #3498DB;
+$colorMadison: #2C3E50;
+$colorDodgerBlue: #19B5FE;
+$colorMing: #336E7B;
+$colorEbonyClay: #22313F;
+$colorMalibu: #6BB9F0;
+$colorCuriousBlue2: #1E8BC3;
+$colorShambray: #3A539B;
+$colorPickledBluewood: #34495E;
+$colorHoki: #67809F;
+$colorJellyBean: #2574A9;
+$colorJacksonsPurple: #1F3A93;
+$colorJordyBlue: #89C4F4;
+$colorSteelBlue: #4B77BE;
+$colorFountainBlue: #5C97BF;
+$colorMediumTurquoise: #4ECDC4;
+$colorAquaIsland: #A2DED0;
+$colorGossip: #87D37C;
+$colorDarkSeaGreen: #90C695;
+$colorEucalyptus: #26A65B;
+$colorCaribbeanGreen: #03C9A9;
+$colorSilverTree: #68C3A3;
+$colorDowny: #65C6BB;
+$colorMountainMeadow: #1BBC9B;
+$colorLightSeaGreen: #1BA39C;
+$colorMediumAquamarine: #66CC99;
+$colorTurquoise: #36D7B7;
+$colorMadang: #C8F7C5;
+$colorRiptide: #86E2D5;
+$colorShamrock: #2ECC71;
+$colorMountainMeadow: #16a085;
+$colorEmerald: #3FC380;
+$colorGreenHaze: #019875;
+$colorFreeSpeechAquamarine: #03A678;
+$colorOceanGreen: #4DAF7C;
+$colorNiagara: #2ABB9B;
+$colorJade: #00B16A;
+$colorSalem: #1E824C;
+$colorObservatory: #049372;
+$colorJungleGreen: #26C281;
+$colorCapeHoney: #FDE3A7;
+$colorCalifornia: #F89406;
+$colorFireBush: #EB9532;
+$colorGold: #E87E04;
+$colorCasablanca: #F4B350;
+$colorCrusta: #F2784B;
+$colorJaffa: #EB974E;
+$colorLightningYellow: #F5AB35;
+$colorBurntOrange: #D35400;
+$colorButtercup: #F39C12;
+$colorEcstasy: #F9690E;
+$colorSandstorm: #F9BF3B;
+$colorJaffa2: #F27935;
+$colorZest: #E67E22;
+$colorWhiteSmoke: #ececec;
+$colorLycnh: #6C7A89;
+$colorPumice: #D2D7D3;
+$colorGallery: #EEEEEE;
+$colorSilverSand: #BDC3C7;
+$colorPorcelain: #ECF0F1;
+$colorCascale: #95A5A6;
+$colorIron: #DADFE1;
+$colorEdward: #ABB7B7;
+$colorCararra: #F2F1EF;
+$colorSilver: #BFBFBF;

@@ -1,0 +1,29 @@
+<?php
+/**
+ * @file
+ * Main file for the HybridAuth uLogin module.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function hybridauth_ulogin_menu() {
+  $items = array();
+
+  $items['admin/config/people/hybridauth/settings'] = array(
+    'title' => 'Settings',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+  $items['admin/config/people/hybridauth/ulogin'] = array(
+    'title' => 'uLogin',
+    'description' => 'Migrate uLogin identities to HybridAuth.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('hybridauth_ulogin_migrate_form'),
+    'access arguments' => array('administer site configuration'),
+    'file' => 'hybridauth_ulogin.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 10,
+  );
+
+  return $items;
+}
