@@ -1,0 +1,66 @@
+<?php
+/**
+ * @file
+ * We store DisplaySuite custom fields in this module for better debugging
+ * and less code in admin panel.
+ *
+ * Notice: fields, defined in this module not available at DisplaySuite UI
+ * admin/structure/ds/fields - only on Display Settings which defined in
+ * ui_limit field value.
+ */
+
+/**
+ * Implements hook_ds_fields_info().
+ */
+function druio_ds_fields_ds_fields_info($entity_type) {
+  $fields = array();
+
+  if ($entity_type == 'node') {
+    $fields['druio_answer_comments'] = array(
+      'title' => 'Answer comments',
+      'ui_limit' => array('answer|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_answer_comments',
+    );
+
+    $fields['druio_node_author_created'] = array(
+      'title' => 'Author + Created',
+      'ui_limit' => array('*|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_node_author_created',
+    );
+
+    return array($entity_type => $fields);
+  }
+  return;
+}
+
+/**
+ * Comments for answer node.
+ * @param $field
+ * @return mixed
+ */
+function druio_ds_fields_answer_comments($field) {
+  if (isset($field['entity']->name)) {
+    return views_embed_view('comments', 'comments_to_answers', $field['entity']->nid);
+  }
+}
+
+/**
+ * Returns Author + Created for node entities.
+ * Format: Username - 24.04.2015 - 01:17
+ * @param $field
+ * @return mixed
+ */
+function druio_ds_fields_node_author_created($field) {
+  if (isset($field['entity']->name)) {
+    $html = '<a href="@user_node_url" class="username">@user_node_name</a> <span class="created">– @node_created</span>';
+    $data = array(
+      '@user_node_url' => url('user/' . $field['entity']->uid),
+      '@user_node_name' => $field['entity']->name,
+      '@node_created' => format_date($field['entity']->created, 'ru_medium'),
+    );
+
+    return format_string($html, $data);
+  }
+}
