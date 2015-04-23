@@ -1,0 +1,16 @@
+name = "Configuration Management"
+description = "Provides configuration management for Drupal."
+core = 7.x
+php = 5.3
+package = "Configuration"
+configure = admin/config/system/configuration
+files[] = configuration_stream.inc
+files[] = tests/configuration.test
+dependencies[] = xautoload
+
+; Information added by drupal.org packaging script on 2013-07-03
+version = "7.x-2.0-alpha3"
+core = "7.x"
+project = "configuration"
+datestamp = "1372873255"
+

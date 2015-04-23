@@ -1,0 +1,128 @@
+<?php
+
+/**
+ * @file
+ * Tests for Configuration Management: Content Types.
+ */
+
+use Drupal\configuration\Config\ConfigurationManagement;
+
+/**
+ * Base class for functional tests for configuration management.
+ */
+class ConfigurationHandlerMenuLinksTestCase extends ConfigurationWebTestCase {
+
+  // Use the minimal profile, to avoid create the content type that will be
+  // imported
+  protected $profile = 'minimal';
+
+  /**
+   * Test info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => t('Handler: Menu Links'),
+      'description' => t('Test the configuration API for menu configurations'),
+      'group' => t('Configuration'),
+    );
+  }
+
+  /**
+   * Implementation of DrupalWebTestCase::setUp().
+   */
+  public function setUp($modules = array()) {
+    global $base_url;
+
+    if (empty($modules)) {
+      parent::setUp(array(
+        'configuration',
+        'menu',
+      ));
+    }
+    else {
+      parent::setUp($modules);
+    }
+  }
+
+  public function testImportToActiveStore() {
+    // Change the path from where the configurations are loaded.
+    $source = drupal_get_path('module', 'configuration') . '/tests/test_configs/';
+
+    // Import the third level, import dependencies too.
+    $config = 'menu_link.f3aa4e71405f1a252d229e24df23187f5c0eef24';
+    $results = ConfigurationManagement::importToActiveStore(array($config), TRUE, FALSE, FALSE, $source);
+    $imported = $results->getInfo('imported');
+    $level_one = 'menu_link.a6d0f08452ba53fd1b8cf291ed73479f86c70552';
+    $level_two = 'menu_link.3bd4fee5d9b3477e3f30a17def41c14b99bdd3b8';
+    $this->assertTrue(in_array($config, $imported), "Configuration for $config was imported.");
+    $this->assertTrue(in_array($level_two, $imported) && in_array($level_one, $imported), "Parents of the menu link also imported.");
+
+    $imported_menu_links = db_query('SELECT COUNT(*) FROM {menu_links} WHERE menu_name = :menu_name', array(':menu_name' => 'menu-test'))->fetchField();
+    $this->assertTrue($imported_menu_links == 3, "The three menus were saved in the ActiveStore.");
+  }
+
+  public function testExportToDataStore() {
+    $menu_link = array(
+      'link_path' => 'admin',
+      'link_title' => 'My link',
+      'menu_name' => 'management',
+      'weight' => 0,
+      'expanded' => 0,
+      'options' => array(),
+      'router_path' => 'admin',
+    );
+    $saved = menu_link_save($menu_link);
+
+    $this->assertTrue($saved, "The menu was saved in the ActiveStore.");
+
+    $config = 'menu.' . sha1(str_replace('-', '_', $menu_link['menu_name']) . ':' . $menu_link['link_path']);
+    $results = ConfigurationManagement::exportToDataStore(array($config), FALSE, FALSE);
+    $exported = $results->getInfo('exported');
+    $this->assertTrue(in_array($config, $exported), "Configuration for $config was exported.");
+
+    $file_for_config = $this->datastore_path . '/' . $config . '.inc';
+
+    $this->assertTrue(file_exists($file_for_config), "The file that storages the menu was created.");
+  }
+
+  public function testCheckModifications() {
+    // Change the path from where the configurations are loaded.
+    $source = drupal_get_path('module', 'configuration') . '/tests/test_configs/';
+
+    // Import the third level, import dependencies too.
+    $config = 'menu_link.f3aa4e71405f1a252d229e24df23187f5c0eef24';
+    $results = ConfigurationManagement::importToActiveStore(array($config), TRUE, FALSE, TRUE, $source);
+
+    drupal_flush_all_caches();
+    $imported_menu_links = db_query('SELECT COUNT(*) FROM {menu_links} WHERE menu_name = :menu_name', array(':menu_name' => 'menu-test'))->fetchField();
+    $this->assertTrue($imported_menu_links == 3, "The three menus were saved in the ActiveStore.");
+
+
+    $menu = ConfigurationManagement::createConfigurationInstance($config);
+    $menu::getMenuLinkByIdenfifier(NULL, TRUE);
+    $initial_hash = $menu->loadFromActiveStore()->buildHash()->getHash();
+
+    $object = db_select('configuration_tracked', 'ct')
+                        ->fields('ct')
+                        ->condition('component', 'menu_link')
+                        ->condition('identifier', 'f3aa4e71405f1a252d229e24df23187f5c0eef24')
+                        ->execute()
+                        ->fetchObject();
+    $this->assertTrue(!empty($object), 'The menu link was suscessfully tracked.');
+
+    $mlid = $menu::getMenuLinkByIdenfifier('f3aa4e71405f1a252d229e24df23187f5c0eef24');
+    $menu_link = menu_link_load($mlid);
+
+    $menu_link['link_title'] = 'Modified';
+    menu_link_save($menu_link);
+
+    $modified_hash = $menu->loadFromActiveStore()->buildHash()->getHash();
+    $this->assertFalse($initial_hash == $modified_hash, 'Menu link hash is not the same after modify the menu link.');
+    $results = ConfigurationManagement::importToActiveStore(array($config), TRUE, FALSE, TRUE, $source);
+
+    $final_hash = $menu->loadFromActiveStore()->buildHash()->getHash();
+    $this->assertTrue($initial_hash == $final_hash, 'Menu link hash is the same after modify the menu link.');
+    $menu_link = menu_link_load($mlid);
+  }
+
+}

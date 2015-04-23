@@ -1,0 +1,19 @@
+name = "Configuration UI Test"
+description = "Support module for configuration management ui tests."
+package = Testing
+core = 7.x
+hidden = TRUE
+
+dependencies[] = ctools
+dependencies[] = views
+dependencies[] = wysiwyg
+dependencies[] = role_export
+
+
+
+; Information added by drupal.org packaging script on 2013-07-03
+version = "7.x-2.0-alpha3"
+core = "7.x"
+project = "configuration"
+datestamp = "1372873255"
+

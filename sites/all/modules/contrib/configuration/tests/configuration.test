@@ -1,0 +1,300 @@
+<?php
+/**
+ * @file
+ * Tests for Configuration Management
+ */
+
+use Drupal\configuration\Config\ConfigurationManagement;
+
+/**
+ * Base class for functional tests for configuration management.
+ */
+class ConfigurationWebTestCase extends DrupalWebTestCase {
+  protected $profile = 'standard';
+
+  /**
+   * Implementation of DrupalWebTestCase::setUp().
+   */
+  public function setUp($modules = array()) {
+    parent::setUp($modules);
+
+    // Generate an unique path for this test based on the database prefix.
+    $this->datastore_path = file_directory_temp();
+
+    variable_set('configuration_config_path', $this->datastore_path);
+    $config_path = variable_get('configuration_config_path', $this->datastore_path);
+    file_prepare_directory($config_path);
+  }
+}
+
+class ConfigurationApiTest extends ConfigurationWebTestCase {
+
+  protected $configurations;
+
+  /**
+   * Test info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => t('Test Configuration API'),
+      'description' => t('Test the export, revert and start/stop tracking API'),
+      'group' => t('Configuration'),
+    );
+  }
+
+  /**
+   * Set up test.
+   */
+  public function setUp($modules = array()) {
+    if (empty($modules)) {
+      parent::setUp(array(
+        'configuration',
+        'field',
+        'filter',
+        'image',
+        'taxonomy',
+      ));
+    }
+    else {
+      parent::setUp($modules);
+    }
+
+    $this->configurations = array(
+      'variable.node_options_article',
+      'variable.node_preview_article',
+      'variable.node_submitted_article',
+      'variable.comment_default_per_page_article',
+      'variable.comment_form_location_article',
+      'variable.comment_preview_article',
+      'variable.comment_subject_field_article',
+      'content_type.article',
+      'field.node.body.article',
+      'vocabulary.tags',
+      'field.node.field_tags.article',
+      'image_style.large',
+      'image_style.medium',
+      'field.node.field_image.article',
+      'permission.create_article_content',
+      'permission.edit_own_article_content',
+      'permission.edit_any_article_content',
+      'permission.delete_own_article_content',
+      'permission.delete_any_article_content',
+    );
+
+    // Creates all the variables for the content type Article.
+    $web_user = $this->drupalCreateUser(
+      array(
+        'administer content types',
+        'administer comments',
+        'administer menu',
+        'post comments'
+      )
+    );
+    $this->drupalLogin($web_user);
+
+    // Save the content type to force to save the variables in the database.
+    $edit = array();
+    $this->drupalPost('admin/structure/types/manage/article', $edit, t('Save content type'));
+  }
+
+  public function testExportToDatastore() {
+    $results = ConfigurationManagement::exportToDataStore(array('content_type.article'));
+    $exported = $results->getInfo('exported');
+
+    foreach ($this->configurations as $config) {
+      $this->assertTrue(in_array($config, $exported), "Configuration for $config was exported.");
+    }
+
+    $count_tracked = db_query("SELECT COUNT(component) FROM {configuration_tracked}")->fetchField();
+    $this->assertTrue(empty($count_tracked), "No configurations have been tracked.");
+  }
+
+  public function testStartAndStopTracking() {
+    $results = ConfigurationManagement::startTracking(array('content_type.article'));
+    $exported = $results->getInfo('exported');
+    $dirpath = drupal_realpath(ConfigurationManagement::getStream()) . '/';
+    $tracked = ConfigurationManagement::trackedConfigurations();
+    $non_tracked = ConfigurationManagement::nonTrackedConfigurations();
+    foreach ($this->configurations as $id) {
+      list($component, $identifier) = explode('.', $id, 2);
+      if (!empty($tracked[$component][$identifier])) {
+        $filename = $dirpath . $id . '.inc';
+        $this->assertTrue(file_exists($filename), t('@filename file was created.', array('@filename' => $filename)));
+      }
+      $this->assertTrue(!empty($tracked[$component][$identifier]), t('@id is being tracked', array('@id' => $id)));
+      $this->assertTrue(empty($non_tracked[$component][$identifier]), t('@id is not being tracked', array('@id' => $id)));
+
+      $handler = ConfigurationManagement::createConfigurationInstance($id);
+      $this->assertTrue($handler->loadFromActiveStore()->getStatus() == t('In Sync'), $id . ' is In Sync');
+    }
+
+    $count_tracked = db_query("SELECT COUNT(component) FROM {configuration_tracked}")->fetchField();
+    $this->assertTrue($count_tracked == count($exported), t("@num of @total configurations have been tracked.", array('@num' => $count_tracked, '@total' => count($exported))));
+
+    $results = ConfigurationManagement::stopTracking(array('content_type.article'));
+    $count_tracked = db_query("SELECT COUNT(component) FROM {configuration_tracked}")->fetchField();
+    $this->assertTrue(empty($count_tracked), "No configurations have been tracked.");
+
+    $tracked = ConfigurationManagement::trackedConfigurations();
+    $non_tracked = ConfigurationManagement::nonTrackedConfigurations();
+    foreach ($this->configurations as $id) {
+      list($component, $identifier) = explode('.', $id, 2);
+      if (empty($tracked[$component][$identifier])) {
+        $filename = $dirpath . $id . '.inc';
+        $this->assertTrue(!file_exists($filename), t('@filename file was deleted.', array('@filename' => $filename)));
+      }
+      $this->assertTrue(empty($tracked[$component][$identifier]), t('@id is not being tracked', array('@id' => $id)));
+    }
+  }
+
+  public function testimportToActiveStore() {
+    $results = ConfigurationManagement::startTracking(array('content_type.article'));
+    $exported = $results->getInfo('exported');
+
+    $handler = ConfigurationManagement::getConfigurationHandler('content_type');
+
+    $content_types = node_type_get_types();
+    $article = $content_types['article'];
+    $article->description = 'modified';
+    node_type_save($article);
+
+    $modified_config = ConfigurationManagement::createConfigurationInstance('content_type.article');
+    $original_config = ConfigurationManagement::createConfigurationInstance('content_type.article');
+    $original_config->loadFromStorage();
+    $modified_config->loadFromActiveStore();
+
+    $this->assertTrue($original_config->getHash() != $modified_config->getHash(), "Hash for content type Article has changed after modify the content type.");
+
+    $results = ConfigurationManagement::importToActiveStore(array('content_type.article'));
+    $modified_config->loadFromActiveStore();
+
+    $this->assertTrue($original_config->getHash() == $modified_config->getHash(), "Configuration for content type Article has been reverted.");
+  }
+}
+
+/**
+ * Base class for functional tests for configuration management.
+ */
+class ConfigurationImportTestCase extends ConfigurationWebTestCase {
+
+  // Use the minimal profile, to avoid create the content type that will be
+  // imported
+  protected $profile = 'minimal';
+
+  protected $configurations;
+
+  /**
+   * Test info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => t('Test Configuration Import API'),
+      'description' => t('Test the import API'),
+      'group' => t('Configuration'),
+    );
+  }
+
+
+  /**
+   * Implementation of DrupalWebTestCase::setUp().
+   */
+  public function setUp($modules = array()) {
+    global $base_url;
+
+    if (empty($modules)) {
+      parent::setUp(array(
+        'configuration',
+        'image',
+        'taxonomy',
+        'menu',
+        'comment',
+      ));
+    }
+    else {
+      parent::setUp($modules);
+    }
+
+    $this->configurations = array(
+      'variable.node_options_article',
+      'variable.node_preview_article',
+      'variable.node_submitted_article',
+      'variable.comment_default_per_page_article',
+      'variable.comment_form_location_article',
+      'variable.comment_preview_article',
+      'variable.comment_subject_field_article',
+      'content_type.article',
+      'field.node.body.article',
+      'vocabulary.tags',
+      'field.node.field_tags.article',
+      'image_style.large',
+      'image_style.medium',
+      'field.node.field_image.article',
+      'permission.create_article_content',
+      'permission.edit_own_article_content',
+      'permission.edit_any_article_content',
+      'permission.delete_own_article_content',
+      'permission.delete_any_article_content',
+    );
+  }
+
+  public function testImportToActiveStore() {
+    // Change the path from where the configurations are loaded.
+    $source = drupal_get_path('module', 'configuration') . '/tests/test_configs/';
+
+    $results = ConfigurationManagement::importToActiveStore(array('content_type.article'), TRUE, TRUE, FALSE, $source);
+    $imported = $results->getInfo('imported');
+
+    foreach ($this->configurations as $config) {
+      $this->assertTrue(in_array($config, $imported), "Configuration for $config was imported.");
+    }
+  }
+
+  public function testImportOldVersionToActiveStore() {
+    // Change the path from where the configurations are loaded.
+    $source = drupal_get_path('module', 'configuration') . '/tests/test_configs/';
+
+    $config = 'content_type.old_version';
+    $results = ConfigurationManagement::importToActiveStore(array($config), FALSE, FALSE, FALSE, $source);
+    $imported = $results->getInfo('imported');
+    $fail = $results->getInfo('fail');
+
+    $this->assertFalse(in_array($config, $imported), "Configuration for $config was imported.");
+    $this->assertTrue(in_array($config, $fail), "Configuration for $config was not imported.");
+  }
+}
+
+/**
+ * Test the discovery of required modules to use configurations.
+ */
+class ConfigurationDiscoverModulesTestCase extends ConfigurationWebTestCase {
+
+  protected $profile = 'minimal';
+
+  /**
+   * Implementation of DrupalWebTestCase::setUp().
+   */
+  public function setUp($modules = array()) {
+    global $base_url;
+
+    if (empty($modules)) {
+      parent::setUp(array(
+        'configuration',
+      ));
+    }
+    else {
+      parent::setUp($modules);
+    }
+  }
+
+  /**
+   * Test info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => t('Discover Required modules API'),
+      'description' => t('Test Configuration for the API that discover what tare the required modules to import a configuration.'),
+      'group' => t('Configuration'),
+    );
+  }
+
+}

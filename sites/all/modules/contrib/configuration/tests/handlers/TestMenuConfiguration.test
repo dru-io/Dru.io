@@ -1,0 +1,104 @@
+<?php
+
+/**
+ * @file
+ * Tests for Configuration Management: Menus.
+ */
+
+class TestMenuConfiguration extends ConfigurationHandlerBaseTestCase {
+
+  /**
+   * Test info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => t('Handler: MenuConfiguration'),
+      'description' => t('Test the configuration API for menu configurations'),
+      'group' => t('Configuration'),
+    );
+  }
+
+  /**
+   * Implementation of DrupalWebTestCase::setUp().
+   */
+  public function setUp($modules = array()) {
+    global $base_url;
+
+    if (empty($modules)) {
+      parent::setUp(array(
+        'configuration',
+        'menu',
+      ));
+    }
+    else {
+      parent::setUp($modules);
+    }
+  }
+
+  /**
+   * Returns an array of configurations to import.
+   */
+  protected function configToImport() {
+    return array('menu.menu_test');
+  }
+
+  /**
+   * Returns an array of configurations to export.
+   */
+  protected function configToExport() {
+    return array('menu.menu_drupal');
+  }
+
+  /**
+   * Returns an array of configurations to modify and check for modifications.
+   */
+  protected function configToModify() {
+    return array('menu.menu_test');
+  }
+
+  /**
+   * Return TRUE if the configuration is modified in the active store.
+   */
+  protected function isModified($config) {
+    $modified = FALSE;
+    $menu = menu_load('menu-test');
+    $modified = $menu['title'] == 'Modified';
+    $modified = $menu['description'] == 'Modified';
+    return $modified;
+  }
+
+  /**
+   * Return TRUE if all the configurations defined in configToImport were saved
+   * into the active store.
+   */
+  protected function savedInActiveStore() {
+    $menu = menu_load('menu-test');
+    return !empty($menu);
+  }
+
+  /**
+   * This function creates the configurations that will be exported by
+   * configuration management.
+   */
+  protected function createConfigToExport() {
+    $menu = array(
+      'menu_name' => 'menu-drupal',
+      'title' => 'My menu',
+      'description' => 'This is my menu',
+    );
+    menu_save($menu);
+  }
+
+  /**
+   * Perform changes in the configuration and save those changes into the active
+   * store.
+   */
+  protected function modifyConfiguration() {
+    $menu_data = array(
+      'menu_name' => 'menu-test',
+      'title' => 'Modified',
+      'description' => 'Modified',
+    );
+    menu_save($menu_data);
+  }
+}

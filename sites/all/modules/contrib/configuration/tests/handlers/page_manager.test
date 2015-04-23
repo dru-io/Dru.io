@@ -1,0 +1,225 @@
+<?php
+
+/**
+ * @file
+ * Tests for Configuration Management: Page Manager Components.
+ */
+use Drupal\configuration\Config\ConfigurationManagement;
+
+/**
+ * Base class for functional tests for configuration management.
+ */
+class ConfigurationHandlerPageManagerTestCase extends ConfigurationWebTestCase {
+
+  protected $profile = 'minimal';
+
+  /**
+   * Test info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => t('Handler: Page Manager'),
+      'description' => t('Test the configuration API for Page Managers configurations'),
+      'group' => t('Configuration'),
+    );
+  }
+
+  /**
+   * Implementation of DrupalWebTestCase::setUp().
+   */
+  public function setUp($modules = array()) {
+    global $base_url;
+
+    if (empty($modules)) {
+      parent::setUp(array(
+            'configuration',
+            'page_manager',
+            'views',
+            'menu',
+          ));
+    }
+    else {
+      parent::setUp($modules);
+    }
+  }
+
+  public function testImportToActiveStore() {
+    // Change the path from where the configurations are loaded.
+    ConfigurationManagement::setStream(drupal_get_path('module', 'configuration') . '/tests/test_configs/');
+    // Page Manager with view as dependency.
+    $config = 'page_manager_pages.configuration_test_page';
+    $results = ConfigurationManagement::importToActiveStore(array($config), TRUE, TRUE);
+    $imported = $results->getInfo('imported');
+    $this->assertTrue(in_array($config, $imported), "Configuration for $config was imported.");
+    $dependencies = array();
+    $dependencies[] = 'page_manager_handlers.page_configuration_test_page_panel_context';
+    $dependencies[] = 'views_view.test';
+    foreach ($dependencies as $component) {
+      $this->assertTrue(in_array($component, $imported), "Dependency $component was imported.");
+    }
+    $view_exists = views_get_view('test');
+    $this->assertTrue(!empty($view_exists->name), "The view was saved in the ActiveStore.");
+     $web_user = $this->drupalCreateUser(
+      array(
+        'access content',
+        'use page manager',
+      )
+    );
+    $this->drupalLogin($web_user);
+    $this->drupalGet('admin/structure/pages');
+    $this->assertRaw('Configuration Test Page', 'Page Manager Page was created correctly.');
+  }
+
+  public function testExportToDataStore() {
+    variable_set('configuration_config_path', $this->datastore_path);
+    $config_path = variable_get('configuration_config_path', $this->datastore_path);
+    file_prepare_directory($config_path);
+
+    ConfigurationManagement::setStream($config_path);
+    $custom_menu = array(
+      'menu_name' => 'menu-configuration-test-menu',
+      'title' => 'Configuration Test Menu',
+      'description' => 'A menu to test a configuration handler.',
+    );
+    $custom_menu_link = array(
+      'menu_name' => 'menu-configuration-test-menu',
+      'mlid' => '218',
+      'plid' => '0',
+      'link_path' => '<front>',
+      'router_path' => '',
+      'link_title' => 'Top Level link 1',
+      'options' => array(
+        'attributes' => array(
+          'title' => '',
+        ),
+      ),
+      'module' => 'menu',
+      'hidden' => '0',
+      'external' => '1',
+      'has_children' => '1',
+      'expanded' => '0',
+      'weight' => '0',
+      'depth' => '1',
+      'customized' => '1',
+      'p1' => '218',
+      'p2' => '0',
+      'p3' => '0',
+      'p4' => '0',
+      'p5' => '0',
+      'p6' => '0',
+      'p7' => '0',
+      'p8' => '0',
+      'p9' => '0',
+      'updated' => '0',
+      'path' => NULL,
+      'load_functions' => NULL,
+      'to_arg_functions' => NULL,
+      'access_callback' => NULL,
+      'access_arguments' => NULL,
+      'page_callback' => NULL,
+      'page_arguments' => NULL,
+      'delivery_callback' => NULL,
+      'fit' => NULL,
+      'number_parts' => NULL,
+      'context' => NULL,
+      'tab_parent' => NULL,
+      'tab_root' => NULL,
+      'title' => 'Top Level link 1',
+      'title_callback' => NULL,
+      'title_arguments' => NULL,
+      'theme_callback' => NULL,
+      'theme_arguments' => NULL,
+      'type' => NULL,
+      'description' => NULL,
+      'position' => NULL,
+      'include_file' => NULL,
+      'link_weight' => '0',
+      'access' => 1,
+      'href' => '<front>',
+      'localized_options' => array(
+        'attributes' => array(
+          'title' => '',
+        ),
+      ),
+    );
+
+    menu_save($custom_menu);
+    $menu_exists = menu_load('menu-configuration-test-menu');
+    $this->assertTrue($menu_exists, "The menu was created in the ActiveStore.");
+    $this->assertTrue(menu_link_save($custom_menu_link), "The menu link was created in the ActiveStore.");
+
+    $config = 'menu_link.menu-configuration-test-menu.218.Top_Level_link_1';
+    $results = ConfigurationManagement::exportToDataStore(array($config), TRUE, TRUE);
+    $exported = $results->getInfo('exported');
+    $this->assertTrue(in_array('menu_link.menu-configuration-test-menu.218.Top_Level_link_1', $exported), "Configuration for menu_link.menu-configuration-test-menu.218.Top_Level_link_1 was exported.");
+    $this->assertTrue(in_array('menu.menu-configuration-test-menu', $exported), "Configuration for menu.menu-configuration-test-menu was exported.");
+
+    $file_for_config = $config_path . 'menu_link.menu-configuration-test-menu.218.Top_Level_link_1.inc';
+    $this->assertTrue(file_exists($file_for_config), "The file that storages the menu link was created.");
+    $file_for_config = $config_path . 'menu.menu-configuration-test-menu.inc';
+    $this->assertTrue(file_exists($file_for_config), "The file that storages the menu was created.");
+  }
+
+  public function testCheckModifications() {
+    // Change the path from where the configurations are loaded.
+    ConfigurationManagement::setStream(drupal_get_path('module', 'configuration') . '/tests/test_configs/');
+    $config = 'menu_link.menu-configuration-test-menu.218.Top_Level_link_1';
+    $results = ConfigurationManagement::importToActiveStore(array($config), TRUE, TRUE, TRUE);
+    $alltracked = ConfigurationManagement::trackedConfigurations();
+    $trackedmenus = array();
+    foreach ($alltracked['menu'] as $identifier => $hash) {
+      $trackedmenus[] = 'menu.' . $identifier;
+    }
+    foreach ($alltracked['menu_link'] as $identifier => $hash) {
+      $trackedmenus[] = 'menu_link.' . $identifier;
+    }
+    foreach ($results->getInfo('imported') as $component) {
+      $this->assertTrue(in_array($component, $trackedmenus), "The component $component was suscessfully tracked.");
+    }
+
+    $original_menu_link = menu_link_load('218');
+    $original_menu = menu_load('menu-configuration-test-menu');
+
+    $web_user = $this->drupalCreateUser(
+            array(
+              'administer menu',
+            )
+    );
+
+    $this->drupalLogin($web_user);
+
+    $mlid = $original_menu_link['mlid'];
+    $new_menulink_title = $original_menu_link['link_title'] . '(edited)';
+
+    // Edit menu link.
+    $edit = array();
+    $edit['link_title'] = $new_menulink_title;
+    $this->drupalPost("admin/structure/menu/item/$mlid/edit", $edit, t('Save'));
+    $this->assertResponse(200);
+
+    // Edit the menu.
+    $edit = array();
+    $new_menu_title = $original_menu['title'] . '(edited)';
+    $edit['title'] = $new_menu_title;
+    $edit['menu_name'] = $original_menu['menu_name'];
+    $edit['description'] = $original_menu['description'];
+    menu_save($edit);
+    $this->drupalGet('admin/structure/menu/manage/' . $original_menu['menu_name'] . '/edit');
+    $this->assertRaw($new_menu_title, t('Custom menu was edited.'));
+
+    $modified_menu_link = menu_link_load('218');
+    $modified_menu = menu_load('menu-configuration-test-menu');
+
+    $this->assertTrue($modified_menu_link['link_title'] == $new_menulink_title, 'The menu link was modified');
+    $this->assertTrue($modified_menu['title'] == $new_menu_title, 'The menu was modified');
+
+    $results = ConfigurationManagement::revertActiveStore(array('menu_link.menu-configuration-test-menu.218.Top_Level_link_1'), TRUE, TRUE);
+
+    $modified_menu_link = menu_link_load('218');
+    $modified_menu = menu_load('menu-configuration-test-menu');
+
+    $this->assertTrue($modified_menu_link['link_title'] == $original_menu_link['link_title'], 'Menu Link reverted');
+    $this->assertTrue($modified_menu['title'] == $original_menu['title'], 'Menu reverted');
+  }
+
+}

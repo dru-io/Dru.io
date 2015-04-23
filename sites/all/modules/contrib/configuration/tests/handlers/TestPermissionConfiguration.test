@@ -1,0 +1,84 @@
+<?php
+
+/**
+ * @file
+ * Tests for Configuration Management: Permissions.
+ */
+
+class TestPermissionConfiguration extends ConfigurationHandlerBaseTestCase {
+
+  // Random developer Role id created
+  protected $developer_rid;
+
+  /**
+   * Test info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => t('Handler: PermissionConfiguration'),
+      'description' => t('Test the configuration API for permissions configurations'),
+      'group' => t('Configuration'),
+    );
+  }
+
+  /**
+   * Returns an array of configurations to import.
+   */
+  protected function configToImport() {
+    // Create a Developer Role
+    $this->developer_rid = $this->drupalCreateRole(array(), 'developer');
+    return array('permission.administer_content_types');
+  }
+
+  /**
+   * Returns an array of configurations to export.
+   */
+  protected function configToExport() {
+    return array('permission.administer_content_types');
+  }
+
+  /**
+   * Returns an array of configurations to modify and check for modifications.
+   */
+  protected function configToModify() {
+    $this->developer_rid = $this->drupalCreateRole(array(), 'developer');
+    return array('permission.administer_content_types');
+  }
+
+  /**
+   * Return TRUE if the configuration is modified in the active store.
+   */
+  protected function isModified($config) {
+    return !db_query('SELECT 1 FROM {role_permission} WHERE permission = :permission AND rid = :rid',
+      array(
+        ':permission' => 'administer content types',
+        ':rid' => $this->developer_rid,
+      )
+    )->fetchField();
+  }
+
+  /**
+   * Return TRUE if all the configurations defined in configToImport were saved
+   * into the active store.
+   */
+  protected function savedInActiveStore() {
+    return !$this->isModified(NULL);
+  }
+
+  /**
+   * This function creates the configurations that will be exported by
+   * configuration management.
+   */
+  protected function createConfigToExport() {
+    // Create a Developer Role
+    $this->developer_rid = $this->drupalCreateRole(array(), 'developer');
+  }
+
+  /**
+   * Perform changes in the configuration and save those changes into the active
+   * store.
+   */
+  protected function modifyConfiguration() {
+    user_role_revoke_permissions($this->developer_rid, array('administer content types'));
+  }
+}

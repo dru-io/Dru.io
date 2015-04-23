@@ -1,0 +1,134 @@
+<?php
+
+/**
+ * @file
+ * Tests for Configuration Management: Image Styles.
+ */
+
+class TestImageStyleConfiguration extends ConfigurationHandlerBaseTestCase {
+
+  protected $style_name;
+
+  /**
+   * Test info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => t('Handler: ImageStyleConfiguration'),
+      'description' => t('Test the configuration API for image style configurations'),
+      'group' => t('Configuration'),
+    );
+  }
+
+
+  /**
+   * Implementation of DrupalWebTestCase::setUp().
+   */
+  public function setUp($modules = array()) {
+    global $base_url;
+
+    if (empty($modules)) {
+      parent::setUp(array(
+        'configuration',
+        'image',
+      ));
+    }
+    else {
+      parent::setUp($modules);
+    }
+  }
+
+  /**
+   * Returns an array of configurations to import.
+   */
+  protected function configToImport() {
+    return array('image_style.custom');
+  }
+
+  /**
+   * Returns an array of configurations to export.
+   */
+  protected function configToExport() {
+    return array('image_style.' . $this->style_name);
+  }
+
+  /**
+   * Returns an array of configurations to modify and check for modifications.
+   */
+  protected function configToModify() {
+    return array('image_style.custom');
+  }
+
+  /**
+   * Return TRUE if the configuration is modified in the active store.
+   */
+  protected function isModified($config) {
+    $modified = FALSE;
+    $image_style = image_style_load('custom');
+    $this->verbose(print_r($image_style, TRUE));
+    $data = current($image_style['effects']);
+    $modified = $data['data']['width'] == '200';
+    $modified = $data['data']['height'] == '200';
+    return $modified;
+  }
+
+  /**
+   * Return TRUE if all the configurations defined in configToImport were saved
+   * into the active store.
+   */
+  protected function savedInActiveStore() {
+    $image_style = image_style_load('custom');
+    return !empty($image_style);
+  }
+
+  /**
+   * This function creates the configurations that will be exported by
+   * configuration management.
+   */
+  protected function createConfigToExport() {
+    $web_user = $this->drupalCreateUser(
+      array(
+        'administer image styles',
+      )
+    );
+    $this->drupalLogin($web_user);
+    $style_name = strtolower($this->randomName(10));
+
+    $edit = array();
+    $edit['name'] = $style_name;
+    $this->drupalPost('admin/config/media/image-styles/add', $edit, t('Create new style'));
+    $this->assertRaw(t('Style %name was created.', array('%name' => $style_name)), t('Image style successfully created.'));
+
+    $edit = array();
+    $edit['new'] = 'image_resize';
+    $this->drupalPost(NULL, $edit, t('Add'));
+
+    $edit = array();
+    $edit['data[width]'] = 100;
+    $edit['data[height]'] = 100;
+    $this->drupalPost(NULL, $edit, t('Add effect'));
+    $this->assertRaw(t('The image effect was successfully applied.'));
+
+    $this->style_name = $style_name;
+  }
+
+  /**
+   * Perform changes in the configuration and save those changes into the active
+   * store.
+   */
+  protected function modifyConfiguration() {
+    $web_user = $this->drupalCreateUser(
+      array(
+        'administer image styles',
+      )
+    );
+    $this->drupalLogin($web_user);
+    $edit = array();
+    $edit['data[width]'] = 200;
+    $edit['data[height]'] = 200;
+    $this->drupalPost('admin/config/media/image-styles/edit/custom/effects/1', $edit, t('Update effect'));
+    $this->assertRaw(t('The image effect was successfully applied.'));
+
+    drupal_static_reset('image_styles');
+  }
+}

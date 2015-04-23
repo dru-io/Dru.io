@@ -1,0 +1,161 @@
+<?php
+
+/**
+ * @file
+ * User Interface for Configuration Management module.
+ */
+
+/**
+ * Implements hook_permission().
+ */
+function configuration_ui_permission() {
+  return array(
+    'administer configuration management' => array(
+      'title' => t('Administer Configuration Management'),
+      'description' => t('Allow to export, import, start and stop tracking configurations.'),
+      'restrict access' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function configuration_ui_menu() {
+  $items['admin/config/system/configuration'] = array(
+    'title' => 'Configuration Management',
+    'description' => 'Allow to export, import, start and stop tracking configurations.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('configuration_ui_tracking_form'),
+    'access arguments' => array('administer configuration management'),
+    'description' => 'Configuration Management',
+    'file' => 'configuration_ui.admin.inc',
+    'type' => MENU_NORMAL_ITEM,
+  );
+
+  $items['admin/config/system/configuration/tracking'] = array(
+    'title' => 'Tracking',
+    'weight' => -3,
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+  );
+
+  $items['admin/config/system/configuration/notracking'] = array(
+    'title' => 'Not tracking',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('configuration_ui_notracking_form'),
+    'access arguments' => array('administer configuration management'),
+    'file' => 'configuration_ui.admin.inc',
+    'weight' => -2,
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  $items['admin/config/system/configuration/sync'] = array(
+    'title' => 'Synchronize',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('configuration_ui_sync_form'),
+    'access arguments' => array('administer configuration management'),
+    'file' => 'configuration_ui.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => -1,
+  );
+
+  $items['admin/config/system/configuration/stop_tracking/%'] = array(
+    'title' => 'Configuration Management',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('configuration_ui_stop_tracking_single_confirm', 5),
+    'access arguments' => array('administer configuration management'),
+    'file' => 'configuration_ui.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['admin/config/system/configuration/start_tracking/%'] = array(
+    'title' => 'Configuration Management',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('configuration_ui_start_tracking_single_confirm', 5),
+    'access arguments' => array('administer configuration management'),
+    'file' => 'configuration_ui.admin.inc',
+    'type' => MENU_CALLBACK,
+  );
+
+  $items['admin/config/system/configuration/view/%'] = array(
+    'title' => 'Configuration Management',
+    'page callback' => 'configuration_ui_config_info',
+    'page arguments' => array(5),
+    'file' => 'configuration_ui.admin.inc',
+    'access arguments' => array('administer configuration management'),
+  );
+
+  $items['admin/config/system/configuration/status/%'] = array(
+    'title' => 'Configuration Management',
+    'page callback' => 'configuration_ui_config_status',
+    'page arguments' => array(5),
+    'file' => 'configuration_ui.admin.inc',
+    'access arguments' => array('administer configuration management'),
+    'type' => MENU_CALLBACK,
+  );
+
+  if (module_exists('diff')) {
+    $items['admin/config/system/configuration/diff/%'] = array(
+      'title' => 'Configuration Management',
+      'page callback' => 'configuration_ui_config_diff',
+      'page arguments' => array(5),
+      'file' => 'configuration_ui.admin.inc',
+      'access arguments' => array('administer configuration management'),
+    );
+  }
+
+  $items['admin/config/system/configuration/migrate'] = array(
+    'title' => 'Migrate',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('configuration_ui_export_form'),
+    'access arguments' => array('administer configuration management'),
+    'file' => 'configuration_ui.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 7,
+  );
+  $items['admin/config/system/configuration/migrate/export'] = array(
+    'title' => 'Export',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => 8,
+  );
+  $items['admin/config/system/configuration/migrate/import'] = array(
+    'title' => 'Import',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('configuration_ui_import_form'),
+    'access arguments' => array('administer configuration management'),
+    'file' => 'configuration_ui.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 9,
+  );
+  $items['admin/config/system/configuration/settings'] = array(
+    'title' => 'Settings',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('configuration_ui_settings_form'),
+    'access arguments' => array('administer configuration management'),
+    'file' => 'configuration_ui.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 10,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function configuration_ui_theme($existing, $type, $theme, $path) {
+  $base = array(
+    'path' => drupal_get_path('module', 'configuration_ui') . '/theme',
+    'file' => 'theme.inc',
+  );
+  $items = array();
+  $items['configuration_ui_form_buttons'] = array(
+    'render element' => 'element',
+  ) + $base;
+
+  $items['configuration_table'] = array(
+    'render element' => 'form',
+  ) + $base;
+
+  return $items;
+}

@@ -1,0 +1,107 @@
+<?php
+
+class TestTextFormatConfiguration extends ConfigurationHandlerBaseTestCase {
+
+  /**
+   * Test info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => t('Handler: TextFormatConfiguration'),
+      'description' => t('Test the configuration API for text formats configurations'),
+      'group' => t('Configuration'),
+    );
+  }
+
+  /**
+   * Returns an array of configurations to import.
+   */
+  protected function configToImport() {
+    return array('text_format.custom');
+  }
+
+  /**
+   * Returns an array of configurations to export.
+   */
+  protected function configToExport() {
+    return array('text_format.custom_plain_text');
+  }
+
+  /**
+   * Returns an array of configurations to modify and check for modifications.
+   */
+  protected function configToModify() {
+    return array('text_format.custom');
+  }
+
+  /**
+   * Return TRUE if the configuration is modified in the active store.
+   */
+  protected function isModified($config) {
+    $modified = FALSE;
+    filter_formats_reset();
+    $format = filter_format_load('custom');
+    $modified = ($format->name == 'modified');
+    return $modified;
+  }
+
+  /**
+   * Return TRUE if all the configurations defined in configToImport were saved
+   * into the active store.
+   */
+  protected function savedInActiveStore() {
+    $format = filter_format_load('custom');
+    return !empty($format->format);
+  }
+
+  /**
+   * This function creates the configurations that will be exported by
+   * configuration management.
+   */
+  protected function createConfigToExport() {
+    $custom_plain_text_format = array(
+      'format' => 'custom_plain_text',
+      'name' => 'Custom Plain text',
+      'weight' => 10,
+      'filters' => array(
+        // Escape all HTML.
+        'filter_html_escape' => array(
+          'weight' => 0,
+          'status' => 1,
+        ),
+        // URL filter.
+        'filter_url' => array(
+          'weight' => 1,
+          'status' => 1,
+        ),
+        // Line break filter.
+        'filter_autop' => array(
+          'weight' => 2,
+          'status' => 1,
+        ),
+      ),
+    );
+    $custom_plain_text_format = (object) $custom_plain_text_format;
+    filter_format_save($custom_plain_text_format);
+  }
+
+  /**
+   * Perform changes in the configuration and save those changes into the active
+   * store.
+   */
+  protected function modifyConfiguration() {
+    $web_user = $this->drupalCreateUser(
+      array(
+        'administer filters',
+      )
+    );
+
+    $this->drupalLogin($web_user);
+
+    $edit = array();
+    $edit['name'] = 'modified';
+    $this->drupalPost('admin/config/content/formats/custom', $edit, t('Save configuration'));
+
+    filter_formats_reset();
+  }
+}

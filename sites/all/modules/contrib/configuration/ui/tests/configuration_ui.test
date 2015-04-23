@@ -1,0 +1,229 @@
+<?php
+/**
+ * @file
+ * Tests for Configuration Management
+ */
+
+use Drupal\configuration\Config\ConfigurationManagement;
+
+/**
+ * Base class for functional tests for configuration management.
+ */
+class ConfigurationUIWebTestCase extends DrupalWebTestCase {
+  protected $profile = 'standard';
+
+  /**
+   * Implementation of DrupalWebTestCase::setUp().
+   */
+  public function setUp($modules = array()) {
+    parent::setUp($modules);
+
+    // Generate an unique path for this test based on the database prefix.
+    $this->datastore_path = file_directory_temp();
+
+    variable_set('configuration_config_path', $this->datastore_path);
+    $config_path = variable_get('configuration_config_path', $this->datastore_path);
+    file_prepare_directory($config_path);
+  }
+}
+
+class ConfigurationUITest extends ConfigurationUIWebTestCase {
+
+  protected $configurations;
+
+  /**
+   * Test info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => t('Test Configuration UI'),
+      'description' => t('Test the Configuration Management UI'),
+      'group' => t('Configuration UI'),
+    );
+  }
+
+  /**
+   * Set up test.
+   */
+  public function setUp($modules = array()) {
+    if (empty($modules)) {
+      parent::setUp(array(
+        'configuration_ui',
+        'field',
+        'filter',
+        'image',
+        'taxonomy',
+      ));
+    }
+    else {
+      parent::setUp($modules);
+    }
+
+    $this->components = array(
+      'content-type' => 'Content type',
+      'field' => 'Field',
+      'image-style' => 'Image style',
+      'variables' => 'Variable',
+      'permission' => 'Permission',
+      'vocabulary' => 'Vocabulary',
+    );
+
+    $this->configurations = array(
+      'variable.node_options_article',
+      'variable.node_preview_article',
+      'variable.node_submitted_article',
+      'variable.comment_default_per_page_article',
+      'variable.comment_form_location_article',
+      'variable.comment_preview_article',
+      'variable.comment_subject_field_article',
+      'content_type.article',
+      'field.node.body.article',
+      'vocabulary.tags',
+      'field.node.field_tags.article',
+      'image_style.large',
+      'image_style.medium',
+      'field.node.field_image.article',
+      'permission.create_article_content',
+      'permission.edit_own_article_content',
+      'permission.edit_any_article_content',
+      'permission.delete_own_article_content',
+      'permission.delete_any_article_content',
+    );
+
+    // Creates all the variables for the content type Article.
+    $web_user = $this->drupalCreateUser(
+      array(
+        'administer configuration management',
+        'administer content types',
+        'administer comments',
+        'administer menu',
+        'post comments'
+      )
+    );
+    $this->drupalLogin($web_user);
+
+    // Save the content type to force to save the variables in the database.
+    $edit = array();
+    $this->drupalPost('admin/structure/types/manage/article', $edit, t('Save content type'));
+  }
+
+  public function testNonTrackingUI() {
+    $this->drupalGet('admin/config/system/configuration/notracking');
+
+    foreach ($this->components as $component => $name) {
+      $this->assertRaw('<span class="fieldset-legend">' .  $name . '</span>');
+    }
+
+    foreach ($this->configurations as $id) {
+      list($component, $identifier) = explode('.', $id, 2);
+      $this->assertFieldByName('items[' . $id . ']', $id, t("Checkbox for @identifier found", array('@identifier' => $id)));
+    }
+  }
+
+  public function testTrackingUI() {
+    $this->drupalGet('admin/config/system/configuration/tracking');
+    $this->assertRaw('No Configurations were found');
+
+    $edit = array();
+    $edit['items[content_type.article]'] = TRUE;
+    $this->drupalPost('admin/config/system/configuration/notracking', $edit, t('Start Tracking'));
+    foreach ($this->configurations as $id) {
+      $this->assertRaw('Tracking ' .  $id);
+    }
+
+    $this->drupalGet('admin/config/system/configuration/notracking');
+    foreach ($this->configurations as $id) {
+      list($component, $identifier) = explode('.', $id, 2);
+      $this->assertNoFieldByName('items[' . $id . ']', $id, t("Checkbox for @identifier not found", array('@identifier' => $id)));
+    }
+
+    $this->drupalGet('admin/config/system/configuration/tracking');
+    foreach ($this->components as $component => $name) {
+      $this->assertRaw('<span class="fieldset-legend">' .  $name . '</span>');
+    }
+
+    foreach ($this->configurations as $id) {
+      list($component, $identifier) = explode('.', $id, 2);
+      $this->assertFieldByName('items[' . $id . ']', $id, t("Checkbox for @identifier found", array('@identifier' => $id)));
+    }
+
+    $edit = array();
+    $edit['items[content_type.article]'] = TRUE;
+    $this->drupalPost('admin/config/system/configuration/tracking', $edit, t('Stop Tracking'));
+    foreach ($this->configurations as $id) {
+      $this->assertRaw('Untracked ' .  $id);
+    }
+    $this->assertRaw('No Configurations were found');
+
+    $this->drupalGet('admin/config/system/configuration/notracking');
+    foreach ($this->configurations as $id) {
+      list($component, $identifier) = explode('.', $id, 2);
+      $this->assertFieldByName('items[' . $id . ']', $id, t("Checkbox for @identifier found", array('@identifier' => $id)));
+    }
+
+  }
+}
+
+class ConfigurationUISettingsTest extends ConfigurationUIWebTestCase {
+
+  protected $profile = 'minimal';
+
+  /**
+   * Test info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => t('Test Configuration Settings UI'),
+      'description' => t('Test the Configuration Management UI: Settings Tab'),
+      'group' => t('Configuration UI'),
+    );
+  }
+
+  /**
+   * Set up test.
+   */
+  public function setUp($modules = array()) {
+    if (empty($modules)) {
+      parent::setUp(array(
+        'configuration_ui',
+      ));
+    }
+    else {
+      parent::setUp($modules);
+    }
+  }
+
+  public function testSynchronizeUI() {
+    // Change the path to be able to read configurations from the test folder
+    // Test the synchronize feature
+    $web_user = $this->drupalCreateUser(
+      array(
+        'administer configuration management',
+      )
+    );
+    $this->drupalLogin($web_user);
+
+    // Test the Validations
+    $edit = array(
+      'configuration_config_path' => drupal_get_path('module', 'configuration') . '/tests/test_configs/',
+      'configuration_remote_server' => TRUE,
+    );
+    $this->drupalPost('admin/config/system/configuration/settings', $edit, t('Save configuration'));
+
+    $this->assertRaw('The configuration options have been saved.');
+
+    $directory = 'non/existent/path';
+    $edit = array(
+      'configuration_config_path' => $directory,
+      'configuration_remote_server' => TRUE,
+    );
+    $this->drupalPost('admin/config/system/configuration/settings', $edit, t('Save configuration'));
+    $this->assertRaw(t('The directory %directory does not exist.', array('%directory' => $directory)));
+
+    $edit = array();
+    $this->drupalPost('admin/config/system/configuration/sync', $edit, t('Synchronize configurations'));
+
+    $this->assertRaw('The following modules have been enabled:', 'Modules enabled');
+    $this->assertRaw(t('Imported %config', array('%config' => 'content_type.article')));
+  }
+}

@@ -1,0 +1,335 @@
+<?php
+
+/**
+ * @file
+ * Tests for Configuration Management: Base Class
+ */
+use Drupal\configuration\Config\ConfigurationManagement;
+
+/**
+ * Base class for functional tests for configuration management.
+ */
+abstract class ConfigurationHandlerBaseTestCase extends ConfigurationWebTestCase {
+
+  // Use the minimal profile, this allow to check if new configurations are
+  // imported.
+  protected $profile = 'minimal';
+
+  /**
+   * Implementation of DrupalWebTestCase::setUp().
+   */
+  public function setUp($modules = array()) {
+    global $base_url;
+
+    if (empty($modules)) {
+      $modules = array('configuration');
+    }
+
+    $extra_modules = $this->addModules();
+    if ($extra_modules) {
+      $modules = array_merge($modules, $extra_modules);
+    }
+
+    parent::setUp($modules);
+  }
+
+  /**
+   * Import a configuration from the DataStore into the ActiveStore.
+   *
+   * Configuration to import should be defined in importConfig().
+   */
+  public function testImportToActiveStore() {
+    // Change the path from where the configurations are loaded.
+    $source = drupal_get_path('module', 'configuration') . '/tests/test_configs/';
+
+    $configToImport = $this->configToImport();
+    $results = ConfigurationManagement::importToActiveStore($configToImport, $this->importDependencies(), $this->importOptionals(), FALSE, $source);
+    $imported = $results->getInfo('imported');
+
+    foreach ($configToImport as $config) {
+      $this->assertTrue(in_array($config, $imported), "Configuration for $config was imported.");
+    }
+
+    if ($this->importDependencies()) {
+      $dependencies = $this->dependenciesToImport();
+      foreach ($dependencies as $config) {
+        $this->assertTrue(in_array($config, $imported), "Dependency configuration $config was imported.");
+      }
+    }
+
+    if ($this->importOptionals()) {
+      $optionals = $this->optionalsToImport();
+      foreach ($optionals as $config) {
+        $this->assertTrue(in_array($config, $imported), "Optional configuration $config was imported.");
+      }
+    }
+
+    $this->assertTrue($this->savedInActiveStore(), "The configuration was saved in the ActiveStore.");
+
+    $this->extraChecksOnImport();
+  }
+
+  /**
+   * Import a configuration from the ActiveStore to the DataStore.
+   *
+   * Configuration to import should be defined in exportConfig().
+   */
+  public function testExportToDataStore() {
+    $this->createConfigToExport();
+
+    $configToExport = $this->configToExport();
+    $results = ConfigurationManagement::exportToDataStore($configToExport, $this->exportDependencies(), $this->exportOptionals());
+    $exported = $results->getInfo('exported');
+
+    foreach ($configToExport as $config) {
+      $this->assertTrue(in_array($config, $exported), "Configuration for $config was exported.");
+      $file_for_config = $this->datastore_path . '/' . $config . '.inc';
+      $this->assertTrue(file_exists($file_for_config), "The file that storages the $config was created.");
+    }
+
+    if ($this->exportDependencies()) {
+      $dependencies = $this->dependenciesToExport();
+      foreach ($dependencies as $config) {
+        $this->assertTrue(in_array($config, $exported), "Dependency configuration for $config was exported.");
+        $file_for_config = $this->datastore_path . '/' . $config . '.inc';
+        $this->assertTrue(file_exists($file_for_config), "The file that storages the dependency $config was created.");
+      }
+    }
+
+    if ($this->exportOptionals()) {
+      $optionals = $this->optionalsToExport();
+      foreach ($optionals as $config) {
+        $this->assertTrue(in_array($config, $exported), "Optional configuration for $config was exported.");
+        $file_for_config = $this->datastore_path . '/' . $config . '.inc';
+        $this->assertTrue(file_exists($file_for_config), "The file that storages the optional $config was created.");
+      }
+    }
+
+    $this->extraChecksOnExport();
+  }
+
+  /**
+   * Import a configuration. Make modifications on it, and then revert it.
+   *
+   * This function will check that the configuration is 'In Sync' after is
+   * imported the first time. Then is overriden after is modified, and is again
+   * 'In Sync' after revert it.
+   */
+  public function testCheckModifications() {
+    $verbose = '';
+
+    // Change the path from where the configurations are loaded.
+    $source = drupal_get_path('module', 'configuration') . '/tests/test_configs/';
+
+    $configToModify = $this->configToModify();
+
+    $verbose .= 'Configs to modify: ' . implode($configToModify, ', ') . "\n";
+
+    $results = ConfigurationManagement::importToActiveStore($configToModify, $this->modifyDependencies(), $this->modifyOptionals(), TRUE, $source);
+
+    $original_hash = array();
+
+    // Check that all the configurations were tracked and are In Sync.
+    foreach ($configToModify as $config) {
+      list($component, $identifier) = explode('.', $config, 2);
+
+      $object = db_select('configuration_tracked', 'ct')
+                          ->fields('ct')
+                          ->condition('component', $component)
+                          ->condition('identifier', $identifier)
+                          ->execute()
+                          ->fetchObject();
+
+      $this->assertTrue(!empty($object), "Config $config was suscessfully tracked.");
+      $verbose .= "This is the content of the tracked.inc file: \n";
+      $traking_file = ConfigurationManagement::readTrackingFile();
+      foreach ($traking_file as $config_id => $tracked_hash) {
+        $verbose .= "\$tracked_hash[$config_id] = $tracked_hash\n";
+      }
+
+      $verbose .= "\n\n\n";
+
+      $handler = ConfigurationManagement::createConfigurationInstance($config);
+
+      $original_hash[$config] = $handler->loadFromActiveStore()->getHash();
+
+      $verbose .= 'The content of ' . $config . ' is ' . $handler->raw() . "\n\n";
+      $this->assertTrue($handler->getStatus() == 'In Sync', "$config is In Sync");
+      $verbose .= "\n\n\n";
+      unset($handler);
+    }
+
+    $verbose .= "Original Hashes after import: \n";
+    foreach ($original_hash as $config_id => $hash) {
+      $verbose .= "\$original_hash[$config_id] = $hash \n";
+    }
+
+    // Now modify the configurations
+    $this->modifyConfiguration();
+
+    $verbose .= "The configurations were modified \n";
+
+    foreach ($configToModify as $config) {
+      if ($this->checkModification($config)) {
+        $this->assertTrue($this->isModified($config), "$config was modified in the active store.");
+
+        $handler = ConfigurationManagement::createConfigurationInstance($config);
+        $current_hashes[$config] = $current_hash = $handler->loadFromActiveStore()->getHash();
+
+        //$this->verbose('<pre>' . $handler->raw() . '</pre>', 'Modified');
+        $verbose .= 'The content of ' . $config . ' is ' . $handler->raw() . "\n\n";
+        $this->assertTrue($current_hash != $original_hash[$config], "The hash for $config is not the same after the modification");
+        $verbose .= "\n\n\n";
+        unset($handler);
+      }
+    }
+
+    $verbose .= "Hashes after modify configs: \n";
+    foreach ($current_hashes as $config_id => $hash) {
+      $verbose .= "\$current_hashes[$config_id] = $hash \n";
+    }
+    $verbose .= "\n\n\n";
+
+    // Finally revert the changes
+    $results = ConfigurationManagement::importToActiveStore($configToModify, $this->modifyDependencies(), $this->modifyOptionals(), TRUE);
+    foreach ($configToModify as $config) {
+      if ($this->checkModification($config)) {
+        $this->assertFalse($this->isModified($config), "$config is not modified in the active store.");
+      }
+
+      $handler = ConfigurationManagement::createConfigurationInstance($config);
+      $final_hashes[$config] = $current_hash = $handler->loadFromActiveStore()->getHash();
+      $status = $handler->getStatus();
+      $this->assertTrue($status == 'In Sync', "$config is In Sync after revert (Status $status)");
+
+      $this->assertTrue($current_hash == $original_hash[$config], "The hash for $config is the same after than the original after the revert");
+    }
+
+    $verbose .= "Hashes after revert configs: \n";
+    foreach ($current_hashes as $config_id => $hash) {
+      $verbose .= "\$final_hashes[$config_id] = $hash \n";
+    }
+
+    $verbose .= "\n\n\n";
+    foreach ($final_hashes as $config => $hash) {
+      if ($this->checkModification($config)) {
+        $verbose .= 'Original: ' . $original_hash[$config] . '   Modified: ' . $current_hashes[$config] . '  Final: ' . $final_hashes[$config] . "\n\n";
+      }
+    }
+
+    $this->verbose('<pre>' . $verbose . '</pre>');
+    $this->extraChecksOnModify();
+  }
+
+  /**
+   * Helper methods
+   */
+  protected function importDependencies() {
+    return FALSE;
+  }
+
+  /**
+   * Returns an array of configurations to check if they were imported.
+   */
+  protected function dependenciesToImport() {
+    return array();
+  }
+
+  protected function addModules() {
+    return FALSE;
+  }
+
+  protected function importOptionals() {
+    return FALSE;
+  }
+
+  /**
+   * Returns an array of configurations to check if they were imported.
+   */
+  protected function optionalsToImport() {
+    return array();
+  }
+
+  protected function exportDependencies() {
+    return FALSE;
+  }
+
+  /**
+   * Returns an array of configurations to check if they were exported.
+   */
+  protected function dependenciesToExport() {
+    return array();
+  }
+
+  protected function exportOptionals() {
+    return FALSE;
+  }
+
+  /**
+   * Returns an array of configurations to check if they were exported.
+   */
+  protected function optionalsToExport() {
+    return array();
+  }
+
+  protected function modifyDependencies() {
+    return FALSE;
+  }
+
+  protected function modifyOptionals() {
+    return FALSE;
+  }
+
+  protected function extraChecksOnImport() {}
+  protected function extraChecksOnExport() {}
+  protected function extraChecksOnModify() {}
+
+  /**
+   * Tests must override the following methods.
+   */
+
+  /**
+   * Returns an array of configurations to import.
+   */
+  abstract protected function configToImport();
+
+  /**
+   * Returns an array of configurations to export.
+   */
+  abstract protected function configToExport();
+
+  /**
+   * Returns an array of configurations to modify and check for modifications.
+   */
+  abstract protected function configToModify();
+
+  /**
+   * Return TRUE if the configuration is modified in the active store.
+   */
+  abstract protected function isModified($config);
+
+  /**
+   * Determine if isModified($config) should be called for this config.
+   */
+  protected function checkModification($config) {
+    return TRUE;
+  }
+
+  /**
+   * Return TRUE if all the configurations defined in configToImport were saved
+   * into the active store.
+   */
+  abstract protected function savedInActiveStore();
+
+  /**
+   * This function creates the configurations that will be exported by
+   * configuration management.
+   */
+  abstract protected function createConfigToExport();
+
+  /**
+   * Perform changes in the configuration and save those changes into the active
+   * store.
+   */
+  abstract protected function modifyConfiguration();
+}

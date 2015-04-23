@@ -1,0 +1,162 @@
+<?php
+
+/**
+ * @file
+ * Tests for Configuration Management: Fields.
+ */
+
+class FieldConfiguration extends ConfigurationHandlerBaseTestCase {
+
+  protected $variable_name;
+
+  /**
+   * Test info.
+   */
+  public static function getInfo() {
+    return array(
+      'name' => t('Handler: FieldConfiguration'),
+      'description' => t('Test the configuration API for field configurations'),
+      'group' => t('Configuration'),
+    );
+  }
+
+  /**
+   * Implementation of DrupalWebTestCase::setUp().
+   */
+  public function setUp($modules = array()) {
+    global $base_url;
+
+    if (empty($modules)) {
+      parent::setUp(array(
+        'configuration',
+        'field_ui',
+      ));
+    }
+    else {
+      parent::setUp($modules);
+    }
+  }
+
+  /**
+   * Returns an array of configurations to import.
+   */
+  protected function configToImport() {
+    return array('content_type.article', 'field.node.body.article');
+  }
+
+  /**
+   * Returns an array of configurations to export.
+   */
+  protected function configToExport() {
+    return array('field.node.my_field.' . $this->field_name);
+  }
+
+  /**
+   * Returns an array of configurations to modify and check for modifications.
+   */
+  protected function configToModify() {
+    return array('content_type.article', 'field.node.body.article');
+  }
+
+  protected function importDependencies() {
+    return TRUE;
+  }
+
+  protected function modifyDependencies() {
+    return TRUE;
+  }
+
+  /**
+   * Return TRUE if the configuration is modified in the active store.
+   */
+  protected function isModified($config) {
+    $modified = FALSE;
+    list($component, $entity_type, $field_name, $bundle) = explode('.', $config);
+    field_info_cache_clear();
+    $field = field_info_instance($entity_type, $field_name, $bundle);
+    $this->verbose(print_r($field, TRUE));
+    $modified = $field['label'] == 'Modified';
+    return $modified;
+  }
+
+
+  /**
+   * Determine if isModified($config) should be called for this config.
+   */
+  protected function checkModification($config) {
+    if ($config == 'content_type.article') {
+      return FALSE;
+    }
+    return TRUE;
+  }
+
+  /**
+   * Return TRUE if all the configurations defined in configToImport were saved
+   * into the active store.
+   */
+  protected function savedInActiveStore() {
+    $article = node_type_load('article');
+
+    $config = 'field.node.body.article';
+    list($component, $entity_type, $field_name, $bundle) = explode('.', $config);
+
+    $field_exists = db_query('SELECT 1
+      FROM {field_config_instance}
+      WHERE
+        entity_type = :entity_type AND
+        field_name = :field_name AND
+        bundle = :bundle',
+        array(
+          'entity_type' => $entity_type,
+          'field_name' => $field_name,
+          'bundle' => $bundle,
+        ))->fetchField();
+    return $field_exists;
+  }
+
+  /**
+   * This function creates the configurations that will be exported by
+   * configuration management.
+   */
+  protected function createConfigToExport() {
+    $web_user = $this->drupalCreateUser(
+      array(
+        'administer content types',
+      )
+    );
+
+    $this->drupalLogin($web_user);
+
+    $type = $this->drupalCreateContentType();
+
+    $edit = array();
+    $edit['fields[_add_new_field][label]'] = 'my_field';
+    $edit['fields[_add_new_field][field_name]'] = 'my_field';
+    $edit['fields[_add_new_field][type]'] = 'text';
+    $edit['fields[_add_new_field][widget_type]'] = 'text_textfield';
+    $this->drupalPost('admin/structure/types/manage/' . $type->type . '/fields', $edit, t('Save'));
+    $this->drupalPost(NULL, array(), t('Save field settings'));
+    $this->drupalPost(NULL, array(), t('Save settings'));
+
+    $this->field_name = $type->type;
+  }
+
+  /**
+   * Perform changes in the configuration and save those changes into the active
+   * store.
+   */
+  protected function modifyConfiguration() {
+    $web_user = $this->drupalCreateUser(
+      array(
+        'administer content types',
+      )
+    );
+    $this->drupalLogin($web_user);
+    $edit = array(
+      'instance[label]' => 'Modified',
+      'instance[description]' => 'Modified',
+      'instance[widget][settings][rows]' => '5',
+    );
+    $this->drupalPost('admin/structure/types/manage/article/fields/body', $edit, t('Save settings'));
+  }
+}
