@@ -3,7 +3,7 @@ sites/*/settings*.php
 
 # Ignore paths that contain user-generated content.
 sites/*/files
+!sites/default/files/config
 sites/*/private
 **/.sass-cache
 **/node-modules
-
