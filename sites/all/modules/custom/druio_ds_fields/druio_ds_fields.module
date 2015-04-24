@@ -17,18 +17,67 @@ function druio_ds_fields_ds_fields_info($entity_type) {
 
   // Entity: Node
   if ($entity_type == 'node') {
-    $fields['druio_answer_comments'] = array(
+    $fields['answer_comments'] = array(
       'title' => 'Answer comments',
       'ui_limit' => array('answer|*'),
       'field_type' => DS_FIELD_TYPE_FUNCTION,
       'function' => 'druio_ds_fields_answer_comments',
     );
 
-    $fields['druio_node_author_created'] = array(
+    $fields['node_author_created'] = array(
       'title' => 'Author + Created',
       'ui_limit' => array('*|*'),
       'field_type' => DS_FIELD_TYPE_FUNCTION,
       'function' => 'druio_ds_fields_node_author_created',
+    );
+
+    $fields['best_answer'] = array(
+      'title' => 'Best answer',
+      'ui_limit' => array('answer|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_best_answer',
+    );
+
+    $fields['node_avatar_and_author'] = array(
+      'title' => 'Avatar + Author',
+      'ui_limit' => array('*|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_node_avatar_and_author',
+    );
+
+    $fields['node_comment_count'] = array(
+      'title' => 'Comment count',
+      'ui_limit' => array('*|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_node_comment_count',
+    );
+
+    $fields['question_answers'] = array(
+      'title' => 'Question answers',
+      'ui_limit' => array('question|full'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_question_answer',
+    );
+
+    $fields['question_answers_count'] = array(
+      'title' => 'Question answer count',
+      'ui_limit' => array('question|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_question_answers_count',
+    );
+
+    $fields['question_title'] = array(
+      'title' => 'Title with mark',
+      'ui_limit' => array('question|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_question_title',
+    );
+
+    $fields['rate_vote_up_down'] = array(
+      'title' => 'Rate: Vote Up/Down',
+      'ui_limit' => array('question|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_rate_vote_up_down',
     );
 
     return array($entity_type => $fields);
@@ -36,7 +85,7 @@ function druio_ds_fields_ds_fields_info($entity_type) {
 
   // Entity: Comment
   if ($entity_type == 'comment') {
-    $fields['druio_comment_author_created'] = array(
+    $fields['comment_author_created'] = array(
       'title' => 'Author + Created',
       'ui_limit' => array('*|*'),
       'field_type' => DS_FIELD_TYPE_FUNCTION,
@@ -54,9 +103,7 @@ function druio_ds_fields_ds_fields_info($entity_type) {
  * @return mixed
  */
 function druio_ds_fields_answer_comments($field) {
-  if (isset($field['entity']->name)) {
-    return views_embed_view('comments', 'comments_to_answers', $field['entity']->nid);
-  }
+  return views_embed_view('comments', 'comments_to_answers', $field['entity']->nid);
 }
 
 /**
@@ -66,16 +113,14 @@ function druio_ds_fields_answer_comments($field) {
  * @return mixed
  */
 function druio_ds_fields_node_author_created($field) {
-  if (isset($field['entity']->name)) {
-    $html = '<a href="@user_node_url" class="username">@user_node_name</a> <span class="created">– @node_created</span>';
-    $data = array(
-      '@user_node_url' => url('user/' . $field['entity']->uid),
-      '@user_node_name' => $field['entity']->name,
-      '@node_created' => format_date($field['entity']->created, 'ru_medium'),
-    );
+  $html = '<a href="@user_node_url" class="username">@user_node_name</a> <span class="created">– @node_created</span>';
+  $data = array(
+    '@user_node_url' => url('user/' . $field['entity']->uid),
+    '@user_node_name' => $field['entity']->name,
+    '@node_created' => format_date($field['entity']->created, 'ru_medium'),
+  );
 
-    return format_string($html, $data);
-  }
+  return format_string($html, $data);
 }
 
 /**
@@ -85,14 +130,137 @@ function druio_ds_fields_node_author_created($field) {
  * @return mixed
  */
 function druio_ds_fields_comment_author_created($field) {
-  if (isset($field['entity']->name)) {
-    $html = '<a href="@user_comment_url" class="username">@user_comment_name</a> <span class="created">– @comment_created</span>';
-    $data = array(
-      '@user_comment_url' => url('user/' . $field['entity']->uid),
-      '@user_comment_name' => $field['entity']->name,
-      '@comment_created' => format_date($field['entity']->created, 'ru_medium'),
-    );
+  $html = '<a href="@user_comment_url" class="username">@user_comment_name</a> <span class="created">– @comment_created</span>';
+  $data = array(
+    '@user_comment_url' => url('user/' . $field['entity']->uid),
+    '@user_comment_name' => $field['entity']->name,
+    '@comment_created' => format_date($field['entity']->created, 'ru_medium'),
+  );
 
-    return format_string($html, $data);
+  return format_string($html, $data);
+}
+
+/**
+ * Best answer flag.
+ * @param $field
+ * @return string|void
+ */
+function druio_ds_fields_best_answer($field) {
+  global $user;
+
+  $field_answer_question_reference = field_get_items('node', $field['entity'], 'field_answer_question_reference');
+
+  if ($user->uid == $field_answer_question_reference[0]['target_id']) {
+    return flag_create_link('best_answer', $field['entity']->nid);
   }
+  else {
+    $flag = flag_get_flag('best_answer');
+    if ($flag->get_count($field['entity']->nid)) {
+      return '<div class="best-answer" title="Автор вопроса пометил данный ответ как \'Как лучший ответ\'"></div>';
+    }
+  }
+  return;
+}
+
+function druio_ds_fields_node_avatar_and_author($field) {
+  $entity = $field['entity'];
+  $author_avatar_fid = $entity->picture;
+
+  if ($author_avatar_fid > 0) {
+    $avatar_file = file_load($author_avatar_fid);
+    $avatar_url = image_style_url('avatar_thumb', $avatar_file->uri);
+  }
+  else {
+    $avatar_url = '/sites/all/themes/druiot/images/noavatar.png';
+  }
+
+  $html = '<a href="@node_author_url" class="@avatar_class"><img src="@node_author_avatar" alt="@node_author_name"></a>';
+  $html .= '<a href="@node_author_url" class="@author_class">@node_author_name</a>';
+  $data = array(
+    '@node_author_url' => url('user/' . $entity->uid),
+    '@node_author_name' => $entity->name,
+    '@node_author_avatar' => $avatar_url,
+    '@avatar_class' => 'avatar',
+    '@author_class' => 'author'
+  );
+
+  return format_string($html, $data);
+}
+
+/**
+ * Comment count.
+ * @param $field
+ * @return mixed
+ */
+function druio_ds_fields_node_comment_count($field) {
+  return $field['entity']->comment_count;
+}
+
+/**
+ * Answers to question + form.
+ * @param $field
+ * @return mixed
+ */
+function druio_ds_fields_question_answer($field) {
+  global $user;
+  $entity = $field['entity'];
+  $html = '';
+
+  if (arg(0) != 'comment') {
+    $html .= '<h2 class="@answers_title_class">@answers_title</h2>';
+    $html .= views_embed_view('answers', 'answers');
+
+    // Check whether the current user replied to this question.
+    if (dlcommunity_is_user_answered_to_question($entity->nid, $user->uid)) {
+      $html .= '@user_responded';
+    }
+    else {
+      // Load Answer form;
+      if (drupal_valid_path('node/add/answer')) {
+        module_load_include('inc', 'node', 'node.pages');
+        $form = node_add('answer');
+        $html .= drupal_render($form);
+      }
+    }
+  }
+
+  $data = array(
+    '@answers_title_class' => 'answers__title',
+    '@answers_title' => 'Ответы',
+    '@user_responded' => 'Вы уже дали ответ на данный вопрос. Воспользуйтесь редактированием, если желаете дополнить свой ответ.',
+  );
+
+  return format_string($html, $data);
+}
+
+/**
+ * Returns answer count to question.
+ * @param $field
+ * @return mixed
+ */
+function druio_ds_fields_question_answers_count($field) {
+  return dlcommunity_question_answers_count($field['entity']->nid);
+}
+
+function druio_ds_fields_question_title($field) {
+  $has_answer = dlcommunity_question_is_best_answer($field['entity']->nid);
+
+  $html = '<h2 class="@question_title_class"><a href="@node_url">@node_title</a></h2>';
+  $data = array(
+    '@question_title_class' => 'title',
+    '@node_url' => url('node/' . $field['entity']->nid),
+    '@node_title' => $field['entity']->title,
+  );
+  $has_answer ? $data['@question_title_class'] .= ' has-answer': false;
+
+  return format_string($html, $data);
+}
+
+/**
+ * Widget Rate vote up down.
+ * @param $field
+ * @return mixed
+ */
+function druio_ds_fields_rate_vote_up_down($field) {
+  return rate_embed($field['entity'], 'vote_up_down', RATE_FULL);
 }
