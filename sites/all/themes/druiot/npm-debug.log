@@ -1,0 +1,91 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/bin/npm', 'install', '--global', 'gulp' ]
+info using npm@1.1.4
+info using node@v0.6.12
+verbose config file /home/vagrant/.npmrc
+verbose config file /usr/etc/npmrc
+verbose config file /usr/share/npm/npmrc
+verbose cache add [ 'gulp', null ]
+silly cache add: name, spec, args [ undefined, 'gulp', [ 'gulp', null ] ]
+verbose parsed url { pathname: 'gulp', path: 'gulp', href: 'gulp' }
+verbose addNamed [ 'gulp', '' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'gulp', '', false ]
+verbose raw, before any munging gulp
+verbose url resolving [ 'http://registry.npmjs.org/', './gulp' ]
+verbose url resolved http://registry.npmjs.org/gulp
+verbose etag "363EDFNTSNLK8HM89H503G6JT"
+http GET http://registry.npmjs.org/gulp
+http 304 http://registry.npmjs.org/gulp
+silly get cb [ 304,
+silly get cb   { date: 'Fri, 24 Apr 2015 18:05:59 GMT',
+silly get cb     via: '1.1 varnish',
+silly get cb     'last-modified': 'Fri, 24 Apr 2015 18:05:59 GMT',
+silly get cb     'cache-control': 'max-age=60',
+silly get cb     etag: '"363EDFNTSNLK8HM89H503G6JT"',
+silly get cb     age: '13',
+silly get cb     connection: 'keep-alive',
+silly get cb     'x-served-by': 'cache-fra1248-FRA',
+silly get cb     'x-cache': 'HIT',
+silly get cb     'x-cache-hits': '1',
+silly get cb     'x-timer': 'S1429898759.487841,VS0,VE0',
+silly get cb     vary: 'Accept' } ]
+verbose etag gulp from cache
+silly name, range, hasData 2 [ 'gulp', '', true ]
+silly versions [ 'gulp', [ '0.0.2', '0.0.3', '0.0.4', '0.0.5' ] ]
+verbose bin dist [ '0.6-ares1.7.5-evundefined-openssl1.0.1-v83.7.12.22-linux-ia32-3.2.0-23-generic-pae',
+verbose bin dist   { shasum: '6bda657a8c2e0cffb15a673b3d196814c31eaa73',
+verbose bin dist     tarball: 'http://registry.npmjs.org/gulp/-/gulp-0.0.5.tgz' } ]
+verbose caching /home/vagrant/.npm/gulp/0.0.5/package/package.json
+verbose loadDefaults gulp@0.0.5
+silly resolved [ { name: 'gulp',
+silly resolved     description: 'Simple stream-y build helper',
+silly resolved     version: '0.0.5',
+silly resolved     homepage: 'http://github.com/wearefractal/gulp',
+silly resolved     repository: { type: 'git', url: 'git://github.com/wearefractal/gulp.git' },
+silly resolved     author: 
+silly resolved      { name: 'Fractal',
+silly resolved        email: 'contact@wearefractal.com',
+silly resolved        url: 'http://wearefractal.com/' },
+silly resolved     main: './index.js',
+silly resolved     preferGlobal: true,
+silly resolved     bin: { gulp: './bin/gulp' },
+silly resolved     dependencies: { async: '*', 'event-stream': '*', 'glob-stream': '*' },
+silly resolved     devDependencies: { mocha: '*', should: '*' },
+silly resolved     scripts: { test: 'mocha' },
+silly resolved     engines: { node: '>= 0.6' },
+silly resolved     licenses: 
+silly resolved      [ { type: 'MIT',
+silly resolved          url: 'http://github.com/wearefractal/gulp/raw/master/LICENSE' } ],
+silly resolved     _id: 'gulp@0.0.5',
+silly resolved     optionalDependencies: {},
+silly resolved     _engineSupported: true,
+silly resolved     _npmVersion: '1.1.4',
+silly resolved     _nodeVersion: 'v0.6.12',
+silly resolved     _defaultsLoaded: true,
+silly resolved     _from: 'gulp' } ]
+info into /usr/local/lib gulp@0.0.5
+info installOne gulp@0.0.5
+verbose from cache /home/vagrant/.npm/gulp/0.0.5/package/package.json
+info unbuild /usr/local/lib/node_modules/gulp
+verbose mkdir (expected) error ENOENT, no such file or directory '/usr/local/lib/node_modules/___gulp.npm'
+verbose unpack_ uid, gid [ undefined, undefined ]
+verbose unpackTarget /usr/local/lib/node_modules/gulp
+ERR! Could not create /usr/local/lib/node_modules/___gulp.npm
+ERR! error installing gulp@0.0.5
+info unbuild /usr/local/lib/node_modules/gulp
+verbose installOne cb gulp@0.0.5
+ERR! Error: EACCES, permission denied '/usr/local/lib/node_modules/___gulp.npm'
+ERR! 
+ERR! Please try running this command again as root/Administrator.
+ERR! 
+ERR! System Linux 3.2.0-23-generic-pae
+ERR! command "node" "/usr/bin/npm" "install" "--global" "gulp"
+ERR! cwd /var/www/drupal7/sites/all/themes/druiot
+ERR! node -v v0.6.12
+ERR! npm -v 1.1.4
+ERR! path /usr/local/lib/node_modules/___gulp.npm
+ERR! code EACCES
+ERR! message EACCES, permission denied '/usr/local/lib/node_modules/___gulp.npm'
+ERR! errno {}
+verbose exit [ 1, true ]

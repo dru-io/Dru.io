@@ -1,0 +1,44 @@
+
+.events {
+  .event__left {
+    @include span(4 of 12);
+  }
+  .event__right {
+    @include span(8 of 12 last);
+  }
+
+  .event--item {
+    border-bottom: dashed 1px $colorMercury;
+    padding-bottom: 1.4rem;
+    margin-bottom: 1.4rem;
+    @include full;
+  }
+  .event__title {
+    margin: 0;
+  }
+  .event__date {
+    &:before {
+      @extend .fa;
+      @extend .fa-calendar;
+      margin-right: 0.5rem;
+    }
+  }
+  .event__photoreport {
+    text-align: right;
+    &:before {
+      @extend .fa;
+      @extend .fa-camera;
+      margin-right: 0.5rem;
+    }
+  }
+  .event__go {
+    a {
+      @include full;
+      @extend .button--submit;
+      margin-top: 0.5rem;
+    }
+    .flag-message {
+      margin-top: 2.5em;
+    }
+  }
+}
