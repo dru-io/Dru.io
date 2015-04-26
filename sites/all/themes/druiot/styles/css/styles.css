@@ -554,6 +554,7 @@ button,
 input[type="submit"],
 .button--submit,
 .events .event__go a,
+.event .event__right .flag-will-go2-event a,
 input[type="reset"],
 .button--reset,
 #edit-preview,
@@ -599,6 +600,7 @@ button,
 input[type="submit"],
 .button--submit,
 .events .event__go a,
+.event .event__right .flag-will-go2-event a,
 input[type="reset"],
 .button--reset,
 #edit-preview,
@@ -613,6 +615,7 @@ input[type="reset"],
   input[type="submit"]:hover,
   .button--submit:hover,
   .events .event__go a:hover,
+  .event .event__right .flag-will-go2-event a:hover,
   input[type="reset"]:hover,
   .button--reset:hover,
   #edit-preview:hover,
@@ -642,6 +645,7 @@ input[type="reset"],
   input[type="submit"]:active,
   .button--submit:active,
   .events .event__go a:active,
+  .event .event__right .flag-will-go2-event a:active,
   input[type="reset"]:active,
   .button--reset:active,
   #edit-preview:active,
@@ -658,6 +662,7 @@ input[type="reset"],
   input[type="submit"]:disabled,
   .button--submit:disabled,
   .events .event__go a:disabled,
+  .event .event__right .flag-will-go2-event a:disabled,
   input[type="reset"]:disabled,
   .button--reset:disabled,
   #edit-preview:disabled,
@@ -671,7 +676,8 @@ input[type="reset"],
 
 input[type="submit"],
 .button--submit,
-.events .event__go a {
+.events .event__go a,
+.event .event__right .flag-will-go2-event a {
   background-color: #3583d5;
   /* Fallback Color */
   background-image: -webkit-gradient(linear, left top, left bottom, left, right);
@@ -693,7 +699,8 @@ input[type="submit"],
   transition: all 200ms; }
   input[type="submit"]:hover,
   .button--submit:hover,
-  .events .event__go a:hover {
+  .events .event__go a:hover,
+  .event .event__right .flag-will-go2-event a:hover {
     background-color: #3276c3;
     /* Fallback Color */
     background-image: -webkit-gradient(linear, left top, left bottom, left, right);
@@ -712,12 +719,14 @@ input[type="submit"],
     transition: all 200ms; }
   input[type="submit"]:active,
   .button--submit:active,
-  .events .event__go a:active {
+  .events .event__go a:active,
+  .event .event__right .flag-will-go2-event a:active {
     background: #5d9cdd;
     transition: all 200ms; }
   input[type="submit"]:disabled,
   .button--submit:disabled,
-  .events .event__go a:disabled {
+  .events .event__go a:disabled,
+  .event .event__right .flag-will-go2-event a:disabled {
     background: #5d9cdd;
     border-color: #1c5187;
     color: #E9EDEF;
@@ -851,7 +860,7 @@ input[type="reset"],
 .project.teaser .version:before, .post.frontpage:before, .question.frontpage:before, .project.full .project__first .type:before,
 .project.full .project__first .dev-status:before,
 .project.full .project__first .maintenance-status:before,
-.project.full .project__first .version:before, .events .event__date:before, .events .event__photoreport:before {
+.project.full .project__first .version:before, .events .event__date:before, .events .event__city:before, .events .event__photoreport:before, .events .event__place:before {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -915,7 +924,7 @@ input[type="reset"],
 .project.teaser .pull-left.version:before, .pull-left.post.frontpage:before, .pull-left.question.frontpage:before, .project.full .project__first .pull-left.type:before,
 .project.full .project__first .pull-left.dev-status:before,
 .project.full .project__first .pull-left.maintenance-status:before,
-.project.full .project__first .pull-left.version:before, .events .pull-left.event__date:before, .events .pull-left.event__photoreport:before {
+.project.full .project__first .pull-left.version:before, .events .pull-left.event__date:before, .events .pull-left.event__city:before, .events .pull-left.event__photoreport:before, .events .pull-left.event__place:before {
   margin-right: .3em; }
 .fa.pull-right, .pull-right#site-search:before, #header-links .header__tracker a.pull-right:before, #header-links .pull-right.header__github:before, #header-profile .header-profile__auth .pull-right.icon:before, #header-profile .header-profile__profile .pull-right.icon:before, #header-profile .pull-right.header-profile__logout:before, .breadcrumb .pull-right.first:before, .question.full .question__left .rate-widget .pull-right.rate-plus, .question.full .question__left .rate-widget .pull-right.rate-minus, .question.full .question__right .pull-right.drupal-version:before, .question.full .question__right .pull-right.projects:before, .question.full .question__right .pull-right.category:before, .question.teaser .question__right .title.has-answer a.pull-right:before, .question.teaser .question__bottom .pull-right.question__info:before, .answer.teaser .answer__left .rate-widget .pull-right.rate-plus, .answer.full .answer__left .rate-widget .pull-right.rate-plus, .answer.teaser .answer__left .rate-widget .pull-right.rate-minus, .answer.full .answer__left .rate-widget .pull-right.rate-minus, .answer.teaser .answer__left .flag-best-answer .pull-right.flag-action, .answer.full .answer__left .flag-best-answer .pull-right.flag-action, .answer.teaser .answer__left .flag-best-answer .pull-right.unflag-action, .answer.full .answer__left .flag-best-answer .pull-right.unflag-action, .answer.teaser .answer__left .pull-right.best-answer, .answer.full .answer__left .pull-right.best-answer, .post .post__footer .rate-widget .pull-right.rate, .post .post__footer .pull-right.comment-count:before, .post .post__footer .pull-right.date:before, .project.teaser .pull-right.type:before,
 .project.teaser .pull-right.dev-status:before,
@@ -923,7 +932,7 @@ input[type="reset"],
 .project.teaser .pull-right.version:before, .pull-right.post.frontpage:before, .pull-right.question.frontpage:before, .project.full .project__first .pull-right.type:before,
 .project.full .project__first .pull-right.dev-status:before,
 .project.full .project__first .pull-right.maintenance-status:before,
-.project.full .project__first .pull-right.version:before, .events .pull-right.event__date:before, .events .pull-right.event__photoreport:before {
+.project.full .project__first .pull-right.version:before, .events .pull-right.event__date:before, .events .pull-right.event__city:before, .events .pull-right.event__photoreport:before, .events .pull-right.event__place:before {
   margin-left: .3em; }
 
 .fa-spin {
@@ -1200,7 +1209,7 @@ input[type="reset"],
 .fa-pencil:before {
   content: ""; }
 
-.fa-map-marker:before {
+.fa-map-marker:before, .events .event__place:before {
   content: ""; }
 
 .fa-adjust:before {
@@ -1509,7 +1518,7 @@ input[type="reset"],
 .fa-arrow-circle-down:before {
   content: ""; }
 
-.fa-globe:before {
+.fa-globe:before, .events .event__city:before {
   content: ""; }
 
 .fa-wrench:before {
@@ -4091,27 +4100,53 @@ body {
     margin-right: -100%;
     clear: none; }
 
-.events .event__left {
-  width: 32.20339%;
-  float: left;
-  margin-right: 1.69492%; }
-.events .event__right {
-  width: 66.10169%;
-  float: right;
-  margin-right: 0; }
-.events .event--item {
-  border-bottom: dashed 1px #E2E2E2;
-  padding-bottom: 1.4rem;
-  margin-bottom: 1.4rem;
+.events .event__item {
   clear: both;
   width: 100%;
   float: left;
   margin-left: 0;
   margin-right: 0; }
+.events .event__left {
+  width: 31.81818%;
+  float: left;
+  margin-right: 2.27273%; }
+.events .event__right {
+  width: 65.90909%;
+  float: right;
+  margin-right: 0; }
+
+.event .event__left {
+  width: 23.72881%;
+  float: left;
+  margin-right: 1.69492%; }
+.event .event__right {
+  width: 74.57627%;
+  float: right;
+  margin-right: 0; }
+.event .event__bottom {
+  clear: both;
+  width: 100%;
+  float: left;
+  margin-left: 0;
+  margin-right: 0; }
+
+.events .event__item {
+  border-bottom: dashed 1px #E2E2E2;
+  padding-bottom: 1.4rem;
+  margin-bottom: 1.4rem; }
 .events .event__title {
   margin: 0; }
-.events .event__date:before {
-  margin-right: 0.5rem; }
+.events .event__info {
+  font-size: 0.8rem; }
+.events .event__date {
+  display: inline-block;
+  margin-right: 1.5rem; }
+  .events .event__date:before {
+    margin-right: 0.5rem; }
+.events .event__city {
+  display: inline-block; }
+  .events .event__city:before {
+    margin-right: 0.5rem; }
 .events .event__photoreport {
   text-align: right; }
   .events .event__photoreport:before {
@@ -4124,6 +4159,15 @@ body {
   margin-right: 0;
   margin-top: 0.5rem; }
 .events .event__go .flag-message {
-  margin-top: 2.5em; }
+  top: 0; }
+.events .event__place:before {
+  margin-right: 0.5rem; }
+.events .event__about {
+  margin: 1rem 0; }
+
+.event .event__right h2 {
+  margin-top: 0; }
+.event .event__right .flag-will-go2-event .flag-message {
+  top: 2rem; }
 
 /*# sourceMappingURL=styles.css.map */

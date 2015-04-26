@@ -25,12 +25,18 @@
  */
 ?>
 
+<div class="event__item">
 <div class="event__left">
   <?php print $fields['field_event_poster']->content; ?>
   <?php print $fields['ops']->content; ?>
 </div>
 <div class="event__right">
   <?php print $fields['title']->content; ?>
-  <?php print $fields['field_event_date']->content; ?>
+  <div class="event__info">
+    <?php print $fields['field_event_date']->content; ?>
+    <?php print $fields['field_event_city']->content; ?>
+    <?php print $fields['field_event_place']->content; ?>
+  </div>
   <?php print $fields['body']->content; ?>
+</div>
 </div>

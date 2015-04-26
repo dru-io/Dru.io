@@ -52,3 +52,27 @@
     @include gallery(3 of 9);
   }
 }
+
+.events {
+  .event__item {
+    @include full;
+  }
+  .event__left {
+    @include span(3 of 9);
+  }
+  .event__right {
+    @include span(6 of 9 last);
+  }
+}
+
+.event {
+  .event__left {
+    @include span(3);
+  }
+  .event__right {
+    @include span(9 last);
+  }
+  .event__bottom {
+    @include full;
+  }
+}

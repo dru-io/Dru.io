@@ -1,25 +1,30 @@
 
 .events {
-  .event__left {
-    @include span(4 of 12);
-  }
-  .event__right {
-    @include span(8 of 12 last);
-  }
-
-  .event--item {
+  .event__item {
     border-bottom: dashed 1px $colorMercury;
     padding-bottom: 1.4rem;
     margin-bottom: 1.4rem;
-    @include full;
   }
   .event__title {
     margin: 0;
   }
+  .event__info {
+    font-size: 0.8rem;
+  }
   .event__date {
+    display: inline-block;
+    margin-right: 1.5rem;
     &:before {
       @extend .fa;
       @extend .fa-calendar;
+      margin-right: 0.5rem;
+    }
+  }
+  .event__city {
+    display: inline-block;
+    &:before {
+      @extend .fa;
+      @extend .fa-globe;
       margin-right: 0.5rem;
     }
   }
@@ -37,8 +42,39 @@
       @extend .button--submit;
       margin-top: 0.5rem;
     }
+
     .flag-message {
-      margin-top: 2.5em;
+      top: 0;
     }
+  }
+  .event__place {
+    &:before {
+      @extend .fa;
+      @extend .fa-map-marker;
+      margin-right: 0.5rem;
+    }
+  }
+  .event__about {
+    margin: 1rem 0;
+  }
+}
+
+.event {
+  .event__left {
+
+  }
+  .event__right {
+    h2 {
+      margin-top: 0;
+    }
+    .flag-will-go2-event {
+      a {
+        @extend .button--submit;
+      }
+      .flag-message {
+        top: 2rem;
+      }
+    }
+
   }
 }
