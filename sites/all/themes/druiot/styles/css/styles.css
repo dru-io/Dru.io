@@ -4030,6 +4030,15 @@ body {
   float: right;
   margin-right: 0; }
 
+.answer .answer__left {
+  width: 6.77966%;
+  float: left;
+  margin-right: 1.69492%; }
+.answer .answer__right {
+  width: 91.52542%;
+  float: right;
+  margin-right: 0; }
+
 .comment-light .comment__left {
   width: 6.77966%;
   float: left;

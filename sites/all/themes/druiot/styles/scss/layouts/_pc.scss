@@ -38,6 +38,16 @@
   }
 }
 
+
+.answer {
+  .answer__left{
+    @include span(1);
+  }
+  .answer__right {
+    @include span(11 last);
+  }
+}
+
 .comment-light {
   .comment__left {
     @include span(1);
