@@ -1,0 +1,5 @@
+[25-Apr-2015 23:18:01 Europe/Moscow] PHP Fatal error:  Call to undefined function ds_druiot_two_regions() in /home/cxwfrqij/public_html/sites/all/modules/contrib/ds/includes/ds.registry.inc on line 570
+[25-Apr-2015 23:18:09 Europe/Moscow] PHP Fatal error:  Call to undefined function ds_druiot_two_regions() in /home/cxwfrqij/public_html/sites/all/modules/contrib/ds/includes/ds.registry.inc on line 570
+[25-Apr-2015 23:23:05 Europe/Moscow] PHP Fatal error:  Call to undefined function ds_druiot_two_regions() in /home/cxwfrqij/public_html/sites/all/modules/contrib/ds/includes/ds.registry.inc on line 570
+[25-Apr-2015 23:23:06 Europe/Moscow] PHP Fatal error:  Call to undefined function ds_druiot_two_regions() in /home/cxwfrqij/public_html/sites/all/modules/contrib/ds/includes/ds.registry.inc on line 570
+[25-Apr-2015 23:23:24 Europe/Moscow] PHP Fatal error:  Call to undefined function ds_druiot_two_regions() in /home/cxwfrqij/public_html/sites/all/modules/contrib/ds/includes/ds.registry.inc on line 570

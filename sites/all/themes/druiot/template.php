@@ -76,42 +76,6 @@ function druiot_preprocess_page(&$variables, $hook) {
 }
 
 /**
- * Implements hook_preprocess_node().
- */
-/*
-function THEMENAME_preprocess_node(&$variables, $hook) {
-
-}
-*/
-
-/**
- * Implements hook_preprocess_comment().
- */
-/*
-function THEMENAME_preprocess_comment(&$variables, $hook) {
-
-}
-*/
-
-/**
- * Implements hook_preprocess_region().
- */
-/*
-function THEMENAME_preprocess_region(&$variables, $hook) {
-
-}
-*/
-
-/**
- * Implements hook_preprocess_block().
- */
-/*
-function STARTERKIT_preprocess_block(&$variables, $hook) {
-
-}
-*/
-
-/**
  * Implements hook_theme().
  * For more flexibility we create some theme definitions.
  */

@@ -3,9 +3,9 @@
  * Main styles. Here must be you stylesheet.
  * Use it well.
  */
+
 body {
   background: url('../../images/bg.png') repeat;
-  @include show-grid();
 }
 
 .divider {
@@ -17,16 +17,12 @@ body {
   font-size: 0.875rem;
   background: $headerBackground;
   box-shadow: inset 0 2.5rem 0 0 rgba(0, 0, 0, 0.5);
-
-  .header__wrapper {
-    @include container($siteWidth);
-  }
 }
 
 .header__logo {
-  @include span(17 no-gutters);
   height: 6.875rem;
   background: #fff;
+  @include span(2 no-gutters);
 
   a {
     display: block;
@@ -34,16 +30,31 @@ body {
 }
 
 .header__content {
-  @include span(103 no-gutters);
-
+  @include span(10 last wide);
   .header__firstline {
-    @include susy-clearfix;
+    #site-search {
+      @include span(3);
+    }
+    #header-links {
+      @include span(4 nest);
+      .header__tracker,
+      .header__github {
+        @include span(2 of 4);
+      }
+      .header__github { @include last; }
+    }
+    #header-profile {
+      @include span(3 last);
+    }
+  }
+  #navigation {
+    @include span(10);
   }
 }
 
 #site-search {
   position: relative;
-  @include span(3 no-gutters);
+
 
   .form-search {
     height: 2.5rem;
@@ -73,14 +84,14 @@ body {
 }
 
 #header-links {
-  @include span(5 no-gutter);
+
   position: relative;
   color: #cccccc;
   line-height: 2.5rem;
   padding: 0 1rem;
 
   .header__tracker {
-    @include span(1 of 3 first no-gutter);
+
 
     a {
       color: #CCC;
@@ -110,7 +121,7 @@ body {
   }
 
   .header__github {
-    @include span(1 of 3 first no-gutter);
+
     display: block;
     color: #cccccc;
 
@@ -123,7 +134,7 @@ body {
 }
 
 #header-profile {
-  @include span(2 last);
+
   position: relative;
   background: none repeat scroll 0% 0% rgba(255, 255, 255, 0.1);
 
@@ -202,7 +213,7 @@ body {
 }
 
 #main {
-  @include container($siteWidth);
+
   @include susy-clearfix;
   padding: 2rem 2.5rem;
   background: #ffffff;
@@ -361,7 +372,6 @@ body {
     }
 
     .question__bottom {
-      @include full();
       margin-top: 1rem;
       border-top: 1px solid $colorGallery;
     }
@@ -613,7 +623,6 @@ body {
   font-size: 0.875rem;
 
   .comment__left {
-
     .avatar {
       border-radius: 4px;
       overflow: hidden;
@@ -621,7 +630,6 @@ body {
   }
 
   .comment__right {
-
     .author-and-date {
       .username {
         font-weight: bold;
@@ -659,10 +667,15 @@ body {
     background: rgb(249, 249, 249);
     padding: 5px;
     border-radius: 2px;
+    .rate-widget,
+    .comment-count,
+    .date,
+    .avatar-and-author {
+      float: left;
+      margin-right: 1rem;
+    }
 
     .rate-widget {
-      @include span(6);
-
       .rate {
         background: $colorGallery;
         color: $colorBoulder;
@@ -709,7 +722,7 @@ body {
     }
 
     .comment-count {
-      @include span(3);
+
       color: $colorBoulder;
       @include fontSize(14px);
       line-height: pxToRem(24px);
@@ -722,7 +735,6 @@ body {
     }
 
     .date {
-      @include span(9);
       color: $colorBoulder;
       @include fontSize(14px);
       line-height: pxToRem(24px);
@@ -735,8 +747,6 @@ body {
     }
 
     .avatar-and-author {
-      @include span(10);
-
       .avatar {
         display: inline-block;
         vertical-align: middle;
@@ -754,6 +764,7 @@ body {
       }
     }
   }
+
 }
 
 .post.teaser {
@@ -767,14 +778,6 @@ body {
 .view.project-page.page {
   .content {
     @include susy-clearfix;
-
-    .project {
-      @include span(1);
-
-      &:nth-child(2n) {
-        @include last;
-      }
-    }
   }
 }
 
@@ -829,21 +832,20 @@ body {
   background-color: $colorLightGrey;
   font-size: 0.875rem;
   padding: 1rem;
-  @include container($siteWidth);
+
 }
 
 #frontpage-top {
-  width: pxToRem(1200px);
   position: relative;
+  width: $siteWidth;
   left: -2.5rem;
   top: -2rem;
   background: #fff url('http://drupal.com/themes/drupalcom/images/parallax/homepage-header/full-screen.jpg') no-repeat;
   background-size: cover;
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
-  @include susy-clearfix;
 
   .left {
-    @include span(10);
+    @include span(6);
     padding: 2rem 2.5rem;
 
     .welcome {
@@ -861,22 +863,13 @@ body {
   }
 
   .right {
-    @include span(10 last);
     padding: 2rem 2.5rem;
 
   }
 }
 
 #frontpage-latest {
-  @include susy-clearfix;
-
   .view {
-    @include span(10);
-
-    &:nth-child(2n) {
-      @include last;
-    }
-
     .header {
       .title {
         margin-top: 0;
@@ -946,7 +939,7 @@ body {
   @include susy-clearfix;
 
   .project__first {
-    @include span(10);
+    
 
     .type,
     .dev-status,
@@ -986,7 +979,7 @@ body {
   }
 
   .project__second {
-    @include span(10 last);
+
   }
 }
 
@@ -1010,16 +1003,20 @@ body {
   margin-bottom: 1rem;
   box-shadow: none;
 }
+
 .add-content-button:hover {
   color: white;
   box-shadow: none;
 }
+
 .add-content-button.question {
   background: #34495e;
 }
+
 .add-content-button.post {
   background: #1abc9c;
 }
+
 .add-content-button.project {
   background: #3498db;
 }
