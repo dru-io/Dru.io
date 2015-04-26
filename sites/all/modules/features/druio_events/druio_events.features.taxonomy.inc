@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * events.features.taxonomy.inc
+ * druio_events.features.taxonomy.inc
  */
 
 /**
  * Implements hook_taxonomy_default_vocabularies().
  */
-function events_taxonomy_default_vocabularies() {
+function druio_events_taxonomy_default_vocabularies() {
   return array(
     'cities' => array(
       'name' => 'Cities',

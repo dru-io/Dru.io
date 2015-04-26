@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * events.features.field_base.inc
+ * druio_events.features.field_base.inc
  */
 
 /**
  * Implements hook_field_default_field_bases().
  */
-function events_field_default_field_bases() {
+function druio_events_field_default_field_bases() {
   $field_bases = array();
 
   // Exported field_base: 'body'

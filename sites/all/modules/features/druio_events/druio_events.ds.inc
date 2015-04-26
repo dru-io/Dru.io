@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * events.ds.inc
+ * druio_events.ds.inc
  */
 
 /**
  * Implements hook_ds_field_settings_info().
  */
-function events_ds_field_settings_info() {
+function druio_events_ds_field_settings_info() {
   $export = array();
 
   $ds_fieldsetting = new stdClass();
@@ -85,7 +85,7 @@ function events_ds_field_settings_info() {
 /**
  * Implements hook_ds_layout_settings_info().
  */
-function events_ds_layout_settings_info() {
+function druio_events_ds_layout_settings_info() {
   $export = array();
 
   $ds_layout = new stdClass();

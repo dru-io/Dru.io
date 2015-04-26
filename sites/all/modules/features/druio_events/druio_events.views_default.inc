@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * events.views_default.inc
+ * druio_events.views_default.inc
  */
 
 /**
  * Implements hook_views_default_views().
  */
-function events_views_default_views() {
+function druio_events_views_default_views() {
   $export = array();
 
   $view = new view();

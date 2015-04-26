@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * events.captcha.inc
+ * druio_events.captcha.inc
  */
 
 /**
  * Implements hook_captcha_default_points().
  */
-function events_captcha_default_points() {
+function druio_events_captcha_default_points() {
   $export = array();
 
   $captcha = new stdClass();

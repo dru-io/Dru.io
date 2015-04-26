@@ -3537,7 +3537,8 @@ body {
     overflow: hidden;
     height: 1.5rem;
     width: 1.5rem;
-    border-radius: 50%; }
+    border-radius: 50%;
+    margin-right: 0.3125rem; }
   .post .post__footer .avatar-and-author .author {
     display: inline-block;
     vertical-align: middle;

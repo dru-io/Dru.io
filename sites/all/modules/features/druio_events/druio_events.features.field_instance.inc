@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * events.features.field_instance.inc
+ * druio_events.features.field_instance.inc
  */
 
 /**
  * Implements hook_field_default_field_instances().
  */
-function events_field_default_field_instances() {
+function druio_events_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance: 'comment-comment_node_event-comment_body'
