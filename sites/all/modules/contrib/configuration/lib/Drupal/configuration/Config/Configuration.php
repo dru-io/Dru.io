@@ -23,7 +23,7 @@ abstract class Configuration {
    * A bit flag used to let us know if a configuration was overridden as a result
    * of changing the activestore directly. (config changes via the UI)
   */
-  const overriden = 0x0001;
+  const overridden = 0x0001;
 
   /**
    * A bit flag used to let us know if a configuration is not currently being
@@ -440,7 +440,7 @@ abstract class Configuration {
    *   If TRUE a human readable name will be return for the status of the
    *   configuration. If FALSE a numeric code will be returned.
    * @return string|integer
-   *   The status of the configuration. (ActiveStore only, In Sync, Overriden).
+   *   The status of the configuration. (ActiveStore only, In Sync, Overridden).
    */
   public function getStatus($human_name = TRUE) {
     if ($this->broken) {
@@ -463,7 +463,7 @@ abstract class Configuration {
         return $human_name ? t('In Sync') : Configuration::inSync;
       }
       else {
-        return $human_name ? t('Overriden') : Configuration::overriden;
+        return $human_name ? t('Overridden') : Configuration::overridden;
       }
     }
   }

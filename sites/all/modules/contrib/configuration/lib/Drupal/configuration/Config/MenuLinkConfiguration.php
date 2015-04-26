@@ -26,6 +26,8 @@ class MenuLinkConfiguration extends Configuration {
       'options',
       'router_path',
       'parent_identifier',
+      'hidden',
+      'module',
     );
     $this->setKeysToExport($keys);
   }

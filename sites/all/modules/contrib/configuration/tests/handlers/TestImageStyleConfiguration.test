@@ -94,8 +94,10 @@ class TestImageStyleConfiguration extends ConfigurationHandlerBaseTestCase {
     $this->drupalLogin($web_user);
     $style_name = strtolower($this->randomName(10));
 
-    $edit = array();
-    $edit['name'] = $style_name;
+    $edit = array(
+      'label' => $style_name,
+      'name' => $style_name,
+    );
     $this->drupalPost('admin/config/media/image-styles/add', $edit, t('Create new style'));
     $this->assertRaw(t('Style %name was created.', array('%name' => $style_name)), t('Image style successfully created.'));
 

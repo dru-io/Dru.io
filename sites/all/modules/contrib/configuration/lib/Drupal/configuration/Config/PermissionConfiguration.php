@@ -175,6 +175,9 @@ class PermissionConfiguration extends Configuration {
       'permission' => $permission,
       'roles' => !empty($permissions_roles[$permission]) ? $permissions_roles[$permission] : array(),
     );
+    if (!empty($this->data['roles'])) {
+      sort($this->data['roles']);
+    }
     return $this;
   }
 

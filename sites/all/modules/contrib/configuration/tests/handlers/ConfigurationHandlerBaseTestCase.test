@@ -112,7 +112,7 @@ abstract class ConfigurationHandlerBaseTestCase extends ConfigurationWebTestCase
    * Import a configuration. Make modifications on it, and then revert it.
    *
    * This function will check that the configuration is 'In Sync' after is
-   * imported the first time. Then is overriden after is modified, and is again
+   * imported the first time. Then is overridden after is modified, and is again
    * 'In Sync' after revert it.
    */
   public function testCheckModifications() {
@@ -140,11 +140,11 @@ abstract class ConfigurationHandlerBaseTestCase extends ConfigurationWebTestCase
                           ->execute()
                           ->fetchObject();
 
-      $this->assertTrue(!empty($object), "Config $config was suscessfully tracked.");
+      $this->assertTrue(!empty($object), "Config $config was successfully tracked.");
       $verbose .= "This is the content of the tracked.inc file: \n";
-      $traking_file = ConfigurationManagement::readTrackingFile();
-      foreach ($traking_file as $config_id => $tracked_hash) {
-        $verbose .= "\$tracked_hash[$config_id] = $tracked_hash\n";
+      $tracking_file = ConfigurationManagement::readTrackingFile();
+      foreach ($tracking_file as $config_id => $tracked_hash) {
+        $verbose .= "\$tracked_hash[$config_id] = " . var_export($tracked_hash, TRUE) . "\n";
       }
 
       $verbose .= "\n\n\n";

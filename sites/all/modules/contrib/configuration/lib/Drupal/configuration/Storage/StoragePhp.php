@@ -28,6 +28,7 @@ class StoragePhp extends Storage {
         $output = 'array()';
       }
       else {
+        ksort($var);
         $output = "array(\n";
         foreach ($var as $key => $value) {
           $output .= $prefix . "  " . $this->export($key) . " => " . $this->export($value, $prefix . '  ') . ",\n";

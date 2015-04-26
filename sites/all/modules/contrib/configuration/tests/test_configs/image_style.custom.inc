@@ -25,6 +25,7 @@ $data = array(
       'weight' => '1',
     ),
   ),
+  'storage' => 1,
 );
 
 $dependencies = array();

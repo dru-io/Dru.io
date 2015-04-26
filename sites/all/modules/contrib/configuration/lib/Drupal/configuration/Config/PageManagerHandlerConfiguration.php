@@ -67,7 +67,26 @@ class PageManagerHandlerConfiguration extends CtoolsConfiguration {
     }
     $data = $this->getData();
     $data->export_type = NULL;
-    panels_save_display($data->conf['display']);
+
+    // get title_pane key if configured.
+    if (isset($data->conf['display']->title_pane)) {
+      $title_pane = $data->conf['display']->title_pane;
+    }
+
+    $display = panels_save_display($data->conf['display']);
+
+    // title_pane configuration workaround.
+    if (isset($display->content[$title_pane])) {
+      $pid = $display->content[$title_pane]->pid;
+      $display->$title_pane = $pid;
+      db_update('panels_display')
+          ->fields(array(
+            'title_pane' => $pid
+          ))
+          ->condition('did', $display->did)
+          ->execute();
+    }
+
     $data->conf['did'] = $data->conf['display']->did;
     unset($data->conf['display']);
     ctools_export_crud_save($this->getComponent(), $data);

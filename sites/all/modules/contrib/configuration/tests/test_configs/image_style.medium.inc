@@ -26,6 +26,7 @@ $data = array(
     ),
   ),
   'name' => 'medium',
+  'storage' => 4,
 );
 
 $dependencies = array();

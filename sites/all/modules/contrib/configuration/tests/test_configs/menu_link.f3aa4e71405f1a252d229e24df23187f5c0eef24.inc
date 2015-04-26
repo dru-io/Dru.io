@@ -19,6 +19,7 @@ $data = array(
   ),
   'router_path' => 'admin/config',
   'parent_identifier' => '3bd4fee5d9b3477e3f30a17def41c14b99bdd3b8',
+  'hidden' => '0',
 );
 
 $dependencies = array(

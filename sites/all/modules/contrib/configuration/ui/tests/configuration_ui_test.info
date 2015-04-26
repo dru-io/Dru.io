@@ -11,9 +11,9 @@ dependencies[] = role_export
 
 
 
-; Information added by drupal.org packaging script on 2013-07-03
-version = "7.x-2.0-alpha3"
+; Information added by Drupal.org packaging script on 2014-07-26
+version = "7.x-2.0-alpha3+11-dev"
 core = "7.x"
 project = "configuration"
-datestamp = "1372873255"
+datestamp = "1406405329"
 

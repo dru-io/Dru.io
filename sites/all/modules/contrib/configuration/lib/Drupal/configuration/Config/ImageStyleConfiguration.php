@@ -55,7 +55,7 @@ class ImageStyleConfiguration extends Configuration {
    * Remove unnecessary keys for export.
    */
   protected function style_sanitize(&$style, $child = FALSE) {
-    $omit = $child ? array('isid', 'ieid', 'storage') : array('isid', 'ieid', 'storage', 'module');
+    $omit = $child ? array('isid', 'ieid') : array('isid', 'ieid', 'module');
     if (is_array($style)) {
       foreach ($style as $k => $v) {
         if (in_array($k, $omit, TRUE)) {
@@ -109,8 +109,10 @@ class ImageStyleConfiguration extends Configuration {
     // Reset the order of effects, this will help to generate always the same
     // hash for image styles that have been reverted.
     $this->data['effects'] = array();
-    foreach ($style['effects'] as $effect) {
-      $this->data['effects'][] = $effect;
+    if (!empty($style['effects'])) {
+      foreach ($style['effects'] as $effect) {
+        $this->data['effects'][] = $effect;
+      }
     }
     return $this;
   }
@@ -119,12 +121,67 @@ class ImageStyleConfiguration extends Configuration {
    * Implements Drupal\configuration\Config\Configuration::saveToActiveStore().
    */
   public function saveToActiveStore(ConfigIteratorSettings &$settings) {
-    if ($style = image_style_load($this->getIdentifier())) {
-      if (!empty($style['isid'])) {
-        image_style_delete($style);
+    $style = $this->getData();
+
+    // Does an image style with the same name already exist?
+    if ($existing_style = image_style_load($this->getIdentifier())) {
+      $isExistingEditable = (bool)($existing_style['storage'] & IMAGE_STORAGE_EDITABLE);
+      $isNewEditable = (bool)($style['storage'] & IMAGE_STORAGE_EDITABLE);
+
+      // New style is using defaults -> revert existing.
+      if (!$isNewEditable && $isExistingEditable) {
+        image_default_style_revert($this->getIdentifier());
+      }
+
+      // New style is editable -> update existing style.
+      elseif ($isExistingEditable && $isNewEditable) {
+        $style['isid'] = $existing_style['isid'];
+        $style = image_style_save($style);
+        if (!empty($existing_style['effects'])) {
+          foreach ($existing_style['effects'] as $effect) {
+            image_effect_delete($effect);
+          }
+        }
+        if (!empty($style['effects'])) {
+          foreach ($style['effects'] as $effect) {
+            $effect['isid'] = $style['isid'];
+            image_effect_save($effect);
+          }
+        }
+      }
+
+      // New style is editable, existing style is using defaults -> update without deleting effects.
+      elseif($isNewEditable && !$isExistingEditable) {
+        if (!empty($existing_style['isid'])) {
+          $style['isid'] = $existing_style['isid'];
+        }
+        $style = image_style_save($style);
+        if (!empty($style['effects'])) {
+          foreach ($style['effects'] as $effect) {
+            $effect['isid'] = $style['isid'];
+            image_effect_save($effect);
+          }
+        }
+      }
+
+      // Neither style is editable, both default -> do nothing at all.
+      else {
+
       }
     }
-    image_default_style_save($this->getData());
+
+    // New style does not exist yet on this system -> save it regardless of its storage.
+    else {
+      $style = image_style_save($style);
+      if (!empty($style['effects'])) {
+        foreach ($style['effects'] as $effect) {
+          $effect['isid'] = $style['isid'];
+          image_effect_save($effect);
+        }
+      }
+      image_style_flush($style);
+    }
+
     $settings->addInfo('imported', $this->getUniqueId());
   }
 }

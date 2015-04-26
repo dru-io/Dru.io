@@ -59,6 +59,14 @@ class ConfigurationHandlerMenuLinksTestCase extends ConfigurationWebTestCase {
 
     $imported_menu_links = db_query('SELECT COUNT(*) FROM {menu_links} WHERE menu_name = :menu_name', array(':menu_name' => 'menu-test'))->fetchField();
     $this->assertTrue($imported_menu_links == 3, "The three menus were saved in the ActiveStore.");
+
+    $num_rows = db_select('menu_links', 'ml')
+      ->fields('ml')
+      ->condition('link_title', 'Level Two')
+      ->condition('hidden', '1')
+      ->execute()
+      ->rowCount();
+    $this->assertTrue($num_rows == 1, "Disabled menu item successfully imported");
   }
 
   public function testExportToDataStore() {
@@ -73,15 +81,14 @@ class ConfigurationHandlerMenuLinksTestCase extends ConfigurationWebTestCase {
     );
     $saved = menu_link_save($menu_link);
 
-    $this->assertTrue($saved, "The menu was saved in the ActiveStore.");
+    $this->assertTrue($saved, "The menu link was saved in the ActiveStore.");
 
-    $config = 'menu.' . sha1(str_replace('-', '_', $menu_link['menu_name']) . ':' . $menu_link['link_path']);
+    $config = 'menu_link.' . sha1(str_replace('-', '_', $menu_link['menu_name']) . ':' . $menu_link['link_path']);
     $results = ConfigurationManagement::exportToDataStore(array($config), FALSE, FALSE);
     $exported = $results->getInfo('exported');
     $this->assertTrue(in_array($config, $exported), "Configuration for $config was exported.");
 
     $file_for_config = $this->datastore_path . '/' . $config . '.inc';
-
     $this->assertTrue(file_exists($file_for_config), "The file that storages the menu was created.");
   }
 
