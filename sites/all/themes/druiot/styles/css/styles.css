@@ -3994,51 +3994,6 @@ body {
     content: " ";
     display: block;
     clear: both; }
-  head {
-    display: block;
-    position: fixed;
-    right: 10px;
-    top: 10px;
-    z-index: 999;
-    color: #333;
-    background: rgba(255, 255, 255, 0.25); }
-  head:before {
-    content: "|||";
-    display: block;
-    padding: 5px 10px;
-    font-family: sans-serif;
-    font-size: 16px;
-    font-weight: bold; }
-  head:hover {
-    background: rgba(255, 255, 255, 0.5);
-    color: red; }
-  head:hover ~ #main, head:hover ~ body #main, head:hover ~
-  #frontpage-top, head:hover ~ body
-  #frontpage-top, head:hover ~
-  .header__wrapper, head:hover ~ body
-  .header__wrapper, head:hover ~
-  #footer, head:hover ~ body
-  #footer {
-    position: relative; }
-    head:hover ~ #main:before, head:hover ~ body #main:before, head:hover ~
-    #frontpage-top:before, head:hover ~ body
-    #frontpage-top:before, head:hover ~
-    .header__wrapper:before, head:hover ~ body
-    .header__wrapper:before, head:hover ~
-    #footer:before, head:hover ~ body
-    #footer:before {
-      position: absolute;
-      top: 0;
-      left: 0;
-      bottom: 0;
-      right: 0;
-      content: " ";
-      z-index: 998;
-      background-image: linear-gradient(to right, blue, #4d4dff 80%, transparent 80%);
-      background-size: 8.47458%;
-      background-origin: content-box;
-      background-clip: content-box;
-      background-position: left top; }
 
 #frontpage-latest:after {
   content: " ";
