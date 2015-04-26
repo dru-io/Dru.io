@@ -75,7 +75,7 @@ function druio_ds_fields_ds_fields_info($entity_type) {
 
     $fields['rate_vote_up_down'] = array(
       'title' => 'Rate: Vote Up/Down',
-      'ui_limit' => array('question|*'),
+      'ui_limit' => array('question|*', 'post|*'),
       'field_type' => DS_FIELD_TYPE_FUNCTION,
       'function' => 'druio_ds_fields_rate_vote_up_down',
     );
