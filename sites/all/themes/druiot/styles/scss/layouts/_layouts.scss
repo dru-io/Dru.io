@@ -6,7 +6,14 @@
 // Susy settings.
 $susy: (
   gutters: 1/4,
-  use-custom: (rem: true)
+  columns: 12,
+  use-custom: (rem: true),
+  debug: (
+    image: show,
+    color: blue,
+    output: overlay,
+    toggle: top right,
+  ),
 );
 
 @include border-box-sizing;

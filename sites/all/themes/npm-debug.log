@@ -1,0 +1,61 @@
+info it worked if it ends with ok
+verbose cli [ 'node', '/usr/bin/npm', 'install', 'node-sass' ]
+info using npm@1.1.4
+info using node@v0.6.12
+verbose config file /home/vagrant/.npmrc
+verbose config file /usr/etc/npmrc
+verbose config file /usr/share/npm/npmrc
+verbose cache add [ 'node-sass', null ]
+silly cache add: name, spec, args [ undefined, 'node-sass', [ 'node-sass', null ] ]
+verbose parsed url { pathname: 'node-sass', path: 'node-sass', href: 'node-sass' }
+verbose addNamed [ 'node-sass', '' ]
+verbose addNamed [ null, '' ]
+silly name, range, hasData [ 'node-sass', '', false ]
+verbose raw, before any munging node-sass
+verbose url resolving [ 'http://registry.npmjs.org/', './node-sass' ]
+verbose url resolved http://registry.npmjs.org/node-sass
+http GET http://registry.npmjs.org/node-sass
+http 200 http://registry.npmjs.org/node-sass
+silly get cb [ 200,
+silly get cb   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+silly get cb     etag: '"17XCC9WNLIMVKMQ10FL286P5R"',
+silly get cb     'content-type': 'application/json',
+silly get cb     'cache-control': 'max-age=60',
+silly get cb     'content-length': '124641',
+silly get cb     'accept-ranges': 'bytes',
+silly get cb     date: 'Fri, 24 Apr 2015 18:14:27 GMT',
+silly get cb     via: '1.1 varnish',
+silly get cb     age: '0',
+silly get cb     connection: 'keep-alive',
+silly get cb     'x-served-by': 'cache-fra1242-FRA',
+silly get cb     'x-cache': 'HIT',
+silly get cb     'x-cache-hits': '1',
+silly get cb     'x-timer': 'S1429899266.714649,VS0,VE726',
+silly get cb     vary: 'Accept' } ]
+verbose mkdir (expected) error ENOENT, no such file or directory '/home/vagrant/.npm/node-sass'
+verbose mkdir done: /home/vagrant/.npm/node-sass 755
+silly name, range, hasData 2 [ 'node-sass', '', true ]
+silly versions [ 'node-sass', [] ]
+ERR! Error: No compatible version found: node-sass
+ERR! No valid targets found.
+ERR! Perhaps not compatible with your version of node?
+ERR!     at installTargetsError (/usr/share/npm/lib/cache.js:488:10)
+ERR!     at next_ (/usr/share/npm/lib/cache.js:438:17)
+ERR!     at next (/usr/share/npm/lib/cache.js:415:44)
+ERR!     at /usr/share/npm/lib/cache.js:408:5
+ERR!     at saved (/usr/share/npm/lib/utils/npm-registry-client/get.js:147:7)
+ERR!     at Object.oncomplete (/usr/lib/nodejs/graceful-fs.js:230:7)
+ERR! You may report this log at:
+ERR!     <http://bugs.debian.org/npm>
+ERR! or use
+ERR!     reportbug --attach /var/www/drupal7/sites/all/themes/npm-debug.log npm
+ERR! 
+ERR! System Linux 3.2.0-23-generic-pae
+ERR! command "node" "/usr/bin/npm" "install" "node-sass"
+ERR! cwd /var/www/drupal7/sites/all/themes
+ERR! node -v v0.6.12
+ERR! npm -v 1.1.4
+ERR! message No compatible version found: node-sass
+ERR! message No valid targets found.
+ERR! message Perhaps not compatible with your version of node?
+verbose exit [ 1, true ]

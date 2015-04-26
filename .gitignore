@@ -6,4 +6,5 @@ sites/*/files
 !sites/default/files/config
 sites/*/private
 **/.sass-cache
+**/*.log
 **/node-modules

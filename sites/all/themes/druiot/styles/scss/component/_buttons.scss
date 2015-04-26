@@ -59,7 +59,8 @@ button,
 }
 
 // Submit button style.
-input[type="submit"] {
+input[type="submit"],
+.button--submit {
   @extend .button;
   @include linear-gradient(#5d9cdd, #3583d5);
   box-shadow: 0 1px 0 0px rgba(255, 255, 255, 0.3) inset, 0 1px 0 0px white;
@@ -91,6 +92,7 @@ input[type="submit"] {
 
 // Reset button style.
 input[type="reset"],
+.button--reset,
 #edit-preview {
   @extend .button;
   @include linear-gradient(#fcd35b, #edbe34);
@@ -122,7 +124,8 @@ input[type="reset"],
 }
 
 // Delete button style.
-#edit-delete {
+#edit-delete,
+.button--delete {
   @extend .button;
   @include linear-gradient(#FF5053, #F01E21);
   box-shadow: 0 1px 0 0px rgba(255, 255, 255, 0.3) inset, 0 1px 0 0px white;

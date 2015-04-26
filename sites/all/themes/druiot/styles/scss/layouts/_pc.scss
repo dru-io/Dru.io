@@ -1,0 +1,78 @@
+
+#main,
+#frontpage-top,
+.header__wrapper,
+#footer {
+  @include container($siteWidth);
+  min-width: 65rem;
+}
+
+#frontpage-latest {
+  @include susy-clearfix;
+  .view {
+    @include span(6);
+
+    &:nth-child(2n) {
+      @include last;
+    }
+  }
+}
+
+#content {
+  @include span(9);
+}
+
+#sidebar-right {
+  @include span(3 last);
+}
+
+.question {
+  .question__left {
+    @include span(1);
+  }
+  .question__right {
+    @include span(11 last);
+  }
+  .question__bottom {
+    @include span(11 last);
+  }
+}
+
+.comment-light {
+  .comment__left {
+    @include span(1);
+  }
+  .comment__right {
+    @include span(11 last);
+  }
+}
+
+.view.project-page.page {
+  .project {
+    @include gallery(3 of 9);
+  }
+}
+
+.events {
+  .event__item {
+    @include full;
+  }
+  .event__left {
+    @include span(3 of 9);
+  }
+  .event__right {
+    @include span(6 of 9 last);
+  }
+}
+
+.event {
+  .event__left {
+    @include span(3);
+  }
+  .event__right {
+    @include span(9 last);
+  }
+  .event__bottom {
+    @include full;
+  }
+}
