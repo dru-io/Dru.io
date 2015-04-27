@@ -1,0 +1,12 @@
+name = Batch add terms
+description = Batch add taxonomy terms
+version = 7.x-1.0
+core = 7.x
+dependencies[] = taxonomy
+
+; Information added by Drupal.org packaging script on 2014-04-29
+version = "7.x-1.1"
+core = "7.x"
+project = "batch_add_terms"
+datestamp = "1398769734"
+

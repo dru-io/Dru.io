@@ -1,0 +1,11 @@
+<?php
+
+/**
+ * Implements hook_install().
+ */
+function batch_add_terms_install() {
+  db_update('system')
+    ->fields(array('weight' => 1))
+    ->condition('name', 'batch_add_terms')
+    ->execute();
+}

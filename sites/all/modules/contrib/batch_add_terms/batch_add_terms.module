@@ -1,0 +1,56 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function batch_add_terms_menu() {
+  $items = array();
+
+  $items['admin/structure/taxonomy/%taxonomy_vocabulary_machine_name/mass-add'] = array(
+    'title' => 'Batch add terms',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('batch_add_terms_form', 3),
+    'access arguments' => array('administer taxonomy'),
+    'type' => MENU_LOCAL_ACTION,
+    'file' => 'batch_add_terms.admin.inc',
+  );
+
+  if (module_exists('vppr')) {
+    $items['admin/structure/taxonomy/%taxonomy_vocabulary_machine_name/mass-add']['access callback'] = 'vppr_access_vocabulary_terms';
+    $items['admin/structure/taxonomy/%taxonomy_vocabulary_machine_name/mass-add']['access arguments'] = array(3);
+  }
+  if (module_exists('taxonomy_access_fix')) {
+    $items['admin/structure/taxonomy/%taxonomy_vocabulary_machine_name/mass-add']['access callback'] = 'taxonomy_access_fix_access';
+    $items['admin/structure/taxonomy/%taxonomy_vocabulary_machine_name/mass-add']['access arguments'] = array('add terms', 3);
+  }
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function batch_add_terms_theme() {
+  return array(
+    'taxonomy_overview_vocabularies' => array(
+      'render element' => 'form',
+      'function' => 'batch_add_terms_taxonomy_overview_vocabularies',
+      'file' => 'batch_add_terms.admin.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function batch_add_terms_form_taxonomy_overview_vocabularies_alter(&$form) {
+  foreach (element_children($form) as $element_name) {
+    if (isset($form[$element_name]['#vocabulary'])) {
+      $form[$element_name]['batch_add'] = array(
+        '#type' => 'link',
+        '#title' => t('batch add terms'),
+        '#href' => 'admin/structure/taxonomy/' . $form[$element_name]['#vocabulary']->machine_name . '/mass-add',
+      );
+    }
+  }
+}
