@@ -8,7 +8,7 @@ if (arg(0) == 'post' || $node_type == 'post' || (arg(0) == 'node' && arg(1) == '
   print '<a href="/node/add/post" class="add-content-button post icon-newspaper">Добавить публикацию</a>';
 }
 if (arg(0) == 'events' || $node_type == 'event' || (arg(0) == 'event' && arg(1) == 'add')) {
-  print '<a href="/node/add/post" class="add-content-button post icon-newspaper">Добавить публикацию</a>';
+  print '<a href="/node/add/event" class="add-content-button post icon-newspaper">Добавить Мероприятие</a>';
 }
 if (arg(0) == 'project' || $node_type == 'project' || (arg(0) == 'node' && arg(1) == 'add')) {
   //print '<a href="#" id="add-project-ajax" class="add-content-button project icon-plug">Добавить расширение</a>';
