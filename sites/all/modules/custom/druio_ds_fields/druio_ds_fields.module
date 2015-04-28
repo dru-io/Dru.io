@@ -75,7 +75,7 @@ function druio_ds_fields_ds_fields_info($entity_type) {
 
     $fields['rate_vote_up_down'] = array(
       'title' => 'Rate: Vote Up/Down',
-      'ui_limit' => array('question|*', 'post|*'),
+      'ui_limit' => array('question|*'),
       'field_type' => DS_FIELD_TYPE_FUNCTION,
       'function' => 'druio_ds_fields_rate_vote_up_down',
     );
@@ -211,7 +211,7 @@ function druio_ds_fields_question_answer($field) {
     $html .= views_embed_view('answers', 'answers');
 
     // Check whether the current user replied to this question.
-    if (dlcommunity_is_user_answered_to_question($entity->nid, $user->uid)) {
+    if (druio_is_user_answered_to_question($entity->nid, $user->uid)) {
       $html .= '@user_responded';
     }
     else {
@@ -239,11 +239,11 @@ function druio_ds_fields_question_answer($field) {
  * @return mixed
  */
 function druio_ds_fields_question_answers_count($field) {
-  return dlcommunity_question_answers_count($field['entity']->nid);
+  return druio_question_answers_count($field['entity']->nid);
 }
 
 function druio_ds_fields_question_title($field) {
-  $has_answer = dlcommunity_question_is_best_answer($field['entity']->nid);
+  $has_answer = druio_question_is_best_answer($field['entity']->nid);
 
   $html = '<h2 class="@question_title_class"><a href="@node_url">@node_title</a></h2>';
   $data = array(
