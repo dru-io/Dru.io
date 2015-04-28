@@ -41,7 +41,9 @@ body {
       .header__github {
         @include span(2 of 4);
       }
-      .header__github { @include last; }
+      .header__github {
+        @include last;
+      }
     }
     #header-profile {
       @include span(3 last);
@@ -54,7 +56,6 @@ body {
 
 #site-search {
   position: relative;
-
 
   .form-search {
     height: 2.5rem;
@@ -91,7 +92,6 @@ body {
   padding: 0 1rem;
 
   .header__tracker {
-
 
     a {
       color: #CCC;
@@ -334,15 +334,16 @@ body {
 
     .question__right {
 
-      .author-and-date {
+      .author-and-created {
         .username {
           font-weight: bold;
-          font-size: 1rem;
+          color: $colorPickledBluewood;
+          @include fontSize(15px);
         }
 
         .created {
           color: $colorBoulder;
-          font-size: 0.875rem;
+          @include fontSize(14px);
         }
       }
 
@@ -374,6 +375,10 @@ body {
     .question__bottom {
       margin-top: 1rem;
       border-top: 1px solid $colorGallery;
+
+      .author-answer-form-info {
+        @include fontSize(13px);
+      }
     }
 
     .links {
@@ -414,12 +419,19 @@ body {
         font-weight: normal;
         @include fontSize(17px);
 
-        &.has-answer a {
+        .has-answer {
+          background: $colorShamrock;
+          margin-right: .5rem;
+          color: white;
+          padding: 0 pxToRem(5px);
+          border-radius: 2px;
+          @include fontSize(12px);
+          text-transform: uppercase;
+
           &:before {
             @extend .fa;
             @extend .fa-check;
-            margin-right: .5rem;
-            color: $colorShamrock;
+            margin-right: .25rem;
           }
         }
       }
@@ -581,15 +593,16 @@ body {
 
     .answer__right {
 
-      .author-and-date {
+      .author-and-created {
         .username {
           font-weight: bold;
-          font-size: 1rem;
+          color: $colorPickledBluewood;
+          @include fontSize(15px);
         }
 
         .created {
           color: $colorBoulder;
-          font-size: 0.875rem;
+          @include fontSize(14px);
         }
       }
     }
@@ -622,6 +635,13 @@ body {
   margin-top: 0.5rem;
   font-size: 0.875rem;
 
+  &:hover {
+    .links {
+      opacity: 1;
+      transition: all 200ms linear;
+    }
+  }
+
   .comment__left {
     .avatar {
       border-radius: 4px;
@@ -630,10 +650,12 @@ body {
   }
 
   .comment__right {
-    .author-and-date {
+    position: relative;
+    .author-and-created {
       .username {
         font-weight: bold;
-        font-size: 0.875rem !important;
+        color: $colorPickledBluewood;
+        @include fontSize(15px);
       }
 
       .created {
@@ -644,9 +666,14 @@ body {
   }
 
   .links {
+    position: absolute;
+    top: 0;
+    right: 0;
     margin: 0;
     padding: 0;
     list-style: none;
+    opacity: 0;
+    transition: all 200ms linear;
     @include fontSize(12px);
 
     li {
@@ -940,7 +967,6 @@ body {
   @include susy-clearfix;
 
   .project__first {
-    
 
     .type,
     .dev-status,
@@ -1022,110 +1048,25 @@ body {
   background: #3498db;
 }
 
-/**
- * Select2.js styles
- */
-/*.select2-container--druio {
-  min-width: pxToRem(200px);
-
-  .selection {
-    width: 100%;
-    background: #fcfcfa;
-    padding: 0.45em 0.6em;
-    display: inline-block;
-    border: 1px solid #b8b8b8;
-    border-top-color: #999;
-    border-radius: 2px;
-    box-sizing: border-box;
-    max-width: 100%;
-    box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-    margin: pxToRem(5px) 0;
-    -webkit-transition: all 200ms linear;
+.bue-ui {
+  background: rgb(249, 249, 249);
+  border: 1px solid #b8b8b8;
+  border-top-color: #999;
+  border-radius: 2px 2px 0 0;
+  margin-bottom: -3px;
+  position: relative;
+  padding: 0;
+  .bue-button {
+    padding: 0;
+    margin: pxToRem(6px);
+    border: none;
+    background: transparent;
+    transform: scale(1);
     transition: all 200ms linear;
 
-    &:focus {
-      outline: medium none;
-      border-color: #40b6ff;
-      box-shadow: 0px 0px 8px 0px #40b6ff, inset 0 1px 3px rgba(0,0,0,.05);
-      background: white;
-      -webkit-transition: all 200ms linear;
+    &:hover {
+      transform: scale(1.3);
       transition: all 200ms linear;
     }
-
-    .select2-selection__rendered {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-
-      .select2-selection__choice {
-        display: inline-block;
-        margin-right: pxToRem(5px);
-        background-image: linear-gradient(to bottom, #1da7ee, #178ee9);
-        text-shadow: 0 1px 0 rgba(0, 51, 83, 0.3);
-        box-shadow: 0 1px 0 rgba(0, 0, 0, 0.2), inset 0 1px rgba(255, 255, 255, 0.03);
-        color: white;
-        border-radius: 2px;
-        padding-right: pxToRem(5px);
-        border: 1px solid rgba(0, 0, 0, 0.2);
-
-        .select2-selection__choice__remove {
-          border-right: 1px solid rgba(255, 255, 255, 0.18);
-          padding-right: pxToRem(5px);
-          padding-left: pxToRem(5px);
-          margin-right: pxToRem(5px);
-          cursor: pointer;
-        }
-      }
-
-      .select2-search {
-        display: inline-block;
-
-        input {
-          background: none;
-          border: none;
-          padding: 0;
-          margin: 0;
-          box-shadow: none;
-        }
-      }
-    }
   }
-
-  .select2-dropdown {
-    position: relative;
-    top: 8px;
-    .select2-results {
-      .select2-results__options {
-        max-height: 200px;
-        overflow-y: auto;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        background: #fcfcfa;
-        border: 1px solid #b8b8b8;
-        border-top: none;
-        border-radius: 0 0 2px 2px;
-        box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.11);
-
-        .select2-results__option {
-          padding: pxToRem(7px);
-          border-bottom: 1px solid #b8b8b8;
-          cursor: pointer;
-
-          &:hover {
-            background: #fff;
-          }
-
-          &:last-child {
-            border: none;
-          }
-
-          &[aria-selected=true] {
-            background-color: #178ee9;
-            color: white;
-          }
-        }
-      }
-    }
-  }*
-}*/
+}

@@ -219,6 +219,7 @@ function druio_ds_fields_question_answer($field) {
       if (drupal_valid_path('node/add/answer')) {
         module_load_include('inc', 'node', 'node.pages');
         $form = node_add('answer');
+        $html .= '<div class="author-answer-form-info">!author_answer</div>';
         $html .= drupal_render($form);
       }
     }
@@ -228,6 +229,7 @@ function druio_ds_fields_question_answer($field) {
     '@answers_title_class' => 'answers__title',
     '@answers_title' => 'Ответы',
     '@user_responded' => 'Вы уже дали ответ на данный вопрос. Воспользуйтесь редактированием, если желаете дополнить свой ответ.',
+    '!author_answer' => '<strong>Обратите внимание!</strong> Вы являетесь автором вопроса. Данная форма может быть использована только если вы нашли решение самостоятельно и желаете поделиться им с остальными. Для этого напишите решение своего вопроса, а затем пометьте его как решение. При использовании "ответа" для дополнения своего вопроса воспользуйтесь комментарием или функцией редактирования вопроса, в противном случае, ваш ответ будет удалён.'
   );
 
   return format_string($html, $data);
@@ -245,13 +247,13 @@ function druio_ds_fields_question_answers_count($field) {
 function druio_ds_fields_question_title($field) {
   $has_answer = druio_question_is_best_answer($field['entity']->nid);
 
-  $html = '<h2 class="@question_title_class"><a href="@node_url">@node_title</a></h2>';
+  $html = '<h2 class="@question_title_class">!label<a href="@node_url">@node_title</a></h2>';
   $data = array(
     '@question_title_class' => 'title',
     '@node_url' => url('node/' . $field['entity']->nid),
     '@node_title' => $field['entity']->title,
+    '!label' => $has_answer ? '<span class="has-answer">Решено</span>': '',
   );
-  $has_answer ? $data['@question_title_class'] .= ' has-answer': false;
 
   return format_string($html, $data);
 }
