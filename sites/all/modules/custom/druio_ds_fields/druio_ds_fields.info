@@ -3,3 +3,4 @@ description = This module contains DisplaySuite fields.
 version = 7.x-1.x
 core = 7.x
 package = Dru.io
+dependencies[] = druio
