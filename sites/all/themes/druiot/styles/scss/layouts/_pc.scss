@@ -1,4 +1,3 @@
-
 #main,
 #frontpage-top,
 .header__wrapper,
@@ -34,7 +33,7 @@
     @include span(11 last);
   }
   .question__bottom {
-    @include span(11 last);
+    @include full();
   }
 }
 
