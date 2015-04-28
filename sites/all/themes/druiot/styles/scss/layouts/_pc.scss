@@ -1,3 +1,4 @@
+
 #main,
 #frontpage-top,
 .header__wrapper,
@@ -32,8 +33,15 @@
   .question__right {
     @include span(11 last);
   }
-  .question__bottom {
-    @include full();
+  &.teaser {
+    .question__bottom {
+      @include span(11 last);
+    }
+  }
+  &.full {
+    .question__bottom {
+      @include full();
+    }
   }
 }
 
