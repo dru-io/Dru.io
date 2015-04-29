@@ -8,6 +8,16 @@
 class DruioProjects {
 
   /**
+   * Parse all projects names from links in html text.
+   * @param $text
+   */
+  public function parseProjectsFromHtmlLinks($text) {
+    $regex = "/(https|http):\\/\\/(www\\.)?drupal.org\\/project\\/(.*)(?=(\"|'))/";
+    preg_match_all($regex, $text, $matches);
+    return $matches[3];
+  }
+
+  /**
    * Parse project name from url.
    */
   public function parseProjectNameFromUrl($url) {
@@ -73,8 +83,10 @@ class DruioProjects {
    * 1 - add successful.
    * 2 - drupal.org not response.
    * 3 - project already exist.
+   * 4 - project exists and updated.
+   * $force_update: if project exists and variable got TRUE, project will be updated.
    */
-  public function addProject($name) {
+  public function addProject($name, $force_update = FALSE) {
     $nodes = db_select('field_data_field_project_short_name', 'sn')
       ->fields('sn', array('entity_id'))
       ->condition('sn.entity_type', 'node', '=')
@@ -85,7 +97,13 @@ class DruioProjects {
 
     // Check if we have project or not.
     if (!empty($nodes)) {
-      return 3;
+      if ($force_update) {
+        $this->updateProject($name);
+        return 4;
+      }
+      else {
+        return 3;
+      }
     }
     // Create new project node.
     else {
@@ -200,10 +218,10 @@ class DruioProjects {
           'date' => $release['date'],
           'files' => array(
             'zip' => array(
-              'url' => $release['files']['file'][0]['url'],
-              'md5' => $release['files']['file'][0]['md5'],
-              'size' => $release['files']['file'][0]['size'],
-              'date' => $release['files']['file'][0]['filedate']
+              'url' => $release['files']['file'][1]['url'],
+              'md5' => $release['files']['file'][1]['md5'],
+              'size' => $release['files']['file'][1]['size'],
+              'date' => $release['files']['file'][1]['filedate']
             ),
             'tar' => array(
               'url' => $release['files']['file'][0]['url'],

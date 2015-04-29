@@ -37,6 +37,20 @@ function druio_projects_ds_fields_info($entity_type) {
       'function' => 'druio_projects_downloads',
     );
 
+    $fields['projects_drupalorg_link'] = array(
+      'title' => 'Project: Drupal.org link',
+      'ui_limit' => array('project|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_projects_drupalorg_link',
+    );
+
+    $fields['projects_questions'] = array(
+      'title' => 'Project: Questions',
+      'ui_limit' => array('project|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_projects_questions',
+    );
+
     return array($entity_type => $fields);
   }
   return;
@@ -59,6 +73,38 @@ function druio_projects_downloads($field) {
 }
 
 /**
+ * Link to original project page.
+ * @param $field
+ */
+function druio_projects_drupalorg_link($field) {
+  $field_project_short_name = field_get_items('node', $field['entity'], 'field_project_short_name');
+  $project_machine_name = $field_project_short_name[0]['safe_value'];
+
+  $html = '<a href="@url_to_project" target="_blank">@label</a>';
+  $data = array(
+    '@url_to_project' => 'https://drupal.org/project/' . $project_machine_name,
+    '@label' => $field['entity']->title . ' на Drupal.org',
+  );
+
+  return format_string($html, $data);
+}
+
+/**
+ * Question referenced to this project.
+ * @param $field
+ * @return mixed
+ */
+function druio_projects_questions($field) {
+  $html = '<h2 class="title">@title</h2>';
+  $html .= views_embed_view('question_nodes', 'questions_in_project');
+  $data = array(
+    '@title' => 'Вопросы по проекту'
+  );
+
+  return format_string($html, $data);
+}
+
+/**
  * Download form for project.
  * @param $releases
  * @return mixed
@@ -75,17 +121,6 @@ function druio_projects_download_form($form, &$form_state, $releases, $entity) {
     }
   }
 
-  $form['release_selector'] = array(
-    '#type' => 'select',
-    '#title' => 'Выбор версии для загрузки',
-    '#options' => $release_selector_options,
-    '#default_value' => '',
-    '#ajax' => array(
-      'callback' => 'druio_projects_download_form_ajax_info',
-      'wrapper' => 'druio-projects-download-info',
-    ),
-  );
-
   // If user select version, we show release information.
   if (!empty($form_state['values']['release_selector'])) {
     $major_version_pattern = "/^(.\\.x)/";
@@ -99,6 +134,39 @@ function druio_projects_download_form($form, &$form_state, $releases, $entity) {
       );
     }
   }
+  // Default version download.
+  else {
+    $priority = array(
+      '7.x',
+      '6.x',
+      '8.x'
+    );
+
+    foreach ($priority as $version) {
+      if (!empty($release_selector_data[$version])) {
+        $version_info = $release_selector_data[$version];
+        $latest_release_version = key($version_info);
+
+        $release_info_markup = theme('druio_projects_downloads_release', array(
+            'release_info' => (array) $release_selector_data[$version][$latest_release_version],
+            'entity' => $entity,
+          )
+        );
+        break;
+      }
+    }
+  }
+
+  $form['release_selector'] = array(
+    '#type' => 'select',
+    '#title' => 'Выбор версии для загрузки',
+    '#options' => $release_selector_options,
+    '#default_value' => $latest_release_version ? $latest_release_version : NULL,
+    '#ajax' => array(
+      'callback' => 'druio_projects_download_form_ajax_info',
+      'wrapper' => 'druio-projects-download-info',
+    ),
+  );
 
   $form['release_info'] = array(
     '#markup' => $release_info_markup,
@@ -205,4 +273,34 @@ function druio_projects_update() {
 
   drupal_json_output($result);
   drupal_exit();
+}
+
+/**
+ * Implements hook_filter_info()
+ * @return mixed
+ */
+function druio_projects_filter_info() {
+  $filters['druio_projects_auto_projects'] = array(
+    'title' => 'Dru.io Projects - auto add and update.',
+    'description' => 'This filter detect links to Drupal projects and add them to our base, if project already exists project will be update.',
+    'process callback' => '_druio_projects_auto_projects',
+  );
+
+  return $filters;
+}
+
+/**
+ * Process filter.
+ * @param $text
+ * @param $filter
+ */
+function _druio_projects_auto_projects($text, $filter) {
+  $druioProjects = new DruioProjects();
+  $projects = $druioProjects->parseProjectsFromHtmlLinks($text);
+
+  if (!empty($projects)) {
+    foreach ($projects as $project_name) {
+      $druioProjects->addProject($project_name);
+    }
+  }
 }

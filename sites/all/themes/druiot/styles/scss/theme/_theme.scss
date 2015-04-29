@@ -953,9 +953,6 @@ body {
     @include fontSize(16px);
     line-height: pxToRem(27px);
     font-weight: normal;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 
     a {
       color: $baseFontColor;
@@ -967,6 +964,18 @@ body {
   @include susy-clearfix;
 
   .project__first {
+    .drupalorg-link {
+      font-weight: bold;
+      a {
+        color: $baseFontColor;
+        border-bottom: 1px dashed $baseFontColor;
+      }
+      &:before {
+        @extend .fa;
+        @extend .fa-drupal;
+        margin-right: pxToRem(10px);
+      }
+    }
 
     .type,
     .dev-status,
@@ -1006,7 +1015,13 @@ body {
   }
 
   .project__second {
-
+    .project-questions {
+      > .title {
+        margin: 0 0 pxToRem(10px) 0;
+        @include fontSize(18px);
+        border-bottom: 1px solid #e8e8e8;
+      }
+    }
   }
 }
 
@@ -1072,10 +1087,11 @@ body {
 }
 
 #druio-projects-download-form {
-  border: 1px solid #ccc;
+  margin: pxToRem(10px) 0;
   padding: pxToRem(10px);
+  border: 1px solid #E7E7E7;
   border-radius: 2px;
-  box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.04);
+  box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.03);
 
   .form-item-release-selector {
     margin: 0;
@@ -1122,6 +1138,7 @@ body {
   }
 
   .drush {
+    @include fontSize(14px);
     .title {
       margin-top: pxToRem(7px);
       @include fontSize(17px);

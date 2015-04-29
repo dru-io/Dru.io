@@ -812,7 +812,7 @@ input[type="reset"], .button--reset, #edit-preview {
   font-style: normal; }
 
 /* line 1, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/component/font-awesome/font-awesome/_core.scss */
-.fa, #site-search:before, #header-links .header__tracker a:before, #header-links .header__github:before, #header-profile .header-profile__auth .icon:before, #header-profile .header-profile__profile .icon:before, #header-profile .header-profile__logout:before, .breadcrumb .first:before, .question.full .question__left .rate-widget .rate-plus, .question.full .question__left .rate-widget .rate-minus, .question.full .question__right .drupal-version:before, .question.full .question__right .projects:before, .question.full .question__right .category:before, .question.teaser .question__right .title .has-answer:before, .question.teaser .question__bottom .question__info:before, .answer.teaser .answer__left .rate-widget .rate-plus, .answer.full .answer__left .rate-widget .rate-plus, .answer.teaser .answer__left .rate-widget .rate-minus, .answer.full .answer__left .rate-widget .rate-minus, .answer.teaser .answer__left .flag-best-answer .flag-action, .answer.full .answer__left .flag-best-answer .flag-action, .answer.teaser .answer__left .flag-best-answer .unflag-action, .answer.full .answer__left .flag-best-answer .unflag-action, .answer.teaser .answer__left .best-answer, .answer.full .answer__left .best-answer, .post .post__footer .rate-widget .rate, .post .post__footer .comment-count:before, .post .post__footer .date:before, .project.teaser .type:before, .project.teaser .dev-status:before, .project.teaser .maintenance-status:before, .project.teaser .version:before, .post.frontpage:before, .question.frontpage:before, .project.full .project__first .type:before, .project.full .project__first .dev-status:before, .project.full .project__first .maintenance-status:before, .project.full .project__first .version:before, #druio-projects-download-form .archives .title:before, #druio-projects-download-form .drush .title:before, .select2-container--druio .selection .select2-selection--single:before, .events .event__date:before, .events .event__city:before, .events .event__photoreport:before, .events .event__place:before {
+.fa, #site-search:before, #header-links .header__tracker a:before, #header-links .header__github:before, #header-profile .header-profile__auth .icon:before, #header-profile .header-profile__profile .icon:before, #header-profile .header-profile__logout:before, .breadcrumb .first:before, .question.full .question__left .rate-widget .rate-plus, .question.full .question__left .rate-widget .rate-minus, .question.full .question__right .drupal-version:before, .question.full .question__right .projects:before, .question.full .question__right .category:before, .question.teaser .question__right .title .has-answer:before, .question.teaser .question__bottom .question__info:before, .answer.teaser .answer__left .rate-widget .rate-plus, .answer.full .answer__left .rate-widget .rate-plus, .answer.teaser .answer__left .rate-widget .rate-minus, .answer.full .answer__left .rate-widget .rate-minus, .answer.teaser .answer__left .flag-best-answer .flag-action, .answer.full .answer__left .flag-best-answer .flag-action, .answer.teaser .answer__left .flag-best-answer .unflag-action, .answer.full .answer__left .flag-best-answer .unflag-action, .answer.teaser .answer__left .best-answer, .answer.full .answer__left .best-answer, .post .post__footer .rate-widget .rate, .post .post__footer .comment-count:before, .post .post__footer .date:before, .project.teaser .type:before, .project.teaser .dev-status:before, .project.teaser .maintenance-status:before, .project.teaser .version:before, .post.frontpage:before, .question.frontpage:before, .project.full .project__first .drupalorg-link:before, .project.full .project__first .type:before, .project.full .project__first .dev-status:before, .project.full .project__first .maintenance-status:before, .project.full .project__first .version:before, #druio-projects-download-form .archives .title:before, #druio-projects-download-form .drush .title:before, .select2-container--druio .selection .select2-selection--single:before, .events .event__date:before, .events .event__city:before, .events .event__photoreport:before, .events .event__place:before {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -884,10 +884,10 @@ input[type="reset"], .button--reset, #edit-preview {
   float: left; }
 
 /* line 11, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.pull-left, .pull-left#site-search:before, #header-links .header__tracker a.pull-left:before, #header-links .pull-left.header__github:before, #header-profile .header-profile__auth .pull-left.icon:before, #header-profile .header-profile__profile .pull-left.icon:before, #header-profile .pull-left.header-profile__logout:before, .breadcrumb .pull-left.first:before, .question.full .question__left .rate-widget .pull-left.rate-plus, .question.full .question__left .rate-widget .pull-left.rate-minus, .question.full .question__right .pull-left.drupal-version:before, .question.full .question__right .pull-left.projects:before, .question.full .question__right .pull-left.category:before, .question.teaser .question__right .title .pull-left.has-answer:before, .question.teaser .question__bottom .pull-left.question__info:before, .answer.teaser .answer__left .rate-widget .pull-left.rate-plus, .answer.full .answer__left .rate-widget .pull-left.rate-plus, .answer.teaser .answer__left .rate-widget .pull-left.rate-minus, .answer.full .answer__left .rate-widget .pull-left.rate-minus, .answer.teaser .answer__left .flag-best-answer .pull-left.flag-action, .answer.full .answer__left .flag-best-answer .pull-left.flag-action, .answer.teaser .answer__left .flag-best-answer .pull-left.unflag-action, .answer.full .answer__left .flag-best-answer .pull-left.unflag-action, .answer.teaser .answer__left .pull-left.best-answer, .answer.full .answer__left .pull-left.best-answer, .post .post__footer .rate-widget .pull-left.rate, .post .post__footer .pull-left.comment-count:before, .post .post__footer .pull-left.date:before, .project.teaser .pull-left.type:before, .project.teaser .pull-left.dev-status:before, .project.teaser .pull-left.maintenance-status:before, .project.teaser .pull-left.version:before, .pull-left.post.frontpage:before, .pull-left.question.frontpage:before, .project.full .project__first .pull-left.type:before, .project.full .project__first .pull-left.dev-status:before, .project.full .project__first .pull-left.maintenance-status:before, .project.full .project__first .pull-left.version:before, #druio-projects-download-form .archives .pull-left.title:before, #druio-projects-download-form .drush .pull-left.title:before, .select2-container--druio .selection .pull-left.select2-selection--single:before, .events .pull-left.event__date:before, .events .pull-left.event__city:before, .events .pull-left.event__photoreport:before, .events .pull-left.event__place:before {
+.fa.pull-left, .pull-left#site-search:before, #header-links .header__tracker a.pull-left:before, #header-links .pull-left.header__github:before, #header-profile .header-profile__auth .pull-left.icon:before, #header-profile .header-profile__profile .pull-left.icon:before, #header-profile .pull-left.header-profile__logout:before, .breadcrumb .pull-left.first:before, .question.full .question__left .rate-widget .pull-left.rate-plus, .question.full .question__left .rate-widget .pull-left.rate-minus, .question.full .question__right .pull-left.drupal-version:before, .question.full .question__right .pull-left.projects:before, .question.full .question__right .pull-left.category:before, .question.teaser .question__right .title .pull-left.has-answer:before, .question.teaser .question__bottom .pull-left.question__info:before, .answer.teaser .answer__left .rate-widget .pull-left.rate-plus, .answer.full .answer__left .rate-widget .pull-left.rate-plus, .answer.teaser .answer__left .rate-widget .pull-left.rate-minus, .answer.full .answer__left .rate-widget .pull-left.rate-minus, .answer.teaser .answer__left .flag-best-answer .pull-left.flag-action, .answer.full .answer__left .flag-best-answer .pull-left.flag-action, .answer.teaser .answer__left .flag-best-answer .pull-left.unflag-action, .answer.full .answer__left .flag-best-answer .pull-left.unflag-action, .answer.teaser .answer__left .pull-left.best-answer, .answer.full .answer__left .pull-left.best-answer, .post .post__footer .rate-widget .pull-left.rate, .post .post__footer .pull-left.comment-count:before, .post .post__footer .pull-left.date:before, .project.teaser .pull-left.type:before, .project.teaser .pull-left.dev-status:before, .project.teaser .pull-left.maintenance-status:before, .project.teaser .pull-left.version:before, .pull-left.post.frontpage:before, .pull-left.question.frontpage:before, .project.full .project__first .pull-left.drupalorg-link:before, .project.full .project__first .pull-left.type:before, .project.full .project__first .pull-left.dev-status:before, .project.full .project__first .pull-left.maintenance-status:before, .project.full .project__first .pull-left.version:before, #druio-projects-download-form .archives .pull-left.title:before, #druio-projects-download-form .drush .pull-left.title:before, .select2-container--druio .selection .pull-left.select2-selection--single:before, .events .pull-left.event__date:before, .events .pull-left.event__city:before, .events .pull-left.event__photoreport:before, .events .pull-left.event__place:before {
   margin-right: .3em; }
 /* line 12, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.pull-right, .pull-right#site-search:before, #header-links .header__tracker a.pull-right:before, #header-links .pull-right.header__github:before, #header-profile .header-profile__auth .pull-right.icon:before, #header-profile .header-profile__profile .pull-right.icon:before, #header-profile .pull-right.header-profile__logout:before, .breadcrumb .pull-right.first:before, .question.full .question__left .rate-widget .pull-right.rate-plus, .question.full .question__left .rate-widget .pull-right.rate-minus, .question.full .question__right .pull-right.drupal-version:before, .question.full .question__right .pull-right.projects:before, .question.full .question__right .pull-right.category:before, .question.teaser .question__right .title .pull-right.has-answer:before, .question.teaser .question__bottom .pull-right.question__info:before, .answer.teaser .answer__left .rate-widget .pull-right.rate-plus, .answer.full .answer__left .rate-widget .pull-right.rate-plus, .answer.teaser .answer__left .rate-widget .pull-right.rate-minus, .answer.full .answer__left .rate-widget .pull-right.rate-minus, .answer.teaser .answer__left .flag-best-answer .pull-right.flag-action, .answer.full .answer__left .flag-best-answer .pull-right.flag-action, .answer.teaser .answer__left .flag-best-answer .pull-right.unflag-action, .answer.full .answer__left .flag-best-answer .pull-right.unflag-action, .answer.teaser .answer__left .pull-right.best-answer, .answer.full .answer__left .pull-right.best-answer, .post .post__footer .rate-widget .pull-right.rate, .post .post__footer .pull-right.comment-count:before, .post .post__footer .pull-right.date:before, .project.teaser .pull-right.type:before, .project.teaser .pull-right.dev-status:before, .project.teaser .pull-right.maintenance-status:before, .project.teaser .pull-right.version:before, .pull-right.post.frontpage:before, .pull-right.question.frontpage:before, .project.full .project__first .pull-right.type:before, .project.full .project__first .pull-right.dev-status:before, .project.full .project__first .pull-right.maintenance-status:before, .project.full .project__first .pull-right.version:before, #druio-projects-download-form .archives .pull-right.title:before, #druio-projects-download-form .drush .pull-right.title:before, .select2-container--druio .selection .pull-right.select2-selection--single:before, .events .pull-right.event__date:before, .events .pull-right.event__city:before, .events .pull-right.event__photoreport:before, .events .pull-right.event__place:before {
+.fa.pull-right, .pull-right#site-search:before, #header-links .header__tracker a.pull-right:before, #header-links .pull-right.header__github:before, #header-profile .header-profile__auth .pull-right.icon:before, #header-profile .header-profile__profile .pull-right.icon:before, #header-profile .pull-right.header-profile__logout:before, .breadcrumb .pull-right.first:before, .question.full .question__left .rate-widget .pull-right.rate-plus, .question.full .question__left .rate-widget .pull-right.rate-minus, .question.full .question__right .pull-right.drupal-version:before, .question.full .question__right .pull-right.projects:before, .question.full .question__right .pull-right.category:before, .question.teaser .question__right .title .pull-right.has-answer:before, .question.teaser .question__bottom .pull-right.question__info:before, .answer.teaser .answer__left .rate-widget .pull-right.rate-plus, .answer.full .answer__left .rate-widget .pull-right.rate-plus, .answer.teaser .answer__left .rate-widget .pull-right.rate-minus, .answer.full .answer__left .rate-widget .pull-right.rate-minus, .answer.teaser .answer__left .flag-best-answer .pull-right.flag-action, .answer.full .answer__left .flag-best-answer .pull-right.flag-action, .answer.teaser .answer__left .flag-best-answer .pull-right.unflag-action, .answer.full .answer__left .flag-best-answer .pull-right.unflag-action, .answer.teaser .answer__left .pull-right.best-answer, .answer.full .answer__left .pull-right.best-answer, .post .post__footer .rate-widget .pull-right.rate, .post .post__footer .pull-right.comment-count:before, .post .post__footer .pull-right.date:before, .project.teaser .pull-right.type:before, .project.teaser .pull-right.dev-status:before, .project.teaser .pull-right.maintenance-status:before, .project.teaser .pull-right.version:before, .pull-right.post.frontpage:before, .pull-right.question.frontpage:before, .project.full .project__first .pull-right.drupalorg-link:before, .project.full .project__first .pull-right.type:before, .project.full .project__first .pull-right.dev-status:before, .project.full .project__first .pull-right.maintenance-status:before, .project.full .project__first .pull-right.version:before, #druio-projects-download-form .archives .pull-right.title:before, #druio-projects-download-form .drush .pull-right.title:before, .select2-container--druio .selection .pull-right.select2-selection--single:before, .events .pull-right.event__date:before, .events .pull-right.event__city:before, .events .pull-right.event__photoreport:before, .events .pull-right.event__place:before {
   margin-left: .3em; }
 
 /* line 1, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/component/font-awesome/font-awesome/_animated.scss */
@@ -2532,7 +2532,7 @@ input[type="reset"], .button--reset, #edit-preview {
   content: "\f1a8"; }
 
 /* line 389, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-drupal:before, .question.full .question__right .drupal-version:before, .question.teaser .question__bottom .drupal:before, .project.teaser .version:before, .project.full .project__first .version:before {
+.fa-drupal:before, .question.full .question__right .drupal-version:before, .question.teaser .question__bottom .drupal:before, .project.teaser .version:before, .project.full .project__first .drupalorg-link:before, .project.full .project__first .version:before {
   content: "\f1a9"; }
 
 /* line 390, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -4201,11 +4201,8 @@ body {
     font-size: 16px;
     font-size: 1rem;
     line-height: 1.6875rem;
-    font-weight: normal;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis; }
-    /* line 960, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+    font-weight: normal; }
+    /* line 957, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
     .question.frontpage .title a {
       color: #3b3b3b; }
 
@@ -4214,19 +4211,35 @@ body {
   content: " ";
   display: block;
   clear: both; }
-/* line 975, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+/* line 967, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+.project.full .project__first .drupalorg-link {
+  font-weight: bold; }
+  /* line 969, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+  .project.full .project__first .drupalorg-link a {
+    color: #3b3b3b;
+    border-bottom: 1px dashed #3b3b3b; }
+  /* line 973, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+  .project.full .project__first .drupalorg-link:before {
+    margin-right: 0.625rem; }
+/* line 984, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
 .project.full .project__first .type:before, .project.full .project__first .dev-status:before, .project.full .project__first .maintenance-status:before, .project.full .project__first .version:before {
   margin-right: 0.3125rem;
   display: inline-block;
   width: 1.25rem; }
+/* line 1019, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+.project.full .project__second .project-questions > .title {
+  margin: 0 0 0.625rem 0;
+  font-size: 18px;
+  font-size: 1.125rem;
+  border-bottom: 1px solid #e8e8e8; }
 
-/* line 1014, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+/* line 1029, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
 .block.block-facetapi .facetapi-facetapi-checkbox-links {
   margin: 0;
   padding: 0;
   list-style: none; }
 
-/* line 1021, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+/* line 1036, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
 .add-content-button {
   display: block;
   border: none;
@@ -4239,24 +4252,24 @@ body {
   margin-bottom: 1rem;
   box-shadow: none; }
 
-/* line 1034, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+/* line 1049, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
 .add-content-button:hover {
   color: white;
   box-shadow: none; }
 
-/* line 1039, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+/* line 1054, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
 .add-content-button.question {
   background: #34495e; }
 
-/* line 1043, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+/* line 1058, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
 .add-content-button.post {
   background: #1abc9c; }
 
-/* line 1047, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+/* line 1062, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
 .add-content-button.project {
   background: #3498db; }
 
-/* line 1051, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+/* line 1066, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
 .bue-ui {
   background: #f9f9f9;
   border: 1px solid #b8b8b8;
@@ -4265,7 +4278,7 @@ body {
   margin-bottom: -3px;
   position: relative;
   padding: 0; }
-  /* line 1059, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+  /* line 1074, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
   .bue-ui .bue-button {
     padding: 0;
     margin: 0.375rem;
@@ -4273,28 +4286,29 @@ body {
     background: transparent;
     transform: scale(1);
     transition: all 200ms linear; }
-    /* line 1067, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+    /* line 1082, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
     .bue-ui .bue-button:hover {
       transform: scale(1.3);
       transition: all 200ms linear; }
 
-/* line 1074, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+/* line 1089, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
 #druio-projects-download-form {
-  border: 1px solid #ccc;
+  margin: 0.625rem 0;
   padding: 0.625rem;
+  border: 1px solid #E7E7E7;
   border-radius: 2px;
-  box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.04); }
-  /* line 1080, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+  box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.03); }
+  /* line 1096, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
   #druio-projects-download-form .form-item-release-selector {
     margin: 0; }
-  /* line 1085, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+  /* line 1101, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
   #druio-projects-download-form .archives .title {
     margin-top: 0.4375rem;
     font-size: 17px;
     font-size: 1.0625rem;
     border-bottom: 1px solid #e8e8e8;
     padding-bottom: 0.3125rem; }
-    /* line 1091, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+    /* line 1107, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
     #druio-projects-download-form .archives .title:before {
       margin-right: 0.3125rem; }
   /* line 12, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
@@ -4302,7 +4316,7 @@ body {
     content: " ";
     display: block;
     clear: both; }
-  /* line 1100, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+  /* line 1116, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
   #druio-projects-download-form .archives .list .item {
     font-size: 12px;
     font-size: 0.75rem;
@@ -4321,29 +4335,33 @@ body {
       margin-left: 52.63158%;
       margin-right: -100%;
       clear: none; }
-    /* line 1106, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+    /* line 1122, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
     #druio-projects-download-form .archives .list .item .item-label {
       font-weight: bold;
       font-size: 16px;
       font-size: 1rem; }
-    /* line 1111, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+    /* line 1127, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
     #druio-projects-download-form .archives .list .item .label {
       font-weight: bold; }
-    /* line 1115, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+    /* line 1131, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
     #druio-projects-download-form .archives .list .item .md5 {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis; }
-  /* line 1125, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
-  #druio-projects-download-form .drush .title {
-    margin-top: 0.4375rem;
-    font-size: 17px;
-    font-size: 1.0625rem;
-    border-bottom: 1px solid #e8e8e8;
-    padding-bottom: 0.3125rem; }
-    /* line 1131, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
-    #druio-projects-download-form .drush .title:before {
-      margin-right: 0.3125rem; }
+  /* line 1140, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+  #druio-projects-download-form .drush {
+    font-size: 14px;
+    font-size: 0.875rem; }
+    /* line 1142, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+    #druio-projects-download-form .drush .title {
+      margin-top: 0.4375rem;
+      font-size: 17px;
+      font-size: 1.0625rem;
+      border-bottom: 1px solid #e8e8e8;
+      padding-bottom: 0.3125rem; }
+      /* line 1148, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_theme.scss */
+      #druio-projects-download-form .drush .title:before {
+        margin-right: 0.3125rem; }
 
 /* line 1, /home/test.dru.io/public_html/sites/all/themes/druiot/styles/scss/theme/_select2.scss */
 .select2-container--druio {
