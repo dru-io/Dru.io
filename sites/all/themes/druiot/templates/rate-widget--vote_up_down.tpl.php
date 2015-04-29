@@ -27,7 +27,7 @@ if ($node && $node->type == 'question' || $node->type == 'answer'): ?>
   if ($links[0]['href']) {
     $plus_class = '';
     $user_vote == 'plus' ? $plus_class = ' voted' : '';
-    print '<a href="' . $links[0]['href'] . '" class="rate-plus' . $plus_class . '"></a>';
+    print '<a href="' . $links[0]['href'] . '" class="rate-button rate-plus' . $plus_class . '"></a>';
   }
   else {
     print '<span class="rate-plus disabled"></span>';
@@ -38,22 +38,22 @@ if ($node && $node->type == 'question' || $node->type == 'answer'): ?>
   if ($links[1]['href']) {
     $minus_class = '';
     $user_vote == 'minus' ? $minus_class = ' voted' : '';
-    print '<a href="' . $links[1]['href'] . '" class="rate-minus' . $minus_class . '"></a>';
+    print '<a href="' . $links[1]['href'] . '" class="rate-button rate-minus' . $minus_class . '"></a>';
   }
   else {
     print '<span class="rate-minus disabled"></span>';
   }
   ?>
 <?php
-  /**
-   * Node: Post.
-   */
+/**
+ * Node: Post.
+ */
 elseif ($node && $node->type == 'post'): ?>
   <?php
   if ($links[1]['href']) {
     $minus_class = '';
     $user_vote == 'minus' ? $minus_class = ' voted' : '';
-    print '<a href="' . $links[1]['href'] . '" class="rate rate--minus' . $minus_class . '"></a>';
+    print '<a href="' . $links[1]['href'] . '" class="rate-button rate rate--minus' . $minus_class . '"></a>';
   }
   else {
     print '<span class="rate rate--minus disabled"></span>';
@@ -64,7 +64,7 @@ elseif ($node && $node->type == 'post'): ?>
   if ($links[0]['href']) {
     $plus_class = '';
     $user_vote == 'plus' ? $plus_class = ' voted' : '';
-    print '<a href="' . $links[0]['href'] . '" class="rate rate--plus' . $plus_class . '"></a>';
+    print '<a href="' . $links[0]['href'] . '" class="rate-button rate rate--plus' . $plus_class . '"></a>';
   }
   else {
     print '<span class="rate rate--plus disabled"></span>';
