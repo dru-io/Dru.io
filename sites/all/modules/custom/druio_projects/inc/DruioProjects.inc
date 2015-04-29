@@ -210,29 +210,32 @@ class DruioProjects {
 
       // Releases
       $releases_array = array();
-      foreach ($data_array['releases']['release'] as $release) {
-        preg_match('/(.\\..)/', $release['version'], $version);
-        $releases_array[$version[0]][$release['version']] = array(
-          'version' => $release['version'],
-          'release_link' => $release['release_link'],
-          'date' => $release['date'],
-          'files' => array(
-            'zip' => array(
-              'url' => $release['files']['file'][1]['url'],
-              'md5' => $release['files']['file'][1]['md5'],
-              'size' => $release['files']['file'][1]['size'],
-              'date' => $release['files']['file'][1]['filedate']
-            ),
-            'tar' => array(
-              'url' => $release['files']['file'][0]['url'],
-              'md5' => $release['files']['file'][0]['md5'],
-              'size' => $release['files']['file'][0]['size'],
-              'date' => $release['files']['file'][0]['filedate']
-            ),
-          )
-        );
+      if (!empty($data_array['releases'])) {
+        foreach ($data_array['releases']['release'] as $release) {
+          preg_match('/(.\\..)/', $release['version'], $version);
+          $releases_array[$version[0]][$release['version']] = array(
+            'version' => $release['version'],
+            'release_link' => $release['release_link'],
+            'date' => $release['date'],
+            'files' => array(
+              'zip' => array(
+                'url' => $release['files']['file'][1]['url'],
+                'md5' => $release['files']['file'][1]['md5'],
+                'size' => $release['files']['file'][1]['size'],
+                'date' => $release['files']['file'][1]['filedate']
+              ),
+              'tar' => array(
+                'url' => $release['files']['file'][0]['url'],
+                'md5' => $release['files']['file'][0]['md5'],
+                'size' => $release['files']['file'][0]['size'],
+                'date' => $release['files']['file'][0]['filedate']
+              ),
+            )
+          );
+        }
+
+        $node->field_project_releases[$node->language][0]['value'] = json_encode($releases_array);
       }
-      $node->field_project_releases[$node->language][0]['value'] = json_encode($releases_array);
     }
 
     // Drupal version

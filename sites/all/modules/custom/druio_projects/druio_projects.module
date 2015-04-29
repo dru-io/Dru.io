@@ -303,4 +303,6 @@ function _druio_projects_auto_projects($text, $filter) {
       $druioProjects->addProject($project_name);
     }
   }
+
+  return $text;
 }
