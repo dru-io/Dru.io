@@ -7,8 +7,12 @@
     cursor: pointer;
     position: relative;
 
-    .select2-selection--single  {
+    /**
+     * Single
+     */
+    .select2-selection--single {
       padding-right: pxToRem(25px);
+      display: block;
       &:before {
         @extend .fa;
         @extend .fa-caret-down;
@@ -28,7 +32,7 @@
         list-style: none;
         margin: 0;
         padding: 0;
-        width: 100%; 
+        width: 100%;
         min-width: pxToRem(150px);
       }
 
@@ -63,7 +67,7 @@
           margin: 0;
           padding: 0;
           border: none;
-          box-shadow:none;
+          box-shadow: none;
         }
       }
     }
@@ -74,7 +78,9 @@
     background: white;
     box-shadow: 0px 0px 7px 3px rgba(0, 0, 0, 0.1);
     border: 1px solid #b8b8b8;
-    min-width: pxToRem(150px);
+    min-width: pxToRem(180px);
+    max-height: pxToRem(250px);
+    overflow: auto;
     &--above {
       margin-bottom: pxToRem(10px);
     }
@@ -97,12 +103,15 @@
 
       .select2-results__option {
         padding: pxToRem(3px) pxToRem(10px);
+      }
+
+      [role="treeitem"] {
+        padding: pxToRem(3px) pxToRem(10px);
         cursor: pointer;
         &:hover {
           background: #40b6ff;
           color: white;
         }
-        &--highlighted,
         &[aria-selected="true"] {
           background: #40b6ff;
           color: white;
