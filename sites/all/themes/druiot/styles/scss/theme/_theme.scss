@@ -1070,3 +1070,69 @@ body {
     }
   }
 }
+
+#druio-projects-download-form {
+  border: 1px solid #ccc;
+  padding: pxToRem(10px);
+  border-radius: 2px;
+  box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.04);
+
+  .form-item-release-selector {
+    margin: 0;
+  }
+
+  .archives {
+    .title {
+      margin-top: pxToRem(7px);
+      @include fontSize(17px);
+      border-bottom: 1px solid rgb(232, 232, 232);
+      padding-bottom: pxToRem(5px);
+
+      &:before {
+        @extend .fa;
+        @extend .fa-cloud-download;
+        margin-right: pxToRem(5px);
+      }
+    }
+
+    .list {
+      @include susy-clearfix;
+      .item {
+        @include fontSize(12px);
+        display: block;
+        @include gallery(2 of 4);
+        color: $baseFontColor;
+
+        .item-label {
+          font-weight: bold;
+          @include fontSize(16px);
+        }
+
+        .label {
+          font-weight: bold;
+        }
+
+        .md5 {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+
+  .drush {
+    .title {
+      margin-top: pxToRem(7px);
+      @include fontSize(17px);
+      border-bottom: 1px solid rgb(232, 232, 232);
+      padding-bottom: pxToRem(5px);
+
+      &:before {
+        @extend .fa;
+        @extend .fa-terminal;
+        margin-right: pxToRem(5px);
+      }
+    }
+  }
+}

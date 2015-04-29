@@ -45,9 +45,8 @@
   }
 }
 
-
 .answer {
-  .answer__left{
+  .answer__left {
     @include span(1);
   }
   .answer__right {
@@ -64,7 +63,9 @@
   }
 }
 
-.view.project-page.page {
+.view.project-page.page,
+.view.project-page-node.page {
+  @include susy-clearfix;
   .project {
     @include gallery(3 of 9);
   }
@@ -91,5 +92,14 @@
   }
   .event__bottom {
     @include full;
+  }
+}
+
+.project.full {
+  .project__first {
+    @include span(5 of 10);
+  }
+  .project__second {
+    @include span(5 of 10 last);
   }
 }

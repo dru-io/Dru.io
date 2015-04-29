@@ -6,11 +6,6 @@
  */
 
 /**
- * Include DruioProjects class.
- */
-include __DIR__ . '/inc/DruioProjects.inc';
-
-/**
  * Implements hook_menu().
  */
 function druio_projects_menu() {
@@ -27,6 +22,117 @@ function druio_projects_menu() {
   );
 
   return $items;
+}
+
+/**
+ * Implements hook_ds_fields_info().
+ */
+function druio_projects_ds_fields_info($entity_type) {
+  // Entity: Node
+  if ($entity_type == 'node') {
+    $fields['projects_downloads'] = array(
+      'title' => 'Project: Downloads',
+      'ui_limit' => array('project|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_projects_downloads',
+    );
+
+    return array($entity_type => $fields);
+  }
+  return;
+}
+
+/**
+ * Project downloads field.
+ * @param $field
+ */
+function druio_projects_downloads($field) {
+  $entity = $field['entity'];
+
+  $release_values = field_get_items('node', $entity, 'field_project_releases');
+  $releases = (array) json_decode($release_values[0]['value']);
+  krsort($releases);
+
+  $download_form = drupal_get_form('druio_projects_download_form', $releases, $entity);
+
+  return drupal_render($download_form);
+}
+
+/**
+ * Download form for project.
+ * @param $releases
+ * @return mixed
+ */
+function druio_projects_download_form($form, &$form_state, $releases, $entity) {
+  $release_selector_options = array();
+  $release_selector_data = array();
+  $release_info_markup = '';
+
+  foreach ($releases as $major_version => $minor_releases) {
+    foreach ((array) $minor_releases as $minor_version => $release_info) {
+      $release_selector_options[$major_version][$minor_version] = $minor_version;
+      $release_selector_data[$major_version][$minor_version] = $release_info;
+    }
+  }
+
+  $form['release_selector'] = array(
+    '#type' => 'select',
+    '#title' => 'Выбор версии для загрузки',
+    '#options' => $release_selector_options,
+    '#default_value' => '',
+    '#ajax' => array(
+      'callback' => 'druio_projects_download_form_ajax_info',
+      'wrapper' => 'druio-projects-download-info',
+    ),
+  );
+
+  // If user select version, we show release information.
+  if (!empty($form_state['values']['release_selector'])) {
+    $major_version_pattern = "/^(.\\.x)/";
+    preg_match($major_version_pattern, $form_state['values']['release_selector'], $matches);
+    if (!empty($matches[0])) {
+      $major_version_selected = $matches[0];
+      $release_info_markup = theme('druio_projects_downloads_release', array(
+          'release_info' => (array) $release_selector_data[$major_version_selected][$form_state['values']['release_selector']],
+          'entity' => $entity,
+        )
+      );
+    }
+  }
+
+  $form['release_info'] = array(
+    '#markup' => $release_info_markup,
+    '#prefix' => '<div id="druio-projects-download-info">',
+    '#suffix' => '</div>',
+  );
+
+  return $form;
+}
+
+/**
+ * Ajax release info update.
+ * @param $form
+ * @param $form_state
+ * @return mixed
+ */
+function druio_projects_download_form_ajax_info($form, $form_state) {
+  return $form['release_info'];
+}
+
+/**
+ * Implements hook_theme().
+ */
+function druio_projects_theme() {
+  // Tracker icon in header.
+  $theme['druio_projects_downloads_release'] = array(
+    'template' => 'theme/druio-projects-downloads-release',
+    'variables' => array(
+      'release_info' => NULL,
+      'entity' => NULL,
+    ),
+  );
+
+  return $theme;
 }
 
 /**
