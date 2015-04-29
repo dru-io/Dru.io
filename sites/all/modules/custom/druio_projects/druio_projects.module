@@ -1,0 +1,102 @@
+<?php
+
+/**
+ * @file
+ * Module for projects.
+ */
+
+/**
+ * Include DruioProjects class.
+ */
+include __DIR__ . '/inc/DruioProjects.inc';
+
+/**
+ * Implements hook_menu().
+ */
+function druio_projects_menu() {
+  $items = array();
+
+  $items['druio/project/ajax-add'] = array(
+    'page callback' => 'druio_projects_ajax_add',
+    'access callback' => TRUE,
+  );
+
+  $items['druio/project/update'] = array(
+    'page callback' => 'druio_projects_update',
+    'access callback' => TRUE,
+  );
+
+  return $items;
+}
+
+/**
+ * Add project via ajax.
+ */
+function druio_projects_ajax_add() {
+  $result = FALSE;
+
+  if (!empty($_POST['project'])) {
+    $post = strtolower($_POST['project']);
+    $project = new DruioProjects();
+
+    if (filter_var($post, FILTER_VALIDATE_URL)) {
+      $project_name = $project->parseProjectNameFromUrl($post);
+    }
+    else {
+      $project_name = $post;
+    }
+
+    $add_result = $project->addProject($project_name);
+
+    switch ($add_result) {
+      case 1:
+        $result = 'Проект успешно добавлен в базу.';
+        break;
+      case 2:
+        $result = 'Drupal.org не отвечает, пропустите добавление, или попробуйте позже';
+        break;
+      case 3:
+        $result = 'Проект уже имеется в нашей базе. ;)';
+        break;
+    }
+  }
+
+  drupal_json_output($result);
+  drupal_exit();
+}
+
+/**
+ * Update project.
+ */
+function druio_projects_update() {
+  $result = FALSE;
+
+  if (!empty($_POST['project'])) {
+    $post = strtolower($_POST['project']);
+    $project = new DruioProjects();
+
+    if (filter_var($post, FILTER_VALIDATE_URL)) {
+      $project_name = $project->parseProjectNameFromUrl($post);
+    }
+    else {
+      $project_name = $post;
+    }
+
+    $add_result = $project->updateProject($project_name);
+
+    switch ($add_result) {
+      case 1:
+        $result = 'Проект успешно добавлен в базу.';
+        break;
+      case 2:
+        $result = 'Drupal.org не отвечает.';
+        break;
+      case 3:
+        $result = 'Проект обновлен.';
+        break;
+    }
+  }
+
+  drupal_json_output($result);
+  drupal_exit();
+}
