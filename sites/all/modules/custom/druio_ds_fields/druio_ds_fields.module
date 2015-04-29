@@ -219,7 +219,9 @@ function druio_ds_fields_question_answer($field) {
       if (drupal_valid_path('node/add/answer')) {
         module_load_include('inc', 'node', 'node.pages');
         $form = node_add('answer');
-        $html .= '<div class="author-answer-form-info">!author_answer</div>';
+        if ($user->uid == $entity->uid) {
+          $html .= '<div class="author-answer-form-info">!author_answer</div>';
+        }
         $html .= drupal_render($form);
       }
     }
