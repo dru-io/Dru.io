@@ -149,8 +149,9 @@ function druio_ds_fields_best_answer($field) {
   global $user;
 
   $field_answer_question_reference = field_get_items('node', $field['entity'], 'field_answer_question_reference');
+  $question = node_load($field_answer_question_reference[0]['target_id']);
 
-  if ($user->uid == $field_answer_question_reference[0]['target_id']) {
+  if ($user->uid == $question->uid) {
     return flag_create_link('best_answer', $field['entity']->nid);
   }
   else {
