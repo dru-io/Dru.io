@@ -37,7 +37,7 @@ function druio_livetodev_menu() {
     'access arguments' => array('administer druio_livetodev'),
     'page callback' => 'drupal_get_form',
     'page arguments' => array('druio_livetodev_settings'),
-    'title' => 'Live to development settings',
+    'title' => 'Live to development',
   );
 
   return $items;
@@ -49,7 +49,7 @@ function druio_livetodev_menu() {
 function druio_livetodev_settings() {
   $form['actions']['delete'] = array(
     '#type' => 'submit',
-    '#value' => 'Force create crubbed database dump',
+    '#value' => 'Create scrubbed database dump',
     '#weight' => 15,
     '#submit' => array('druio_livetodev_create_opensoruce_database'),
   );
@@ -68,37 +68,28 @@ function druio_livetodev_create_opensoruce_database() {
     // We continue only if settings.php contains data for scrubbing database.
     if ($scrub) {
       // Clear caches. We MUST do it before doing anything with two tables.
-      $core = array(
-        'cache',
-        'cache_path',
-        'cache_filter',
-        'cache_bootstrap',
-        'cache_page'
-      );
-      $cache_tables = array_merge(module_invoke_all('flush_caches'), $core);
-      foreach ($cache_tables as $table) {
-        cache_clear_all('*', $table, TRUE);
-      }
+      drupal_flush_all_caches();
 
       // Create dump of production db.
-      $production_dump = text_format(
-        '@path/@filename.@extension',
+      $production_dump = format_string(
+        '@path/@filename@extension',
         array(
           '@path' => drupal_realpath('public://'),
           '@filename' => 'dump-' . time(),
           '@extension' => '.tar.gz',
         )
       );
+
       _druio_livetodev_mysql_dump('default', $production_dump);
       // Import dump to scrubbing db.
-      /*_druio_livetodev_mysql_import('scrubbing', $production_dump);
+      _druio_livetodev_mysql_import('scrubbing', $production_dump);
       // Remove file after import.
       file_unmanaged_delete($production_dump);
       // Scrubbing data.
       _druio_livetodev_scrub_data();
       // Dump scrubbed database.
-      $scrubbed_dump = text_format(
-        '@path/@filename.@extension',
+      $scrubbed_dump = format_string(
+        '@path/@filename@extension',
         array(
           '@path' => drupal_realpath('public://'),
           '@filename' => 'database',
@@ -190,17 +181,14 @@ function _druio_livetodev_scrub_data() {
   db_query("UPDATE users SET picture = 0;");
 
   // Disable modules for dev: hybridauth, mandrill.
-  db_query("DELETE FROM system WHERE name IN ('hybridauth', 'mandrill_template', 'mandrill_reports', 'mandrill');");
+  module_disable(array(
+    'hybridauth',
+    'mandrill',
+  ));
 
   // Clean after HybridAuth.
   db_query("DELETE FROM hybridauth_session;");
-  db_query("UPDATE variable SET value='s:4:\"fake\";' WHERE name='hybridauth_provider_Facebook_keys_id';");
-  db_query("UPDATE variable SET value='s:4:\"fake\";' WHERE name='hybridauth_provider_Facebook_keys_secret';");
-  db_query("UPDATE variable SET value='s:4:\"fake\";' WHERE name='hybridauth_provider_Google_keys_id';");
-  db_query("UPDATE variable SET value='s:4:\"fake\";' WHERE name='hybridauth_provider_Google_keys_secret';");
-  db_query("UPDATE variable SET value='s:4:\"fake\";' WHERE name='hybridauth_provider_Google_keys_secret';");
-  db_query("UPDATE variable SET value='s:4:\"fake\";' WHERE name='hybridauth_provider_Twitter_keys_key';");
-  db_query("UPDATE variable SET value='s:4:\"fake\";' WHERE name='hybridauth_provider_Twitter_keys_secret';");
+  db_query("UPDATE variable SET value='s:4:\"fake\";' WHERE name LIKE 'hybridauth_%%';");
 
   // Remove mandrill API key.
   db_query("UPDATE variable SET value='s:4:\"fake\";' WHERE name='mandrill_api_key';");
@@ -210,9 +198,6 @@ function _druio_livetodev_scrub_data() {
 
   // Remove sessions.
   db_query("TRUNCATE sessions;");
-
-  // Remove watchdog.
-  db_query("TRUNCATE watchdog;");
 
   // Remove history.
   db_query("TRUNCATE history;");
