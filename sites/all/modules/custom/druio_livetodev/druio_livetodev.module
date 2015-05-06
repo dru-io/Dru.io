@@ -76,7 +76,7 @@ function druio_livetodev_create_opensoruce_database() {
         array(
           '@path' => drupal_realpath('public://'),
           '@filename' => 'dump-' . time(),
-          '@extension' => '.tar.gz',
+          '@extension' => '.sql.gz',
         )
       );
 
@@ -93,7 +93,7 @@ function druio_livetodev_create_opensoruce_database() {
         array(
           '@path' => drupal_realpath('public://'),
           '@filename' => 'database',
-          '@extension' => '.tar.gz',
+          '@extension' => '.sql.gz',
         )
       );
       _druio_livetodev_mysql_dump('scrubbing', $scrubbed_dump);
