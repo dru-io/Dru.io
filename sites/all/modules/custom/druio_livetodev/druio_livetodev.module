@@ -170,6 +170,10 @@ function _druio_livetodev_scrub_data() {
   $database = Database::getConnectionInfo('scrubbing');
   db_set_active('scrubbing');
 
+  // Drupal flush all caches not clear this table, but it's huge and have
+  // to much old unused data.
+  db_query("DELETE FROM {cache_form} WHERE expire < now();");
+
   // Scrub all e-mail addresses.
   db_query("UPDATE users SET mail=CONCAT('user', uid, '@example.com') WHERE uid > 0;");
   db_query("UPDATE users SET init=CONCAT('user', uid, '@example.com') WHERE uid > 0;");
