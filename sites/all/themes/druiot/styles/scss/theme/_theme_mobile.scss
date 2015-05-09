@@ -1,0 +1,34 @@
+@include breakpoint(max-width $phone) {
+
+  /* Hide elements */
+
+  body {
+    background: #fff;
+  }
+
+  #main,
+  #frontpage-top .left,
+  #frontpage-top .right {
+    padding: 1rem;
+  }
+
+  #frontpage-top,
+  #site-search,
+  #header-links,
+  #block-views-question-nodes-last-questions,
+  #admin-menu,
+  .header__content {
+    display: none;
+  }
+
+  .header__logo {
+    a {
+      text-align: center;
+      img {
+        display: inline;
+      }
+    }
+  }
+
+
+}

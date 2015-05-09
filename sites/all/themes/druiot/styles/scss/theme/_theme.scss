@@ -22,35 +22,9 @@ body {
 .header__logo {
   height: 6.875rem;
   background: #fff;
-  @include span(2 no-gutters);
 
   a {
     display: block;
-  }
-}
-
-.header__content {
-  @include span(10 last wide);
-  .header__firstline {
-    #site-search {
-      @include span(3);
-    }
-    #header-links {
-      @include span(4 nest);
-      .header__tracker,
-      .header__github {
-        @include span(2 of 4);
-      }
-      .header__github {
-        @include last;
-      }
-    }
-    #header-profile {
-      @include span(3 last);
-    }
-  }
-  #navigation {
-    @include span(10);
   }
 }
 
@@ -865,15 +839,11 @@ body {
 
 #frontpage-top {
   position: relative;
-  width: $siteWidth;
-  left: -2.5rem;
-  top: -2rem;
   background: #fff url('http://drupal.com/themes/drupalcom/images/parallax/homepage-header/full-screen.jpg') no-repeat;
   background-size: cover;
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
 
   .left {
-    @include span(6);
     padding: 2rem 2.5rem;
 
     .welcome {

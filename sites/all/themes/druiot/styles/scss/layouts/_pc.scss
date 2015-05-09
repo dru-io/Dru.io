@@ -1,105 +1,146 @@
 
-#main,
-#frontpage-top,
-.header__wrapper,
-#footer {
-  @include container($siteWidth);
-  min-width: 65rem;
-}
+@include breakpoint($phone) {
+  #main,
+  #frontpage-top,
+  .header__wrapper,
+  #footer {
+    @include container($siteWidth);
+    min-width: 65rem;
+  }
 
-#frontpage-latest {
-  @include susy-clearfix;
-  .view {
-    @include span(6);
+  #frontpage-latest {
+    @include susy-clearfix;
+    .view {
+      @include span(6);
 
-    &:nth-child(2n) {
-      @include last;
+      &:nth-child(2n) {
+        @include last;
+      }
     }
   }
-}
 
-#content {
-  @include span(9);
-}
-
-#sidebar-right {
-  @include span(3 last);
-}
-
-.question {
-  .question__left {
-    @include span(1);
+  .header__logo {
+    @include span(2 no-gutters);
   }
-  .question__right {
-    @include span(11 last);
+
+  .header__content {
+    @include span(10 last wide);
+    .header__firstline {
+      #site-search {
+        @include span(3);
+      }
+      #header-links {
+        @include span(4 nest);
+        .header__tracker,
+        .header__github {
+          @include span(2 of 4);
+        }
+        .header__github {
+          @include last;
+        }
+      }
+      #header-profile {
+        @include span(3 last);
+      }
+    }
+    #navigation {
+      @include span(10);
+    }
   }
-  &.teaser {
-    .question__bottom {
+
+  #content {
+    @include span(9);
+  }
+
+  #frontpage-top {
+    position: relative;
+    width: $siteWidth;
+    left: -2.5rem;
+    top: -2rem;
+    .left {
+      @include span(6);
+    }
+  }
+
+  #sidebar-right {
+    @include span(3 last);
+  }
+
+  .question {
+    .question__left {
+      @include span(1);
+    }
+    .question__right {
+      @include span(11 last);
+    }
+    &.teaser {
+      .question__bottom {
+        @include span(11 last);
+      }
+    }
+    &.full {
+      .question__bottom {
+        @include full();
+      }
+    }
+  }
+
+  .answer {
+    .answer__left {
+      @include span(1);
+    }
+    .answer__right {
       @include span(11 last);
     }
   }
-  &.full {
-    .question__bottom {
-      @include full();
+
+  .comment-light {
+    .comment__left {
+      @include span(1);
+    }
+    .comment__right {
+      @include span(11 last);
     }
   }
-}
 
-.answer {
-  .answer__left {
-    @include span(1);
+  .view.project-page.page,
+  .view.project-page-node.page {
+    @include susy-clearfix;
+    .project {
+      @include gallery(3 of 9);
+    }
   }
-  .answer__right {
-    @include span(11 last);
-  }
-}
 
-.comment-light {
-  .comment__left {
-    @include span(1);
+  .events {
+    .event__item {
+      @include full;
+    }
+    .event__left {
+      @include span(3 of 9);
+    }
+    .event__right {
+      @include span(6 of 9 last);
+    }
   }
-  .comment__right {
-    @include span(11 last);
-  }
-}
 
-.view.project-page.page,
-.view.project-page-node.page {
-  @include susy-clearfix;
-  .project {
-    @include gallery(3 of 9);
+  .event {
+    .event__left {
+      @include span(3);
+    }
+    .event__right {
+      @include span(9 last);
+    }
+    .event__bottom {
+      @include full;
+    }
   }
-}
 
-.events {
-  .event__item {
-    @include full;
-  }
-  .event__left {
-    @include span(3 of 9);
-  }
-  .event__right {
-    @include span(6 of 9 last);
-  }
-}
-
-.event {
-  .event__left {
-    @include span(3);
-  }
-  .event__right {
-    @include span(9 last);
-  }
-  .event__bottom {
-    @include full;
-  }
-}
-
-.project.full {
-  .project__first {
-    @include span(5 of 10);
-  }
-  .project__second {
-    @include span(5 of 10 last);
+  .project.full {
+    .project__first {
+      @include span(5 of 10);
+    }
+    .project__second {
+      @include span(5 of 10 last);
+    }
   }
 }
