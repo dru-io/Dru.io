@@ -7,4 +7,5 @@ sites/*/files
 sites/*/private
 **/.sass-cache
 **/*.log
+error_log
 **/node-modules
