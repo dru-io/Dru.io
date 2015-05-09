@@ -54,7 +54,8 @@ class DruioProjects {
 
     curl_setopt_array($ch, $options);
     $data = curl_exec($ch);
-    $status = curl_getinfo($ch)['http_code'];
+    $status = curl_getinfo($ch);
+    $status = $status['http_code'];
 
     // If status Ok.
     if ($status == 200) {
