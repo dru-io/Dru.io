@@ -243,9 +243,13 @@ function hybridauth_update_7004(&$sandbox) {
   // Calculate the total number of users.
   if (!isset($sandbox['total'])) {
     $sandbox['total'] = db_select('users', 'u')
+      ->condition('data', '%' . db_like('pass') . '%', 'LIKE')
       ->countQuery()
       ->execute()
       ->fetchField();
+    if (!$sandbox['total']) {
+      return t('There are no user accounts to process.');
+    }
     $sandbox['current'] = 0;
   }
 
@@ -255,6 +259,7 @@ function hybridauth_update_7004(&$sandbox) {
   // Get users' ids for one pass.
   $result = db_select('users', 'u')
     ->fields('u', array('uid'))
+    ->condition('data', '%' . db_like('pass') . '%', 'LIKE')
     ->orderBy('u.uid')
     ->range($sandbox['current'], $users_per_pass)
     ->execute();
@@ -280,12 +285,19 @@ function hybridauth_update_7004(&$sandbox) {
 }
 
 /**
- * Remove users passwords stored in plaintext from hybridauth_identity DB table.
+ * Failed update, moved to hybridauth_update_7006().
  */
 function hybridauth_update_7005(&$sandbox) {
+}
+
+/**
+ * Remove users passwords stored in plaintext from hybridauth_identity DB table.
+ */
+function hybridauth_update_7006(&$sandbox) {
   // Calculate the total number of HybridAuth identities.
   if (!isset($sandbox['total'])) {
     $sandbox['total'] = db_select('hybridauth_identity', 'ha_id')
+      ->condition('data', '%' . db_like('pass') . '%', 'LIKE')
       ->countQuery()
       ->execute()
       ->fetchField();
@@ -301,6 +313,7 @@ function hybridauth_update_7005(&$sandbox) {
   // Get HybridAuth identities ids for one pass.
   $result = db_select('hybridauth_identity', 'ha_id')
     ->fields('ha_id', array('id'))
+    ->condition('data', '%' . db_like('pass') . '%', 'LIKE')
     ->orderBy('ha_id.id')
     ->range($sandbox['current'], $identities_per_pass)
     ->execute();
@@ -311,7 +324,7 @@ function hybridauth_update_7005(&$sandbox) {
     $data = unserialize($identity['data']);
     if (isset($data['pass'])) {
       unset($data['pass']);
-      _hybridauth_identity_save($data, $identity->uid);
+      _hybridauth_identity_save($data, $identity['uid']);
     }
     $sandbox['current']++;
   }
