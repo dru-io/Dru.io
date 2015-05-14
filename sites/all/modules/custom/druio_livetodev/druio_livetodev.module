@@ -192,6 +192,7 @@ function _druio_livetodev_scrub_data() {
 
   // Clean after HybridAuth.
   db_query("DELETE FROM hybridauth_session;");
+  db_query("DELETE FROM hybridauth_identity;");
   db_query("UPDATE variable SET value='s:4:\"fake\";' WHERE name LIKE 'hybridauth_%%';");
 
   // Remove mandrill API key.
@@ -199,6 +200,7 @@ function _druio_livetodev_scrub_data() {
 
   // Remove all caches.
   drupal_flush_all_caches();
+  db_query("TRUNCATE cache_form;");
 
   // Remove sessions.
   db_query("TRUNCATE sessions;");
@@ -208,6 +210,12 @@ function _druio_livetodev_scrub_data() {
 
   // Remove flood.
   db_query("TRUNCATE flood;");
+
+  // Remove CAPTCHA data.
+  db_query("TRUNCATE captcha_sessions;");
+
+  // Remove xmlsitemap data.
+  db_query("TRUNCATE xmlsitemap;");
 
   // Remove Solr server data.
   db_query("UPDATE search_api_index SET server=NULL WHERE id='2';");
