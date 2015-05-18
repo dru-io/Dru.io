@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Install/uninstall module info.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function druio_livetodev_uninstall() {
+  variable_del('druio_livetodev_*');
+}

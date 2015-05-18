@@ -1,0 +1,260 @@
+<?php
+
+/**
+ * @file
+ * Code for prepare project to public download.
+ * @TODO
+ * - Replace views enabling/disabling for Search API pages with adding search
+ *   api database module and server.
+ */
+
+/**
+ * Implements hook_permission().
+ * @return array
+ */
+function druio_livetodev_permission() {
+  return array(
+    'administer druio_livetodev' => array(
+      'title' => 'Access to Dru.io - Live to Dev settings',
+    ),
+  );
+}
+
+/**
+ * Implements hook_menu().
+ */
+function druio_livetodev_menu() {
+  $items['admin/config/druio'] = array(
+    'title' => 'Dru.io',
+    'weight' => -50,
+    'page callback' => 'system_admin_menu_block_page',
+    'access arguments' => array('access administration pages'),
+    'file' => 'system.admin.inc',
+    'file path' => drupal_get_path('module', 'system'),
+    'position' => 'right',
+  );
+
+  $items['admin/config/druio/livetodev'] = array(
+    'access arguments' => array('administer druio_livetodev'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('druio_livetodev_settings'),
+    'title' => 'Live to development',
+  );
+
+  return $items;
+}
+
+/**
+ * Settings form for module.
+ */
+function druio_livetodev_settings() {
+  $form['actions']['delete'] = array(
+    '#type' => 'submit',
+    '#value' => 'Create scrubbed database dump',
+    '#weight' => 15,
+    '#submit' => array('druio_livetodev_create_opensoruce_database'),
+  );
+
+  return $form;
+}
+
+/**
+ * Created scrubbed dump of current live database.
+ */
+function druio_livetodev_create_opensoruce_database() {
+  // This code require safe_mode = Off in php.ini.
+  if (!ini_get('safe_mode')) {
+    $scrub = Database::getConnectionInfo('scrubbing');
+
+    // We continue only if settings.php contains data for scrubbing database.
+    if ($scrub) {
+      // Clear caches. We MUST do it before doing anything with two tables.
+      drupal_flush_all_caches();
+
+      // Create dump of production db.
+      $production_dump = format_string(
+        '@path/@filename@extension',
+        array(
+          '@path' => drupal_realpath('public://'),
+          '@filename' => 'dump-' . time(),
+          '@extension' => '.sql.gz',
+        )
+      );
+
+      _druio_livetodev_mysql_dump('default', $production_dump);
+      // Import dump to scrubbing db.
+      _druio_livetodev_mysql_import('scrubbing', $production_dump);
+      // Remove file after import.
+      file_unmanaged_delete($production_dump);
+      // Scrubbing data.
+      _druio_livetodev_scrub_data();
+      // Dump scrubbed database.
+      $scrubbed_dump = format_string(
+        '@path/@filename@extension',
+        array(
+          '@path' => drupal_realpath('public://'),
+          '@filename' => 'database',
+          '@extension' => '.sql.gz',
+        )
+      );
+      _druio_livetodev_mysql_dump('scrubbing', $scrubbed_dump);
+    }
+    else {
+      drupal_set_message('You must set scrubbing database connection to your settings.php to perform this operation.', 'error');
+    }
+  }
+  else {
+    drupal_set_message('Sorry, but this feature works only with php configuration with <strong>safe_mode = Off</strong>.', 'warning');
+  }
+}
+
+/**
+ * Create mysql dump.
+ * @param $connection_name
+ * @param $filepath : path where dump will save.
+ * @return \shell command exit code. 0 - all fine.
+ */
+function _druio_livetodev_mysql_dump($connection_name, $filepath) {
+  $database = Database::getConnectionInfo($connection_name);
+  db_set_active($connection_name);
+
+  $cmd = format_string(
+    'mysqldump -u @username -p@password @database | gzip > @dumpname',
+    array(
+      '@username' => $database['default']['username'],
+      '@password' => $database['default']['password'],
+      '@database' => $database['default']['database'],
+      '@dumpname' => $filepath,
+    )
+  );
+  exec($cmd, $output, $result);
+  db_set_active();
+  return $result;
+}
+
+/**
+ * Import dump to database.
+ * @param $connection_name
+ * @param $filepath
+ */
+function _druio_livetodev_mysql_import($connection_name, $filepath) {
+  $database = Database::getConnectionInfo($connection_name);
+  db_set_active($connection_name);
+
+  // Checkout, is database has tables.
+  $tables = db_query('SHOW TABLES')->fetchCol();
+  // Clear tables if they exist.
+  if (!empty($tables)) {
+    foreach ($tables as $table) {
+      db_drop_table($table);
+    }
+  }
+
+  $cmd = format_string(
+    'gunzip -c @dumpname | mysql -u @username -p@password @database',
+    array(
+      '@username' => $database['default']['username'],
+      '@password' => $database['default']['password'],
+      '@database' => $database['default']['database'],
+      '@dumpname' => $filepath,
+    )
+  );
+  exec($cmd, $output, $result);
+  db_set_active();
+  return $result;
+}
+
+/**
+ * Scrubbing important data.
+ */
+function _druio_livetodev_scrub_data() {
+  $database = Database::getConnectionInfo('scrubbing');
+  db_set_active('scrubbing');
+
+  // Drupal flush all caches not clear this table, but it's huge and have
+  // to much old unused data.
+  db_query("DELETE FROM {cache_form} WHERE expire < now();");
+
+  // Scrub all e-mail addresses.
+  db_query("UPDATE users SET mail=CONCAT('user', uid, '@example.com') WHERE uid > 0;");
+  db_query("UPDATE users SET init=CONCAT('user', uid, '@example.com') WHERE uid > 0;");
+
+  // Destroy passwords.
+  db_query("UPDATE users SET pass = 'use drush user-login';");
+
+  // Set for all users default avatar.
+  db_query("UPDATE users SET picture = 0;");
+
+  // Disable modules for dev: hybridauth, mandrill.
+  module_disable(array(
+    'hybridauth',
+    'mandrill',
+  ));
+
+  // Clean after HybridAuth.
+  db_query("DELETE FROM hybridauth_session;");
+  db_query("DELETE FROM hybridauth_identity;");
+  db_query("UPDATE variable SET value='s:4:\"fake\";' WHERE name LIKE 'hybridauth_%%';");
+
+  // Remove mandrill API key.
+  db_query("UPDATE variable SET value='s:4:\"fake\";' WHERE name='mandrill_api_key';");
+
+  // Remove all caches.
+  drupal_flush_all_caches();
+  db_query("TRUNCATE cache_form;");
+
+  // Remove sessions.
+  db_query("TRUNCATE sessions;");
+
+  // Remove history.
+  db_query("TRUNCATE history;");
+
+  // Remove flood.
+  db_query("TRUNCATE flood;");
+
+  // Remove CAPTCHA data.
+  db_query("TRUNCATE captcha_sessions;");
+
+  // Remove xmlsitemap data.
+  db_query("TRUNCATE xmlsitemap;");
+
+  // Remove Solr server data.
+  db_query("UPDATE search_api_index SET server=NULL WHERE id='2';");
+  db_query("DELETE FROM search_api_server WHERE id='6';");
+
+  // Disable views for Search API and enable fallback just for nodes.
+  $views_to_disable = array(
+    'questions_page',
+    'project_page',
+    'posts_page',
+  );
+
+  // Get currently disabled views.
+  $views_status = variable_get('views_defaults', array());
+
+  // Disable views from array.
+  foreach ($views_to_disable as $key => $viewname) {
+    $views_status[$viewname] = TRUE;
+  }
+
+  // Enable views list.
+  $views_to_enable = array(
+    'question_pages_nodes',
+    'posts_page_node',
+    'project_page_node',
+  );
+
+  // Enable them, just remove from disabled.
+  foreach ($views_to_enable as $key => $viewname) {
+    unset($views_status[$viewname]);
+  }
+  
+  variable_set('views_defaults', $views_status);
+
+  // Empty cache for views.
+  if (function_exists('views_invalidate_cache')) {
+    views_invalidate_cache();
+  }
+
+  db_set_active();
+}
