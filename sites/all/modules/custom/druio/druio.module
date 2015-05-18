@@ -178,7 +178,7 @@ function druio_is_user_answered_to_question($qid, $uid) {
     $query->countQuery();
     $count = $query->execute()->fetchField();
 
-    $count ? $result = TRUE : $result = FALSE;
+    $result = (bool) $count;
   }
 
   return $result;
