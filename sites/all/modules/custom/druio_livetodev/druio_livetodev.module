@@ -4,7 +4,8 @@
  * @file
  * Code for prepare project to public download.
  * @TODO
- * - Write classes for dump/import without exec() command.
+ * - Replace views enabling/disabling for Search API pages with adding search
+ *   api database module and server.
  */
 
 /**
@@ -220,6 +221,40 @@ function _druio_livetodev_scrub_data() {
   // Remove Solr server data.
   db_query("UPDATE search_api_index SET server=NULL WHERE id='2';");
   db_query("DELETE FROM search_api_server WHERE id='6';");
+
+  // Disable views for Search API and enable fallback just for nodes.
+  $views_to_disable = array(
+    'questions_page',
+    'project_page',
+    'posts_page',
+  );
+
+  // Get currently disabled views.
+  $views_status = variable_get('views_defaults', array());
+
+  // Disable views from array.
+  foreach ($views_to_disable as $key => $viewname) {
+    $views_status[$viewname] = TRUE;
+  }
+
+  // Enable views list.
+  $views_to_enable = array(
+    'question_pages_nodes',
+    'posts_page_node',
+    'project_page_node',
+  );
+
+  // Enable them, just remove from disabled.
+  foreach ($views_to_enable as $key => $viewname) {
+    unset($views_status[$viewname]);
+  }
+  
+  variable_set('views_defaults', $views_status);
+
+  // Empty cache for views.
+  if (function_exists('views_invalidate_cache')) {
+    views_invalidate_cache();
+  }
 
   db_set_active();
 }
