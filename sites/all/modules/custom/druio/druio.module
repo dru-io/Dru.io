@@ -8,7 +8,8 @@
 /**
  * Tracking messages config
  */
-include __DIR__ . '/druio_messages.inc';
+
+module_load_include('inc', 'druio', 'includes/druio.messages');
 
 /**
  * Implements hook_flag_flag().
@@ -42,26 +43,20 @@ function druio_flag_flag($flag, $entity_id, $account, $flagging) {
 function druio_form_alter(&$form, &$form_state, $form_id) {
 
   // Disable formatting tips for comments.
-  if (
-    $form_id == 'comment_node_question_form' ||
-    $form_id == 'comment_node_post_form'
-  ) {
+  if (in_array($form_id, array('comment_node_question_form', 'comment_node_post_form'))) {
     $form['comment_body']['#after_build'][] = 'druio_form_remove_formatting_tips';
   }
 
   // Disable formatting tips for nodes.
-  if (
-    $form_id == 'question_node_form' ||
-    $form_id == 'post_node_form' ||
-    $form_id == 'answer_node_form'
-  ) {
+  if (in_array($form_id, array('question_node_form', 'post_node_form', 'answer_node_form'))) {
     $form['body']['#after_build'][] = 'druio_form_remove_formatting_tips';
   }
 
   // Add default project reference to question.
   if ($form_id == 'question_node_form') {
-    if (!empty($_GET['project'])) {
-      $entity_node = node_load($_GET['project']);
+    if (is_numeric($_GET['project'])) {
+      $project_nid = $_GET['project'];
+      $entity_node = node_load($project_nid);
       if ($entity_node) {
         $form['field_project_reference'][LANGUAGE_NONE]['#default_value'] = $entity_node->title . ' (' . $entity_node->nid . ')';
       }
@@ -72,23 +67,22 @@ function druio_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'answer_node_form') {
     if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'answer') {
       drupal_set_message('Ответы можно добавлять только к вопросам.', 'warning');
-      global $base_url;
-      drupal_goto($base_url . '/question');
+      drupal_goto('/question'); //@todo: редирект нужно делать раньше не в форме
     }
     // Make title not required and hide it.
     $form['title']['#required'] = FALSE;
-    $form['title']['#value'] = 'Ответ №' . arg(1);
     hide($form['title']);
+
+    $answer_nid = arg(1);
+    $form['title']['#value'] = "Ответ №{$answer_nid}"; //@todo: у ответа номером идет вопрос?
 
     // Hide field reference to question.
     hide($form['field_answer_question_reference']);
 
     // Set default reference to question when adding new answer.
-    if (!$form['field_answer_question_reference']['und'][0]['target_id']['#default_value']) {
-      $question = node_load(arg(1));
-
-      if ($question) {
-        $form['field_answer_question_reference'][LANGUAGE_NONE][0]['target_id']['#default_value'] = "$question->title ($question->nid)";
+    if (empty($form['field_answer_question_reference'][LANGUAGE_NONE][0]['target_id']['#default_value'])) {
+      if ($question = node_load($answer_nid)) {
+        $form['field_answer_question_reference'][LANGUAGE_NONE][0]['target_id']['#default_value'] = "{$question->title} ({$question->nid})";
       }
       //$form['field_answer_question_reference'][LANGUAGE_NONE]['#default_value'] = $question->nid;
     }
@@ -105,6 +99,7 @@ function druio_form_alter(&$form, &$form_state, $form_id) {
  */
 function druio_form_remove_formatting_tips(&$form) {
   $form[LANGUAGE_NONE][0]['format']['#access'] = FALSE;
+
   return $form;
 }
 
@@ -122,8 +117,9 @@ function druio_question_is_best_answer($nid) {
   $is_best_answer = FALSE;
   if (!empty($answers)) {
     foreach ($answers as $answer) {
-      if (flag_get_counts('node', $answer->entity_id)) {
+      if (flag_get_counts('node', $answer->entity_id)) { //@todo: переписать в запрос джойном с flag_counts
         $is_best_answer = TRUE;
+        break;
       }
     }
   }
@@ -163,25 +159,19 @@ function druio_is_user_answered_to_question($qid, $uid) {
   $answers = $query->execute()->fetchAllAssoc('entity_id');
 
   // If answers exists.
-  if ($answers) {
+  if (!empty($answers)) {
     // Prepare answer id's.
-    $aid = array();
-    foreach ($answers as $nid => $answer) {
-      $aid[] = $nid;
-    }
-
+    $aids = array_keys($answers);
     // Check whether the user is the author of at least one of the answers.
     $query = db_select('node', 'n');
     $query->fields('n');
     $query->condition('n.uid', $uid);
-    $query->condition('n.nid', $aid, 'IN');
+    $query->condition('n.nid', $aids, 'IN');
     $query->countQuery();
-    $count = $query->execute()->fetchField();
-
-    $count ? $result = TRUE : $result = FALSE;
+    $result = $query->execute()->fetchField();
   }
 
-  return $result;
+  return (bool) $result;
 }
 
 /**
@@ -203,7 +193,7 @@ function druio_block_view($delta = '') {
 
   switch ($delta) {
     case 'add_content_buttons':
-      $block['subject'] = NULL;
+      $block['subject'] = '';
       $block['content'] = array(
         '#theme' => 'add_content_buttons',
       );
