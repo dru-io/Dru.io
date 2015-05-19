@@ -220,17 +220,19 @@ function druio_projects_ajax_add() {
       $project_name = $post;
     }
 
-    $add_result = $project->addProject($project_name);
+    // Add project, if exist, update info.
+    $add_result = $project->addProject($project_name, TRUE);
 
     switch ($add_result) {
       case 1:
         $result = 'Проект успешно добавлен в базу.';
         break;
       case 2:
-        $result = 'Drupal.org не отвечает, пропустите добавление, или попробуйте позже';
+        $result = 'Drupal.org не отвечает, или вы указали несуществующий проект.';
         break;
       case 3:
-        $result = 'Проект уже имеется в нашей базе. ;)';
+      case 4:
+        $result = 'Проект уже имеется в нашей базе. Информация о модуле успешно обновлена.';
         break;
     }
   }
@@ -305,4 +307,26 @@ function _druio_projects_auto_projects($text, $filter) {
   }
 
   return $text;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter():question_node_form.
+ * Alter question node form and add button for project submision.
+ */
+function druio_projects_form_question_node_form_alter(&$form, &$form_state, $form_id) {
+  // Just make sure field is exist.
+  if (isset($form['field_project_reference'])) {
+    // Attach our js.
+    $path = drupal_get_path('module', 'druio_projects');
+    drupal_add_js($path . '/js/druio_projects.js');
+    // Add link to description.
+    $form['field_project_reference']['und']['#description'] .= format_string(
+      '<br /><@tag>@description !link</@tag>',
+      array(
+        '@tag' => 'div',
+        '@description' => 'Если нужный проект отстуствует, вы можете добавить его самостоятельно.',
+        '!link' => '<a href="#" id="add-project-button">Добавить проект в базу.</a>'
+      )
+    );
+  }
 }
