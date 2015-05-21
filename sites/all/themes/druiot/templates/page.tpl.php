@@ -11,7 +11,12 @@
     <section class="header__content">
       <div class="header__firstline">
         <?php print $header_search_form; ?>
-        <?php print $header_links; ?>
+        <div id="header-links">
+          <div class="header__tracker <?php print _druio_messages_status(); ?>" <?php print 'data-new-count="' . druio_tracker_count() . '">'; ?>
+          <a href="/tracker"><span>Трекер</span></a></div>
+        <a href="https://github.com/Niklan/Dru.io" class="header__github"
+           rel="nofollow" target="_blank"><span>Мы на GitHub</span></a>
+      </div>
         <?php print $header_profile; ?>
       </div>
 

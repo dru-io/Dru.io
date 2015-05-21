@@ -73,6 +73,10 @@ function druiot_preprocess_page(&$variables, $hook) {
       'class' => $content_classes_array,
     )
   );
+
+  //tracker
+  $variables['druiot_tracker']['count'] = druio_tracker_count($user->uid);
+  $variables['druiot_tracker']['status'] = _druio_messages_status($user->uid);
 }
 
 /**
@@ -82,11 +86,6 @@ function druiot_preprocess_page(&$variables, $hook) {
 function druiot_theme() {
   $theme = array();
   global $user;
-
-  // Tracker icon in header.
-  $theme['druiot_header_links'] = array(
-    'template' => 'templates/druiot-header-links',
-  );
 
   // Profile info for anonymous users.
   $theme['druiot_auth_anon'] = array(

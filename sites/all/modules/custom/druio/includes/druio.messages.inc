@@ -29,6 +29,7 @@ function druio_comment_insert($comment) {
       // prevent notify for own comments
       if ($user->uid != $node->author->uid->value()) {
         _druio_tracker_create($nid, $uid);
+        _druio_tracker_create($nid, $node->value()->uid);
       }
       break;
     case 'post':
@@ -76,10 +77,26 @@ function druio_tracker_count($uid = NULL) {
     ->countQuery()
     ->execute()
     ->fetchField();
-
   return $query;
 }
 
+function _druio_messages_status($uid = NULL) {
+  global $user;
+  if (!$uid) {
+    $uid = $user->uid;
+  }
+  $query = db_select('eck_track_message', 'e')
+    ->fields('e', array('uid'))
+    ->condition('e.uid', $uid)
+    ->countQuery()
+    ->execute()
+    ->fetchField();
+
+  if ($query) {
+    return 'new';
+  }
+  else return '';
+}
 
 /*
  * Add information for use entity property in views relationship.
