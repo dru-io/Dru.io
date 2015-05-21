@@ -1,0 +1,8 @@
+<?php
+
+/**
+ *
+ */
+function hello_world_init() {
+  drupal_set_message("Hello Dru.io");
+}
