@@ -50,10 +50,9 @@ function druio_projects_ds_fields_info($entity_type) {
       'field_type' => DS_FIELD_TYPE_FUNCTION,
       'function' => 'druio_projects_questions',
     );
-
-    return array($entity_type => $fields);
   }
-  return;
+
+  return array($entity_type => $fields);
 }
 
 /**
@@ -95,13 +94,10 @@ function druio_projects_drupalorg_link($field) {
  * @return mixed
  */
 function druio_projects_questions($field) {
-  $html = '<h2 class="title">@title</h2>';
+  $html = '<h2 class="title">Вопросы по проекту</h2>';
   $html .= views_embed_view('question_nodes', 'questions_in_project');
-  $data = array(
-    '@title' => 'Вопросы по проекту'
-  );
 
-  return format_string($html, $data);
+  return $html;
 }
 
 /**
