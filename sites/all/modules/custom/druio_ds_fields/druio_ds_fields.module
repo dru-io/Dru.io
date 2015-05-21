@@ -9,6 +9,8 @@
  * ui_limit field value.
  */
 
+define('DRUIO_NOAVATAR_PATH', '/sites/all/themes/druiot/images/noavatar.png');
+
 /**
  * Implements hook_ds_fields_info().
  */
@@ -79,8 +81,6 @@ function druio_ds_fields_ds_fields_info($entity_type) {
       'field_type' => DS_FIELD_TYPE_FUNCTION,
       'function' => 'druio_ds_fields_rate_vote_up_down',
     );
-
-    return array($entity_type => $fields);
   }
 
   // Entity: Comment
@@ -91,10 +91,9 @@ function druio_ds_fields_ds_fields_info($entity_type) {
       'field_type' => DS_FIELD_TYPE_FUNCTION,
       'function' => 'druio_ds_fields_comment_author_created',
     );
-
-    return array($entity_type => $fields);
   }
-  return;
+
+  return array($entity_type => $fields);
 }
 
 /**
@@ -147,32 +146,34 @@ function druio_ds_fields_comment_author_created($field) {
  */
 function druio_ds_fields_best_answer($field) {
   global $user;
+  $output = '';
 
   $field_answer_question_reference = field_get_items('node', $field['entity'], 'field_answer_question_reference');
   $question = node_load($field_answer_question_reference[0]['target_id']);
 
   if ($user->uid == $question->uid) {
-    return flag_create_link('best_answer', $field['entity']->nid);
+    $output = flag_create_link('best_answer', $field['entity']->nid);
   }
   else {
     $flag = flag_get_flag('best_answer');
     if ($flag->get_count($field['entity']->nid)) {
-      return '<div class="best-answer" title="Автор вопроса пометил данный ответ как \'Как лучший ответ\'"></div>';
+      $output = '<div class="best-answer" title="Автор вопроса пометил данный ответ как \'Как лучший ответ\'"></div>';
     }
   }
-  return;
+
+  return $output;
 }
 
 function druio_ds_fields_node_avatar_and_author($field) {
   $entity = $field['entity'];
   $author_avatar_fid = $entity->picture;
 
-  if ($author_avatar_fid > 0) {
+  if (!empty($author_avatar_fid)) {
     $avatar_file = file_load($author_avatar_fid);
     $avatar_url = image_style_url('avatar_thumb', $avatar_file->uri);
   }
   else {
-    $avatar_url = '/sites/all/themes/druiot/images/noavatar.png';
+    $avatar_url = DRUIO_NOAVATAR_PATH;
   }
 
   $html = '<a href="@node_author_url" class="@avatar_class"><img src="@node_author_avatar" alt="@node_author_name"></a>';
@@ -226,16 +227,18 @@ function druio_ds_fields_question_answer($field) {
         $html .= drupal_render($form);
       }
     }
+
+    $data = array(
+      '@answers_title_class' => 'answers__title',
+      '@answers_title' => 'Ответы',
+      '@user_responded' => 'Вы уже дали ответ на данный вопрос. Воспользуйтесь редактированием, если желаете дополнить свой ответ.',
+      '!author_answer' => '<strong>Обратите внимание!</strong> Вы являетесь автором вопроса. Данная форма может быть использована только если вы нашли решение самостоятельно и желаете поделиться им с остальными. Для этого напишите решение своего вопроса, а затем пометьте его как решение. При использовании "ответа" для дополнения своего вопроса воспользуйтесь комментарием или функцией редактирования вопроса, в противном случае, ваш ответ будет удалён.'
+    );
   }
 
-  $data = array(
-    '@answers_title_class' => 'answers__title',
-    '@answers_title' => 'Ответы',
-    '@user_responded' => 'Вы уже дали ответ на данный вопрос. Воспользуйтесь редактированием, если желаете дополнить свой ответ.',
-    '!author_answer' => '<strong>Обратите внимание!</strong> Вы являетесь автором вопроса. Данная форма может быть использована только если вы нашли решение самостоятельно и желаете поделиться им с остальными. Для этого напишите решение своего вопроса, а затем пометьте его как решение. При использовании "ответа" для дополнения своего вопроса воспользуйтесь комментарием или функцией редактирования вопроса, в противном случае, ваш ответ будет удалён.'
-  );
+  $result = !empty($html) ? format_string($html, $data) : '';
 
-  return format_string($html, $data);
+  return $result;
 }
 
 /**
