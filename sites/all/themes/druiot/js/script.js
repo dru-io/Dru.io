@@ -21,6 +21,12 @@
       $('select').select2({
         theme: 'druio' 
       });
+
+      $('#make-reply').click(function() {
+         $(this).hide();
+         $('form.node-answer-form').fadeIn();
+      });
+
     }
   };
 

@@ -370,11 +370,25 @@ body {
           margin-right: 0.5rem;
         }
       }
+
+      .links li a {
+        @extend .button--submit;
+        margin: 0.5rem 0 0.5rem;
+        font-size: 0.875rem;
+      }
     }
 
     .question__bottom {
       margin-top: 1rem;
       border-top: 1px solid $colorGallery;
+
+      .node-answer-form {
+        display: none;
+      }
+
+      #make-reply {
+        font-size: 1.2rem;
+      }
 
       .author-answer-form-info {
         @include fontSize(13px);
