@@ -223,6 +223,7 @@ function druio_ds_fields_question_answer($field) {
         if ($user->uid == $entity->uid) {
           $html .= '<div class="author-answer-form-info">!author_answer</div>';
         }
+        $html .= '<button type="button" id="make-reply" class="button--submit">Ответить на вопрос</button>';
         $html .= drupal_render($form);
       }
     }

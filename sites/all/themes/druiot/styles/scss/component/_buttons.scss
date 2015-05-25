@@ -80,6 +80,12 @@ input[type="submit"],
     transition: all 200ms;
   }
 
+  &:visited {
+    background: #5d9cdd;
+    color: #fff;
+
+  }
+
   &:disabled {
     background: #5d9cdd;
     border-color: #1c5187;
@@ -113,6 +119,11 @@ input[type="reset"],
     transition: all 200ms;
   }
 
+  &:visited {
+    background: #f2ca59;
+    color: #fff;
+  }
+
   &:disabled {
     background: #f2ca59;
     border-color: #b28a08;
@@ -143,6 +154,11 @@ input[type="reset"],
   &:active {
     background: #e34a4d;
     transition: all 200ms;
+  }
+
+  &:visited {
+    background: #e34a4d;
+    color: #fff;
   }
 
   &:disabled {
