@@ -370,12 +370,6 @@ body {
           margin-right: 0.5rem;
         }
       }
-
-      > .links li a {
-        @extend .button--submit;
-        margin: 0.5rem 0 0.5rem;
-        font-size: 0.875rem;
-      }
     }
 
     .question__bottom {
@@ -510,7 +504,19 @@ body {
       }
     }
   }
+}
 
+
+body.registred {
+  .question {
+    .question__right {
+      > .links li a {
+        @extend .button--submit;
+        margin: 0.5rem 0 0.5rem;
+        font-size: 0.875rem;
+      }
+    }
+  }
 }
 
 /**

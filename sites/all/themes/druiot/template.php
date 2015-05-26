@@ -25,6 +25,13 @@ function druiot_preprocess_html(&$variables) {
     $variables['classes_array'][] = 'no-sidebar';
   }
 
+  if(user_is_logged_in()) {
+    $variables['classes_array'][] = 'registred';
+  }
+  else {
+    $variables['classes_array'][] = 'anonymous';
+  }
+
 }
 /**
  * Implements hook_preprocess_page().
