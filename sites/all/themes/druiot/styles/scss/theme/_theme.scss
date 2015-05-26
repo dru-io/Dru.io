@@ -371,7 +371,7 @@ body {
         }
       }
 
-      .links li a {
+      > .links li a {
         @extend .button--submit;
         margin: 0.5rem 0 0.5rem;
         font-size: 0.875rem;
