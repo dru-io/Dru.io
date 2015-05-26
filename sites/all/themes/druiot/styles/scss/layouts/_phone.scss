@@ -12,67 +12,42 @@
     }
   }
 
-  .header__content {
-    @include span(10 last wide);
-    .header__firstline {
-      #site-search {
-        @include span(3);
-      }
-      #header-links {
-        @include span(4 nest);
-        .header__tracker,
-        .header__github {
-          @include span(2 of 4);
-        }
-        .header__github {
-          @include last;
-        }
-      }
-      #header-profile {
-        @include span(3 last);
-      }
-    }
-    #navigation {
-      @include span(10);
-    }
-  }
-
-  #content {
-    @include full;
-  }
-
-  #frontpage-top {
-    .left {
-      @include full;
-
-    }
-  }
-
-  #sidebar-right {
+  .header__content,
+  .header__firstline,
+  #header-links,
+  .header__logo,
+  #header-profile,
+  #navigation,
+  #content,
+  #sidebar-right,
+  #frontpage-top .left {
     @include full;
   }
 
   .question {
-    .question__left {
-      @include full;
+    &.teaser {
+      .question__left {
       .avatar {
-        @include span(6);
-      }
-      .rate-widget {
-        @include span(6 last);
+        @include span(1);
       }
     }
     .question__right {
-
+      @include span(11 last);
     }
-    &.teaser {
       .question__bottom {
-
+        @include full;
       }
     }
     &.full {
+      .avatar {
+        @include span(3);
+      }
+      .rate-widget {
+        @include span(3);
+      }
+      .question__right,
       .question__bottom {
-        @include full();
+        @include full;
       }
     }
   }
@@ -87,9 +62,6 @@
         @include span(6 last);
       }
     }
-    .answer__right {
-
-    }
   }
 
   .comment-light {
@@ -103,42 +75,22 @@
 
   .view.project-page.page,
   .view.project-page-node.page {
-    @include susy-clearfix;
     .project {
-      @include gallery(3 of 9);
+      @include full;
+    }
+  }
+  .project.full {
+    .project__first,
+    .project__second {
+      @include full;
     }
   }
 
   .events {
-    .event__item {
-      @include full;
-    }
-    .event__left {
-      @include span(3 of 9);
-    }
-    .event__right {
-      @include span(6 of 9 last);
-    }
-  }
-
-  .event {
-    .event__left {
-      @include span(3);
-    }
-    .event__right {
-      @include span(9 last);
-    }
+    .event__left,
+    .event__right,
     .event__bottom {
       @include full;
-    }
-  }
-
-  .project.full {
-    .project__first {
-      @include span(5 of 10);
-    }
-    .project__second {
-      @include span(5 of 10 last);
     }
   }
 
@@ -146,7 +98,8 @@
 
   #site-search,
   #header-links,
-  #block-views-question-nodes-last-questions {
+  #block-views-question-nodes-last-questions,
+  #block-druio-add-content-buttons {
     display: none;
   }
 }

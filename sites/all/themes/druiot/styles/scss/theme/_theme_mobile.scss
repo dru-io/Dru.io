@@ -12,12 +12,19 @@
     padding: 1rem;
   }
 
+  #header {
+    background: transparent;
+  }
+
+  .header__firstline {
+    background: $headerBackground;
+  }
+
   #frontpage-top,
   #site-search,
   #header-links,
   #block-views-question-nodes-last-questions,
-  #admin-menu,
-  .header__content {
+  #admin-menu {
     display: none;
   }
 
@@ -29,6 +36,4 @@
       }
     }
   }
-
-
 }

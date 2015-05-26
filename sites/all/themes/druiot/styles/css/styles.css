@@ -3776,7 +3776,7 @@ body {
       #druio-projects-download-form .drush .title:before {
         margin-right: 0.3125rem; }
 
-@media (max-width: 30rem) {
+@media (max-width: 570px) {
   /* Hide elements */
   body {
     background: #fff; }
@@ -3786,12 +3786,17 @@ body {
   #frontpage-top .right {
     padding: 1rem; }
 
+  #header {
+    background: transparent; }
+
+  .header__firstline {
+    background: #2E5B95; }
+
   #frontpage-top,
   #site-search,
   #header-links,
   #block-views-question-nodes-last-questions,
-  #admin-menu,
-  .header__content {
+  #admin-menu {
     display: none; }
 
   .header__logo a {
@@ -3884,7 +3889,7 @@ body {
           background: #40b6ff;
           color: white; }
 
-@media (max-width: 30rem) {
+@media (max-width: 570px) {
   #main,
   #frontpage-top,
   .header__wrapper,
@@ -3905,42 +3910,14 @@ body {
     display: block;
     clear: both; }
 
-  .header__content {
-    width: 84.74576%;
-    float: right;
-    margin-right: 0; }
-    .header__content .header__firstline #site-search {
-      width: 23.72881%;
-      float: left;
-      margin-right: 1.69492%; }
-    .header__content .header__firstline #header-links {
-      width: 32.20339%;
-      float: left;
-      margin-right: 1.69492%; }
-      .header__content .header__firstline #header-links .header__tracker,
-      .header__content .header__firstline #header-links .header__github {
-        width: 47.36842%;
-        float: left;
-        margin-right: 5.26316%; }
-      .header__content .header__firstline #header-links .header__github {
-        float: right;
-        margin-right: 0; }
-    .header__content .header__firstline #header-profile {
-      width: 23.72881%;
-      float: right;
-      margin-right: 0; }
-    .header__content #navigation {
-      width: 83.05085%;
-      float: left;
-      margin-right: 1.69492%; }
-
-  #content {
-    clear: both;
-    width: 100%;
-    float: left;
-    margin-left: 0;
-    margin-right: 0; }
-
+  .header__content,
+  .header__firstline,
+  #header-links,
+  .header__logo,
+  #header-profile,
+  #navigation,
+  #content,
+  #sidebar-right,
   #frontpage-top .left {
     clear: both;
     width: 100%;
@@ -3948,27 +3925,29 @@ body {
     margin-left: 0;
     margin-right: 0; }
 
-  #sidebar-right {
+  .question.teaser .question__left .avatar {
+    width: 6.77966%;
+    float: left;
+    margin-right: 1.69492%; }
+  .question.teaser .question__right {
+    width: 91.52542%;
+    float: right;
+    margin-right: 0; }
+  .question.teaser .question__bottom {
     clear: both;
     width: 100%;
     float: left;
     margin-left: 0;
     margin-right: 0; }
-
-  .question .question__left {
-    clear: both;
-    width: 100%;
+  .question.full .avatar {
+    width: 23.72881%;
     float: left;
-    margin-left: 0;
-    margin-right: 0; }
-    .question .question__left .avatar {
-      width: 49.15254%;
-      float: left;
-      margin-right: 1.69492%; }
-    .question .question__left .rate-widget {
-      width: 49.15254%;
-      float: right;
-      margin-right: 0; }
+    margin-right: 1.69492%; }
+  .question.full .rate-widget {
+    width: 23.72881%;
+    float: left;
+    margin-right: 1.69492%; }
+  .question.full .question__right,
   .question.full .question__bottom {
     clear: both;
     width: 100%;
@@ -4000,77 +3979,38 @@ body {
     float: right;
     margin-right: 0; }
 
-  .view.project-page.page:after,
-  .view.project-page-node.page:after {
-    content: " ";
-    display: block;
-    clear: both; }
   .view.project-page.page .project,
   .view.project-page-node.page .project {
-    width: 31.81818%;
-    float: left; }
-    .view.project-page.page .project:nth-child(3n + 1),
-    .view.project-page-node.page .project:nth-child(3n + 1) {
-      margin-left: 0;
-      margin-right: -100%;
-      clear: both;
-      margin-left: 0; }
-    .view.project-page.page .project:nth-child(3n + 2),
-    .view.project-page-node.page .project:nth-child(3n + 2) {
-      margin-left: 34.09091%;
-      margin-right: -100%;
-      clear: none; }
-    .view.project-page.page .project:nth-child(3n + 3),
-    .view.project-page-node.page .project:nth-child(3n + 3) {
-      margin-left: 68.18182%;
-      margin-right: -100%;
-      clear: none; }
-
-  .events .event__item {
-    clear: both;
-    width: 100%;
-    float: left;
-    margin-left: 0;
-    margin-right: 0; }
-  .events .event__left {
-    width: 31.81818%;
-    float: left;
-    margin-right: 2.27273%; }
-  .events .event__right {
-    width: 65.90909%;
-    float: right;
-    margin-right: 0; }
-
-  .event .event__left {
-    width: 23.72881%;
-    float: left;
-    margin-right: 1.69492%; }
-  .event .event__right {
-    width: 74.57627%;
-    float: right;
-    margin-right: 0; }
-  .event .event__bottom {
     clear: both;
     width: 100%;
     float: left;
     margin-left: 0;
     margin-right: 0; }
 
-  .project.full .project__first {
-    width: 48.97959%;
-    float: left;
-    margin-right: 2.04082%; }
+  .project.full .project__first,
   .project.full .project__second {
-    width: 48.97959%;
-    float: right;
+    clear: both;
+    width: 100%;
+    float: left;
+    margin-left: 0;
+    margin-right: 0; }
+
+  .events .event__left,
+  .events .event__right,
+  .events .event__bottom {
+    clear: both;
+    width: 100%;
+    float: left;
+    margin-left: 0;
     margin-right: 0; }
 
   /* Hide elements */
   #site-search,
   #header-links,
-  #block-views-question-nodes-last-questions {
+  #block-views-question-nodes-last-questions,
+  #block-druio-add-content-buttons {
     display: none; } }
-@media (min-width: 30rem) {
+@media (min-width: 570px) {
   #main,
   #frontpage-top,
   .header__wrapper,
