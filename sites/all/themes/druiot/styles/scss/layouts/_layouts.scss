@@ -4,6 +4,7 @@
  */
 
 // Susy settings.
+
 $susy: (
   gutters: 1/4,
   columns: 12,
@@ -15,3 +16,9 @@ $susy: (
 // Default sizes.
 // 1200px
 $siteWidth: 75rem;
+
+
+// Devices
+$desktop: 50rem;
+$tablet: 45rem;
+$phone: 570px;
