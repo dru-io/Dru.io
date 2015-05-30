@@ -1,16 +1,17 @@
+      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
+        <img src="<?php print $logo; ?>" alt="<?php print $site_name; ?>" width="160" height="110" class="logo">
 <header id="header" role="banner">
   <div class="header__wrapper">
     <section class="header__logo">
       <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"
          rel="home">
-        <img src="<?php print $logo; ?>" alt="<?php print $site_name; ?>"
-             class="logo">
+        <img src="<?php print $logo; ?>" alt="<?php print $site_name; ?>" width="160" class="logo">
       </a>
     </section>
 
     <section class="header__content">
       <div class="header__firstline">
-        <?php print $header_search_form; ?>
+        <?php print render($page['header_search_form']); ?>
         <div id="header-links">
           <div class="header__tracker <?php print _druio_messages_status(); ?>" <?php print 'data-new-count="' . druio_tracker_count() . '">'; ?>
           <a href="/tracker"><span>Трекер</span></a></div>
