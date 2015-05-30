@@ -9,6 +9,4 @@ sites/*/private
 **/*.log
 error_log
 **/node-modules
-sites/all/themes/druiot/styles/css/styles.css
 sites/all/themes/druiot/styles/css/styles.css*
-
