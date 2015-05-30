@@ -2,7 +2,7 @@
   <div class="header__wrapper">
     <section class="header__logo">
       <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
-        <img src="<?php print $logo; ?>" alt="<?php print $site_name; ?>" class="logo">
+        <img src="<?php print $logo; ?>" alt="<?php print $site_name; ?>" width="170" height="110" class="logo">
       </a>
     </section>
 
