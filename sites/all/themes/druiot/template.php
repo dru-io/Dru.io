@@ -44,9 +44,11 @@ function druiot_preprocess_page(&$variables) {
   //  $variables['header_links'] = theme('druiot_header_links');
 
   // Search form.
-  $variables['header_search_form'] = '<form action="/search" id="site-search">
-          <input name="s" value="" maxlength="128" class="form-search" type="text" placeholder="Поиск по сообществу">
-        </form>';
+  $variables['page']['header_search_form'] = array(
+    '#markup' => '<form action="/search" id="site-search">
+                    <input name="s" value="" maxlength="128" class="form-search" type="text" placeholder="Поиск по сообществу">
+                  </form>'
+  );
 
   // Header profile data.
   $variables['page']['header_profile'] = array(
