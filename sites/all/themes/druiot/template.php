@@ -14,7 +14,8 @@ function druiot_preprocess_html(&$variables) {
   // Redefine body classes.
   $variables['classes_array'] = array();
 
-  if (drupal_render($variables['page']['sidebar_right'])) {
+  $element_children = element_children($variables['page']['sidebar_right']);
+  if (!empty($element_children)) {
     $variables['classes_array'][] = 'sidebar-right';
 
     if (drupal_is_front_page()) {
@@ -26,7 +27,7 @@ function druiot_preprocess_html(&$variables) {
   }
 
   if(user_is_logged_in()) {
-    $variables['classes_array'][] = 'registred';
+    $variables['classes_array'][] = 'registered';
   }
   else {
     $variables['classes_array'][] = 'anonymous';
@@ -36,11 +37,11 @@ function druiot_preprocess_html(&$variables) {
 /**
  * Implements hook_preprocess_page().
  */
-function druiot_preprocess_page(&$variables, $hook) {
+function druiot_preprocess_page(&$variables) {
   global $user;
 
   // Header links
-  $variables['header_links'] = theme('druiot_header_links');
+  //  $variables['header_links'] = theme('druiot_header_links');
 
   // Search form.
   $variables['header_search_form'] = '<form action="/search" id="site-search">
@@ -48,37 +49,9 @@ function druiot_preprocess_page(&$variables, $hook) {
         </form>';
 
   // Header profile data.
-  if (user_is_anonymous()) {
-    $variables['header_profile'] = theme('druiot_auth_anon', array('user' => $user));
-  }
-  else {
-    $variables['header_profile'] = theme('druiot_auth_user', array('user' => $user));
-  }
-
-  // Content classes.
-  $content_classes_array = array();
-  $is_sidebar = FALSE;
-
-  // Check sidebar is available?
-  $sidebar_right = drupal_render($variables['page']['sidebar_right']);
-  $variables['sidebar_right'] = $sidebar_right;
-  if ($sidebar_right) {
-    $is_sidebar = TRUE;
-  }
-
-  // Finally check have sidebar or not.
-  if ($is_sidebar) {
-    $content_classes_array[] = 'gl col xl-15-24';
-  }
-  else {
-    $content_classes_array[] = 'gl col xl-1-1';
-  }
-
-  // Write to variable.
-  $variables['content_classes'] = drupal_attributes(
-    array(
-      'class' => $content_classes_array,
-    )
+  $variables['page']['header_profile'] = array(
+    '#theme' => $user->uid ? 'druiot_auth_user' : 'druiot_auth_anon',
+    '#user' => $user,
   );
 
   //tracker

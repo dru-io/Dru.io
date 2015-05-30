@@ -10,6 +10,11 @@ module_load_include('inc', 'druio', 'includes/druio.messages');
 
 /**
  * Implements hook_flag_flag().
+ *
+ * @param $flag
+ * @param $entity_id
+ * @param $account
+ * @param $flagging
  */
 function druio_flag_flag($flag, $entity_id, $account, $flagging) {
   if ($flag->name == 'best_answer') {
@@ -36,6 +41,10 @@ function druio_flag_flag($flag, $entity_id, $account, $flagging) {
 
 /**
  * Implements hook_form_alter().
+ *
+ * @param $form
+ * @param $form_state
+ * @param $form_id
  */
 function druio_form_alter(&$form, &$form_state, $form_id) {
 
@@ -90,6 +99,9 @@ function druio_form_alter(&$form, &$form_state, $form_id) {
 
 /**
  * Remove formating tips for comments.
+ *
+ * @param $form
+ * @return mixed
  */
 function druio_form_remove_formatting_tips(&$form) {
   $form[LANGUAGE_NONE][0]['format']['#access'] = FALSE;
@@ -99,6 +111,9 @@ function druio_form_remove_formatting_tips(&$form) {
 
 /**
  * Return has or not question best answer.
+ *
+ * @param $nid
+ * @return bool
  */
 function druio_question_is_best_answer($nid) {
   $answers = db_select('field_data_field_answer_question_reference', 'er')
@@ -123,6 +138,9 @@ function druio_question_is_best_answer($nid) {
 
 /**
  * Returns count of answers.
+ *
+ * @param $nid
+ * @return mixed
  */
 function druio_question_answers_count($nid) {
   $answers = db_select('field_data_field_answer_question_reference', 'er');
@@ -139,6 +157,10 @@ function druio_question_answers_count($nid) {
 
 /**
  * Is user answered to this question before.
+ *
+ * @param $qid
+ * @param $uid
+ * @return bool
  */
 function druio_is_user_answered_to_question($qid, $uid) {
   // Default value.
@@ -170,6 +192,8 @@ function druio_is_user_answered_to_question($qid, $uid) {
 
 /**
  * Implements hook_block_info().
+ *
+ * @return mixed
  */
 function druio_block_info() {
   $blocks['add_content_buttons'] = array(
@@ -181,6 +205,9 @@ function druio_block_info() {
 
 /**
  * Implements hook_block_view().
+ *
+ * @param string $delta
+ * @return array
  */
 function druio_block_view($delta = '') {
   $block = array();
@@ -200,7 +227,7 @@ function druio_block_view($delta = '') {
 /**
  * Implements hook_theme().
  *
- * Темизации и шаблоны.
+ * @return array
  */
 function druio_theme() {
   return array(

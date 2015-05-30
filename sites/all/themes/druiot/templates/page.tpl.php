@@ -1,10 +1,8 @@
 <header id="header" role="banner">
   <div class="header__wrapper">
     <section class="header__logo">
-      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>"
-         rel="home">
-        <img src="<?php print $logo; ?>" alt="<?php print $site_name; ?>"
-             class="logo">
+      <a href="<?php print $front_page; ?>" title="<?php print t('Home'); ?>" rel="home">
+        <img src="<?php print $logo; ?>" alt="<?php print $site_name; ?>" class="logo">
       </a>
     </section>
 
@@ -14,10 +12,9 @@
         <div id="header-links">
           <div class="header__tracker <?php print _druio_messages_status(); ?>" <?php print 'data-new-count="' . druio_tracker_count() . '">'; ?>
           <a href="/tracker"><span>Трекер</span></a></div>
-        <a href="https://github.com/Niklan/Dru.io" class="header__github"
-           rel="nofollow" target="_blank"><span>Мы на GitHub</span></a>
+        <a href="https://github.com/Niklan/Dru.io" class="header__github" rel="nofollow" target="_blank"><span>Мы на GitHub</span></a>
       </div>
-        <?php print $header_profile; ?>
+        <?php print render($page['header_profile']); ?>
       </div>
 
       <?php print render($page['navigation']); ?>
@@ -45,10 +42,10 @@
       <?php print $feed_icons; ?>
     </section>
 
-    <?php
-    if ($sidebar_right) {
-      print $sidebar_right;
-    } ?>
+    <?php if ($page['sidebar_right']): ?>
+      <?php print render($page['sidebar_right']); ?>
+    <?php endif; ?>
+
   <?php else: ?>
     <section id="content" role="main">
       <?php print theme('druiot_frontpage_content'); ?>
