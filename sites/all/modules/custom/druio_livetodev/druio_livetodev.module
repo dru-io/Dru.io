@@ -22,6 +22,8 @@ function druio_livetodev_permission() {
 
 /**
  * Implements hook_menu().
+ *
+ * @return mixed
  */
 function druio_livetodev_menu() {
   $items['admin/config/druio'] = array(
@@ -46,6 +48,8 @@ function druio_livetodev_menu() {
 
 /**
  * Settings form for module.
+ *
+ * @return mixed
  */
 function druio_livetodev_settings() {
   $form['actions']['delete'] = array(
