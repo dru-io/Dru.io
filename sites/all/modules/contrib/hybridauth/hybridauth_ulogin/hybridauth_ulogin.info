@@ -5,9 +5,9 @@ package = "HybridAuth"
 configure = admin/config/people/hybridauth/ulogin
 dependencies[] = hybridauth
 
-; Information added by Drupal.org packaging script on 2015-05-20
-version = "7.x-2.12+10-dev"
+; Information added by Drupal.org packaging script on 2015-04-23
+version = "7.x-2.12"
 core = "7.x"
 project = "hybridauth"
-datestamp = "1432132329"
+datestamp = "1429826286"
 

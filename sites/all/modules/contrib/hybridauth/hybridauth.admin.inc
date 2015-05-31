@@ -320,21 +320,14 @@ function hybridauth_admin_settings($form, &$form_state) {
     '#type' => 'fieldset',
     '#title' => t('Other settings'),
   );
-  $destination_description = t('Drupal path to redirect to, like "node/1". Leave empty to return to the same page (set to [HTTP_REFERER] for widget in modal dialogs loaded by AJAX).') . '<br/>'
-    . t('You can use any user or global tokens here.') . ' '
-    . t('Install !link module to get list of all available tokens.',
-      array('!link' => l(t('Token'), 'http://drupal.org/project/token', array('attributes' => array('target' => '_blank')))));
   $form['vtabs']['fset_other']['hybridauth_destination'] = array(
     '#type' => 'textfield',
     '#title' => t('Redirect after login'),
     '#default_value' => variable_get('hybridauth_destination', ''),
-    '#description' => $destination_description,
-  );
-  $form['vtabs']['fset_other']['hybridauth_destination_error'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Redirect after error on login'),
-    '#default_value' => variable_get('hybridauth_destination_error', ''),
-    '#description' => $destination_description,
+    '#description' => t('Drupal path to redirect to, like "node/1". Leave empty to return to the same page (set to [HTTP_REFERER] for widget in modal dialogs loaded by AJAX).') . '<br/>'
+      . t('You can use any user or global tokens here.') . ' '
+      . t('Install !link module to get list of all available tokens.',
+        array('!link' => l(t('Token'), 'http://drupal.org/project/token', array('attributes' => array('target' => '_blank'))))),
   );
   if (module_exists('token')) {
     $form['vtabs']['fset_other']['fset_token'] = array(
