@@ -28,6 +28,7 @@ function acebueditor_textarea($element, $form_state) {
     return $element;
   }
 
+  module_load_include('inc', 'bueditor');
   $editors = bueditor_user_eids($GLOBALS['user']);
   $editors[0] = bueditor_check_page($_GET['q'], $editors[0]);
   $is_editor_path = drupal_match_path(request_uri(), '/admin/config/content/bueditor/*');
