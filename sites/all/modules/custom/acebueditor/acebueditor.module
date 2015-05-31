@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Ace BUEditor
  * by Alan Bondarchuk <imacoda@gmail.com>
@@ -7,13 +8,40 @@
  * For the next generation of Russian Drupal Community
  * http://community.drupalife.com
  *
-*/
+ */
 
 /**
- * Implements hook_preprocess_html().
+ * Implements hook_element_info().
  */
-function acebueditor_preprocess_html(&$vars) {
-  $module_path = drupal_get_path('module', 'acebueditor');
-  drupal_add_js($module_path . '/js/ace.bueditor.js', array('weight' => 100));
-  drupal_add_css($module_path . '/css/ace.bueditor.css', array('weight' => 100));
+function acebueditor_element_info() {
+  $elements['textarea']['#process'] = array('acebueditor_textarea');
+  return $elements;
+}
+
+/**
+ * Load Ace on pages with bueditor enabled elements.
+ */
+function acebueditor_textarea($element, $form_state) {
+  static $acebueditor;
+
+  if (isset($acebueditor)) {
+    return $element;
+  }
+
+  $editors = bueditor_user_eids($GLOBALS['user']);
+  $editors[0] = bueditor_check_page($_GET['q'], $editors[0]);
+  $is_editor_path = drupal_match_path(request_uri(), '/admin/config/content/bueditor/*');
+  if ($editors[0] || $is_editor_path) {
+    $module_path = drupal_get_path('module', 'acebueditor');
+    drupal_add_js($module_path . '/js/ace.bueditor.js', array('weight' => 100));
+    drupal_add_css($module_path . '/css/ace.bueditor.css', array('weight' => 100));
+
+    $ace_basepath = function_exists('libraries_get_path') ? libraries_get_path('ace') : 'sites/all/libraries/ace';
+    $ace_src = $ace_basepath . '/src-noconflict';
+    drupal_add_js(array('ace_editor' => array('ace_src' => $ace_src)), 'setting');
+    drupal_add_js($ace_src . '/ace.js');
+    $acebueditor = TRUE;
+  }
+
+  return $element;
 }
