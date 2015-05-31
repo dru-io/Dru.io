@@ -155,6 +155,14 @@
       else {
         vals.push(label + ': ' + Drupal.t('return to the same page'));
       }
+      value = $('#edit-hybridauth-destination-error', context).attr('value');
+      label = '<span style="font-weight:bold;">' + $.trim($('label[for="edit-hybridauth-destination-error"]', context).text()) + '</span>';
+      if (value) {
+        vals.push(label + ': ' + value);
+      }
+      else {
+        vals.push(label + ': ' + Drupal.t('return to the same page'));
+      }
 
       label = '<span style="font-weight:bold;">' + $.trim($('label[for="edit-hybridauth-duplicate-emails"]', context).text()) + '</span>';
       var list = [];

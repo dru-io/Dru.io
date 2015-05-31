@@ -633,6 +633,7 @@ function hybridauth_user_identity($form, &$form_state, $account) {
       '#weight' => 10,
       '#hybridauth_widget_type' => 'list',
       '#hybridauth_destination' => '',
+      '#hybridauth_destination_error' => '',
     );
   }
 
@@ -760,6 +761,7 @@ function hybridauth_user_identity_delete($form, &$form_state, $account, $id) {
           '#weight' => 10,
           '#hybridauth_widget_type' => 'list',
           '#hybridauth_destination' => '',
+          '#hybridauth_destination_error' => '',
         );
       }
       return $form;
