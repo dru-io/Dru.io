@@ -1,7 +1,7 @@
 # Dru.io - Drupal сообщество.
 
-<img src="http://dru.io/sites/all/themes/druiot/logo.png" alt="Dru.io" style="width: 170px; margin-right: 10px; float: left;">
-**Адрес сообщества:** http://dru.io
+<img src="http://dru.io/sites/all/themes/druiot/logo.png" alt="Dru.io" style="width: 170px;">
+**Адрес сообщества:** <a href="http://dru.io" title="Русскоязычное сообщество Drupal">dru.io</a>
 
 ### Навигация по репозиторию:
 - [Issues](https://github.com/Niklan/Dru.io/issues) - вопросы, предложения улучшения, запросы, обсуждения. Тут происходит обсуждение технической стороны проекта.
