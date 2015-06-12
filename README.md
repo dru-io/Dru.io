@@ -1,6 +1,4 @@
-# Dru.io - Drupal сообщество.
-
-<a href="http://dru.io" title="Русскоязычное сообщество Drupal">
+<a href="http://dru.io" title="Русскоязычное сообщество Drupal" alt="Русскоязычное сообщество Drupal">
 <img src="http://dru.io/sites/all/themes/druiot/logo.png" alt="Dru.io" width="170" />
 </a>
 
