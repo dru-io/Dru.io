@@ -237,3 +237,16 @@ function druio_theme() {
     ),
   );
 }
+
+/**
+ * Remove "log in to post comment"
+ *
+ * @param $comment
+ * @param $view_mode
+ * @param $langcode
+ */
+function druio_comment_view($comment, $view_mode, $langcode) {
+  if ($view_mode == 'full') {
+    unset($comment->content['links']['comment']['#links']['comment_forbidden']);
+  }
+}
