@@ -246,7 +246,5 @@ function druio_theme() {
  * @param $langcode
  */
 function druio_comment_view($comment, $view_mode, $langcode) {
-  if ($view_mode == 'full') {
-    unset($comment->content['links']['comment']['#links']['comment_forbidden']);
-  }
+  unset($comment->content['links']['comment']['#links']['comment_forbidden']);
 }
