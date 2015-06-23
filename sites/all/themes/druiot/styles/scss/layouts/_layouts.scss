@@ -6,7 +6,7 @@
 // Susy settings.
 
 $susy: (
-  gutters: 1/4,
+  gutters: (1/4),
   columns: 12,
   use-custom: (rem: true),
 );
