@@ -158,7 +158,7 @@ function druio_projects_download_form($form, &$form_state, $releases, $entity) {
     '#type' => 'select',
     '#title' => 'Выбор версии для загрузки',
     '#options' => $release_selector_options,
-    '#default_value' => $latest_release_version ? $latest_release_version : NULL,
+    '#default_value' => isset($latest_release_version) ? $latest_release_version : NULL,
     '#ajax' => array(
       'callback' => 'druio_projects_download_form_ajax_info',
       'wrapper' => 'druio-projects-download-info',
