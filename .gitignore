@@ -3,10 +3,4 @@ sites/*/settings*.php
 
 # Ignore paths that contain user-generated content.
 sites/*/files
-!sites/default/files/config
 sites/*/private
-**/.sass-cache
-**/*.log
-error_log
-**/node-modules
-sites/all/themes/druiot/styles/css/styles.css*

@@ -6,7 +6,7 @@
 */
 
 // A service client for the OAuth 2 flow.
-// v0.1
+// v0.1.1
 class OAuth2Client
 {
 	public $api_base_url     = "";
@@ -32,14 +32,15 @@ class OAuth2Client
 	public $curl_ssl_verifypeer      = false;
 	public $curl_ssl_verifyhost      = false;
 	public $curl_header              = array();
-	public $curl_useragent           = "OAuth/2 Simple PHP Client v0.1; HybridAuth http://hybridauth.sourceforge.net/";
+	public $curl_useragent           = "OAuth/2 Simple PHP Client v0.1.1; HybridAuth http://hybridauth.sourceforge.net/";
 	public $curl_authenticate_method = "POST";
-        public $curl_proxy               = null;
+	public $curl_proxy               = null;
 
 	//--
 
 	public $http_code             = "";
 	public $http_info             = "";
+	protected $response           = null;
 
 	//--
 
@@ -140,10 +141,20 @@ class OAuth2Client
 		}
 
 		if( $response && $this->decode_json ){
-			$response = json_decode( $response );
+			return $this->response = json_decode( $response );
 		}
 
-		return $response;
+		return $this->response = $response;
+	}
+
+	/**
+	 * Return the response object afer the fact
+	 *
+	 * @return mixed
+	 */
+	public function getResponse()
+	{
+	    return $this->response;
 	}
 
 	/**
@@ -216,7 +227,7 @@ class OAuth2Client
 
 		if( $type == "POST" ){
 			curl_setopt($ch, CURLOPT_POST, 1);
-			if($params) curl_setopt( $ch, CURLOPT_POSTFIELDS, http_build_query($params) );
+			if($params) curl_setopt( $ch, CURLOPT_POSTFIELDS, $params );
 		}
 
 		$response = curl_exec($ch);

@@ -158,8 +158,7 @@ interface SearchApiSolrConnectionInterface {
    * @param string $rawPost
    *   The XML document to send to the Solr server's update service.
    * @param int|false $timeout
-   *   (optional) Maximum expected duration (in seconds). Defaults to not timing
-   *   out.
+   *   (optional) Maximum expected duration (in seconds).
    *
    * @return object
    *   A response object.
@@ -167,7 +166,7 @@ interface SearchApiSolrConnectionInterface {
    * @throws SearchApiException
    *   If an error occurs during the service call
    */
-  public function update($rawPost, $timeout = FALSE);
+  public function update($rawPost, $timeout = 3600);
 
   /**
    * Adds an array of Solr Documents to the index all at once

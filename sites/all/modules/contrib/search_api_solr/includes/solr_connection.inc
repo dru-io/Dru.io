@@ -635,7 +635,7 @@ class SearchApiSolrConnection implements SearchApiSolrConnectionInterface {
   public static function escape($value, $version = 0) {
     $replacements = array();
 
-    $specials = array('+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', "\\");
+    $specials = array('+', '-', '&&', '||', '!', '(', ')', '{', '}', '[', ']', '^', '"', '~', '*', '?', ':', "\\", 'AND', 'OR', 'NOT');
     // Solr 4.x introduces regular expressions, making the slash also a special
     // character.
     if ($version >= 4) {
@@ -720,7 +720,7 @@ class SearchApiSolrConnection implements SearchApiSolrConnectionInterface {
   /**
    * Implements SearchApiSolrConnectionInterface::update().
    */
-  public function update($rawPost, $timeout = FALSE) {
+  public function update($rawPost, $timeout = 3600) {
     if (empty($this->update_url)) {
       // Store the URL in an instance variable since many updates may be sent
       // via a single instance of this class.
@@ -914,7 +914,7 @@ class SearchApiSolrConnection implements SearchApiSolrConnectionInterface {
           }
         }
         if ($qalt) {
-          $params['q.alt'] = implode(' ', $qalt);
+          $params['q.alt'] = implode(' AND ', $qalt);
         }
         if (empty($params['fq'])) {
           unset($params['fq']);

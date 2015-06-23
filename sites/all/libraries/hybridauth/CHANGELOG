@@ -1,13 +1,33 @@
 Hybridauth Change log
 =====================
-2.4.0 -
+2.4.1 - April 11 2015
+      Fixes:
+        #430 - Disable autoloading for class_exists() checks
+        #435 + #436 - Google fix Undefined property: stdClass::$emails
+        #437 + #442 - OAuth2Client->api() - json_decode
+
+2.4.0 - April 2 2015
       New Providers:
+        - BitBucket #405
         - Rhapsody #362
         - Rdio #352
         - SoundCloud #352
         - BeatsMusic #351
         - Dropbox #344 via #367
+        - Providers for Citrix #385
+        - MailChimp OAuth2 #399
+        - Wordpress and Dribbble #394
+      New:
+        #382 - LinkedIn send direct message
+        #388 - Add home town in VKontakte
+        #396 + #408 - Make Hybrid_Endpoint methods non-static
+        #410 - Set LinkedIn API request timeout to 5 seconds because the API can be slow.
+        #419 - Adding emailVerified for Google email type 'account'
+        #406 + #425 - Add access token to header in google provider
+        #427 - Add class property for responses to be stored
       Fixes:
+        #382 - Fix undefined variable in Foursquare
+        #379 - Google authentication problem on the master branch (invalid_request, missing parameter) with Drupal 7
         #368 - Correct year and date birth in VKontakte provider
         #228 - HTTP_HOST not found via #366
         #358 - Added abbility get email from vkontakte response
@@ -15,6 +35,15 @@ Hybridauth Change log
         #360 - GitHub provider fix: Return primary email address, not the first
         #354 - Hybrid_Providers_Foursquare::getUserContacts() implementation
         #351 - Deezer provider fix
+        #296 - OAuth2Client - curl - invalid POSTc
+        #395 - Do not replace $_REQUEST with something else
+        #412 - Facebook now requires access_token to get coverInfoURL
+        #413 - Fix Fatal Error: Declaration of Hybrid_Storage::config() must be compatible with that of Hybrid_Storage_Interface::config()
+        #417 - Fixed an issue with email property for vkontakte
+        #393 + #420 - Steam API user data support
+        #426 - GitHub provider fix: Parameter order incorrect
+      Removed:
+        - Removed examples (#381, #339, #208)
 
 2.3.0 - November 16 2014
         #87 - Make logging level based

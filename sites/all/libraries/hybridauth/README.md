@@ -1,4 +1,6 @@
-# HybridAuth 2.4.0-dev
+# HybridAuth 2.4.0
+
+[![Join the chat at https://gitter.im/hybridauth/hybridauth](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/hybridauth/hybridauth?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 HybridAuth enables developers to easily build social applications and tools
 to engage websites visitors and customers on a social level by implementing
@@ -19,8 +21,7 @@ HybridAuth repository is made up of several projects:
 
 ## Getting Started
 
-We highly recommend that you download and use the latest release from HybridAuth website
-at [http://hybridauth.sourceforge.net/download.html](http://hybridauth.sourceforge.net/download.html)
+We highly recommend that you download and use the latest release from [https://github.com/hybridauth/hybridauth/releases](https://github.com/hybridauth/hybridauth/releases)
 
 You can find  complete documentation for HybridAuth
 at [http://hybridauth.sourceforge.net](http://hybridauth.sourceforge.net)

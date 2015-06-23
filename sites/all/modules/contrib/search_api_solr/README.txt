@@ -2,12 +2,10 @@ Solr search
 -----------
 
 This module provides an implementation of the Search API which uses an Apache
-Solr search server for indexing and searching. Before enabling or using this
-module, you'll have to follow the instructions given in INSTALL.txt first.
+Solr search server for indexing and searching. You can find detailed
+instructions for setting up Solr in the module's handbook [1].
 
-For more detailed documentation, see the handbook [1].
-
-[1] https://drupal.org/node/1999280
+[1] https://www.drupal.org/node/1999280
 
 Supported optional features
 ---------------------------
