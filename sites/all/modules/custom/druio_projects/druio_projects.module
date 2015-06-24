@@ -63,7 +63,7 @@ function druio_projects_ds_fields_info($entity_type) {
  *
  * @return string
  */
-function druio_projects_downloads($field) {
+function druio_projects_downloads(array $field) {
   $entity = $field['entity'];
 
   $release_values = field_get_items('node', $entity, 'field_project_releases');
@@ -82,7 +82,7 @@ function druio_projects_downloads($field) {
  *
  * @return string
  */
-function druio_projects_drupalorg_link($field) {
+function druio_projects_drupalorg_link(array $field) {
   $field_project_short_name = field_get_items('node', $field['entity'], 'field_project_short_name');
   $project_machine_name = $field_project_short_name[0]['safe_value'];
 
@@ -102,7 +102,7 @@ function druio_projects_drupalorg_link($field) {
  *
  * @return string
  */
-function druio_projects_questions($field) {
+function druio_projects_questions(array $field) {
   $html = '<h2 class="title">Вопросы по проекту</h2>';
   $html .= views_embed_view('question_nodes', 'questions_in_project');
 
@@ -188,10 +188,9 @@ function druio_projects_download_form($form, &$form_state, $releases, $entity) {
 /**
  * Ajax release info update.
  *
- * @param $form
- * @param $form_state
+ * Callback for druio_projects_download_form().
  *
- * @return mixed
+ * @ingroup callbacks
  */
 function druio_projects_download_form_ajax_info($form, $form_state) {
   return $form['release_info'];

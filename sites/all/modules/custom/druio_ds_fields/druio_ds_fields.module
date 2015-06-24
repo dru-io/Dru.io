@@ -107,7 +107,7 @@ function druio_ds_fields_ds_fields_info($entity_type) {
  *
  * @return mixed
  */
-function druio_ds_fields_answer_comments($field) {
+function druio_ds_fields_answer_comments(array $field) {
   return views_embed_view('comments', 'comments_to_answers', $field['entity']->nid);
 }
 
@@ -120,7 +120,7 @@ function druio_ds_fields_answer_comments($field) {
  *
  * @return mixed
  */
-function druio_ds_fields_node_author_created($field) {
+function druio_ds_fields_node_author_created(array $field) {
   $html = '<a href="@user_node_url" class="username">@user_node_name</a> <span class="created">– @node_created</span>';
   $data = array(
     '@user_node_url' => url('user/' . $field['entity']->uid),
@@ -140,7 +140,7 @@ function druio_ds_fields_node_author_created($field) {
  *
  * @return mixed
  */
-function druio_ds_fields_comment_author_created($field) {
+function druio_ds_fields_comment_author_created(array $field) {
   $html = '<a href="@user_comment_url" class="username">@user_comment_name</a> <span class="created">– @comment_created</span>';
   $data = array(
     '@user_comment_url' => url('user/' . $field['entity']->uid),
@@ -158,7 +158,7 @@ function druio_ds_fields_comment_author_created($field) {
  *
  * @return string|void
  */
-function druio_ds_fields_best_answer($field) {
+function druio_ds_fields_best_answer(array $field) {
   global $user;
   $output = '';
 
@@ -183,7 +183,7 @@ function druio_ds_fields_best_answer($field) {
  *
  * @return string
  */
-function druio_ds_fields_node_avatar_and_author($field) {
+function druio_ds_fields_node_avatar_and_author(array $field) {
   $entity = $field['entity'];
   $author_avatar_fid = $entity->picture;
 
@@ -215,7 +215,7 @@ function druio_ds_fields_node_avatar_and_author($field) {
  *
  * @return int
  */
-function druio_ds_fields_node_comment_count($field) {
+function druio_ds_fields_node_comment_count(array $field) {
   return $field['entity']->comment_count;
 }
 
@@ -226,7 +226,7 @@ function druio_ds_fields_node_comment_count($field) {
  *
  * @return mixed
  */
-function druio_ds_fields_question_answer($field) {
+function druio_ds_fields_question_answer(array $field) {
   global $user;
   $entity = $field['entity'];
   $html = '';
@@ -272,7 +272,7 @@ function druio_ds_fields_question_answer($field) {
  *
  * @return int
  */
-function druio_ds_fields_question_answers_count($field) {
+function druio_ds_fields_question_answers_count(array $field) {
   return druio_question_answers_count($field['entity']->nid);
 }
 
@@ -281,7 +281,7 @@ function druio_ds_fields_question_answers_count($field) {
  *
  * @return string
  */
-function druio_ds_fields_question_title($field) {
+function druio_ds_fields_question_title(array $field) {
   $has_answer = druio_question_is_best_answer($field['entity']->nid);
 
   $html = '<h2 class="@question_title_class">!label<a href="@node_url">@node_title</a></h2>';
@@ -302,6 +302,6 @@ function druio_ds_fields_question_title($field) {
  *
  * @return mixed
  */
-function druio_ds_fields_rate_vote_up_down($field) {
+function druio_ds_fields_rate_vote_up_down(array$field) {
   return rate_embed($field['entity'], 'vote_up_down', RATE_FULL);
 }

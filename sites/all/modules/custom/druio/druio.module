@@ -10,11 +10,6 @@ module_load_include('inc', 'druio', 'includes/druio.messages');
 
 /**
  * Implements hook_flag_flag().
- *
- * @param object $flag
- * @param int $entity_id
- * @param object $account
- * @param $flagging
  */
 function druio_flag_flag($flag, $entity_id, $account, $flagging) {
   if ($flag->name == 'best_answer') {
@@ -47,7 +42,7 @@ function druio_form_alter(&$form, &$form_state, $form_id) {
   // Disable formatting tips for comments.
   if (in_array($form_id, array(
     'comment_node_question_form',
-    'comment_node_post_form'
+    'comment_node_post_form',
   ))) {
     $form['comment_body']['#after_build'][] = 'druio_form_remove_formatting_tips';
   }
@@ -56,7 +51,7 @@ function druio_form_alter(&$form, &$form_state, $form_id) {
   if (in_array($form_id, array(
     'question_node_form',
     'post_node_form',
-    'answer_node_form'
+    'answer_node_form',
   ))) {
     $form['body']['#after_build'][] = 'druio_form_remove_formatting_tips';
   }
@@ -73,7 +68,8 @@ function druio_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'answer_node_form') {
     if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'answer') {
       drupal_set_message('Ответы можно добавлять только к вопросам.', 'warning');
-      drupal_goto('/question'); //@todo: редирект нужно делать раньше, не в форме
+      // @todo: редирект нужно делать раньше, не в форме.
+      drupal_goto('/question');
     }
     // Make title not required and hide it.
     $form['title']['#required'] = FALSE;

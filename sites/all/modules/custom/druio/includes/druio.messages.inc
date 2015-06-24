@@ -32,6 +32,7 @@ function druio_comment_insert($comment) {
         _druio_tracker_create($nid, $question_node->uid);
       }
       break;
+
     case 'answer':
       $nid = $node->field_answer_question_reference->value()->nid;
       $uid = $node->field_answer_question_reference->value()->uid;
@@ -42,6 +43,7 @@ function druio_comment_insert($comment) {
         _druio_tracker_create($nid, $node->value()->uid);
       }
       break;
+
     case 'post':
       $nid = $comment->nid;
       $post_node = node_load($nid);

@@ -142,8 +142,9 @@ function _druio_livetodev_mysql_dump($connection_name, $filepath) {
 
 /**
  * Import dump to database.
- * @param $connection_name
- * @param $filepath
+ *
+ * @param string $connection_name
+ * @param string $filepath
  */
 function _druio_livetodev_mysql_import($connection_name, $filepath) {
   $database = Database::getConnectionInfo($connection_name);
