@@ -1148,3 +1148,10 @@ body.registered {
     }
   }
 }
+
+.hljs {
+  background: white;
+  @include fontSize(12px);
+  border-left: 4px solid rgba(0,39,59,.5);
+  padding: 0 0 0 pxToRem(12px);
+}
