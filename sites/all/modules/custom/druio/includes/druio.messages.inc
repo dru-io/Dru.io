@@ -162,7 +162,7 @@ function _druio_tracker_create($nid, $uid) {
   $wrapper = entity_metadata_wrapper('track_message', $entity);
   $wrapper->nid = $nid;
   $wrapper->uid = $uid;
-  $wrapper->linked_url = drupal_get_path_alias('node/'.$nid);
+  $wrapper->linked_url = drupal_get_path_alias('node/' . $nid);
   $wrapper->save();
 }
 

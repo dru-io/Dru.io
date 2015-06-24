@@ -201,12 +201,15 @@ class DruioProjects {
           case 'Modules':
             $node->field_project_type[$node->language][0]['tid'] = 26;
             break;
+
           case 'Themes':
             $node->field_project_type[$node->language][0]['tid'] = 27;
             break;
+
           case 'Distributions':
             $node->field_project_type[$node->language][0]['tid'] = 25;
             break;
+
           case 'Drupal core':
             $node->field_project_type[$node->language][0]['tid'] = 24;
             break;
@@ -249,7 +252,7 @@ class DruioProjects {
                 'size' => $release['files']['file'][0]['size'],
                 'date' => $release['files']['file'][0]['filedate'],
               ),
-            )
+            ),
           );
         }
 

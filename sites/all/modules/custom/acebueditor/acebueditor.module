@@ -3,7 +3,8 @@
 /**
  * @file
  * Ace BUEditor.
- * by Alan Bondarchuk <imacoda@gmail.com>
+ *
+ * by Alan Bondarchuk <imacoda@gmail.com>.
  *
  * Provides a toolbar button for writing code with Ace in BUEditor.
  * For the next generation of Russian Drupal Community.

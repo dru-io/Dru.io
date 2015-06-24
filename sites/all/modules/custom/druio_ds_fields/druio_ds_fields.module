@@ -1,7 +1,8 @@
 <?php
 /**
  * @file
- * We store DisplaySuite custom fields in this module for better debugging and less code in admin panel.
+ * We store DisplaySuite custom fields in this module for better debugging
+ * and less code in admin panel.
  *
  * Notice: fields, defined in this module not available at DisplaySuite UI
  * admin/structure/ds/fields - only on Display Settings which defined in
@@ -112,6 +113,7 @@ function druio_ds_fields_answer_comments($field) {
 
 /**
  * Returns Author + Created for node entities.
+ *
  * Format: Username - 24.04.2015 - 01:17.
  *
  * @param array $field
@@ -131,6 +133,7 @@ function druio_ds_fields_node_author_created($field) {
 
 /**
  * Returns Author + Created for comment entities.
+ *
  * Format: Username - 24.04.2015 - 01:17.
  *
  * @param array $field
