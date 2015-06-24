@@ -275,7 +275,7 @@ function _druio_livetodev_scrub_data() {
   foreach ($views_to_enable as $viewname) {
     unset($views_status[$viewname]);
   }
-  
+
   variable_set('views_defaults', $views_status);
 
   // Empty cache for views.
