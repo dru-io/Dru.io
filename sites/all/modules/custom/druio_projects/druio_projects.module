@@ -28,7 +28,7 @@ function druio_projects_menu() {
  * Implements hook_ds_fields_info().
  */
 function druio_projects_ds_fields_info($entity_type) {
-  // Entity: Node
+  // Entity: Node.
   if ($entity_type == 'node') {
     $fields['projects_downloads'] = array(
       'title' => 'Project: Downloads',
@@ -58,7 +58,10 @@ function druio_projects_ds_fields_info($entity_type) {
 
 /**
  * Project downloads field.
- * @param $field
+ *
+ * @param array $field
+ *
+ * @return string
  */
 function druio_projects_downloads($field) {
   $entity = $field['entity'];
@@ -74,7 +77,10 @@ function druio_projects_downloads($field) {
 
 /**
  * Link to original project page.
- * @param $field
+ *
+ * @param array $field
+ *
+ * @return string
  */
 function druio_projects_drupalorg_link($field) {
   $field_project_short_name = field_get_items('node', $field['entity'], 'field_project_short_name');
@@ -91,8 +97,10 @@ function druio_projects_drupalorg_link($field) {
 
 /**
  * Question referenced to this project.
- * @param $field
- * @return mixed
+ *
+ * @param array $field
+ *
+ * @return string
  */
 function druio_projects_questions($field) {
   $html = '<h2 class="title">Вопросы по проекту</h2>';
@@ -103,7 +111,10 @@ function druio_projects_questions($field) {
 
 /**
  * Download form for project.
- * @param $releases
+ *
+ * @param array $releases
+ * @param object $entity
+ *
  * @return mixed
  */
 function druio_projects_download_form($form, &$form_state, $releases, $entity) {
@@ -136,7 +147,7 @@ function druio_projects_download_form($form, &$form_state, $releases, $entity) {
     $priority = array(
       '7.x',
       '6.x',
-      '8.x'
+      '8.x',
     );
 
     foreach ($priority as $version) {
@@ -176,8 +187,10 @@ function druio_projects_download_form($form, &$form_state, $releases, $entity) {
 
 /**
  * Ajax release info update.
+ *
  * @param $form
  * @param $form_state
+ *
  * @return mixed
  */
 function druio_projects_download_form_ajax_info($form, $form_state) {
@@ -224,9 +237,11 @@ function druio_projects_ajax_add() {
       case 1:
         $result = 'Проект успешно добавлен в базу.';
         break;
+
       case 2:
         $result = 'Drupal.org не отвечает, или вы указали несуществующий проект.';
         break;
+
       case 3:
       case 4:
         $result = 'Проект уже имеется в нашей базе. Информация о модуле успешно обновлена.';
@@ -261,9 +276,11 @@ function druio_projects_update() {
       case 1:
         $result = 'Проект успешно добавлен в базу.';
         break;
+
       case 2:
         $result = 'Drupal.org не отвечает.';
         break;
+
       case 3:
         $result = 'Проект обновлен.';
         break;
@@ -275,8 +292,7 @@ function druio_projects_update() {
 }
 
 /**
- * Implements hook_filter_info()
- * @return mixed
+ * Implements hook_filter_info().
  */
 function druio_projects_filter_info() {
   $filters['druio_projects_auto_projects'] = array(
@@ -290,16 +306,19 @@ function druio_projects_filter_info() {
 
 /**
  * Process filter.
- * @param $text
+ *
+ * @param string $text
  * @param $filter
+ *
+ * @return string
  */
 function _druio_projects_auto_projects($text, $filter) {
-  $druioProjects = new DruioProjects();
-  $projects = $druioProjects->parseProjectsFromHtmlLinks($text);
+  $druio_projects = new DruioProjects();
+  $projects = $druio_projects->parseProjectsFromHtmlLinks($text);
 
   if (!empty($projects)) {
     foreach ($projects as $project_name) {
-      $druioProjects->addProject($project_name);
+      $druio_projects->addProject($project_name);
     }
   }
 
@@ -307,8 +326,9 @@ function _druio_projects_auto_projects($text, $filter) {
 }
 
 /**
- * Implements hook_form_FORM_ID_alter():question_node_form.
- * Alter question node form and add button for project submision.
+ * Implements hook_form_FORM_ID_alter() for question_node_form().
+ *
+ * Alter question node form and add button for project submission.
  */
 function druio_projects_form_question_node_form_alter(&$form, &$form_state, $form_id) {
   // Just make sure field is exist.
@@ -317,12 +337,12 @@ function druio_projects_form_question_node_form_alter(&$form, &$form_state, $for
     $path = drupal_get_path('module', 'druio_projects');
     drupal_add_js($path . '/js/druio_projects.js');
     // Add link to description.
-    $form['field_project_reference']['und']['#description'] .= format_string(
+    $form['field_project_reference'][LANGUAGE_NONE]['#description'] .= format_string(
       '<br /><@tag>@description !link</@tag>',
       array(
         '@tag' => 'div',
         '@description' => 'Если нужный проект отстуствует, вы можете добавить его самостоятельно.',
-        '!link' => '<a href="#" id="add-project-button">Добавить проект в базу.</a>'
+        '!link' => '<a href="#" id="add-project-button">Добавить проект в базу.</a>',
       )
     );
   }

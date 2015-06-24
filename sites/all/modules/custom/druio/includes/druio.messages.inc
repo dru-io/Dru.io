@@ -2,31 +2,32 @@
 
 /**
  * @file
- * Create tracking message
+ * Create tracking message.
  */
 
 /**
- * @param $node
+ * Implements hook_node_insert().
  */
 function druio_node_insert($node) {
   if ($node->type == 'answer') {
-    $question_node = node_load($node->field_answer_question_reference['und'][0]['target_id']);
+    $question_node = node_load($node->field_answer_question_reference[LANGUAGE_NONE][0]['target_id']);
     _druio_tracker_create($question_node->nid, $question_node->uid);
   }
 }
 
 /**
- * @param $comment
- * @throws \EntityMetadataWrapperException
+ * Implements hook_comment_insert().
  */
 function druio_comment_insert($comment) {
   global $user;
+
   $node = entity_metadata_wrapper('node', $comment->nid);
   switch ($node->type->value()) {
     case 'question':
       $nid = $comment->nid;
       $question_node = node_load($nid);
-      // prevent notify for own comments
+
+      // Prevent notify for own comments.
       if ($user->uid != $question_node->uid) {
         _druio_tracker_create($nid, $question_node->uid);
       }
@@ -34,7 +35,8 @@ function druio_comment_insert($comment) {
     case 'answer':
       $nid = $node->field_answer_question_reference->value()->nid;
       $uid = $node->field_answer_question_reference->value()->uid;
-      // prevent notify for own comments
+
+      // Prevent notify for own comments.
       if ($user->uid != $node->author->uid->value()) {
         _druio_tracker_create($nid, $uid);
         _druio_tracker_create($nid, $node->value()->uid);
@@ -43,7 +45,8 @@ function druio_comment_insert($comment) {
     case 'post':
       $nid = $comment->nid;
       $post_node = node_load($nid);
-      // prevent notify for own comments
+
+      // Prevent notify for own comments.
       if ($user->uid != $post_node->uid) {
         _druio_tracker_create($nid, $post_node->uid);
       }
@@ -52,10 +55,13 @@ function druio_comment_insert($comment) {
 }
 
 /**
- * Return tracking messages for user
+ * Return tracking messages for user.
  *
- * @param $uid - The user id for search
- * @return mixed - Status of viewed messages, default 0
+ * @param int $uid
+ *   The user id for search.
+ *
+ * @return mixed
+ *   Status of viewed messages, default 0.
  */
 function druio_tracker_list($uid) {
   $query = db_select('eck_track_message', 'e')
@@ -64,38 +70,47 @@ function druio_tracker_list($uid) {
     ->execute()
     ->fetchAll();
 
-    return $query;
+  return $query;
 }
 
 /**
- * Return count of unread tracking messages
+ * Return count of unread tracking messages.
  *
- * @param null $uid - The user id for serach
- * @return mixed - Status of viewed messages, default 0
+ * @param int|null $uid
+ *   The user id for search.
+ *
+ * @return mixed
+ *   Status of viewed messages, default 0.
  */
 function druio_tracker_count($uid = NULL) {
   global $user;
+
   if (!$uid) {
     $uid = $user->uid;
   }
+
   $query = db_select('eck_track_message', 'e')
     ->fields('e', array('uid'))
     ->condition('e.uid', $uid)
     ->countQuery()
     ->execute()
     ->fetchField();
+
   return $query;
 }
 
 /**
- * @param null $uid
+ * @param int|null $uid
+ *
  * @return string
  */
 function _druio_messages_status($uid = NULL) {
   global $user;
+
   if (!$uid) {
     $uid = $user->uid;
   }
+
   $query = db_select('eck_track_message', 'e')
     ->fields('e', array('uid'))
     ->condition('e.uid', $uid)
@@ -106,31 +121,30 @@ function _druio_messages_status($uid = NULL) {
   if ($query) {
     return 'new';
   }
-  else return '';
+
+  return '';
 }
 
 /**
- * Add information for use entity property in views relationship.
+ * Implements hook_entity_property_info_alter().
  *
- * @param $info
- * @return mixed
+ * Add information for use entity property in views relationship.
  */
 function druio_entity_property_info_alter(&$info) {
   $info['track_message']['properties']['nid']['type'] = 'node';
   $info['track_message']['properties']['uid']['type'] = 'user';
+
   return $info;
 }
 
 /**
- * Implements hook_node_view
- * Delete viewed nodes from tracker
+ * Implements hook_node_view().
  *
- * @param $node
- * @param $view_mode
- * @param $langcode
+ * Delete viewed nodes from tracker.
  */
 function druio_node_view($node, $view_mode, $langcode) {
   $valid_types = $node->type == 'question' || $node->type == 'post';
+
   if (user_is_logged_in() && $valid_types && $view_mode == 'full') {
     global $user;
     _druio_tracker_delete($node->nid, $user->uid);
@@ -138,10 +152,10 @@ function druio_node_view($node, $view_mode, $langcode) {
 }
 
 /**
- * Create entity
+ * Create entity.
  *
- * @param $nid
- * @param $uid
+ * @param int $nid
+ * @param int $uid
  */
 function _druio_tracker_create($nid, $uid) {
   $entity = entity_create('track_message', array('type' => 'track_message'));
@@ -153,11 +167,11 @@ function _druio_tracker_create($nid, $uid) {
 }
 
 /**
- * @param $nid
- * @param $uid
+ * @param int $nid
+ * @param int $uid
  */
 function _druio_tracker_delete($nid, $uid) {
-  $deleted = db_delete('eck_track_message')
+  db_delete('eck_track_message')
     ->condition('nid', $nid)
     ->condition('uid', $uid)
     ->execute();

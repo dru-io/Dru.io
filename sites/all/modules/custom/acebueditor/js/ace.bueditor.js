@@ -20,7 +20,7 @@ BUE.postprocess.acebueditor = function (E, $) {
     var editor = ace.edit('ace-editor');
     var editor_session = editor.session;
     var initial_value = E.getSelection();
-    if(initial_value.indexOf('<?php') == -1) {
+    if (initial_value.indexOf('<?php') == -1) {
       initial_value = "<?php\n\n" + initial_value;
     }
     editor.setValue(initial_value);

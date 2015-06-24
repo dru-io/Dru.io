@@ -2,14 +2,18 @@
 
 /**
  * @file
- * Class DruioProjects
  * Class for manipulating projects.
+ */
+
+/**
+ * Class DruioProjects.
  */
 class DruioProjects {
 
   /**
    * Parse all projects names from links in html text.
-   * @param $text
+   *
+   * @param string $text
    */
   public function parseProjectsFromHtmlLinks($text) {
     $regex = "/(https|http):\\/\\/(www\\.)?drupal.org\\/project\\/(.*)(?=(\"|'))/";
@@ -19,6 +23,10 @@ class DruioProjects {
 
   /**
    * Parse project name from url.
+   *
+   * @param string $url
+   *
+   * @returns string|bool
    */
   public function parseProjectNameFromUrl($url) {
     $parsed_url = parse_url($url);
@@ -38,10 +46,13 @@ class DruioProjects {
   }
 
   /**
-   * @param $name - project machine name.
    * Send request and try to get project info.
-   * Return JSON.
+   *
+   * @param string $name
+   *   Project machine name.
+   *
    * @return bool|string
+   *   Return JSON.
    */
   private function sendRequest($name) {
     $ch = curl_init();
@@ -49,7 +60,7 @@ class DruioProjects {
     $options = array(
       CURLOPT_URL => 'http://updates.drupal.org/release-history/' . $name . '/all',
       CURLOPT_HEADER => "Content-Type:application/xml",
-      CURLOPT_RETURNTRANSFER => TRUE
+      CURLOPT_RETURNTRANSFER => TRUE,
     );
 
     curl_setopt_array($ch, $options);
@@ -66,7 +77,7 @@ class DruioProjects {
       $array = json_decode($json, TRUE);
 
       if (count($array) <= 1) {
-        // if drupal.org returns: 'No project found';
+        // If drupal.org returns: 'No project found';
         return FALSE;
       }
       else {
@@ -80,12 +91,16 @@ class DruioProjects {
 
   /**
    * Add new project.
-   * Return DATA:
-   * 1 - add successful.
-   * 2 - drupal.org not response.
-   * 3 - project already exist.
-   * 4 - project exists and updated.
-   * $force_update: if project exists and variable got TRUE, project will be updated.
+   *
+   * @param string $name
+   * @param bool $force_update
+   *   If project exists and variable got TRUE, project will be updated.
+   *
+   * @return int
+   *   1 - add successful.
+   *   2 - drupal.org not response.
+   *   3 - project already exist.
+   *   4 - project exists and updated.
    */
   public function addProject($name, $force_update = FALSE) {
     $nodes = db_select('field_data_field_project_short_name', 'sn')
@@ -134,10 +149,13 @@ class DruioProjects {
 
   /**
    * Update project information.
-   * Return DATA:
-   * 1 - update successful.
-   * 2 - drupal.org not response.
-   * 3 - project does not exist.
+   *
+   * @param string $name
+   *
+   * @return int
+   *   1 - update successful.
+   *   2 - drupal.org not response.
+   *   3 - project does not exist.
    */
   public function updateProject($name) {
     $nodes = db_select('field_data_field_project_short_name', 'sn')
@@ -175,7 +193,7 @@ class DruioProjects {
    * Set field data.
    */
   private function generateFieldData(&$node, $data_array) {
-    // Set terms
+    // Set terms.
     foreach ($data_array['terms']['term'] as $term) {
 
       if ($term['name'] == 'Projects') {
@@ -209,7 +227,7 @@ class DruioProjects {
         }
       }
 
-      // Releases
+      // Releases.
       $releases_array = array();
       if (!empty($data_array['releases'])) {
         foreach ($data_array['releases']['release'] as $release) {
@@ -223,13 +241,13 @@ class DruioProjects {
                 'url' => $release['files']['file'][1]['url'],
                 'md5' => $release['files']['file'][1]['md5'],
                 'size' => $release['files']['file'][1]['size'],
-                'date' => $release['files']['file'][1]['filedate']
+                'date' => $release['files']['file'][1]['filedate'],
               ),
               'tar' => array(
                 'url' => $release['files']['file'][0]['url'],
                 'md5' => $release['files']['file'][0]['md5'],
                 'size' => $release['files']['file'][0]['size'],
-                'date' => $release['files']['file'][0]['filedate']
+                'date' => $release['files']['file'][0]['filedate'],
               ),
             )
           );
@@ -239,7 +257,7 @@ class DruioProjects {
       }
     }
 
-    // Drupal version
+    // Drupal version.
     foreach ($releases_array as $drupal_version => $release) {
       $term_load = taxonomy_get_term_by_name($drupal_version, 'drupal_versions');
       if ($term_load) {
@@ -248,7 +266,7 @@ class DruioProjects {
       }
     }
 
-    // Other fields
+    // Other fields.
     $node->field_project_short_name[$node->language][0]['value'] = $data_array['short_name'];
   }
 }

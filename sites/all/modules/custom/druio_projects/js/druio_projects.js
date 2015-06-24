@@ -1,7 +1,8 @@
 /**
  * @file
- * druio_projects module js.
+ * Druio_projects module js.
  */
+
 'use strict';
 (function ($, Drupal, window, document, undefined) {
 

@@ -1,26 +1,22 @@
 <?php
 /**
  * @file
- * We store DisplaySuite custom fields in this module for better debugging
- * and less code in admin panel.
+ * We store DisplaySuite custom fields in this module for better debugging and less code in admin panel.
  *
  * Notice: fields, defined in this module not available at DisplaySuite UI
  * admin/structure/ds/fields - only on Display Settings which defined in
  * ui_limit field value.
  */
 
-define('DEFAULT_AVATAR_PATH', '/sites/all/themes/druiot/images/noavatar.png');
+define('DRUIO_DS_FIELDS_DEFAULT_AVATAR_PATH', '/sites/all/themes/druiot/images/noavatar.png');
 
 /**
  * Implements hook_ds_fields_info().
- *
- * @param $entity_type
- * @return array|void
  */
 function druio_ds_fields_ds_fields_info($entity_type) {
   $fields = array();
 
-  // Entity: Node
+  // Entity: Node.
   if ($entity_type == 'node') {
     $fields['answer_comments'] = array(
       'title' => 'Answer comments',
@@ -88,7 +84,7 @@ function druio_ds_fields_ds_fields_info($entity_type) {
     return array($entity_type => $fields);
   }
 
-  // Entity: Comment
+  // Entity: Comment.
   if ($entity_type == 'comment') {
     $fields['comment_author_created'] = array(
       'title' => 'Author + Created',
@@ -99,12 +95,15 @@ function druio_ds_fields_ds_fields_info($entity_type) {
 
     return array($entity_type => $fields);
   }
+
   return;
 }
 
 /**
  * Comments for answer node.
- * @param $field
+ *
+ * @param array $field
+ *
  * @return mixed
  */
 function druio_ds_fields_answer_comments($field) {
@@ -113,8 +112,10 @@ function druio_ds_fields_answer_comments($field) {
 
 /**
  * Returns Author + Created for node entities.
- * Format: Username - 24.04.2015 - 01:17
- * @param $field
+ * Format: Username - 24.04.2015 - 01:17.
+ *
+ * @param array $field
+ *
  * @return mixed
  */
 function druio_ds_fields_node_author_created($field) {
@@ -130,8 +131,10 @@ function druio_ds_fields_node_author_created($field) {
 
 /**
  * Returns Author + Created for comment entities.
- * Format: Username - 24.04.2015 - 01:17
- * @param $field
+ * Format: Username - 24.04.2015 - 01:17.
+ *
+ * @param array $field
+ *
  * @return mixed
  */
 function druio_ds_fields_comment_author_created($field) {
@@ -147,7 +150,9 @@ function druio_ds_fields_comment_author_created($field) {
 
 /**
  * Best answer flag.
- * @param $field
+ *
+ * @param array $field
+ *
  * @return string|void
  */
 function druio_ds_fields_best_answer($field) {
@@ -163,7 +168,7 @@ function druio_ds_fields_best_answer($field) {
   else {
     $flag = flag_get_flag('best_answer');
     if ($flag->get_count($field['entity']->nid)) {
-      $output =  '<div class="best-answer" title="Автор вопроса пометил данный ответ как \'Как лучший ответ\'"></div>';
+      $output = '<div class="best-answer" title="Автор вопроса пометил данный ответ как \'Как лучший ответ\'"></div>';
     }
   }
 
@@ -171,8 +176,9 @@ function druio_ds_fields_best_answer($field) {
 }
 
 /**
- * @param $field
- * @return mixed|string
+ * @param array $field
+ *
+ * @return string
  */
 function druio_ds_fields_node_avatar_and_author($field) {
   $entity = $field['entity'];
@@ -183,7 +189,7 @@ function druio_ds_fields_node_avatar_and_author($field) {
     $avatar_url = image_style_url('avatar_thumb', $avatar_file->uri);
   }
   else {
-    $avatar_url = DEFAULT_AVATAR_PATH;
+    $avatar_url = DRUIO_DS_FIELDS_DEFAULT_AVATAR_PATH;
   }
 
   $html = '<a href="@node_author_url" class="@avatar_class"><img src="@node_author_avatar" alt="@node_author_name"></a>';
@@ -193,7 +199,7 @@ function druio_ds_fields_node_avatar_and_author($field) {
     '@node_author_name' => $entity->name,
     '@node_author_avatar' => $avatar_url,
     '@avatar_class' => 'avatar',
-    '@author_class' => 'author'
+    '@author_class' => 'author',
   );
 
   return format_string($html, $data);
@@ -201,8 +207,10 @@ function druio_ds_fields_node_avatar_and_author($field) {
 
 /**
  * Comment count.
- * @param $field
- * @return mixed
+ *
+ * @param array $field
+ *
+ * @return int
  */
 function druio_ds_fields_node_comment_count($field) {
   return $field['entity']->comment_count;
@@ -210,7 +218,9 @@ function druio_ds_fields_node_comment_count($field) {
 
 /**
  * Answers to question + form.
- * @param $field
+ *
+ * @param array $field
+ *
  * @return mixed
  */
 function druio_ds_fields_question_answer($field) {
@@ -254,13 +264,20 @@ function druio_ds_fields_question_answer($field) {
 
 /**
  * Returns answer count to question.
- * @param $field
- * @return mixed
+ *
+ * @param array $field
+ *
+ * @return int
  */
 function druio_ds_fields_question_answers_count($field) {
   return druio_question_answers_count($field['entity']->nid);
 }
 
+/**
+ * @param array $field
+ *
+ * @return string
+ */
 function druio_ds_fields_question_title($field) {
   $has_answer = druio_question_is_best_answer($field['entity']->nid);
 
@@ -269,7 +286,7 @@ function druio_ds_fields_question_title($field) {
     '@question_title_class' => 'title',
     '@node_url' => url('node/' . $field['entity']->nid),
     '@node_title' => $field['entity']->title,
-    '!label' => $has_answer ? '<span class="has-answer">Решено</span>': '',
+    '!label' => $has_answer ? '<span class="has-answer">Решено</span>' : '',
   );
 
   return format_string($html, $data);
@@ -277,7 +294,9 @@ function druio_ds_fields_question_title($field) {
 
 /**
  * Widget Rate vote up down.
- * @param $field
+ *
+ * @param array $field
+ *
  * @return mixed
  */
 function druio_ds_fields_rate_vote_up_down($field) {

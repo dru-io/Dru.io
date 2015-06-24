@@ -7,6 +7,7 @@
  * - $release_info: all data for selected by user release.
  * - $entity: entity of project.
  */
+
 $files = $release_info['files'];
 $version = $release_info['version'];
 $field_project_short_name = field_get_items('node', $entity, 'field_project_short_name');
