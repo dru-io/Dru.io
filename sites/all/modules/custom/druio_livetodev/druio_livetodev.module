@@ -187,8 +187,14 @@ function _druio_livetodev_scrub_data() {
     ->execute();
 
   // Scrub all e-mail addresses.
-  db_query("UPDATE users SET mail=CONCAT('user', uid, '@example.com') WHERE uid > 0;");
-  db_query("UPDATE users SET init=CONCAT('user', uid, '@example.com') WHERE uid > 0;");
+  db_update('users')
+    ->expression('mail', "CONCAT('user', uid, '@example.com')")
+    ->condition('uid', 0, '>')
+    ->execute();
+  db_update('users')
+    ->expression('init', "CONCAT('user', uid, '@example.com')")
+    ->condition('uid', 0, '>')
+    ->execute();
 
   // Destroy passwords.
   db_update('users')
@@ -214,10 +220,20 @@ function _druio_livetodev_scrub_data() {
   db_delete('hybridauth_session')->execute();
   db_delete('hybridauth_identity')->execute();
 
-  db_query("UPDATE variable SET value='s:4:\"fake\";' WHERE name LIKE 'hybridauth_%%';");
+  db_update('variable')
+    ->fields(array(
+      'value' => 's:4:\"fake\";',
+    ))
+    ->condition('name', db_like('hybridauth_') . '%%', 'LIKE')
+    ->execute();
 
   // Remove mandrill API key.
-  db_query("UPDATE variable SET value='s:4:\"fake\";' WHERE name='mandrill_api_key';");
+  db_update('variable')
+    ->fields(array(
+      'value' => 's:4:\"fake\";',
+    ))
+    ->condition('name', 'mandrill_api_key')
+    ->execute();
 
   // Remove all caches.
   drupal_flush_all_caches();
