@@ -302,6 +302,6 @@ function druio_ds_fields_question_title(array $field) {
  *
  * @return mixed
  */
-function druio_ds_fields_rate_vote_up_down(array$field) {
+function druio_ds_fields_rate_vote_up_down(array $field) {
   return rate_embed($field['entity'], 'vote_up_down', RATE_FULL);
 }
