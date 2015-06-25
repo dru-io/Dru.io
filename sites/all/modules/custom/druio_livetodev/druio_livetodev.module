@@ -3,6 +3,9 @@
 /**
  * @file
  * Code for prepare project to public download.
+ */
+
+/**
  * @TODO
  * - Replace views enabling/disabling for Search API pages with adding search
  *   api database module and server.
@@ -10,7 +13,6 @@
 
 /**
  * Implements hook_permission().
- * @return array
  */
 function druio_livetodev_permission() {
   return array(
@@ -22,8 +24,6 @@ function druio_livetodev_permission() {
 
 /**
  * Implements hook_menu().
- *
- * @return mixed
  */
 function druio_livetodev_menu() {
   $items['admin/config/druio'] = array(
@@ -104,19 +104,23 @@ function druio_livetodev_create_opensoruce_database() {
       _druio_livetodev_mysql_dump('scrubbing', $scrubbed_dump);
     }
     else {
-      drupal_set_message('You must set scrubbing database connection to your settings.php to perform this operation.', 'error');
+      drupal_set_message(t('You must set scrubbing database connection to your settings.php to perform this operation.'), 'error');
     }
   }
   else {
-    drupal_set_message('Sorry, but this feature works only with php configuration with <strong>safe_mode = Off</strong>.', 'warning');
+    drupal_set_message(t('Sorry, but this feature works only with php configuration with <strong>safe_mode = Off</strong>.'), 'warning');
   }
 }
 
 /**
  * Create mysql dump.
- * @param $connection_name
- * @param $filepath : path where dump will save.
- * @return \shell command exit code. 0 - all fine.
+ *
+ * @param string $connection_name
+ * @param string $filepath
+ *   Path where dump will save.
+ *
+ * @return string
+ *   Shell command exit code. 0 - all fine.
  */
 function _druio_livetodev_mysql_dump($connection_name, $filepath) {
   $database = Database::getConnectionInfo($connection_name);
@@ -138,8 +142,9 @@ function _druio_livetodev_mysql_dump($connection_name, $filepath) {
 
 /**
  * Import dump to database.
- * @param $connection_name
- * @param $filepath
+ *
+ * @param string $connection_name
+ * @param string $filepath
  */
 function _druio_livetodev_mysql_import($connection_name, $filepath) {
   $database = Database::getConnectionInfo($connection_name);
@@ -172,22 +177,38 @@ function _druio_livetodev_mysql_import($connection_name, $filepath) {
  * Scrubbing important data.
  */
 function _druio_livetodev_scrub_data() {
-  $database = Database::getConnectionInfo('scrubbing');
+  Database::getConnectionInfo('scrubbing');
   db_set_active('scrubbing');
 
   // Drupal flush all caches not clear this table, but it's huge and have
   // to much old unused data.
-  db_query("DELETE FROM {cache_form} WHERE expire < now();");
+  db_delete('cache_form')
+    ->condition('expire', REQUEST_TIME, '<')
+    ->execute();
 
   // Scrub all e-mail addresses.
-  db_query("UPDATE users SET mail=CONCAT('user', uid, '@example.com') WHERE uid > 0;");
-  db_query("UPDATE users SET init=CONCAT('user', uid, '@example.com') WHERE uid > 0;");
+  db_update('users')
+    ->expression('mail', "CONCAT('user', uid, '@example.com')")
+    ->condition('uid', 0, '>')
+    ->execute();
+  db_update('users')
+    ->expression('init', "CONCAT('user', uid, '@example.com')")
+    ->condition('uid', 0, '>')
+    ->execute();
 
   // Destroy passwords.
-  db_query("UPDATE users SET pass = 'use drush user-login';");
+  db_update('users')
+    ->fields(array(
+      'pass' => 'use drush user-login',
+    ))
+    ->execute();
 
   // Set for all users default avatar.
-  db_query("UPDATE users SET picture = 0;");
+  db_update('users')
+    ->fields(array(
+      'picture' => 0,
+    ))
+    ->execute();
 
   // Disable modules for dev: hybridauth, mandrill.
   module_disable(array(
@@ -196,35 +217,53 @@ function _druio_livetodev_scrub_data() {
   ));
 
   // Clean after HybridAuth.
-  db_query("DELETE FROM hybridauth_session;");
-  db_query("DELETE FROM hybridauth_identity;");
-  db_query("UPDATE variable SET value='s:4:\"fake\";' WHERE name LIKE 'hybridauth_%%';");
+  db_delete('hybridauth_session')->execute();
+  db_delete('hybridauth_identity')->execute();
+
+  db_update('variable')
+    ->fields(array(
+      'value' => 's:4:\"fake\";',
+    ))
+    ->condition('name', db_like('hybridauth_') . '%%', 'LIKE')
+    ->execute();
 
   // Remove mandrill API key.
-  db_query("UPDATE variable SET value='s:4:\"fake\";' WHERE name='mandrill_api_key';");
+  db_update('variable')
+    ->fields(array(
+      'value' => 's:4:\"fake\";',
+    ))
+    ->condition('name', 'mandrill_api_key')
+    ->execute();
 
   // Remove all caches.
   drupal_flush_all_caches();
-  db_query("TRUNCATE cache_form;");
+  db_truncate('cache_form')->execute();
 
   // Remove sessions.
-  db_query("TRUNCATE sessions;");
+  db_truncate('sessions')->execute();
 
   // Remove history.
-  db_query("TRUNCATE history;");
+  db_truncate('history')->execute();
 
   // Remove flood.
-  db_query("TRUNCATE flood;");
+  db_truncate('flood')->execute();
 
   // Remove CAPTCHA data.
-  db_query("TRUNCATE captcha_sessions;");
+  db_truncate('captcha_sessions')->execute();
 
   // Remove xmlsitemap data.
-  db_query("TRUNCATE xmlsitemap;");
+  db_truncate('xmlsitemap')->execute();
 
   // Remove Solr server data.
-  db_query("UPDATE search_api_index SET server=NULL WHERE id='2';");
-  db_query("DELETE FROM search_api_server WHERE id='6';");
+  db_update('search_api_index')
+    ->fields(array(
+      'server' => 'NULL',
+    ))
+    ->condition('id', 2)
+    ->execute();
+  db_delete('search_api_server')
+    ->condition('id', 6)
+    ->execute();
 
   // Disable views for Search API and enable fallback just for nodes.
   $views_to_disable = array(
@@ -237,7 +276,7 @@ function _druio_livetodev_scrub_data() {
   $views_status = variable_get('views_defaults', array());
 
   // Disable views from array.
-  foreach ($views_to_disable as $key => $viewname) {
+  foreach ($views_to_disable as $viewname) {
     $views_status[$viewname] = TRUE;
   }
 
@@ -249,10 +288,10 @@ function _druio_livetodev_scrub_data() {
   );
 
   // Enable them, just remove from disabled.
-  foreach ($views_to_enable as $key => $viewname) {
+  foreach ($views_to_enable as $viewname) {
     unset($views_status[$viewname]);
   }
-  
+
   variable_set('views_defaults', $views_status);
 
   // Empty cache for views.

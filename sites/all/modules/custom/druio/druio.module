@@ -5,16 +5,11 @@
  * Main code.
  */
 
-// Tracking messages config
+// Tracking messages config.
 module_load_include('inc', 'druio', 'includes/druio.messages');
 
 /**
  * Implements hook_flag_flag().
- *
- * @param $flag
- * @param $entity_id
- * @param $account
- * @param $flagging
  */
 function druio_flag_flag($flag, $entity_id, $account, $flagging) {
   if ($flag->name == 'best_answer') {
@@ -41,20 +36,23 @@ function druio_flag_flag($flag, $entity_id, $account, $flagging) {
 
 /**
  * Implements hook_form_alter().
- *
- * @param $form
- * @param $form_state
- * @param $form_id
  */
 function druio_form_alter(&$form, &$form_state, $form_id) {
 
   // Disable formatting tips for comments.
-  if (in_array($form_id, array('comment_node_question_form', 'comment_node_post_form'))) {
+  if (in_array($form_id, array(
+    'comment_node_question_form',
+    'comment_node_post_form',
+  ))) {
     $form['comment_body']['#after_build'][] = 'druio_form_remove_formatting_tips';
   }
 
   // Disable formatting tips for nodes.
-  if (in_array($form_id, array('question_node_form', 'post_node_form', 'answer_node_form'))) {
+  if (in_array($form_id, array(
+    'question_node_form',
+    'post_node_form',
+    'answer_node_form',
+  ))) {
     $form['body']['#after_build'][] = 'druio_form_remove_formatting_tips';
   }
 
@@ -70,7 +68,8 @@ function druio_form_alter(&$form, &$form_state, $form_id) {
   if ($form_id == 'answer_node_form') {
     if (arg(0) == 'node' && arg(1) == 'add' && arg(2) == 'answer') {
       drupal_set_message('Ответы можно добавлять только к вопросам.', 'warning');
-      drupal_goto('/question'); //@todo: редирект нужно делать раньше, не в форме
+      // @todo: редирект нужно делать раньше, не в форме.
+      drupal_goto('/question');
     }
     // Make title not required and hide it.
     $form['title']['#required'] = FALSE;
@@ -87,7 +86,7 @@ function druio_form_alter(&$form, &$form_state, $form_id) {
       if ($question = node_load($answer_nid)) {
         $form['field_answer_question_reference'][LANGUAGE_NONE][0]['target_id']['#default_value'] = "{$question->title} ({$question->nid})";
       }
-      //$form['field_answer_question_reference'][LANGUAGE_NONE]['#default_value'] = $question->nid;
+      // $form['field_answer_question_reference'][LANGUAGE_NONE]['#default_value'] = $question->nid;
     }
 
     // Check if user has access to node creation.
@@ -100,7 +99,8 @@ function druio_form_alter(&$form, &$form_state, $form_id) {
 /**
  * Remove formating tips for comments.
  *
- * @param $form
+ * @param object $form
+ *
  * @return mixed
  */
 function druio_form_remove_formatting_tips(&$form) {
@@ -112,7 +112,8 @@ function druio_form_remove_formatting_tips(&$form) {
 /**
  * Return has or not question best answer.
  *
- * @param $nid
+ * @param int $nid
+ *
  * @return bool
  */
 function druio_question_is_best_answer($nid) {
@@ -126,7 +127,8 @@ function druio_question_is_best_answer($nid) {
   $is_best_answer = FALSE;
   if (!empty($answers)) {
     foreach ($answers as $answer) {
-      if (flag_get_counts('node', $answer->entity_id)) { //@todo: переписать в запрос джойном с flag_counts
+      // @todo: переписать в запрос джойном с flag_counts.
+      if (flag_get_counts('node', $answer->entity_id)) {
         $is_best_answer = TRUE;
         break;
       }
@@ -139,7 +141,8 @@ function druio_question_is_best_answer($nid) {
 /**
  * Returns count of answers.
  *
- * @param $nid
+ * @param int $nid
+ *
  * @return mixed
  */
 function druio_question_answers_count($nid) {
@@ -158,8 +161,9 @@ function druio_question_answers_count($nid) {
 /**
  * Is user answered to this question before.
  *
- * @param $qid
- * @param $uid
+ * @param int $qid
+ * @param int $uid
+ *
  * @return bool
  */
 function druio_is_user_answered_to_question($qid, $uid) {
@@ -205,9 +209,6 @@ function druio_block_info() {
 
 /**
  * Implements hook_block_view().
- *
- * @param string $delta
- * @return array
  */
 function druio_block_view($delta = '') {
   $block = array();
@@ -226,24 +227,22 @@ function druio_block_view($delta = '') {
 
 /**
  * Implements hook_theme().
- *
- * @return array
  */
 function druio_theme() {
   return array(
     'add_content_buttons' => array(
       'template' => 'templates/add-content-buttons',
-      'render element' => 'theme'
+      'render element' => 'theme',
     ),
   );
 }
 
 /**
- * Remove "log in to post comment"
+ * Remove "log in to post comment".
  *
- * @param $comment
- * @param $view_mode
- * @param $langcode
+ * @param object $comment
+ * @param string $view_mode
+ * @param string $langcode
  */
 function druio_comment_view($comment, $view_mode, $langcode) {
   unset($comment->content['links']['comment']['#links']['comment_forbidden']);
