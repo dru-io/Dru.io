@@ -10,3 +10,6 @@ sites/*/private
 error_log
 **/node-modules
 sites/all/themes/druiot/styles/css/styles.css*
+
+# Ignore IDE's
+.idea

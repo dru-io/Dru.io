@@ -11,8 +11,8 @@ stylesheets[all][] = system.messages.css
 stylesheets[all][] = system.theme.css
 
 ; Here you can attach your own styles.
-stylesheets[all][] = styles/css/styles.css
 stylesheets[all][] = styles/css/highlightjs.css
+stylesheets[all][] = styles/css/styles.css
 
 ; Here tou can attach your scripts.
 scripts[] = js/highlight.pack.js
