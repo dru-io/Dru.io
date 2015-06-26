@@ -3,10 +3,12 @@
  * @file
  * Block template.
  *
- * $block_id - blocks unique id (integer).
- * $block_html_id - block system name.
- * $classes - classes list for this block.
- * $title - block title.
+ * Available variables:
+ *
+ * - $block_id: Blocks unique id (integer).
+ * - $block_html_id: Block system name.
+ * - $classes: Classes list for this block.
+ * - $title: Block title.
  */
 ?>
 

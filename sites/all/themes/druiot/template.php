@@ -26,7 +26,7 @@ function druiot_preprocess_html(&$variables) {
     $variables['classes_array'][] = 'no-sidebar';
   }
 
-  if(user_is_logged_in()) {
+  if (user_is_logged_in()) {
     $variables['classes_array'][] = 'registered';
   }
   else {
@@ -40,14 +40,14 @@ function druiot_preprocess_html(&$variables) {
 function druiot_preprocess_page(&$variables) {
   global $user;
 
-  // Header links
-  //  $variables['header_links'] = theme('druiot_header_links');
+  // Header links.
+  // $variables['header_links'] = theme('druiot_header_links');
 
   // Search form.
   $variables['page']['header_search_form'] = array(
     '#markup' => '<form action="/search" id="site-search">
                     <input name="s" value="" maxlength="128" class="form-search" type="text" placeholder="Поиск по сообществу">
-                  </form>'
+                  </form>',
   );
 
   // Header profile data.
@@ -56,13 +56,14 @@ function druiot_preprocess_page(&$variables) {
     '#user' => $user,
   );
 
-  //tracker
+  // Tracker.
   $variables['druiot_tracker']['count'] = druio_tracker_count($user->uid);
   $variables['druiot_tracker']['status'] = _druio_messages_status($user->uid);
 }
 
 /**
  * Implements hook_theme().
+ *
  * For more flexibility we create some theme definitions.
  */
 function druiot_theme() {
@@ -81,7 +82,7 @@ function druiot_theme() {
     'template' => 'templates/druiot-auth-user',
   );
 
-  // Frontpage content
+  // Frontpage content.
   $theme['druiot_frontpage_content'] = array(
     'variables' => array('user' => $user),
     'template' => 'templates/druiot-frontpage-content',

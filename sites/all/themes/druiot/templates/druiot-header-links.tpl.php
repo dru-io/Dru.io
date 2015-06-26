@@ -1,5 +1,8 @@
 <?php
 /**
+ * @file
+ * Template for links in site header.
+ *
  * @vars
  * $has_new: TRUE if has new tracker updates. Not used for noew (w8 tracker).
  */
