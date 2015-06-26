@@ -13,9 +13,9 @@
   <div class="projects">
     <?php
     $projects = array();
-    foreach ($items as $item) {
+    foreach ($items as $item):
       $projects[] = $item['#markup'];
-    }
+    endforeach;
     print implode(', ', $projects);
     ?>
   </div>

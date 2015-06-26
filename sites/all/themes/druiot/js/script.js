@@ -4,6 +4,7 @@
  *
  * You can edit it or write on your own.
  */
+
 (function ($, Drupal, window, document, undefined) {
 
   Drupal.behaviors.yourBehaviorName = {

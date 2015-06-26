@@ -4,6 +4,7 @@
  * @file
  * Default simple view template to all the fields as a row.
  *
+ * Variables available:
  * - $view: The view in use.
  * - $fields: an array of $field objects. Each one contains:
  *   - $field->content: The output of the field.
