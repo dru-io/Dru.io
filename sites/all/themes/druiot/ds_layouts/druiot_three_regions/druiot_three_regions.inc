@@ -1,4 +1,5 @@
 <?php
+
 function ds_druiot_three_regions() {
   return array(
     'label' => 'Dru.io - Three regions',

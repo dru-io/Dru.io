@@ -1,9 +1,13 @@
 <?php
 /**
  * @file
- * Rate widget theme
+ * Rate widget theme.
+ */
+
+/**
  * @TODO: Переписать node_load на простой запрос.
  */
+
 if (isset($results['user_vote'])) {
   if ($results['user_vote'] == 1) {
     $user_vote = 'plus';

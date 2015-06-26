@@ -1,6 +1,7 @@
 /**
  * @file
  * Example of JavaScript file for theme.
+ *
  * You can edit it or write on your own.
  */
 (function ($, Drupal, window, document, undefined) {
@@ -19,7 +20,7 @@
 
       // Activate Select2
       $('select').select2({
-        theme: 'druio' 
+        theme: 'druio'
       });
 
       $('#make-reply').click(function() {
