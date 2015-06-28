@@ -8,6 +8,21 @@
  */
 
 /**
+ * Implements hook__html_head_alter().
+ *
+ * Remove shortlink metatag
+ *
+ * @param $head_elements
+ */
+function druiot_html_head_alter(&$head_elements) {
+  foreach ($head_elements as $key => $data) {
+    if (isset($data['#attributes']) && isset($data['#attributes']['rel']) && $data['#attributes']['rel'] == 'shortlink') {
+      unset($head_elements[$key]);
+    }
+  }
+}
+
+/**
  * Implements template_preprocess_html().
  */
 function druiot_preprocess_html(&$variables) {
