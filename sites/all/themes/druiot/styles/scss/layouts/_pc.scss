@@ -152,10 +152,10 @@
     .profile__avatar {
       @include span(3 of 12 last);
     }
-    .profile__answers {
+    .profile__questions {
       @include span(6 of 12);
     }
-    .profile__questions {
+    .profile__answers {
       @include span(6 of 12 last);
     }
   }
