@@ -47,7 +47,7 @@
     }
   }
 
-  #content {
+  body.sidebar-right #content {
     @include span(9);
   }
 
@@ -140,6 +140,23 @@
     }
     .project__second {
       @include span(5 of 10 last);
+    }
+  }
+  .profile {
+    .profile__info {
+      @include full();
+    }
+    .profile__contacts {
+      @include span(5 of 12);
+    }
+    .profile__avatar {
+      @include span(3 of 12 last);
+    }
+    .profile__answers {
+      @include span(6 of 12);
+    }
+    .profile__questions {
+      @include span(6 of 12 last);
     }
   }
 }
