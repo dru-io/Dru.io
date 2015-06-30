@@ -121,3 +121,24 @@ function druiot_node_view_alter(&$build) {
     unset($build['links']['comment']['#links']['comment-new-comments']);
   }
 }
+
+/**
+ * Implements hook_preprocess_views_view_fields().
+ */
+function druiot_preprocess_views_view_fields(&$vars) {
+
+  if ($vars['view']->name === 'events') {
+
+    //get current row
+    $current_result = $vars['view']->result[$vars['view']->row_index];
+    $date_field = $current_result->field_field_event_date[0]['raw'];
+
+    //works with timezone
+    $event_date = new DateTime($date_field['value'], new DateTimeZone('UTC'));
+    $event_date->setTimezone(new DateTimeZone($date_field['timezone']));
+
+    //check if event date already passed
+    $vars['is_event_past'] = (strtotime('now') > $event_date->getTimestamp());
+  }
+
+}

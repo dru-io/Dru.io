@@ -26,13 +26,16 @@
  * - $row: The raw result object from the query, with all data it fetched.
  *
  * @ingroup views_templates
+ * @var $is_event_past - check if event is past
  */
 ?>
 
 <div class="event__item">
 <div class="event__left">
   <?php print $fields['field_event_poster']->content; ?>
-  <?php print $fields['ops']->content; ?>
+  <?php if (!$is_event_past): ?>
+    <?php print $fields['ops']->content; ?>
+  <?php endif; ?>
 </div>
 <div class="event__right">
   <?php print $fields['title']->content; ?>
