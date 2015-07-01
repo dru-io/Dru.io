@@ -1,9 +1,5 @@
 <?php
 
-module_load_include('inc', 'views_exported', 'inc/views_exported_profile');
-
-
-
 /*
  * Implementation of hook_views_api()
  */
