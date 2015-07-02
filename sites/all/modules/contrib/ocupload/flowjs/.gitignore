@@ -1,0 +1,16 @@
+*~
+
+# Node
+/build
+/node_modules
+/bower_components
+
+# Samples
+/samples/Node.js/node_modules/
+
+# Editors
+.idea
+
+# Tests
+sauce_connect.log
+/coverage

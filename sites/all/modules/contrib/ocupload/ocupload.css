@@ -1,0 +1,16 @@
+#upload-queue {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  z-index: 999;
+}
+#upload-queue div {
+  padding: .5em 1em;
+  background: #E0E0D8;
+  margin: 5px 10px;
+  border-radius: 4px;
+  line-height: 120%;
+  white-space: nowrap;
+  overflow: hidden;
+}
