@@ -43,6 +43,7 @@
       <?php print render($user_profile['user_picture']); ?>
     </div>
     <div class="profile__rating">
+      Рейтинг: <?php print render($user_profile['field_user_rating']); ?>
     </div>
   </div>
   <div class="profile__questions">
