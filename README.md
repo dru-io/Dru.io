@@ -9,6 +9,8 @@
 [![Join the chat at https://gitter.im/Niklan/Dru.io](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/Niklan/Dru.io?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 - [Issues](https://github.com/Niklan/Dru.io/issues) - вопросы, предложения улучшения, запросы, обсуждения. Тут происходит обсуждение технической стороны проекта.
 - [Список изменений в сообществе](https://github.com/Niklan/Dru.io/wiki/%D0%A1%D0%BF%D0%B8%D1%81%D0%BE%D0%BA-%D0%BE%D0%B1%D0%BD%D0%BE%D0%B2%D0%BB%D0%B5%D0%BD%D0%B8%D0%B9-2015).
+- Актуальная кодовая база - данный репозиторий.
+- Актуальная [база данных](http://dru.io/sites/default/files/database.sql.gz). Создается ежедневно в 3 часа ночи. 
 
 ## Описание
 
