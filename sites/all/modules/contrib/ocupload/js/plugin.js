@@ -67,7 +67,7 @@ CKEDITOR.plugins.add('OCUpload', {
    * Files selected handler.
    */
   Drupal.ocupload.ckeditorPlugin.onFilesSubmitted = function (files, event) {
-    var $textarea = $(event.target).closest('.form-item').find('textarea');
+    var $textarea = $(event.target).closest('.cke').prev('textarea');
     var editorInstance = CKEDITOR.instances[$textarea.attr('id')];
     var selection = editorInstance.getSelection();
 

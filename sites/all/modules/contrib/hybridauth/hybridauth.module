@@ -288,7 +288,7 @@ function hybridauth_element_info() {
     '#hybridauth_widget_icon_pack' => variable_get('hybridauth_widget_icon_pack', 'hybridauth_32'),
     '#hybridauth_widget_hide_links' => variable_get('hybridauth_widget_hide_links', 0),
     '#hybridauth_destination' => variable_get('hybridauth_destination', ''),
-    //'#hybridauth_destination_error' => '',
+    '#hybridauth_destination_error' => variable_get('hybridauth_destination_error', ''),
     '#hybridauth_query' => array(),
     '#hybridauth_onclick' => '',
     '#attached' => array(
@@ -803,6 +803,10 @@ function _hybridauth_make_username($data) {
     $hybridauth_name = $desired_name = trim($data['username']);
   }
 
+  if (empty($hybridauth_name)) {
+    $hybridauth_name = $desired_name = 'hybridauth_user';
+  }
+
   $counter = 0;
   while (user_load_by_name($hybridauth_name)) {
     $counter++;
@@ -1012,7 +1016,8 @@ function _hybridauth_invoke_hooks($hook, $account, $data) {
  * Helper function to get language object with empty language prefix.
  */
 function _hybridauth_language_default() {
-  $language_default = language_default();
+  global $language;
+  $language_default = $language;
   $language_default->prefix = '';
   return $language_default;
 }

@@ -13,10 +13,10 @@ Download it at https://github.com/hybridauth/hybridauth/releases and unpack into
 HybridAuth library requires php-curl extension.
 
 If you need additional providers support like Mail.ru - then you need to
-copy needed additional providers to the library.
+copy needed additional providers to the library and clear Drupal caches.
 For instance, to get Mail.ru provider working you need to copy
 'additional-providers/hybridauth-mailru/Providers/Mailru.php' to
-'hybridauth/Hybrid/Providers/Mailru.php' and you are good to go.
+'hybridauth/Hybrid/Providers/Mailru.php', clear caches, and you are good to go.
 After that you just need to configure your application ID, private and secret
 keys at module configuration pages.
 

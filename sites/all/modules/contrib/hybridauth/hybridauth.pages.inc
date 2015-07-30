@@ -270,8 +270,8 @@ function _hybridauth_window_process_auth($data) {
   // Create new user account.
   else {
     // Visitors can create accounts.
-    if ((!variable_get('hybridauth_register', 0) && variable_get('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL))
-      || variable_get('hybridauth_register', 0) != 3) {
+    if ((variable_get('hybridauth_register', 0) == 0 && variable_get('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL))
+      || variable_get('hybridauth_register', 0) == 1 || variable_get('hybridauth_register', 0) == 2) {
       _hybridauth_invoke_hooks('hybridauth_user_preinsert', $user, $data);
 
       // Check profile information for required fields.
@@ -304,7 +304,7 @@ function _hybridauth_window_process_auth($data) {
 
       $admin_approval_required = FALSE;
       // Admin approval is required.
-      if ((!variable_get('hybridauth_register', 0) && variable_get('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL) == USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL)
+      if ((variable_get('hybridauth_register', 0) == 0 && variable_get('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL) == USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL)
         || variable_get('hybridauth_register', 0) == 2) {
         $userinfo['status'] = 0;
         $admin_approval_required = TRUE;
@@ -633,6 +633,7 @@ function hybridauth_user_identity($form, &$form_state, $account) {
       '#weight' => 10,
       '#hybridauth_widget_type' => 'list',
       '#hybridauth_destination' => '',
+      '#hybridauth_destination_error' => '',
     );
   }
 
@@ -760,6 +761,7 @@ function hybridauth_user_identity_delete($form, &$form_state, $account, $id) {
           '#weight' => 10,
           '#hybridauth_widget_type' => 'list',
           '#hybridauth_destination' => '',
+          '#hybridauth_destination_error' => '',
         );
       }
       return $form;
