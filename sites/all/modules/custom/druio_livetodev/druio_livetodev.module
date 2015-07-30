@@ -326,7 +326,7 @@ function druio_livetodev_cronapi() {
 /**
  * The callback for the cron job,
  */
-function druio_livetodev_cron_job($job) {
+function druio_livetodev_cron_job($job = NULL) {
   // Do backup.
   druio_livetodev_create_opensoruce_database();
 }
