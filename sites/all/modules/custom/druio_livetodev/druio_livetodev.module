@@ -301,3 +301,33 @@ function _druio_livetodev_scrub_data() {
 
   db_set_active();
 }
+
+/**
+ * Implements hook_cronapi().
+ */
+function druio_livetodev_cronapi() {
+  $items = array();
+  
+  $items['druio_livetodev_cron_job'] = array(
+    'title' => t('Created scrubbed database backup for public.'),
+    'enabled' => TRUE,
+    'tags' => 'druio',
+     'scheduler' => array(
+      'name' => 'crontab',
+      'crontab' => array(
+        'rules' => array('0 3 * * *'), // run every day at 3 AM (night)
+      ),
+    ),
+  );
+  
+  return $items;
+}
+
+/**
+ * The callback for the cron job,
+ */
+function druio_livetodev_cron_job($job) {
+  // Do backup.
+  druio_livetodev_create_opensoruce_database();
+}
+
