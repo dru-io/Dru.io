@@ -311,7 +311,7 @@ function druio_livetodev_cronapi() {
   $items['druio_livetodev_cron_job'] = array(
     'title' => t('Created scrubbed database backup for public.'),
     'enabled' => TRUE,
-    'tags' => 'druio',
+    'tags' => array('druio'),
      'scheduler' => array(
       'name' => 'crontab',
       'crontab' => array(
