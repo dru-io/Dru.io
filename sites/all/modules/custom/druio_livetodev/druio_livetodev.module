@@ -220,18 +220,12 @@ function _druio_livetodev_scrub_data() {
   db_delete('hybridauth_session')->execute();
   db_delete('hybridauth_identity')->execute();
 
-  db_update('variable')
-    ->fields(array(
-      'value' => 's:4:\"fake\";',
-    ))
+  db_delete('variable')
     ->condition('name', db_like('hybridauth_') . '%%', 'LIKE')
     ->execute();
 
   // Remove mandrill API key.
-  db_update('variable')
-    ->fields(array(
-      'value' => 's:4:\"fake\";',
-    ))
+  db_delete('variable')
     ->condition('name', 'mandrill_api_key')
     ->execute();
 
