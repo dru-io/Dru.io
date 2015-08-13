@@ -12,7 +12,7 @@
  * @ingroup forms
  */
 function hybridauth_admin_settings($form, &$form_state) {
-  if (!variable_get('hybridauth_register', 0) && variable_get('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL) == USER_REGISTER_ADMINISTRATORS_ONLY) {
+  if (variable_get('hybridauth_register', 0) == 0 && variable_get('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL) == USER_REGISTER_ADMINISTRATORS_ONLY) {
     drupal_set_message(t('Currently only administrators can create new user accounts. Either change the "Who can register accounts?" option under "Account settings" tab or at the core <a href="!link">Account settings</a>.',
       array('!link' => url('admin/config/people/accounts'))), 'warning');
   }
@@ -320,14 +320,21 @@ function hybridauth_admin_settings($form, &$form_state) {
     '#type' => 'fieldset',
     '#title' => t('Other settings'),
   );
+  $destination_description = t('Drupal path to redirect to, like "node/1". Leave empty to return to the same page (set to [HTTP_REFERER] for widget in modal dialogs loaded by AJAX).') . '<br/>'
+    . t('You can use any user or global tokens here.') . ' '
+    . t('Install !link module to get list of all available tokens.',
+      array('!link' => l(t('Token'), 'http://drupal.org/project/token', array('attributes' => array('target' => '_blank')))));
   $form['vtabs']['fset_other']['hybridauth_destination'] = array(
     '#type' => 'textfield',
     '#title' => t('Redirect after login'),
     '#default_value' => variable_get('hybridauth_destination', ''),
-    '#description' => t('Drupal path to redirect to, like "node/1". Leave empty to return to the same page (set to [HTTP_REFERER] for widget in modal dialogs loaded by AJAX).') . '<br/>'
-      . t('You can use any user or global tokens here.') . ' '
-      . t('Install !link module to get list of all available tokens.',
-        array('!link' => l(t('Token'), 'http://drupal.org/project/token', array('attributes' => array('target' => '_blank'))))),
+    '#description' => $destination_description,
+  );
+  $form['vtabs']['fset_other']['hybridauth_destination_error'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Redirect after error on login'),
+    '#default_value' => variable_get('hybridauth_destination_error', ''),
+    '#description' => $destination_description,
   );
   if (module_exists('token')) {
     $form['vtabs']['fset_other']['fset_token'] = array(

@@ -12,25 +12,37 @@ function template_preprocess_hybridauth_widget(&$vars, $hook) {
 
   $query = $element['#hybridauth_query'];
   $element['#hybridauth_destination'] = trim($element['#hybridauth_destination']);
+  $element['#hybridauth_destination_error'] = trim($element['#hybridauth_destination_error']);
+  $destination = drupal_get_destination();
   // Process destination; HTTP_REFERER is needed for widget in modals
   // to return to the current page.
   if ($element['#hybridauth_destination'] == '[HTTP_REFERER]' && isset($_SERVER['HTTP_REFERER'])) {
     $query += array(
       'destination' => $_SERVER['HTTP_REFERER'],
-      'destination_error' => $_SERVER['HTTP_REFERER'],
     );
   }
   elseif ($element['#hybridauth_destination']) {
-    $destination = drupal_get_destination();
     $query += array(
       'destination' => $element['#hybridauth_destination'],
-      'destination_error' => $destination['destination'],
     );
   }
   else {
-    $destination = drupal_get_destination();
     $query += array(
       'destination' => $destination['destination'],
+    );
+  }
+  if ($element['#hybridauth_destination_error'] == '[HTTP_REFERER]' && isset($_SERVER['HTTP_REFERER'])) {
+    $query += array(
+      'destination_error' => $_SERVER['HTTP_REFERER'],
+    );
+  }
+  elseif ($element['#hybridauth_destination_error']) {
+    $query += array(
+      'destination_error' => $element['#hybridauth_destination_error'],
+    );
+  }
+  else {
+    $query += array(
       'destination_error' => $destination['destination'],
     );
   }

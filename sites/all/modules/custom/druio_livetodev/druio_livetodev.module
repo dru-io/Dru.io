@@ -220,18 +220,12 @@ function _druio_livetodev_scrub_data() {
   db_delete('hybridauth_session')->execute();
   db_delete('hybridauth_identity')->execute();
 
-  db_update('variable')
-    ->fields(array(
-      'value' => 's:4:\"fake\";',
-    ))
+  db_delete('variable')
     ->condition('name', db_like('hybridauth_') . '%%', 'LIKE')
     ->execute();
 
   // Remove mandrill API key.
-  db_update('variable')
-    ->fields(array(
-      'value' => 's:4:\"fake\";',
-    ))
+  db_delete('variable')
     ->condition('name', 'mandrill_api_key')
     ->execute();
 
@@ -301,3 +295,33 @@ function _druio_livetodev_scrub_data() {
 
   db_set_active();
 }
+
+/**
+ * Implements hook_cronapi().
+ */
+function druio_livetodev_cronapi() {
+  $items = array();
+  
+  $items['druio_livetodev_cron_job'] = array(
+    'title' => t('Created scrubbed database backup for public.'),
+    'enabled' => TRUE,
+    'tags' => array('druio'),
+     'scheduler' => array(
+      'name' => 'crontab',
+      'crontab' => array(
+        'rules' => array('0 3 * * *'), // run every day at 3 AM (night)
+      ),
+    ),
+  );
+  
+  return $items;
+}
+
+/**
+ * The callback for the cron job,
+ */
+function druio_livetodev_cron_job($job = NULL) {
+  // Do backup.
+  druio_livetodev_create_opensoruce_database();
+}
+

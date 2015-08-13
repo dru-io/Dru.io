@@ -39,12 +39,15 @@ function hybridauth_uninstall() {
   variable_del('hybridauth_pictures');
   variable_del('hybridauth_register');
   variable_del('hybridauth_email_verification');
+  variable_del('hybridauth_email_verification_body');
+  variable_del('hybridauth_email_verification_subject');
   variable_del('hybridauth_username');
   variable_del('hybridauth_registration_username_change');
   variable_del('hybridauth_registration_password');
   variable_del('hybridauth_display_name');
   variable_del('hybridauth_override_realname');
   variable_del('hybridauth_destination');
+  variable_del('hybridauth_destination_error');
   variable_del('hybridauth_forms');
   variable_del('hybridauth_duplicate_emails');
   variable_del('hybridauth_debug');
