@@ -15,6 +15,16 @@
 </section>
 
 <section id="frontpage-latest">
-  <?php print views_embed_view('posts_node', 'frontpage'); ?>
-  <?php print views_embed_view('question_nodes', 'frontpage'); ?>
+  <div class="frontpage__questions">
+    <?php print views_embed_view('question_nodes', 'frontpage'); ?>
+  </div>
+  <div class="frontpage__orders">
+    <?php print views_embed_view('orders', 'block'); ?>
+  </div>
+  <div class="frontpage__posts">
+    <?php print views_embed_view('posts_node', 'frontpage'); ?>
+  </div>
+  <div class="frontpage__events">
+    <?php print views_embed_view('events', 'block_1'); ?>
+  </div>
 </section>

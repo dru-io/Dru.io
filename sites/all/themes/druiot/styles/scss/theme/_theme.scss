@@ -859,7 +859,12 @@ body.registered {
   background-color: $colorLightGrey;
   font-size: 0.875rem;
   padding: 1rem;
-
+  .copyright {
+    float: left;
+  }
+  .social {
+    float: right;
+  }
 }
 
 #frontpage-top {
@@ -901,56 +906,57 @@ body.registered {
   }
 }
 
-.post.frontpage {
-  padding-left: pxToRem(25px);
-  position: relative;
-  border-bottom: 1px solid #ECECEC;
-  padding-bottom: pxToRem(5px);
-  margin-bottom: pxToRem(5px);
+.frontpage__posts,
+.frontpage__questions,
+.frontpage__orders {
+  article,
+  .row {
+    padding-left: pxToRem(25px);
+    position: relative;
+    border-bottom: 1px solid #ECECEC;
+    padding-bottom: pxToRem(5px);
+    margin-bottom: pxToRem(5px);
 
-  &:before {
-    @extend .fa;
-    @extend .fa-file-text-o;
-    position: absolute;
-    top: pxToRem(5px);
-    left: 0;
-  }
+    &:before {
+      @extend .fa;
+      position: absolute;
+      top: pxToRem(5px);
+      left: 0;
+    }
 
-  .title {
-    margin: 0;
-    @include fontSize(16px);
-    line-height: pxToRem(27px);
-    font-weight: normal;
+    .title {
+      margin: 0;
+      @include fontSize(16px);
+      line-height: pxToRem(27px);
+      font-weight: normal;
 
-    a {
-      color: $baseFontColor;
+      a {
+        color: $baseFontColor;
+      }
     }
   }
 }
 
-.question.frontpage {
-  padding-left: pxToRem(25px);
-  position: relative;
-  border-bottom: 1px solid #ECECEC;
-  padding-bottom: pxToRem(5px);
-  margin-bottom: pxToRem(5px);
-
-  &:before {
-    @extend .fa;
-    @extend .fa-question;
-    position: absolute;
-    top: pxToRem(5px);
-    left: 0;
+.frontpage__posts {
+  article {
+    &:before {
+      @extend .fa-file-text-o;
+    }
   }
+}
 
-  .title {
-    margin: 0;
-    @include fontSize(16px);
-    line-height: pxToRem(27px);
-    font-weight: normal;
+.frontpage__questions {
+  article {
+    &:before {
+      @extend .fa-question;
+    }
+  }
+}
 
-    a {
-      color: $baseFontColor;
+.frontpage__orders {
+  .row {
+    &:before {
+      @extend .fa-diamond;
     }
   }
 }

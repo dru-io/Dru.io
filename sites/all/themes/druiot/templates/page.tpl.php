@@ -54,5 +54,11 @@
 </main>
 
 <footer id="footer">
-  &copy; Dru.io Копирование разрешено при указании обратной гиперссылки.
+  <div class="copyright">
+    &copy; Dru.io Копирование разрешено при указании обратной гиперссылки.
+  </div>
+  <div class="social">
+    <a href="https://twitter.com/dru_io"><i class="fa fa-twitter"></i></a>
+    <a href="https://vk.com/druio"><i class="fa fa-vk"></i></a>
+  </div>
 </footer>

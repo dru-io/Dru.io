@@ -9,7 +9,7 @@
 
   #frontpage-latest {
     @include susy-clearfix;
-    .view {
+    > div {
       @include span(6);
 
       &:nth-child(2n) {
