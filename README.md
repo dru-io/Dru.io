@@ -26,26 +26,31 @@
 При создании сообщества использовались следующие технологии: php, css, scss, js, html. Если вам знакомы все или часть из них, то вы сможете помочь и принять участие в разработке проекта. 
 
 
-## Установка dev окружения
+## Развёртывание локальной версии dru.io
 
-Актуальную версию базы данных можно скачать в [разделе релизов проекта](https://github.com/Niklan/Dru.io/releases)
+Ниже приведена пошаговая инструкция для развертывания дистрибутива dru.io в собственной среде разработки. Консольные команды указаны с расчетом на то, что выполняться они будут в корне каталога сайта.
 
-Ниже приведена пошаговая инструкция для развертывания дистрибутива dru.io в собственной среде разработки. Команды указаны с расчетом на то, что выполняться они будут в корне каталога сайта.
+1. Скачиваем и импортируем [актуальную версию базы данных](http://dru.io/sites/default/files/database.sql.gz)
+
+2. Клонируем репозиторий
 
 ~~~
 git clone https://github.com/Niklan/Dru.io.git .
+~~~
+
+3. Копируем дефолтный конфиг
+
+~~~
 cd sites/default
 cp default.settings.php settings.php
 ~~~
 
-Далее, удобным для вас способ добавить в sites/default/settings.php следующий массив, заменив данные на свои.
+4. Добавляем в конфиг информацию о базе данных и директориях
 
 ~~~php
-$databases = array (
-  'default' => 
-  array (
-    'default' => 
-    array (
+$databases = array(
+  'default' => array(
+    'default' => array(
       'database' => 'DATABASE_NAME',
       'username' => 'DATABASE_USERNAME',
       'password' => 'DATABASE_PASSWORD',
@@ -56,14 +61,13 @@ $databases = array (
     ),
   ),
 );
+$conf['file_temporary_path'] = 'path/to/temp';
 ~~~
 
-Далее импортируем БД используя phpmyadmin или консоль:
+5. Логинимся под администратором
 
 ~~~
-mysql -u DATABASE_USERNAME -p
-use DATABASE_NAME
-source /path/to/dump.sql
+drush user-login
 ~~~
 
 
