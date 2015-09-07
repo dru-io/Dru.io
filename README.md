@@ -34,41 +34,41 @@
 
 2. Клонируем репозиторий
 
-~~~
-git clone https://github.com/Niklan/Dru.io.git .
-~~~
+  ~~~
+  git clone https://github.com/Niklan/Dru.io.git .
+  ~~~
 
 3. Копируем дефолтный конфиг
 
-~~~
-cd sites/default
-cp default.settings.php settings.php
-~~~
+  ~~~
+  cd sites/default
+  cp default.settings.php settings.php
+  ~~~
 
 4. Добавляем в конфиг информацию о базе данных и директориях
 
-~~~php
-$databases = array(
-  'default' => array(
+  ~~~php
+  $databases = array(
     'default' => array(
-      'database' => 'DATABASE_NAME',
-      'username' => 'DATABASE_USERNAME',
-      'password' => 'DATABASE_PASSWORD',
-      'host' => 'localhost',
-      'port' => '',
-      'driver' => 'mysql',
-      'prefix' => '',
+      'default' => array(
+        'database' => 'DATABASE_NAME',
+        'username' => 'DATABASE_USERNAME',
+        'password' => 'DATABASE_PASSWORD',
+        'host' => 'localhost',
+        'port' => '',
+        'driver' => 'mysql',
+        'prefix' => '',
+      ),
     ),
-  ),
-);
-$conf['file_temporary_path'] = 'path/to/temp';
-~~~
+  );
+  $conf['file_temporary_path'] = 'path/to/temp';
+  ~~~
 
 5. Логинимся под администратором
 
-~~~
-drush user-login
-~~~
+  ~~~
+  drush user-login
+  ~~~
 
 
 *Создано [сообществом](https://github.com/Niklan/Dru.io/graphs/contributors), для сообщества.*
