@@ -1,0 +1,268 @@
+/**
+ * @file
+ * Mixin file
+ */
+// Import functions.
+@import "functions";
+
+/**
+ * Font size calculation.
+ */
+@mixin font-size($size) {
+  font-size: $size;
+  font-size: pxtorem($size);
+}
+
+/**
+ * Linear gradient.
+ */
+@mixin linear-gradient($fromColor, $toColor) {
+  background-color: $toColor; /* Fallback Color */
+  background-image: -webkit-gradient(linear, left top, left bottom, from($fromColor), to($toColor)); /* Saf4+, Chrome */
+  background-image: -webkit-linear-gradient(top, $fromColor, $toColor); /* Chrome 10+, Saf5.1+, iOS 5+ */
+  background-image: -moz-linear-gradient(top, $fromColor, $toColor); /* FF3.6 */
+  background-image: -ms-linear-gradient(top, $fromColor, $toColor); /* IE10 */
+  background-image: -o-linear-gradient(top, $fromColor, $toColor); /* Opera 11.10+ */
+  background-image: linear-gradient(top, $fromColor, $toColor);
+  filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, StartColorStr='#{$fromColor}', EndColorStr='#{$toColor}');
+}
+
+/**
+ * Flexbox mixins.
+ * This mixins allows you to use CSS3 Flexbox widly, cuz it makes fallback
+ * for old syntax.
+ * Supports: http://caniuse.com/#feat=flexbox
+ */
+
+/**
+ * display: flexbox
+ */
+@mixin flexbox {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: -moz-flex;
+  display: flex;
+}
+
+/**
+ * display: inline-flex
+ */
+@mixin inline-flex {
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: -moz-inline-flex;
+  display: inline-flex;
+}
+
+/**
+ * flex-direction: row | row-reverse | column | column-reverse
+ * row: left to right
+ * row-reverse: right ro left
+ * column: top to bottom
+ * column-reverse: bottom to top
+ */
+@mixin flex-direction($direction: row) {
+  @if $direction == row-reverse {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: horizontal
+  } @else if $direction == column {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+  } @else if $direction == column-reverse {
+    -webkit-box-direction: reverse;
+    -webkit-box-orient: vertical;
+  } @else {
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+  }
+  -webkit-flex-direction: $direction;
+  -moz-flex-direction: $direction;
+  -ms-flex-direction: $direction;
+  flex-direction: $direction;
+}
+
+/**
+ * flex-wrap: nowrap | wrap | wrap-reverse
+ * nowrap: single line
+ * wrap: multiline
+ * wrap-reverse: multiline reverse
+ */
+@mixin flex-wrap($wrap: nowrap) {
+  -webkit-flex-wrap: $wrap;
+  -moz-flex-wrap: $wrap;
+  @if $wrap == nowrap {
+    -ms-flex-wrap: none;
+  } @else {
+    -ms-flex-wrap: $wrap;
+  }
+  flex-wrap: $wrap;
+}
+
+/**
+ * flex-flow: <'flex-direction'> || <'flex-wrap'>
+ */
+@mixin flex-flow($flow: (row nowrap)) {
+  -webkit-flex-flow: $flow;
+  -moz-flex-flow: $flow;
+  -ms-flex-flow: $flow;
+  flex-flow: $flow;
+}
+
+/**
+ * order: <integer>
+ */
+@mixin order($order: 0) {
+  -webkit-box-ordinal-group: $order + 1;
+  -ms-flex-order: $order;
+  -webkit-order: $order;
+  -moz-order: $order;
+  order: $order;
+}
+
+/**
+ * flex-grow: <number>
+ */
+@mixin flex-grow($grow: 0) {
+  -webkit-box-flex: $grow;
+  -webkit-flex-grow: $grow;
+  -moz-flex-grow: $grow;
+  -ms-flex-positive: $grow;
+  flex-grow: $grow;
+}
+
+/**
+ * flex-shrink: <number>
+ */
+@mixin flex-shrink($shrink: 1) {
+  -webkit-flex-shrink: $shrink;
+  -moz-flex-shrink: $shrink;
+  -ms-flex-negative: $shrink;
+  flex-shrink: $shrink;
+}
+
+/**
+ * flex-basis: <length> | auto
+ */
+@mixin flex-basis($basis: auto) {
+  -webkit-flex-basis: $basis;
+  -moz-flex-basis: $basis;
+  -ms-flex-preferred-size: $basis;
+  flex-basis: $basis;
+}
+
+/**
+ * flex: none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ]
+ */
+@mixin flex($fg: 0, $fs: 1, $fb: auto) {
+  $fg-boxflex: $fg;
+
+  @if type-of($fg) == 'list' {
+    $fg-boxflex: nth($fg, 1);
+  }
+
+  -webkit-box-flex: $fg-boxflex;
+  -webkit-flex: $fg $fs $fb;
+  -moz-box-flex: $fg-boxflex;
+  -moz-flex: $fg $fs $fb;
+  -ms-flex: $fg $fs $fb;
+  flex: $fg $fs $fb;
+}
+
+/**
+ * justify-content: flex-start | flex-end | center | space-between | space-around
+ */
+@mixin justify-content($value: flex-start) {
+  @if $value == flex-start {
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+  } @else if $value == flex-end {
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+  } @else if $value == space-between {
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+  } @else if $value == space-around {
+    -ms-flex-pack: distribute;
+  } @else {
+    -webkit-box-pack: $value;
+    -ms-flex-pack: $value;
+  }
+  -webkit-justify-content: $value;
+  -moz-justify-content: $value;
+  justify-content: $value;
+}
+
+/**
+ * align-items: flex-start | flex-end | center | baseline | stretch
+ */
+@mixin align-items($value: stretch) {
+  @if $value == flex-start {
+    -webkit-box-align: start;
+    -ms-flex-align: start;
+  } @else if $value == flex-end {
+    -webkit-box-align: end;
+    -ms-flex-align: end;
+  } @else {
+    -webkit-box-align: $value;
+    -ms-flex-align: $value;
+  }
+  -webkit-align-items: $value;
+  -moz-align-items: $value;
+  align-items: $value;
+}
+
+/**
+ * align-self: auto | flex-start | flex-end | center | baseline | stretch
+ */
+@mixin align-self($value: auto) {
+  -webkit-align-self: $value;
+  -moz-align-self: $value;
+  @if $value == flex-start {
+    -ms-flex-item-align: start;
+  } @else if $value == flex-end {
+    -ms-flex-item-align: end;
+  } @else {
+    -ms-flex-item-align: $value;
+  }
+  align-self: $value;
+}
+
+/**
+ * align-content: flex-start | flex-end | center | space-between | space-around | stretch
+ */
+@mixin align-content($value: stretch) {
+  -webkit-align-content: $value;
+  -moz-align-content: $value;
+  @if $value == flex-start {
+    -ms-flex-line-pack: start;
+  } @else if $value == flex-end {
+    -ms-flex-line-pack: end;
+  } @else {
+    -ms-flex-line-pack: $value;
+  }
+  align-content: $value;
+}
+
+/**
+ * Horizontal gradient. Left to right.
+ */
+@mixin gradient-horizontal($start-color: black, $end-color: white, $start-percent: 0%, $end-percent: 100%) {
+  background-image: -webkit-linear-gradient(left, $start-color $start-percent, $end-color $end-percent);
+  background-image: -o-linear-gradient(left, $start-color $start-percent, $end-color $end-percent);
+  background-image: linear-gradient(to right, $start-color $start-percent, $end-color $end-percent);
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=1);
+}
+
+/**
+ * Vertical gradient. Top to bottom.
+ */
+@mixin gradient-vertical($start-color: black, $end-color: white, $start-percent: 0%, $end-percent: 100%) {
+  background-image: -webkit-linear-gradient(top, $start-color $start-percent, $end-color $end-percent); // Safari 5.1-6, Chrome 10+
+  background-image: -o-linear-gradient(top, $start-color $start-percent, $end-color $end-percent); // Opera 12
+  background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent); // Standard, IE10, Firefox 16+, Opera 12.10+, Safari 7+, Chrome 26+
+  background-repeat: repeat-x;
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#{ie-hex-str($start-color)}', endColorstr='#{ie-hex-str($end-color)}', GradientType=0); // IE9 and down
+}

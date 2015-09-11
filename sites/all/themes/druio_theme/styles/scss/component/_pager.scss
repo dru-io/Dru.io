@@ -1,0 +1,52 @@
+/**
+ * @file
+ * Pager styles.
+ */
+.pager {
+  margin: 1rem auto;
+  padding: 0px;
+  list-style: none outside none;
+  display: table;
+  background: #ffffff;
+  border: 1px solid $gray-light;
+  border-radius: 4px;
+  overflow: hidden;
+
+  li {
+    float: left;
+    border-right: 1px solid $gray-light;
+    background: transparent;
+    transition: background 200ms;
+
+    a{
+      padding: 0 1rem;
+      color: $gray-light;
+      text-decoration: none;
+      line-height: 2rem;
+    }
+
+    &:hover {
+      background: #F9F9F9;
+      transition: background 200ms;
+    }
+
+    &:last-child {
+      border: none;
+    }
+  }
+
+  .pager-ellipsis {
+    padding: 0 1rem;
+    color: $gray-light;
+    text-decoration: none;
+    line-height: 2rem;
+  }
+
+  .pager-current {
+    padding: 0 1rem;
+    color: $gray-light;
+    text-decoration: none;
+    line-height: 2rem;
+    background: #F9F9F9;
+  }
+}
