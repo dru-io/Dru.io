@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * @file
+ * Written by Henri MEDOT <henri.medot[AT]absyx[DOT]fr>
+ * http://www.absyx.fr
+ */
+
+/**
+ * Implements hook_entity_info_alter().
+ */
+function field_readonly_entity_info_alter(&$entity_info) {
+  // Add the field_readonly view mode.
+  foreach (array_keys($entity_info) as $entity_type) {
+    $entity_info[$entity_type]['view modes']['field_readonly'] = array(
+      'label' => t('Field Readonly'),
+      'custom settings' => FALSE,
+    );
+  }
+}
+
+/**
+ * Implements hook_field_attach_form().
+ */
+function field_readonly_field_attach_form($entity_type, $entity, &$form, &$form_state, $langcode) {
+  // Display non-accessible fields as read-only items.
+  list($entity_id, , $bundle) = entity_extract_ids($entity_type, $entity);
+  if ($entity_id && entity_access('view', $entity_type, $entity)) {
+    $build = entity_view($entity_type, array($entity), 'field_readonly');
+    $build = reset($build);
+    $build = $build[$entity_id];
+
+    // Iterate on each field instance.
+    $instances = _field_invoke_get_instances($entity_type, $bundle, array('default' => TRUE, 'deleted' => FALSE, 'language' => NULL));
+    foreach ($instances as $instance) {
+      $field = field_info_field_by_id($instance['field_id']);
+      $field_name = $field['field_name'];
+
+      if (isset($form[$field_name])) {
+        $element = $form[$field_name];
+        if (isset($element['#access']) && !$element['#access'] && isset($build[$field_name])) {
+          $new_field_name = '_field_readonly__'. $field_name;
+          $form[$new_field_name] = array_merge($build[$field_name], array('#weight' => $element['#weight']));
+          $attach_css = TRUE;
+
+          // Add support for the Field Group module.
+          if (isset($form['#group_children'][$field_name])) {
+            $form['#group_children'][$new_field_name] = $form['#group_children'][$field_name];
+            $form[$new_field_name]['#type'] = '_dummy_type';
+          }
+        }
+      }
+    }
+
+    if (!empty($attach_css)) {
+      $form['#attached']['css'][] = drupal_get_path('module', 'field_readonly') .'/field_readonly.css';
+    }
+  }
+}
