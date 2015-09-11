@@ -548,7 +548,7 @@ body {
   font-size: 1rem;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   line-height: 22px;
-  color: #777777; }
+  color: #333333; }
 
 /* line 16, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/base/_typography.scss */
 a {
@@ -669,6 +669,1465 @@ blockquote {
  *
  * LG media query styles.
  */
+@media  (min-width: 1200px) {
+  /* line 13, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
+  #header .pane {
+    max-width: 1184px;
+    margin-left: auto;
+    margin-right: auto; }
+    /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
+    #header .pane:after {
+      content: " ";
+      display: block;
+      clear: both; }
+    /* line 15, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
+    #header .pane .logo {
+      width: 10.625rem;
+      float: left; }
+    /* line 19, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
+    #header .pane .content {
+      margin-left: 170px; } }
+
+@-webkit-keyframes bounce {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
+  40% {
+    -webkit-transform: translateY(-30px);
+    -moz-transform: translateY(-30px);
+    -ms-transform: translateY(-30px);
+    -o-transform: translateY(-30px);
+    transform: translateY(-30px); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
+  60% {
+    -webkit-transform: translateY(-15px);
+    -moz-transform: translateY(-15px);
+    -ms-transform: translateY(-15px);
+    -o-transform: translateY(-15px);
+    transform: translateY(-15px); } }
+
+@-moz-keyframes bounce {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
+  40% {
+    -webkit-transform: translateY(-30px);
+    -moz-transform: translateY(-30px);
+    -ms-transform: translateY(-30px);
+    -o-transform: translateY(-30px);
+    transform: translateY(-30px); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
+  60% {
+    -webkit-transform: translateY(-15px);
+    -moz-transform: translateY(-15px);
+    -ms-transform: translateY(-15px);
+    -o-transform: translateY(-15px);
+    transform: translateY(-15px); } }
+
+@-ms-keyframes bounce {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
+  40% {
+    -webkit-transform: translateY(-30px);
+    -moz-transform: translateY(-30px);
+    -ms-transform: translateY(-30px);
+    -o-transform: translateY(-30px);
+    transform: translateY(-30px); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
+  60% {
+    -webkit-transform: translateY(-15px);
+    -moz-transform: translateY(-15px);
+    -ms-transform: translateY(-15px);
+    -o-transform: translateY(-15px);
+    transform: translateY(-15px); } }
+
+@-o-keyframes bounce {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
+  40% {
+    -webkit-transform: translateY(-30px);
+    -moz-transform: translateY(-30px);
+    -ms-transform: translateY(-30px);
+    -o-transform: translateY(-30px);
+    transform: translateY(-30px); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
+  60% {
+    -webkit-transform: translateY(-15px);
+    -moz-transform: translateY(-15px);
+    -ms-transform: translateY(-15px);
+    -o-transform: translateY(-15px);
+    transform: translateY(-15px); } }
+
+@keyframes bounce {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
+  0%, 20%, 50%, 80%, 100% {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -ms-transform: translateY(0);
+    -o-transform: translateY(0);
+    transform: translateY(0); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
+  40% {
+    -webkit-transform: translateY(-30px);
+    -moz-transform: translateY(-30px);
+    -ms-transform: translateY(-30px);
+    -o-transform: translateY(-30px);
+    transform: translateY(-30px); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
+  60% {
+    -webkit-transform: translateY(-15px);
+    -moz-transform: translateY(-15px);
+    -ms-transform: translateY(-15px);
+    -o-transform: translateY(-15px);
+    transform: translateY(-15px); } }
+
+@-webkit-keyframes flash {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_flash.scss */
+  0%, 50%, 100% {
+    opacity: 1; }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_flash.scss */
+  25%, 75% {
+    opacity: 0; } }
+
+@-moz-keyframes flash {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_flash.scss */
+  0%, 50%, 100% {
+    opacity: 1; }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_flash.scss */
+  25%, 75% {
+    opacity: 0; } }
+
+@-ms-keyframes flash {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_flash.scss */
+  0%, 50%, 100% {
+    opacity: 1; }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_flash.scss */
+  25%, 75% {
+    opacity: 0; } }
+
+@-o-keyframes flash {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_flash.scss */
+  0%, 50%, 100% {
+    opacity: 1; }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_flash.scss */
+  25%, 75% {
+    opacity: 0; } }
+
+@keyframes flash {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_flash.scss */
+  0%, 50%, 100% {
+    opacity: 1; }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_flash.scss */
+  25%, 75% {
+    opacity: 0; } }
+
+@-webkit-keyframes pulse {
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_pulse.scss */
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_pulse.scss */
+  50% {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_pulse.scss */
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); } }
+
+@-moz-keyframes pulse {
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_pulse.scss */
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_pulse.scss */
+  50% {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_pulse.scss */
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); } }
+
+@-ms-keyframes pulse {
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_pulse.scss */
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_pulse.scss */
+  50% {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_pulse.scss */
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); } }
+
+@-o-keyframes pulse {
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_pulse.scss */
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_pulse.scss */
+  50% {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_pulse.scss */
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); } }
+
+@keyframes pulse {
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_pulse.scss */
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_pulse.scss */
+  50% {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_pulse.scss */
+  100% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); } }
+
+@-webkit-keyframes rubberBand {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    -o-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    -moz-transform: scale3d(1.25, 0.75, 1);
+    -ms-transform: scale3d(1.25, 0.75, 1);
+    -o-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    -moz-transform: scale3d(0.75, 1.25, 1);
+    -ms-transform: scale3d(0.75, 1.25, 1);
+    -o-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    -moz-transform: scale3d(1.15, 0.85, 1);
+    -ms-transform: scale3d(1.15, 0.85, 1);
+    -o-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  65% {
+    -webkit-transform: scale3d(.95, 1.05, 1);
+    -moz-transform: scale3d(.95, 1.05, 1);
+    -ms-transform: scale3d(.95, 1.05, 1);
+    -o-transform: scale3d(.95, 1.05, 1);
+    transform: scale3d(.95, 1.05, 1); }
+
+  /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  75% {
+    -webkit-transform: scale3d(1.05, .95, 1);
+    -moz-transform: scale3d(1.05, .95, 1);
+    -ms-transform: scale3d(1.05, .95, 1);
+    -o-transform: scale3d(1.05, .95, 1);
+    transform: scale3d(1.05, .95, 1); }
+
+  /* line 8, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    -o-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); } }
+
+@-moz-keyframes rubberBand {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    -o-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    -moz-transform: scale3d(1.25, 0.75, 1);
+    -ms-transform: scale3d(1.25, 0.75, 1);
+    -o-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    -moz-transform: scale3d(0.75, 1.25, 1);
+    -ms-transform: scale3d(0.75, 1.25, 1);
+    -o-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    -moz-transform: scale3d(1.15, 0.85, 1);
+    -ms-transform: scale3d(1.15, 0.85, 1);
+    -o-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  65% {
+    -webkit-transform: scale3d(.95, 1.05, 1);
+    -moz-transform: scale3d(.95, 1.05, 1);
+    -ms-transform: scale3d(.95, 1.05, 1);
+    -o-transform: scale3d(.95, 1.05, 1);
+    transform: scale3d(.95, 1.05, 1); }
+
+  /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  75% {
+    -webkit-transform: scale3d(1.05, .95, 1);
+    -moz-transform: scale3d(1.05, .95, 1);
+    -ms-transform: scale3d(1.05, .95, 1);
+    -o-transform: scale3d(1.05, .95, 1);
+    transform: scale3d(1.05, .95, 1); }
+
+  /* line 8, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    -o-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); } }
+
+@-ms-keyframes rubberBand {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    -o-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    -moz-transform: scale3d(1.25, 0.75, 1);
+    -ms-transform: scale3d(1.25, 0.75, 1);
+    -o-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    -moz-transform: scale3d(0.75, 1.25, 1);
+    -ms-transform: scale3d(0.75, 1.25, 1);
+    -o-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    -moz-transform: scale3d(1.15, 0.85, 1);
+    -ms-transform: scale3d(1.15, 0.85, 1);
+    -o-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  65% {
+    -webkit-transform: scale3d(.95, 1.05, 1);
+    -moz-transform: scale3d(.95, 1.05, 1);
+    -ms-transform: scale3d(.95, 1.05, 1);
+    -o-transform: scale3d(.95, 1.05, 1);
+    transform: scale3d(.95, 1.05, 1); }
+
+  /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  75% {
+    -webkit-transform: scale3d(1.05, .95, 1);
+    -moz-transform: scale3d(1.05, .95, 1);
+    -ms-transform: scale3d(1.05, .95, 1);
+    -o-transform: scale3d(1.05, .95, 1);
+    transform: scale3d(1.05, .95, 1); }
+
+  /* line 8, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    -o-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); } }
+
+@-o-keyframes rubberBand {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    -o-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    -moz-transform: scale3d(1.25, 0.75, 1);
+    -ms-transform: scale3d(1.25, 0.75, 1);
+    -o-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    -moz-transform: scale3d(0.75, 1.25, 1);
+    -ms-transform: scale3d(0.75, 1.25, 1);
+    -o-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    -moz-transform: scale3d(1.15, 0.85, 1);
+    -ms-transform: scale3d(1.15, 0.85, 1);
+    -o-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  65% {
+    -webkit-transform: scale3d(.95, 1.05, 1);
+    -moz-transform: scale3d(.95, 1.05, 1);
+    -ms-transform: scale3d(.95, 1.05, 1);
+    -o-transform: scale3d(.95, 1.05, 1);
+    transform: scale3d(.95, 1.05, 1); }
+
+  /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  75% {
+    -webkit-transform: scale3d(1.05, .95, 1);
+    -moz-transform: scale3d(1.05, .95, 1);
+    -ms-transform: scale3d(1.05, .95, 1);
+    -o-transform: scale3d(1.05, .95, 1);
+    transform: scale3d(1.05, .95, 1); }
+
+  /* line 8, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    -o-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); } }
+
+@keyframes rubberBand {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  0% {
+    -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    -o-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  30% {
+    -webkit-transform: scale3d(1.25, 0.75, 1);
+    -moz-transform: scale3d(1.25, 0.75, 1);
+    -ms-transform: scale3d(1.25, 0.75, 1);
+    -o-transform: scale3d(1.25, 0.75, 1);
+    transform: scale3d(1.25, 0.75, 1); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  40% {
+    -webkit-transform: scale3d(0.75, 1.25, 1);
+    -moz-transform: scale3d(0.75, 1.25, 1);
+    -ms-transform: scale3d(0.75, 1.25, 1);
+    -o-transform: scale3d(0.75, 1.25, 1);
+    transform: scale3d(0.75, 1.25, 1); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  50% {
+    -webkit-transform: scale3d(1.15, 0.85, 1);
+    -moz-transform: scale3d(1.15, 0.85, 1);
+    -ms-transform: scale3d(1.15, 0.85, 1);
+    -o-transform: scale3d(1.15, 0.85, 1);
+    transform: scale3d(1.15, 0.85, 1); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  65% {
+    -webkit-transform: scale3d(.95, 1.05, 1);
+    -moz-transform: scale3d(.95, 1.05, 1);
+    -ms-transform: scale3d(.95, 1.05, 1);
+    -o-transform: scale3d(.95, 1.05, 1);
+    transform: scale3d(.95, 1.05, 1); }
+
+  /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  75% {
+    -webkit-transform: scale3d(1.05, .95, 1);
+    -moz-transform: scale3d(1.05, .95, 1);
+    -ms-transform: scale3d(1.05, .95, 1);
+    -o-transform: scale3d(1.05, .95, 1);
+    transform: scale3d(1.05, .95, 1); }
+
+  /* line 8, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_rubberBand.scss */
+  100% {
+    -webkit-transform: scale3d(1, 1, 1);
+    -moz-transform: scale3d(1, 1, 1);
+    -ms-transform: scale3d(1, 1, 1);
+    -o-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1); } }
+
+@-webkit-keyframes shake {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_shake.scss */
+  0%, 100% {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_shake.scss */
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translateX(-10px);
+    -moz-transform: translateX(-10px);
+    -ms-transform: translateX(-10px);
+    -o-transform: translateX(-10px);
+    transform: translateX(-10px); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_shake.scss */
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translateX(10px);
+    -moz-transform: translateX(10px);
+    -ms-transform: translateX(10px);
+    -o-transform: translateX(10px);
+    transform: translateX(10px); } }
+
+@-moz-keyframes shake {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_shake.scss */
+  0%, 100% {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_shake.scss */
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translateX(-10px);
+    -moz-transform: translateX(-10px);
+    -ms-transform: translateX(-10px);
+    -o-transform: translateX(-10px);
+    transform: translateX(-10px); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_shake.scss */
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translateX(10px);
+    -moz-transform: translateX(10px);
+    -ms-transform: translateX(10px);
+    -o-transform: translateX(10px);
+    transform: translateX(10px); } }
+
+@-ms-keyframes shake {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_shake.scss */
+  0%, 100% {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_shake.scss */
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translateX(-10px);
+    -moz-transform: translateX(-10px);
+    -ms-transform: translateX(-10px);
+    -o-transform: translateX(-10px);
+    transform: translateX(-10px); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_shake.scss */
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translateX(10px);
+    -moz-transform: translateX(10px);
+    -ms-transform: translateX(10px);
+    -o-transform: translateX(10px);
+    transform: translateX(10px); } }
+
+@-o-keyframes shake {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_shake.scss */
+  0%, 100% {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_shake.scss */
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translateX(-10px);
+    -moz-transform: translateX(-10px);
+    -ms-transform: translateX(-10px);
+    -o-transform: translateX(-10px);
+    transform: translateX(-10px); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_shake.scss */
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translateX(10px);
+    -moz-transform: translateX(10px);
+    -ms-transform: translateX(10px);
+    -o-transform: translateX(10px);
+    transform: translateX(10px); } }
+
+@keyframes shake {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_shake.scss */
+  0%, 100% {
+    -webkit-transform: translateX(0);
+    -moz-transform: translateX(0);
+    -ms-transform: translateX(0);
+    -o-transform: translateX(0);
+    transform: translateX(0); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_shake.scss */
+  10%, 30%, 50%, 70%, 90% {
+    -webkit-transform: translateX(-10px);
+    -moz-transform: translateX(-10px);
+    -ms-transform: translateX(-10px);
+    -o-transform: translateX(-10px);
+    transform: translateX(-10px); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_shake.scss */
+  20%, 40%, 60%, 80% {
+    -webkit-transform: translateX(10px);
+    -moz-transform: translateX(10px);
+    -ms-transform: translateX(10px);
+    -o-transform: translateX(10px);
+    transform: translateX(10px); } }
+
+@-webkit-keyframes swing {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  20%, 40%, 60%, 80%, 100% {
+    -webkit-transform-origin: top center;
+    -moz-transform-origin: top center;
+    -ms-transform-origin: top center;
+    -o-transform-origin: top center;
+    transform-origin: top center; }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  20% {
+    -webkit-transform: rotate(15deg);
+    -moz-transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
+    -o-transform: rotate(15deg);
+    transform: rotate(15deg); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  40% {
+    -webkit-transform: rotate(-10deg);
+    -moz-transform: rotate(-10deg);
+    -ms-transform: rotate(-10deg);
+    -o-transform: rotate(-10deg);
+    transform: rotate(-10deg); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  60% {
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    -o-transform: rotate(5deg);
+    transform: rotate(5deg); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  80% {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    transform: rotate(-5deg); }
+
+  /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  100% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); } }
+
+@-moz-keyframes swing {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  20%, 40%, 60%, 80%, 100% {
+    -webkit-transform-origin: top center;
+    -moz-transform-origin: top center;
+    -ms-transform-origin: top center;
+    -o-transform-origin: top center;
+    transform-origin: top center; }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  20% {
+    -webkit-transform: rotate(15deg);
+    -moz-transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
+    -o-transform: rotate(15deg);
+    transform: rotate(15deg); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  40% {
+    -webkit-transform: rotate(-10deg);
+    -moz-transform: rotate(-10deg);
+    -ms-transform: rotate(-10deg);
+    -o-transform: rotate(-10deg);
+    transform: rotate(-10deg); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  60% {
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    -o-transform: rotate(5deg);
+    transform: rotate(5deg); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  80% {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    transform: rotate(-5deg); }
+
+  /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  100% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); } }
+
+@-ms-keyframes swing {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  20%, 40%, 60%, 80%, 100% {
+    -webkit-transform-origin: top center;
+    -moz-transform-origin: top center;
+    -ms-transform-origin: top center;
+    -o-transform-origin: top center;
+    transform-origin: top center; }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  20% {
+    -webkit-transform: rotate(15deg);
+    -moz-transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
+    -o-transform: rotate(15deg);
+    transform: rotate(15deg); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  40% {
+    -webkit-transform: rotate(-10deg);
+    -moz-transform: rotate(-10deg);
+    -ms-transform: rotate(-10deg);
+    -o-transform: rotate(-10deg);
+    transform: rotate(-10deg); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  60% {
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    -o-transform: rotate(5deg);
+    transform: rotate(5deg); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  80% {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    transform: rotate(-5deg); }
+
+  /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  100% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); } }
+
+@-o-keyframes swing {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  20%, 40%, 60%, 80%, 100% {
+    -webkit-transform-origin: top center;
+    -moz-transform-origin: top center;
+    -ms-transform-origin: top center;
+    -o-transform-origin: top center;
+    transform-origin: top center; }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  20% {
+    -webkit-transform: rotate(15deg);
+    -moz-transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
+    -o-transform: rotate(15deg);
+    transform: rotate(15deg); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  40% {
+    -webkit-transform: rotate(-10deg);
+    -moz-transform: rotate(-10deg);
+    -ms-transform: rotate(-10deg);
+    -o-transform: rotate(-10deg);
+    transform: rotate(-10deg); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  60% {
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    -o-transform: rotate(5deg);
+    transform: rotate(5deg); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  80% {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    transform: rotate(-5deg); }
+
+  /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  100% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); } }
+
+@keyframes swing {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  20%, 40%, 60%, 80%, 100% {
+    -webkit-transform-origin: top center;
+    -moz-transform-origin: top center;
+    -ms-transform-origin: top center;
+    -o-transform-origin: top center;
+    transform-origin: top center; }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  20% {
+    -webkit-transform: rotate(15deg);
+    -moz-transform: rotate(15deg);
+    -ms-transform: rotate(15deg);
+    -o-transform: rotate(15deg);
+    transform: rotate(15deg); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  40% {
+    -webkit-transform: rotate(-10deg);
+    -moz-transform: rotate(-10deg);
+    -ms-transform: rotate(-10deg);
+    -o-transform: rotate(-10deg);
+    transform: rotate(-10deg); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  60% {
+    -webkit-transform: rotate(5deg);
+    -moz-transform: rotate(5deg);
+    -ms-transform: rotate(5deg);
+    -o-transform: rotate(5deg);
+    transform: rotate(5deg); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  80% {
+    -webkit-transform: rotate(-5deg);
+    -moz-transform: rotate(-5deg);
+    -ms-transform: rotate(-5deg);
+    -o-transform: rotate(-5deg);
+    transform: rotate(-5deg); }
+
+  /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_swing.scss */
+  100% {
+    -webkit-transform: rotate(0deg);
+    -moz-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg); } }
+
+@-webkit-keyframes tada {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  10%, 20% {
+    -webkit-transform: scale(0.9) rotate(-3deg);
+    -moz-transform: scale(0.9) rotate(-3deg);
+    -ms-transform: scale(0.9) rotate(-3deg);
+    -o-transform: scale(0.9) rotate(-3deg);
+    transform: scale(0.9) rotate(-3deg); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  30%, 50%, 70%, 90% {
+    -webkit-transform: scale(1.1) rotate(3deg);
+    -moz-transform: scale(1.1) rotate(3deg);
+    -ms-transform: scale(1.1) rotate(3deg);
+    -o-transform: scale(1.1) rotate(3deg);
+    transform: scale(1.1) rotate(3deg); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  40%, 60%, 80% {
+    -webkit-transform: scale(1.1) rotate(-3deg);
+    -moz-transform: scale(1.1) rotate(-3deg);
+    -ms-transform: scale(1.1) rotate(-3deg);
+    -o-transform: scale(1.1) rotate(-3deg);
+    transform: scale(1.1) rotate(-3deg); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  100% {
+    -webkit-transform: scale(1) rotate(0);
+    -moz-transform: scale(1) rotate(0);
+    -ms-transform: scale(1) rotate(0);
+    -o-transform: scale(1) rotate(0);
+    transform: scale(1) rotate(0); } }
+
+@-moz-keyframes tada {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  10%, 20% {
+    -webkit-transform: scale(0.9) rotate(-3deg);
+    -moz-transform: scale(0.9) rotate(-3deg);
+    -ms-transform: scale(0.9) rotate(-3deg);
+    -o-transform: scale(0.9) rotate(-3deg);
+    transform: scale(0.9) rotate(-3deg); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  30%, 50%, 70%, 90% {
+    -webkit-transform: scale(1.1) rotate(3deg);
+    -moz-transform: scale(1.1) rotate(3deg);
+    -ms-transform: scale(1.1) rotate(3deg);
+    -o-transform: scale(1.1) rotate(3deg);
+    transform: scale(1.1) rotate(3deg); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  40%, 60%, 80% {
+    -webkit-transform: scale(1.1) rotate(-3deg);
+    -moz-transform: scale(1.1) rotate(-3deg);
+    -ms-transform: scale(1.1) rotate(-3deg);
+    -o-transform: scale(1.1) rotate(-3deg);
+    transform: scale(1.1) rotate(-3deg); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  100% {
+    -webkit-transform: scale(1) rotate(0);
+    -moz-transform: scale(1) rotate(0);
+    -ms-transform: scale(1) rotate(0);
+    -o-transform: scale(1) rotate(0);
+    transform: scale(1) rotate(0); } }
+
+@-ms-keyframes tada {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  10%, 20% {
+    -webkit-transform: scale(0.9) rotate(-3deg);
+    -moz-transform: scale(0.9) rotate(-3deg);
+    -ms-transform: scale(0.9) rotate(-3deg);
+    -o-transform: scale(0.9) rotate(-3deg);
+    transform: scale(0.9) rotate(-3deg); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  30%, 50%, 70%, 90% {
+    -webkit-transform: scale(1.1) rotate(3deg);
+    -moz-transform: scale(1.1) rotate(3deg);
+    -ms-transform: scale(1.1) rotate(3deg);
+    -o-transform: scale(1.1) rotate(3deg);
+    transform: scale(1.1) rotate(3deg); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  40%, 60%, 80% {
+    -webkit-transform: scale(1.1) rotate(-3deg);
+    -moz-transform: scale(1.1) rotate(-3deg);
+    -ms-transform: scale(1.1) rotate(-3deg);
+    -o-transform: scale(1.1) rotate(-3deg);
+    transform: scale(1.1) rotate(-3deg); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  100% {
+    -webkit-transform: scale(1) rotate(0);
+    -moz-transform: scale(1) rotate(0);
+    -ms-transform: scale(1) rotate(0);
+    -o-transform: scale(1) rotate(0);
+    transform: scale(1) rotate(0); } }
+
+@-o-keyframes tada {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  10%, 20% {
+    -webkit-transform: scale(0.9) rotate(-3deg);
+    -moz-transform: scale(0.9) rotate(-3deg);
+    -ms-transform: scale(0.9) rotate(-3deg);
+    -o-transform: scale(0.9) rotate(-3deg);
+    transform: scale(0.9) rotate(-3deg); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  30%, 50%, 70%, 90% {
+    -webkit-transform: scale(1.1) rotate(3deg);
+    -moz-transform: scale(1.1) rotate(3deg);
+    -ms-transform: scale(1.1) rotate(3deg);
+    -o-transform: scale(1.1) rotate(3deg);
+    transform: scale(1.1) rotate(3deg); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  40%, 60%, 80% {
+    -webkit-transform: scale(1.1) rotate(-3deg);
+    -moz-transform: scale(1.1) rotate(-3deg);
+    -ms-transform: scale(1.1) rotate(-3deg);
+    -o-transform: scale(1.1) rotate(-3deg);
+    transform: scale(1.1) rotate(-3deg); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  100% {
+    -webkit-transform: scale(1) rotate(0);
+    -moz-transform: scale(1) rotate(0);
+    -ms-transform: scale(1) rotate(0);
+    -o-transform: scale(1) rotate(0);
+    transform: scale(1) rotate(0); } }
+
+@keyframes tada {
+  /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  0% {
+    -webkit-transform: scale(1);
+    -moz-transform: scale(1);
+    -ms-transform: scale(1);
+    -o-transform: scale(1);
+    transform: scale(1); }
+
+  /* line 3, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  10%, 20% {
+    -webkit-transform: scale(0.9) rotate(-3deg);
+    -moz-transform: scale(0.9) rotate(-3deg);
+    -ms-transform: scale(0.9) rotate(-3deg);
+    -o-transform: scale(0.9) rotate(-3deg);
+    transform: scale(0.9) rotate(-3deg); }
+
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  30%, 50%, 70%, 90% {
+    -webkit-transform: scale(1.1) rotate(3deg);
+    -moz-transform: scale(1.1) rotate(3deg);
+    -ms-transform: scale(1.1) rotate(3deg);
+    -o-transform: scale(1.1) rotate(3deg);
+    transform: scale(1.1) rotate(3deg); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  40%, 60%, 80% {
+    -webkit-transform: scale(1.1) rotate(-3deg);
+    -moz-transform: scale(1.1) rotate(-3deg);
+    -ms-transform: scale(1.1) rotate(-3deg);
+    -o-transform: scale(1.1) rotate(-3deg);
+    transform: scale(1.1) rotate(-3deg); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_tada.scss */
+  100% {
+    -webkit-transform: scale(1) rotate(0);
+    -moz-transform: scale(1) rotate(0);
+    -ms-transform: scale(1) rotate(0);
+    -o-transform: scale(1) rotate(0);
+    transform: scale(1) rotate(0); } }
+
+@-webkit-keyframes wobble {
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  0% {
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    -o-transform: translateX(0%);
+    transform: translateX(0%); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  15% {
+    -webkit-transform: translateX(-25%) rotate(-5deg);
+    -moz-transform: translateX(-25%) rotate(-5deg);
+    -ms-transform: translateX(-25%) rotate(-5deg);
+    -o-transform: translateX(-25%) rotate(-5deg);
+    transform: translateX(-25%) rotate(-5deg); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  30% {
+    -webkit-transform: translateX(20%) rotate(3deg);
+    -moz-transform: translateX(20%) rotate(3deg);
+    -ms-transform: translateX(20%) rotate(3deg);
+    -o-transform: translateX(20%) rotate(3deg);
+    transform: translateX(20%) rotate(3deg); }
+
+  /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  45% {
+    -webkit-transform: translateX(-15%) rotate(-3deg);
+    -moz-transform: translateX(-15%) rotate(-3deg);
+    -ms-transform: translateX(-15%) rotate(-3deg);
+    -o-transform: translateX(-15%) rotate(-3deg);
+    transform: translateX(-15%) rotate(-3deg); }
+
+  /* line 8, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  60% {
+    -webkit-transform: translateX(10%) rotate(2deg);
+    -moz-transform: translateX(10%) rotate(2deg);
+    -ms-transform: translateX(10%) rotate(2deg);
+    -o-transform: translateX(10%) rotate(2deg);
+    transform: translateX(10%) rotate(2deg); }
+
+  /* line 9, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  75% {
+    -webkit-transform: translateX(-5%) rotate(-1deg);
+    -moz-transform: translateX(-5%) rotate(-1deg);
+    -ms-transform: translateX(-5%) rotate(-1deg);
+    -o-transform: translateX(-5%) rotate(-1deg);
+    transform: translateX(-5%) rotate(-1deg); }
+
+  /* line 10, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  100% {
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    -o-transform: translateX(0%);
+    transform: translateX(0%); } }
+
+@-moz-keyframes wobble {
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  0% {
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    -o-transform: translateX(0%);
+    transform: translateX(0%); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  15% {
+    -webkit-transform: translateX(-25%) rotate(-5deg);
+    -moz-transform: translateX(-25%) rotate(-5deg);
+    -ms-transform: translateX(-25%) rotate(-5deg);
+    -o-transform: translateX(-25%) rotate(-5deg);
+    transform: translateX(-25%) rotate(-5deg); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  30% {
+    -webkit-transform: translateX(20%) rotate(3deg);
+    -moz-transform: translateX(20%) rotate(3deg);
+    -ms-transform: translateX(20%) rotate(3deg);
+    -o-transform: translateX(20%) rotate(3deg);
+    transform: translateX(20%) rotate(3deg); }
+
+  /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  45% {
+    -webkit-transform: translateX(-15%) rotate(-3deg);
+    -moz-transform: translateX(-15%) rotate(-3deg);
+    -ms-transform: translateX(-15%) rotate(-3deg);
+    -o-transform: translateX(-15%) rotate(-3deg);
+    transform: translateX(-15%) rotate(-3deg); }
+
+  /* line 8, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  60% {
+    -webkit-transform: translateX(10%) rotate(2deg);
+    -moz-transform: translateX(10%) rotate(2deg);
+    -ms-transform: translateX(10%) rotate(2deg);
+    -o-transform: translateX(10%) rotate(2deg);
+    transform: translateX(10%) rotate(2deg); }
+
+  /* line 9, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  75% {
+    -webkit-transform: translateX(-5%) rotate(-1deg);
+    -moz-transform: translateX(-5%) rotate(-1deg);
+    -ms-transform: translateX(-5%) rotate(-1deg);
+    -o-transform: translateX(-5%) rotate(-1deg);
+    transform: translateX(-5%) rotate(-1deg); }
+
+  /* line 10, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  100% {
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    -o-transform: translateX(0%);
+    transform: translateX(0%); } }
+
+@-ms-keyframes wobble {
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  0% {
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    -o-transform: translateX(0%);
+    transform: translateX(0%); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  15% {
+    -webkit-transform: translateX(-25%) rotate(-5deg);
+    -moz-transform: translateX(-25%) rotate(-5deg);
+    -ms-transform: translateX(-25%) rotate(-5deg);
+    -o-transform: translateX(-25%) rotate(-5deg);
+    transform: translateX(-25%) rotate(-5deg); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  30% {
+    -webkit-transform: translateX(20%) rotate(3deg);
+    -moz-transform: translateX(20%) rotate(3deg);
+    -ms-transform: translateX(20%) rotate(3deg);
+    -o-transform: translateX(20%) rotate(3deg);
+    transform: translateX(20%) rotate(3deg); }
+
+  /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  45% {
+    -webkit-transform: translateX(-15%) rotate(-3deg);
+    -moz-transform: translateX(-15%) rotate(-3deg);
+    -ms-transform: translateX(-15%) rotate(-3deg);
+    -o-transform: translateX(-15%) rotate(-3deg);
+    transform: translateX(-15%) rotate(-3deg); }
+
+  /* line 8, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  60% {
+    -webkit-transform: translateX(10%) rotate(2deg);
+    -moz-transform: translateX(10%) rotate(2deg);
+    -ms-transform: translateX(10%) rotate(2deg);
+    -o-transform: translateX(10%) rotate(2deg);
+    transform: translateX(10%) rotate(2deg); }
+
+  /* line 9, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  75% {
+    -webkit-transform: translateX(-5%) rotate(-1deg);
+    -moz-transform: translateX(-5%) rotate(-1deg);
+    -ms-transform: translateX(-5%) rotate(-1deg);
+    -o-transform: translateX(-5%) rotate(-1deg);
+    transform: translateX(-5%) rotate(-1deg); }
+
+  /* line 10, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  100% {
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    -o-transform: translateX(0%);
+    transform: translateX(0%); } }
+
+@-o-keyframes wobble {
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  0% {
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    -o-transform: translateX(0%);
+    transform: translateX(0%); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  15% {
+    -webkit-transform: translateX(-25%) rotate(-5deg);
+    -moz-transform: translateX(-25%) rotate(-5deg);
+    -ms-transform: translateX(-25%) rotate(-5deg);
+    -o-transform: translateX(-25%) rotate(-5deg);
+    transform: translateX(-25%) rotate(-5deg); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  30% {
+    -webkit-transform: translateX(20%) rotate(3deg);
+    -moz-transform: translateX(20%) rotate(3deg);
+    -ms-transform: translateX(20%) rotate(3deg);
+    -o-transform: translateX(20%) rotate(3deg);
+    transform: translateX(20%) rotate(3deg); }
+
+  /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  45% {
+    -webkit-transform: translateX(-15%) rotate(-3deg);
+    -moz-transform: translateX(-15%) rotate(-3deg);
+    -ms-transform: translateX(-15%) rotate(-3deg);
+    -o-transform: translateX(-15%) rotate(-3deg);
+    transform: translateX(-15%) rotate(-3deg); }
+
+  /* line 8, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  60% {
+    -webkit-transform: translateX(10%) rotate(2deg);
+    -moz-transform: translateX(10%) rotate(2deg);
+    -ms-transform: translateX(10%) rotate(2deg);
+    -o-transform: translateX(10%) rotate(2deg);
+    transform: translateX(10%) rotate(2deg); }
+
+  /* line 9, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  75% {
+    -webkit-transform: translateX(-5%) rotate(-1deg);
+    -moz-transform: translateX(-5%) rotate(-1deg);
+    -ms-transform: translateX(-5%) rotate(-1deg);
+    -o-transform: translateX(-5%) rotate(-1deg);
+    transform: translateX(-5%) rotate(-1deg); }
+
+  /* line 10, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  100% {
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    -o-transform: translateX(0%);
+    transform: translateX(0%); } }
+
+@keyframes wobble {
+  /* line 4, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  0% {
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    -o-transform: translateX(0%);
+    transform: translateX(0%); }
+
+  /* line 5, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  15% {
+    -webkit-transform: translateX(-25%) rotate(-5deg);
+    -moz-transform: translateX(-25%) rotate(-5deg);
+    -ms-transform: translateX(-25%) rotate(-5deg);
+    -o-transform: translateX(-25%) rotate(-5deg);
+    transform: translateX(-25%) rotate(-5deg); }
+
+  /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  30% {
+    -webkit-transform: translateX(20%) rotate(3deg);
+    -moz-transform: translateX(20%) rotate(3deg);
+    -ms-transform: translateX(20%) rotate(3deg);
+    -o-transform: translateX(20%) rotate(3deg);
+    transform: translateX(20%) rotate(3deg); }
+
+  /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  45% {
+    -webkit-transform: translateX(-15%) rotate(-3deg);
+    -moz-transform: translateX(-15%) rotate(-3deg);
+    -ms-transform: translateX(-15%) rotate(-3deg);
+    -o-transform: translateX(-15%) rotate(-3deg);
+    transform: translateX(-15%) rotate(-3deg); }
+
+  /* line 8, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  60% {
+    -webkit-transform: translateX(10%) rotate(2deg);
+    -moz-transform: translateX(10%) rotate(2deg);
+    -ms-transform: translateX(10%) rotate(2deg);
+    -o-transform: translateX(10%) rotate(2deg);
+    transform: translateX(10%) rotate(2deg); }
+
+  /* line 9, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  75% {
+    -webkit-transform: translateX(-5%) rotate(-1deg);
+    -moz-transform: translateX(-5%) rotate(-1deg);
+    -ms-transform: translateX(-5%) rotate(-1deg);
+    -o-transform: translateX(-5%) rotate(-1deg);
+    transform: translateX(-5%) rotate(-1deg); }
+
+  /* line 10, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_wobble.scss */
+  100% {
+    -webkit-transform: translateX(0%);
+    -moz-transform: translateX(0%);
+    -ms-transform: translateX(0%);
+    -o-transform: translateX(0%);
+    transform: translateX(0%); } }
+
 /*!
  *  Font Awesome 4.3.0 by @davegandy - http://fontawesome.io - @fontawesome
  *  License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
@@ -683,7 +2142,7 @@ blockquote {
   font-style: normal; }
 
 /* line 1, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_core.scss */
-.fa {
+.fa, #header .pane .content .top .search-form:before, #header .pane .content .top .header-links .link.tracker:before, #header .pane .content .top .header-links .link.github:before {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -754,10 +2213,10 @@ blockquote {
   float: right; }
 
 /* line 11, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.fa-pull-left {
+.fa.fa-pull-left, #header .pane .content .top .fa-pull-left.search-form:before, #header .pane .content .top .header-links .fa-pull-left.link.tracker:before, #header .pane .content .top .header-links .fa-pull-left.link.github:before {
   margin-right: .3em; }
 /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.fa-pull-right {
+.fa.fa-pull-right, #header .pane .content .top .fa-pull-right.search-form:before, #header .pane .content .top .header-links .fa-pull-right.link.tracker:before, #header .pane .content .top .header-links .fa-pull-right.link.github:before {
   margin-left: .3em; }
 
 /* Deprecated as of 4.4.0 */
@@ -770,10 +2229,10 @@ blockquote {
   float: left; }
 
 /* line 20, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.pull-left {
+.fa.pull-left, #header .pane .content .top .pull-left.search-form:before, #header .pane .content .top .header-links .pull-left.link.tracker:before, #header .pane .content .top .header-links .pull-left.link.github:before {
   margin-right: .3em; }
 /* line 21, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.pull-right {
+.fa.pull-right, #header .pane .content .top .pull-right.search-form:before, #header .pane .content .top .header-links .pull-right.link.tracker:before, #header .pane .content .top .header-links .pull-right.link.github:before {
   margin-left: .3em; }
 
 /* line 1, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_animated.scss */
@@ -886,7 +2345,7 @@ blockquote {
   content: "\f001"; }
 
 /* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-search:before {
+.fa-search:before, #header .pane .content .top .search-form:before {
   content: "\f002"; }
 
 /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -1462,7 +2921,7 @@ blockquote {
   content: "\f09a"; }
 
 /* line 150, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-github:before {
+.fa-github:before, #header .pane .content .top .header-links .link.github:before {
   content: "\f09b"; }
 
 /* line 151, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -1486,7 +2945,7 @@ blockquote {
   content: "\f0a1"; }
 
 /* line 156, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-bell:before {
+.fa-bell:before, #header .pane .content .top .header-links .link.tracker.new:before {
   content: "\f0f3"; }
 
 /* line 157, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -1742,7 +3201,7 @@ blockquote {
   content: "\f0f2"; }
 
 /* line 220, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-bell-o:before {
+.fa-bell-o:before, #header .pane .content .top .header-links .link.tracker:before {
   content: "\f0a2"; }
 
 /* line 221, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -3605,7 +5064,7 @@ label {
     display: block;
     margin-top: 5px;
     margin-bottom: 10px;
-    color: #b7b7b7; }
+    color: #737373; }
 
 /* line 103, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_forms.scss */
 .form-actions input {
@@ -3857,7 +5316,7 @@ table {
   margin: 1em 0;
   border: 1px solid #d0d0d0;
   box-shadow: none;
-  color: #777777;
+  color: #333333;
   border-collapse: separate;
   border-spacing: 0; }
   /* line 16, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tables.scss */
@@ -3926,6 +5385,117 @@ table {
 
 /**
  * @file
- * Main styles. Here must be you stylesheet.
+ * Main styles.
  * Use it well.
  */
+/* line 21, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/language/susy/_box-sizing.scss */
+*, *:before, *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box; }
+
+/* line 9, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+#header {
+  font-size: 0.875rem;
+  background: #2E5B95;
+  box-shadow: inset 0 2.5rem 0 0 rgba(0, 0, 0, 0.5); }
+  /* line 14, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  #header .pane .logo {
+    background: white;
+    padding: 0.625rem; }
+  /* line 20, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  #header .pane .content .top {
+    height: 2.5rem;
+    color: #eeeeee; }
+    /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
+    #header .pane .content .top:after {
+      content: " ";
+      display: block;
+      clear: both; }
+    /* line 24, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    #header .pane .content .top .search-form {
+      width: 15rem;
+      float: left;
+      position: relative; }
+      /* line 28, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      #header .pane .content .top .search-form .search-input {
+        height: 2.5rem;
+        width: 100%;
+        border-radius: 0;
+        background: rgba(255, 255, 255, 0.1);
+        box-shadow: none;
+        border: none;
+        color: #FFF;
+        padding-left: 2.5rem;
+        margin: 0; }
+      /* line 39, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      #header .pane .content .top .search-form:before {
+        position: absolute;
+        left: 0.875rem;
+        line-height: 2.5rem; }
+    /* line 50, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    #header .pane .content .top .header-links .link {
+      position: relative;
+      display: block;
+      float: left;
+      line-height: 2.5rem;
+      color: #eeeeee;
+      padding: 0 0.625rem;
+      background: transparent;
+      transition: all 400ms; }
+      /* line 59, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      #header .pane .content .top .header-links .link:hover {
+        background: rgba(0, 0, 0, 0.2);
+        transition: all 400ms; }
+      /* line 63, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      #header .pane .content .top .header-links .link.tracker, #header .pane .content .top .header-links .link.github {
+        padding-left: 2.1875rem; }
+        /* line 65, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+        #header .pane .content .top .header-links .link.tracker:before, #header .pane .content .top .header-links .link.github:before {
+          position: absolute;
+          left: 0;
+          line-height: 2.5rem;
+          width: 2.1875rem;
+          text-align: center; }
+      /* line 79, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      #header .pane .content .top .header-links .link.tracker.new:before {
+        -webkit-transform-origin: top center;
+        -moz-transform-origin: top center;
+        -ms-transform-origin: top center;
+        -o-transform-origin: top center;
+        transform-origin: top center;
+        -webkit-animation-name: swing;
+        -moz-animation-name: swing;
+        -ms-animation-name: swing;
+        -o-animation-name: swing;
+        animation-name: swing;
+        -webkit-animation-iteration-count: infinite;
+        -moz-animation-iteration-count: infinite;
+        -ms-animation-iteration-count: infinite;
+        -o-animation-iteration-count: infinite;
+        animation-iteration-count: infinite;
+        -webkit-animation-duration: 2s;
+        -moz-animation-duration: 2s;
+        -ms-animation-duration: 2s;
+        -o-animation-duration: 2s;
+        animation-duration: 2s;
+        -webkit-animation-delay: 0s;
+        -moz-animation-delay: 0s;
+        -ms-animation-delay: 0s;
+        -o-animation-delay: 0s;
+        animation-delay: 0s;
+        -webkit-animation-timing-function: ease;
+        -moz-animation-timing-function: ease;
+        -ms-animation-timing-function: ease;
+        -o-animation-timing-function: ease;
+        animation-timing-function: ease;
+        -webkit-animation-fill-mode: both;
+        -moz-animation-fill-mode: both;
+        -ms-animation-fill-mode: both;
+        -o-animation-fill-mode: both;
+        animation-fill-mode: both;
+        -webkit-backface-visibility: hidden;
+        -moz-backface-visibility: hidden;
+        -ms-backface-visibility: hidden;
+        -o-backface-visibility: hidden;
+        backface-visibility: hidden; }

@@ -6,7 +6,7 @@
 /**
  * Sizes.
  */
-$site-width: 1100px !default;
+$site-width: 1200px !default;
 // Media sizes.
 $xs-media: max-width 768px;
 $sm-media: 768px;
@@ -26,6 +26,8 @@ $gray-lighter: lighten($gray-base, 93.5%);
 $brand-main: #f44336;
 $brand-border-color: #E8E8E8;
 
+$brand-color-1: #2E5B95;
+
 /**
  * Branding.
  */
@@ -36,7 +38,7 @@ $brand-warning: #f0ad4e !default;
 $brand-danger:  #d9534f !default;
 
 $body-bg:    white;
-$text-color: $gray-light;
+$text-color: $gray-dark;
 
 // Links
 $link-color:            #4a90d9;

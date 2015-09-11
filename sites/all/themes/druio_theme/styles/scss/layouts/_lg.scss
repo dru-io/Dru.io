@@ -5,5 +5,20 @@
  */
 
 @include breakpoint($lg-media) {
-  // Your styles here.
+  // -16px - this is for scrollbar size.
+  // If we don't do this, on ~1190px browser width we get vertical scrollbars.
+  $site-width: 1200px - 16px;
+
+  #header {
+    .pane {
+      @include container($site-width);
+      .logo {
+        width: pxtorem(170px);
+        float: left;
+      }
+      .content {
+        margin-left: 170px;
+      }
+    }
+  }
 }
