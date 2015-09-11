@@ -1,0 +1,18 @@
+div.contextual-links-wrapper {
+  ul.contextual-links {
+    background: $contextual-links-bg;
+    border: $contextual-links-border;
+    border-radius: $contextual-links-border-radius;
+    box-shadow: $contextual-links-box-shadow;
+    li {
+      a {
+        color: $contextual-links-color;
+      }
+      &:hover {
+        a {
+          background: $contextual-links-hover-bg;
+        }
+      }
+    }
+  }
+}

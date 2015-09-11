@@ -1,0 +1,35 @@
+/**
+ * @file
+ * Fieldsets
+ */
+fieldset {
+  border: 1px solid #D0D0D0;
+  padding: 15px;
+  position: relative;
+  margin: 15px 0px;
+
+  .fieldset-legend {
+    font-weight: bold;
+    margin-top: 5px;
+    position: absolute;
+    text-transform: uppercase;
+  }
+
+  .fieldset-wrapper {
+    margin: 20px 0px 0 0;
+  }
+}
+
+html.js {
+  fieldset {
+    &.collapsed {
+      border-width: 1px;
+    }
+
+    &.collapsible {
+      .fieldset-legend {
+        padding-left: 15px;
+      }
+    }
+  }
+}

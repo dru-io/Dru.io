@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="57.934929mm"
+   height="12.231467mm"
+   viewBox="0 0 205.28125 43.339844"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.91 r"
+   inkscape:export-filename="/home/nikita/favicon.png"
+   inkscape:export-xdpi="180"
+   inkscape:export-ydpi="180"
+   sodipodi:docname="logo.svg">
+  <defs
+     id="defs4">
+    <linearGradient
+       id="linearGradient4605"
+       inkscape:collect="always">
+      <stop
+         id="stop4609"
+         offset="0"
+         style="stop-color:#5c2849;stop-opacity:1" />
+      <stop
+         style="stop-color:#a73e5c;stop-opacity:1"
+         offset="0.25834319"
+         id="stop4855" />
+      <stop
+         id="stop4857"
+         offset="0.51668632"
+         style="stop-color:#ec4863;stop-opacity:1" />
+      <stop
+         style="stop-color:#ff733f;stop-opacity:0.83137256"
+         offset="0.77502948"
+         id="stop4859" />
+      <stop
+         id="stop4611"
+         offset="1"
+         style="stop-color:#ffd285;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4605"
+       id="linearGradient4149"
+       x1="-35.81271"
+       y1="504.09552"
+       x2="169.46854"
+       y2="504.09552"
+       gradientUnits="userSpaceOnUse" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.979899"
+     inkscape:cx="-4.3015398"
+     inkscape:cy="-16.431985"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     fit-margin-top="0"
+     fit-margin-left="0"
+     fit-margin-right="0"
+     fit-margin-bottom="0"
+     inkscape:window-width="1920"
+     inkscape:window-height="1020"
+     inkscape:window-x="-1"
+     inkscape:window-y="-3"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title />
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(35.81271,-482.4256)">
+    <text
+       xml:space="preserve"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4149);fill-opacity:1;stroke:none;"
+       x="-38.601772"
+       y="524.97247"
+       id="text2985"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         x="-38.601772"
+         y="524.97247"
+         id="tspan2993"
+         style="font-weight:bold;font-size:56px;-inkscape-font-specification:'Sans Bold';fill:url(#linearGradient4149);fill-opacity:1">Gli<tspan
+   style="font-size:48px;letter-spacing:1px;fill:url(#linearGradient4149);fill-opacity:1"
+   id="tspan3007">sseo</tspan></tspan></text>
+  </g>
+</svg>

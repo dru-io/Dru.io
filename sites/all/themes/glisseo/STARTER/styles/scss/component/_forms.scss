@@ -1,0 +1,110 @@
+/**
+ * @file
+ * Form and form elements styles.
+ */
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[autofocus],
+input[required],
+textarea,
+select {
+  display: block;
+  max-width: 100%;
+  width: auto;
+  height: $input-height-base;
+  padding: $padding-base-vertical $padding-base-horizontal;
+  line-height: $line-height-base;
+  background: $input-bg;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $input-border-color;
+  border-radius: $border-radius-small;
+  box-shadow: $input-box-shadow;
+  box-sizing: border-box;
+
+  &.error {
+    border-color: #e74c3c;
+  }
+
+  &:focus {
+    outline: medium none;
+    border-color: $input-border-color-focus;
+    box-shadow: $input-box-shadow-focus;
+    background: $input-bg-focus;
+    -webkit-transition: all 200ms linear;
+    transition: all 200ms linear;
+  }
+
+  &:disabled {
+    cursor: $input-cursor-disabled;
+    background: $input-bg-disabled;
+    font-size: 100%;
+    color: $input-color-disabled;
+    text-shadow: none;
+  }
+}
+
+textarea {
+  height: auto;
+}
+
+select {
+  @include gradient-vertical(white, #f9f9f9);
+  box-shadow: $select-box-shadow;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $select-border-color;
+
+  &:focus {
+    @include gradient-vertical(white, #f9f9f9);
+    border-color: $select-border-color-focus;
+    box-shadow: $select-box-shadow-focus;
+  }
+}
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: pxtorem(5px);
+  font-weight: bold;
+}
+
+.label-inline {
+  display: inline-block;
+}
+
+/**
+ * Drupal specific styles.
+ */
+.form-item {
+  margin: 0;
+  padding: 0 0 $form-item-padding 0;
+  .description {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    color: lighten($text-color, 25%);
+  }
+}
+
+.form-actions {
+  input {
+    margin: 0 pxtorem(6px) 0 0;
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+
