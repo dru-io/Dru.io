@@ -42,8 +42,8 @@ $body-bg:    white url('../../images/bg.png') repeat;
 $text-color: $gray-dark;
 
 // Links
-$link-color:            #4a90d9;
-$link-hover-color:      #276ea3;
+$link-color:            #0077c0;
+$link-hover-color:      lighten($link-color, 20%);
 $link-hover-decoration: none;
 
 $selection-bg:    $gray-lighter;

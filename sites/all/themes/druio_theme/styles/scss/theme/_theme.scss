@@ -180,3 +180,13 @@
   padding: 0;
   list-style: none;
 }
+
+#sidebar {
+  > .block {
+    margin-bottom: pxtorem(20px);
+    > .title {
+      margin-top: 0;
+      @include font-size(20px);
+    }
+  }
+}

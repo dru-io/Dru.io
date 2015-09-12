@@ -552,11 +552,11 @@ body {
 
 /* line 16, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/base/_typography.scss */
 a {
-  color: #4a90d9;
+  color: #0077c0;
   text-decoration: none; }
   /* line 19, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/base/_typography.scss */
   a:hover {
-    color: #276ea3; }
+    color: #27adff; }
 
 /* line 24, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/base/_typography.scss */
 ol, ul {
@@ -5614,3 +5614,12 @@ table {
   margin: 0;
   padding: 0;
   list-style: none; }
+
+/* line 185, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+#sidebar > .block {
+  margin-bottom: 1.25rem; }
+  /* line 187, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  #sidebar > .block > .title {
+    margin-top: 0;
+    font-size: 20px;
+    font-size: 1.25rem; }
