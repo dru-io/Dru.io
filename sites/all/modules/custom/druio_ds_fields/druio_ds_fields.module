@@ -9,7 +9,7 @@
  * ui_limit field value.
  */
 
-define('DRUIO_DS_FIELDS_DEFAULT_AVATAR_PATH', '/sites/all/themes/druiot/images/noavatar.png');
+define('DRUIO_DS_FIELDS_DEFAULT_AVATAR_PATH', '/sites/all/themes/druio_theme/noavatar.png');
 
 /**
  * Implements hook_ds_fields_info().
@@ -80,6 +80,13 @@ function druio_ds_fields_ds_fields_info($entity_type) {
       'ui_limit' => array('question|*', 'answer|*'),
       'field_type' => DS_FIELD_TYPE_FUNCTION,
       'function' => 'druio_ds_fields_rate_vote_up_down',
+    );
+
+    $fields['question_teaser_statistic'] = array(
+      'title' => 'Question: Statistics for teaser',
+      'ui_limit' => array('question|teaser'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_question_teaser_statistic',
     );
 
     return array($entity_type => $fields);
@@ -304,4 +311,51 @@ function druio_ds_fields_question_title(array $field) {
  */
 function druio_ds_fields_rate_vote_up_down(array $field) {
   return rate_embed($field['entity'], 'vote_up_down', RATE_FULL);
+}
+
+/**
+ * Simple statistics for question node on teaser mode. Like StackOverflow.
+ * @param $field
+ * @return string
+ */
+function druio_ds_fields_question_teaser_statistic($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+  // Question NID.
+  $nid = $wrapper->getIdentifier();
+  $answers_count = druio_question_answers_count($nid);
+  $is_best_answer = druio_question_is_best_answer($nid);
+  $rating_results = rate_get_results('node', $nid, 1);
+  $rating = $rating_results['rating'];
+
+  return format_string(
+    '<div class="@wrapper_class">
+  <div class="@rating_class">
+    @rating
+    <div class="@label_class">
+      @rating_label
+    </div>
+  </div>
+
+  <div class="@answers_class">
+    @answers
+    <div class="@label_class">
+      @answers_label
+    </div>
+  </div>
+</div>',
+    array(
+      '@wrapper_class' => 'info',
+      '@rating_class' => 'rating',
+      '@rating' => $rating,
+      '@label_class' => 'label',
+      '@rating_label' => 'рейтинг',
+      '@answers_class' => 'answers ' . ($is_best_answer ? 'has-best' : ''),
+      '@answers' => $answers_count,
+      '@answers_label' => druio_russian_plural($answers_count, array(
+        'ответ',
+        'ответа',
+        'ответов',
+      ))
+    )
+  );
 }
