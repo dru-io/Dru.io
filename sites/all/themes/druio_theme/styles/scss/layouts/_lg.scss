@@ -37,4 +37,18 @@
   #sidebar {
     @include span(3 last);
   }
+
+  .question-teaser {
+    @include susy-clearfix;
+    .info {
+      @include span(2);
+      @include susy-clearfix;
+      .rating {
+        @include span(6);
+      }
+      .answers {
+        @include span(6 last);
+      }
+    }
+  }
 }

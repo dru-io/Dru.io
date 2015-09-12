@@ -328,7 +328,7 @@ function druio_ds_fields_question_teaser_statistic($field) {
   $rating = $rating_results['rating'];
 
   return format_string(
-    '<div class="@wrapper_class">
+    '<div class="@wrapper_class" onclick="@onclick">
   <div class="@rating_class">
     @rating
     <div class="@label_class">
@@ -345,6 +345,7 @@ function druio_ds_fields_question_teaser_statistic($field) {
 </div>',
     array(
       '@wrapper_class' => 'info',
+      '@onclick' => "window.location.href='" . url('node/' . $nid) ."'",
       '@rating_class' => 'rating',
       '@rating' => $rating,
       '@label_class' => 'label',
@@ -352,10 +353,10 @@ function druio_ds_fields_question_teaser_statistic($field) {
       '@answers_class' => 'answers ' . ($is_best_answer ? 'has-best' : ''),
       '@answers' => $answers_count,
       '@answers_label' => druio_russian_plural($answers_count, array(
-        'ответ',
-        'ответа',
-        'ответов',
-      ))
+    'ответ',
+    'ответа',
+    'ответов',
+  ))
     )
   );
 }

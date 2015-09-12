@@ -190,3 +190,30 @@
     }
   }
 }
+
+.question-teaser {
+  border-bottom: 1px solid $hr-border;
+  padding-bottom: pxtorem($padding-large-vertical);
+  margin-bottom: pxtorem($padding-large-vertical);
+  .info {
+    cursor: pointer;
+    text-align: center;
+    @include font-size(17px);
+    .rating, .answers {
+      padding: pxtorem(6px);
+      .label {
+        @include font-size(13.5px);
+      }
+    }
+    .answers {
+      color: $brand-color-2;
+      &.has-best {
+        background: $brand-color-3;
+      }
+    }
+  }
+  .title {
+    margin-top: 0;
+    @include font-size(18px);
+  }
+}
