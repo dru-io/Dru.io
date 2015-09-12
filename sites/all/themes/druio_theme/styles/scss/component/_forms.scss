@@ -61,6 +61,7 @@ textarea {
 }
 
 select {
+  cursor: pointer;
   @include gradient-vertical(white, #f9f9f9);
   box-shadow: $select-box-shadow;
   border-width: 1px;

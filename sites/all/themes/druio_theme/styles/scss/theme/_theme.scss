@@ -255,3 +255,36 @@
     }
   }
 }
+
+.question-full {
+  > .left {}
+  > .right {
+    .tags {
+      float: left;
+      line-height: pxtorem(14px);
+      .tag {
+        display: inline-block;
+        background: #f8f8f8;
+        border: 1px solid #ececec;
+        color: #707070;
+        white-space: nowrap;
+        margin: pxtorem(2px) pxtorem(2px) pxtorem(2px) 0;
+        padding: pxtorem(4px);
+        @include font-size(11px);
+        &:before {
+          @extend .fa;
+          margin-right: pxtorem(4px);
+        }
+        &.core:before {
+          @extend .fa-drupal;
+        }
+        &.category:before {
+          @extend .fa-tag;
+        }
+        &.project:before {
+          @extend .fa-cubes;
+        }
+      }
+    }
+  }
+}

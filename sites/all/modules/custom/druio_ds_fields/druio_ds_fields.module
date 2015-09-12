@@ -68,13 +68,6 @@ function druio_ds_fields_ds_fields_info($entity_type) {
       'function' => 'druio_ds_fields_question_answers_count',
     );
 
-    $fields['question_title'] = array(
-      'title' => 'Title with mark',
-      'ui_limit' => array('question|*'),
-      'field_type' => DS_FIELD_TYPE_FUNCTION,
-      'function' => 'druio_ds_fields_question_title',
-    );
-
     $fields['rate_vote_up_down'] = array(
       'title' => 'Rate: Vote Up/Down',
       'ui_limit' => array('question|*', 'answer|*'),
@@ -295,25 +288,6 @@ function druio_ds_fields_question_answer(array $field) {
  */
 function druio_ds_fields_question_answers_count(array $field) {
   return druio_question_answers_count($field['entity']->nid);
-}
-
-/**
- * @param array $field
- *
- * @return string
- */
-function druio_ds_fields_question_title(array $field) {
-  $has_answer = druio_question_is_best_answer($field['entity']->nid);
-
-  $html = '<h2 class="@question_title_class">!label<a href="@node_url">@node_title</a></h2>';
-  $data = array(
-    '@question_title_class' => 'title',
-    '@node_url' => url('node/' . $field['entity']->nid),
-    '@node_title' => $field['entity']->title,
-    '!label' => $has_answer ? '<span class="has-answer">Решено</span>' : '',
-  );
-
-  return format_string($html, $data);
 }
 
 /**
