@@ -14,28 +14,12 @@
         <?php print $header_links; ?>
         <?php print $header_auth; ?>
       </div>
+
+      <?php print render($page['navigation']); ?>
     </div>
   </div>
 </header>
 
-<!-- CONTENT BELOW IS UNDER CONSTRUCTION :) -->
-<?php if ($site_name || $site_slogan): ?>
-  <div id="name-and-slogan">
-    <?php if ($site_name): ?>
-      <h2 id="site-name">
-        <a href="<?php print $front_page; ?>"
-           title="<?php print t('Home'); ?>"
-           rel="home"><span><?php print $site_name; ?></span></a>
-      </h2>
-    <?php endif; ?>
-
-    <?php if ($site_slogan): ?>
-      <div id="site-slogan"><?php print $site_slogan; ?></div>
-    <?php endif; ?>
-  </div>
-<?php endif; ?>
-
-<?php print render($page['navigation']); ?>
 <main id="main">
   <?php if ($page['sidebar_first']): ?>
     <?php print render($page['sidebar_first']); ?>

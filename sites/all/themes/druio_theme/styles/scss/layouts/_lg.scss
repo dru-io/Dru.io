@@ -21,4 +21,8 @@
       }
     }
   }
+
+  #main {
+    @include container($site-width);
+  }
 }

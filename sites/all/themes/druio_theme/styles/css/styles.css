@@ -686,7 +686,17 @@ blockquote {
       float: left; }
     /* line 19, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
     #header .pane .content {
-      margin-left: 170px; } }
+      margin-left: 170px; }
+  /* line 25, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
+  #main {
+    max-width: 1184px;
+    margin-left: auto;
+    margin-right: auto; }
+    /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
+    #main:after {
+      content: " ";
+      display: block;
+      clear: both; } }
 
 @-webkit-keyframes bounce {
   /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
@@ -5543,3 +5553,31 @@ table {
         /* line 136, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
         #header .pane .content .top .header-auth-user .logout:before {
           margin-left: 0.4375rem; }
+
+/* line 149, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+#navigation .menu {
+  margin: 0;
+  padding: 0;
+  list-style: none; }
+  /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
+  #navigation .menu:after {
+    content: " ";
+    display: block;
+    clear: both; }
+  /* line 154, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  #navigation .menu li {
+    float: left; }
+    /* line 156, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    #navigation .menu li a {
+      display: block;
+      line-height: 4.75rem;
+      padding: 0 0.75rem;
+      color: white;
+      font-size: 18px;
+      font-size: 1.125rem;
+      background: transparent;
+      transition: all 500ms; }
+      /* line 164, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      #navigation .menu li a:hover {
+        background: rgba(0, 0, 0, 0.25);
+        transition: all 500ms; }

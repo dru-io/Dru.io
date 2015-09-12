@@ -144,3 +144,28 @@
     }
   }
 }
+
+#navigation {
+  .menu {
+    @include susy-clearfix;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      float: left;
+      a {
+        display: block;
+        line-height: pxtorem(76px);
+        padding: 0 pxtorem($padding-base-vertical * 2);
+        color: white;
+        @include font-size(18px);
+        background: transparent;
+        transition: all 500ms;
+        &:hover {
+          background: rgba(black, .25);
+          transition: all 500ms;
+        }
+      }
+    }
+  }
+}
