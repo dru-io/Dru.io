@@ -50,5 +50,8 @@
         @include span(6 last);
       }
     }
+    .right {
+      @include span(10 last);
+    }
   }
 }

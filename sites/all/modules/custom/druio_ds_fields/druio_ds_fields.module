@@ -89,6 +89,20 @@ function druio_ds_fields_ds_fields_info($entity_type) {
       'function' => 'druio_ds_fields_question_teaser_statistic',
     );
 
+    $fields['question_tags_info'] = array(
+      'title' => 'Question: Tags (drupal version, category, projects)',
+      'ui_limit' => array('question|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_question_tags_info',
+    );
+
+    $fields['question_created_info'] = array(
+      'title' => 'Question: Created info',
+      'ui_limit' => array('question|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_question_created_info',
+    );
+
     return array($entity_type => $fields);
   }
 
@@ -328,35 +342,100 @@ function druio_ds_fields_question_teaser_statistic($field) {
   $rating = $rating_results['rating'];
 
   return format_string(
-    '<div class="@wrapper_class" onclick="@onclick">
-  <div class="@rating_class">
+    '<div class="info" onclick="@onclick">
+  <div class="rating">
     @rating
-    <div class="@label_class">
-      @rating_label
+    <div class="label">
+      рейтинг
     </div>
   </div>
 
   <div class="@answers_class">
     @answers
-    <div class="@label_class">
+    <div class="label">
       @answers_label
     </div>
   </div>
 </div>',
     array(
-      '@wrapper_class' => 'info',
-      '@onclick' => "window.location.href='" . url('node/' . $nid) ."'",
-      '@rating_class' => 'rating',
+      '@onclick' => "window.location.href='" . url('node/' . $nid) . "'",
       '@rating' => $rating,
-      '@label_class' => 'label',
-      '@rating_label' => 'рейтинг',
-      '@answers_class' => 'answers ' . ($is_best_answer ? 'has-best' : ''),
+      '@answers_class' => 'answers ' . ($is_best_answer ? 'has-best' : '') . ($answers_count ? '' : 'no-answers'),
       '@answers' => $answers_count,
       '@answers_label' => druio_russian_plural($answers_count, array(
-    'ответ',
-    'ответа',
-    'ответов',
-  ))
+        'ответ',
+        'ответа',
+        'ответов',
+      ))
+    )
+  );
+}
+
+/**
+ * This field display all tags, such as Drupal Version, project reference and
+ * category.
+ * @param $field
+ * @return string
+ */
+function druio_ds_fields_question_tags_info($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+  $content = array();
+
+  if ($wrapper->__isset('field_drupal_version')) {
+    foreach ($wrapper->field_drupal_version->getIterator() as $field_drupal_version) {
+      $content[] = format_string(
+        '<span class="tag core">@label</span>',
+        array(
+          '@label' => $field_drupal_version->label(),
+        )
+      );
+    }
+  }
+
+  if ($wrapper->__isset('field_category')) {
+    foreach ($wrapper->field_category->getIterator() as $field_category) {
+      $content[] = format_string(
+        '<span class="tag category">@label</span>',
+        array(
+          '@label' => $field_category->label(),
+        )
+      );
+    }
+  }
+
+  if ($wrapper->__isset('field_project_reference')) {
+    foreach ($wrapper->field_project_reference->getIterator() as $field_project_reference) {
+      $content[] = format_string(
+        '<a href="@href" class="tag project">@label</a>',
+        array(
+          '@href' => url('node/' . $field_project_reference->getIdentifier()),
+          '@label' => $field_project_reference->label(),
+        )
+      );
+    }
+  }
+
+  return format_string(
+    '<div class="tags">!items</div>',
+    array(
+      '!items' => implode('', $content),
+    )
+  );
+}
+
+/**
+ * Info about when and who created question.
+ * @param $field
+ */
+function druio_ds_fields_question_created_info($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+
+  return format_string(
+    '<div class="created">Вопрос задан @date <a href="@href">@author</a></div>',
+    array(
+      '@date' => format_date($wrapper->created->value(), 'ru_medium'),
+      '@href' => url('user/' . $wrapper->author->getIdentifier()),
+      '@author' => $wrapper->author->label(),
     )
   );
 }

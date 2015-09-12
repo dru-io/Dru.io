@@ -210,10 +210,48 @@
       &.has-best {
         background: $brand-color-3;
       }
+      &.no-answers {
+        color: $text-color;
+      }
     }
   }
-  .title {
-    margin-top: 0;
-    @include font-size(18px);
+  .right {
+    .title {
+      margin-top: 0;
+      @include font-size(18px);
+    }
+    .tags {
+      float: left;
+      line-height: pxtorem(14px);
+      .tag {
+        display: inline-block;
+        background: #f8f8f8;
+        border: 1px solid #ececec;
+        color: #707070;
+        white-space: nowrap;
+        margin: pxtorem(2px) pxtorem(2px) pxtorem(2px) 0;
+        padding: pxtorem(4px);
+        @include font-size(11px);
+        &:before {
+          @extend .fa;
+          margin-right: pxtorem(4px);
+        }
+        &.core:before {
+          @extend .fa-drupal;
+        }
+        &.category:before {
+          @extend .fa-tag;
+        }
+        &.project:before {
+          @extend .fa-cubes;
+        }
+      }
+    }
+    .created {
+      float: right;
+      @include font-size(12px);
+      padding-top: pxtorem(4px);
+      color: #707070;
+    }
   }
 }
