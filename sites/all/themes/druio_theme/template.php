@@ -104,3 +104,29 @@ function druio_theme_preprocess_druio_theme_auth_user(&$variables) {
   $variables['picture'] = $user->picture ? image_style_url('avatar_thumb', $full_user->picture->uri) : '/' . variable_get('user_picture_default', '');
   $variables['username'] = $user->name;
 }
+
+
+/**
+ * Implements template_preprocess_html().
+ */
+function druio_theme_preprocess_html(&$variables) {
+  // Redefine body classes.
+  $variables['classes_array'] = array();
+  $element_children = element_children($variables['page']['sidebar']);
+  if (!empty($element_children)) {
+    $variables['classes_array'][] = 'sidebar';
+  }
+  else {
+    $variables['classes_array'][] = 'no-sidebars';
+  }
+
+  if (drupal_is_front_page()) {
+    $variables['classes_array'][] = 'frontpage';
+  }
+  if (user_is_logged_in()) {
+    $variables['classes_array'][] = 'registered';
+  }
+  else {
+    $variables['classes_array'][] = 'anonymous';
+  }
+}

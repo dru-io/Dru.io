@@ -13,16 +13,28 @@
     .pane {
       @include container($site-width);
       .logo {
-        width: pxtorem(170px);
+        width: pxtorem(190px);
         float: left;
       }
       .content {
-        margin-left: 170px;
+        margin-left: 190px;
       }
     }
   }
 
   #main {
     @include container($site-width);
+    @include susy-clearfix;
+  }
+
+  #content {
+    @include span(9);
+    .no-sidebars & {
+      @include full();
+    }
+  }
+
+  #sidebar {
+    @include span(3 last);
   }
 }

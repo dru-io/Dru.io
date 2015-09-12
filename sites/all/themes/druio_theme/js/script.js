@@ -5,9 +5,9 @@
  */
 (function ($, Drupal, window, document, undefined) {
 
-  Drupal.behaviors.yourBehaviorName = {
+  Drupal.behaviors.druio_theme = {
     attach: function (context, settings) {
-      // Your code here.
+
     }
   };
 

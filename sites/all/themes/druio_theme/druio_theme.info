@@ -14,13 +14,12 @@ stylesheets[all][] = system.theme.css
 stylesheets[all][] = styles/css/styles.css
 
 ; Here tou can attach your scripts.
-;scripts[] = js/script.js
+scripts[] = js/script.js
 
 regions[navigation]     = Navigation bar
 regions[help]           = Help
 regions[content]        = Content
-regions[sidebar_first]  = First sidebar
-regions[sidebar_second] = Second sidebar
+regions[sidebar]        = Sidebar
 regions[footer]         = Footer
 
 ; This two regions is required by Drupal Core. Don't remove them, they not display in block list.

@@ -421,7 +421,7 @@ td, th {
 
 /* line 20, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/base/_base.scss */
 body {
-  background: white;
+  background: white url('../../images/bg.png') repeat;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; }
 
 /* line 26, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/base/_base.scss */
@@ -586,18 +586,18 @@ h4, h5, h6 {
 
 /* line 50, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/base/_typography.scss */
 h1 {
-  font-size: 41px;
-  font-size: 2.5625rem; }
+  font-size: 32px;
+  font-size: 2rem; }
 
 /* line 51, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/base/_typography.scss */
 h2 {
-  font-size: 34px;
-  font-size: 2.125rem; }
+  font-size: 27px;
+  font-size: 1.6875rem; }
 
 /* line 52, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/base/_typography.scss */
 h3 {
-  font-size: 28px;
-  font-size: 1.75rem; }
+  font-size: 20px;
+  font-size: 1.25rem; }
 
 /* line 53, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/base/_typography.scss */
 h4 {
@@ -682,11 +682,11 @@ blockquote {
       clear: both; }
     /* line 15, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
     #header .pane .logo {
-      width: 10.625rem;
+      width: 11.875rem;
       float: left; }
     /* line 19, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
     #header .pane .content {
-      margin-left: 170px; }
+      margin-left: 190px; }
   /* line 25, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
   #main {
     max-width: 1184px;
@@ -696,7 +696,29 @@ blockquote {
     #main:after {
       content: " ";
       display: block;
-      clear: both; } }
+      clear: both; }
+    /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
+    #main:after {
+      content: " ";
+      display: block;
+      clear: both; }
+  /* line 30, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
+  #content {
+    width: 74.57627%;
+    float: left;
+    margin-right: 1.69492%; }
+    /* line 32, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
+    .no-sidebars #content {
+      clear: both;
+      width: 100%;
+      float: left;
+      margin-left: 0;
+      margin-right: 0; }
+  /* line 37, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
+  #sidebar {
+    width: 23.72881%;
+    float: right;
+    margin-right: 0; } }
 
 @-webkit-keyframes bounce {
   /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
@@ -5412,7 +5434,7 @@ table {
   /* line 14, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   #header .pane .logo {
     background: white;
-    padding: 0.625rem; }
+    padding: 0.625rem 1.25rem; }
   /* line 20, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   #header .pane .content .top {
     height: 2.5rem;
@@ -5581,3 +5603,14 @@ table {
       #navigation .menu li a:hover {
         background: rgba(0, 0, 0, 0.25);
         transition: all 500ms; }
+
+/* line 173, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+#main {
+  background: white;
+  padding: 1.25rem; }
+
+/* line 178, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+.facetapi-facetapi-checkbox-links {
+  margin: 0;
+  padding: 0;
+  list-style: none; }

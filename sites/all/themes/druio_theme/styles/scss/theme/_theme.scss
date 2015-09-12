@@ -13,7 +13,7 @@
   .pane {
     .logo {
       background: white;
-      padding: pxtorem(10px);
+      padding: pxtorem(10px) pxtorem(20px);
     }
     .content {
       // Top line of the header. Which is darker :)
@@ -168,4 +168,15 @@
       }
     }
   }
+}
+
+#main {
+  background: white;
+  padding: pxtorem(20px);
+}
+
+.facetapi-facetapi-checkbox-links  {
+  margin: 0;
+  padding: 0;
+  list-style: none;
 }

@@ -21,10 +21,6 @@
 </header>
 
 <main id="main">
-  <?php if ($page['sidebar_first']): ?>
-    <?php print render($page['sidebar_first']); ?>
-  <?php endif; ?>
-
   <section id="content" role="main">
     <?php print render($page['highlighted']); ?>
     <?php print $breadcrumb; ?>
@@ -43,8 +39,8 @@
     <?php print $feed_icons; ?>
   </section>
 
-  <?php if ($page['sidebar_second']): ?>
-    <?php print render($page['sidebar_second']); ?>
+  <?php if ($page['sidebar']): ?>
+    <?php print render($page['sidebar']); ?>
   <?php endif; ?>
 </main>
 
