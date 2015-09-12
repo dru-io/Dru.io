@@ -51,13 +51,8 @@ function druio_theme_preprocess_page(&$variables) {
   $variables['header_links'] = theme('druio_theme_header_links', array('links' => $header_links));
 
   // Header profile data.
-  $variables['page']['header_profile'] = array(
-    '#theme' => $user->uid ? 'druiot_auth_user' : 'druiot_auth_anon',
-    '#user' => $user,
-  );
-  // Tracker.
-  $variables['druiot_tracker']['count'] = druio_tracker_count($user->uid);
-  $variables['druiot_tracker']['status'] = _druio_messages_status($user->uid);
+  $header_auth_template = $user->uid ? 'druio_theme_auth_user' : 'druio_theme_auth_anon';
+  $variables['header_auth'] = theme($header_auth_template, array('user' => $user));
 }
 
 /**
@@ -65,16 +60,27 @@ function druio_theme_preprocess_page(&$variables) {
  */
 function druio_theme_theme() {
   global $user;
-  return array(
-    // Header links in top line of header.
-    'druio_theme_header_links' => array(
-      'variables' => array(
-        'user' => $user,
-        'links' => NULL,
-      ),
-      'template' => 'templates/theme/header-links',
+
+  // Header links in top line of header.
+  $theme['druio_theme_header_links'] = array(
+    'variables' => array(
+      'user' => $user,
+      'links' => NULL,
     ),
+    'template' => 'templates/theme/header-links',
   );
+  // Profile info for anonymous users.
+  $theme['druio_theme_auth_anon'] = array(
+    'variables' => array('user' => NULL),
+    'template' => 'templates/theme/header-auth-anon',
+  );
+  // Profile in for user.
+  $theme['druio_theme_auth_user'] = array(
+    'variables' => array('user' => NULL),
+    'template' => 'templates/theme/header-auth-user',
+  );
+
+  return $theme;
 }
 
 /**
@@ -88,3 +94,13 @@ function druio_theme_preprocess_druio_theme_header_links(&$variables) {
   }
 }
 
+/**
+ * Implements hook_preprocess_HOOK():druio_theme_auth_user.
+ * @param $variables
+ */
+function druio_theme_preprocess_druio_theme_auth_user(&$variables) {
+  $user = $variables['user'];
+  $full_user = user_load($user->uid);
+  $variables['picture'] = $user->picture ? image_style_url('avatar_thumb', $full_user->picture->uri) : '/' . variable_get('user_picture_default', '');
+  $variables['username'] = $user->name;
+}

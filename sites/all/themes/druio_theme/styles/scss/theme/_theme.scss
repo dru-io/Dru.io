@@ -90,6 +90,56 @@
             }
           }
         }
+
+        // Anonymous links.
+        .header-auth-anon {
+          float: right;
+          .link {
+            display: block;
+            float: left;
+            line-height: pxtorem(40px);
+            padding: 0 pxtorem($padding-large-vertical * 2);
+            color: white;
+            font-weight: bold;
+            &.sign-up {
+              background: $brand-color-2;
+            }
+          }
+        }
+
+        // Auth user.
+        .header-auth-user {
+          float: right;
+          .picture {
+            float: left;
+          }
+          .username {
+            display: block;
+            float: left;
+            width: pxtorem(140px);
+            padding: 0 pxtorem($padding-large-vertical);
+            line-height: pxtorem(40px);
+            color: white;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .logout {
+            float: left;
+            display: block;
+            line-height: pxtorem(40px);
+            width: pxtorem(40px);
+            color: white;
+            text-align: center;
+            background: rgba(white, .2);
+            &:before {
+              @extend .fa;
+              @extend .fa-sign-out;
+              margin-left: pxtorem(7px);
+            }
+          }
+        }
       }
     }
   }

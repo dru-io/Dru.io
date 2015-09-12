@@ -12,6 +12,7 @@
       <div class="top">
         <?php print $header_search_form; ?>
         <?php print $header_links; ?>
+        <?php print $header_auth; ?>
       </div>
     </div>
   </div>
