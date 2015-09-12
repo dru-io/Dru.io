@@ -440,7 +440,7 @@ function druio_ds_fields_question_signature($field) {
     </a>
     <div class="info">
       <a href="@user_url">@username</a>
-      <div class="rating">@rating</div>
+      <div class="rating" title="Репутация пользователя">@rating</div>
     </div>
   </div>
 </div>',

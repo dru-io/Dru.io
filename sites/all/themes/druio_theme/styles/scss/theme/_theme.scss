@@ -319,8 +319,33 @@
     }
     .bottom {
       .signature {
+        padding: pxtorem(5px);
+        background: lighten($brand-color-1, 55%);
         float: right;
         width: pxtorem(200px);
+        @include font-size(12px);
+        line-height: $line-height-small;
+        .user {
+          margin-top: pxtorem(5px);
+          @include susy-clearfix;
+          .picture {
+            display: block;
+            width: pxtorem(32px);
+            float: left;
+            margin-top: pxtorem(2px);
+          }
+          .info {
+            float: left;
+            margin-left: pxtorem(6px);
+            .rating {
+              &:before {
+                @extend .fa;
+                @extend .fa-bar-chart;
+                margin-right: pxtorem(4px);
+              }
+            }
+          }
+        }
       }
     }
   }
