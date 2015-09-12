@@ -100,8 +100,7 @@ function druio_theme_preprocess_druio_theme_header_links(&$variables) {
  */
 function druio_theme_preprocess_druio_theme_auth_user(&$variables) {
   $user = $variables['user'];
-  $full_user = user_load($user->uid);
-  $variables['picture'] = $user->picture ? image_style_url('avatar_thumb', $full_user->picture->uri) : '/' . variable_get('user_picture_default', '');
+  $variables['picture'] = druio_get_user_picture($user->uid);
   $variables['username'] = $user->name;
 }
 

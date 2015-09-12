@@ -279,3 +279,24 @@ function druio_russian_plural($number, $endingArray) {
   }
   return $ending;
 }
+
+/**
+ * Return url to user picture (avatar).
+ * @param $uid
+ * @param string $image_style
+ * @return string
+ */
+function druio_get_user_picture($uid, $image_style = NULL) {
+  $user = user_load($uid);
+  if ($user->picture) {
+    if ($image_style) {
+      return image_style_url($image_style, $user->picture->uri);
+    }
+    else {
+      return file_Create_url($user->picture->uri);
+    }
+  }
+  else {
+    return '/' . variable_get('user_picture_default', '');
+  }
+}

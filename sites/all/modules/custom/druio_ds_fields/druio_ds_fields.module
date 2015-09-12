@@ -96,6 +96,13 @@ function druio_ds_fields_ds_fields_info($entity_type) {
       'function' => 'druio_ds_fields_question_created_info',
     );
 
+    $fields['question_signature'] = array(
+      'title' => 'Question: User signature',
+      'ui_limit' => array('question|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_question_signature',
+    );
+
     return array($entity_type => $fields);
   }
 
@@ -400,6 +407,7 @@ function druio_ds_fields_question_tags_info($field) {
 /**
  * Info about when and who created question.
  * @param $field
+ * @return string
  */
 function druio_ds_fields_question_created_info($field) {
   $wrapper = entity_metadata_wrapper('node', $field['entity']);
@@ -410,6 +418,38 @@ function druio_ds_fields_question_created_info($field) {
       '@date' => format_date($wrapper->created->value(), 'ru_medium'),
       '@href' => url('user/' . $wrapper->author->getIdentifier()),
       '@author' => $wrapper->author->label(),
+    )
+  );
+}
+
+/**
+ * Question signature: author, created.
+ * @param $field
+ * @return string
+ */
+function druio_ds_fields_question_signature($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+  $author_uid = $wrapper->author->getIdentifier();
+
+  return format_string(
+    '<div class="signature">
+  Вопрос задан @created
+  <div class="user">
+    <a href="@user_url" class="picture">
+      <img src="@src" alt="Аватар пользователя @username" width="32" height="32" />
+    </a>
+    <div class="info">
+      <a href="@user_url">@username</a>
+      <div class="rating">@rating</div>
+    </div>
+  </div>
+</div>',
+    array(
+      '@created' => format_date($wrapper->created->value(), 'ru_medium'),
+      '@user_url' => url('user/' . $author_uid),
+      '@src' => druio_get_user_picture($author_uid, 'avatar_thumb'),
+      '@username' => $wrapper->author->label(),
+      '@rating' => druio_rating_get_user_rating($author_uid),
     )
   );
 }
