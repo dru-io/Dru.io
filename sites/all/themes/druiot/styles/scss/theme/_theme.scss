@@ -175,6 +175,11 @@ body {
 
     li {
       float: left;
+      &.active-trail {
+        a {
+          background-color: lighten($headerBackground, 10%);
+        }
+      }
 
       a {
         display: block;
@@ -934,6 +939,10 @@ body.registered {
   border-bottom: 1px solid #ECECEC;
   padding-bottom: pxToRem(5px);
   margin-bottom: pxToRem(5px);
+  
+  &:hover {
+    color: $linkColorHover;
+  }
 
   &:before {
     @extend .fa;
