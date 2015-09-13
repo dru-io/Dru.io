@@ -7,6 +7,11 @@
 
   Drupal.behaviors.druio_theme = {
     attach: function (context, settings) {
+      // Attach highlightjs.
+      $('pre code').each(function (i, block) {
+        hljs.highlightBlock(block);
+      });
+
       // Fix wrapper for Rate module.
       $('.rate-widget').each(function () {
         $(this).addClass($(this).attr('id'));

@@ -354,3 +354,97 @@
     display: none;
   }
 }
+
+.hljs {
+  background: white;
+  @include font-size(12px);
+  border-left: 4px solid rgba(0,39,59,.5);
+  padding: 0 0 0 pxtorem(12px);
+}
+
+.answer-teaser {
+  border-bottom: 1px solid $hr-border;
+  padding-bottom: pxtorem(10px);
+  margin-bottom: pxtorem(10px);
+  > .left {
+    .rate-widget {
+      text-align: center;
+      @include font-size(30px);
+      line-height: 1;
+      margin: 0;
+      color: $text-color;
+      .rate-plus {
+        @extend .fa;
+        @extend .fa-chevron-up;
+        &.voted,
+        &:hover {
+          color: $brand-color-1;
+        }
+      }
+      .rate-minus {
+        @extend .fa;
+        @extend .fa-chevron-down;
+        &.voted,
+        &:hover {
+          color: $brand-color-1;
+        }
+      }
+      .rate-plus,
+      .rate-minus {
+        color: $gray-lighter;
+        font-size: 2.5rem;
+        &.disabled:hover {
+          color: $gray-lighter;
+        }
+      }
+    }
+    .best-answer {
+      text-align: center;
+      color: $brand-color-2;
+      margin: pxtorem(10px) 0;
+      @include font-size(36px);
+      &:before {
+        @extend .fa;
+        @extend .fa-check;
+      }
+    }
+  }
+  > .right {
+    .bottom {
+      @include susy-clearfix;
+      .signature {
+        padding: pxtorem(5px);
+        float: right;
+        width: pxtorem(200px);
+        @include font-size(12px);
+        line-height: $line-height-small;
+        .user {
+          margin-top: pxtorem(5px);
+          @include susy-clearfix;
+          .picture {
+            display: block;
+            width: pxtorem(32px);
+            float: left;
+            margin-top: pxtorem(2px);
+          }
+          .info {
+            float: left;
+            margin-left: pxtorem(6px);
+            .rating {
+              &:before {
+                @extend .fa;
+                @extend .fa-bar-chart;
+                margin-right: pxtorem(4px);
+              }
+            }
+          }
+        }
+      }
+    }
+    .view-comments-comments-to-answers {
+      border-top: 1px solid $hr-border;
+      padding-top: pxtorem(10px);
+      margin-top: pxtorem(10px);
+    }
+  }
+}
