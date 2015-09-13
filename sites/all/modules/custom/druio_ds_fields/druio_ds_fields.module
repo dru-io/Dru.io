@@ -110,6 +110,13 @@ function druio_ds_fields_ds_fields_info($entity_type) {
       'function' => 'druio_ds_fields_answer_signature',
     );
 
+    $fields['add_comment_link'] = array(
+      'title' => 'Add comment link',
+      'ui_limit' => array('*|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_add_comment_link',
+    );
+
     return array($entity_type => $fields);
   }
 
@@ -496,6 +503,22 @@ function druio_ds_fields_answer_signature($field) {
       '@src' => druio_get_user_picture($author_uid, 'avatar_thumb'),
       '@username' => $wrapper->author->label(),
       '@rating' => druio_rating_get_user_rating($author_uid),
+    )
+  );
+}
+
+/**
+ * Add comment link.
+ * @param $field
+ * @return string
+ */
+function druio_ds_fields_add_comment_link($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+
+  return format_string(
+    '<a href="/comment/reply/@id#comment-form" class="add-comment">Добавить комментарий</a>',
+    array(
+      '@id' => $wrapper->getIdentifier(),
     )
   );
 }

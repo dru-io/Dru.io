@@ -446,5 +446,24 @@
       padding-top: pxtorem(10px);
       margin-top: pxtorem(10px);
     }
+    .add-comment {
+      @include font-size(13px);
+    }
+  }
+}
+
+.comment-minimal {
+  @include font-size(13px);
+  border-bottom: 1px solid $hr-border;
+  padding-bottom: pxtorem(10px);
+  margin-bottom: pxtorem(10px);
+  .author-and-created {
+    @include font-size(12px);
+    .created {
+      color: $gray-light;
+    }
+  }
+  > p {
+    margin-bottom: pxtorem(5px);
   }
 }

@@ -642,7 +642,7 @@ pre code {
 blockquote {
   padding: 11px 22px;
   margin: 0 0 22px;
-  font-size: 20px;
+  font-size: 12px;
   border-left: 5px solid #eeeeee; }
 
 /**
@@ -5900,3 +5900,25 @@ table {
     border-top: 1px solid #eeeeee;
     padding-top: 0.625rem;
     margin-top: 0.625rem; }
+  /* line 449, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .answer-teaser > .right .add-comment {
+    font-size: 13px;
+    font-size: 0.8125rem; }
+
+/* line 455, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+.comment-minimal {
+  font-size: 13px;
+  font-size: 0.8125rem;
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 0.625rem;
+  margin-bottom: 0.625rem; }
+  /* line 460, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .comment-minimal .author-and-created {
+    font-size: 12px;
+    font-size: 0.75rem; }
+    /* line 462, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    .comment-minimal .author-and-created .created {
+      color: #777777; }
+  /* line 466, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .comment-minimal > p {
+    margin-bottom: 0.3125rem; }
