@@ -318,6 +318,7 @@
       }
     }
     .bottom {
+      @include susy-clearfix;
       .signature {
         padding: pxtorem(5px);
         background: lighten($brand-color-1, 55%);
