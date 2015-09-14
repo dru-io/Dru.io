@@ -117,6 +117,13 @@ function druio_ds_fields_ds_fields_info($entity_type) {
       'function' => 'druio_ds_fields_add_comment_link',
     );
 
+    $fields['qustion_comments'] = array(
+      'title' => 'Question comments',
+      'ui_limit' => array('question|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_question_comments',
+    );
+
     return array($entity_type => $fields);
   }
 
@@ -521,4 +528,20 @@ function druio_ds_fields_add_comment_link($field) {
       '@id' => $wrapper->getIdentifier(),
     )
   );
+}
+
+/**
+ * Comments to question. This is created for printing comments to question in
+ * specific format.
+ * @param $field
+ */
+function druio_ds_fields_question_comments($field) {
+  $view = views_get_view('comments');
+  $view->set_display('comments_to_question');
+  $view->set_arguments(array($field['entity']->nid));
+  $output = $view->preview();
+  // If view has result.
+  if ($view->result) {
+    return $output;
+  }
 }

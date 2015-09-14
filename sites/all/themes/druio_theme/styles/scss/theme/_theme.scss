@@ -193,8 +193,8 @@
 
 .question-teaser {
   border-bottom: 1px solid $hr-border;
-  padding-bottom: pxtorem($padding-large-vertical);
-  margin-bottom: pxtorem($padding-large-vertical);
+  padding-bottom: pxtorem(20px);
+  margin-bottom: pxtorem(20px);
   .info {
     cursor: pointer;
     text-align: center;
@@ -291,6 +291,7 @@
     }
   }
   > .right {
+    margin-bottom: pxtorem(20px);
     .tags {
       line-height: pxtorem(14px);
       .tag {
@@ -319,6 +320,7 @@
     }
     .bottom {
       @include susy-clearfix;
+      margin-bottom: pxtorem(15px);
       .signature {
         padding: pxtorem(5px);
         background: lighten($brand-color-1, 55%);
@@ -349,9 +351,17 @@
         }
       }
     }
+    .add-comment {
+      @include font-size(13px);
+    }
   }
   .node-answer-form {
     display: none;
+  }
+  .answers__title {
+    margin-bottom: pxtorem(10px);
+    padding-bottom: pxtorem(10px);
+    border-bottom: 1px solid $hr-border;
   }
 }
 
@@ -364,8 +374,8 @@
 
 .answer-teaser {
   border-bottom: 1px solid $hr-border;
-  padding-bottom: pxtorem(10px);
-  margin-bottom: pxtorem(10px);
+  padding-bottom: pxtorem(20px);
+  margin-bottom: pxtorem(20px);
   > .left {
     .rate-widget {
       text-align: center;
