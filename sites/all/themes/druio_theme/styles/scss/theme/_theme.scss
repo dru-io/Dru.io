@@ -536,3 +536,71 @@
 #page-title {
   margin: pxtorem(6px) 0;
 }
+
+.post-teaser {
+  .top {
+    .title {
+      //@include font-size(24px);
+    }
+  }
+  .bottom {
+    @include susy-clearfix;
+    background: rgb(249, 249, 249);
+    padding: 5px;
+    border-radius: 2px;
+    .rate-widget,
+    .comment-count,
+    .date,
+    .avatar-and-author {
+      float: left;
+      margin-right: 1rem;
+    }
+    .rate-widget {
+      .rate {
+        background: $gray-darken;
+        color: $gray-light;
+        display: inline-block;
+        padding: pxtorem(5px);
+        border-radius: 2px;
+        @extend .fa;
+        @include font-size(14px);
+
+        &--minus {
+          @extend .fa-arrow-down;
+
+          &:hover:not(.disabled),
+          &.voted {
+            background: $brand-color-2;
+            color: white;
+          }
+        }
+
+        &--plus {
+          @extend .fa-arrow-up;
+
+          &:hover:not(.disabled),
+          &.voted {
+            background: $brand-color-2;
+            color: white;
+          }
+        }
+      }
+
+      .rate-result {
+        display: inline-block;
+        padding: 0  pxtorem(7px);
+        font-weight: bold;
+
+        &.good {
+          color: $brand-color-2;
+        }
+
+        &.bad {
+          color: $brand-color-2;
+        }
+      }
+    }
+
+
+  }
+}
