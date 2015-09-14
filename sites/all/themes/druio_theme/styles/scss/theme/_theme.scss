@@ -477,3 +477,48 @@
     margin-bottom: pxtorem(5px);
   }
 }
+
+.event-teaser {
+  margin-bottom: pxtorem(15px);
+  padding-bottom: pxtorem(15px);
+  border-bottom: 1px solid $hr-border;
+  .left {
+    .poster {
+      overflow: hidden;
+      padding: pxtorem(3px);
+      background: white;
+      border: 1px solid $hr-border;
+      border-radius: $border-radius-base;
+      margin-bottom: pxtorem(10px);
+    }
+    .date, .city, .address {
+      position: relative;
+      padding-left: pxtorem(26px);
+      margin-bottom: pxtorem(6px);
+      &:before {
+        position: absolute;
+        left: 0;
+        @extend .fa;
+        width: pxtorem(20px);
+        text-align: center;
+        margin-right: pxtorem(6px);
+      }
+    }
+    .date:before {
+      @extend .fa-calendar-check-o;
+    }
+    .city:before {
+      @extend .fa-globe;
+    }
+    .address:before {
+      @extend .fa-map-marker;
+    }
+  }
+  .right {
+    .title {
+      margin-top: 0;
+      @include font-size(24px);
+      font-weight: bold;
+    }
+  }
+}

@@ -74,4 +74,14 @@
       @include span(11 last);
     }
   }
+
+  .event-teaser {
+    @include susy-clearfix;
+    .left {
+      @include span(3);
+    }
+    .right {
+      @include span(9 last);
+    }
+  }
 }
