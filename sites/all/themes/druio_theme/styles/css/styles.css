@@ -780,17 +780,17 @@ blockquote {
     float: right;
     margin-right: 0; }
   /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
-  .event-teaser:after {
+  .event-teaser:after, .event-full:after {
     content: " ";
     display: block;
     clear: both; }
-  /* line 80, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
-  .event-teaser .left {
+  /* line 81, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
+  .event-teaser .left, .event-full .left {
     width: 23.72881%;
     float: left;
     margin-right: 1.69492%; }
-  /* line 83, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
-  .event-teaser .right {
+  /* line 84, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
+  .event-teaser .right, .event-full .right {
     width: 74.57627%;
     float: right;
     margin-right: 0; } }
@@ -2249,7 +2249,7 @@ blockquote {
   font-style: normal; }
 
 /* line 1, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_core.scss */
-.fa, #header .pane .content .top .search-form:before, #header .pane .content .top .header-links .link.tracker:before, #header .pane .content .top .header-links .link.github:before, #header .pane .content .top .header-auth-user .logout:before, .question-teaser .right .tags .tag:before, .question-full > .left .rate-widget .rate-plus, .question-full > .left .rate-widget .rate-minus, .question-full > .right .tags .tag:before, .question-full > .right .bottom .signature .user .info .rating:before, .answer-teaser > .left .rate-widget .rate-plus, .answer-teaser > .left .rate-widget .rate-minus, .answer-teaser > .left .best-answer:before, .answer-teaser > .right .bottom .signature .user .info .rating:before, .event-teaser .left .date:before, .event-teaser .left .city:before, .event-teaser .left .address:before {
+.fa, #header .pane .content .top .search-form:before, #header .pane .content .top .header-links .link.tracker:before, #header .pane .content .top .header-links .link.github:before, #header .pane .content .top .header-auth-user .logout:before, .question-teaser .right .tags .tag:before, .question-full > .left .rate-widget .rate-plus, .question-full > .left .rate-widget .rate-minus, .question-full > .right .tags .tag:before, .question-full > .right .bottom .signature .user .info .rating:before, .answer-teaser > .left .rate-widget .rate-plus, .answer-teaser > .left .rate-widget .rate-minus, .answer-teaser > .left .best-answer:before, .answer-teaser > .right .bottom .signature .user .info .rating:before, .event-teaser .left .date:before, .event-teaser .left .city:before, .event-teaser .left .address:before, .event-full .left .date:before, .event-full .left .city:before, .event-full .left .address:before {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -2320,10 +2320,10 @@ blockquote {
   float: right; }
 
 /* line 11, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.fa-pull-left, #header .pane .content .top .fa-pull-left.search-form:before, #header .pane .content .top .header-links .fa-pull-left.link.tracker:before, #header .pane .content .top .header-links .fa-pull-left.link.github:before, #header .pane .content .top .header-auth-user .fa-pull-left.logout:before, .question-teaser .right .tags .fa-pull-left.tag:before, .question-full > .left .rate-widget .fa-pull-left.rate-plus, .question-full > .left .rate-widget .fa-pull-left.rate-minus, .question-full > .right .tags .fa-pull-left.tag:before, .question-full > .right .bottom .signature .user .info .fa-pull-left.rating:before, .answer-teaser > .left .rate-widget .fa-pull-left.rate-plus, .answer-teaser > .left .rate-widget .fa-pull-left.rate-minus, .answer-teaser > .left .fa-pull-left.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .fa-pull-left.rating:before, .event-teaser .left .fa-pull-left.date:before, .event-teaser .left .fa-pull-left.city:before, .event-teaser .left .fa-pull-left.address:before {
+.fa.fa-pull-left, #header .pane .content .top .fa-pull-left.search-form:before, #header .pane .content .top .header-links .fa-pull-left.link.tracker:before, #header .pane .content .top .header-links .fa-pull-left.link.github:before, #header .pane .content .top .header-auth-user .fa-pull-left.logout:before, .question-teaser .right .tags .fa-pull-left.tag:before, .question-full > .left .rate-widget .fa-pull-left.rate-plus, .question-full > .left .rate-widget .fa-pull-left.rate-minus, .question-full > .right .tags .fa-pull-left.tag:before, .question-full > .right .bottom .signature .user .info .fa-pull-left.rating:before, .answer-teaser > .left .rate-widget .fa-pull-left.rate-plus, .answer-teaser > .left .rate-widget .fa-pull-left.rate-minus, .answer-teaser > .left .fa-pull-left.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .fa-pull-left.rating:before, .event-teaser .left .fa-pull-left.date:before, .event-teaser .left .fa-pull-left.city:before, .event-teaser .left .fa-pull-left.address:before, .event-full .left .fa-pull-left.date:before, .event-full .left .fa-pull-left.city:before, .event-full .left .fa-pull-left.address:before {
   margin-right: .3em; }
 /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.fa-pull-right, #header .pane .content .top .fa-pull-right.search-form:before, #header .pane .content .top .header-links .fa-pull-right.link.tracker:before, #header .pane .content .top .header-links .fa-pull-right.link.github:before, #header .pane .content .top .header-auth-user .fa-pull-right.logout:before, .question-teaser .right .tags .fa-pull-right.tag:before, .question-full > .left .rate-widget .fa-pull-right.rate-plus, .question-full > .left .rate-widget .fa-pull-right.rate-minus, .question-full > .right .tags .fa-pull-right.tag:before, .question-full > .right .bottom .signature .user .info .fa-pull-right.rating:before, .answer-teaser > .left .rate-widget .fa-pull-right.rate-plus, .answer-teaser > .left .rate-widget .fa-pull-right.rate-minus, .answer-teaser > .left .fa-pull-right.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .fa-pull-right.rating:before, .event-teaser .left .fa-pull-right.date:before, .event-teaser .left .fa-pull-right.city:before, .event-teaser .left .fa-pull-right.address:before {
+.fa.fa-pull-right, #header .pane .content .top .fa-pull-right.search-form:before, #header .pane .content .top .header-links .fa-pull-right.link.tracker:before, #header .pane .content .top .header-links .fa-pull-right.link.github:before, #header .pane .content .top .header-auth-user .fa-pull-right.logout:before, .question-teaser .right .tags .fa-pull-right.tag:before, .question-full > .left .rate-widget .fa-pull-right.rate-plus, .question-full > .left .rate-widget .fa-pull-right.rate-minus, .question-full > .right .tags .fa-pull-right.tag:before, .question-full > .right .bottom .signature .user .info .fa-pull-right.rating:before, .answer-teaser > .left .rate-widget .fa-pull-right.rate-plus, .answer-teaser > .left .rate-widget .fa-pull-right.rate-minus, .answer-teaser > .left .fa-pull-right.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .fa-pull-right.rating:before, .event-teaser .left .fa-pull-right.date:before, .event-teaser .left .fa-pull-right.city:before, .event-teaser .left .fa-pull-right.address:before, .event-full .left .fa-pull-right.date:before, .event-full .left .fa-pull-right.city:before, .event-full .left .fa-pull-right.address:before {
   margin-left: .3em; }
 
 /* Deprecated as of 4.4.0 */
@@ -2336,10 +2336,10 @@ blockquote {
   float: left; }
 
 /* line 20, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.pull-left, #header .pane .content .top .pull-left.search-form:before, #header .pane .content .top .header-links .pull-left.link.tracker:before, #header .pane .content .top .header-links .pull-left.link.github:before, #header .pane .content .top .header-auth-user .pull-left.logout:before, .question-teaser .right .tags .pull-left.tag:before, .question-full > .left .rate-widget .pull-left.rate-plus, .question-full > .left .rate-widget .pull-left.rate-minus, .question-full > .right .tags .pull-left.tag:before, .question-full > .right .bottom .signature .user .info .pull-left.rating:before, .answer-teaser > .left .rate-widget .pull-left.rate-plus, .answer-teaser > .left .rate-widget .pull-left.rate-minus, .answer-teaser > .left .pull-left.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .pull-left.rating:before, .event-teaser .left .pull-left.date:before, .event-teaser .left .pull-left.city:before, .event-teaser .left .pull-left.address:before {
+.fa.pull-left, #header .pane .content .top .pull-left.search-form:before, #header .pane .content .top .header-links .pull-left.link.tracker:before, #header .pane .content .top .header-links .pull-left.link.github:before, #header .pane .content .top .header-auth-user .pull-left.logout:before, .question-teaser .right .tags .pull-left.tag:before, .question-full > .left .rate-widget .pull-left.rate-plus, .question-full > .left .rate-widget .pull-left.rate-minus, .question-full > .right .tags .pull-left.tag:before, .question-full > .right .bottom .signature .user .info .pull-left.rating:before, .answer-teaser > .left .rate-widget .pull-left.rate-plus, .answer-teaser > .left .rate-widget .pull-left.rate-minus, .answer-teaser > .left .pull-left.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .pull-left.rating:before, .event-teaser .left .pull-left.date:before, .event-teaser .left .pull-left.city:before, .event-teaser .left .pull-left.address:before, .event-full .left .pull-left.date:before, .event-full .left .pull-left.city:before, .event-full .left .pull-left.address:before {
   margin-right: .3em; }
 /* line 21, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.pull-right, #header .pane .content .top .pull-right.search-form:before, #header .pane .content .top .header-links .pull-right.link.tracker:before, #header .pane .content .top .header-links .pull-right.link.github:before, #header .pane .content .top .header-auth-user .pull-right.logout:before, .question-teaser .right .tags .pull-right.tag:before, .question-full > .left .rate-widget .pull-right.rate-plus, .question-full > .left .rate-widget .pull-right.rate-minus, .question-full > .right .tags .pull-right.tag:before, .question-full > .right .bottom .signature .user .info .pull-right.rating:before, .answer-teaser > .left .rate-widget .pull-right.rate-plus, .answer-teaser > .left .rate-widget .pull-right.rate-minus, .answer-teaser > .left .pull-right.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .pull-right.rating:before, .event-teaser .left .pull-right.date:before, .event-teaser .left .pull-right.city:before, .event-teaser .left .pull-right.address:before {
+.fa.pull-right, #header .pane .content .top .pull-right.search-form:before, #header .pane .content .top .header-links .pull-right.link.tracker:before, #header .pane .content .top .header-links .pull-right.link.github:before, #header .pane .content .top .header-auth-user .pull-right.logout:before, .question-teaser .right .tags .pull-right.tag:before, .question-full > .left .rate-widget .pull-right.rate-plus, .question-full > .left .rate-widget .pull-right.rate-minus, .question-full > .right .tags .pull-right.tag:before, .question-full > .right .bottom .signature .user .info .pull-right.rating:before, .answer-teaser > .left .rate-widget .pull-right.rate-plus, .answer-teaser > .left .rate-widget .pull-right.rate-minus, .answer-teaser > .left .pull-right.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .pull-right.rating:before, .event-teaser .left .pull-right.date:before, .event-teaser .left .pull-right.city:before, .event-teaser .left .pull-right.address:before, .event-full .left .pull-right.date:before, .event-full .left .pull-right.city:before, .event-full .left .pull-right.address:before {
   margin-left: .3em; }
 
 /* line 1, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_animated.scss */
@@ -2688,7 +2688,7 @@ blockquote {
   content: "\f040"; }
 
 /* line 65, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-map-marker:before, .event-teaser .left .address:before {
+.fa-map-marker:before, .event-teaser .left .address:before, .event-full .left .address:before {
   content: "\f041"; }
 
 /* line 66, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -3092,7 +3092,7 @@ blockquote {
   content: "\f0ab"; }
 
 /* line 166, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-globe:before, .event-teaser .left .city:before {
+.fa-globe:before, .event-teaser .left .city:before, .event-full .left .city:before {
   content: "\f0ac"; }
 
 /* line 167, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -4736,7 +4736,7 @@ blockquote {
   content: "\f273"; }
 
 /* line 577, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-calendar-check-o:before, .event-teaser .left .date:before {
+.fa-calendar-check-o:before, .event-teaser .left .date:before, .event-full .left .date:before {
   content: "\f274"; }
 
 /* line 578, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -4786,11 +4786,13 @@ blockquote {
 /* line 1, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_breadcrumbs.scss */
 .breadcrumb {
   color: #777;
-  background: #f5f5f5;
-  padding: 8px 15px;
-  margin-bottom: 15px;
-  border-radius: 4px; }
-  /* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_breadcrumbs.scss */
+  background: transporent;
+  padding: 0 0;
+  margin-bottom: 0;
+  border-radius: 4px;
+  font-size: 13.5px;
+  font-size: 0.84375rem; }
+  /* line 8, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_breadcrumbs.scss */
   .breadcrumb .delimiter {
     color: #ccc; }
 
@@ -4802,7 +4804,7 @@ blockquote {
  * Default styles and resets for all buttons used as base for all others.
  */
 /* line 13, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_buttons.scss */
-input[type="submit"], input[type="button"], input[type="reset"], button, input[type="button"], button, .btn, input[type="submit"], .btn-primary, .btn-warning, #edit-preview, .btn-danger, #edit-delete, .btn-success, .btn-info {
+input[type="submit"], input[type="button"], input[type="reset"], button, input[type="button"], button, .btn, input[type="submit"], .btn-primary, .flag-will-go2-event, .btn-warning, #edit-preview, .btn-danger, #edit-delete, .btn-success, .btn-info {
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
@@ -4822,19 +4824,19 @@ input[type="submit"], input[type="button"], input[type="reset"], button, input[t
  * Default button style.
  */
 /* line 35, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_buttons.scss */
-input[type="button"], button, input[type="button"], button, .btn, input[type="submit"], .btn-primary, .btn-warning, #edit-preview, .btn-danger, #edit-delete, .btn-success, .btn-info {
+input[type="button"], button, input[type="button"], button, .btn, input[type="submit"], .btn-primary, .flag-will-go2-event, .btn-warning, #edit-preview, .btn-danger, #edit-delete, .btn-success, .btn-info {
   transition: all 200ms; }
   /* line 39, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_buttons.scss */
-  input[type="button"]:hover, input[type="button"]:focus, button:hover, button:focus, input[type="button"]:hover, button:hover, .btn:hover, input[type="submit"]:hover, .btn-primary:hover, .btn-warning:hover, #edit-preview:hover, .btn-danger:hover, #edit-delete:hover, .btn-success:hover, .btn-info:hover, input[type="button"]:focus, button:focus, .btn:focus, input[type="submit"]:focus, .btn-primary:focus, .btn-warning:focus, #edit-preview:focus, .btn-danger:focus, #edit-delete:focus, .btn-success:focus, .btn-info:focus {
+  input[type="button"]:hover, input[type="button"]:focus, button:hover, button:focus, input[type="button"]:hover, button:hover, .btn:hover, input[type="submit"]:hover, .btn-primary:hover, .flag-will-go2-event:hover, .btn-warning:hover, #edit-preview:hover, .btn-danger:hover, #edit-delete:hover, .btn-success:hover, .btn-info:hover, input[type="button"]:focus, button:focus, .btn:focus, input[type="submit"]:focus, .btn-primary:focus, .flag-will-go2-event:focus, .btn-warning:focus, #edit-preview:focus, .btn-danger:focus, #edit-delete:focus, .btn-success:focus, .btn-info:focus {
     color: #333;
     text-decoration: none; }
   /* line 44, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_buttons.scss */
-  input[type="button"]:active, button:active, input[type="button"]:active, button:active, .btn:active, input[type="submit"]:active, .btn-primary:active, .btn-warning:active, #edit-preview:active, .btn-danger:active, #edit-delete:active, .btn-success:active, .btn-info:active {
+  input[type="button"]:active, button:active, input[type="button"]:active, button:active, .btn:active, input[type="submit"]:active, .btn-primary:active, .flag-will-go2-event:active, .btn-warning:active, #edit-preview:active, .btn-danger:active, #edit-delete:active, .btn-success:active, .btn-info:active {
     background: #f4f4f4;
     border-color: #729fcf;
     transition: all 200ms; }
   /* line 52, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_buttons.scss */
-  input[type="button"].disabled, input[type="button"][disabled], input[type="button"]:disabled, button.disabled, button[disabled], button:disabled, .btn.disabled, input.disabled[type="button"], button.disabled, .disabled.btn, input.disabled[type="submit"], .disabled.btn-primary, .disabled.btn-warning, .disabled#edit-preview, .disabled.btn-danger, .disabled#edit-delete, .disabled.btn-success, .disabled.btn-info, .btn[disabled], input[disabled][type="button"], button[disabled], [disabled].btn, input[disabled][type="submit"], [disabled].btn-primary, [disabled].btn-warning, [disabled]#edit-preview, [disabled].btn-danger, [disabled]#edit-delete, [disabled].btn-success, [disabled].btn-info, input[type="button"]:disabled, button:disabled, .btn:disabled, input[type="submit"]:disabled, .btn-primary:disabled, .btn-warning:disabled, #edit-preview:disabled, .btn-danger:disabled, #edit-delete:disabled, .btn-success:disabled, .btn-info:disabled {
+  input[type="button"].disabled, input[type="button"][disabled], input[type="button"]:disabled, button.disabled, button[disabled], button:disabled, .btn.disabled, input.disabled[type="button"], button.disabled, .disabled.btn, input.disabled[type="submit"], .disabled.btn-primary, .disabled.flag-will-go2-event, .disabled.btn-warning, .disabled#edit-preview, .disabled.btn-danger, .disabled#edit-delete, .disabled.btn-success, .disabled.btn-info, .btn[disabled], input[disabled][type="button"], button[disabled], [disabled].btn, input[disabled][type="submit"], [disabled].btn-primary, [disabled].flag-will-go2-event, [disabled].btn-warning, [disabled]#edit-preview, [disabled].btn-danger, [disabled]#edit-delete, [disabled].btn-success, [disabled].btn-info, input[type="button"]:disabled, button:disabled, .btn:disabled, input[type="submit"]:disabled, .btn-primary:disabled, .flag-will-go2-event:disabled, .btn-warning:disabled, #edit-preview:disabled, .btn-danger:disabled, #edit-delete:disabled, .btn-success:disabled, .btn-info:disabled {
     cursor: not-allowed;
     pointer-events: none;
     opacity: 0.7; }
@@ -4843,23 +4845,23 @@ input[type="button"], button, input[type="button"], button, .btn, input[type="su
  * Submit and primary button style.
  */
 /* line 63, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_buttons.scss */
-input[type="submit"], .btn-primary {
+input[type="submit"], .btn-primary, .flag-will-go2-event {
   background: #49A5DE;
   color: #fff;
   border: 1px solid #339ada; }
   /* line 70, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_buttons.scss */
-  input[type="submit"]:hover, input[type="submit"]:focus, .btn-primary:hover, .btn-primary:focus {
+  input[type="submit"]:hover, input[type="submit"]:focus, .btn-primary:hover, .flag-will-go2-event:hover, .btn-primary:focus, .flag-will-go2-event:focus {
     background: #339ada;
     color: #fff;
     text-decoration: none; }
   /* line 76, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_buttons.scss */
-  input[type="submit"]:active, .btn-primary:active {
+  input[type="submit"]:active, .btn-primary:active, .flag-will-go2-event:active {
     background: #339ada;
     color: #fff;
     text-decoration: none;
     box-shadow: inset 0 4px 3px 0 rgba(0, 0, 0, 0.2); }
   /* line 85, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_buttons.scss */
-  input[type="submit"].disabled, input[type="submit"][disabled], input[type="submit"]:disabled, .btn-primary.disabled, .btn-primary[disabled], .btn-primary:disabled {
+  input[type="submit"].disabled, input[type="submit"][disabled], input[type="submit"]:disabled, .btn-primary.disabled, .disabled.flag-will-go2-event, .btn-primary[disabled], [disabled].flag-will-go2-event, .btn-primary:disabled, .flag-will-go2-event:disabled {
     cursor: not-allowed;
     pointer-events: none;
     opacity: 0.7; }
@@ -5953,34 +5955,45 @@ table {
   .comment-minimal > p {
     margin-bottom: 0.3125rem; }
 
-/* line 481, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
-.event-teaser {
+/* line 482, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+.event-teaser, .event-full {
   margin-bottom: 0.9375rem;
   padding-bottom: 0.9375rem;
   border-bottom: 1px solid #eeeeee; }
-  /* line 486, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
-  .event-teaser .left .poster {
+  /* line 487, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .event-teaser .left .poster, .event-full .left .poster {
     overflow: hidden;
     padding: 0.1875rem;
     background: white;
     border: 1px solid #eeeeee;
     border-radius: 4px;
     margin-bottom: 0.625rem; }
-  /* line 494, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
-  .event-teaser .left .date, .event-teaser .left .city, .event-teaser .left .address {
+  /* line 495, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .event-teaser .left .date, .event-teaser .left .city, .event-teaser .left .address, .event-full .left .date, .event-full .left .city, .event-full .left .address {
     position: relative;
     padding-left: 1.625rem;
     margin-bottom: 0.375rem; }
-    /* line 498, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
-    .event-teaser .left .date:before, .event-teaser .left .city:before, .event-teaser .left .address:before {
+    /* line 499, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    .event-teaser .left .date:before, .event-teaser .left .city:before, .event-teaser .left .address:before, .event-full .left .date:before, .event-full .left .city:before, .event-full .left .address:before {
       position: absolute;
       left: 0;
       width: 1.25rem;
       text-align: center;
       margin-right: 0.375rem; }
-  /* line 518, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
-  .event-teaser .right .title {
+  /* line 519, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .event-teaser .right .title, .event-full .right .title {
     margin-top: 0;
     font-size: 24px;
     font-size: 1.5rem;
     font-weight: bold; }
+
+/* line 527, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+.flag-will-go2-event {
+  display: block; }
+  /* line 531, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .flag-will-go2-event a {
+    color: white; }
+
+/* line 536, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+#page-title {
+  margin: 0.375rem 0; }

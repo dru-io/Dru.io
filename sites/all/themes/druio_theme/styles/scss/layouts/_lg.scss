@@ -75,7 +75,8 @@
     }
   }
 
-  .event-teaser {
+  .event-teaser,
+  .event-full {
     @include susy-clearfix;
     .left {
       @include span(3);

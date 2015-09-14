@@ -4,6 +4,7 @@
   padding: $breadcrumb-padding-vertical $breadcrumb-padding-horizontal;
   margin-bottom: $breadcrumb-margin-bottom;
   border-radius: $border-radius-base;
+  @include font-size(13.5px);
   .delimiter {
     color: $breadcrumb-delimiter-color;
   }

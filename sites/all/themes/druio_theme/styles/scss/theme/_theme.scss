@@ -478,7 +478,8 @@
   }
 }
 
-.event-teaser {
+.event-teaser,
+.event-full {
   margin-bottom: pxtorem(15px);
   padding-bottom: pxtorem(15px);
   border-bottom: 1px solid $hr-border;
@@ -521,4 +522,17 @@
       font-weight: bold;
     }
   }
+}
+
+.flag-will-go2-event {
+  @extend .btn;
+  @extend .btn-primary;
+  display: block;
+  a {
+    color: white;
+  }
+}
+
+#page-title {
+  margin: pxtorem(6px) 0;
 }

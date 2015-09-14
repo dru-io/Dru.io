@@ -189,10 +189,10 @@ $btn-info-border: darken($btn-info-bg, 5%) !default;
 /**
  * Breadcrumbs.
  */
-$breadcrumb-padding-vertical:   8px !default;
-$breadcrumb-padding-horizontal: 15px !default;
-$breadcrumb-margin-bottom:      15px !default;
-$breadcrumb-bg:                 #f5f5f5 !default;
+$breadcrumb-padding-vertical:   0 !default;
+$breadcrumb-padding-horizontal: 0 !default;
+$breadcrumb-margin-bottom:      0 !default;
+$breadcrumb-bg:                 transporent !default;
 $breadcrumb-color:              #777 !default;
 $breadcrumb-delimiter-color:    #ccc !default;
 
