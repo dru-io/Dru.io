@@ -531,12 +531,15 @@ function druio_ds_fields_answer_signature($field) {
 function druio_ds_fields_add_comment_link($field) {
   $wrapper = entity_metadata_wrapper('node', $field['entity']);
 
-  return format_string(
-    '<a href="/comment/reply/@id#comment-form" class="add-comment">Добавить комментарий</a>',
-    array(
-      '@id' => $wrapper->getIdentifier(),
-    )
-  );
+  if (!user_is_anonymous()) {
+    return format_string(
+      '<a href="/comment/reply/@id#comment-form" class="add-comment">Добавить комментарий</a>',
+      array(
+        '@id' => $wrapper->getIdentifier(),
+      )
+    );
+  }
+  return;
 }
 
 /**

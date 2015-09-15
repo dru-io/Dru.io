@@ -2252,7 +2252,7 @@ blockquote {
   font-style: normal; }
 
 /* line 1, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_core.scss */
-.fa, #header .pane .content .top .search-form:before, #header .pane .content .top .header-links .link.tracker:before, #header .pane .content .top .header-links .link.github:before, #header .pane .content .top .header-auth-user .logout:before, .question-teaser .right .tags .tag:before, .question-full > .left .rate-widget .rate-plus, .question-full > .left .rate-widget .rate-minus, .question-full > .right .tags .tag:before, .question-full > .right .bottom .signature .user .info .rating:before, .answer-teaser > .left .rate-widget .rate-plus, .answer-teaser > .left .rate-widget .rate-minus, .answer-teaser > .left .best-answer:before, .answer-teaser > .right .bottom .signature .user .info .rating:before, .event-teaser .left .date:before, .event-teaser .left .city:before, .event-teaser .left .address:before, .event-full .left .date:before, .event-full .left .city:before, .event-full .left .address:before, .post-teaser .bottom .rate-widget .rate, .post-teaser .bottom .comment-count:before, .post-teaser .bottom .date:before {
+.fa, #header .pane .content .top .search-form:before, #header .pane .content .top .header-links .link.tracker:before, #header .pane .content .top .header-links .link.github:before, #header .pane .content .top .header-auth-user .logout:before, .question-teaser .right .tags .tag:before, .question-full > .left .rate-widget .rate-plus, .question-full > .left .rate-widget .rate-minus, .question-full > .right .tags .tag:before, .question-full > .right .bottom .signature .user .info .rating:before, .answer-teaser > .left .rate-widget .rate-plus, .answer-teaser > .left .rate-widget .rate-minus, .answer-teaser > .left .best-answer:before, .answer-teaser > .right .bottom .signature .user .info .rating:before, .event-teaser .left .date:before, .event-teaser .left .city:before, .event-teaser .left .address:before, .event-full .left .date:before, .event-full .left .city:before, .event-full .left .address:before, .post-teaser .bottom .rate-widget .rate, .post-teaser .bottom .comment-count:before, .post-teaser .bottom .date:before, .post-full > .bottom .rate-widget .rate, .post-full > .bottom .comment-count:before, .post-full > .bottom .date:before, #make-reply:before {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -2323,10 +2323,10 @@ blockquote {
   float: right; }
 
 /* line 11, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.fa-pull-left, #header .pane .content .top .fa-pull-left.search-form:before, #header .pane .content .top .header-links .fa-pull-left.link.tracker:before, #header .pane .content .top .header-links .fa-pull-left.link.github:before, #header .pane .content .top .header-auth-user .fa-pull-left.logout:before, .question-teaser .right .tags .fa-pull-left.tag:before, .question-full > .left .rate-widget .fa-pull-left.rate-plus, .question-full > .left .rate-widget .fa-pull-left.rate-minus, .question-full > .right .tags .fa-pull-left.tag:before, .question-full > .right .bottom .signature .user .info .fa-pull-left.rating:before, .answer-teaser > .left .rate-widget .fa-pull-left.rate-plus, .answer-teaser > .left .rate-widget .fa-pull-left.rate-minus, .answer-teaser > .left .fa-pull-left.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .fa-pull-left.rating:before, .event-teaser .left .fa-pull-left.date:before, .event-teaser .left .fa-pull-left.city:before, .event-teaser .left .fa-pull-left.address:before, .event-full .left .fa-pull-left.date:before, .event-full .left .fa-pull-left.city:before, .event-full .left .fa-pull-left.address:before, .post-teaser .bottom .rate-widget .fa-pull-left.rate, .post-teaser .bottom .fa-pull-left.comment-count:before, .post-teaser .bottom .fa-pull-left.date:before {
+.fa.fa-pull-left, #header .pane .content .top .fa-pull-left.search-form:before, #header .pane .content .top .header-links .fa-pull-left.link.tracker:before, #header .pane .content .top .header-links .fa-pull-left.link.github:before, #header .pane .content .top .header-auth-user .fa-pull-left.logout:before, .question-teaser .right .tags .fa-pull-left.tag:before, .question-full > .left .rate-widget .fa-pull-left.rate-plus, .question-full > .left .rate-widget .fa-pull-left.rate-minus, .question-full > .right .tags .fa-pull-left.tag:before, .question-full > .right .bottom .signature .user .info .fa-pull-left.rating:before, .answer-teaser > .left .rate-widget .fa-pull-left.rate-plus, .answer-teaser > .left .rate-widget .fa-pull-left.rate-minus, .answer-teaser > .left .fa-pull-left.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .fa-pull-left.rating:before, .event-teaser .left .fa-pull-left.date:before, .event-teaser .left .fa-pull-left.city:before, .event-teaser .left .fa-pull-left.address:before, .event-full .left .fa-pull-left.date:before, .event-full .left .fa-pull-left.city:before, .event-full .left .fa-pull-left.address:before, .post-teaser .bottom .rate-widget .fa-pull-left.rate, .post-teaser .bottom .fa-pull-left.comment-count:before, .post-teaser .bottom .fa-pull-left.date:before, .post-full > .bottom .rate-widget .fa-pull-left.rate, .post-full > .bottom .fa-pull-left.comment-count:before, .post-full > .bottom .fa-pull-left.date:before, .fa-pull-left#make-reply:before {
   margin-right: .3em; }
 /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.fa-pull-right, #header .pane .content .top .fa-pull-right.search-form:before, #header .pane .content .top .header-links .fa-pull-right.link.tracker:before, #header .pane .content .top .header-links .fa-pull-right.link.github:before, #header .pane .content .top .header-auth-user .fa-pull-right.logout:before, .question-teaser .right .tags .fa-pull-right.tag:before, .question-full > .left .rate-widget .fa-pull-right.rate-plus, .question-full > .left .rate-widget .fa-pull-right.rate-minus, .question-full > .right .tags .fa-pull-right.tag:before, .question-full > .right .bottom .signature .user .info .fa-pull-right.rating:before, .answer-teaser > .left .rate-widget .fa-pull-right.rate-plus, .answer-teaser > .left .rate-widget .fa-pull-right.rate-minus, .answer-teaser > .left .fa-pull-right.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .fa-pull-right.rating:before, .event-teaser .left .fa-pull-right.date:before, .event-teaser .left .fa-pull-right.city:before, .event-teaser .left .fa-pull-right.address:before, .event-full .left .fa-pull-right.date:before, .event-full .left .fa-pull-right.city:before, .event-full .left .fa-pull-right.address:before, .post-teaser .bottom .rate-widget .fa-pull-right.rate, .post-teaser .bottom .fa-pull-right.comment-count:before, .post-teaser .bottom .fa-pull-right.date:before {
+.fa.fa-pull-right, #header .pane .content .top .fa-pull-right.search-form:before, #header .pane .content .top .header-links .fa-pull-right.link.tracker:before, #header .pane .content .top .header-links .fa-pull-right.link.github:before, #header .pane .content .top .header-auth-user .fa-pull-right.logout:before, .question-teaser .right .tags .fa-pull-right.tag:before, .question-full > .left .rate-widget .fa-pull-right.rate-plus, .question-full > .left .rate-widget .fa-pull-right.rate-minus, .question-full > .right .tags .fa-pull-right.tag:before, .question-full > .right .bottom .signature .user .info .fa-pull-right.rating:before, .answer-teaser > .left .rate-widget .fa-pull-right.rate-plus, .answer-teaser > .left .rate-widget .fa-pull-right.rate-minus, .answer-teaser > .left .fa-pull-right.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .fa-pull-right.rating:before, .event-teaser .left .fa-pull-right.date:before, .event-teaser .left .fa-pull-right.city:before, .event-teaser .left .fa-pull-right.address:before, .event-full .left .fa-pull-right.date:before, .event-full .left .fa-pull-right.city:before, .event-full .left .fa-pull-right.address:before, .post-teaser .bottom .rate-widget .fa-pull-right.rate, .post-teaser .bottom .fa-pull-right.comment-count:before, .post-teaser .bottom .fa-pull-right.date:before, .post-full > .bottom .rate-widget .fa-pull-right.rate, .post-full > .bottom .fa-pull-right.comment-count:before, .post-full > .bottom .fa-pull-right.date:before, .fa-pull-right#make-reply:before {
   margin-left: .3em; }
 
 /* Deprecated as of 4.4.0 */
@@ -2339,10 +2339,10 @@ blockquote {
   float: left; }
 
 /* line 20, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.pull-left, #header .pane .content .top .pull-left.search-form:before, #header .pane .content .top .header-links .pull-left.link.tracker:before, #header .pane .content .top .header-links .pull-left.link.github:before, #header .pane .content .top .header-auth-user .pull-left.logout:before, .question-teaser .right .tags .pull-left.tag:before, .question-full > .left .rate-widget .pull-left.rate-plus, .question-full > .left .rate-widget .pull-left.rate-minus, .question-full > .right .tags .pull-left.tag:before, .question-full > .right .bottom .signature .user .info .pull-left.rating:before, .answer-teaser > .left .rate-widget .pull-left.rate-plus, .answer-teaser > .left .rate-widget .pull-left.rate-minus, .answer-teaser > .left .pull-left.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .pull-left.rating:before, .event-teaser .left .pull-left.date:before, .event-teaser .left .pull-left.city:before, .event-teaser .left .pull-left.address:before, .event-full .left .pull-left.date:before, .event-full .left .pull-left.city:before, .event-full .left .pull-left.address:before, .post-teaser .bottom .rate-widget .pull-left.rate, .post-teaser .bottom .pull-left.comment-count:before, .post-teaser .bottom .pull-left.date:before {
+.fa.pull-left, #header .pane .content .top .pull-left.search-form:before, #header .pane .content .top .header-links .pull-left.link.tracker:before, #header .pane .content .top .header-links .pull-left.link.github:before, #header .pane .content .top .header-auth-user .pull-left.logout:before, .question-teaser .right .tags .pull-left.tag:before, .question-full > .left .rate-widget .pull-left.rate-plus, .question-full > .left .rate-widget .pull-left.rate-minus, .question-full > .right .tags .pull-left.tag:before, .question-full > .right .bottom .signature .user .info .pull-left.rating:before, .answer-teaser > .left .rate-widget .pull-left.rate-plus, .answer-teaser > .left .rate-widget .pull-left.rate-minus, .answer-teaser > .left .pull-left.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .pull-left.rating:before, .event-teaser .left .pull-left.date:before, .event-teaser .left .pull-left.city:before, .event-teaser .left .pull-left.address:before, .event-full .left .pull-left.date:before, .event-full .left .pull-left.city:before, .event-full .left .pull-left.address:before, .post-teaser .bottom .rate-widget .pull-left.rate, .post-teaser .bottom .pull-left.comment-count:before, .post-teaser .bottom .pull-left.date:before, .post-full > .bottom .rate-widget .pull-left.rate, .post-full > .bottom .pull-left.comment-count:before, .post-full > .bottom .pull-left.date:before, .pull-left#make-reply:before {
   margin-right: .3em; }
 /* line 21, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.pull-right, #header .pane .content .top .pull-right.search-form:before, #header .pane .content .top .header-links .pull-right.link.tracker:before, #header .pane .content .top .header-links .pull-right.link.github:before, #header .pane .content .top .header-auth-user .pull-right.logout:before, .question-teaser .right .tags .pull-right.tag:before, .question-full > .left .rate-widget .pull-right.rate-plus, .question-full > .left .rate-widget .pull-right.rate-minus, .question-full > .right .tags .pull-right.tag:before, .question-full > .right .bottom .signature .user .info .pull-right.rating:before, .answer-teaser > .left .rate-widget .pull-right.rate-plus, .answer-teaser > .left .rate-widget .pull-right.rate-minus, .answer-teaser > .left .pull-right.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .pull-right.rating:before, .event-teaser .left .pull-right.date:before, .event-teaser .left .pull-right.city:before, .event-teaser .left .pull-right.address:before, .event-full .left .pull-right.date:before, .event-full .left .pull-right.city:before, .event-full .left .pull-right.address:before, .post-teaser .bottom .rate-widget .pull-right.rate, .post-teaser .bottom .pull-right.comment-count:before, .post-teaser .bottom .pull-right.date:before {
+.fa.pull-right, #header .pane .content .top .pull-right.search-form:before, #header .pane .content .top .header-links .pull-right.link.tracker:before, #header .pane .content .top .header-links .pull-right.link.github:before, #header .pane .content .top .header-auth-user .pull-right.logout:before, .question-teaser .right .tags .pull-right.tag:before, .question-full > .left .rate-widget .pull-right.rate-plus, .question-full > .left .rate-widget .pull-right.rate-minus, .question-full > .right .tags .pull-right.tag:before, .question-full > .right .bottom .signature .user .info .pull-right.rating:before, .answer-teaser > .left .rate-widget .pull-right.rate-plus, .answer-teaser > .left .rate-widget .pull-right.rate-minus, .answer-teaser > .left .pull-right.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .pull-right.rating:before, .event-teaser .left .pull-right.date:before, .event-teaser .left .pull-right.city:before, .event-teaser .left .pull-right.address:before, .event-full .left .pull-right.date:before, .event-full .left .pull-right.city:before, .event-full .left .pull-right.address:before, .post-teaser .bottom .rate-widget .pull-right.rate, .post-teaser .bottom .pull-right.comment-count:before, .post-teaser .bottom .pull-right.date:before, .post-full > .bottom .rate-widget .pull-right.rate, .post-full > .bottom .pull-right.comment-count:before, .post-full > .bottom .pull-right.date:before, .pull-right#make-reply:before {
   margin-left: .3em; }
 
 /* line 1, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_animated.scss */
@@ -2703,7 +2703,7 @@ blockquote {
   content: "\f043"; }
 
 /* line 68, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-edit:before, .fa-pencil-square-o:before {
+.fa-edit:before, .fa-pencil-square-o:before, #make-reply:before {
   content: "\f044"; }
 
 /* line 69, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -2815,11 +2815,11 @@ blockquote {
   content: "\f061"; }
 
 /* line 96, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-arrow-up:before, .post-teaser .bottom .rate-widget .rate--plus:before {
+.fa-arrow-up:before, .post-teaser .bottom .rate-widget .rate--plus:before, .post-full > .bottom .rate-widget .rate--plus:before {
   content: "\f062"; }
 
 /* line 97, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-arrow-down:before, .post-teaser .bottom .rate-widget .rate--minus:before {
+.fa-arrow-down:before, .post-teaser .bottom .rate-widget .rate--minus:before, .post-full > .bottom .rate-widget .rate--minus:before {
   content: "\f063"; }
 
 /* line 98, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -2879,7 +2879,7 @@ blockquote {
   content: "\f072"; }
 
 /* line 112, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-calendar:before, .post-teaser .bottom .date:before {
+.fa-calendar:before, .post-teaser .bottom .date:before, .post-full > .bottom .date:before {
   content: "\f073"; }
 
 /* line 113, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -3263,7 +3263,7 @@ blockquote {
   content: "\f0e5"; }
 
 /* line 208, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-comments-o:before, .post-teaser .bottom .comment-count:before {
+.fa-comments-o:before, .post-teaser .bottom .comment-count:before, .post-full > .bottom .comment-count:before {
   content: "\f0e6"; }
 
 /* line 209, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -6072,3 +6072,79 @@ table {
     line-height: 1;
     font-size: 14px;
     font-size: 0.875rem; }
+
+/* line 632, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+.post-full > .bottom {
+  background: #f9f9f9;
+  padding: 5px;
+  border-radius: 2px;
+  color: #777; }
+  /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
+  .post-full > .bottom:after {
+    content: " ";
+    display: block;
+    clear: both; }
+  /* line 641, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .post-full > .bottom .rate-widget, .post-full > .bottom .comment-count, .post-full > .bottom .date, .post-full > .bottom .avatar-and-author {
+    float: left;
+    margin-right: 1rem; }
+  /* line 646, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .post-full > .bottom .rate-widget .rate {
+    background: #E6E6E6;
+    color: #777;
+    display: inline-block;
+    padding: 0.3125rem;
+    border-radius: 2px;
+    font-size: 14px;
+    font-size: 0.875rem; }
+    /* line 657, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    .post-full > .bottom .rate-widget .rate--minus:hover:not(.disabled), .post-full > .bottom .rate-widget .rate--minus.voted {
+      background: #903030;
+      color: white; }
+    /* line 665, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    .post-full > .bottom .rate-widget .rate--plus:hover:not(.disabled), .post-full > .bottom .rate-widget .rate--plus.voted {
+      background: #4c9067;
+      color: white; }
+  /* line 671, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .post-full > .bottom .rate-widget .rate-result {
+    display: inline-block;
+    padding: 0 0.4375rem;
+    font-weight: bold; }
+    /* line 675, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    .post-full > .bottom .rate-widget .rate-result.good {
+      color: #4c9067; }
+    /* line 678, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    .post-full > .bottom .rate-widget .rate-result.bad {
+      color: #903030; }
+  /* line 683, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .post-full > .bottom .comment-count, .post-full > .bottom .date {
+    font-size: 14px;
+    font-size: 0.875rem; }
+    /* line 685, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    .post-full > .bottom .comment-count:before, .post-full > .bottom .date:before {
+      margin-right: 0.375rem; }
+  /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
+  .post-full > .bottom .avatar-and-author:after {
+    content: " ";
+    display: block;
+    clear: both; }
+  /* line 698, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .post-full > .bottom .avatar-and-author .avatar {
+    float: left;
+    display: block;
+    overflow: hidden;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+    margin-right: 0.3125rem; }
+  /* line 707, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .post-full > .bottom .avatar-and-author .author {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1;
+    font-size: 14px;
+    font-size: 0.875rem; }
+
+/* line 718, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+#make-reply:before {
+  margin-right: 0.375rem; }

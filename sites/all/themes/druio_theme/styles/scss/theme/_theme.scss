@@ -175,7 +175,7 @@
   padding: pxtorem(20px);
 }
 
-.facetapi-facetapi-checkbox-links  {
+.facetapi-facetapi-checkbox-links {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -368,7 +368,7 @@
 .hljs {
   background: white;
   @include font-size(12px);
-  border-left: 4px solid rgba(0,39,59,.5);
+  border-left: 4px solid rgba(0, 39, 59, .5);
   padding: 0 0 0 pxtorem(12px);
 }
 
@@ -584,7 +584,7 @@
       }
       .rate-result {
         display: inline-block;
-        padding: 0  pxtorem(7px);
+        padding: 0 pxtorem(7px);
         font-weight: bold;
         &.good {
           color: $brand-color-2;
@@ -625,5 +625,99 @@
         @include font-size(14px);
       }
     }
+  }
+}
+
+.post-full {
+  > .bottom {
+    @include susy-clearfix;
+    background: rgb(249, 249, 249);
+    padding: 5px;
+    border-radius: 2px;
+    color: #777;
+    .rate-widget,
+    .comment-count,
+    .date,
+    .avatar-and-author {
+      float: left;
+      margin-right: pxtorem(16px);
+    }
+    .rate-widget {
+      .rate {
+        background: #E6E6E6;
+        color: #777;
+        display: inline-block;
+        padding: pxtorem(5px);
+        border-radius: 2px;
+        @extend .fa;
+        @include font-size(14px);
+        &--minus {
+          @extend .fa-arrow-down;
+          &:hover:not(.disabled),
+          &.voted {
+            background: $brand-color-4;
+            color: white;
+          }
+        }
+        &--plus {
+          @extend .fa-arrow-up;
+          &:hover:not(.disabled),
+          &.voted {
+            background: $brand-color-2;
+            color: white;
+          }
+        }
+      }
+      .rate-result {
+        display: inline-block;
+        padding: 0 pxtorem(7px);
+        font-weight: bold;
+        &.good {
+          color: $brand-color-2;
+        }
+        &.bad {
+          color: $brand-color-4;
+        }
+      }
+    }
+    .comment-count, .date {
+      @include font-size(14px);
+      &:before {
+        @extend .fa;
+        margin-right: pxtorem(6px);
+      }
+    }
+    .comment-count:before {
+      @extend .fa-comments-o;
+    }
+    .date:before {
+      @extend .fa-calendar;
+    }
+    .avatar-and-author {
+      @include susy-clearfix;
+      .avatar {
+        float: left;
+        display: block;
+        overflow: hidden;
+        height: pxtorem(24px);
+        width: pxtorem(24px);
+        border-radius: 50%;
+        margin-right: pxtorem(5px);
+      }
+      .author {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1;
+        @include font-size(14px);
+      }
+    }
+  }
+}
+
+#make-reply {
+  &:before {
+    @extend .fa;
+    @extend .fa-pencil-square-o;
+    margin-right: pxtorem(6px);
   }
 }
