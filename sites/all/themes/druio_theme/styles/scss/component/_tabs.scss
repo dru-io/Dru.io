@@ -2,30 +2,23 @@
  * Tabs style.
  */
 ul.tabs {
+  @include susy-clearfix;
   // Primary tabs.
   &.primary {
-    background: white;
-    letter-spacing: -0.3rem;
-    margin: 1rem 0;
+    background: $primary-tabs-bg;
+    margin: $primary-tabs-margin;
     padding: 0;
     list-style: none;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid $primary-tabs-inactive-color;
 
     li {
-      letter-spacing: 0rem;
-      display: inline-block;
-      vertical-align: middle;
-
+      float: left;
       &.active {
-        color: #333;
-        border: 1px solid #ddd;
-        border-bottom: 1px solid white;
-        border-radius: 2px 2px 0 0;
         margin-bottom: -1px;
+        border-bottom: 3px solid $primary-tabs-active-color;
       }
-
       a {
-        color: #666;
+        color: $primary-tabs-inactive-color;
         display: block;
         padding: .5rem .75rem;
         border: none;
@@ -34,7 +27,7 @@ ul.tabs {
 
       &.active a,
       &:hover a {
-        color: #333;
+        color: $primary-tabs-active-color;
         transition: all 500ms;
       }
     }

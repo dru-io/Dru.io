@@ -217,3 +217,10 @@ $vertical-tabs-button-bg-selected:    #439fe0;
 $vertical-tabs-button-text-shadow:    0 1px 0 rgba(0,0,0,.1);
 $vertical-tabs-list-border:           1px solid #DDD;
 
+/**
+ * Primary tabs.
+ */
+$primary-tabs-bg: white;
+$primary-tabs-margin: 1rem 0;
+$primary-tabs-inactive-color: #bdc3c7;
+$primary-tabs-active-color: $brand-primary;

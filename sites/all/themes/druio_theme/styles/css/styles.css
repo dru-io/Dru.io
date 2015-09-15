@@ -403,6 +403,9 @@ td, th {
  * Vertical tabs.
  */
 /**
+ * Primary tabs.
+ */
+/**
  * @file
  * Here styled base elements and over fixes.
  */
@@ -5264,57 +5267,56 @@ label {
 /**
  * Tabs style.
  */
-/* line 6, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+/* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
+ul.tabs:after {
+  content: " ";
+  display: block;
+  clear: both; }
+/* line 7, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
 ul.tabs.primary {
   background: white;
-  letter-spacing: -0.3rem;
   margin: 1rem 0;
   padding: 0;
   list-style: none;
-  border-bottom: 1px solid #ddd; }
+  border-bottom: 1px solid #bdc3c7; }
   /* line 14, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
   ul.tabs.primary li {
-    letter-spacing: 0rem;
-    display: inline-block;
-    vertical-align: middle; }
-    /* line 19, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+    float: left; }
+    /* line 16, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
     ul.tabs.primary li.active {
-      color: #333;
-      border: 1px solid #ddd;
-      border-bottom: 1px solid white;
-      border-radius: 2px 2px 0 0;
-      margin-bottom: -1px; }
-    /* line 27, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+      margin-bottom: -1px;
+      border-bottom: 3px solid #49A5DE; }
+    /* line 20, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
     ul.tabs.primary li a {
-      color: #666;
+      color: #bdc3c7;
       display: block;
       padding: .5rem .75rem;
       border: none;
       text-decoration: none; }
-    /* line 36, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+    /* line 29, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
     ul.tabs.primary li.active a, ul.tabs.primary li:hover a {
-      color: #333;
+      color: #49A5DE;
       transition: all 500ms; }
-/* line 44, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+/* line 37, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
 ul.tabs.secondary {
   margin: 0;
   padding: 0;
   list-style: none;
   border-bottom: 1px solid #E0E0E0; }
-  /* line 50, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+  /* line 43, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
   ul.tabs.secondary:after {
     content: '';
     display: block;
     float: none;
     clear: both; }
-  /* line 57, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+  /* line 50, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
   ul.tabs.secondary li {
     float: left;
     display: block;
     border: none;
     padding: 0;
     margin: 0; }
-    /* line 64, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+    /* line 57, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
     ul.tabs.secondary li a {
       display: block;
       margin: 0;
@@ -5323,40 +5325,40 @@ ul.tabs.secondary {
       border: none;
       box-shadow: none;
       transition: box-shadow 200ms; }
-    /* line 74, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+    /* line 67, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
     ul.tabs.secondary li.active a {
       background: white;
       box-shadow: inset 0px -2px 0px #6D6D6D; }
-    /* line 79, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+    /* line 72, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
     ul.tabs.secondary li.hover a {
       box-shadow: inset 0px -2px 0px #6D6D6D;
       transition: box-shadow 200ms; }
-/* line 86, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+/* line 79, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
 ul.tabs:last-child {
   margin-bottom: 15px; }
 
-/* line 92, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+/* line 85, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
 .vertical-tabs {
   background: white; }
-  /* line 94, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+  /* line 87, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
   .vertical-tabs .vertical-tabs-list {
     background: #fbfaf8;
     border: 1px solid #DDD; }
-    /* line 97, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+    /* line 90, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
     .vertical-tabs .vertical-tabs-list * {
       text-decoration: none !important;
       outline: 0 !important; }
-    /* line 102, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+    /* line 95, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
     .vertical-tabs .vertical-tabs-list .vertical-tab-button {
       border: none; }
-      /* line 104, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+      /* line 97, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
       .vertical-tabs .vertical-tabs-list .vertical-tab-button a {
         color: #555459;
         border: none; }
-      /* line 109, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+      /* line 102, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
       .vertical-tabs .vertical-tabs-list .vertical-tab-button.selected {
         background: #439fe0; }
-        /* line 111, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
+        /* line 104, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/_tabs.scss */
         .vertical-tabs .vertical-tabs-list .vertical-tab-button.selected strong, .vertical-tabs .vertical-tabs-list .vertical-tab-button.selected .summary {
           color: white;
           text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1); }
