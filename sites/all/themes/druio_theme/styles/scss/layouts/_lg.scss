@@ -85,4 +85,24 @@
       @include span(9 last);
     }
   }
+
+  .comment-full {
+    @include susy-clearfix;
+    > .left {
+      @include span(1);
+    }
+    > .right {
+      @include span(11 last);
+    }
+  }
+
+  .view-project-page-page {
+    .content {
+      @include susy-clearfix;
+      .project-teaser {
+        @include gallery(4 of 12);
+      }
+    }
+  }
+
 }

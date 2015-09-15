@@ -721,3 +721,78 @@
     margin-right: pxtorem(6px);
   }
 }
+
+.comment-full {
+  margin-bottom: pxtorem(15px);
+  padding-bottom: pxtorem(15px);
+  border-bottom: 1px solid $hr-border;
+  position: relative;
+  > .right {
+    .links {
+      @include susy-clearfix;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      padding: 0;
+      opacity: 0;
+      transition: all 500ms;
+      list-style: none;
+      li {
+        @include font-size(12px);
+        float: left;
+        margin-left: pxtorem(10px);
+      }
+    }
+    .author-and-created {
+      margin-bottom: pxtorem(10px);
+      .username {
+        color: $brand-color-1;
+        font-weight: bold;
+      }
+      .created {
+        color: #777;
+        @include font-size(12px);
+        line-height: pxtorem(16px);
+      }
+    }
+    .content {
+      p:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+    &:hover {
+      .links {
+        opacity: 1;
+        transition: all 500ms;
+      }
+    }
+  }
+}
+
+.project-teaser {
+  margin-bottom: pxtorem(15px);
+  padding-bottom: pxtorem(15px);
+  border-bottom: 1px solid $hr-border;
+  .title {
+    @include font-size(19px);
+  }
+  .type, .dev-status, .maintenance-status {
+    &:before {
+      @extend .fa;
+      width: pxtorem(20px);
+      text-align: center;
+      margin-right: pxtorem(6px);
+    }
+  }
+  .type:before {
+    @extend .fa-flip-horizontal;
+    @extend .fa-cubes;
+  }
+  .dev-status {
+    @extend .fa-keyboard-o;
+  }
+  .maintenance-status:before {
+    @extend .fa-life-ring;
+  }
+}
