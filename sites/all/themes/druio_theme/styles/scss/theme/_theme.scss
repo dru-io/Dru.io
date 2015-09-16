@@ -534,7 +534,7 @@
 }
 
 #page-title {
-  margin: pxtorem(6px) 0;
+  margin: pxtorem(6px) 0 pxtorem(24px);
 }
 
 .post-teaser {
@@ -794,5 +794,105 @@
   }
   .maintenance-status:before {
     @extend .fa-life-ring;
+  }
+}
+
+.project-full {
+  > .left {
+    .type,
+    .dev-status,
+    .maintenance-status,
+    .version,
+    .drupalorg {
+      &:before {
+        @extend .fa;
+        margin-right: pxtorem(6px);
+        width: pxtorem(22px);
+        text-align: center;
+      }
+    }
+    .drupalorg:before {
+      @extend .fa-drupal;
+    }
+    .type:before {
+      @extend .fa-cubes;
+    }
+    .dev-status:before {
+      @extend .fa-keyboard-o;
+    }
+    .maintenance-status:before {
+      @extend .fa-life-ring;
+    }
+    .version:before {
+      @extend .fa-drupal;
+    }
+  }
+}
+
+#druio-projects-download-form {
+  margin: pxtorem(10px) 0;
+  padding: pxtorem(10px);
+  border: 1px solid #E7E7E7;
+  border-radius: 2px;
+  box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.03);
+
+  .form-item-release-selector {
+    margin: 0;
+  }
+
+  .archives {
+    .title {
+      margin-top: pxtorem(7px);
+      @include font-size(17px);
+      border-bottom: 1px solid rgb(232, 232, 232);
+      padding-bottom: pxtorem(5px);
+
+      &:before {
+        @extend .fa;
+        @extend .fa-cloud-download;
+        margin-right: pxtorem(5px);
+      }
+    }
+
+    .list {
+      @include susy-clearfix;
+      .item {
+        @include font-size(12px);
+        display: block;
+        @include gallery(2 of 4);
+        color: $text-color;
+
+        .item-label {
+          font-weight: bold;
+          @include font-size(16px);
+        }
+
+        .label {
+          font-weight: bold;
+        }
+
+        .md5 {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+
+  .drush {
+    @include font-size(14px);
+    .title {
+      margin-top: pxtorem(7px);
+      @include font-size(17px);
+      border-bottom: 1px solid rgb(232, 232, 232);
+      padding-bottom: pxtorem(5px);
+
+      &:before {
+        @extend .fa;
+        @extend .fa-terminal;
+        margin-right: pxtorem(5px);
+      }
+    }
   }
 }

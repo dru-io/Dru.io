@@ -105,4 +105,13 @@
     }
   }
 
+  .project-full {
+    @include susy-clearfix;
+    > .left {
+      @include span(6);
+    }
+    > .right {
+      @include span(6 last);
+    }
+  }
 }
