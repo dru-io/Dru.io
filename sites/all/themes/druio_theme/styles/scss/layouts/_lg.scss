@@ -114,4 +114,22 @@
       @include span(6 last);
     }
   }
+
+  .order-teaser {
+    @include susy-clearfix;
+    .info {
+      @include span(3);
+      @include susy-clearfix;
+      .ready2work {
+        @include span(5);
+      }
+      .budget {
+        @include span(7 last);
+      }
+    }
+    .right {
+      @include span(9 last);
+    }
+  }
+
 }

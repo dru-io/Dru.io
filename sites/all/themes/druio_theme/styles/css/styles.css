@@ -851,6 +851,36 @@ blockquote {
   .project-full > .right {
     width: 49.15254%;
     float: right;
+    margin-right: 0; }
+  /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
+  .order-teaser:after {
+    content: " ";
+    display: block;
+    clear: both; }
+  /* line 120, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
+  .order-teaser .info {
+    width: 23.72881%;
+    float: left;
+    margin-right: 1.69492%; }
+    /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
+    .order-teaser .info:after {
+      content: " ";
+      display: block;
+      clear: both; }
+    /* line 123, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
+    .order-teaser .info .ready2work {
+      width: 40.67797%;
+      float: left;
+      margin-right: 1.69492%; }
+    /* line 126, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
+    .order-teaser .info .budget {
+      width: 57.62712%;
+      float: right;
+      margin-right: 0; }
+  /* line 130, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
+  .order-teaser .right {
+    width: 74.57627%;
+    float: right;
     margin-right: 0; } }
 
 @-webkit-keyframes bounce {
@@ -6344,3 +6374,43 @@ table {
       /* line 891, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       #druio-projects-download-form .drush .title:before {
         margin-right: 0.3125rem; }
+
+/* line 900, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+.order-teaser {
+  border-bottom: 1px solid #eeeeee;
+  padding-bottom: 1.25rem;
+  margin-bottom: 1.25rem; }
+  /* line 904, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .order-teaser .info {
+    cursor: pointer;
+    text-align: center;
+    font-size: 17px;
+    font-size: 1.0625rem; }
+    /* line 908, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    .order-teaser .info .ready2work, .order-teaser .info .budget {
+      padding: 0.375rem; }
+      /* line 910, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      .order-teaser .info .ready2work .label, .order-teaser .info .budget .label {
+        font-size: 13.5px;
+        font-size: 0.84375rem; }
+    /* line 914, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    .order-teaser .info .ready2work {
+      color: #4c9067; }
+      /* line 916, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      .order-teaser .info .ready2work.complete {
+        background: #e0f0d3; }
+      /* line 919, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      .order-teaser .info .ready2work.no-people {
+        color: #333333; }
+  /* line 925, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .order-teaser .right .title {
+    margin-top: 0;
+    font-size: 18px;
+    font-size: 1.125rem; }
+  /* line 929, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .order-teaser .right .created {
+    float: right;
+    font-size: 12px;
+    font-size: 0.75rem;
+    padding-top: 0.25rem;
+    color: #707070; }

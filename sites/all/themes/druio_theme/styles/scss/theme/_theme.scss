@@ -896,3 +896,41 @@
     }
   }
 }
+
+.order-teaser {
+  border-bottom: 1px solid $hr-border;
+  padding-bottom: pxtorem(20px);
+  margin-bottom: pxtorem(20px);
+  .info {
+    cursor: pointer;
+    text-align: center;
+    @include font-size(17px);
+    .ready2work, .budget {
+      padding: pxtorem(6px);
+      .label {
+        @include font-size(13.5px);
+      }
+    }
+    .ready2work {
+      color: $brand-color-2;
+      &.complete {
+        background: $brand-color-3;
+      }
+      &.no-people {
+        color: $text-color;
+      }
+    }
+  }
+  .right {
+    .title {
+      margin-top: 0;
+      @include font-size(18px);
+    }
+    .created {
+      float: right;
+      @include font-size(12px);
+      padding-top: pxtorem(4px);
+      color: #707070;
+    }
+  }
+}

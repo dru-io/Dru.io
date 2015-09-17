@@ -89,11 +89,11 @@ function druio_ds_fields_ds_fields_info($entity_type) {
       'function' => 'druio_ds_fields_question_tags_info',
     );
 
-    $fields['question_created_info'] = array(
-      'title' => 'Question: Created info',
-      'ui_limit' => array('question|*'),
+    $fields['relative_created_info'] = array(
+      'title' => 'Relative created info',
+      'ui_limit' => array('question|*', 'order|*'),
       'field_type' => DS_FIELD_TYPE_FUNCTION,
-      'function' => 'druio_ds_fields_question_created_info',
+      'function' => 'druio_ds_fields_relative_created_info',
     );
 
     $fields['question_signature'] = array(
@@ -122,6 +122,20 @@ function druio_ds_fields_ds_fields_info($entity_type) {
       'ui_limit' => array('question|*'),
       'field_type' => DS_FIELD_TYPE_FUNCTION,
       'function' => 'druio_ds_fields_question_comments',
+    );
+
+    $fields['order_teaser_info'] = array(
+      'title' => 'Order: Teaser info',
+      'ui_limit' => array('order|teaser'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_order_teaser_info',
+    );
+
+    $fields['order_specification'] = array(
+      'title' => 'Order: Specification',
+      'ui_limit' => array('order|full'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_order_specification',
     );
 
     return array($entity_type => $fields);
@@ -433,11 +447,11 @@ function druio_ds_fields_question_tags_info($field) {
 }
 
 /**
- * Info about when and who created question.
+ * Info about when and who created in relative units.
  * @param $field
  * @return string
  */
-function druio_ds_fields_question_created_info($field) {
+function druio_ds_fields_relative_created_info($field) {
   $wrapper = entity_metadata_wrapper('node', $field['entity']);
 
   $week = 60 * 60 * 24 * 7;
@@ -449,9 +463,26 @@ function druio_ds_fields_question_created_info($field) {
     $date = format_interval($diffirence, 1);
   }
 
+  $bundle_name = $wrapper->getBundle();
+
+  switch ($bundle_name) {
+    case 'question':
+      $label = 'Вопрос задан';
+      break;
+
+    case 'order':
+      $label = 'Заказ размещён';
+      break;
+
+    default:
+      $label = 'Создано';
+      break;
+  }
+
   return format_string(
-    '<div class="created">Вопрос задан @date <a href="@href">@author</a></div>',
+    '<div class="created">@label @date <a href="@href">@author</a></div>',
     array(
+      '@label' => $label,
       '@date' => $date,
       '@href' => url('user/' . $wrapper->author->getIdentifier()),
       '@author' => $wrapper->author->label(),
@@ -556,4 +587,96 @@ function druio_ds_fields_question_comments($field) {
   if ($view->result) {
     return $output;
   }
+}
+
+/**
+ * Number of responses.
+ * @param $field
+ * @return string
+ */
+function druio_ds_fields_order_teaser_info($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+  $nid = $wrapper->getIdentifier();
+  $flag = flag_get_flag('ready2work');
+  $ready2work = $flag->get_count($nid);
+  $budget = '—';
+  if ($wrapper->__isset('field_order_budgeting')) {
+    if (strlen($wrapper->field_order_budgeting->value())) {
+      $budget = number_format($wrapper->field_order_budgeting->value(), 0, '.', ' ') . ' руб.';
+    }
+  }
+
+  $status_class = 'active';
+  if ($wrapper->__isset('field_order_status_term')) {
+    $status_tid = $wrapper->field_order_status_term->getIdentifier();
+    switch ($status_tid) {
+      case 3419:
+        $status_class = 'archive';
+        break;
+
+      case 3417:
+        $status_class = 'complete';
+        break;
+
+      case 3418:
+        $status_class = 'cancel';
+        break;
+    }
+  }
+
+  return format_string(
+    '<div class="info" onclick="@onclick">
+  <div class="ready2work @read2work_additional">
+    @ready
+    <div class="label">
+      @ready_label
+    </div>
+  </div>
+
+  <div class="budget">
+   @budget
+    <div class="label">
+      бюджет
+    </div>
+  </div>
+</div>',
+    array(
+      '@onclick' => "window.location.href='" . url('node/' . $nid) . "'",
+      '@ready' => $ready2work,
+      '@ready_label' => druio_russian_plural($ready2work, array(
+        'человек',
+        'человека',
+        'человек'
+      )),
+      '@budget' => $budget,
+      '@read2work_additional' => ($ready2work > 0 ? '' : 'no-people') . $status_class,
+    )
+  );
+}
+
+/**
+ * Download link for order specification.
+ * @param $field
+ * @return string|void
+ */
+function druio_ds_fields_order_specification($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+
+  if ($wrapper->__isset('field_order_specification')) {
+    $result = '<ul class="files">';
+    foreach ($wrapper->field_order_specification->getIterator() as $field_order_specification) {
+      $file = $field_order_specification->file->value();
+      $result .= format_string(
+        '<div class="file"><a href="@href" rel="nofollow">@filename</a> <span class="filesize">(@filesize)</span></div>',
+        array(
+          '@href' => file_create_url($file->uri),
+          '@filename' => $file->filename,
+          '@filesize' => format_size($file->filesize),
+        )
+      );
+    }
+    $result .= '</ul>';
+    return $result;
+  }
+  return;
 }
