@@ -21,7 +21,9 @@
         var $this = $(this);
         if ($this.width() != $this[0].naturalWidth) {
           if (0 == $(this).parent('a').length) {
-            $this.wrap('<a class="lightcase" href="' + $this.attr('src') + '"></a>');
+            var $link_wrapper = $('<a class="lightcase" href="' + $this.attr('src') + '"></a>');
+            $this.wrap($link_wrapper);
+            Drupal.behaviors.Lightcase.attach($link_wrapper, settings);
           }
         }
       });
