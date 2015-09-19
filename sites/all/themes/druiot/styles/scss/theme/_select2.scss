@@ -21,7 +21,8 @@
     /**
      * Single
      */
-    .select2-selection--single {
+    .select2-selection--single,
+    .select2-selection--multiple {
       padding-right: pxToRem(25px);
       display: block;
       &:before {
