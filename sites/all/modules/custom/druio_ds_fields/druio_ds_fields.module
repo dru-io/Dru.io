@@ -138,6 +138,13 @@ function druio_ds_fields_ds_fields_info($entity_type) {
       'function' => 'druio_ds_fields_order_specification',
     );
 
+    $fields['order_applicants'] = array(
+      'title' => 'Order: Applicants',
+      'ui_limit' => array('order|full'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_order_applicants',
+    );
+
     return array($entity_type => $fields);
   }
 
@@ -663,7 +670,8 @@ function druio_ds_fields_order_specification($field) {
   $wrapper = entity_metadata_wrapper('node', $field['entity']);
 
   if ($wrapper->__isset('field_order_specification')) {
-    $result = '<ul class="files">';
+    $result = '<div class="files">';
+    $result .= '<span class="label">Прикрепленные файлы</span>';
     foreach ($wrapper->field_order_specification->getIterator() as $field_order_specification) {
       $file = $field_order_specification->file->value();
       $result .= format_string(
@@ -675,8 +683,21 @@ function druio_ds_fields_order_specification($field) {
         )
       );
     }
-    $result .= '</ul>';
+    $result .= '</div>';
     return $result;
   }
   return;
+}
+
+/**
+ * Applicants for job.
+ * @param $field
+ * @return mixed
+ */
+function druio_ds_fields_order_applicants($field) {
+  global $user;
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+  if (user_has_role(3) || ($wrapper->author->getIdentifier() == $user->uid)) {
+    return views_embed_view('applicants', 'block');
+  }
 }

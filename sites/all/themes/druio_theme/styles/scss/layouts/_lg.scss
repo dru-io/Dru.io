@@ -132,4 +132,27 @@
     }
   }
 
+  .order-full {
+    .info {
+      @include susy-clearfix;
+      .left {
+        @include span(4);
+      }
+      .right {
+        @include span(8 last);
+      }
+    }
+  }
+
+  .view-applicants-block {
+    .applicant {
+      @include susy-clearfix;
+      .picture {
+        @include span(1);
+      }
+      .info {
+        @include span(11 last);
+      }
+    }
+  }
 }

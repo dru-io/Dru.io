@@ -934,3 +934,93 @@
     }
   }
 }
+
+.order-full {
+  > .info {
+    margin-bottom: pxtorem(20px);
+    .left {
+      .status, .budget, .files {
+        margin-bottom: pxtorem(4px);
+        .label, .label-inline {
+          font-weight: bold;
+        }
+        &:before {
+          @extend .fa;
+          width: pxtorem(20px);
+          text-align: center;
+          margin-right: pxtorem(6px);
+        }
+      }
+      .status:before {
+        @extend .fa-info;
+      }
+      .budget:before {
+        @extend .fa-money;
+      }
+      .files {
+        .file {
+          margin-left: pxtorem(26px);
+          @include font-size(14px);
+          &:before {
+            @extend .fa;
+            @extend .fa-download;
+            margin-right: pxtorem(6px);
+            color: $gray-light;
+          }
+          .filesize {
+            color: $gray-light;
+            @include font-size(12px);
+          }
+        }
+        &:before {
+          @extend .fa-file-text-o;
+        }
+      }
+    }
+    .right {
+      .contacts {
+        &:before {
+          @extend .fa;
+          @extend .fa-envelope-o;
+          margin-right: pxtorem(6px);
+        }
+        .label-inline {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .flag-ready2work {
+    .flag {
+      @extend .btn;
+      @extend .btn-primary;
+      &:before {
+        @extend .fa;
+        margin-right: pxtorem(6px);
+      }
+      &.flagged:before, &.unflag-action:before {
+        @extend .fa-times;
+      }
+      &.unflagged:before, &.flag-action:before {
+        @extend .fa-pencil-square-o;
+      }
+    }
+    .flag-message {
+      margin-top: pxtorem(10px);
+    }
+  }
+
+  .view-applicants-block {
+    margin-top: pxtorem(15px);
+    .applicant {
+      margin-bottom: pxtorem(10px);
+      padding-bottom: pxtorem(10px);
+      border-bottom: 1px solid $hr-border;
+      .picture {
+        overflow: hidden;
+        border-radius: 2px;
+      }
+    }
+  }
+}
