@@ -7,8 +7,15 @@
 
 (function ($, Drupal, window, document, undefined) {
 
-  Drupal.behaviors.yourBehaviorName = {
+  Drupal.behaviors.druio = {
     attach: function (context, settings) {
+
+      // Set target="_blank" for links in content section.
+      var $article = $('#content > article');
+      $('section.question__right a, section.post__content a', $article)
+        .not('.category a, .projects a, .ul.links a')
+        .attr('target', '_blank');
+
       // Attach highlightjs.
       $('pre code').each(function (i, block) {
         hljs.highlightBlock(block);
@@ -24,9 +31,9 @@
         theme: 'druio'
       });
 
-      $('#make-reply').click(function() {
-         $(this).hide();
-         $('form.node-answer-form').fadeIn();
+      $('#make-reply').click(function () {
+        $(this).hide();
+        $('form.node-answer-form').fadeIn();
       });
 
     }
