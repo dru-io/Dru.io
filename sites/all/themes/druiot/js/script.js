@@ -17,7 +17,8 @@
         .attr('target', '_blank');
 
       $('section.question__right img, ' +
-        'section.post__content img', $article).each(function () {
+        'section.post__content img,' +
+        '.comments img', $article).each(function () {
         var $this = $(this);
         if ($this.width() != $this[0].naturalWidth) {
           if (0 == $(this).parent('a').length) {
