@@ -155,4 +155,11 @@
       }
     }
   }
+
+  #footer {
+    .pane {
+      @include container($site-width);
+      @include susy-clearfix;
+    }
+  }
 }

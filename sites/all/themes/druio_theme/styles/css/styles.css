@@ -911,7 +911,22 @@ blockquote {
   .view-applicants-block .applicant .info {
     width: 91.52542%;
     float: right;
-    margin-right: 0; } }
+    margin-right: 0; }
+  /* line 160, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
+  #footer .pane {
+    max-width: 1184px;
+    margin-left: auto;
+    margin-right: auto; }
+    /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
+    #footer .pane:after {
+      content: " ";
+      display: block;
+      clear: both; }
+    /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
+    #footer .pane:after {
+      content: " ";
+      display: block;
+      clear: both; } }
 
 @-webkit-keyframes bounce {
   /* line 2, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/animate.css/_attention-seekers/_bounce.scss */
@@ -6497,3 +6512,11 @@ table {
     .order-full .view-applicants-block .applicant .picture {
       overflow: hidden;
       border-radius: 2px; }
+
+/* line 1028, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+#footer {
+  background: #313132;
+  color: #eeeeee; }
+  /* line 1031, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  #footer .pane {
+    padding: 0.625rem 1.25rem; }

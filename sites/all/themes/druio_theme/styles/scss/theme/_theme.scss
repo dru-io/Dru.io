@@ -1024,3 +1024,11 @@
     }
   }
 }
+
+#footer {
+  background: $brand-color-5;
+  color: $gray-lighter;
+  .pane {
+    padding: pxtorem(10px) pxtorem(20px);
+  }
+}
