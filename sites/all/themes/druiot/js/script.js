@@ -16,6 +16,16 @@
         .not('.category a, .projects a, .ul.links a')
         .attr('target', '_blank');
 
+      $('section.question__right img, ' +
+        'section.post__content img', $article).each(function () {
+        var $this = $(this);
+        if ($this.width() != $this[0].naturalWidth) {
+          if (0 == $(this).parent('a').length) {
+            $this.wrap('<a class="lightcase" href="' + $this.attr('src') + '"></a>');
+          }
+        }
+      });
+
       // Attach highlightjs.
       $('pre code').each(function (i, block) {
         hljs.highlightBlock(block);
