@@ -33,7 +33,7 @@
 <div class="event__item">
 <div class="event__left">
   <?php print $fields['field_event_poster']->content; ?>
-  <?php if (!$is_event_past): ?>
+  <?php if (!$is_event_past && isset($fields['ops']->content)): ?>
     <?php print $fields['ops']->content; ?>
   <?php endif; ?>
 </div>
