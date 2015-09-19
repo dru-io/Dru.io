@@ -18,6 +18,7 @@
 
       $('section.question__right img, ' +
         'section.post__content img,' +
+        '.answer img,' +
         '.comments img', $article).each(function () {
         var $this = $(this);
         if ($this.width() != $this[0].naturalWidth) {
