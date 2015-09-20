@@ -11,7 +11,7 @@
     attach: function (context, settings) {
 
       // Set target="_blank" for links in content section.
-      var $article = $('#content > article');
+      var $article = $('#content > article', context);
       $('section.question__right a, section.post__content a', $article)
         .not('.category a, .projects a, .ul.links a')
         .attr('target', '_blank');
@@ -19,7 +19,7 @@
       $('section.question__right img, ' +
         'section.post__content img,' +
         '.answer img,' +
-        '.comments img', $article).each(function () {
+        '.comments img', $article).one("load", function () {
         var $this = $(this);
         if ($this.width() != $this[0].naturalWidth) {
           if (0 == $(this).parent('a').length) {
@@ -28,10 +28,12 @@
             Drupal.behaviors.Lightcase.attach($link_wrapper, settings);
           }
         }
+      }).each(function () {
+        if (this.complete) $(this).load();
       });
 
       // Attach highlightjs.
-      $('pre code').each(function (i, block) {
+      $('code, pre code').each(function (i, block) {
         hljs.highlightBlock(block);
       });
 
