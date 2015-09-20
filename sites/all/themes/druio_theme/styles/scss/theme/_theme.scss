@@ -1173,3 +1173,18 @@
     }
   }
 }
+
+.bue-ui {
+  padding: 0;
+  margin: pxtorem(10px) 0;
+  background: transparent;
+  .bue-button {
+    background: white;
+    @include gradient-vertical(#ffffff, #EAEAEA);
+    height: pxtorem(25px);
+    padding: pxtorem(5px);
+    &:hover {
+      border-color: $brand-color-1;
+    }
+  }
+}

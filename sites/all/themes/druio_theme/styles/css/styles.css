@@ -6684,3 +6684,22 @@ table {
     font-size: 14px;
     font-size: 0.875rem;
     padding: 0; }
+
+/* line 1177, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+.bue-ui {
+  padding: 0;
+  margin: 0.625rem 0;
+  background: transparent; }
+  /* line 1181, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  .bue-ui .bue-button {
+    background: white;
+    background-image: -webkit-linear-gradient(top, #ffffff 0%, #EAEAEA 100%);
+    background-image: -o-linear-gradient(top, #ffffff 0%, #EAEAEA 100%);
+    background-image: linear-gradient(to bottom, #ffffff 0%, #EAEAEA 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF', endColorstr='#FFEAEAEA', GradientType=0);
+    height: 1.5625rem;
+    padding: 0.3125rem; }
+    /* line 1186, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    .bue-ui .bue-button:hover {
+      border-color: #2E5B95; }
