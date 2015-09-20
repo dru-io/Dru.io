@@ -1028,7 +1028,40 @@
 #footer {
   background: $brand-color-5;
   color: $gray-lighter;
+  @include font-size(13.5px);
   .pane {
     padding: pxtorem(10px) pxtorem(20px);
+  }
+  a {
+    color: white;
+    text-decoration: underline;
+  }
+}
+
+#block-block-1 {
+  .social {
+    @include susy-clearfix;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      float: left;
+      margin-right: pxtorem(12px);
+      .item {
+        @include font-size(18px);
+        &:before {
+          @extend .fa;
+        }
+        &.facebook:before {
+          @extend .fa-facebook;
+        }
+        &.vkontakte:before {
+          @extend .fa-vk;
+        }
+        &.twitter:before {
+          @extend .fa-twitter;
+        }
+      }
+    }
   }
 }
