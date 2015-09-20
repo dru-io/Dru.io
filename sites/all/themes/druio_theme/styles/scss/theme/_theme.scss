@@ -1065,3 +1065,111 @@
     }
   }
 }
+
+#frontpage-top {
+  position: relative;
+  background: url('../../images/frontpage-d8.jpg') no-repeat center center;
+  background-size: cover;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  left: pxtorem(-20px);
+  top: pxtorem(-20px);
+  .left {
+    padding: pxtorem(20px);
+    .welcome {
+      margin: 0 0 pxtorem(10px) 0;
+      text-align: center;
+    }
+    .community {
+      margin: 0 0 pxtorem(10px) 0;
+      text-align: center;
+      font-weight: 400;
+      color: grey;
+      @include font-size(17px);
+    }
+  }
+  .right {
+    padding: 2rem 2.5rem;
+  }
+}
+
+.question-minimal {
+  @include susy-clearfix;
+  .answers {
+    position: absolute;
+    float: left;
+    display: inline-block;
+    width: pxtorem(36px);
+    text-align: center;
+    padding: pxtorem(2px) 0;
+    cursor: pointer;
+    border-radius: 2px;
+    color: $brand-color-2;
+    border: 1px solid #DCDCDC;
+    &.has-best {
+      background: $brand-color-3;
+      border-color: transparent;
+    }
+    &.no-answers {
+      color: $text-color;
+    }
+  }
+  .title {
+    float: left;
+    margin: 0 0 0 pxtorem(46px);
+    @include font-size(16px);
+    line-height: pxtorem(24px);
+  }
+}
+
+.view-question-nodes-frontpage {
+  .question-minimal {
+    margin-bottom: pxtorem(10px);
+    padding-bottom: pxtorem(10px);
+    border-bottom: 1px solid $hr-border;
+    .answers {
+      @include font-size(14px);
+      padding: 0;
+    }
+  }
+}
+
+.view-question-nodes-last-questions {
+  .question-minimal {
+    margin-bottom: pxtorem(10px);
+    padding-bottom: pxtorem(10px);
+    border-bottom: 1px solid $hr-border;
+  }
+}
+
+.post-minimal {
+  @include susy-clearfix;
+  .comments {
+    position: absolute;
+    float: left;
+    display: inline-block;
+    width: pxtorem(36px);
+    text-align: center;
+    padding: pxtorem(2px) 0;
+    cursor: pointer;
+    border-radius: 2px;
+    border: 1px solid #DCDCDC;
+  }
+  .title {
+    float: left;
+    margin: 0 0 0 pxtorem(46px);
+    @include font-size(16px);
+    line-height: pxtorem(24px);
+  }
+}
+
+.view-posts-node-frontpage {
+  .post-minimal {
+    margin-bottom: pxtorem(10px);
+    padding-bottom: pxtorem(10px);
+    border-bottom: 1px solid $hr-border;
+    .comments {
+      @include font-size(14px);
+      padding: 0;
+    }
+  }
+}

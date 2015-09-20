@@ -145,6 +145,13 @@ function druio_ds_fields_ds_fields_info($entity_type) {
       'function' => 'druio_ds_fields_order_applicants',
     );
 
+    $fields['question_info_minimal'] = array(
+      'title' => 'Question: Minimal info',
+      'ui_limit' => array('question|minimal'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_question_info_minimal',
+    );
+
     return array($entity_type => $fields);
   }
 
@@ -700,4 +707,29 @@ function druio_ds_fields_order_applicants($field) {
   if (user_has_role(3) || ($wrapper->author->getIdentifier() == $user->uid)) {
     return views_embed_view('applicants', 'block');
   }
+}
+
+/**
+ * Simple info for minimal question view.
+ * @param $field
+ * @return string
+ */
+function druio_ds_fields_question_info_minimal($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+
+  // Question NID.
+  $nid = $wrapper->getIdentifier();
+  $answers_count = druio_question_answers_count($nid);
+  $is_best_answer = druio_question_is_best_answer($nid);
+
+  return format_string(
+    '<div class="@answers_class" onclick="@onclick" title="Количество ответов">
+  @answers
+</div>',
+    array(
+      '@onclick' => "window.location.href='" . url('node/' . $nid) . "'",
+      '@answers_class' => 'answers ' . ($is_best_answer ? 'has-best' : '') . ($answers_count ? '' : 'no-answers'),
+      '@answers' => $answers_count,
+    )
+  );
 }

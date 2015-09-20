@@ -162,4 +162,22 @@
       @include susy-clearfix;
     }
   }
+
+  #frontpage-top {
+    @include susy-clearfix;
+    width: $site-width;
+    .left {
+      @include span(6);
+    }
+  }
+
+  #frontpage-latest {
+    @include susy-clearfix;
+    .view-posts-node-frontpage {
+      @include span(6);
+    }
+    .view-question-nodes-frontpage {
+      @include span(6 last);
+    }
+  }
 }
