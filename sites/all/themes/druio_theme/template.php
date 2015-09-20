@@ -79,6 +79,11 @@ function druio_theme_theme() {
     'variables' => array('user' => NULL),
     'template' => 'templates/theme/header-auth-user',
   );
+  // Frontpage content.
+  $theme['druio_theme_frontpage'] = array(
+    'variables' => array('user' => NULL),
+    'template' => 'templates/theme/frontpage',
+  );
 
   return $theme;
 }
