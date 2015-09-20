@@ -8,70 +8,29 @@
   // -16px - this is for scrollbar size.
   // If we don't do this, on ~1190px browser width we get vertical scrollbars.
   $site-width: 1200px - 16px;
-
   #header {
     .pane {
       @include container($site-width);
-      .logo {
-        width: pxtorem(190px);
-        float: left;
-      }
-      .content {
-        margin-left: 190px;
-      }
     }
   }
-
   #main {
     @include container($site-width);
-    @include susy-clearfix;
   }
-
-  #content {
-    @include span(9);
-    .no-sidebars & {
-      @include full();
+  #footer {
+    .pane {
+      @include container($site-width);
     }
   }
-
-  #sidebar {
-    @include span(3 last);
+  #frontpage-top {
+    width: $site-width;
   }
 
   .question-teaser {
-    @include susy-clearfix;
     .info {
       @include span(2);
-      @include susy-clearfix;
-      .rating {
-        @include span(6);
-      }
-      .answers {
-        @include span(6 last);
-      }
     }
     .right {
       @include span(10 last);
-    }
-  }
-
-  .question-full {
-    @include susy-clearfix;
-    > .left {
-      @include span(1);
-    }
-    > .right {
-      @include span(11 last);
-    }
-  }
-
-  .answer-teaser {
-    @include susy-clearfix;
-    > .left {
-      @include span(1);
-    }
-    > .right {
-      @include span(11 last);
     }
   }
 
@@ -86,46 +45,9 @@
     }
   }
 
-  .comment-full {
-    @include susy-clearfix;
-    > .left {
-      @include span(1);
-    }
-    > .right {
-      @include span(11 last);
-    }
-  }
-
-  .view-project-page-page {
-    .content {
-      @include susy-clearfix;
-      .project-teaser {
-        @include gallery(4 of 12);
-      }
-    }
-  }
-
-  .project-full {
-    @include susy-clearfix;
-    > .left {
-      @include span(6);
-    }
-    > .right {
-      @include span(6 last);
-    }
-  }
-
   .order-teaser {
-    @include susy-clearfix;
     .info {
       @include span(3);
-      @include susy-clearfix;
-      .ready2work {
-        @include span(5);
-      }
-      .budget {
-        @include span(7 last);
-      }
     }
     .right {
       @include span(9 last);
@@ -134,50 +56,12 @@
 
   .order-full {
     .info {
-      @include susy-clearfix;
       .left {
         @include span(4);
       }
       .right {
         @include span(8 last);
       }
-    }
-  }
-
-  .view-applicants-block {
-    .applicant {
-      @include susy-clearfix;
-      .picture {
-        @include span(1);
-      }
-      .info {
-        @include span(11 last);
-      }
-    }
-  }
-
-  #footer {
-    .pane {
-      @include container($site-width);
-      @include susy-clearfix;
-    }
-  }
-
-  #frontpage-top {
-    @include susy-clearfix;
-    width: $site-width;
-    .left {
-      @include span(6);
-    }
-  }
-
-  #frontpage-latest {
-    @include susy-clearfix;
-    .view-posts-node-frontpage {
-      @include span(6);
-    }
-    .view-question-nodes-frontpage {
-      @include span(6 last);
     }
   }
 }

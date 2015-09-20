@@ -5,5 +5,5 @@
  */
 
 @include breakpoint($sm-media) {
-  // Your styles here.
+  $site-width: 768px - 16px;
 }
