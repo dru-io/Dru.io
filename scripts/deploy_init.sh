@@ -3,8 +3,6 @@ echo "INIT DH Version"
 
 SITEPATH="$HOME/domains/$SETTINGS_DOMAIN"
 
-SITEPATH="$GITLC_DOCROOT"
-
 
 cd $SITEPATH
 
