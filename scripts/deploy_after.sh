@@ -5,3 +5,5 @@ cd $SITEPATH
 echo "clean cache"
 
 drush cc all
+
+echo "Cache cleaned"
