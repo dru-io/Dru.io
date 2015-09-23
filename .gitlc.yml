@@ -1,2 +1,13 @@
 code_style:
-  default: [codespell,drupal,drupalpractice]
+  default: [codespell]
+  rules:
+    includes: ignore
+    misc: ignore
+    modules: ignore
+    profiles: ignore
+    scripts: ignore
+    themes: ignore
+    sites/all/modules/contrib: ignore
+    sites/all/libraries: ignore    
+    sites/all/modules: [drupal, drupalsecure, drupalpractice]
+    sites/all/themes: [drupal, drupalsecure, drupalpractice]
