@@ -25,6 +25,6 @@ deploy:
         site-name: "PR {pr_number}"
         site-mail: "noreply@{domainname}"
     dir: '{home}/domains/{domainname}'
-    init: '{deploy_dir}/scripts/init.sh'
-    before: '{deploy_dir}/scripts/before.sh'
-    after: '{deploy_dir}/scripts/after.sh'
+    init: '{deploy_dir}/scripts/deploy_init.sh'
+    before: '{deploy_dir}/scripts/deploy_before.sh'
+    after: '{deploy_dir}/scripts/deploy_after.sh'
