@@ -3,7 +3,6 @@ echo "INIT DH Version"
 
 SITEPATH="$HOME/domains/$SETTINGS_DOMAIN"
 
-
 cd $SITEPATH
 
 rsync -av $GITLC_DOCROOT/ $SITEPATH/
