@@ -3,10 +3,9 @@ echo "INIT DH Version"
 
 SITEPATH="$HOME/domains/$SETTINGS_DOMAIN"
 
-
 cd $SITEPATH
 
-rsync -av $GITLC_DOCROOT/ $SITEPATH/
+rsync -av $GITLC_DEPLOY_DIR/ $SITEPATH/
 
 wget http://dru.io/sites/default/files/database.sql.gz
 gunzip database.sql.gz
