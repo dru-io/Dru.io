@@ -24,7 +24,7 @@ deploy:
         account-pass: "druiotesting"
         site-name: "PR {pr_number}"
         site-mail: "noreply@{domainname}"
-    dir: '{home}/domains/{domainname}'
+    dir: '{home}/github/pr/{pr_number}'
     init: '{deploy_dir}/scripts/deploy_init.sh'
     before: '{deploy_dir}/scripts/deploy_before.sh'
     after: '{deploy_dir}/scripts/deploy_after.sh'
