@@ -37,11 +37,12 @@
       function tablet_sidebar() {
         var width = $(window).width(),
         // This is our tablet media query sizes.
-          minWidth = 768,
-          maxWidth = 992;
+          minWidth = 768-16,
+          maxWidth = 992-16,
+          hasSidebar = $('body', context).hasClass('sidebar');
 
         // If we in media query breakpoint.
-        if (width >= minWidth && width <= maxWidth) {
+        if (width >= minWidth && width <= maxWidth && hasSidebar) {
           $('#main', context).prepend(sidebarButton);
           // Attach click listener to our button.
           sidebarButton.on('click', function (e) {

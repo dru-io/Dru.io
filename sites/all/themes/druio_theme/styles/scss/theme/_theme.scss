@@ -1258,3 +1258,13 @@
     transition: all 300ms;
   }
 }
+
+.view-question-nodes-questions-in-project {
+  .content {
+    .question-minimal {
+      margin-bottom: pxtorem(10px);
+      padding-bottom: pxtorem(10px);
+      border-bottom: 1px solid $hr-border;
+    }
+  }
+}
