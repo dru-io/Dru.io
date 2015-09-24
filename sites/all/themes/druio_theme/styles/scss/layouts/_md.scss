@@ -10,172 +10,35 @@
   #header {
     .pane {
       @include container($site-width);
-      .logo {
-        width: pxtorem(190px);
-        float: left;
-      }
-      .content {
-        margin-left: 190px;
-      }
     }
   }
-
   #main {
     @include container($site-width);
-    @include susy-clearfix;
   }
-
-  #content {
-    @include span(9);
-    .no-sidebars & {
-      @include full();
-    }
-  }
-
-  #sidebar {
-    @include span(3 last);
-  }
-
-  .question-teaser {
-    @include susy-clearfix;
-    .info {
-      @include span(3);
-      @include susy-clearfix;
-      .rating {
-        @include span(6);
-      }
-      .answers {
-        @include span(6 last);
-      }
-    }
-    .right {
-      @include span(9 last);
-    }
-  }
-
-  .question-full {
-    @include susy-clearfix;
-    > .left {
-      @include span(1);
-    }
-    > .right {
-      @include span(11 last);
-    }
-  }
-
-  .answer-teaser {
-    @include susy-clearfix;
-    > .left {
-      @include span(1);
-    }
-    > .right {
-      @include span(11 last);
-    }
-  }
-
-  .event-teaser,
-  .event-full {
-    @include susy-clearfix;
-    .left {
-      @include span(4);
-    }
-    .right {
-      @include span(8 last);
-    }
-  }
-
-  .comment-full {
-    @include susy-clearfix;
-    > .left {
-      @include span(1);
-    }
-    > .right {
-      @include span(11 last);
-    }
-  }
-
-  .view-project-page-page {
-    .content {
-      @include susy-clearfix;
-      .project-teaser {
-        @include gallery(4 of 12);
-      }
-    }
-  }
-
-  .project-full {
-    @include susy-clearfix;
-    > .left {
-      @include span(6);
-    }
-    > .right {
-      @include span(6 last);
-    }
-  }
-
-  .order-teaser {
-    @include susy-clearfix;
-    .info {
-      @include span(4);
-      @include susy-clearfix;
-      .ready2work {
-        @include span(5);
-      }
-      .budget {
-        @include span(7 last);
-      }
-    }
-    .right {
-      @include span(8 last);
-    }
-  }
-
-  .order-full {
-    .info {
-      @include susy-clearfix;
-      .left {
-        @include span(5);
-      }
-      .right {
-        @include span(7 last);
-      }
-    }
-  }
-
-  .view-applicants-block {
-    .applicant {
-      @include susy-clearfix;
-      .picture {
-        @include span(1);
-      }
-      .info {
-        @include span(11 last);
-      }
-    }
-  }
-
   #footer {
     .pane {
       @include container($site-width);
-      @include susy-clearfix;
     }
   }
-
   #frontpage-top {
-    @include susy-clearfix;
     width: $site-width;
     .left {
       @include span(6);
     }
   }
-
-  #frontpage-latest {
+  #main {
+    @include container($site-width);
     @include susy-clearfix;
-    .view-posts-node-frontpage {
-      @include span(6);
-    }
-    .view-question-nodes-frontpage {
-      @include span(6 last);
+  }
+  #sidebar {
+    // Fix full() from _sm
+    clear: none;
+    @include span(3 last);
+  }
+  #content {
+    @include span(9);
+    .no-sidebars & {
+      @include full();
     }
   }
 }

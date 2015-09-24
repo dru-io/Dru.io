@@ -14,6 +14,11 @@
     .logo {
       background: white;
       padding: pxtorem(10px) pxtorem(20px);
+      @include breakpoint($sm-media $md-media) {
+        overflow: hidden;
+        height: pxtorem(40px);
+        padding-top: pxtorem(4px);
+      }
     }
     .content {
       // Top line of the header. Which is darker :)
@@ -23,6 +28,12 @@
         color: $gray-lighter;
         .search-form {
           width: pxtorem(240px);
+          @include breakpoint($sm-media) {
+            width: pxtorem(160px);
+          }
+          @include breakpoint($md-media) {
+            width: pxtorem(240px);
+          }
           float: left;
           position: relative;
           .search-input {
@@ -168,11 +179,21 @@
       }
     }
   }
+  @include breakpoint($sm-media $md-media) {
+    $site-width: 768px - 16px;
+    width: $site-width;
+    margin-left: pxtorem(-190px);
+    .menu li a {
+      @include font-size(17px);
+    }
+  }
 }
 
 #main {
   background: white;
   padding: pxtorem(20px);
+  position: relative;
+  overflow: hidden;
 }
 
 .facetapi-facetapi-checkbox-links {
@@ -181,12 +202,37 @@
   list-style: none;
 }
 
+#content {
+  position: relative;
+  @include breakpoint($sm-media $md-media) {
+    transform: translateX(0);
+    transition: all 300ms;
+    .sidebar-open & {
+      transform: translateX(-291px);
+      transition: all 300ms;
+    }
+  }
+}
+
 #sidebar {
+  position: relative;
   > .block {
     margin-bottom: pxtorem(20px);
     > .title {
       margin-top: 0;
       @include font-size(20px);
+    }
+  }
+  @include breakpoint($sm-media $md-media) {
+    width: pxtorem(291px);
+    position: absolute;
+    top: pxtorem(40px);
+    right: 0;
+    transform: translateX(291px);
+    transition: all 300ms;
+    .sidebar-open & {
+      transform: translateX(0);
+      transition: all 300ms;
     }
   }
 }
@@ -1186,5 +1232,29 @@
     &:hover {
       border-color: $brand-color-1;
     }
+  }
+}
+
+#sidebar-toggle {
+  background: $brand-color-1;
+  color: white;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: pxtorem(6px);
+  display: block;
+  font-weight: bold;
+  @include font-size(13px);
+  z-index: 10;
+  &:before {
+    @extend .fa;
+    @extend .fa-chevron-left;
+    margin-right: pxtorem(6px);
+    transform: rotate(0deg);
+    transition: all 300ms;
+  }
+  .sidebar-open &:before {
+    transform: rotate(180deg);
+    transition: all 300ms;
   }
 }
