@@ -5,8 +5,6 @@ SITEPATH="$HOME/domains/$SETTINGS_DOMAIN"
 
 cd $SITEPATH
 
-echo "sync to docroot"
-
 rsync -av $GITLC_DEPLOY_DIR/ $SITEPATH/
 
 wget http://dru.io/sites/default/files/database.sql.gz
