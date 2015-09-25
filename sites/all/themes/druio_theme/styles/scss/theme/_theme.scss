@@ -9,7 +9,10 @@
 #header {
   font-size: 0.875rem;
   background: $brand-color-1;
-  box-shadow: inset 0 pxtorem(40px) 0 0 rgba(black, 0.5);
+  box-shadow: inset 0 pxtorem(136px) 0 0 rgba(black, 0.5);
+  @include breakpoint($sm-media) {
+    box-shadow: inset 0 pxtorem(40px) 0 0 rgba(black, 0.5);
+  }
   .pane {
     .logo {
       background: white;
@@ -19,6 +22,16 @@
         height: pxtorem(40px);
         padding-top: pxtorem(4px);
       }
+      @include breakpoint($xs-media) {
+        > a {
+          display: block;
+          overflow: hidden;
+          height: pxtorem(36px);
+          padding: 0;
+          width: pxtorem(170px);
+          margin: 0 auto;
+        }
+      }
     }
     .content {
       // Top line of the header. Which is darker :)
@@ -27,7 +40,7 @@
         height: pxtorem(40px);
         color: $gray-lighter;
         .search-form {
-          width: pxtorem(240px);
+          width: 100%;
           @include breakpoint($sm-media) {
             width: pxtorem(160px);
           }
@@ -1265,6 +1278,109 @@
       margin-bottom: pxtorem(10px);
       padding-bottom: pxtorem(10px);
       border-bottom: 1px solid $hr-border;
+    }
+  }
+}
+
+#mobile-menu-button {
+  color: white;
+  display: inline-block;
+  padding: pxtorem(10px) pxtorem(10px);
+  @include font-size(17px);
+  &:before {
+    @extend .fa;
+    @extend .fa-bars;
+    margin-right: pxtorem(6px);
+  }
+}
+
+// Styles for XS media query.
+@include breakpoint($xs-media) {
+  body {
+    transform: translateX(0);
+    transition: all 300ms;
+    &.menu-open {
+      overflow: hidden;
+      transform: translateX(250px);
+      transition: all 300ms;
+    }
+  }
+  #mobile-menu {
+    width: pxtorem(250px);
+    height: 100%;
+    background: #172E4B;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-250px);
+    // Anonymous links.
+    .header-auth-anon {
+      @include susy-clearfix;
+      margin-bottom: pxtorem(20px);
+      .link {
+        display: block;
+        float: left;
+        text-align: center;
+        line-height: pxtorem(40px);
+        padding: 0 pxtorem($padding-large-vertical * 2);
+        color: white;
+        font-weight: bold;
+        &.sign-up {
+          background: $brand-color-2;
+          width: 67%;
+        }
+        &.sign-in {
+          width: 33%;
+        }
+      }
+    }
+    // Auth user.
+    .header-auth-user {
+      @include susy-clearfix;
+      margin-bottom: pxtorem(20px);
+      .picture {
+        float: left;
+      }
+      .username {
+        display: block;
+        float: left;
+        width: pxtorem(140px);
+        padding: 0 pxtorem($padding-large-vertical);
+        line-height: pxtorem(40px);
+        color: white;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .logout {
+        float: left;
+        display: block;
+        line-height: pxtorem(40px);
+        width: pxtorem(40px);
+        color: white;
+        text-align: center;
+        background: rgba(white, .2);
+        &:before {
+          @extend .fa;
+          @extend .fa-sign-out;
+          margin-left: pxtorem(7px);
+        }
+      }
+    }
+    .menu {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      li {
+        a {
+          color: white;
+          display: block;
+          padding: pxtorem(6px) pxtorem(12px);
+          border-bottom: 1px solid rgba($hr-border, .1);
+        }
+      }
     }
   }
 }

@@ -37,8 +37,8 @@
       function tablet_sidebar() {
         var width = $(window).width(),
         // This is our tablet media query sizes.
-          minWidth = 768-16,
-          maxWidth = 992-16,
+          minWidth = 768 - 16,
+          maxWidth = 992 - 16,
           hasSidebar = $('body', context).hasClass('sidebar');
 
         // If we in media query breakpoint.
@@ -61,11 +61,53 @@
           sidebarButton.remove();
         }
       }
+
       // First at all we call this function on page load.
       tablet_sidebar();
+
+      /**
+       * Mobile header.
+       */
+      var mobileNav = $('<div id="mobile-menu"></div>'),
+        mobileNavButton = $('<a href="#" id="mobile-menu-button">Меню</a>');
+
+      // Bind click for button.
+      mobileNavButton.on('click', function(e) {
+        $('body', context).toggleClass('menu-open');
+      });
+
+      function mobile_menu() {
+        var maxWidth = 768,
+          width = $(window).width();
+
+        // If mobile size.
+        if (width < maxWidth) {
+          // Add our mobile nav.
+          $('body', context).append(mobileNav);
+          // Add mobile menu button.
+          $('#header .pane', context).append(mobileNavButton);
+          // Move header-auth.
+          $('#mobile-menu', context).append($('#header .content .top [class^="header-auth"]', context));
+          // Move navigation.
+          $('#mobile-menu', context).append($('#navigation .menu', context));
+        }
+        else {
+          // Move back navigation.
+          $('#navigation', context).append($('#mobile-menu .menu', context));
+          // Move back header auth links.
+          $('#header .content .top', context).append($('#mobile-menu [class^="header-auth"]', context));
+          // Remove mobile nav.
+          $('#mobile-menu', context).remove();
+          // Remove mobile nav button.
+          $('#mobile-menu-button', context).remove();
+        }
+      };
+      mobile_menu();
+
       // Attach event on widnow resize.
       $(window).on('resize', function (e) {
         tablet_sidebar();
+        mobile_menu();
       });
     }
   };

@@ -5,5 +5,8 @@
  */
 
 @include breakpoint($xs-media) {
-  // Your styles here.
+  #header .pane .content .top .header-links,
+  #header .pane .content {
+    @include susy-clearfix;
+  }
 }

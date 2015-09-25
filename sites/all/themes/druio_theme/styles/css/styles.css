@@ -657,6 +657,13 @@ blockquote {
  *
  * XS media query styles.
  */
+@media  (max-width: 768px) {
+  /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
+  #header .pane .content .top .header-links:after, #header .pane .content:after {
+    content: " ";
+    display: block;
+    clear: both; } }
+
 /**
  * @file
  *
@@ -2560,7 +2567,7 @@ blockquote {
   font-style: normal; }
 
 /* line 1, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_core.scss */
-.fa, #header .pane .content .top .search-form:before, #header .pane .content .top .header-links .link.tracker:before, #header .pane .content .top .header-links .link.github:before, #header .pane .content .top .header-auth-user .logout:before, .question-teaser .right .tags .tag:before, .question-full > .left .rate-widget .rate-plus, .question-full > .left .rate-widget .rate-minus, .question-full > .right .tags .tag:before, .question-full > .right .bottom .signature .user .info .rating:before, .answer-teaser > .left .rate-widget .rate-plus, .answer-teaser > .left .rate-widget .rate-minus, .answer-teaser > .left .best-answer:before, .answer-teaser > .right .bottom .signature .user .info .rating:before, .event-teaser .left .date:before, .event-teaser .left .city:before, .event-teaser .left .address:before, .event-full .left .date:before, .event-full .left .city:before, .event-full .left .address:before, .post-teaser .bottom .rate-widget .rate, .post-teaser .bottom .comment-count:before, .post-teaser .bottom .date:before, .post-full > .bottom .rate-widget .rate, .post-full > .bottom .comment-count:before, .post-full > .bottom .date:before, #make-reply:before, .project-teaser .type:before, .project-teaser .dev-status:before, .project-teaser .maintenance-status:before, .project-full > .left .type:before, .project-full > .left .dev-status:before, .project-full > .left .maintenance-status:before, .project-full > .left .version:before, .project-full > .left .drupalorg:before, #druio-projects-download-form .archives .title:before, #druio-projects-download-form .drush .title:before, .order-full > .info .left .status:before, .order-full > .info .left .budget:before, .order-full > .info .left .files:before, .order-full > .info .left .files .file:before, .order-full > .info .right .contacts:before, .order-full .flag-ready2work .flag:before, #block-block-1 .social li .item:before, #sidebar-toggle:before {
+.fa, #header .pane .content .top .search-form:before, #header .pane .content .top .header-links .link.tracker:before, #header .pane .content .top .header-links .link.github:before, #header .pane .content .top .header-auth-user .logout:before, .question-teaser .right .tags .tag:before, .question-full > .left .rate-widget .rate-plus, .question-full > .left .rate-widget .rate-minus, .question-full > .right .tags .tag:before, .question-full > .right .bottom .signature .user .info .rating:before, .answer-teaser > .left .rate-widget .rate-plus, .answer-teaser > .left .rate-widget .rate-minus, .answer-teaser > .left .best-answer:before, .answer-teaser > .right .bottom .signature .user .info .rating:before, .event-teaser .left .date:before, .event-teaser .left .city:before, .event-teaser .left .address:before, .event-full .left .date:before, .event-full .left .city:before, .event-full .left .address:before, .post-teaser .bottom .rate-widget .rate, .post-teaser .bottom .comment-count:before, .post-teaser .bottom .date:before, .post-full > .bottom .rate-widget .rate, .post-full > .bottom .comment-count:before, .post-full > .bottom .date:before, #make-reply:before, .project-teaser .type:before, .project-teaser .dev-status:before, .project-teaser .maintenance-status:before, .project-full > .left .type:before, .project-full > .left .dev-status:before, .project-full > .left .maintenance-status:before, .project-full > .left .version:before, .project-full > .left .drupalorg:before, #druio-projects-download-form .archives .title:before, #druio-projects-download-form .drush .title:before, .order-full > .info .left .status:before, .order-full > .info .left .budget:before, .order-full > .info .left .files:before, .order-full > .info .left .files .file:before, .order-full > .info .right .contacts:before, .order-full .flag-ready2work .flag:before, #block-block-1 .social li .item:before, #sidebar-toggle:before, #mobile-menu-button:before, #mobile-menu .header-auth-user .logout:before {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -2631,10 +2638,10 @@ blockquote {
   float: right; }
 
 /* line 11, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.fa-pull-left, #header .pane .content .top .fa-pull-left.search-form:before, #header .pane .content .top .header-links .fa-pull-left.link.tracker:before, #header .pane .content .top .header-links .fa-pull-left.link.github:before, #header .pane .content .top .header-auth-user .fa-pull-left.logout:before, .question-teaser .right .tags .fa-pull-left.tag:before, .question-full > .left .rate-widget .fa-pull-left.rate-plus, .question-full > .left .rate-widget .fa-pull-left.rate-minus, .question-full > .right .tags .fa-pull-left.tag:before, .question-full > .right .bottom .signature .user .info .fa-pull-left.rating:before, .answer-teaser > .left .rate-widget .fa-pull-left.rate-plus, .answer-teaser > .left .rate-widget .fa-pull-left.rate-minus, .answer-teaser > .left .fa-pull-left.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .fa-pull-left.rating:before, .event-teaser .left .fa-pull-left.date:before, .event-teaser .left .fa-pull-left.city:before, .event-teaser .left .fa-pull-left.address:before, .event-full .left .fa-pull-left.date:before, .event-full .left .fa-pull-left.city:before, .event-full .left .fa-pull-left.address:before, .post-teaser .bottom .rate-widget .fa-pull-left.rate, .post-teaser .bottom .fa-pull-left.comment-count:before, .post-teaser .bottom .fa-pull-left.date:before, .post-full > .bottom .rate-widget .fa-pull-left.rate, .post-full > .bottom .fa-pull-left.comment-count:before, .post-full > .bottom .fa-pull-left.date:before, .fa-pull-left#make-reply:before, .project-teaser .fa-pull-left.type:before, .project-teaser .fa-pull-left.dev-status:before, .project-teaser .fa-pull-left.maintenance-status:before, .project-full > .left .fa-pull-left.type:before, .project-full > .left .fa-pull-left.dev-status:before, .project-full > .left .fa-pull-left.maintenance-status:before, .project-full > .left .fa-pull-left.version:before, .project-full > .left .fa-pull-left.drupalorg:before, #druio-projects-download-form .archives .fa-pull-left.title:before, #druio-projects-download-form .drush .fa-pull-left.title:before, .order-full > .info .left .fa-pull-left.status:before, .order-full > .info .left .fa-pull-left.budget:before, .order-full > .info .left .fa-pull-left.files:before, .order-full > .info .left .files .fa-pull-left.file:before, .order-full > .info .right .fa-pull-left.contacts:before, .order-full .flag-ready2work .fa-pull-left.flag:before, #block-block-1 .social li .fa-pull-left.item:before, .fa-pull-left#sidebar-toggle:before {
+.fa.fa-pull-left, #header .pane .content .top .fa-pull-left.search-form:before, #header .pane .content .top .header-links .fa-pull-left.link.tracker:before, #header .pane .content .top .header-links .fa-pull-left.link.github:before, #header .pane .content .top .header-auth-user .fa-pull-left.logout:before, .question-teaser .right .tags .fa-pull-left.tag:before, .question-full > .left .rate-widget .fa-pull-left.rate-plus, .question-full > .left .rate-widget .fa-pull-left.rate-minus, .question-full > .right .tags .fa-pull-left.tag:before, .question-full > .right .bottom .signature .user .info .fa-pull-left.rating:before, .answer-teaser > .left .rate-widget .fa-pull-left.rate-plus, .answer-teaser > .left .rate-widget .fa-pull-left.rate-minus, .answer-teaser > .left .fa-pull-left.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .fa-pull-left.rating:before, .event-teaser .left .fa-pull-left.date:before, .event-teaser .left .fa-pull-left.city:before, .event-teaser .left .fa-pull-left.address:before, .event-full .left .fa-pull-left.date:before, .event-full .left .fa-pull-left.city:before, .event-full .left .fa-pull-left.address:before, .post-teaser .bottom .rate-widget .fa-pull-left.rate, .post-teaser .bottom .fa-pull-left.comment-count:before, .post-teaser .bottom .fa-pull-left.date:before, .post-full > .bottom .rate-widget .fa-pull-left.rate, .post-full > .bottom .fa-pull-left.comment-count:before, .post-full > .bottom .fa-pull-left.date:before, .fa-pull-left#make-reply:before, .project-teaser .fa-pull-left.type:before, .project-teaser .fa-pull-left.dev-status:before, .project-teaser .fa-pull-left.maintenance-status:before, .project-full > .left .fa-pull-left.type:before, .project-full > .left .fa-pull-left.dev-status:before, .project-full > .left .fa-pull-left.maintenance-status:before, .project-full > .left .fa-pull-left.version:before, .project-full > .left .fa-pull-left.drupalorg:before, #druio-projects-download-form .archives .fa-pull-left.title:before, #druio-projects-download-form .drush .fa-pull-left.title:before, .order-full > .info .left .fa-pull-left.status:before, .order-full > .info .left .fa-pull-left.budget:before, .order-full > .info .left .fa-pull-left.files:before, .order-full > .info .left .files .fa-pull-left.file:before, .order-full > .info .right .fa-pull-left.contacts:before, .order-full .flag-ready2work .fa-pull-left.flag:before, #block-block-1 .social li .fa-pull-left.item:before, .fa-pull-left#sidebar-toggle:before, .fa-pull-left#mobile-menu-button:before, #mobile-menu .header-auth-user .fa-pull-left.logout:before {
   margin-right: .3em; }
 /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.fa-pull-right, #header .pane .content .top .fa-pull-right.search-form:before, #header .pane .content .top .header-links .fa-pull-right.link.tracker:before, #header .pane .content .top .header-links .fa-pull-right.link.github:before, #header .pane .content .top .header-auth-user .fa-pull-right.logout:before, .question-teaser .right .tags .fa-pull-right.tag:before, .question-full > .left .rate-widget .fa-pull-right.rate-plus, .question-full > .left .rate-widget .fa-pull-right.rate-minus, .question-full > .right .tags .fa-pull-right.tag:before, .question-full > .right .bottom .signature .user .info .fa-pull-right.rating:before, .answer-teaser > .left .rate-widget .fa-pull-right.rate-plus, .answer-teaser > .left .rate-widget .fa-pull-right.rate-minus, .answer-teaser > .left .fa-pull-right.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .fa-pull-right.rating:before, .event-teaser .left .fa-pull-right.date:before, .event-teaser .left .fa-pull-right.city:before, .event-teaser .left .fa-pull-right.address:before, .event-full .left .fa-pull-right.date:before, .event-full .left .fa-pull-right.city:before, .event-full .left .fa-pull-right.address:before, .post-teaser .bottom .rate-widget .fa-pull-right.rate, .post-teaser .bottom .fa-pull-right.comment-count:before, .post-teaser .bottom .fa-pull-right.date:before, .post-full > .bottom .rate-widget .fa-pull-right.rate, .post-full > .bottom .fa-pull-right.comment-count:before, .post-full > .bottom .fa-pull-right.date:before, .fa-pull-right#make-reply:before, .project-teaser .fa-pull-right.type:before, .project-teaser .fa-pull-right.dev-status:before, .project-teaser .fa-pull-right.maintenance-status:before, .project-full > .left .fa-pull-right.type:before, .project-full > .left .fa-pull-right.dev-status:before, .project-full > .left .fa-pull-right.maintenance-status:before, .project-full > .left .fa-pull-right.version:before, .project-full > .left .fa-pull-right.drupalorg:before, #druio-projects-download-form .archives .fa-pull-right.title:before, #druio-projects-download-form .drush .fa-pull-right.title:before, .order-full > .info .left .fa-pull-right.status:before, .order-full > .info .left .fa-pull-right.budget:before, .order-full > .info .left .fa-pull-right.files:before, .order-full > .info .left .files .fa-pull-right.file:before, .order-full > .info .right .fa-pull-right.contacts:before, .order-full .flag-ready2work .fa-pull-right.flag:before, #block-block-1 .social li .fa-pull-right.item:before, .fa-pull-right#sidebar-toggle:before {
+.fa.fa-pull-right, #header .pane .content .top .fa-pull-right.search-form:before, #header .pane .content .top .header-links .fa-pull-right.link.tracker:before, #header .pane .content .top .header-links .fa-pull-right.link.github:before, #header .pane .content .top .header-auth-user .fa-pull-right.logout:before, .question-teaser .right .tags .fa-pull-right.tag:before, .question-full > .left .rate-widget .fa-pull-right.rate-plus, .question-full > .left .rate-widget .fa-pull-right.rate-minus, .question-full > .right .tags .fa-pull-right.tag:before, .question-full > .right .bottom .signature .user .info .fa-pull-right.rating:before, .answer-teaser > .left .rate-widget .fa-pull-right.rate-plus, .answer-teaser > .left .rate-widget .fa-pull-right.rate-minus, .answer-teaser > .left .fa-pull-right.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .fa-pull-right.rating:before, .event-teaser .left .fa-pull-right.date:before, .event-teaser .left .fa-pull-right.city:before, .event-teaser .left .fa-pull-right.address:before, .event-full .left .fa-pull-right.date:before, .event-full .left .fa-pull-right.city:before, .event-full .left .fa-pull-right.address:before, .post-teaser .bottom .rate-widget .fa-pull-right.rate, .post-teaser .bottom .fa-pull-right.comment-count:before, .post-teaser .bottom .fa-pull-right.date:before, .post-full > .bottom .rate-widget .fa-pull-right.rate, .post-full > .bottom .fa-pull-right.comment-count:before, .post-full > .bottom .fa-pull-right.date:before, .fa-pull-right#make-reply:before, .project-teaser .fa-pull-right.type:before, .project-teaser .fa-pull-right.dev-status:before, .project-teaser .fa-pull-right.maintenance-status:before, .project-full > .left .fa-pull-right.type:before, .project-full > .left .fa-pull-right.dev-status:before, .project-full > .left .fa-pull-right.maintenance-status:before, .project-full > .left .fa-pull-right.version:before, .project-full > .left .fa-pull-right.drupalorg:before, #druio-projects-download-form .archives .fa-pull-right.title:before, #druio-projects-download-form .drush .fa-pull-right.title:before, .order-full > .info .left .fa-pull-right.status:before, .order-full > .info .left .fa-pull-right.budget:before, .order-full > .info .left .fa-pull-right.files:before, .order-full > .info .left .files .fa-pull-right.file:before, .order-full > .info .right .fa-pull-right.contacts:before, .order-full .flag-ready2work .fa-pull-right.flag:before, #block-block-1 .social li .fa-pull-right.item:before, .fa-pull-right#sidebar-toggle:before, .fa-pull-right#mobile-menu-button:before, #mobile-menu .header-auth-user .fa-pull-right.logout:before {
   margin-left: .3em; }
 
 /* Deprecated as of 4.4.0 */
@@ -2647,10 +2654,10 @@ blockquote {
   float: left; }
 
 /* line 20, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.pull-left, #header .pane .content .top .pull-left.search-form:before, #header .pane .content .top .header-links .pull-left.link.tracker:before, #header .pane .content .top .header-links .pull-left.link.github:before, #header .pane .content .top .header-auth-user .pull-left.logout:before, .question-teaser .right .tags .pull-left.tag:before, .question-full > .left .rate-widget .pull-left.rate-plus, .question-full > .left .rate-widget .pull-left.rate-minus, .question-full > .right .tags .pull-left.tag:before, .question-full > .right .bottom .signature .user .info .pull-left.rating:before, .answer-teaser > .left .rate-widget .pull-left.rate-plus, .answer-teaser > .left .rate-widget .pull-left.rate-minus, .answer-teaser > .left .pull-left.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .pull-left.rating:before, .event-teaser .left .pull-left.date:before, .event-teaser .left .pull-left.city:before, .event-teaser .left .pull-left.address:before, .event-full .left .pull-left.date:before, .event-full .left .pull-left.city:before, .event-full .left .pull-left.address:before, .post-teaser .bottom .rate-widget .pull-left.rate, .post-teaser .bottom .pull-left.comment-count:before, .post-teaser .bottom .pull-left.date:before, .post-full > .bottom .rate-widget .pull-left.rate, .post-full > .bottom .pull-left.comment-count:before, .post-full > .bottom .pull-left.date:before, .pull-left#make-reply:before, .project-teaser .pull-left.type:before, .project-teaser .pull-left.dev-status:before, .project-teaser .pull-left.maintenance-status:before, .project-full > .left .pull-left.type:before, .project-full > .left .pull-left.dev-status:before, .project-full > .left .pull-left.maintenance-status:before, .project-full > .left .pull-left.version:before, .project-full > .left .pull-left.drupalorg:before, #druio-projects-download-form .archives .pull-left.title:before, #druio-projects-download-form .drush .pull-left.title:before, .order-full > .info .left .pull-left.status:before, .order-full > .info .left .pull-left.budget:before, .order-full > .info .left .pull-left.files:before, .order-full > .info .left .files .pull-left.file:before, .order-full > .info .right .pull-left.contacts:before, .order-full .flag-ready2work .pull-left.flag:before, #block-block-1 .social li .pull-left.item:before, .pull-left#sidebar-toggle:before {
+.fa.pull-left, #header .pane .content .top .pull-left.search-form:before, #header .pane .content .top .header-links .pull-left.link.tracker:before, #header .pane .content .top .header-links .pull-left.link.github:before, #header .pane .content .top .header-auth-user .pull-left.logout:before, .question-teaser .right .tags .pull-left.tag:before, .question-full > .left .rate-widget .pull-left.rate-plus, .question-full > .left .rate-widget .pull-left.rate-minus, .question-full > .right .tags .pull-left.tag:before, .question-full > .right .bottom .signature .user .info .pull-left.rating:before, .answer-teaser > .left .rate-widget .pull-left.rate-plus, .answer-teaser > .left .rate-widget .pull-left.rate-minus, .answer-teaser > .left .pull-left.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .pull-left.rating:before, .event-teaser .left .pull-left.date:before, .event-teaser .left .pull-left.city:before, .event-teaser .left .pull-left.address:before, .event-full .left .pull-left.date:before, .event-full .left .pull-left.city:before, .event-full .left .pull-left.address:before, .post-teaser .bottom .rate-widget .pull-left.rate, .post-teaser .bottom .pull-left.comment-count:before, .post-teaser .bottom .pull-left.date:before, .post-full > .bottom .rate-widget .pull-left.rate, .post-full > .bottom .pull-left.comment-count:before, .post-full > .bottom .pull-left.date:before, .pull-left#make-reply:before, .project-teaser .pull-left.type:before, .project-teaser .pull-left.dev-status:before, .project-teaser .pull-left.maintenance-status:before, .project-full > .left .pull-left.type:before, .project-full > .left .pull-left.dev-status:before, .project-full > .left .pull-left.maintenance-status:before, .project-full > .left .pull-left.version:before, .project-full > .left .pull-left.drupalorg:before, #druio-projects-download-form .archives .pull-left.title:before, #druio-projects-download-form .drush .pull-left.title:before, .order-full > .info .left .pull-left.status:before, .order-full > .info .left .pull-left.budget:before, .order-full > .info .left .pull-left.files:before, .order-full > .info .left .files .pull-left.file:before, .order-full > .info .right .pull-left.contacts:before, .order-full .flag-ready2work .pull-left.flag:before, #block-block-1 .social li .pull-left.item:before, .pull-left#sidebar-toggle:before, .pull-left#mobile-menu-button:before, #mobile-menu .header-auth-user .pull-left.logout:before {
   margin-right: .3em; }
 /* line 21, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
-.fa.pull-right, #header .pane .content .top .pull-right.search-form:before, #header .pane .content .top .header-links .pull-right.link.tracker:before, #header .pane .content .top .header-links .pull-right.link.github:before, #header .pane .content .top .header-auth-user .pull-right.logout:before, .question-teaser .right .tags .pull-right.tag:before, .question-full > .left .rate-widget .pull-right.rate-plus, .question-full > .left .rate-widget .pull-right.rate-minus, .question-full > .right .tags .pull-right.tag:before, .question-full > .right .bottom .signature .user .info .pull-right.rating:before, .answer-teaser > .left .rate-widget .pull-right.rate-plus, .answer-teaser > .left .rate-widget .pull-right.rate-minus, .answer-teaser > .left .pull-right.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .pull-right.rating:before, .event-teaser .left .pull-right.date:before, .event-teaser .left .pull-right.city:before, .event-teaser .left .pull-right.address:before, .event-full .left .pull-right.date:before, .event-full .left .pull-right.city:before, .event-full .left .pull-right.address:before, .post-teaser .bottom .rate-widget .pull-right.rate, .post-teaser .bottom .pull-right.comment-count:before, .post-teaser .bottom .pull-right.date:before, .post-full > .bottom .rate-widget .pull-right.rate, .post-full > .bottom .pull-right.comment-count:before, .post-full > .bottom .pull-right.date:before, .pull-right#make-reply:before, .project-teaser .pull-right.type:before, .project-teaser .pull-right.dev-status:before, .project-teaser .pull-right.maintenance-status:before, .project-full > .left .pull-right.type:before, .project-full > .left .pull-right.dev-status:before, .project-full > .left .pull-right.maintenance-status:before, .project-full > .left .pull-right.version:before, .project-full > .left .pull-right.drupalorg:before, #druio-projects-download-form .archives .pull-right.title:before, #druio-projects-download-form .drush .pull-right.title:before, .order-full > .info .left .pull-right.status:before, .order-full > .info .left .pull-right.budget:before, .order-full > .info .left .pull-right.files:before, .order-full > .info .left .files .pull-right.file:before, .order-full > .info .right .pull-right.contacts:before, .order-full .flag-ready2work .pull-right.flag:before, #block-block-1 .social li .pull-right.item:before, .pull-right#sidebar-toggle:before {
+.fa.pull-right, #header .pane .content .top .pull-right.search-form:before, #header .pane .content .top .header-links .pull-right.link.tracker:before, #header .pane .content .top .header-links .pull-right.link.github:before, #header .pane .content .top .header-auth-user .pull-right.logout:before, .question-teaser .right .tags .pull-right.tag:before, .question-full > .left .rate-widget .pull-right.rate-plus, .question-full > .left .rate-widget .pull-right.rate-minus, .question-full > .right .tags .pull-right.tag:before, .question-full > .right .bottom .signature .user .info .pull-right.rating:before, .answer-teaser > .left .rate-widget .pull-right.rate-plus, .answer-teaser > .left .rate-widget .pull-right.rate-minus, .answer-teaser > .left .pull-right.best-answer:before, .answer-teaser > .right .bottom .signature .user .info .pull-right.rating:before, .event-teaser .left .pull-right.date:before, .event-teaser .left .pull-right.city:before, .event-teaser .left .pull-right.address:before, .event-full .left .pull-right.date:before, .event-full .left .pull-right.city:before, .event-full .left .pull-right.address:before, .post-teaser .bottom .rate-widget .pull-right.rate, .post-teaser .bottom .pull-right.comment-count:before, .post-teaser .bottom .pull-right.date:before, .post-full > .bottom .rate-widget .pull-right.rate, .post-full > .bottom .pull-right.comment-count:before, .post-full > .bottom .pull-right.date:before, .pull-right#make-reply:before, .project-teaser .pull-right.type:before, .project-teaser .pull-right.dev-status:before, .project-teaser .pull-right.maintenance-status:before, .project-full > .left .pull-right.type:before, .project-full > .left .pull-right.dev-status:before, .project-full > .left .pull-right.maintenance-status:before, .project-full > .left .pull-right.version:before, .project-full > .left .pull-right.drupalorg:before, #druio-projects-download-form .archives .pull-right.title:before, #druio-projects-download-form .drush .pull-right.title:before, .order-full > .info .left .pull-right.status:before, .order-full > .info .left .pull-right.budget:before, .order-full > .info .left .pull-right.files:before, .order-full > .info .left .files .pull-right.file:before, .order-full > .info .right .pull-right.contacts:before, .order-full .flag-ready2work .pull-right.flag:before, #block-block-1 .social li .pull-right.item:before, .pull-right#sidebar-toggle:before, .pull-right#mobile-menu-button:before, #mobile-menu .header-auth-user .pull-right.logout:before {
   margin-left: .3em; }
 
 /* line 1, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_animated.scss */
@@ -3279,7 +3286,7 @@ blockquote {
   content: "\f08a"; }
 
 /* line 135, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-sign-out:before, #header .pane .content .top .header-auth-user .logout:before {
+.fa-sign-out:before, #header .pane .content .top .header-auth-user .logout:before, #mobile-menu .header-auth-user .logout:before {
   content: "\f08b"; }
 
 /* line 136, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -3463,7 +3470,7 @@ blockquote {
   content: "\f0c8"; }
 
 /* line 181, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-navicon:before, .fa-reorder:before, .fa-bars:before {
+.fa-navicon:before, .fa-reorder:before, .fa-bars:before, #mobile-menu-button:before {
   content: "\f0c9"; }
 
 /* line 182, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -5819,8 +5826,11 @@ table {
 #header {
   font-size: 0.875rem;
   background: #2E5B95;
-  box-shadow: inset 0 2.5rem 0 0 rgba(0, 0, 0, 0.5); }
-  /* line 14, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  box-shadow: inset 0 8.5rem 0 0 rgba(0, 0, 0, 0.5); }
+  @media  (min-width: 768px) {
+    #header {
+      box-shadow: inset 0 2.5rem 0 0 rgba(0, 0, 0, 0.5); } }
+  /* line 17, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   #header .pane .logo {
     background: white;
     padding: 0.625rem 1.25rem; }
@@ -5829,7 +5839,16 @@ table {
         overflow: hidden;
         height: 2.5rem;
         padding-top: 0.25rem; } }
-  /* line 25, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    @media  (max-width: 768px) {
+      /* line 26, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      #header .pane .logo > a {
+        display: block;
+        overflow: hidden;
+        height: 2.25rem;
+        padding: 0;
+        width: 10.625rem;
+        margin: 0 auto; } }
+  /* line 38, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   #header .pane .content .top {
     height: 2.5rem;
     color: #eeeeee; }
@@ -5838,9 +5857,9 @@ table {
       content: " ";
       display: block;
       clear: both; }
-    /* line 29, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 42, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #header .pane .content .top .search-form {
-      width: 15rem;
+      width: 100%;
       float: left;
       position: relative; }
       @media  (min-width: 768px) {
@@ -5849,7 +5868,7 @@ table {
       @media  (min-width: 992px) {
         #header .pane .content .top .search-form {
           width: 15rem; } }
-      /* line 39, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 52, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       #header .pane .content .top .search-form .search-input {
         height: 2.5rem;
         width: 100%;
@@ -5860,12 +5879,12 @@ table {
         color: #FFF;
         padding-left: 2.5rem;
         margin: 0; }
-      /* line 50, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 63, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       #header .pane .content .top .search-form:before {
         position: absolute;
         left: 0.875rem;
         line-height: 2.5rem; }
-    /* line 61, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 74, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #header .pane .content .top .header-links .link {
       position: relative;
       display: block;
@@ -5875,21 +5894,21 @@ table {
       padding: 0 0.625rem;
       background: transparent;
       transition: all 400ms; }
-      /* line 70, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 83, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       #header .pane .content .top .header-links .link:hover {
         background: rgba(0, 0, 0, 0.2);
         transition: all 400ms; }
-      /* line 74, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 87, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       #header .pane .content .top .header-links .link.tracker, #header .pane .content .top .header-links .link.github {
         padding-left: 2.1875rem; }
-        /* line 76, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+        /* line 89, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
         #header .pane .content .top .header-links .link.tracker:before, #header .pane .content .top .header-links .link.github:before {
           position: absolute;
           left: 0;
           line-height: 2.5rem;
           width: 2.1875rem;
           text-align: center; }
-      /* line 90, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 103, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       #header .pane .content .top .header-links .link.tracker.new:before {
         -webkit-transform-origin: top center;
         -moz-transform-origin: top center;
@@ -5931,10 +5950,10 @@ table {
         -ms-backface-visibility: hidden;
         -o-backface-visibility: hidden;
         backface-visibility: hidden; }
-    /* line 106, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 119, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #header .pane .content .top .header-auth-anon {
       float: right; }
-      /* line 108, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 121, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       #header .pane .content .top .header-auth-anon .link {
         display: block;
         float: left;
@@ -5942,16 +5961,16 @@ table {
         padding: 0 1.25rem;
         color: white;
         font-weight: bold; }
-        /* line 115, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+        /* line 128, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
         #header .pane .content .top .header-auth-anon .link.sign-up {
           background: #4c9067; }
-    /* line 122, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 135, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #header .pane .content .top .header-auth-user {
       float: right; }
-      /* line 124, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 137, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       #header .pane .content .top .header-auth-user .picture {
         float: left; }
-      /* line 127, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 140, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       #header .pane .content .top .header-auth-user .username {
         display: block;
         float: left;
@@ -5963,7 +5982,7 @@ table {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis; }
-      /* line 139, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 152, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       #header .pane .content .top .header-auth-user .logout {
         float: left;
         display: block;
@@ -5972,11 +5991,11 @@ table {
         color: white;
         text-align: center;
         background: rgba(255, 255, 255, 0.2); }
-        /* line 147, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+        /* line 160, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
         #header .pane .content .top .header-auth-user .logout:before {
           margin-left: 0.4375rem; }
 
-/* line 160, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 173, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 #navigation .menu {
   margin: 0;
   padding: 0;
@@ -5986,10 +6005,10 @@ table {
     content: " ";
     display: block;
     clear: both; }
-  /* line 165, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 178, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   #navigation .menu li {
     float: left; }
-    /* line 167, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 180, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #navigation .menu li a {
       display: block;
       line-height: 4.75rem;
@@ -5999,7 +6018,7 @@ table {
       font-size: 1.125rem;
       background: transparent;
       transition: all 500ms; }
-      /* line 175, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 188, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       #navigation .menu li a:hover {
         background: rgba(0, 0, 0, 0.25);
         transition: all 500ms; }
@@ -6007,43 +6026,43 @@ table {
   #navigation {
     width: 752px;
     margin-left: -11.875rem; }
-    /* line 186, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 199, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #navigation .menu li a {
       font-size: 17px;
       font-size: 1.0625rem; } }
 
-/* line 192, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 205, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 #main {
   background: white;
   padding: 1.25rem;
   position: relative;
   overflow: hidden; }
 
-/* line 199, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 212, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .facetapi-facetapi-checkbox-links {
   margin: 0;
   padding: 0;
   list-style: none; }
 
-/* line 205, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 218, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 #content {
   position: relative; }
   @media  (min-width: 768px) and (max-width: 992px) {
     #content {
       transform: translateX(0);
       transition: all 300ms; }
-      /* line 210, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 223, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       .sidebar-open #content {
         transform: translateX(-291px);
         transition: all 300ms; } }
 
-/* line 217, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 230, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 #sidebar {
   position: relative; }
-  /* line 219, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 232, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   #sidebar > .block {
     margin-bottom: 1.25rem; }
-    /* line 221, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 234, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #sidebar > .block > .title {
       margin-top: 0;
       font-size: 20px;
@@ -6056,48 +6075,48 @@ table {
       right: 0;
       transform: translateX(291px);
       transition: all 300ms; }
-      /* line 233, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 246, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       .sidebar-open #sidebar {
         transform: translateX(0);
         transition: all 300ms; } }
 
-/* line 240, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 253, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .question-teaser {
   border-bottom: 1px solid #eeeeee;
   padding-bottom: 1.25rem;
   margin-bottom: 1.25rem; }
-  /* line 244, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 257, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .question-teaser .info {
     cursor: pointer;
     text-align: center;
     font-size: 17px;
     font-size: 1.0625rem; }
-    /* line 248, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 261, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .question-teaser .info .rating, .question-teaser .info .answers {
       padding: 0.375rem; }
-      /* line 250, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 263, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       .question-teaser .info .rating .label, .question-teaser .info .answers .label {
         font-size: 13.5px;
         font-size: 0.84375rem; }
-    /* line 254, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 267, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .question-teaser .info .answers {
       color: #4c9067; }
-      /* line 256, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 269, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       .question-teaser .info .answers.has-best {
         background: #e0f0d3; }
-      /* line 259, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 272, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       .question-teaser .info .answers.no-answers {
         color: #333333; }
-  /* line 265, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 278, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .question-teaser .right .title {
     margin-top: 0;
     font-size: 18px;
     font-size: 1.125rem; }
-  /* line 269, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 282, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .question-teaser .right .tags {
     float: left;
     line-height: 0.875rem; }
-    /* line 272, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 285, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .question-teaser .right .tags .tag {
       display: inline-block;
       background: #f8f8f8;
@@ -6108,10 +6127,10 @@ table {
       padding: 0.25rem;
       font-size: 11px;
       font-size: 0.6875rem; }
-      /* line 281, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 294, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       .question-teaser .right .tags .tag:before {
         margin-right: 0.25rem; }
-  /* line 296, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 309, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .question-teaser .right .created {
     float: right;
     font-size: 12px;
@@ -6119,7 +6138,7 @@ table {
     padding-top: 0.25rem;
     color: #707070; }
 
-/* line 307, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 320, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .question-full > .left .rate-widget {
   text-align: center;
   font-size: 30px;
@@ -6127,26 +6146,26 @@ table {
   line-height: 1;
   margin: 0;
   color: #333333; }
-  /* line 317, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 330, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .question-full > .left .rate-widget .rate-plus.voted, .question-full > .left .rate-widget .rate-plus:hover {
     color: #2E5B95; }
-  /* line 325, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 338, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .question-full > .left .rate-widget .rate-minus.voted, .question-full > .left .rate-widget .rate-minus:hover {
     color: #2E5B95; }
-  /* line 330, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 343, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .question-full > .left .rate-widget .rate-plus, .question-full > .left .rate-widget .rate-minus {
     color: #eeeeee;
     font-size: 2.5rem; }
-    /* line 333, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 346, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .question-full > .left .rate-widget .rate-plus.disabled:hover, .question-full > .left .rate-widget .rate-minus.disabled:hover {
       color: #eeeeee; }
-/* line 339, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 352, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .question-full > .right {
   margin-bottom: 1.25rem; }
-  /* line 341, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 354, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .question-full > .right .tags {
     line-height: 0.875rem; }
-    /* line 343, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 356, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .question-full > .right .tags .tag {
       display: inline-block;
       background: #f8f8f8;
@@ -6157,10 +6176,10 @@ table {
       padding: 0.25rem;
       font-size: 11px;
       font-size: 0.6875rem; }
-      /* line 352, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 365, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       .question-full > .right .tags .tag:before {
         margin-right: 0.25rem; }
-  /* line 367, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 380, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .question-full > .right .bottom {
     margin-bottom: 0.9375rem; }
     /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
@@ -6168,7 +6187,7 @@ table {
       content: " ";
       display: block;
       clear: both; }
-    /* line 370, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 383, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .question-full > .right .bottom .signature {
       padding: 0.3125rem;
       background: #e5edf7;
@@ -6177,7 +6196,7 @@ table {
       font-size: 12px;
       font-size: 0.75rem;
       line-height: 1.5; }
-      /* line 377, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 390, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       .question-full > .right .bottom .signature .user {
         margin-top: 0.3125rem; }
         /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
@@ -6185,33 +6204,33 @@ table {
           content: " ";
           display: block;
           clear: both; }
-        /* line 380, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+        /* line 393, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
         .question-full > .right .bottom .signature .user .picture {
           display: block;
           width: 2rem;
           float: left;
           margin-top: 0.125rem; }
-        /* line 386, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+        /* line 399, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
         .question-full > .right .bottom .signature .user .info {
           float: left;
           margin-left: 0.375rem; }
-          /* line 390, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+          /* line 403, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
           .question-full > .right .bottom .signature .user .info .rating:before {
             margin-right: 0.25rem; }
-  /* line 400, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 413, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .question-full > .right .add-comment {
     font-size: 13px;
     font-size: 0.8125rem; }
-/* line 404, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 417, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .question-full .node-answer-form {
   display: none; }
-/* line 407, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 420, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .question-full .answers__title {
   margin-bottom: 0.625rem;
   padding-bottom: 0.625rem;
   border-bottom: 1px solid #eeeeee; }
 
-/* line 414, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 427, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .hljs {
   background: white;
   font-size: 12px;
@@ -6219,12 +6238,12 @@ table {
   border-left: 4px solid rgba(0, 39, 59, 0.5);
   padding: 0 0 0 0.75rem; }
 
-/* line 421, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 434, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .answer-teaser {
   border-bottom: 1px solid #eeeeee;
   padding-bottom: 1.25rem;
   margin-bottom: 1.25rem; }
-  /* line 426, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 439, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .answer-teaser > .left .rate-widget {
     text-align: center;
     font-size: 30px;
@@ -6232,20 +6251,20 @@ table {
     line-height: 1;
     margin: 0;
     color: #333333; }
-    /* line 436, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 449, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .answer-teaser > .left .rate-widget .rate-plus.voted, .answer-teaser > .left .rate-widget .rate-plus:hover {
       color: #2E5B95; }
-    /* line 444, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 457, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .answer-teaser > .left .rate-widget .rate-minus.voted, .answer-teaser > .left .rate-widget .rate-minus:hover {
       color: #2E5B95; }
-    /* line 449, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 462, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .answer-teaser > .left .rate-widget .rate-plus, .answer-teaser > .left .rate-widget .rate-minus {
       color: #eeeeee;
       font-size: 2.5rem; }
-      /* line 452, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 465, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       .answer-teaser > .left .rate-widget .rate-plus.disabled:hover, .answer-teaser > .left .rate-widget .rate-minus.disabled:hover {
         color: #eeeeee; }
-  /* line 457, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 470, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .answer-teaser > .left .best-answer {
     text-align: center;
     color: #4c9067;
@@ -6257,7 +6276,7 @@ table {
     content: " ";
     display: block;
     clear: both; }
-  /* line 471, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 484, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .answer-teaser > .right .bottom .signature {
     padding: 0.3125rem;
     float: right;
@@ -6265,7 +6284,7 @@ table {
     font-size: 12px;
     font-size: 0.75rem;
     line-height: 1.5; }
-    /* line 477, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 490, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .answer-teaser > .right .bottom .signature .user {
       margin-top: 0.3125rem; }
       /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
@@ -6273,53 +6292,53 @@ table {
         content: " ";
         display: block;
         clear: both; }
-      /* line 480, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 493, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       .answer-teaser > .right .bottom .signature .user .picture {
         display: block;
         width: 2rem;
         float: left;
         margin-top: 0.125rem; }
-      /* line 486, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 499, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       .answer-teaser > .right .bottom .signature .user .info {
         float: left;
         margin-left: 0.375rem; }
-        /* line 490, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+        /* line 503, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
         .answer-teaser > .right .bottom .signature .user .info .rating:before {
           margin-right: 0.25rem; }
-  /* line 500, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 513, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .answer-teaser > .right .view-comments-comments-to-answers {
     border-top: 1px solid #eeeeee;
     padding-top: 0.625rem;
     margin-top: 0.625rem; }
-  /* line 505, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 518, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .answer-teaser > .right .add-comment {
     font-size: 13px;
     font-size: 0.8125rem; }
 
-/* line 511, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 524, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .comment-minimal {
   font-size: 13px;
   font-size: 0.8125rem;
   border-bottom: 1px solid #eeeeee;
   padding-bottom: 0.625rem;
   margin-bottom: 0.625rem; }
-  /* line 516, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 529, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .comment-minimal .author-and-created {
     font-size: 12px;
     font-size: 0.75rem; }
-    /* line 518, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 531, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .comment-minimal .author-and-created .created {
       color: #777777; }
-  /* line 522, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 535, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .comment-minimal > p {
     margin-bottom: 0.3125rem; }
 
-/* line 528, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 541, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .event-teaser, .event-full {
   margin-bottom: 0.9375rem;
   padding-bottom: 0.9375rem;
   border-bottom: 1px solid #eeeeee; }
-  /* line 533, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 546, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .event-teaser .left .poster, .event-full .left .poster {
     overflow: hidden;
     padding: 0.1875rem;
@@ -6327,37 +6346,37 @@ table {
     border: 1px solid #eeeeee;
     border-radius: 4px;
     margin-bottom: 0.625rem; }
-  /* line 541, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 554, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .event-teaser .left .date, .event-teaser .left .city, .event-teaser .left .address, .event-full .left .date, .event-full .left .city, .event-full .left .address {
     position: relative;
     padding-left: 1.625rem;
     margin-bottom: 0.375rem; }
-    /* line 545, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 558, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .event-teaser .left .date:before, .event-teaser .left .city:before, .event-teaser .left .address:before, .event-full .left .date:before, .event-full .left .city:before, .event-full .left .address:before {
       position: absolute;
       left: 0;
       width: 1.25rem;
       text-align: center;
       margin-right: 0.375rem; }
-  /* line 565, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 578, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .event-teaser .right .title, .event-full .right .title {
     margin-top: 0;
     font-size: 24px;
     font-size: 1.5rem;
     font-weight: bold; }
 
-/* line 573, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 586, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .flag-will-go2-event {
   display: block; }
-  /* line 577, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 590, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .flag-will-go2-event a {
     color: white; }
 
-/* line 582, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 595, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 #page-title {
   margin: 0.375rem 0 1.5rem; }
 
-/* line 592, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 605, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .post-teaser .bottom {
   background: #f9f9f9;
   padding: 5px;
@@ -6368,11 +6387,11 @@ table {
     content: " ";
     display: block;
     clear: both; }
-  /* line 601, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 614, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .post-teaser .bottom .rate-widget, .post-teaser .bottom .comment-count, .post-teaser .bottom .date, .post-teaser .bottom .avatar-and-author {
     float: left;
     margin-right: 1rem; }
-  /* line 606, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 619, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .post-teaser .bottom .rate-widget .rate {
     background: #E6E6E6;
     color: #777;
@@ -6381,30 +6400,30 @@ table {
     border-radius: 2px;
     font-size: 14px;
     font-size: 0.875rem; }
-    /* line 617, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 630, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .post-teaser .bottom .rate-widget .rate--minus:hover:not(.disabled), .post-teaser .bottom .rate-widget .rate--minus.voted {
       background: #903030;
       color: white; }
-    /* line 625, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 638, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .post-teaser .bottom .rate-widget .rate--plus:hover:not(.disabled), .post-teaser .bottom .rate-widget .rate--plus.voted {
       background: #4c9067;
       color: white; }
-  /* line 631, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 644, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .post-teaser .bottom .rate-widget .rate-result {
     display: inline-block;
     padding: 0 0.4375rem;
     font-weight: bold; }
-    /* line 635, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 648, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .post-teaser .bottom .rate-widget .rate-result.good {
       color: #4c9067; }
-    /* line 638, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 651, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .post-teaser .bottom .rate-widget .rate-result.bad {
       color: #903030; }
-  /* line 643, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 656, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .post-teaser .bottom .comment-count, .post-teaser .bottom .date {
     font-size: 14px;
     font-size: 0.875rem; }
-    /* line 645, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 658, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .post-teaser .bottom .comment-count:before, .post-teaser .bottom .date:before {
       margin-right: 0.375rem; }
   /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
@@ -6412,7 +6431,7 @@ table {
     content: " ";
     display: block;
     clear: both; }
-  /* line 658, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 671, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .post-teaser .bottom .avatar-and-author .avatar {
     float: left;
     display: block;
@@ -6421,7 +6440,7 @@ table {
     width: 1.5rem;
     border-radius: 50%;
     margin-right: 0.3125rem; }
-  /* line 667, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 680, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .post-teaser .bottom .avatar-and-author .author {
     display: inline-block;
     vertical-align: middle;
@@ -6429,7 +6448,7 @@ table {
     font-size: 14px;
     font-size: 0.875rem; }
 
-/* line 678, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 691, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .post-full > .bottom {
   background: #f9f9f9;
   padding: 5px;
@@ -6440,11 +6459,11 @@ table {
     content: " ";
     display: block;
     clear: both; }
-  /* line 687, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 700, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .post-full > .bottom .rate-widget, .post-full > .bottom .comment-count, .post-full > .bottom .date, .post-full > .bottom .avatar-and-author {
     float: left;
     margin-right: 1rem; }
-  /* line 692, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 705, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .post-full > .bottom .rate-widget .rate {
     background: #E6E6E6;
     color: #777;
@@ -6453,30 +6472,30 @@ table {
     border-radius: 2px;
     font-size: 14px;
     font-size: 0.875rem; }
-    /* line 703, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 716, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .post-full > .bottom .rate-widget .rate--minus:hover:not(.disabled), .post-full > .bottom .rate-widget .rate--minus.voted {
       background: #903030;
       color: white; }
-    /* line 711, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 724, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .post-full > .bottom .rate-widget .rate--plus:hover:not(.disabled), .post-full > .bottom .rate-widget .rate--plus.voted {
       background: #4c9067;
       color: white; }
-  /* line 717, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 730, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .post-full > .bottom .rate-widget .rate-result {
     display: inline-block;
     padding: 0 0.4375rem;
     font-weight: bold; }
-    /* line 721, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 734, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .post-full > .bottom .rate-widget .rate-result.good {
       color: #4c9067; }
-    /* line 724, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 737, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .post-full > .bottom .rate-widget .rate-result.bad {
       color: #903030; }
-  /* line 729, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 742, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .post-full > .bottom .comment-count, .post-full > .bottom .date {
     font-size: 14px;
     font-size: 0.875rem; }
-    /* line 731, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 744, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .post-full > .bottom .comment-count:before, .post-full > .bottom .date:before {
       margin-right: 0.375rem; }
   /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
@@ -6484,7 +6503,7 @@ table {
     content: " ";
     display: block;
     clear: both; }
-  /* line 744, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 757, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .post-full > .bottom .avatar-and-author .avatar {
     float: left;
     display: block;
@@ -6493,7 +6512,7 @@ table {
     width: 1.5rem;
     border-radius: 50%;
     margin-right: 0.3125rem; }
-  /* line 753, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 766, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .post-full > .bottom .avatar-and-author .author {
     display: inline-block;
     vertical-align: middle;
@@ -6501,17 +6520,17 @@ table {
     font-size: 14px;
     font-size: 0.875rem; }
 
-/* line 764, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 777, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 #make-reply:before {
   margin-right: 0.375rem; }
 
-/* line 771, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 784, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .comment-full {
   margin-bottom: 0.9375rem;
   padding-bottom: 0.9375rem;
   border-bottom: 1px solid #eeeeee;
   position: relative; }
-  /* line 777, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 790, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .comment-full > .right .links {
     position: absolute;
     top: 0;
@@ -6526,72 +6545,72 @@ table {
       content: " ";
       display: block;
       clear: both; }
-    /* line 787, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 800, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .comment-full > .right .links li {
       font-size: 12px;
       font-size: 0.75rem;
       float: left;
       margin-left: 0.625rem; }
-  /* line 793, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 806, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .comment-full > .right .author-and-created {
     margin-bottom: 0.625rem; }
-    /* line 795, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 808, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .comment-full > .right .author-and-created .username {
       color: #2E5B95;
       font-weight: bold; }
-    /* line 799, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 812, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .comment-full > .right .author-and-created .created {
       color: #777;
       font-size: 12px;
       font-size: 0.75rem;
       line-height: 1rem; }
-  /* line 806, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 819, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .comment-full > .right .content p:last-of-type {
     margin-bottom: 0; }
-  /* line 811, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 824, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .comment-full > .right:hover .links {
     opacity: 1;
     transition: all 500ms; }
 
-/* line 819, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 832, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .project-teaser {
   margin-bottom: 0.9375rem;
   padding-bottom: 0.9375rem;
   border-bottom: 1px solid #eeeeee; }
-  /* line 823, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 836, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .project-teaser .title {
     font-size: 19px;
     font-size: 1.1875rem; }
-  /* line 827, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 840, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .project-teaser .type:before, .project-teaser .dev-status:before, .project-teaser .maintenance-status:before {
     width: 1.25rem;
     text-align: center;
     margin-right: 0.375rem; }
 
-/* line 853, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 866, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .project-full > .left .type:before, .project-full > .left .dev-status:before, .project-full > .left .maintenance-status:before, .project-full > .left .version:before, .project-full > .left .drupalorg:before {
   margin-right: 0.375rem;
   width: 1.375rem;
   text-align: center; }
 
-/* line 878, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 891, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 #druio-projects-download-form {
   margin: 0.625rem 0;
   padding: 0.625rem;
   border: 1px solid #E7E7E7;
   border-radius: 2px;
   box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.03); }
-  /* line 885, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 898, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   #druio-projects-download-form .form-item-release-selector {
     margin: 0; }
-  /* line 890, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 903, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   #druio-projects-download-form .archives .title {
     margin-top: 0.4375rem;
     font-size: 17px;
     font-size: 1.0625rem;
     border-bottom: 1px solid #e8e8e8;
     padding-bottom: 0.3125rem; }
-    /* line 896, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 909, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #druio-projects-download-form .archives .title:before {
       margin-right: 0.3125rem; }
   /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
@@ -6599,7 +6618,7 @@ table {
     content: " ";
     display: block;
     clear: both; }
-  /* line 905, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 918, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   #druio-projects-download-form .archives .list .item {
     font-size: 12px;
     font-size: 0.75rem;
@@ -6618,67 +6637,67 @@ table {
       margin-left: 52.63158%;
       margin-right: -100%;
       clear: none; }
-    /* line 911, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 924, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #druio-projects-download-form .archives .list .item .item-label {
       font-weight: bold;
       font-size: 16px;
       font-size: 1rem; }
-    /* line 916, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 929, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #druio-projects-download-form .archives .list .item .label {
       font-weight: bold; }
-    /* line 920, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 933, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #druio-projects-download-form .archives .list .item .md5 {
       overflow: hidden;
       white-space: nowrap;
       text-overflow: ellipsis; }
-  /* line 929, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 942, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   #druio-projects-download-form .drush {
     font-size: 14px;
     font-size: 0.875rem; }
-    /* line 931, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 944, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #druio-projects-download-form .drush .title {
       margin-top: 0.4375rem;
       font-size: 17px;
       font-size: 1.0625rem;
       border-bottom: 1px solid #e8e8e8;
       padding-bottom: 0.3125rem; }
-      /* line 937, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 950, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       #druio-projects-download-form .drush .title:before {
         margin-right: 0.3125rem; }
 
-/* line 946, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 959, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .order-teaser {
   border-bottom: 1px solid #eeeeee;
   padding-bottom: 1.25rem;
   margin-bottom: 1.25rem; }
-  /* line 950, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 963, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .order-teaser .info {
     cursor: pointer;
     text-align: center;
     font-size: 17px;
     font-size: 1.0625rem; }
-    /* line 954, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 967, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .order-teaser .info .ready2work, .order-teaser .info .budget {
       padding: 0.375rem; }
-      /* line 956, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 969, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       .order-teaser .info .ready2work .label, .order-teaser .info .budget .label {
         font-size: 13.5px;
         font-size: 0.84375rem; }
-    /* line 960, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 973, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .order-teaser .info .ready2work {
       color: #4c9067; }
-      /* line 962, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 975, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       .order-teaser .info .ready2work.complete {
         background: #e0f0d3; }
-      /* line 965, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      /* line 978, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       .order-teaser .info .ready2work.no-people {
         color: #333333; }
-  /* line 971, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 984, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .order-teaser .right .title {
     margin-top: 0;
     font-size: 18px;
     font-size: 1.125rem; }
-  /* line 975, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 988, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .order-teaser .right .created {
     float: right;
     font-size: 12px;
@@ -6686,74 +6705,74 @@ table {
     padding-top: 0.25rem;
     color: #707070; }
 
-/* line 985, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 998, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .order-full > .info {
   margin-bottom: 1.25rem; }
-  /* line 988, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1001, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .order-full > .info .left .status, .order-full > .info .left .budget, .order-full > .info .left .files {
     margin-bottom: 0.25rem; }
-    /* line 990, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 1003, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .order-full > .info .left .status .label, .order-full > .info .left .status .label-inline, .order-full > .info .left .budget .label, .order-full > .info .left .budget .label-inline, .order-full > .info .left .files .label, .order-full > .info .left .files .label-inline {
       font-weight: bold; }
-    /* line 993, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 1006, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .order-full > .info .left .status:before, .order-full > .info .left .budget:before, .order-full > .info .left .files:before {
       width: 1.25rem;
       text-align: center;
       margin-right: 0.375rem; }
-  /* line 1007, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1020, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .order-full > .info .left .files .file {
     margin-left: 1.625rem;
     font-size: 14px;
     font-size: 0.875rem; }
-    /* line 1010, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 1023, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .order-full > .info .left .files .file:before {
       margin-right: 0.375rem;
       color: #777777; }
-    /* line 1016, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 1029, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .order-full > .info .left .files .file .filesize {
       color: #777777;
       font-size: 12px;
       font-size: 0.75rem; }
-  /* line 1028, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1041, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .order-full > .info .right .contacts:before {
     margin-right: 0.375rem; }
-  /* line 1033, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1046, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .order-full > .info .right .contacts .label-inline {
     font-weight: bold; }
-/* line 1044, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 1057, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .order-full .flag-ready2work .flag:before {
   margin-right: 0.375rem; }
-/* line 1055, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 1068, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .order-full .flag-ready2work .flag-message {
   margin-top: 0.625rem; }
-/* line 1060, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 1073, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .order-full .view-applicants-block {
   margin-top: 0.9375rem; }
-  /* line 1062, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1075, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .order-full .view-applicants-block .applicant {
     margin-bottom: 0.625rem;
     padding-bottom: 0.625rem;
     border-bottom: 1px solid #eeeeee; }
-    /* line 1066, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 1079, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .order-full .view-applicants-block .applicant .picture {
       overflow: hidden;
       border-radius: 2px; }
 
-/* line 1074, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 1087, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 #footer {
   background: #313132;
   color: #eeeeee;
   font-size: 13.5px;
   font-size: 0.84375rem; }
-  /* line 1078, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1091, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   #footer .pane {
     padding: 0.625rem 1.25rem; }
-  /* line 1081, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1094, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   #footer a {
     color: white;
     text-decoration: underline; }
 
-/* line 1088, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 1101, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 #block-block-1 .social {
   margin: 0;
   padding: 0;
@@ -6763,16 +6782,16 @@ table {
     content: " ";
     display: block;
     clear: both; }
-  /* line 1093, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1106, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   #block-block-1 .social li {
     float: left;
     margin-right: 0.75rem; }
-    /* line 1096, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 1109, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #block-block-1 .social li .item {
       font-size: 18px;
       font-size: 1.125rem; }
 
-/* line 1115, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 1128, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 #frontpage-top {
   position: relative;
   background: url('../../images/frontpage-d8.jpg') no-repeat center center;
@@ -6780,14 +6799,14 @@ table {
   border-bottom: 1px solid rgba(0, 0, 0, 0.04);
   left: -1.25rem;
   top: -1.25rem; }
-  /* line 1122, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1135, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   #frontpage-top .left {
     padding: 1.25rem; }
-    /* line 1124, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 1137, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #frontpage-top .left .welcome {
       margin: 0 0 0.625rem 0;
       text-align: center; }
-    /* line 1128, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 1141, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #frontpage-top .left .community {
       margin: 0 0 0.625rem 0;
       text-align: center;
@@ -6795,7 +6814,7 @@ table {
       color: grey;
       font-size: 17px;
       font-size: 1.0625rem; }
-  /* line 1136, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1149, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   #frontpage-top .right {
     padding: 2rem 2.5rem; }
 
@@ -6804,7 +6823,7 @@ table {
   content: " ";
   display: block;
   clear: both; }
-/* line 1143, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 1156, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .question-minimal .answers {
   position: absolute;
   float: left;
@@ -6816,14 +6835,14 @@ table {
   border-radius: 2px;
   color: #4c9067;
   border: 1px solid #DCDCDC; }
-  /* line 1154, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1167, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .question-minimal .answers.has-best {
     background: #e0f0d3;
     border-color: transparent; }
-  /* line 1158, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1171, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .question-minimal .answers.no-answers {
     color: #333333; }
-/* line 1162, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 1175, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .question-minimal .title {
   float: left;
   margin: 0 0 0 2.875rem;
@@ -6831,18 +6850,18 @@ table {
   font-size: 1rem;
   line-height: 1.5rem; }
 
-/* line 1171, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 1184, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .view-question-nodes-frontpage .question-minimal {
   margin-bottom: 0.625rem;
   padding-bottom: 0.625rem;
   border-bottom: 1px solid #eeeeee; }
-  /* line 1175, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1188, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .view-question-nodes-frontpage .question-minimal .answers {
     font-size: 14px;
     font-size: 0.875rem;
     padding: 0; }
 
-/* line 1183, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 1196, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .view-question-nodes-last-questions .question-minimal {
   margin-bottom: 0.625rem;
   padding-bottom: 0.625rem;
@@ -6853,7 +6872,7 @@ table {
   content: " ";
   display: block;
   clear: both; }
-/* line 1192, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 1205, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .post-minimal .comments {
   position: absolute;
   float: left;
@@ -6864,7 +6883,7 @@ table {
   cursor: pointer;
   border-radius: 2px;
   border: 1px solid #DCDCDC; }
-/* line 1203, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 1216, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .post-minimal .title {
   float: left;
   margin: 0 0 0 2.875rem;
@@ -6872,23 +6891,23 @@ table {
   font-size: 1rem;
   line-height: 1.5rem; }
 
-/* line 1212, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 1225, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .view-posts-node-frontpage .post-minimal {
   margin-bottom: 0.625rem;
   padding-bottom: 0.625rem;
   border-bottom: 1px solid #eeeeee; }
-  /* line 1216, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1229, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .view-posts-node-frontpage .post-minimal .comments {
     font-size: 14px;
     font-size: 0.875rem;
     padding: 0; }
 
-/* line 1223, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 1236, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .bue-ui {
   padding: 0;
   margin: 0.625rem 0;
   background: transparent; }
-  /* line 1227, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1240, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .bue-ui .bue-button {
     background: white;
     background-image: -webkit-linear-gradient(top, #ffffff 0%, #EAEAEA 100%);
@@ -6898,11 +6917,11 @@ table {
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFFFF', endColorstr='#FFEAEAEA', GradientType=0);
     height: 1.5625rem;
     padding: 0.3125rem; }
-    /* line 1232, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    /* line 1245, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .bue-ui .bue-button:hover {
       border-color: #2E5B95; }
 
-/* line 1238, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 1251, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 #sidebar-toggle {
   background: #2E5B95;
   color: white;
@@ -6915,18 +6934,120 @@ table {
   font-size: 13px;
   font-size: 0.8125rem;
   z-index: 10; }
-  /* line 1249, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1262, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   #sidebar-toggle:before {
     margin-right: 0.375rem;
     transform: rotate(0deg);
     transition: all 300ms; }
-  /* line 1256, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  /* line 1269, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
   .sidebar-open #sidebar-toggle:before {
     transform: rotate(180deg);
     transition: all 300ms; }
 
-/* line 1264, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+/* line 1277, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
 .view-question-nodes-questions-in-project .content .question-minimal {
   margin-bottom: 0.625rem;
   padding-bottom: 0.625rem;
   border-bottom: 1px solid #eeeeee; }
+
+/* line 1285, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+#mobile-menu-button {
+  color: white;
+  display: inline-block;
+  padding: 0.625rem 0.625rem;
+  font-size: 17px;
+  font-size: 1.0625rem; }
+  /* line 1290, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  #mobile-menu-button:before {
+    margin-right: 0.375rem; }
+
+@media  (max-width: 768px) {
+  /* line 1299, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  body {
+    transform: translateX(0);
+    transition: all 300ms; }
+    /* line 1302, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    body.menu-open {
+      overflow: hidden;
+      transform: translateX(250px);
+      transition: all 300ms; }
+  /* line 1308, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  #mobile-menu {
+    width: 15.625rem;
+    height: 100%;
+    background: #172E4B;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-250px); }
+    /* line 1318, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    #mobile-menu .header-auth-anon {
+      margin-bottom: 1.25rem; }
+      /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
+      #mobile-menu .header-auth-anon:after {
+        content: " ";
+        display: block;
+        clear: both; }
+      /* line 1321, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      #mobile-menu .header-auth-anon .link {
+        display: block;
+        float: left;
+        text-align: center;
+        line-height: 2.5rem;
+        padding: 0 1.25rem;
+        color: white;
+        font-weight: bold; }
+        /* line 1329, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+        #mobile-menu .header-auth-anon .link.sign-up {
+          background: #4c9067;
+          width: 67%; }
+        /* line 1333, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+        #mobile-menu .header-auth-anon .link.sign-in {
+          width: 33%; }
+    /* line 1339, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    #mobile-menu .header-auth-user {
+      margin-bottom: 1.25rem; }
+      /* line 12, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
+      #mobile-menu .header-auth-user:after {
+        content: " ";
+        display: block;
+        clear: both; }
+      /* line 1342, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      #mobile-menu .header-auth-user .picture {
+        float: left; }
+      /* line 1345, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      #mobile-menu .header-auth-user .username {
+        display: block;
+        float: left;
+        width: 8.75rem;
+        padding: 0 0.625rem;
+        line-height: 2.5rem;
+        color: white;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis; }
+      /* line 1357, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      #mobile-menu .header-auth-user .logout {
+        float: left;
+        display: block;
+        line-height: 2.5rem;
+        width: 2.5rem;
+        color: white;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.2); }
+        /* line 1365, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+        #mobile-menu .header-auth-user .logout:before {
+          margin-left: 0.4375rem; }
+    /* line 1372, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    #mobile-menu .menu {
+      margin: 0;
+      padding: 0;
+      list-style: none; }
+      /* line 1377, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      #mobile-menu .menu li a {
+        color: white;
+        display: block;
+        padding: 0.375rem 0.75rem;
+        border-bottom: 1px solid rgba(238, 238, 238, 0.1); } }
