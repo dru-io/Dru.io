@@ -13,7 +13,7 @@
       // Set target="_blank" for links in content section.
       var $article = $('#content > article', context);
       $('section.question__right a, section.post__content a', $article)
-        .not('.category a, .projects a, .ul.links a')
+        .not('.category a, .projects a, ul.links a')
         .attr('target', '_blank');
 
       $('section.question__right img, ' +
