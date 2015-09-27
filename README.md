@@ -25,46 +25,90 @@
 
 При создании сообщества использовались следующие технологии: php, css, scss, js, html. Если вам знакомы все или часть из них, то вы сможете помочь и принять участие в разработке проекта. 
 
+## Совместная разработка
 
-## Установка dev окружения
+Необходимый инструментарий:
 
-Актуальную версию базы данных можно скачать в [разделе релизов проекта](https://github.com/Niklan/Dru.io/releases)
+* Аккаунт на Github
+* Git
+* Drush
 
-Ниже приведена пошаговая инструкция для развертывания дистрибутива dru.io в собственной среде разработки. Команды указаны с расчетом на то, что выполняться они будут в корне каталога сайта.
+### Развёртывание локальной версии dru.io
 
-~~~
-git clone https://github.com/Niklan/Dru.io.git .
-cd sites/default
-cp default.settings.php settings.php
-~~~
+Ниже приведена пошаговая инструкция для развертывания дистрибутива dru.io в собственной среде разработки. Консольные команды указаны с расчетом на то, что выполняться они будут в корне каталога сайта.
 
-Далее, удобным для вас способ добавить в sites/default/settings.php следующий массив, заменив данные на свои.
+1. Скачиваем и импортируем [актуальную версию базы данных](http://dru.io/sites/default/files/database.sql.gz)
 
-~~~php
-$databases = array (
-  'default' => 
-  array (
-    'default' => 
-    array (
-      'database' => 'DATABASE_NAME',
-      'username' => 'DATABASE_USERNAME',
-      'password' => 'DATABASE_PASSWORD',
-      'host' => 'localhost',
-      'port' => '',
-      'driver' => 'mysql',
-      'prefix' => '',
+2. Делаем форк текущего репозитория ([скриншот](http://dru.io/sites/default/files/dev-help1.png))
+
+3. Клонируем форкнутый репозиторий на локальный компьютер:
+
+  ~~~
+  git clone git@github.com:YOUR_GITHUB_NAME/Dru.io.git .
+  ~~~
+
+4. Добавляем привязку удалённого репозитория:
+
+  ~~~
+  git remote add upstream git@github.com:Niklan/Dru.io.git
+  ~~~
+
+5. Копируем дефолтный конфиг:
+
+  ~~~
+  cd sites/default
+  cp default.settings.php settings.php
+  ~~~
+
+6. Добавляем в конфиг информацию о базе данных и директориях:
+
+  ~~~php
+  $databases = array(
+    'default' => array(
+      'default' => array(
+        'database' => 'DATABASE_NAME',
+        'username' => 'DATABASE_USERNAME',
+        'password' => 'DATABASE_PASSWORD',
+        'host' => 'localhost',
+        'port' => '',
+        'driver' => 'mysql',
+        'prefix' => '',
+      ),
     ),
-  ),
-);
-~~~
+  );
+  $conf['file_temporary_path'] = 'path/to/temp';
+  ~~~
 
-Далее импортируем БД используя phpmyadmin или консоль:
+7. Логинимся под администратором:
 
-~~~
-mysql -u DATABASE_USERNAME -p
-use DATABASE_NAME
-source /path/to/dump.sql
-~~~
+  ~~~
+  drush user-login
+  ~~~
+
+### Отправка ваших изменений
+
+1. Перед началом работы над локальной версией dru.io всегда забираем актуальную версию оригинального репозитория:
+
+  ~~~
+  git pull upstream master
+  ~~~
+
+2. Делаем правки
+
+3. Коммитим правки:
+
+  ~~~
+  git add .
+  git commit -am 'Commit message'
+  ~~~
+
+4. Отправляем коммит в свой удалённый репозиторий на Github:
+
+  ~~~
+  git push origin master
+  ~~~
+
+5. Переходим на Github и создаём Pull request ([скриншот](http://dru.io/sites/default/files/dev-help2.png))
 
 
 *Создано [сообществом](https://github.com/Niklan/Dru.io/graphs/contributors), для сообщества.*

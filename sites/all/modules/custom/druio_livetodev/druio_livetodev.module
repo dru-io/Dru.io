@@ -307,7 +307,7 @@ function druio_livetodev_cronapi() {
     'enabled' => TRUE,
     'tags' => array('druio'),
      'scheduler' => array(
-      'name' => 'crontab',
+       'name' => 'crontab',
       'crontab' => array(
         'rules' => array('0 3 * * *'), // run every day at 3 AM (night)
       ),

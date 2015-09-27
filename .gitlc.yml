@@ -1,0 +1,30 @@
+code_style:
+  default: [codespell]
+  rules:
+    includes: ignore
+    misc: ignore
+    modules: ignore
+    profiles: ignore
+    scripts: ignore
+    themes: ignore
+    sites/all/modules/contrib: ignore
+    sites/all/libraries: ignore    
+    sites/all/modules: [drupal, drupalsecure, drupalpractice]
+    sites/all/themes: [drupal, drupalsecure, drupalpractice]
+deploy:
+  pull_request:
+    robin:
+      domain: "{pr_number}.pr.dru.io"
+    type:
+      name: "custom"
+      settings:
+        domain: "{domainname}"
+        account-name: "Niklan"
+        account-mail: "niklanrus@gmail.com"
+        account-pass: "druiotesting"
+        site-name: "PR {pr_number}"
+        site-mail: "noreply@{domainname}"
+    dir: '{home}/github/pr/{pr_number}'
+    init: '{deploy_dir}/scripts/deploy_init.sh'
+    before: '{deploy_dir}/scripts/deploy_before.sh'
+    after: '{deploy_dir}/scripts/deploy_after.sh'

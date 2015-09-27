@@ -1,0 +1,585 @@
+<?php
+
+/**
+ * Provides the Lightcase jQuery plugin, a tool that offers a nice and elegant
+ * way to add zooming functionality for images, html content and multi-media
+ * on your webpages, and an extensive settings page for configuring Lightcase
+ * settings and how Lightcase interacts with your Drupal website.
+ *
+ * @file
+ * .module file for Drupal Lightcase hooks and functions.
+ */
+
+/**
+ * Implements hook_library().
+ */
+function lightcase_library() {
+  $path = drupal_get_path('module', 'lightcase');
+  $library = libraries_detect('lightcase');
+
+  $libraries = array();
+
+  $libraries['lightcase'] = array(
+    'title' => 'Lightcase',
+    'website' => 'http://cornel.bopp-art.com/lightcase/',
+    'version' => libraries_get_version($library, array(
+      'file' => $library['version arguments']['file'],
+      'pattern' => $library['version arguments']['pattern'],
+    )),
+    'js' => array(
+      $library['library path'] . '/lightcase.js' => array(
+        'type' => 'file',
+      ),
+      $path . '/lightcase.js' => array(
+        'type' => 'file',
+      ),
+    ),
+    'css' => array(
+      $library['library path'] . '/css/lightcase.css' => array(
+        'type' => 'file',
+        'media' => 'screen',
+      ),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_init().
+ */
+function lightcase_page_alter(&$page) {
+  if (lightcase_active()) {
+    $library = libraries_detect('lightcase');
+
+    if ($library['installed']) {
+      libraries_load_files($library);
+
+      $settings = _lightcase_filter_settings(variable_get('lightcase_settings'));
+      $context = array('alterable' => &$settings);
+
+      drupal_alter('lightcase_settings', $settings['options'], $settings['helpers'], $context);
+
+      $page['page_bottom']['#attached']['js'][] = array(
+        'data' => array('lightcase' => $settings),
+        'type' => 'setting',
+      );
+
+      $page['page_bottom']['#attached']['library'][] = array(
+        'lightcase',
+        'lightcase',
+      );
+    }
+    else {
+      watchdog('lightcase', $library['error message'], NULL, WATCHDOG_ERROR);
+    }
+  }
+}
+
+/**
+ * Implements hook_menu().
+ */
+function lightcase_menu() {
+  $items['admin/config/user-interface/lightcase'] = array(
+    'title' => 'Lightcase',
+    'description' => 'Configure Lightcase settings.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('lightcase_admin_settings_form'),
+    'access arguments' => array('administer lightcase'),
+    'type' => MENU_NORMAL_ITEM,
+    'file' => 'lightcase.admin.inc',
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_help().
+ */
+function lightcase_help($path, $arg) {
+  $library = libraries_info('lightcase');
+  $output = '';
+
+  switch ($path) {
+    case 'admin/help#lightcase':
+      $output = '<h3>' . t('Installation') . '</h3>';
+      $output .= '<ol>';
+      $output .= '<li>' . t('Install the !libraries module.', array('!libraries' => l(t('Libraries API'), 'http://drupal.org/project/libraries'))) . '</li>';
+      $output .= '<li>' . t('Download the !lightcase and upload the entire folder to %location. When installed correctly, the directory %dir should be available at %dir_location.', array(
+          '!lightcase' => l(t('Lightcase plugin'), $library['download url']),
+          '%location' => 'sites/all/libraries/lightcase',
+          '%dir' => 'source/',
+          '%dir_location' => 'sites/all/libraries/lightcase/source/',
+        )) . '</li>';
+      $output .= '</ol>';
+      $output .= '<h3>' . t('Configuration') . '</h3>';
+      $output .= '<p>' . t('You may configure Lightcase in the module\'s !page.', array('!page' => l('configuration page', 'admin/config/user-interface/lightcase'))) . '</p>';
+      break;
+  }
+
+  return $output;
+}
+
+/**
+ * Implementation of hook_permission().
+ */
+function lightcase_permission() {
+  return array(
+    'administer lightcase' => array(
+      'title' => t('Administer Lightcase access'),
+      'description' => t('Allow administrators to change Lightcase settings.'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_libraries_info().
+ */
+function lightcase_libraries_info() {
+  $libraries['lightcase'] = array(
+    'name' => 'Lightcase',
+    'vendor url' => 'http://cornel.bopp-art.com/lightcase/',
+    'download url' => 'https://github.com/cbopp-art/lightcase/releases',
+    'version arguments' => array(
+      'file' => 'lightcase.js',
+      'pattern' => '@version([\s*\d\.]+) @',
+      'lines' => 8,
+    ),
+    'files' => array(
+      'js' => array(
+        'lightcase.js',
+      ),
+      'css' => array(
+        'css/lightcase.css',
+      ),
+    ),
+    'integration files' => array(
+      'lightcase' => array(
+        'js' => array(
+          'lightcase.js',
+        ),
+      ),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function lightcase_theme() {
+  return array(
+    'lightcase_image_formatter' => array(
+      'variables' => array(
+        'item' => NULL,
+        'entity' => NULL,
+        'entity_type' => NULL,
+        'field' => array(),
+        'display_settings' => array(),
+      ),
+      'file' => 'lightcase.theme.inc',
+    ),
+    'lightcase_imagefield' => array(
+      'variables' => array(
+        'image' => array(),
+        'path' => NULL,
+        'caption' => NULL,
+        'group' => NULL,
+      ),
+      'file' => 'lightcase.theme.inc',
+    ),
+    'lightcase_insert_image' => array(
+      'variables' => array(
+        'item' => NULL,
+        'widget' => NULL,
+      ),
+      'template' => 'lightcase-insert-image',
+      'file' => 'lightcase.theme.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function lightcase_field_formatter_info() {
+  return array(
+    'lightcase' => array(
+      'label' => t('Lightcase'),
+      'field types' => array('image'),
+      'settings' => array(
+        'lightcase_image_style_content' => 'thumbnail',
+        'lightcase_image_style_lightcase' => 'large',
+        'lightcase_gallery' => 'post',
+        'lightcase_gallery_custom' => '',
+        'lightcase_caption' => 'auto',
+        'lightcase_caption_custom' => '',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_settings_form().
+ */
+function lightcase_field_formatter_settings_form($field, $instance, $view_mode, $form, &$form_state) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  $image_style_options = image_style_options(FALSE);
+
+  $element['lightcase_image_style_content'] = array(
+    '#type' => 'select',
+    '#title' => t('Content image style'),
+    '#description' => t('The image in the content will be displayed using this image style.'),
+    '#options' => $image_style_options,
+    '#empty_option' => t('None (original image)'),
+    '#default_value' => $settings['lightcase_image_style_content'],
+  );
+
+  $element['lightcase_image_style_lightcase'] = array(
+    '#type' => 'select',
+    '#title' => t('Lightcase image style'),
+    '#description' => t('The image shown in the Lightcase will be displayed using this image style.'),
+    '#options' => $image_style_options,
+    '#empty_option' => t('None (original image)'),
+    '#default_value' => $settings['lightcase_image_style_lightcase'],
+  );
+
+  $element['lightcase_gallery'] = array(
+    '#type' => 'select',
+    '#title' => t('Gallery (image grouping)'),
+    '#description' => t('Group images using this scheme. The <em>data-rel</em> HTML attribute will be used.'),
+    '#options' => lightcase_field_formatter_grouping_options(),
+    '#default_value' => $settings['lightcase_gallery'],
+  );
+
+  $element['lightcase_gallery_custom'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Custom grouping'),
+    '#description' => t('Every image on the page with this grouping value will be grouped together.<br />The <em>data-rel</em> HTML attribute will be used.<br /><strong>Note</strong>: Must only contain letters, numbers, hyphens and underscores and it must begin with a letter.'),
+    '#element_validate' => array('lightcase_gallery_custom_validate'),
+    '#default_value' => $settings['lightcase_gallery_custom'],
+    '#states' => array(
+      'visible' => array(
+        ':input[name$="[settings][lightcase_gallery]"]' => array('value' => 'custom'),
+      ),
+    ),
+  );
+
+  $element['lightcase_caption'] = array(
+    '#type' => 'select',
+    '#title' => t('Caption'),
+    '#options' => lightcase_field_formatter_caption_options(),
+    '#default_value' => $settings['lightcase_caption'],
+  );
+
+  $element['lightcase_caption_custom'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Custom caption'),
+    '#default_value' => $settings['lightcase_caption_custom'],
+    '#states' => array(
+      'visible' => array(
+        ':input[name$="[settings][lightcase_caption]"]' => array('value' => 'custom'),
+      ),
+    ),
+  );
+
+  $element['lightcase_caption_custom_tokens_container'] = array(
+    '#type' => 'container',
+    '#states' => array(
+      'visible' => array(
+        ':input[name$="[settings][lightcase_caption]"]' => array('value' => 'custom'),
+      ),
+    ),
+  );
+
+  $element['lightcase_caption_custom_tokens_container']['lightcase_caption_custom_tokens'] = array(
+    '#theme' => 'token_tree',
+    '#token_types' => array($instance['entity_type'], 'file'),
+  );
+
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function lightcase_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+
+  foreach ($items as $i => $item) {
+    $element[$i] = array(
+      '#theme' => 'lightcase_image_formatter',
+      '#item' => $item,
+      '#entity' => $entity,
+      '#entity_type' => $entity_type,
+      '#field' => $field,
+      '#display_settings' => $display['settings'],
+    );
+  }
+
+  return $element;
+}
+
+/**
+ * Implements hook_field_formatter_settings_summary().
+ */
+function lightcase_field_formatter_settings_summary($field, $instance, $view_mode) {
+  $display = $instance['display'][$view_mode];
+  $settings = $display['settings'];
+
+  $image_style_options = image_style_options();
+  $grouping_options = lightcase_field_formatter_grouping_options();
+  $caption_options = lightcase_field_formatter_caption_options();
+
+  $summary = t('Content image style: %style', array('%style' => isset($image_style_options[$settings['lightcase_image_style_content']]) ? $image_style_options[$settings['lightcase_image_style_content']] : t('Original image'))) . '<br />';
+  $summary .= t('Lightcase image style: %style', array('%style' => isset($image_style_options[$settings['lightcase_image_style_lightcase']]) ? $image_style_options[$settings['lightcase_image_style_lightcase']] : t('Original image'))) . '<br />';
+  $summary .= t('Grouping options: %option', array('%option' => $settings['lightcase_gallery'] != 'none' ? $grouping_options[$settings['lightcase_gallery']] : t('None'))) . '<br />';
+  $summary .= t('Caption: %option', array('%option' => $settings['lightcase_caption'] != 'none' ? $caption_options[$settings['lightcase_caption']] : t('None')));
+
+  return $summary;
+}
+
+/**
+ * Return an array of available grouping options.
+ */
+function lightcase_field_formatter_grouping_options() {
+  $grouping = array(
+    'none' => t('<none>'),
+    'post' => t('Per post gallery'),
+    'page' => t('Per page gallery'),
+    'field_post' => t('Per field in post gallery'),
+    'field_page' => t('Per field in page gallery'),
+    'custom' => t('Custom'),
+  );
+
+  drupal_alter('lightcase_grouping_options', $grouping);
+
+  return $grouping;
+}
+
+/**
+ * Return an array of available caption options.
+ */
+function lightcase_field_formatter_caption_options() {
+  return array(
+    'none' => t('<none>'),
+    'auto' => t('Automatic'),
+    'title' => t('Title text'),
+    'alt' => t('Alt text'),
+    'content_title' => t('Content title'),
+    'custom' => t('Custom'),
+  );
+}
+
+/**
+ * Custom element validator for the custom grouping value.
+ *
+ * @see lightcase_field_formatter_settings_form().
+ */
+function lightcase_gallery_custom_validate($element, &$form_state, $form) {
+  if ($element['#value'] && !preg_match('/^[A-Za-z]+[A-Za-z0-9-_]*$/', $element['#value'])) {
+    form_error($element, t('The custom grouping value must only contain letters, numbers, hyphens and underscores and it must begin with a letter.'));
+  }
+}
+
+/**
+ * Implements hook_insert_styles().
+ */
+function lightcase_insert_styles() {
+  $insert_styles = array();
+
+  foreach (image_styles() as $key => $style) {
+    $insert_styles['lightcase__' . $key] = array('label' => $style['name'] . ' (Lightcase)');
+  }
+
+  return $insert_styles;
+}
+
+/**
+ * Implements hook_insert_content().
+ */
+function lightcase_insert_content($item, $style, $widget) {
+  list($item['module_name'], $item['style_name']) = explode('__', $style['name'], 2);
+
+  return theme('lightcase_insert_image', array(
+    'item' => $item,
+    'widget' => $widget,
+  ));
+}
+
+/**
+ * Default settings for Lightcase.
+ *
+ * @return array
+ *   An array of defaults.
+ */
+function _lightcase_defaults() {
+  return array(
+    'settings' => array(
+      'selectors' => '',
+      'deactivated_pages' => "admin*\r\nimg_assist*\r\nimce*\r\nnode/add*\r\nnode/*/edit",
+    ),
+  );
+}
+
+/**
+ * Determines if the Lightcase plugin should be loaded.
+ *
+ * @param $path string (optional)
+ *   An optional path. If not passed in, will use the current path.
+ *
+ * @return
+ *   TRUE if Lightcase is active, FALSE otherwise.
+ */
+function lightcase_active($path = NULL) {
+  $settings = variable_get('lightcase_settings');
+  $deactivated_pages = $settings['settings']['deactivated_pages'];
+
+  if (!isset($path)) {
+    $path = drupal_get_path_alias($_GET['q']);
+  }
+
+  // Need the library loaded on this page.
+  if ($path == 'admin/config/user-interface/lightcase') {
+    return TRUE;
+  }
+
+  $page_match = drupal_match_path($path, $deactivated_pages);
+
+  if ($path != $_GET['q']) {
+    $page_match = $page_match || drupal_match_path($_GET['q'], $deactivated_pages);
+  }
+
+  return !$page_match;
+}
+
+/**
+ * Filter out default values and format settings before sending to javascript.
+ *
+ * @param $settings array
+ *   The settings array.
+ *
+ * @return array
+ *   A filtered array of only user-modified settings.
+ *
+ * @see _lightcase_defaults().
+ */
+function _lightcase_filter_settings($settings) {
+  $defaults = _lightcase_defaults();
+
+  // Shouldn't set blank options. Doesn't work if you use the module 'out of
+  // the box'.
+  $filtered_settings = _lightcase_array_diff_assoc_recursive($settings, $defaults);
+
+  if (isset($filtered_settings['settings']['selectors'])) {
+    $selectors = $filtered_settings['settings']['selectors'];
+    $filtered_settings['selectors'] = explode("\r\n", trim($selectors));
+  }
+
+  unset($filtered_settings['settings']);
+
+  return $filtered_settings;
+}
+
+/**
+ * An implementation of a multidimensional array_diff function.
+ *
+ * @param $array1 array
+ *   The array to compare from.
+ * @param $array2 array
+ *   The array to compare against.
+ *
+ * @return array
+ *   An array containing all the entries from array1 that are not in array2.
+ */
+function _lightcase_array_diff_assoc_recursive($array1, $array2) {
+  $return = array();
+
+  if (empty($array1)) {
+    return $array2;
+  }
+
+  foreach ($array1 as $key => $value) {
+    if (array_key_exists($key, $array2)) {
+      if (is_array($value)) {
+        $recursive_diff = _lightcase_array_diff_assoc_recursive($value, $array2[$key]);
+
+        if (sizeof($recursive_diff)) {
+          $return[$key] = $recursive_diff;
+        }
+      }
+      else {
+        if ($value != $array2[$key]) {
+          $return[$key] = $value;
+        }
+      }
+    }
+    else {
+      $return[$key] = $value;
+    }
+  }
+
+  return $return;
+}
+
+function _lightcase_array_replace_recursive($array, $array1) {
+  if (function_exists('array_replace_recursive')) {
+    return array_replace_recursive($array, $array1);
+  }
+
+  function recurse($array, $array1) {
+    foreach ($array1 as $key => $value) {
+      if (!isset($array[$key]) || (isset($array[$key]) && !is_array($array[$key]))) {
+        $array[$key] = array();
+      }
+
+      if (is_array($value)) {
+        $value = recurse($array[$key], $value);
+      }
+
+      $array[$key] = $value;
+    }
+
+    return $array;
+  }
+
+  $args = func_get_args();
+  $array = $args[0];
+
+  if (!is_array($array)) {
+    return $array;
+  }
+
+  for ($i = 1; $i < count($args); $i++) {
+    if (is_array($args[$i])) {
+      $array = recurse($array, $args[$i]);
+    }
+  }
+
+  return $array;
+}
+
+/**
+ * Convert strings into appropriate values for floats/integers/etc.
+ *
+ * @param $item mixed
+ *   The element in the array.
+ * @param $key mixed
+ *   The key of the element.
+ *
+ * @see lightcase_admin_settings_form_submit().
+ */
+function _lightcase_array_walk_convert_string(&$item, &$key) {
+  if (preg_match('/[0-9]+(px|ms)/', $item)) {
+    $item = substr($item, 0, -2);
+  }
+
+  if (is_numeric($item)) {
+    $f = (float) $item;
+    $i = (int) $item;
+    $item = $f == $i ? $i : $f;
+  }
+}
