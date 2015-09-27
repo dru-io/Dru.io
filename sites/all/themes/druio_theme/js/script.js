@@ -34,10 +34,10 @@
       // Button for toggle sidebar.
       var sidebarButton = $('<a href="#" id="sidebar-toggle">Сайдбар</a>');
       // Function which did all work.
-      function tablet_sidebar() {
+      function responsive_sidebar() {
         var width = $(window).width(),
         // This is our tablet media query sizes.
-          minWidth = 768 - 16,
+          minWidth = 0,
           maxWidth = 992 - 16,
           hasSidebar = $('body', context).hasClass('sidebar');
 
@@ -63,7 +63,7 @@
       }
 
       // First at all we call this function on page load.
-      tablet_sidebar();
+      responsive_sidebar();
 
       /**
        * Mobile header.
@@ -106,7 +106,7 @@
 
       // Attach event on widnow resize.
       $(window).on('resize', function (e) {
-        tablet_sidebar();
+        responsive_sidebar();
         mobile_menu();
       });
     }

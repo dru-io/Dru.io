@@ -217,6 +217,14 @@
 
 #content {
   position: relative;
+  @include breakpoint($xs-media) {
+    transform: translateX(0);
+    transition: all 300ms;
+    .sidebar-open & {
+      transform: translateX(-291px);
+      transition: all 300ms;
+    }
+  }
   @include breakpoint($sm-media $md-media) {
     transform: translateX(0);
     transition: all 300ms;
@@ -234,6 +242,18 @@
     > .title {
       margin-top: 0;
       @include font-size(20px);
+    }
+  }
+  @include breakpoint($xs-media) {
+    width: pxtorem(291px);
+    position: absolute;
+    top: pxtorem(40px);
+    right: 0;
+    transform: translateX(291px);
+    transition: all 300ms;
+    .sidebar-open & {
+      transform: translateX(0);
+      transition: all 300ms;
     }
   }
   @include breakpoint($sm-media $md-media) {
@@ -1381,6 +1401,46 @@
           border-bottom: 1px solid rgba($hr-border, .1);
         }
       }
+    }
+  }
+  .question-teaser {
+    position: relative;
+    @include susy-clearfix;
+    min-height: pxtorem(115px);
+    .info {
+      width: pxtorem(80px);
+      float: left;
+      position: absolute;
+    }
+    .right {
+      float: left;
+      margin-left: pxtorem(90px);
+    }
+  }
+  .question-full {
+    position: relative;
+    @include susy-clearfix;
+    > .left {
+      width: pxtorem(60px);
+      float: left;
+      position: absolute;
+    }
+    > .right {
+      margin-left: pxtorem(70px);
+      float: left;
+    }
+  }
+  .answer-teaser {
+    position: relative;
+    @include susy-clearfix;
+    > .left {
+      width: pxtorem(60px);
+      float: left;
+      position: absolute;
+    }
+    > .right {
+      margin-left: pxtorem(70px);
+      float: left;
     }
   }
 }
