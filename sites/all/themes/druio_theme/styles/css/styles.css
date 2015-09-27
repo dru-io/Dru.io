@@ -7170,4 +7170,7 @@ table {
     /* line 1469, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     .order-teaser .right {
       float: left;
-      margin-left: 8.75rem; } }
+      margin-left: 8.75rem; }
+  /* line 1474, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  #frontpage-top {
+    display: none; } }
