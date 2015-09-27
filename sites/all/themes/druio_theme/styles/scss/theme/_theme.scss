@@ -1443,4 +1443,18 @@
       float: left;
     }
   }
+  .event-teaser,
+  .event-full {
+    position: relative;
+    > .left {
+      @include susy-clearfix;
+      .poster {
+        float: left;
+        width: pxtorem(120px);
+      }
+      .date, .city, .address {
+        margin-left: pxtorem(130px);
+      }
+    }
+  }
 }
