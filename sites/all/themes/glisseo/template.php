@@ -103,6 +103,14 @@ function glisseo_preprocess_node(&$variables) {
 }
 
 /**
+ * Implements hook_preprocess_comment().
+ */
+function glisseo_preprocess_comment(&$variables) {
+  $variables['classes_array'] = array();
+  $variables['classes_array'][] = drupal_html_class('comment-' . $variables['elements']['#view_mode']);
+}
+
+/**
  * Implements theme_textarea().
  * Disable grippie.
  */

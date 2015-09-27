@@ -29,11 +29,13 @@ $brand-border-color: #E8E8E8;
 $brand-color-1: #2E5B95;
 $brand-color-2: #4c9067;
 $brand-color-3: #e0f0d3;
+$brand-color-4: #903030;
+$brand-color-5: #313132;
 
 /**
  * Branding.
  */
-$brand-primary: #337ab7;
+$brand-primary: #49A5DE;
 $brand-success: #5cb85c !default;
 $brand-info:    #5bc0de !default;
 $brand-warning: #f0ad4e !default;
@@ -86,7 +88,7 @@ $headings-color:          inherit !default;
 $mark-bg: #DFF0D8;
 
 // Blockqoutes.
-$blockquote-font-size:    ($font-size-base * 1.25) !default;
+$blockquote-font-size:    ($font-size-base * 0.75) !default;
 $blockquote-border-color: $gray-lighter !default;
 
 // <hr> tag.
@@ -189,10 +191,10 @@ $btn-info-border: darken($btn-info-bg, 5%) !default;
 /**
  * Breadcrumbs.
  */
-$breadcrumb-padding-vertical:   8px !default;
-$breadcrumb-padding-horizontal: 15px !default;
-$breadcrumb-margin-bottom:      15px !default;
-$breadcrumb-bg:                 #f5f5f5 !default;
+$breadcrumb-padding-vertical:   0 !default;
+$breadcrumb-padding-horizontal: 0 !default;
+$breadcrumb-margin-bottom:      0 !default;
+$breadcrumb-bg:                 transporent !default;
 $breadcrumb-color:              #777 !default;
 $breadcrumb-delimiter-color:    #ccc !default;
 
@@ -217,3 +219,10 @@ $vertical-tabs-button-bg-selected:    #439fe0;
 $vertical-tabs-button-text-shadow:    0 1px 0 rgba(0,0,0,.1);
 $vertical-tabs-list-border:           1px solid #DDD;
 
+/**
+ * Primary tabs.
+ */
+$primary-tabs-bg:             white;
+$primary-tabs-margin:         1rem 0;
+$primary-tabs-inactive-color: #bdc3c7;
+$primary-tabs-active-color:   $brand-color-1;

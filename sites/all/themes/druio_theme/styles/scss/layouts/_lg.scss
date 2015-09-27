@@ -8,60 +8,60 @@
   // -16px - this is for scrollbar size.
   // If we don't do this, on ~1190px browser width we get vertical scrollbars.
   $site-width: 1200px - 16px;
-
   #header {
     .pane {
       @include container($site-width);
-      .logo {
-        width: pxtorem(190px);
-        float: left;
-      }
-      .content {
-        margin-left: 190px;
-      }
     }
   }
-
   #main {
     @include container($site-width);
-    @include susy-clearfix;
   }
-
-  #content {
-    @include span(9);
-    .no-sidebars & {
-      @include full();
+  #footer {
+    .pane {
+      @include container($site-width);
     }
   }
-
-  #sidebar {
-    @include span(3 last);
+  #frontpage-top {
+    width: $site-width;
   }
 
   .question-teaser {
-    @include susy-clearfix;
     .info {
       @include span(2);
-      @include susy-clearfix;
-      .rating {
-        @include span(6);
-      }
-      .answers {
-        @include span(6 last);
-      }
     }
     .right {
       @include span(10 last);
     }
   }
 
-  .question-full {
+  .event-teaser,
+  .event-full {
     @include susy-clearfix;
-    > .left {
-      @include span(1);
+    .left {
+      @include span(3);
     }
-    > .right {
-      @include span(11 last);
+    .right {
+      @include span(9 last);
+    }
+  }
+
+  .order-teaser {
+    .info {
+      @include span(3);
+    }
+    .right {
+      @include span(9 last);
+    }
+  }
+
+  .order-full {
+    .info {
+      .left {
+        @include span(4);
+      }
+      .right {
+        @include span(8 last);
+      }
     }
   }
 }

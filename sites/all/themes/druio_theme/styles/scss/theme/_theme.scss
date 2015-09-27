@@ -9,11 +9,29 @@
 #header {
   font-size: 0.875rem;
   background: $brand-color-1;
-  box-shadow: inset 0 pxtorem(40px) 0 0 rgba(black, 0.5);
+  box-shadow: inset 0 pxtorem(136px) 0 0 rgba(black, 0.5);
+  @include breakpoint($sm-media) {
+    box-shadow: inset 0 pxtorem(40px) 0 0 rgba(black, 0.5);
+  }
   .pane {
     .logo {
       background: white;
       padding: pxtorem(10px) pxtorem(20px);
+      @include breakpoint($sm-media $md-media) {
+        overflow: hidden;
+        height: pxtorem(40px);
+        padding-top: pxtorem(4px);
+      }
+      @include breakpoint($xs-media) {
+        > a {
+          display: block;
+          overflow: hidden;
+          height: pxtorem(36px);
+          padding: 0;
+          width: pxtorem(170px);
+          margin: 0 auto;
+        }
+      }
     }
     .content {
       // Top line of the header. Which is darker :)
@@ -22,7 +40,13 @@
         height: pxtorem(40px);
         color: $gray-lighter;
         .search-form {
-          width: pxtorem(240px);
+          width: 100%;
+          @include breakpoint($sm-media) {
+            width: pxtorem(160px);
+          }
+          @include breakpoint($md-media) {
+            width: pxtorem(240px);
+          }
           float: left;
           position: relative;
           .search-input {
@@ -168,20 +192,51 @@
       }
     }
   }
+  @include breakpoint($sm-media $md-media) {
+    $site-width: 768px - 16px;
+    width: $site-width;
+    margin-left: pxtorem(-190px);
+    .menu li a {
+      @include font-size(17px);
+    }
+  }
 }
 
 #main {
   background: white;
   padding: pxtorem(20px);
+  position: relative;
+  overflow: hidden;
 }
 
-.facetapi-facetapi-checkbox-links  {
+.facetapi-facetapi-checkbox-links {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+#content {
+  position: relative;
+  @include breakpoint($xs-media) {
+    transform: translateX(0);
+    transition: all 300ms;
+    .sidebar-open & {
+      transform: translateX(-291px);
+      transition: all 300ms;
+    }
+  }
+  @include breakpoint($sm-media $md-media) {
+    transform: translateX(0);
+    transition: all 300ms;
+    .sidebar-open & {
+      transform: translateX(-291px);
+      transition: all 300ms;
+    }
+  }
+}
+
 #sidebar {
+  position: relative;
   > .block {
     margin-bottom: pxtorem(20px);
     > .title {
@@ -189,12 +244,36 @@
       @include font-size(20px);
     }
   }
+  @include breakpoint($xs-media) {
+    width: pxtorem(291px);
+    position: absolute;
+    top: pxtorem(40px);
+    right: 0;
+    transform: translateX(291px);
+    transition: all 300ms;
+    .sidebar-open & {
+      transform: translateX(0);
+      transition: all 300ms;
+    }
+  }
+  @include breakpoint($sm-media $md-media) {
+    width: pxtorem(291px);
+    position: absolute;
+    top: pxtorem(40px);
+    right: 0;
+    transform: translateX(291px);
+    transition: all 300ms;
+    .sidebar-open & {
+      transform: translateX(0);
+      transition: all 300ms;
+    }
+  }
 }
 
 .question-teaser {
   border-bottom: 1px solid $hr-border;
-  padding-bottom: pxtorem($padding-large-vertical);
-  margin-bottom: pxtorem($padding-large-vertical);
+  padding-bottom: pxtorem(20px);
+  margin-bottom: pxtorem(20px);
   .info {
     cursor: pointer;
     text-align: center;
@@ -257,10 +336,42 @@
 }
 
 .question-full {
-  > .left {}
+  > .left {
+    .rate-widget {
+      text-align: center;
+      @include font-size(30px);
+      line-height: 1;
+      margin: 0;
+      color: $text-color;
+      .rate-plus {
+        @extend .fa;
+        @extend .fa-chevron-up;
+        &.voted,
+        &:hover {
+          color: $brand-color-1;
+        }
+      }
+      .rate-minus {
+        @extend .fa;
+        @extend .fa-chevron-down;
+        &.voted,
+        &:hover {
+          color: $brand-color-1;
+        }
+      }
+      .rate-plus,
+      .rate-minus {
+        color: $gray-lighter;
+        font-size: 2.5rem;
+        &.disabled:hover {
+          color: $gray-lighter;
+        }
+      }
+    }
+  }
   > .right {
+    margin-bottom: pxtorem(20px);
     .tags {
-      float: left;
       line-height: pxtorem(14px);
       .tag {
         display: inline-block;
@@ -286,5 +397,1081 @@
         }
       }
     }
+    .bottom {
+      @include susy-clearfix;
+      margin-bottom: pxtorem(15px);
+      .signature {
+        padding: pxtorem(5px);
+        background: lighten($brand-color-1, 55%);
+        float: right;
+        width: pxtorem(200px);
+        @include font-size(12px);
+        line-height: $line-height-small;
+        .user {
+          margin-top: pxtorem(5px);
+          @include susy-clearfix;
+          .picture {
+            display: block;
+            width: pxtorem(32px);
+            float: left;
+            margin-top: pxtorem(2px);
+          }
+          .info {
+            float: left;
+            margin-left: pxtorem(6px);
+            .rating {
+              &:before {
+                @extend .fa;
+                @extend .fa-bar-chart;
+                margin-right: pxtorem(4px);
+              }
+            }
+          }
+        }
+      }
+    }
+    .add-comment {
+      @include font-size(13px);
+    }
+  }
+  .node-answer-form {
+    display: none;
+  }
+  .answers__title {
+    margin-bottom: pxtorem(10px);
+    padding-bottom: pxtorem(10px);
+    border-bottom: 1px solid $hr-border;
+  }
+}
+
+.hljs {
+  background: white;
+  @include font-size(12px);
+  border-left: 4px solid rgba(0, 39, 59, .5);
+  padding: 0 0 0 pxtorem(12px);
+}
+
+.answer-teaser {
+  border-bottom: 1px solid $hr-border;
+  padding-bottom: pxtorem(20px);
+  margin-bottom: pxtorem(20px);
+  > .left {
+    .rate-widget {
+      text-align: center;
+      @include font-size(30px);
+      line-height: 1;
+      margin: 0;
+      color: $text-color;
+      .rate-plus {
+        @extend .fa;
+        @extend .fa-chevron-up;
+        &.voted,
+        &:hover {
+          color: $brand-color-1;
+        }
+      }
+      .rate-minus {
+        @extend .fa;
+        @extend .fa-chevron-down;
+        &.voted,
+        &:hover {
+          color: $brand-color-1;
+        }
+      }
+      .rate-plus,
+      .rate-minus {
+        color: $gray-lighter;
+        font-size: 2.5rem;
+        &.disabled:hover {
+          color: $gray-lighter;
+        }
+      }
+    }
+    .best-answer {
+      text-align: center;
+      color: $brand-color-2;
+      margin: pxtorem(10px) 0;
+      @include font-size(36px);
+      &:before {
+        @extend .fa;
+        @extend .fa-check;
+      }
+    }
+  }
+  > .right {
+    .bottom {
+      @include susy-clearfix;
+      .signature {
+        padding: pxtorem(5px);
+        float: right;
+        width: pxtorem(200px);
+        @include font-size(12px);
+        line-height: $line-height-small;
+        .user {
+          margin-top: pxtorem(5px);
+          @include susy-clearfix;
+          .picture {
+            display: block;
+            width: pxtorem(32px);
+            float: left;
+            margin-top: pxtorem(2px);
+          }
+          .info {
+            float: left;
+            margin-left: pxtorem(6px);
+            .rating {
+              &:before {
+                @extend .fa;
+                @extend .fa-bar-chart;
+                margin-right: pxtorem(4px);
+              }
+            }
+          }
+        }
+      }
+    }
+    .view-comments-comments-to-answers {
+      border-top: 1px solid $hr-border;
+      padding-top: pxtorem(10px);
+      margin-top: pxtorem(10px);
+    }
+    .add-comment {
+      @include font-size(13px);
+    }
+  }
+}
+
+.comment-minimal {
+  @include font-size(13px);
+  border-bottom: 1px solid $hr-border;
+  padding-bottom: pxtorem(10px);
+  margin-bottom: pxtorem(10px);
+  .author-and-created {
+    @include font-size(12px);
+    .created {
+      color: $gray-light;
+    }
+  }
+  > p {
+    margin-bottom: pxtorem(5px);
+  }
+}
+
+.event-teaser,
+.event-full {
+  margin-bottom: pxtorem(15px);
+  padding-bottom: pxtorem(15px);
+  border-bottom: 1px solid $hr-border;
+  .left {
+    .poster {
+      overflow: hidden;
+      padding: pxtorem(3px);
+      background: white;
+      border: 1px solid $hr-border;
+      border-radius: $border-radius-base;
+      margin-bottom: pxtorem(10px);
+    }
+    .date, .city, .address {
+      position: relative;
+      padding-left: pxtorem(26px);
+      margin-bottom: pxtorem(6px);
+      &:before {
+        position: absolute;
+        left: 0;
+        @extend .fa;
+        width: pxtorem(20px);
+        text-align: center;
+        margin-right: pxtorem(6px);
+      }
+    }
+    .date:before {
+      @extend .fa-calendar-check-o;
+    }
+    .city:before {
+      @extend .fa-globe;
+    }
+    .address:before {
+      @extend .fa-map-marker;
+    }
+  }
+  .right {
+    .title {
+      margin-top: 0;
+      @include font-size(24px);
+      font-weight: bold;
+    }
+  }
+}
+
+.flag-will-go2-event {
+  @extend .btn;
+  @extend .btn-primary;
+  display: block;
+  a {
+    color: white;
+  }
+}
+
+#page-title {
+  margin: pxtorem(6px) 0 pxtorem(24px);
+}
+
+.post-teaser {
+  .top {
+    .title {
+      //@include font-size(24px);
+    }
+  }
+  .bottom {
+    @include susy-clearfix;
+    background: rgb(249, 249, 249);
+    padding: 5px;
+    border-radius: 2px;
+    color: #777;
+    .rate-widget,
+    .comment-count,
+    .date,
+    .avatar-and-author {
+      float: left;
+      margin-right: pxtorem(16px);
+    }
+    .rate-widget {
+      .rate {
+        background: #E6E6E6;
+        color: #777;
+        display: inline-block;
+        padding: pxtorem(5px);
+        border-radius: 2px;
+        @extend .fa;
+        @include font-size(14px);
+        &--minus {
+          @extend .fa-arrow-down;
+          &:hover:not(.disabled),
+          &.voted {
+            background: $brand-color-4;
+            color: white;
+          }
+        }
+        &--plus {
+          @extend .fa-arrow-up;
+          &:hover:not(.disabled),
+          &.voted {
+            background: $brand-color-2;
+            color: white;
+          }
+        }
+      }
+      .rate-result {
+        display: inline-block;
+        padding: 0 pxtorem(7px);
+        font-weight: bold;
+        &.good {
+          color: $brand-color-2;
+        }
+        &.bad {
+          color: $brand-color-4;
+        }
+      }
+    }
+    .comment-count, .date {
+      @include font-size(14px);
+      &:before {
+        @extend .fa;
+        margin-right: pxtorem(6px);
+      }
+    }
+    .comment-count:before {
+      @extend .fa-comments-o;
+    }
+    .date:before {
+      @extend .fa-calendar;
+    }
+    .avatar-and-author {
+      @include susy-clearfix;
+      .avatar {
+        float: left;
+        display: block;
+        overflow: hidden;
+        height: pxtorem(24px);
+        width: pxtorem(24px);
+        border-radius: 50%;
+        margin-right: pxtorem(5px);
+      }
+      .author {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1;
+        @include font-size(14px);
+      }
+    }
+  }
+}
+
+.post-full {
+  > .bottom {
+    @include susy-clearfix;
+    background: rgb(249, 249, 249);
+    padding: 5px;
+    border-radius: 2px;
+    color: #777;
+    .rate-widget,
+    .comment-count,
+    .date,
+    .avatar-and-author {
+      float: left;
+      margin-right: pxtorem(16px);
+    }
+    .rate-widget {
+      .rate {
+        background: #E6E6E6;
+        color: #777;
+        display: inline-block;
+        padding: pxtorem(5px);
+        border-radius: 2px;
+        @extend .fa;
+        @include font-size(14px);
+        &--minus {
+          @extend .fa-arrow-down;
+          &:hover:not(.disabled),
+          &.voted {
+            background: $brand-color-4;
+            color: white;
+          }
+        }
+        &--plus {
+          @extend .fa-arrow-up;
+          &:hover:not(.disabled),
+          &.voted {
+            background: $brand-color-2;
+            color: white;
+          }
+        }
+      }
+      .rate-result {
+        display: inline-block;
+        padding: 0 pxtorem(7px);
+        font-weight: bold;
+        &.good {
+          color: $brand-color-2;
+        }
+        &.bad {
+          color: $brand-color-4;
+        }
+      }
+    }
+    .comment-count, .date {
+      @include font-size(14px);
+      &:before {
+        @extend .fa;
+        margin-right: pxtorem(6px);
+      }
+    }
+    .comment-count:before {
+      @extend .fa-comments-o;
+    }
+    .date:before {
+      @extend .fa-calendar;
+    }
+    .avatar-and-author {
+      @include susy-clearfix;
+      .avatar {
+        float: left;
+        display: block;
+        overflow: hidden;
+        height: pxtorem(24px);
+        width: pxtorem(24px);
+        border-radius: 50%;
+        margin-right: pxtorem(5px);
+      }
+      .author {
+        display: inline-block;
+        vertical-align: middle;
+        line-height: 1;
+        @include font-size(14px);
+      }
+    }
+  }
+}
+
+#make-reply {
+  &:before {
+    @extend .fa;
+    @extend .fa-pencil-square-o;
+    margin-right: pxtorem(6px);
+  }
+}
+
+.comment-full {
+  margin-bottom: pxtorem(15px);
+  padding-bottom: pxtorem(15px);
+  border-bottom: 1px solid $hr-border;
+  position: relative;
+  > .right {
+    .links {
+      @include susy-clearfix;
+      position: absolute;
+      top: 0;
+      right: 0;
+      margin: 0;
+      padding: 0;
+      opacity: 0;
+      transition: all 500ms;
+      list-style: none;
+      li {
+        @include font-size(12px);
+        float: left;
+        margin-left: pxtorem(10px);
+      }
+    }
+    .author-and-created {
+      margin-bottom: pxtorem(10px);
+      .username {
+        color: $brand-color-1;
+        font-weight: bold;
+      }
+      .created {
+        color: #777;
+        @include font-size(12px);
+        line-height: pxtorem(16px);
+      }
+    }
+    .content {
+      p:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+    &:hover {
+      .links {
+        opacity: 1;
+        transition: all 500ms;
+      }
+    }
+  }
+}
+
+.project-teaser {
+  margin-bottom: pxtorem(15px);
+  padding-bottom: pxtorem(15px);
+  border-bottom: 1px solid $hr-border;
+  .title {
+    @include font-size(19px);
+  }
+  .type, .dev-status, .maintenance-status {
+    &:before {
+      @extend .fa;
+      width: pxtorem(20px);
+      text-align: center;
+      margin-right: pxtorem(6px);
+    }
+  }
+  .type:before {
+    @extend .fa-flip-horizontal;
+    @extend .fa-cubes;
+  }
+  .dev-status {
+    @extend .fa-keyboard-o;
+  }
+  .maintenance-status:before {
+    @extend .fa-life-ring;
+  }
+}
+
+.project-full {
+  > .left {
+    .type,
+    .dev-status,
+    .maintenance-status,
+    .version,
+    .drupalorg {
+      &:before {
+        @extend .fa;
+        margin-right: pxtorem(6px);
+        width: pxtorem(22px);
+        text-align: center;
+      }
+    }
+    .drupalorg:before {
+      @extend .fa-drupal;
+    }
+    .type:before {
+      @extend .fa-cubes;
+    }
+    .dev-status:before {
+      @extend .fa-keyboard-o;
+    }
+    .maintenance-status:before {
+      @extend .fa-life-ring;
+    }
+    .version:before {
+      @extend .fa-drupal;
+    }
+  }
+}
+
+#druio-projects-download-form {
+  margin: pxtorem(10px) 0;
+  padding: pxtorem(10px);
+  border: 1px solid #E7E7E7;
+  border-radius: 2px;
+  box-shadow: 0px 0px 3px 2px rgba(0, 0, 0, 0.03);
+
+  .form-item-release-selector {
+    margin: 0;
+  }
+
+  .archives {
+    .title {
+      margin-top: pxtorem(7px);
+      @include font-size(17px);
+      border-bottom: 1px solid rgb(232, 232, 232);
+      padding-bottom: pxtorem(5px);
+
+      &:before {
+        @extend .fa;
+        @extend .fa-cloud-download;
+        margin-right: pxtorem(5px);
+      }
+    }
+
+    .list {
+      @include susy-clearfix;
+      .item {
+        @include font-size(12px);
+        display: block;
+        @include gallery(2 of 4);
+        color: $text-color;
+
+        .item-label {
+          font-weight: bold;
+          @include font-size(16px);
+        }
+
+        .label {
+          font-weight: bold;
+        }
+
+        .md5 {
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+    }
+  }
+
+  .drush {
+    @include font-size(14px);
+    .title {
+      margin-top: pxtorem(7px);
+      @include font-size(17px);
+      border-bottom: 1px solid rgb(232, 232, 232);
+      padding-bottom: pxtorem(5px);
+
+      &:before {
+        @extend .fa;
+        @extend .fa-terminal;
+        margin-right: pxtorem(5px);
+      }
+    }
+  }
+}
+
+.order-teaser {
+  border-bottom: 1px solid $hr-border;
+  padding-bottom: pxtorem(20px);
+  margin-bottom: pxtorem(20px);
+  .info {
+    cursor: pointer;
+    text-align: center;
+    @include font-size(17px);
+    .ready2work, .budget {
+      padding: pxtorem(6px);
+      .label {
+        @include font-size(13.5px);
+      }
+    }
+    .ready2work {
+      color: $brand-color-2;
+      &.complete {
+        background: $brand-color-3;
+      }
+      &.no-people {
+        color: $text-color;
+      }
+    }
+  }
+  .right {
+    .title {
+      margin-top: 0;
+      @include font-size(18px);
+    }
+    .created {
+      float: right;
+      @include font-size(12px);
+      padding-top: pxtorem(4px);
+      color: #707070;
+    }
+  }
+}
+
+.order-full {
+  > .info {
+    margin-bottom: pxtorem(20px);
+    .left {
+      .status, .budget, .files {
+        margin-bottom: pxtorem(4px);
+        .label, .label-inline {
+          font-weight: bold;
+        }
+        &:before {
+          @extend .fa;
+          width: pxtorem(20px);
+          text-align: center;
+          margin-right: pxtorem(6px);
+        }
+      }
+      .status:before {
+        @extend .fa-info;
+      }
+      .budget:before {
+        @extend .fa-money;
+      }
+      .files {
+        .file {
+          margin-left: pxtorem(26px);
+          @include font-size(14px);
+          &:before {
+            @extend .fa;
+            @extend .fa-download;
+            margin-right: pxtorem(6px);
+            color: $gray-light;
+          }
+          .filesize {
+            color: $gray-light;
+            @include font-size(12px);
+          }
+        }
+        &:before {
+          @extend .fa-file-text-o;
+        }
+      }
+    }
+    .right {
+      .contacts {
+        &:before {
+          @extend .fa;
+          @extend .fa-envelope-o;
+          margin-right: pxtorem(6px);
+        }
+        .label-inline {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .flag-ready2work {
+    .flag {
+      @extend .btn;
+      @extend .btn-primary;
+      &:before {
+        @extend .fa;
+        margin-right: pxtorem(6px);
+      }
+      &.flagged:before, &.unflag-action:before {
+        @extend .fa-times;
+      }
+      &.unflagged:before, &.flag-action:before {
+        @extend .fa-pencil-square-o;
+      }
+    }
+    .flag-message {
+      margin-top: pxtorem(10px);
+    }
+  }
+
+  .view-applicants-block {
+    margin-top: pxtorem(15px);
+    .applicant {
+      margin-bottom: pxtorem(10px);
+      padding-bottom: pxtorem(10px);
+      border-bottom: 1px solid $hr-border;
+      .picture {
+        overflow: hidden;
+        border-radius: 2px;
+      }
+    }
+  }
+}
+
+#footer {
+  background: $brand-color-5;
+  color: $gray-lighter;
+  @include font-size(13.5px);
+  .pane {
+    padding: pxtorem(10px) pxtorem(20px);
+  }
+  a {
+    color: white;
+    text-decoration: underline;
+  }
+}
+
+#block-block-1 {
+  .social {
+    @include susy-clearfix;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    li {
+      float: left;
+      margin-right: pxtorem(12px);
+      .item {
+        @include font-size(18px);
+        &:before {
+          @extend .fa;
+        }
+        &.facebook:before {
+          @extend .fa-facebook;
+        }
+        &.vkontakte:before {
+          @extend .fa-vk;
+        }
+        &.twitter:before {
+          @extend .fa-twitter;
+        }
+      }
+    }
+  }
+}
+
+#frontpage-top {
+  position: relative;
+  background: url('../../images/frontpage-d8.jpg') no-repeat center center;
+  background-size: cover;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.04);
+  left: pxtorem(-20px);
+  top: pxtorem(-20px);
+  .left {
+    padding: pxtorem(20px);
+    .welcome {
+      margin: 0 0 pxtorem(10px) 0;
+      text-align: center;
+    }
+    .community {
+      margin: 0 0 pxtorem(10px) 0;
+      text-align: center;
+      font-weight: 400;
+      color: grey;
+      @include font-size(17px);
+    }
+  }
+  .right {
+    padding: 2rem 2.5rem;
+  }
+}
+
+.question-minimal {
+  @include susy-clearfix;
+  .answers {
+    position: absolute;
+    float: left;
+    display: inline-block;
+    width: pxtorem(36px);
+    text-align: center;
+    padding: pxtorem(2px) 0;
+    cursor: pointer;
+    border-radius: 2px;
+    color: $brand-color-2;
+    border: 1px solid #DCDCDC;
+    &.has-best {
+      background: $brand-color-3;
+      border-color: transparent;
+    }
+    &.no-answers {
+      color: $text-color;
+    }
+  }
+  .title {
+    float: left;
+    margin: 0 0 0 pxtorem(46px);
+    @include font-size(16px);
+    line-height: pxtorem(24px);
+  }
+}
+
+.view-question-nodes-frontpage {
+  .question-minimal {
+    margin-bottom: pxtorem(10px);
+    padding-bottom: pxtorem(10px);
+    border-bottom: 1px solid $hr-border;
+    .answers {
+      @include font-size(14px);
+      padding: 0;
+    }
+  }
+}
+
+.view-question-nodes-last-questions {
+  .question-minimal {
+    margin-bottom: pxtorem(10px);
+    padding-bottom: pxtorem(10px);
+    border-bottom: 1px solid $hr-border;
+  }
+}
+
+.post-minimal {
+  @include susy-clearfix;
+  .comments {
+    position: absolute;
+    float: left;
+    display: inline-block;
+    width: pxtorem(36px);
+    text-align: center;
+    padding: pxtorem(2px) 0;
+    cursor: pointer;
+    border-radius: 2px;
+    border: 1px solid #DCDCDC;
+  }
+  .title {
+    float: left;
+    margin: 0 0 0 pxtorem(46px);
+    @include font-size(16px);
+    line-height: pxtorem(24px);
+  }
+}
+
+.view-posts-node-frontpage {
+  .post-minimal {
+    margin-bottom: pxtorem(10px);
+    padding-bottom: pxtorem(10px);
+    border-bottom: 1px solid $hr-border;
+    .comments {
+      @include font-size(14px);
+      padding: 0;
+    }
+  }
+}
+
+.bue-ui {
+  padding: 0;
+  margin: pxtorem(10px) 0;
+  background: transparent;
+  .bue-button {
+    background: white;
+    @include gradient-vertical(#ffffff, #EAEAEA);
+    height: pxtorem(25px);
+    padding: pxtorem(5px);
+    &:hover {
+      border-color: $brand-color-1;
+    }
+  }
+}
+
+#sidebar-toggle {
+  background: $brand-color-1;
+  color: white;
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: pxtorem(6px);
+  display: block;
+  font-weight: bold;
+  @include font-size(13px);
+  z-index: 10;
+  &:before {
+    @extend .fa;
+    @extend .fa-chevron-left;
+    margin-right: pxtorem(6px);
+    transform: rotate(0deg);
+    transition: all 300ms;
+  }
+  .sidebar-open &:before {
+    transform: rotate(180deg);
+    transition: all 300ms;
+  }
+}
+
+.view-question-nodes-questions-in-project {
+  .content {
+    .question-minimal {
+      margin-bottom: pxtorem(10px);
+      padding-bottom: pxtorem(10px);
+      border-bottom: 1px solid $hr-border;
+    }
+  }
+}
+
+#mobile-menu-button {
+  color: white;
+  display: inline-block;
+  padding: pxtorem(10px) pxtorem(10px);
+  @include font-size(17px);
+  &:before {
+    @extend .fa;
+    @extend .fa-bars;
+    margin-right: pxtorem(6px);
+  }
+}
+
+// Styles for XS media query.
+@include breakpoint($xs-media) {
+  body {
+    transform: translateX(0);
+    transition: all 300ms;
+    &.menu-open {
+      overflow: hidden;
+      transform: translateX(250px);
+      transition: all 300ms;
+    }
+  }
+  #mobile-menu {
+    width: pxtorem(250px);
+    height: 100%;
+    background: #172E4B;
+    color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-250px);
+    // Anonymous links.
+    .header-auth-anon {
+      @include susy-clearfix;
+      margin-bottom: pxtorem(20px);
+      .link {
+        display: block;
+        float: left;
+        text-align: center;
+        line-height: pxtorem(40px);
+        padding: 0 pxtorem($padding-large-vertical * 2);
+        color: white;
+        font-weight: bold;
+        &.sign-up {
+          background: $brand-color-2;
+          width: 67%;
+        }
+        &.sign-in {
+          width: 33%;
+        }
+      }
+    }
+    // Auth user.
+    .header-auth-user {
+      @include susy-clearfix;
+      margin-bottom: pxtorem(20px);
+      .picture {
+        float: left;
+      }
+      .username {
+        display: block;
+        float: left;
+        width: pxtorem(140px);
+        padding: 0 pxtorem($padding-large-vertical);
+        line-height: pxtorem(40px);
+        color: white;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .logout {
+        float: left;
+        display: block;
+        line-height: pxtorem(40px);
+        width: pxtorem(40px);
+        color: white;
+        text-align: center;
+        background: rgba(white, .2);
+        &:before {
+          @extend .fa;
+          @extend .fa-sign-out;
+          margin-left: pxtorem(7px);
+        }
+      }
+    }
+    .menu {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      li {
+        a {
+          color: white;
+          display: block;
+          padding: pxtorem(6px) pxtorem(12px);
+          border-bottom: 1px solid rgba($hr-border, .1);
+        }
+      }
+    }
+  }
+  .question-teaser {
+    position: relative;
+    @include susy-clearfix;
+    min-height: pxtorem(115px);
+    .info {
+      width: pxtorem(80px);
+      float: left;
+      position: absolute;
+    }
+    .right {
+      float: left;
+      margin-left: pxtorem(90px);
+    }
+  }
+  .question-full {
+    position: relative;
+    @include susy-clearfix;
+    > .left {
+      width: pxtorem(60px);
+      float: left;
+      position: absolute;
+    }
+    > .right {
+      margin-left: pxtorem(70px);
+      float: left;
+    }
+  }
+  .answer-teaser {
+    position: relative;
+    @include susy-clearfix;
+    > .left {
+      width: pxtorem(60px);
+      float: left;
+      position: absolute;
+    }
+    > .right {
+      margin-left: pxtorem(70px);
+      float: left;
+    }
+  }
+  .event-teaser,
+  .event-full {
+    position: relative;
+    > .left {
+      @include susy-clearfix;
+      .poster {
+        float: left;
+        width: pxtorem(120px);
+      }
+      .date, .city, .address {
+        margin-left: pxtorem(130px);
+      }
+    }
+  }
+  .order-teaser {
+    position: relative;
+    @include susy-clearfix;
+    min-height: pxtorem(115px);
+    .info {
+      width: pxtorem(130px);
+      float: left;
+      position: absolute;
+    }
+    .right {
+      float: left;
+      margin-left: pxtorem(140px);
+    }
+  }
+  #frontpage-top {
+    display: none;
   }
 }

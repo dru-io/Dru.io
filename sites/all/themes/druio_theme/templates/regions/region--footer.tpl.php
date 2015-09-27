@@ -6,6 +6,8 @@
 ?>
 <?php if ($content): ?>
   <footer id="footer" class="footer" role="contentinfo">
-    <?php print $content; ?>
+    <div class="pane">
+      <?php print $content; ?>
+    </div>
   </footer>
 <?php endif; ?>
