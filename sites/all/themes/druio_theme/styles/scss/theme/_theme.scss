@@ -1457,4 +1457,18 @@
       }
     }
   }
+  .order-teaser {
+    position: relative;
+    @include susy-clearfix;
+    min-height: pxtorem(115px);
+    .info {
+      width: pxtorem(130px);
+      float: left;
+      position: absolute;
+    }
+    .right {
+      float: left;
+      margin-left: pxtorem(140px);
+    }
+  }
 }
