@@ -1475,3 +1475,33 @@
     display: none;
   }
 }
+
+.add-content-button {
+  display: block;
+  border: none;
+  text-align: center;
+  color: white !important;
+  font-weight: 400;
+  padding: .3rem;
+  border-radius: 3px;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+  box-shadow: none;
+  &:hover {
+    color: white;
+    box-shadow: none;
+  }
+  &.question {
+    background: #34495e;
+  }
+  &.post {
+    background: #1abc9c;
+  }
+  &.project {
+    background: #34495e;
+  }
+  &.order {
+    background: #34495e;
+  }
+}
+

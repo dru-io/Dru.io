@@ -231,7 +231,7 @@ function druio_block_view($delta = '') {
 function druio_theme() {
   return array(
     'add_content_buttons' => array(
-      'template' => 'templates/add-content-buttons',
+      'template' => 'templates/theme/add-content-buttons',
       'render element' => 'theme',
     ),
   );
