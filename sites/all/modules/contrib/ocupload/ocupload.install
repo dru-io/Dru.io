@@ -137,6 +137,7 @@ function ocupload_install() {
       'template_select' => module_exists('colorbox')
         ? '<a href="!filepath" class="colorbox" target="_blank">!text</a>'
         : '<a href="!filepath" target="_blank">!text</a>',
+      'link_template' => '<a href="!filepath" target="_blank">!image</a>',
     ),
     array(
       'mask' => 'rar,zip,doc,xls',

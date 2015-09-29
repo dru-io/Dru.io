@@ -5,9 +5,9 @@ package = Content authoring
 configure = admin/config/content/ocupload
 php = 5.4
 
-; Information added by Drupal.org packaging script on 2015-07-08
+; Information added by Drupal.org packaging script on 2015-09-27
 version = "7.x-2.x-dev"
 core = "7.x"
 project = "ocupload"
-datestamp = "1436351652"
+datestamp = "1443344750"
 

@@ -196,13 +196,29 @@ function ocupload_change_files_status($form, &$form_state) {
   if ($cache = cache_get($cid)) {
     module_load_include('inc', 'ocupload');
 
+    $form_id = $form['#form_id'];
+
+    $fields_map = array(
+      'user_profile_form' => array(
+        'signature[value]' => 'signature',
+      ),
+    );
+    drupal_alter('ocupload_fields_map', $fields_map, $form, $form_state);
+
     $permanent_files = array();
 
     foreach ($cache->data as $field_name => $files) {
-      $field_value = _ocupload_field_value_by_html_name($form_state, $field_name);
+      $form_state_field_name = isset($fields_map[$form_id][$field_name])
+        ? $fields_map[$form_id][$field_name]
+        : $field_name;
+      $field_value = _ocupload_field_value_by_html_name($form_state, $form_state_field_name);
+
+      if (!$field_value) {
+        continue;
+      }
 
       foreach ($files as $fid => $file_name) {
-        if (strpos($field_value, $file_name) !== FALSE) {
+        if (strpos($field_value, drupal_encode_path($file_name)) !== FALSE) {
           // Change file status to permanent
           $file = file_load($fid);
           $file->status = FILE_STATUS_PERMANENT;

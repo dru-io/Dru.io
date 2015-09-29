@@ -162,5 +162,23 @@ function search_api_solr_hook_search_api_data_type_info() {
 }
 
 /**
+ * Alter autocomplete suggestions returned from Solr servers.
+ *
+ * @param array $suggestions
+ *   An array of suggestions to be altered, in the structure documented in
+ *   SearchApiAutocompleteSuggesterInterface::getAutocompleteSuggestions().
+ * @param array $alter_data
+ *   An associative array of data about the search, with the following keys:
+ *   "search", "query", "incomplete_key", "user_input", which correspond to the
+ *   arguments to SearchApiAutocompleteInterface::getAutocompleteSuggestions();
+ *   and "responses", an array containing the Solr response objects used for
+ *   constructing the suggestions.
+ */
+function hook_search_api_solr_autocomplete_suggestions_alter(array &$suggestions, array &$alter_data) {
+  // Always also suggest the original user input.
+  array_unshift($suggestions, trim($alter_data['user_input']));
+}
+
+/**
  * @} End of "addtogroup hooks".
  */

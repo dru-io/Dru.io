@@ -1,10 +1,24 @@
-Search API Solr search 1.8 (2015-06-15):
+Search API Solr Search 1.9 (2015-08-30):
+----------------------------------------
+- #2503829 by das-peter: Added support for grouping on "magic" fields.
+- #2503617 by tobiasb: Fixed undefined "status_message" property in HTTP
+  response object.
+- #2313591 by thePanz, nadavoid: Added support for random sorting.
+- #2004596 by drunken monkey: Fixed workarounds for MLT problems.
+- #2486533 by drunken monkey: Fixed the default operator in the Solr 5 configs.
+- #2466897 by drunken monkey: Fixed Solr version options in server settings.
+- #1918904 by arnested, ramlev, drunken monkey: Added an alter hook for
+  autocomplete suggestions.
+- #2532812 by drunken monkey: Improved performance for filter-only queries.
+- #2463523 by bmunslow: Fixed field boosts in multi-index searches.
+
+Search API Solr Search 1.8 (2015-06-15):
 ----------------------------------------
 - #2502511 by drunken monkey: Fixed index removal on Solr 5.
 - #2441117 by drunken monkey: Fixed unnecessary reindexing after changing
   fields' boosts.
 
-Search API Solr search 1.7 (2015-06-08):
+Search API Solr Search 1.7 (2015-06-08):
 ----------------------------------------
 - #2466489 by drunken monkey: Changed installation instructions to point to the
   handbook.
@@ -20,7 +34,7 @@ Search API Solr search 1.7 (2015-06-08):
   with a bounding box.
 - #2333133 by drunken monkey: Fixed behavior of filters on fulltext fields.
 
-Search API Solr search 1.6 (2014-09-08):
+Search API Solr Search 1.6 (2014-09-08):
 ----------------------------------------
 - #2050961 by das-peter, drunken monkey: Added proximity/distance information
   to search results.
@@ -32,7 +46,7 @@ Search API Solr search 1.6 (2014-09-08):
 - #2270767 by RaF: Fixed search_api_solr_views_data_alter() not always
   returning all virtual fields.
 
-Search API Solr search 1.5 (2014-05-23):
+Search API Solr Search 1.5 (2014-05-23):
 ----------------------------------------
 - #2216895 by das-peter: Added support for empty/non-empty conditions on
   location field types.
@@ -52,7 +66,7 @@ Search API Solr search 1.5 (2014-05-23):
   only” queries.
 - #2147573 by drunken monkey: Improved error handling.
 
-Search API Solr search 1.4 (2013-12-25):
+Search API Solr Search 1.4 (2013-12-25):
 ----------------------------------------
 - #2157839 by drunken monkey, Nick_vh: Updated config files to the newest
   version.
@@ -70,7 +84,7 @@ Search API Solr search 1.4 (2013-12-25):
 - #2064377 by Nick_vh: Made configuration files compatible with Solr Cloud.
 - #2107417 by Nick_vh: Fixed config files for Solr 4.5.
 
-Search API Solr search 1.3 (2013-10-23):
+Search API Solr Search 1.3 (2013-10-23):
 ----------------------------------------
 - #2099683 by drunken monkey: Added support for 'virtual fields' in Views.
 - #1997702 by ianthomas_uk, drunken monkey: Added "AUTO" mode for HTTP method.
@@ -80,7 +94,7 @@ Search API Solr search 1.3 (2013-10-23):
 - #1882190 by corvus_ch, arnested, drunken monkey: Added optional index ID
   prefixes.
 
-Search API Solr search 1.2 (2013-09-01):
+Search API Solr Search 1.2 (2013-09-01):
 ----------------------------------------
 - #1246730 by febbraro, maciej.zgadzaj, drunken monkey: Added a way to alter
   the Solr document when indexing.
@@ -91,7 +105,7 @@ Search API Solr search 1.2 (2013-09-01):
 - #2045355 by drunken monkey, arpieb: Fixed result mapping of item IDs.
 - #2050157 by izus: Fixed typo in stopwords.txt.
 
-Search API Solr search 1.1 (2013-07-21):
+Search API Solr Search 1.1 (2013-07-21):
 ----------------------------------------
 - #1957730 by drunken monkey: Fixed filter query strings for negated filters.
 - #2010818 by kenorb, drunken monkey: Added new Files tab showing all used solr
@@ -106,7 +120,7 @@ Search API Solr search 1.1 (2013-07-21):
   multi-valued fields.
 - #2008034 by bdecarne: Fixed highlighting in multi-index searches.
 
-Search API Solr search 1.0 (2013-06-09):
+Search API Solr Search 1.0 (2013-06-09):
 ----------------------------------------
 - #1896080 by drunken monkey: Included additional required config files in the
   module.
@@ -120,7 +134,7 @@ Search API Solr search 1.0 (2013-06-09):
   support.
 - #1549244 by cferthorney, drunken monkey: Added SSL Support for Solr servers.
 
-Search API Solr search 1.0, RC 5 (2013-05-17):
+Search API Solr Search 1.0, RC 5 (2013-05-17):
 ----------------------------------------------
 - #1190462 by drunken monkey: Documented that enabling HTML filter makes sense.
 - #1986284 by drunken monkey: Updated common configs to the latest version.
@@ -134,7 +148,7 @@ Search API Solr search 1.0, RC 5 (2013-05-17):
 - #1978600 by chaby: Fixed hook_requirements() for install phase.
 - #1976930 by drunken monkey: Fixed duplicate method in SearchApiSolrField.
 
-Search API Solr search 1.0, RC 4 (2013-04-22):
+Search API Solr Search 1.0, RC 4 (2013-04-22):
 ----------------------------------------------
 - #1744250 by mollux, drunken monkey, das-peter: Added support for
   location-based searches.
@@ -144,7 +158,7 @@ Search API Solr search 1.0, RC 4 (2013-04-22):
 - #1900644 by Deciphered: Fixed facet handling for multi-index searches.
 - #1897386 by drunken monkey, NIck_vh: Update the common schema.
 
-Search API Solr search 1.0, RC 3 (2013-01-06):
+Search API Solr Search 1.0, RC 3 (2013-01-06):
 ----------------------------------------------
 - #1828260 by drunken monkey: Fixed filtering by index in multi-index searches.
 - #1509380 by drunken monkey: Adopt common config files.
@@ -163,7 +177,7 @@ Search API Solr search 1.0, RC 3 (2013-01-06):
 - #1299940 by drunken monkey: Fixed handling of empty response.
 - #1507818 by larowlan: Fixed field boosts for standard request handler.
 
-Search API Solr search 1.0, RC 2 (2012-05-23):
+Search API Solr Search 1.0, RC 2 (2012-05-23):
 ----------------------------------------------
 - Fixed escaping of error messages.
 - #1480170 by kotnik: Fixed return value of hook_requirements().
@@ -173,14 +187,14 @@ Search API Solr search 1.0, RC 2 (2012-05-23):
 - #1302406 by Steven Jones: Fixed autoload problem during installation.
 - #1340244 by drunken monkey, alanomaly: Added more helpful error messages.
 
-Search API Solr search 1.0, RC 1 (2011-11-10):
+Search API Solr Search 1.0, RC 1 (2011-11-10):
 ----------------------------------------------
 - #1308638 by drunken monkey: Adapted to new structure of field settings.
 - #1308498 by zenlan, drunken monkey: Added flexibility for facet fields.
 - #1319544 by drunken monkey: Fixed never delete contents of read-only indexes.
 - #1309650 by jonhattan, drunken monkey: Added support for the Libraries API.
 
-Search API Solr search 1.0, Beta 4 (2011-09-08):
+Search API Solr Search 1.0, Beta 4 (2011-09-08):
 ------------------------------------------------
 - #1230536 by thegreat, drunken monkey: Added support for OR facets.
 - #1184002 by drunken monkey: Fixed support of the latest SolrPhpClient version.
@@ -203,7 +217,7 @@ Search API Solr search 1.0, Beta 4 (2011-09-08):
 - #1184002 by drunken monkey: Fixed INSTALL.txt to reflect that the module
   doesn't work with the latest Solr PHP Client version.
 
-Search API Solr search 1.0, Beta 3 (2011-06-06):
+Search API Solr Search 1.0, Beta 3 (2011-06-06):
 ------------------------------------------------
 - #1111852 by miiimooo, drunken monkey: Added a 'More like this' feature.
 - #1153306 by JoeMcGuire, drunken monkey: Added spellchecking support.
@@ -213,7 +227,7 @@ Search API Solr search 1.0, Beta 3 (2011-06-06):
 - #1110820 by becw, drunken monkey: Added support for the Luke request handler.
 - #1095956 by drunken monkey: Added Solr-specific index alter hook.
 
-Search API Solr search 1.0, Beta 2 (2011-03-04):
+Search API Solr Search 1.0, Beta 2 (2011-03-04):
 ------------------------------------------------
 - #1071894 by drunken monkey: Fixed incorrect handling of boolean facets.
 - #1071796: Add additional help for Solr-specific extensions.
@@ -226,7 +240,7 @@ Search API Solr search 1.0, Beta 2 (2011-03-04):
 - #915174: Remove unnecessary files[] declarations from .info file.
 - #984134: Add Solr-specific query alter hooks.
 
-Search API Solr search 1.0, Beta 1 (2010-11-29):
+Search API Solr Search 1.0, Beta 1 (2010-11-29):
 ------------------------------------------------
 Basic functionality is in place and quite well-tested, including support for
 facets and for multi-index searches.

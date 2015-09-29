@@ -392,7 +392,7 @@ class SearchApiSolrConnection implements SearchApiSolrConnectionInterface {
     $system_info = $this->getSystemInfo();
     // Get our solr version number
     if (isset($system_info->lucene->{'solr-spec-version'})) {
-      return $system_info->lucene->{'solr-spec-version'}[0];
+      return (int) $system_info->lucene->{'solr-spec-version'};
     }
     return 0;
   }
@@ -603,6 +603,7 @@ class SearchApiSolrConnection implements SearchApiSolrConnectionInterface {
 
     $result = drupal_http_request($url, $options);
 
+    $result->status_message = isset($result->status_message) ? $result->status_message : '';
     if (!isset($result->code) || $result->code < 0) {
       $result->code = 0;
       $result->status_message = 'Request failed';
@@ -900,26 +901,6 @@ class SearchApiSolrConnection implements SearchApiSolrConnectionInterface {
       // search keys here. (With our normal service class, empty keys won't be
       // set, but another module using this connection class might do that.)
       unset($params['q'], $params['qf']);
-
-      // If we have filters set (which will nearly always be the case, since we
-      // have to filter by index), move them to the q.alt parameter where
-      // possible.
-      if (!empty($params['fq'])) {
-        $qalt = array();
-        foreach ($params['fq'] as $i => $fq) {
-          // Tagged and negative filters cannot be moved to q.alt.
-          if ($fq[0] !== '{' && $fq[0] !== '-') {
-            $qalt[] = "($fq)";
-            unset($params['fq'][$i]);
-          }
-        }
-        if ($qalt) {
-          $params['q.alt'] = implode(' AND ', $qalt);
-        }
-        if (empty($params['fq'])) {
-          unset($params['fq']);
-        }
-      }
     }
 
     // Build the HTTP query string. We have our own method for that since PHP's

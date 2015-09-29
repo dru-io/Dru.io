@@ -578,9 +578,23 @@ function _ocupload_get_appropriate_template($file_extension) {
 function _ocupload_field_value_by_html_name($form_state, $field_name) {
   $parts = explode('[', $field_name);
   $value = &$form_state['values'];
+
   foreach ($parts as $part) {
     $part = rtrim($part, ']');
-    $value = &$value[$part];
+    if (isset($value[$part])) {
+      $value = &$value[$part];
+    }
+    else {
+      $message = 'Uploaded files will not be saved. Field "@field_name" not exist in "@form_id" form state. Contact to site administrator.';
+      $message_vars = array(
+        '@field_name' => $field_name,
+        '@form_id' => $form_state['build_info']['form_id'],
+      );
+      drupal_set_message(t($message, $message_vars), 'error');
+      watchdog('ocupload', $message, $message_vars, WATCHDOG_ERROR);
+      return;
+    }
   }
+
   return $value;
 }
