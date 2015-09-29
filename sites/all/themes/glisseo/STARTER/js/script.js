@@ -5,10 +5,10 @@
  */
 (function ($, Drupal, window, document, undefined) {
 
-    Drupal.behaviors.yourBehaviorName = {
-        attach: function (context, settings) {
-            // Your code here.
-        }
-    };
+  Drupal.behaviors.yourBehaviorName = {
+    attach: function (context, settings) {
+      // Your code here.
+    }
+  };
 
 })(jQuery, Drupal, this, this.document);

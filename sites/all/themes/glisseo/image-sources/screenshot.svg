@@ -7,7 +7,6 @@
    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
    xmlns:svg="http://www.w3.org/2000/svg"
    xmlns="http://www.w3.org/2000/svg"
-   xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    width="82.973335mm"
@@ -16,48 +15,12 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.91 r"
-   inkscape:export-filename="/home/nikita/Projects/pushbullet.niklan.net (Glisseo)/glisseo/screenshot.png"
+   inkscape:export-filename="/home/nikita/glisseo/screenshot.png"
    inkscape:export-xdpi="90"
    inkscape:export-ydpi="90"
    sodipodi:docname="screenshot.svg">
   <defs
-     id="defs4">
-    <linearGradient
-       inkscape:collect="always"
-       id="linearGradient4335">
-      <stop
-         style="stop-color:#9b59a1;stop-opacity:1"
-         offset="0"
-         id="stop4323" />
-      <stop
-         id="stop4337"
-         offset="0.23527037"
-         style="stop-color:#894c91;stop-opacity:1" />
-      <stop
-         style="stop-color:#6a3775;stop-opacity:1"
-         offset="0.48566863"
-         id="stop4341" />
-      <stop
-         style="stop-color:#4d245c;stop-opacity:1"
-         offset="0.75"
-         id="stop4339" />
-      <stop
-         style="stop-color:#3e174c;stop-opacity:1"
-         offset="1"
-         id="stop4325" />
-    </linearGradient>
-    <radialGradient
-       inkscape:collect="always"
-       xlink:href="#linearGradient4335"
-       id="radialGradient4327"
-       cx="194.90358"
-       cy="427.0347"
-       fx="194.90358"
-       fy="427.0347"
-       r="105"
-       gradientTransform="matrix(1.4,0,0,1.0428572,-317.63002,36.218089)"
-       gradientUnits="userSpaceOnUse" />
-  </defs>
+     id="defs4" />
   <sodipodi:namedview
      id="base"
      pagecolor="#ffffff"
@@ -65,20 +28,20 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="1.4"
-     inkscape:cx="349.28571"
-     inkscape:cy="113.40534"
+     inkscape:zoom="1.979899"
+     inkscape:cx="81.977542"
+     inkscape:cy="153.05127"
      inkscape:document-units="px"
-     inkscape:current-layer="g4355"
+     inkscape:current-layer="layer1"
      showgrid="false"
      fit-margin-top="0"
      fit-margin-left="0"
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:window-width="1920"
-     inkscape:window-height="1024"
-     inkscape:window-x="0"
-     inkscape:window-y="29"
+     inkscape:window-height="1020"
+     inkscape:window-x="-1"
+     inkscape:window-y="-3"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -88,7 +51,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -98,7 +61,7 @@
      id="layer1"
      transform="translate(191.76498,-372.05426)">
     <rect
-       style="fill:url(#radialGradient4327);fill-opacity:1"
+       style="fill:#ec4863;fill-opacity:1"
        id="rect4147"
        width="294"
        height="219"
@@ -106,15 +69,16 @@
        y="372.05426" />
     <g
        id="g4355"
-       transform="translate(-342.89162,94.004761)">
+       transform="translate(-342.89162,94.004761)"
+       style="fill:#ffffff;fill-opacity:1">
       <text
          sodipodi:linespacing="125%"
          id="text4343"
          y="390.20724"
          x="225.62663"
-         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#ffffff"
+           style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-family:Arial;-inkscape-font-specification:'Arial Bold';fill:#ffffff;fill-opacity:1"
            id="tspan4347"
            y="390.20724"
            x="225.62663"
@@ -124,9 +88,9 @@
          id="text4351"
          y="410.59305"
          x="227.18242"
-         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
+         style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:sans-serif;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
          xml:space="preserve"><tspan
-           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.25px;font-family:Arial;-inkscape-font-specification:'Arial Italic';fill:#ffffff"
+           style="font-style:italic;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:16.25px;font-family:Arial;-inkscape-font-specification:'Arial Italic';fill:#ffffff;fill-opacity:1"
            y="410.59305"
            x="227.18242"
            id="tspan4353"

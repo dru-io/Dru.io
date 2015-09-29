@@ -1,0 +1,44 @@
+/**
+ * @file
+ *
+ * MD media query styles.
+ */
+
+@include breakpoint($md-media) {
+  $site-width: 992px - 16px;
+
+  #header {
+    .pane {
+      @include container($site-width);
+    }
+  }
+  #main {
+    @include container($site-width);
+  }
+  #footer {
+    .pane {
+      @include container($site-width);
+    }
+  }
+  #frontpage-top {
+    width: $site-width;
+    .left {
+      @include span(6);
+    }
+  }
+  #main {
+    @include container($site-width);
+    @include susy-clearfix;
+  }
+  #sidebar {
+    // Fix full() from _sm
+    clear: none;
+    @include span(3 last);
+  }
+  #content {
+    @include span(9);
+    .no-sidebars & {
+      @include full();
+    }
+  }
+}

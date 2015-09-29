@@ -247,3 +247,56 @@ function druio_theme() {
 function druio_comment_view($comment, $view_mode, $langcode) {
   unset($comment->content['links']['comment']['#links']['comment_forbidden']);
 }
+
+/**
+ * Plural function for Russian words.
+ * @param $number
+ * @param $endingArray
+ * @return
+ */
+function druio_russian_plural($number, $endingArray) {
+  $number = abs($number) % 100;
+  if ($number >= 11 && $number <= 19) {
+    $ending = $endingArray[2];
+  }
+  else {
+    $i = $number % 10;
+    switch ($i) {
+      case (0):
+        $ending = $endingArray[2];
+        break;
+      case (1):
+        $ending = $endingArray[0];
+        break;
+      case (2):
+      case (3):
+      case (4):
+        $ending = $endingArray[1];
+        break;
+      default:
+        $ending = $endingArray[2];
+    }
+  }
+  return $ending;
+}
+
+/**
+ * Return url to user picture (avatar).
+ * @param $uid
+ * @param string $image_style
+ * @return string
+ */
+function druio_get_user_picture($uid, $image_style = NULL) {
+  $user = user_load($uid);
+  if ($user->picture) {
+    if ($image_style) {
+      return image_style_url($image_style, $user->picture->uri);
+    }
+    else {
+      return file_Create_url($user->picture->uri);
+    }
+  }
+  else {
+    return '/' . variable_get('user_picture_default', '');
+  }
+}

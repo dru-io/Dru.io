@@ -38,15 +38,18 @@ function glisseo_preprocess_html(&$variables) {
   $status = drupal_get_http_header("status");
   if($status == "404 Not Found") {
     $variables['theme_hook_suggestions'][] = 'html__404';
+    $variables['classes_array'][] = drupal_html_class('page-404');
   }
 
   if($status == "403 Forbidden") {
     $variables['theme_hook_suggestions'][] = 'html__403';
+    $variables['classes_array'][] = drupal_html_class('page-403');
   }
 }
 
 /**
  * Implements hook_preprocess_page().
+ * @TODO: automate sidebar variable generate.
  */
 function glisseo_preprocess_page(&$variables, $hook) {
   // Add template suggestions for 404 and 403 errors.
@@ -59,7 +62,6 @@ function glisseo_preprocess_page(&$variables, $hook) {
   if($status == "403 Forbidden") {
     $variables['theme_hook_suggestions'][] = 'page__403';
   }
-
 }
 
 /**
@@ -73,25 +75,21 @@ function glisseo_preprocess_block(&$variables, $hook) {
  * Implements template_preprocess_node().
  */
 function glisseo_preprocess_node(&$variables) {
-  // New classes. More clear then defaults.
-  $variables['clean_classes_array'] = array();
-  $variables['clean_classes_array'][] = drupal_html_class($variables['type']);
-  $variables['clean_classes_array'][] = drupal_html_class($variables['view_mode']);
-  // We add 'teaser' class, if content is teaser and don't have 'teaser' vew mode.
-  if ($variables['teaser'] && !in_array('teaser', $variables['clean_classes_array'])) {
-    $variables['clean_classes_array'][] = drupal_html_class('teaser');
-  }
-  // If content is sticky, we add special class.
-  if ($variables['sticky']) {
-    $variables['clean_classes_array'][] = drupal_html_class('sticky');
-  }
-  // We add that class only when contextual links enabled.
-  if (module_exists('contextual')) {
-    $variables['clean_classes_array'][] = drupal_html_class('contextual-links-region');
-  }
+  $is_contextual = in_array('contextual-links-region', $variables['classes_array']);
+  // Clear default classes.
+  if (theme_get_setting('glisseo_replace_node_classes')) {
+    $variables['classes_array'] = array();
+    $variables['classes_array'][] = drupal_html_class($variables['type'] . '-' . $variables['view_mode']);
 
-  // Generate clean classes variable.
-  $variables['clean_classes'] = implode(' ', $variables['clean_classes_array']);
+    // If content is sticky, we add special class.
+    if ($variables['sticky']) {
+      $variables['classes_array'][] = drupal_html_class('sticky');
+    }
+    // We add that class only when contextual links enabled.
+    if ($is_contextual) {
+      $variables['classes_array'][] = drupal_html_class('contextual-links-region');
+    }
+  }
 
   // Work with Node object.
   $node = $variables['node'];
@@ -105,28 +103,11 @@ function glisseo_preprocess_node(&$variables) {
 }
 
 /**
-* Implements hook_theme().
-*/
-function glisseo_theme($existing, $type, $theme, $path) {
-  $theme = array();
-
-  // Rewrite checkboxes.
-  if (theme_get_setting('glisseo_new_checkboxes')) {
-    $theme['checkbox'] = array(
-      'render element' => 'element',
-      'template' => 'templates/fields/field--type-checkbox',
-    );
-  }
-
-  // Rewrite radios.
-  if (theme_get_setting('glisseo_new_radios')) {
-    $theme['radio'] = array(
-      'render element' => 'element',
-      'template' => 'templates/fields/field--type-radio',
-    );
-  }
-
-  return $theme;
+ * Implements hook_preprocess_comment().
+ */
+function glisseo_preprocess_comment(&$variables) {
+  $variables['classes_array'] = array();
+  $variables['classes_array'][] = drupal_html_class('comment-' . $variables['elements']['#view_mode']);
 }
 
 /**

@@ -1,0 +1,67 @@
+/**
+ * @file
+ *
+ * LG media query styles.
+ */
+
+@include breakpoint($lg-media) {
+  // -16px - this is for scrollbar size.
+  // If we don't do this, on ~1190px browser width we get vertical scrollbars.
+  $site-width: 1200px - 16px;
+  #header {
+    .pane {
+      @include container($site-width);
+    }
+  }
+  #main {
+    @include container($site-width);
+  }
+  #footer {
+    .pane {
+      @include container($site-width);
+    }
+  }
+  #frontpage-top {
+    width: $site-width;
+  }
+
+  .question-teaser {
+    .info {
+      @include span(2);
+    }
+    .right {
+      @include span(10 last);
+    }
+  }
+
+  .event-teaser,
+  .event-full {
+    @include susy-clearfix;
+    .left {
+      @include span(3);
+    }
+    .right {
+      @include span(9 last);
+    }
+  }
+
+  .order-teaser {
+    .info {
+      @include span(3);
+    }
+    .right {
+      @include span(9 last);
+    }
+  }
+
+  .order-full {
+    .info {
+      .left {
+        @include span(4);
+      }
+      .right {
+        @include span(8 last);
+      }
+    }
+  }
+}

@@ -47,28 +47,20 @@ function glisseo_form_system_theme_settings_alter(&$form, $form_state, $form_id 
     '#default_value' => theme_get_setting('glisseo_body_classes')
   );
 
-  $form['developers_settings']['glisseo_new_checkboxes'] = array(
-    '#weight' => 3,
-    '#type' => 'checkbox',
-    '#title' => t('New checkbox style.'),
-    '#description' => t('Checkboxes will be displayed as switchers.'),
-    '#default_value' => theme_get_setting('glisseo_new_checkboxes')
-  );
-
-  $form['developers_settings']['glisseo_new_radios'] = array(
-    '#weight' => 4,
-    '#type' => 'checkbox',
-    '#title' => t('New radio-button style.'),
-    '#description' => t('Radio-buttons will be themed.'),
-    '#default_value' => theme_get_setting('glisseo_new_radios')
-  );
-
   $form['developers_settings']['glisseo_disable_grippie'] = array(
-    '#weight' => 5,
+    '#weight' => 3,
     '#type' => 'checkbox',
     '#title' => t('Disable textarea grippie.'),
     '#description' => t('Modern browser support textarea resize out the box. You can disable default grippie.'),
     '#default_value' => theme_get_setting('glisseo_disable_grippie')
+  );
+
+  $form['developers_settings']['glisseo_replace_node_classes'] = array(
+    '#weight' => 4,
+    '#type' => 'checkbox',
+    '#title' => t('Replace default node classes'),
+    '#description' => t('Classes like: node node-teaser node-article node-sticky will be replaced by: article-teaser sticky.'),
+    '#default_value' => theme_get_setting('glisseo_replace_node_classes')
   );
 
   // @TODO: manage all files without custom code.

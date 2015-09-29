@@ -9,7 +9,7 @@
  * ui_limit field value.
  */
 
-define('DRUIO_DS_FIELDS_DEFAULT_AVATAR_PATH', '/sites/all/themes/druiot/images/noavatar.png');
+define('DRUIO_DS_FIELDS_DEFAULT_AVATAR_PATH', '/sites/all/themes/druio_theme/noavatar.png');
 
 /**
  * Implements hook_ds_fields_info().
@@ -68,18 +68,88 @@ function druio_ds_fields_ds_fields_info($entity_type) {
       'function' => 'druio_ds_fields_question_answers_count',
     );
 
-    $fields['question_title'] = array(
-      'title' => 'Title with mark',
-      'ui_limit' => array('question|*'),
-      'field_type' => DS_FIELD_TYPE_FUNCTION,
-      'function' => 'druio_ds_fields_question_title',
-    );
-
     $fields['rate_vote_up_down'] = array(
       'title' => 'Rate: Vote Up/Down',
-      'ui_limit' => array('question|*', 'answer|*'),
+      'ui_limit' => array('question|*', 'answer|*', 'post|*'),
       'field_type' => DS_FIELD_TYPE_FUNCTION,
       'function' => 'druio_ds_fields_rate_vote_up_down',
+    );
+
+    $fields['question_teaser_statistic'] = array(
+      'title' => 'Question: Statistics for teaser',
+      'ui_limit' => array('question|teaser'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_question_teaser_statistic',
+    );
+
+    $fields['question_tags_info'] = array(
+      'title' => 'Question: Tags (drupal version, category, projects)',
+      'ui_limit' => array('question|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_question_tags_info',
+    );
+
+    $fields['relative_created_info'] = array(
+      'title' => 'Relative created info',
+      'ui_limit' => array('question|*', 'order|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_relative_created_info',
+    );
+
+    $fields['question_signature'] = array(
+      'title' => 'Question: User signature',
+      'ui_limit' => array('question|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_question_signature',
+    );
+
+    $fields['answer_signature'] = array(
+      'title' => 'Answer: User signature',
+      'ui_limit' => array('answer|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_answer_signature',
+    );
+
+    $fields['add_comment_link'] = array(
+      'title' => 'Add comment link',
+      'ui_limit' => array('*|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_add_comment_link',
+    );
+
+    $fields['qustion_comments'] = array(
+      'title' => 'Question comments',
+      'ui_limit' => array('question|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_question_comments',
+    );
+
+    $fields['order_teaser_info'] = array(
+      'title' => 'Order: Teaser info',
+      'ui_limit' => array('order|teaser'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_order_teaser_info',
+    );
+
+    $fields['order_specification'] = array(
+      'title' => 'Order: Specification',
+      'ui_limit' => array('order|full'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_order_specification',
+    );
+
+    $fields['order_applicants'] = array(
+      'title' => 'Order: Applicants',
+      'ui_limit' => array('order|full'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_order_applicants',
+    );
+
+    $fields['question_info_minimal'] = array(
+      'title' => 'Question: Minimal info',
+      'ui_limit' => array('question|minimal'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_question_info_minimal',
     );
 
     return array($entity_type => $fields);
@@ -108,7 +178,14 @@ function druio_ds_fields_ds_fields_info($entity_type) {
  * @return mixed
  */
 function druio_ds_fields_answer_comments(array $field) {
-  return views_embed_view('comments', 'comments_to_answers', $field['entity']->nid);
+  $view = views_get_view('comments');
+  $view->set_display('comments_to_answers');
+  $view->set_arguments(array($field['entity']->nid));
+  $output = $view->preview();
+  // If view has result.
+  if ($view->result) {
+    return $output;
+  }
 }
 
 /**
@@ -277,25 +354,6 @@ function druio_ds_fields_question_answers_count(array $field) {
 }
 
 /**
- * @param array $field
- *
- * @return string
- */
-function druio_ds_fields_question_title(array $field) {
-  $has_answer = druio_question_is_best_answer($field['entity']->nid);
-
-  $html = '<h2 class="@question_title_class">!label<a href="@node_url">@node_title</a></h2>';
-  $data = array(
-    '@question_title_class' => 'title',
-    '@node_url' => url('node/' . $field['entity']->nid),
-    '@node_title' => $field['entity']->title,
-    '!label' => $has_answer ? '<span class="has-answer">Решено</span>' : '',
-  );
-
-  return format_string($html, $data);
-}
-
-/**
  * Widget Rate vote up down.
  *
  * @param array $field
@@ -304,4 +362,374 @@ function druio_ds_fields_question_title(array $field) {
  */
 function druio_ds_fields_rate_vote_up_down(array $field) {
   return rate_embed($field['entity'], 'vote_up_down', RATE_FULL);
+}
+
+/**
+ * Simple statistics for question node on teaser mode. Like StackOverflow.
+ * @param $field
+ * @return string
+ */
+function druio_ds_fields_question_teaser_statistic($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+  // Question NID.
+  $nid = $wrapper->getIdentifier();
+  $answers_count = druio_question_answers_count($nid);
+  $is_best_answer = druio_question_is_best_answer($nid);
+  $rating_results = rate_get_results('node', $nid, 1);
+  $rating = $rating_results['rating'];
+
+  return format_string(
+    '<div class="info" onclick="@onclick">
+  <div class="rating">
+    @rating
+    <div class="label">
+      рейтинг
+    </div>
+  </div>
+
+  <div class="@answers_class">
+    @answers
+    <div class="label">
+      @answers_label
+    </div>
+  </div>
+</div>',
+    array(
+      '@onclick' => "window.location.href='" . url('node/' . $nid) . "'",
+      '@rating' => $rating,
+      '@answers_class' => 'answers ' . ($is_best_answer ? 'has-best' : '') . ($answers_count ? '' : 'no-answers'),
+      '@answers' => $answers_count,
+      '@answers_label' => druio_russian_plural($answers_count, array(
+        'ответ',
+        'ответа',
+        'ответов',
+      ))
+    )
+  );
+}
+
+/**
+ * This field display all tags, such as Drupal Version, project reference and
+ * category.
+ * @param $field
+ * @return string
+ */
+function druio_ds_fields_question_tags_info($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+  $content = array();
+
+  if ($wrapper->__isset('field_drupal_version')) {
+    foreach ($wrapper->field_drupal_version->getIterator() as $field_drupal_version) {
+      $content[] = format_string(
+        '<span class="tag core">@label</span>',
+        array(
+          '@label' => $field_drupal_version->label(),
+        )
+      );
+    }
+  }
+
+  if ($wrapper->__isset('field_category')) {
+    foreach ($wrapper->field_category->getIterator() as $field_category) {
+      $content[] = format_string(
+        '<span class="tag category">@label</span>',
+        array(
+          '@label' => $field_category->label(),
+        )
+      );
+    }
+  }
+
+  if ($wrapper->__isset('field_project_reference')) {
+    foreach ($wrapper->field_project_reference->getIterator() as $field_project_reference) {
+      $content[] = format_string(
+        '<a href="@href" class="tag project">@label</a>',
+        array(
+          '@href' => url('node/' . $field_project_reference->getIdentifier()),
+          '@label' => $field_project_reference->label(),
+        )
+      );
+    }
+  }
+
+  return format_string(
+    '<div class="tags">!items</div>',
+    array(
+      '!items' => implode('', $content),
+    )
+  );
+}
+
+/**
+ * Info about when and who created in relative units.
+ * @param $field
+ * @return string
+ */
+function druio_ds_fields_relative_created_info($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+
+  $week = 60 * 60 * 24 * 7;
+  $diffirence = time() - $wrapper->created->value();
+  if ($diffirence >= $week) {
+    $date = format_date($wrapper->created->value(), 'ru_medium');
+  }
+  else {
+    $date = format_interval($diffirence, 1);
+  }
+
+  $bundle_name = $wrapper->getBundle();
+
+  switch ($bundle_name) {
+    case 'question':
+      $label = 'Вопрос задан';
+      break;
+
+    case 'order':
+      $label = 'Заказ размещён';
+      break;
+
+    default:
+      $label = 'Создано';
+      break;
+  }
+
+  return format_string(
+    '<div class="created">@label @date <a href="@href">@author</a></div>',
+    array(
+      '@label' => $label,
+      '@date' => $date,
+      '@href' => url('user/' . $wrapper->author->getIdentifier()),
+      '@author' => $wrapper->author->label(),
+    )
+  );
+}
+
+/**
+ * Question signature: author, created.
+ * @param $field
+ * @return string
+ */
+function druio_ds_fields_question_signature($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+  $author_uid = $wrapper->author->getIdentifier();
+
+  return format_string(
+    '<div class="signature">
+  Вопрос задан @created
+  <div class="user">
+    <a href="@user_url" class="picture">
+      <img src="@src" alt="Аватар пользователя @username" width="32" height="32" />
+    </a>
+    <div class="info">
+      <a href="@user_url">@username</a>
+      <div class="rating" title="Репутация пользователя">@rating</div>
+    </div>
+  </div>
+</div>',
+    array(
+      '@created' => format_date($wrapper->created->value(), 'ru_medium'),
+      '@user_url' => url('user/' . $author_uid),
+      '@src' => druio_get_user_picture($author_uid, 'avatar_thumb'),
+      '@username' => $wrapper->author->label(),
+      '@rating' => druio_rating_get_user_rating($author_uid),
+    )
+  );
+}
+
+/**
+ * Question signature: author, created.
+ * @param $field
+ * @return string
+ */
+function druio_ds_fields_answer_signature($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+  $author_uid = $wrapper->author->getIdentifier();
+
+  return format_string(
+    '<div class="signature">
+  Ответ дан @created
+  <div class="user">
+    <a href="@user_url" class="picture">
+      <img src="@src" alt="Аватар пользователя @username" width="32" height="32" />
+    </a>
+    <div class="info">
+      <a href="@user_url">@username</a>
+      <div class="rating" title="Репутация пользователя">@rating</div>
+    </div>
+  </div>
+</div>',
+    array(
+      '@created' => format_date($wrapper->created->value(), 'ru_medium'),
+      '@user_url' => url('user/' . $author_uid),
+      '@src' => druio_get_user_picture($author_uid, 'avatar_thumb'),
+      '@username' => $wrapper->author->label(),
+      '@rating' => druio_rating_get_user_rating($author_uid),
+    )
+  );
+}
+
+/**
+ * Add comment link.
+ * @param $field
+ * @return string
+ */
+function druio_ds_fields_add_comment_link($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+
+  if (!user_is_anonymous()) {
+    return format_string(
+      '<a href="/comment/reply/@id#comment-form" class="add-comment">Добавить комментарий</a>',
+      array(
+        '@id' => $wrapper->getIdentifier(),
+      )
+    );
+  }
+  return;
+}
+
+/**
+ * Comments to question. This is created for printing comments to question in
+ * specific format.
+ * @param $field
+ */
+function druio_ds_fields_question_comments($field) {
+  $view = views_get_view('comments');
+  $view->set_display('comments_to_question');
+  $view->set_arguments(array($field['entity']->nid));
+  $output = $view->preview();
+  // If view has result.
+  if ($view->result) {
+    return $output;
+  }
+}
+
+/**
+ * Number of responses.
+ * @param $field
+ * @return string
+ */
+function druio_ds_fields_order_teaser_info($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+  $nid = $wrapper->getIdentifier();
+  $flag = flag_get_flag('ready2work');
+  $ready2work = $flag->get_count($nid);
+  $budget = '—';
+  if ($wrapper->__isset('field_order_budgeting')) {
+    if (strlen($wrapper->field_order_budgeting->value())) {
+      $budget = number_format($wrapper->field_order_budgeting->value(), 0, '.', ' ') . ' руб.';
+    }
+  }
+
+  $status_class = 'active';
+  if ($wrapper->__isset('field_order_status_term')) {
+    $status_tid = $wrapper->field_order_status_term->getIdentifier();
+    switch ($status_tid) {
+      case 3419:
+        $status_class = 'archive';
+        break;
+
+      case 3417:
+        $status_class = 'complete';
+        break;
+
+      case 3418:
+        $status_class = 'cancel';
+        break;
+    }
+  }
+
+  return format_string(
+    '<div class="info" onclick="@onclick">
+  <div class="ready2work @read2work_additional">
+    @ready
+    <div class="label">
+      @ready_label
+    </div>
+  </div>
+
+  <div class="budget">
+   @budget
+    <div class="label">
+      бюджет
+    </div>
+  </div>
+</div>',
+    array(
+      '@onclick' => "window.location.href='" . url('node/' . $nid) . "'",
+      '@ready' => $ready2work,
+      '@ready_label' => druio_russian_plural($ready2work, array(
+        'человек',
+        'человека',
+        'человек'
+      )),
+      '@budget' => $budget,
+      '@read2work_additional' => ($ready2work > 0 ? '' : 'no-people') . $status_class,
+    )
+  );
+}
+
+/**
+ * Download link for order specification.
+ * @param $field
+ * @return string|void
+ */
+function druio_ds_fields_order_specification($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+
+  if ($wrapper->__isset('field_order_specification')) {
+    $result = '<div class="files">';
+    $result .= '<span class="label">Прикрепленные файлы</span>';
+    foreach ($wrapper->field_order_specification->getIterator() as $field_order_specification) {
+      $file = $field_order_specification->file->value();
+      $result .= format_string(
+        '<div class="file"><a href="@href" rel="nofollow">@filename</a> <span class="filesize">(@filesize)</span></div>',
+        array(
+          '@href' => file_create_url($file->uri),
+          '@filename' => $file->filename,
+          '@filesize' => format_size($file->filesize),
+        )
+      );
+    }
+    $result .= '</div>';
+    return $result;
+  }
+  return;
+}
+
+/**
+ * Applicants for job.
+ * @param $field
+ * @return mixed
+ */
+function druio_ds_fields_order_applicants($field) {
+  global $user;
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+  if (user_has_role(3) || ($wrapper->author->getIdentifier() == $user->uid)) {
+    return views_embed_view('applicants', 'block');
+  }
+}
+
+/**
+ * Simple info for minimal question view.
+ * @param $field
+ * @return string
+ */
+function druio_ds_fields_question_info_minimal($field) {
+  $wrapper = entity_metadata_wrapper('node', $field['entity']);
+
+  // Question NID.
+  $nid = $wrapper->getIdentifier();
+  $answers_count = druio_question_answers_count($nid);
+  $is_best_answer = druio_question_is_best_answer($nid);
+
+  return format_string(
+    '<div class="@answers_class" onclick="@onclick" title="Количество ответов">
+  @answers
+</div>',
+    array(
+      '@onclick' => "window.location.href='" . url('node/' . $nid) . "'",
+      '@answers_class' => 'answers ' . ($is_best_answer ? 'has-best' : '') . ($answers_count ? '' : 'no-answers'),
+      '@answers' => $answers_count,
+    )
+  );
 }

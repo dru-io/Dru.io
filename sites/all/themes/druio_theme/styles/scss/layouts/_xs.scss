@@ -1,0 +1,21 @@
+/**
+ * @file
+ *
+ * XS media query styles.
+ */
+
+@include breakpoint($xs-media) {
+  #header .pane .content .top .header-links,
+  #header .pane .content {
+    @include susy-clearfix;
+  }
+  .comment-full {
+    @include susy-clearfix;
+    > .left {
+      @include span(1);
+    }
+    > .right {
+      @include span(11 last);
+    }
+  }
+}

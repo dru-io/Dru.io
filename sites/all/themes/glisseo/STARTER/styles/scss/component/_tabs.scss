@@ -90,27 +90,30 @@ ul.tabs {
 
 // Vertical tabs.
 .vertical-tabs {
+  background: $vertical-tabs-bg;
   .vertical-tabs-list {
+    background: $vertical-tabs-list-bg;
+    border: $vertical-tabs-list-border;
     * {
       text-decoration: none !important;
       outline: 0 !important;
     }
 
     .vertical-tab-button {
-      @include linear-gradient(#fefefe, #f6f7f8);
-
+      border: none;
       a {
-        color: rgba(80, 74, 74, 1);
+        color: $vertical-tabs-button-color;
         border: none;
       }
 
       &.selected {
-        background: white;
-
-        strong {
-          color: $linkColor;
+        background: $vertical-tabs-button-bg-selected;
+        strong, .summary {
+          color: $vertical-tabs-button-color-selected;
+          text-shadow: $vertical-tabs-button-text-shadow;
         }
       }
     }
   }
 }
+

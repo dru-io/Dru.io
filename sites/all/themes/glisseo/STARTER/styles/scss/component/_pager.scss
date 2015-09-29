@@ -3,43 +3,50 @@
  * Pager styles.
  */
 .pager {
-  margin: 0px auto;
+  margin: 1rem auto;
   padding: 0px;
   list-style: none outside none;
   display: table;
-  color: #444;
+  background: #ffffff;
+  border: 1px solid $gray-light;
+  border-radius: 4px;
+  overflow: hidden;
 
   li {
     float: left;
-    margin: 0 5px;
-  }
+    border-right: 1px solid $gray-light;
+    background: transparent;
+    transition: background 200ms;
 
-  .pager-item {
-    border: 3px solid #D8D5D5;
-    padding: 0px 0.5rem;
-    border-radius: 5px;
-    background: #F8F8F8;
-
-    a {
-      color: #444;
+    a{
+      padding: 0 1rem;
+      color: $gray-light;
       text-decoration: none;
+      line-height: 2rem;
+    }
+
+    &:hover {
+      background: #F9F9F9;
+      transition: background 200ms;
+    }
+
+    &:last-child {
       border: none;
     }
   }
 
-  .pager-current {
-    border: 3px solid #B9B9B9;
-    padding: 0px 0.5rem;
-    border-radius: 5px;
-    font-weight: bold;
+  .pager-ellipsis {
+    padding: 0 1rem;
+    color: $gray-light;
+    text-decoration: none;
+    line-height: 2rem;
   }
 
-  .pager-next a,
-  .pager-last a,
-  .pager-first a,
-  .pager-previous a {
+  .pager-current {
+    padding: 0 1rem;
+    color: $gray-light;
     text-decoration: none;
-    border: none;
-    font-weight: bold;
+    line-height: 2rem;
+    background: #F9F9F9;
   }
 }

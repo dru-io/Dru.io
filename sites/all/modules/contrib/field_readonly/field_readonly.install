@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Written by Henri MEDOT <henri.medot[AT]absyx[DOT]fr>
+ * http://www.absyx.fr
+ */
+
+/**
+ * Implements hook_install().
+ */
+function field_readonly_install() {
+  db_update('system')
+    ->fields(array('weight' => 2))
+    ->condition('name', 'field_readonly')
+    ->execute();
+}
+
+/**
+ * Make Field Readonly run after Field Group.
+ */
+function field_readonly_update_7001() {
+  db_update('system')
+    ->fields(array('weight' => 2))
+    ->condition('name', 'field_readonly')
+    ->execute();
+}

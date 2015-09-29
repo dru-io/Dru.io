@@ -23,39 +23,37 @@
   <defs
      id="defs4">
     <linearGradient
-       inkscape:collect="always"
-       id="linearGradient4335">
+       id="linearGradient4605"
+       inkscape:collect="always">
       <stop
-         style="stop-color:#9b59a1;stop-opacity:1"
+         id="stop4609"
          offset="0"
-         id="stop4323" />
+         style="stop-color:#5c2849;stop-opacity:1" />
       <stop
-         id="stop4337"
-         offset="0.23527037"
-         style="stop-color:#894c91;stop-opacity:1" />
+         style="stop-color:#a73e5c;stop-opacity:1"
+         offset="0.25834319"
+         id="stop4855" />
       <stop
-         style="stop-color:#6a3775;stop-opacity:1"
-         offset="0.48566863"
-         id="stop4341" />
+         id="stop4857"
+         offset="0.51668632"
+         style="stop-color:#ec4863;stop-opacity:1" />
       <stop
-         style="stop-color:#4d245c;stop-opacity:1"
-         offset="0.75"
-         id="stop4339" />
+         style="stop-color:#ff733f;stop-opacity:0.83137256"
+         offset="0.77502948"
+         id="stop4859" />
       <stop
-         style="stop-color:#3e174c;stop-opacity:1"
+         id="stop4611"
          offset="1"
-         id="stop4325" />
+         style="stop-color:#ffd285;stop-opacity:1" />
     </linearGradient>
-    <radialGradient
+    <linearGradient
        inkscape:collect="always"
-       xlink:href="#linearGradient4335"
-       id="radialGradient4766"
-       cx="66.827911"
-       cy="504.09552"
-       fx="66.827911"
-       fy="504.09552"
-       r="102.64062"
-       gradientTransform="matrix(0,-1,0.97432287,0,-424.32388,570.92343)"
+       xlink:href="#linearGradient4605"
+       id="linearGradient4149"
+       x1="-35.81271"
+       y1="504.09552"
+       x2="169.46854"
+       y2="504.09552"
        gradientUnits="userSpaceOnUse" />
   </defs>
   <sodipodi:namedview
@@ -66,7 +64,7 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1.979899"
-     inkscape:cx="91.157875"
+     inkscape:cx="-4.3015398"
      inkscape:cy="-16.431985"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
@@ -76,9 +74,9 @@
      fit-margin-right="0"
      fit-margin-bottom="0"
      inkscape:window-width="1920"
-     inkscape:window-height="1024"
-     inkscape:window-x="0"
-     inkscape:window-y="29"
+     inkscape:window-height="1020"
+     inkscape:window-x="-1"
+     inkscape:window-y="-3"
      inkscape:window-maximized="1" />
   <metadata
      id="metadata7">
@@ -88,7 +86,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -99,7 +97,7 @@
      transform="translate(35.81271,-482.4256)">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:url(#radialGradient4766);fill-opacity:1;stroke:none"
+       style="font-style:normal;font-weight:normal;font-size:40px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:url(#linearGradient4149);fill-opacity:1;stroke:none;"
        x="-38.601772"
        y="524.97247"
        id="text2985"
@@ -108,8 +106,8 @@
          x="-38.601772"
          y="524.97247"
          id="tspan2993"
-         style="font-weight:bold;font-size:56px;-inkscape-font-specification:'Sans Bold';fill:url(#radialGradient4766);fill-opacity:1">Gli<tspan
-   style="font-size:48px;letter-spacing:1px;fill:url(#radialGradient4766);fill-opacity:1"
+         style="font-weight:bold;font-size:56px;-inkscape-font-specification:'Sans Bold';fill:url(#linearGradient4149);fill-opacity:1">Gli<tspan
+   style="font-size:48px;letter-spacing:1px;fill:url(#linearGradient4149);fill-opacity:1"
    id="tspan3007">sseo</tspan></tspan></text>
   </g>
 </svg>

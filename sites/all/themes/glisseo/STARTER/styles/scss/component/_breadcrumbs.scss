@@ -1,0 +1,10 @@
+.breadcrumb {
+  color: $breadcrumb-color;
+  background: $breadcrumb-bg;
+  padding: $breadcrumb-padding-vertical $breadcrumb-padding-horizontal;
+  margin-bottom: $breadcrumb-margin-bottom;
+  border-radius: $border-radius-base;
+  .delimiter {
+    color: $breadcrumb-delimiter-color;
+  }
+}

@@ -1,0 +1,32 @@
+/**
+ * @file
+ * Styles for status pages like 404, 403.
+ */
+
+.page-404, .page-403 {
+  background: #f2f2f2;
+  color: $gray-dark;
+  .content {
+    max-width: pxtorem(320px);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    .code {
+      @include font-size(170px);
+      font-weight: bold;
+      margin: 0;
+    }
+    .status {
+      @include font-size(36px);
+      text-transform: uppercase;
+      margin: 0;
+    }
+    .home {
+      display: block;
+      margin: pxtorem(10px) 0;
+      font-weight: bold;
+    }
+  }
+}
