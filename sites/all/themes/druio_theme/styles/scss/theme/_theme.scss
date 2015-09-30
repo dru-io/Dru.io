@@ -185,7 +185,7 @@
         @include font-size(18px);
         background: transparent;
         transition: all 500ms;
-        &:hover {
+        &:hover, &.active-trail {
           background: rgba(black, .25);
           transition: all 500ms;
         }
@@ -1197,6 +1197,9 @@
     margin: 0 0 0 pxtorem(46px);
     @include font-size(16px);
     line-height: pxtorem(24px);
+    a {
+      display: block;
+    }
   }
 }
 
