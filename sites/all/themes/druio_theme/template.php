@@ -133,4 +133,12 @@ function druio_theme_preprocess_html(&$variables) {
   else {
     $variables['classes_array'][] = 'anonymous';
   }
+
+  $status = drupal_get_http_header("status");
+  if ($status == "404 Not Found") {
+    $variables['classes_array'][] = drupal_html_class('page-404');
+  }
+  if ($status == "403 Forbidden") {
+    $variables['classes_array'][] = drupal_html_class('page-403');
+  }
 }
