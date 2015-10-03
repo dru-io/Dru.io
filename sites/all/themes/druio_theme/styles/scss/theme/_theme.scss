@@ -1172,6 +1172,7 @@
 }
 
 .question-minimal {
+  position: relative;
   @include susy-clearfix;
   .answers {
     position: absolute;
@@ -1184,6 +1185,7 @@
     border-radius: 2px;
     color: $brand-color-2;
     border: 1px solid #DCDCDC;
+    left: 0px;
     &.has-best {
       background: $brand-color-3;
       border-color: transparent;
@@ -1224,6 +1226,7 @@
 }
 
 .post-minimal {
+  position: relative;
   @include susy-clearfix;
   .comments {
     position: absolute;
@@ -1235,6 +1238,7 @@
     cursor: pointer;
     border-radius: 2px;
     border: 1px solid #DCDCDC;
+    left: 0px;
   }
   .title {
     float: left;
