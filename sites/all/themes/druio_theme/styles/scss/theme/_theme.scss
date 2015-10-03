@@ -253,9 +253,11 @@
     position: absolute;
     top: pxtorem(40px);
     right: 0;
+    -webkit-transform: translateX(291px);
     transform: translateX(291px);
     transition: all 300ms;
     .sidebar-open & {
+      -webkit-transform: translateX(0);
       transform: translateX(0);
       transition: all 300ms;
     }
@@ -265,9 +267,11 @@
     position: absolute;
     top: pxtorem(40px);
     right: 0;
+    -webkit-transform: translateX(291px);
     transform: translateX(291px);
     transition: all 300ms;
     .sidebar-open & {
+      -webkit-transform: translateX(0);
       transform: translateX(0);
       transition: all 300ms;
     }
