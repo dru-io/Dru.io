@@ -1535,3 +1535,20 @@
     border: 1px solid #ccc;
   }
 }
+
+.page-403 {
+  .auth, .register {
+    @extend .btn;
+    margin: 0 pxtorem(6px);
+    &:before {
+      @extend .fa;
+      margin-right: pxtorem(6px);
+    }
+  }
+  .auth:before {
+    @extend .fa-sign-in;
+  }
+  .register:before {
+    @extend .fa-unlock
+  }
+}

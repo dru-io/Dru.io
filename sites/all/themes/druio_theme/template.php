@@ -53,6 +53,21 @@ function druio_theme_preprocess_page(&$variables) {
   // Header profile data.
   $header_auth_template = $user->uid ? 'druio_theme_auth_user' : 'druio_theme_auth_anon';
   $variables['header_auth'] = theme($header_auth_template, array('user' => $user));
+
+  $status = drupal_get_http_header("status");
+  if ($status == "403 Forbidden") {
+    _druio_theme_preprocess_page_403($variables);
+  }
+}
+
+/**
+ * Helper function for adding variables to page--403.tpl.php file.
+ *
+ * @param $variables
+ */
+function _druio_theme_preprocess_page_403(&$variables) {
+  $variables['is_anon'] = user_is_anonymous();
+
 }
 
 /**
