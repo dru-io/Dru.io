@@ -1488,3 +1488,11 @@
   }
 }
 
+.question-full .content-pane .right .content,
+.answer-teaser .right,
+.post-full > .content,
+.comment-full .right .content {
+  img {
+    border: 1px solid #ccc;
+  }
+}
