@@ -489,6 +489,34 @@
         }
       }
     }
+    .flag-best-answer {
+      text-align: center;
+      display: block;
+      .flag-action {
+        color: #EEE;
+        &:hover {
+          color: $brand-color-2;
+        }
+        &:before {
+          @extend .fa;
+          @extend .fa-check;
+          font-size: 2.5rem;
+        }
+      }
+
+      .unflag-action {
+        color: $brand-color-2;
+        &:hover {
+          color: #EEE;
+        }
+        &:before {
+          @extend .fa;
+          @extend .fa-check;
+          font-size: 2.5rem;
+        }
+      }
+    }
+
     .best-answer {
       text-align: center;
       color: $brand-color-2;
