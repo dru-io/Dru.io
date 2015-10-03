@@ -18,4 +18,27 @@
       @include span(11 last);
     }
   }
+  .question-full {
+    position: relative;
+    .content-pane {
+      @include susy-clearfix;
+      position: relative;
+      > .left {
+        @include span(2);
+      }
+      > .right {
+        @include span(10 last);
+      }
+    }
+  }
+  .answer-teaser {
+    position: relative;
+    @include susy-clearfix;
+    > .left {
+      @include span(2);
+    }
+    > .right {
+      @include span(10 last);
+    }
+  }
 }

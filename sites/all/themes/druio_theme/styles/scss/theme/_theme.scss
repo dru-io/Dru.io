@@ -336,102 +336,104 @@
 }
 
 .question-full {
-  > .left {
-    .rate-widget {
-      text-align: center;
-      @include font-size(30px);
-      line-height: 1;
-      margin: 0;
-      color: $text-color;
-      .rate-plus {
-        @extend .fa;
-        @extend .fa-chevron-up;
-        &.voted,
-        &:hover {
-          color: $brand-color-1;
-        }
-      }
-      .rate-minus {
-        @extend .fa;
-        @extend .fa-chevron-down;
-        &.voted,
-        &:hover {
-          color: $brand-color-1;
-        }
-      }
-      .rate-plus,
-      .rate-minus {
-        color: $gray-lighter;
-        font-size: 2.5rem;
-        &.disabled:hover {
-          color: $gray-lighter;
-        }
-      }
-    }
-  }
-  > .right {
-    margin-bottom: pxtorem(20px);
-    .tags {
-      line-height: pxtorem(14px);
-      .tag {
-        display: inline-block;
-        background: #f8f8f8;
-        border: 1px solid #ececec;
-        color: #707070;
-        white-space: nowrap;
-        margin: pxtorem(2px) pxtorem(2px) pxtorem(2px) 0;
-        padding: pxtorem(4px);
-        @include font-size(11px);
-        &:before {
+  .content-pane {
+    > .left {
+      .rate-widget {
+        text-align: center;
+        @include font-size(30px);
+        line-height: 1;
+        margin: 0;
+        color: $text-color;
+        .rate-plus {
           @extend .fa;
-          margin-right: pxtorem(4px);
+          @extend .fa-chevron-up;
+          &.voted,
+          &:hover {
+            color: $brand-color-1;
+          }
         }
-        &.core:before {
-          @extend .fa-drupal;
+        .rate-minus {
+          @extend .fa;
+          @extend .fa-chevron-down;
+          &.voted,
+          &:hover {
+            color: $brand-color-1;
+          }
         }
-        &.category:before {
-          @extend .fa-tag;
-        }
-        &.project:before {
-          @extend .fa-cubes;
+        .rate-plus,
+        .rate-minus {
+          color: $gray-lighter;
+          font-size: 2.5rem;
+          &.disabled:hover {
+            color: $gray-lighter;
+          }
         }
       }
     }
-    .bottom {
-      @include susy-clearfix;
-      margin-bottom: pxtorem(15px);
-      .signature {
-        padding: pxtorem(5px);
-        background: lighten($brand-color-1, 55%);
-        float: right;
-        width: pxtorem(200px);
-        @include font-size(12px);
-        line-height: $line-height-small;
-        .user {
-          margin-top: pxtorem(5px);
-          @include susy-clearfix;
-          .picture {
-            display: block;
-            width: pxtorem(32px);
-            float: left;
-            margin-top: pxtorem(2px);
+    > .right {
+      margin-bottom: pxtorem(20px);
+      .tags {
+        line-height: pxtorem(14px);
+        .tag {
+          display: inline-block;
+          background: #f8f8f8;
+          border: 1px solid #ececec;
+          color: #707070;
+          white-space: nowrap;
+          margin: pxtorem(2px) pxtorem(2px) pxtorem(2px) 0;
+          padding: pxtorem(4px);
+          @include font-size(11px);
+          &:before {
+            @extend .fa;
+            margin-right: pxtorem(4px);
           }
-          .info {
-            float: left;
-            margin-left: pxtorem(6px);
-            .rating {
-              &:before {
-                @extend .fa;
-                @extend .fa-bar-chart;
-                margin-right: pxtorem(4px);
+          &.core:before {
+            @extend .fa-drupal;
+          }
+          &.category:before {
+            @extend .fa-tag;
+          }
+          &.project:before {
+            @extend .fa-cubes;
+          }
+        }
+      }
+      .bottom {
+        @include susy-clearfix;
+        margin-bottom: pxtorem(15px);
+        .signature {
+          padding: pxtorem(5px);
+          background: lighten($brand-color-1, 55%);
+          float: right;
+          width: pxtorem(200px);
+          @include font-size(12px);
+          line-height: $line-height-small;
+          .user {
+            margin-top: pxtorem(5px);
+            @include susy-clearfix;
+            .picture {
+              display: block;
+              width: pxtorem(32px);
+              float: left;
+              margin-top: pxtorem(2px);
+            }
+            .info {
+              float: left;
+              margin-left: pxtorem(6px);
+              .rating {
+                &:before {
+                  @extend .fa;
+                  @extend .fa-bar-chart;
+                  margin-right: pxtorem(4px);
+                }
               }
             }
           }
         }
       }
-    }
-    .add-comment {
-      @include font-size(13px);
+      .add-comment {
+        @include font-size(13px);
+      }
     }
   }
   .node-answer-form {
@@ -1422,32 +1424,6 @@
     .right {
       float: left;
       margin-left: pxtorem(90px);
-    }
-  }
-  .question-full {
-    position: relative;
-    @include susy-clearfix;
-    > .left {
-      width: pxtorem(60px);
-      float: left;
-      position: absolute;
-    }
-    > .right {
-      margin-left: pxtorem(70px);
-      float: left;
-    }
-  }
-  .answer-teaser {
-    position: relative;
-    @include susy-clearfix;
-    > .left {
-      width: pxtorem(60px);
-      float: left;
-      position: absolute;
-    }
-    > .right {
-      margin-left: pxtorem(70px);
-      float: left;
     }
   }
   .event-teaser,

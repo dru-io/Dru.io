@@ -51,12 +51,14 @@
   }
 
   .question-full {
-    @include susy-clearfix;
-    > .left {
-      @include span(1);
-    }
-    > .right {
-      @include span(11 last);
+    .content-pane {
+      @include susy-clearfix;
+      > .left {
+        @include span(1);
+      }
+      > .right {
+        @include span(11 last);
+      }
     }
   }
 
