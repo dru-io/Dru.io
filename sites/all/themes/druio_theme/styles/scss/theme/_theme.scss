@@ -218,17 +218,21 @@
 #content {
   position: relative;
   @include breakpoint($xs-media) {
+    -webkit-transform: translateX(0);
     transform: translateX(0);
     transition: all 300ms;
     .sidebar-open & {
+      -webkit-transform: translateX(-291px);
       transform: translateX(-291px);
       transition: all 300ms;
     }
   }
   @include breakpoint($sm-media $md-media) {
+    -webkit-transform: translateX(0);
     transform: translateX(0);
     transition: all 300ms;
     .sidebar-open & {
+      -webkit-transform: translateX(-291px);
       transform: translateX(-291px);
       transition: all 300ms;
     }
@@ -1354,10 +1358,12 @@
 // Styles for XS media query.
 @include breakpoint($xs-media) {
   body {
+    -webkit-transform: translateX(0);
     transform: translateX(0);
     transition: all 300ms;
     &.menu-open {
       overflow: hidden;
+      -webkit-transform: translateX(250px);
       transform: translateX(250px);
       transition: all 300ms;
     }
@@ -1370,6 +1376,7 @@
     position: absolute;
     top: 0;
     left: 0;
+    -webkit-transform: translateX(-250px);
     transform: translateX(-250px);
     // Anonymous links.
     .header-auth-anon {
