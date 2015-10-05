@@ -50,7 +50,7 @@
 ?>
 <?php if (!$has_contacts): ?>
   <?php print $no_contacts_message; ?>
-<?php else: ?>
+<?php elseif ($is_active): ?>
   <?php if ($needs_wrapping_element): ?>
     <div class="flag-outer flag-outer-<?php print $flag_name_css; ?>">
   <?php endif; ?>

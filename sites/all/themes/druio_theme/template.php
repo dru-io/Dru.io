@@ -175,6 +175,16 @@ function druio_theme_preprocess_flag(&$variables) {
       $variables['has_contacts'] = FALSE;
     }
 
+    $node = menu_get_object();
+    $variables['is_active'] = FALSE;
+    if (isset($node) && $node->type = 'order') {
+      $node_wrapper = entity_metadata_wrapper('node', $node);
+      $field_order_status_term = $node_wrapper->field_order_status_term->getIdentifier();
+      if ($field_order_status_term == 3420) {
+        $variables['is_active'] = TRUE;
+      }
+    }
+
     $variables['no_contacts_message'] = format_string(
       '<div class="no-contacts-warning">@text !link</div>',
       array(
