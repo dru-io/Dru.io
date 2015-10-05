@@ -300,3 +300,23 @@ function druio_get_user_picture($uid, $image_style = NULL) {
     return '/' . variable_get('user_picture_default', '');
   }
 }
+
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function druio_form_user_profile_form_alter(&$form, &$form_state, $form_id) {
+  $form['#after_build'][] = 'druio_form_user_profile_form_afetr_build';
+}
+
+/**
+ * After build callback for 'user_profile_form' form id.
+ * @param $form
+ */
+function druio_form_user_profile_form_afetr_build($form) {
+  // Disable format helpers.
+  $form['field_user_contacts'][LANGUAGE_NONE][0]['format']['#access'] = FALSE;
+  // Disable rating field.
+  $form['field_user_rating'][LANGUAGE_NONE][0]['#access'] = FALSE;
+  return $form;
+}
