@@ -1144,6 +1144,10 @@ body {
       }
     }
   }
+  .no-contacts-warning {
+    @extend .messages;
+    @extend .messages.warning;
+  }
 }
 
 #footer {

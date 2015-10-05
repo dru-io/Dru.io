@@ -157,3 +157,32 @@ function druio_theme_preprocess_html(&$variables) {
     $variables['classes_array'][] = drupal_html_class('page-403');
   }
 }
+
+/**
+ * Imlements hook_preprocess_hook().
+ *
+ * @param $variables
+ */
+function druio_theme_preprocess_flag(&$variables) {
+  global $user;
+  $user_wrapper = entity_metadata_wrapper('user', $user);
+  if ($variables['flag']->name == 'ready2work' && !user_is_anonymous()) {
+    $field_user_contacts = $user_wrapper->field_user_contacts->value();
+    if ($field_user_contacts) {
+      $variables['has_contacts'] = TRUE;
+    }
+    else {
+      $variables['has_contacts'] = FALSE;
+    }
+
+    $variables['no_contacts_message'] = format_string(
+      '<div class="no-contacts-warning">@text !link</div>',
+      array(
+        '@text' => 'Для того чтобы отозваться на заявку, вам необходимо указать личные контактные данные в своём профиле.',
+        '!link' => l('Добавить контактную информацию.', '/user/' . $user->uid . '/edit', array(
+          'fragment' => 'edit-field-user-contacts',
+        )),
+      )
+    );
+  }
+}
