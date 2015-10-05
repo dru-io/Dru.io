@@ -6,4 +6,4 @@ sites/*/files
 sites/*/private
 
 # node.js
-node_modules
+**/node-modules

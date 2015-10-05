@@ -181,6 +181,9 @@ function druio_theme_preprocess_flag(&$variables) {
         '@text' => 'Для того чтобы отозваться на заявку, вам необходимо указать личные контактные данные в своём профиле.',
         '!link' => l('Добавить контактную информацию.', '/user/' . $user->uid . '/edit', array(
           'fragment' => 'edit-field-user-contacts',
+          'query' => array(
+            'destination' => current_path(),
+          )
         )),
       )
     );
