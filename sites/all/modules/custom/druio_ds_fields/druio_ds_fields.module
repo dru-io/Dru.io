@@ -471,7 +471,7 @@ function druio_ds_fields_relative_created_info($field) {
   $week = 60 * 60 * 24 * 7;
   $diffirence = time() - $wrapper->created->value();
   if ($diffirence >= $week) {
-    $date = format_date($wrapper->created->value(), 'ru_medium');
+    $date = format_date($wrapper->created->value(), 'ru_medium') . ' назад';
   }
   else {
     $date = format_interval($diffirence, 1);

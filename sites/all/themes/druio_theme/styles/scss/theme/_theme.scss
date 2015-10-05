@@ -6,6 +6,10 @@
 
 @include border-box-sizing();
 
+body {
+  word-break: break-word;
+}
+
 #header {
   font-size: 0.875rem;
   background: $brand-color-1;
@@ -1549,6 +1553,6 @@
     @extend .fa-sign-in;
   }
   .register:before {
-    @extend .fa-unlock
+    @extend .fa-unlock;
   }
 }
