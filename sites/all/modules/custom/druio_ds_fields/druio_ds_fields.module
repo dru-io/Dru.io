@@ -794,7 +794,13 @@ function druio_ds_fields_comment_created_relative_date($field) {
     $date = format_interval($diffirence, 1)  . ' назад';
   }
 
-  $comment_nid = $comment_wrapper->node->getIdentifier();
+  $comment_node_bundle = $comment_wrapper->node->getBundle();
+  if ($comment_node_bundle == 'answer') {
+    $comment_nid = arg(1);
+  }
+  else {
+    $comment_nid = $comment_wrapper->node->getIdentifier();
+  }
 
   return format_string(
     '<div class="relative-date">Комментарий оставлен <a href="@anchor">@date</a></div>',

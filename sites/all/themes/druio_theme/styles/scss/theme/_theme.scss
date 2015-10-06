@@ -462,7 +462,7 @@ body {
   background: white;
   @include font-size(12px);
   border-left: 4px solid rgba(0, 39, 59, .5);
-  padding: 0 0 0 pxtorem(12px);
+  padding: pxtorem(5px) 0 pxtorem(5px) pxtorem(12px);
 }
 
 .answer-teaser {
@@ -1580,10 +1580,10 @@ body {
   }
 }
 
-.question-full .content-pane .right .content,
-.answer-teaser .right,
+.question-full .content-pane .right > .content,
+.answer-teaser .right > .content,
 .post-full > .content,
-.comment-full .right .content {
+.comment-full .right > .content {
   img {
     border: 1px solid #ccc;
   }
