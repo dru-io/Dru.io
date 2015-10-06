@@ -573,8 +573,6 @@ body {
       }
     }
     .view-comments-comments-to-answers {
-      border-top: 1px solid $hr-border;
-      padding-top: pxtorem(10px);
       margin-top: pxtorem(10px);
     }
     .add-comment {
@@ -586,23 +584,47 @@ body {
 .comment-minimal {
   @include font-size(13px);
   border-bottom: 1px solid $hr-border;
-  padding-bottom: pxtorem(10px);
-  margin-bottom: pxtorem(10px);
   position: relative;
-  .author-and-created {
-    @include font-size(12px);
-    .created {
-      color: $gray-light;
+  blockquote {
+    @include font-size(13px);
+  }
+  .user-summary {
+    @include susy-clearfix;
+    .avatar {
+      width: pxtorem(35px);
+      display: block;
+      overflow: hidden;
+      border-radius: 50%;
+      margin-right: pxtorem(10px);
+      float: left;
+    }
+    .info {
+      float: left;
+      line-height: 1;
+      a {
+        font-weight: bold;
+        color: #333;
+      }
     }
   }
-  > p {
-    margin-bottom: pxtorem(5px);
+  .content {
+    margin-left: pxtorem(45px);
+    margin-top: pxtorem(-15px);
+    line-height: 1.3;
+  }
+  .relative-date {
+    margin-left: pxtorem(45px);
+    color: #9099a3;
+    line-height: 1;
+    a {
+      color: #9099a3;
+    }
   }
   .links {
     @include susy-clearfix;
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: pxtorem(11px);
+    right: pxtorem(10px);
     margin: 0;
     padding: 0;
     opacity: 0;
@@ -1581,5 +1603,17 @@ body {
   }
   .register:before {
     @extend .fa-unlock;
+  }
+}
+
+.view-comments-comments-to-question,
+.view-comments-comments-to-answers {
+  background: #f6f7f7;
+  border-radius: 5px 5px 0 0;
+  .comment-minimal {
+    padding: pxtorem(15px) pxtorem(10px);
+    &:last-child {
+      border-bottom: 0;
+    }
   }
 }

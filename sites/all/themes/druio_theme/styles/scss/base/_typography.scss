@@ -82,8 +82,12 @@ pre {
 }
 
 blockquote {
-  padding: 0 0 0 pxtorem(10px);
-  margin: 0 0 $line-height-computed;
+  padding: pxtorem(5px) 0 pxtorem(5px) pxtorem(10px);
+  margin: 0 0 ($line-height-computed / 2);
   font-size: $blockquote-font-size;
   border-left: 5px solid $blockquote-border-color;
+  background: white;
+  p:last-of-type {
+    margin-bottom: 0;
+  }
 }

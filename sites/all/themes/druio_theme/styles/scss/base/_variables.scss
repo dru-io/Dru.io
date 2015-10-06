@@ -88,7 +88,7 @@ $headings-color:          inherit !default;
 $mark-bg: #DFF0D8;
 
 // Blockqoutes.
-$blockquote-font-size:    ($font-size-base * 0.75) !default;
+$blockquote-font-size:    $font-size-base !default;
 $blockquote-border-color: $gray-lighter !default;
 
 // <hr> tag.

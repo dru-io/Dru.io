@@ -164,6 +164,20 @@ function druio_ds_fields_ds_fields_info($entity_type) {
       'function' => 'druio_ds_fields_comment_author_created',
     );
 
+    $fields['comment_minimal_avatar_name'] = array(
+      'title' => 'Avatar + Name',
+      'ui_limit' => array('*|minimal'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_comment_minimal_avatar_name',
+    );
+
+    $fields['comment_created_relative_date'] = array(
+      'title' => 'Created relative date',
+      'ui_limit' => array('*|*'),
+      'field_type' => DS_FIELD_TYPE_FUNCTION,
+      'function' => 'druio_ds_fields_comment_created_relative_date',
+    );
+
     return array($entity_type => $fields);
   }
 
@@ -730,6 +744,63 @@ function druio_ds_fields_question_info_minimal($field) {
       '@onclick' => "window.location.href='" . url('node/' . $nid) . "'",
       '@answers_class' => 'answers ' . ($is_best_answer ? 'has-best' : '') . ($answers_count ? '' : 'no-answers'),
       '@answers' => $answers_count,
+    )
+  );
+}
+
+/**
+ * Avatar + Name for minimal comment view.
+ *
+ * @param $field
+ * @return string
+ */
+function druio_ds_fields_comment_minimal_avatar_name($field) {
+  $comment_wrapper = entity_metadata_wrapper('comment', $field['entity']);
+  $uid = $comment_wrapper->author->getIdentifier();
+  $user_url = url('user/' . $uid);
+  $avatar = format_string(
+    '<a href="@url" class="avatar"><img src="@src" alt="@alt"></a>',
+    array(
+      '@url' => $user_url,
+      '@src' => druio_get_user_picture($comment_wrapper->author->getIdentifier(), 'avatar_thumb'),
+      '@alt' => 'Аватар пользователя ' . $comment_wrapper->author->label(),
+    )
+  );
+  $nickname = format_string(
+    '<a href="@url">@nickname</a>',
+    array(
+      '@url' => $user_url,
+      '@nickname' => $comment_wrapper->author->label(),
+    )
+  );
+  return format_string(
+    '<div class="user-summary">!avatar <div class="info">!info</div></div>',
+    array(
+      '!avatar' => $avatar,
+      '!info' => $nickname,
+    )
+  );
+}
+
+function druio_ds_fields_comment_created_relative_date($field) {
+  $comment_wrapper = entity_metadata_wrapper('comment', $field['entity']);
+
+  $week = 60 * 60 * 24 * 7;
+  $diffirence = time() - $comment_wrapper->created->value();
+  if ($diffirence >= $week) {
+    $date = format_date($comment_wrapper->created->value(), 'ru_medium');
+  }
+  else {
+    $date = format_interval($diffirence, 1)  . ' назад';
+  }
+
+  $comment_nid = $comment_wrapper->node->getIdentifier();
+
+  return format_string(
+    '<div class="relative-date">Комментарий оставлен <a href="@anchor">@date</a></div>',
+    array(
+      '@date' => $date,
+      '@anchor' => url('node/' . $comment_nid) . '#comment-' . $comment_wrapper->getIdentifier(),
     )
   );
 }
