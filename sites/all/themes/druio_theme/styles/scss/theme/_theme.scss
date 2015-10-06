@@ -588,6 +588,7 @@ body {
   border-bottom: 1px solid $hr-border;
   padding-bottom: pxtorem(10px);
   margin-bottom: pxtorem(10px);
+  position: relative;
   .author-and-created {
     @include font-size(12px);
     .created {
@@ -596,6 +597,28 @@ body {
   }
   > p {
     margin-bottom: pxtorem(5px);
+  }
+  .links {
+    @include susy-clearfix;
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 0;
+    padding: 0;
+    opacity: 0;
+    transition: all 500ms;
+    list-style: none;
+    li {
+      @include font-size(12px);
+      float: left;
+      margin-left: pxtorem(10px);
+    }
+  }
+  &:hover {
+    .links {
+      opacity: 1;
+      transition: all 500ms;
+    }
   }
 }
 
