@@ -1412,6 +1412,14 @@ body {
   }
 }
 
+.user-profile {
+  .group-header {
+    img {
+      display: inline-block;
+    }
+  }
+}
+
 // Styles for XS media query.
 @include breakpoint($xs-media) {
   body {
