@@ -5,6 +5,8 @@
  * Main code.
  */
 
+define(DRUIO_MIN_USER_RATING_TO_VOTE, 20);
+
 // Tracking messages config.
 module_load_include('inc', 'druio', 'includes/druio.messages');
 
@@ -319,4 +321,32 @@ function druio_form_user_profile_form_afetr_build($form) {
   // Disable rating field.
   $form['field_user_rating'][LANGUAGE_NONE][0]['#access'] = FALSE;
   return $form;
+}
+
+/**
+ * Implements hook_rate_vote_alter().
+ */
+function druio_rate_vote_alter($vote, $context) {
+  global $user;
+  $user_wrapper = entity_metadata_wrapper('user', $user);
+  if ($context['widget']->name == 'vote_up_down') {
+    if ($user_wrapper->field_user_rating->value() < DRUIO_MIN_USER_RATING_TO_VOTE) {
+      drupal_set_message('Вы не можете изменить рейтинг, так как Ваш рейтинг меньше ' . DRUIO_MIN_USER_RATING_TO_VOTE .'.', 'warning');
+      $context['save'] = FALSE;
+      if ($vote['entity_type'] == 'node') {
+        $context['redirect'] = url('node/' . $vote['entity_id']);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function druio_preprocess_node(&$variables) {
+  $node_wrapper = entity_metadata_wrapper('node', $variables['node']);
+  // Redirect user from /answer/NID page to question page.
+  if ($node_wrapper->getBundle() == 'answer' && arg(0) == 'node' && $variables['view_mode'] != 'teaser') {
+    drupal_goto('node/' . $node_wrapper->field_answer_question_reference->getIdentifier());
+  }
 }
