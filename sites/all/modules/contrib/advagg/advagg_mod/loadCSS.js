@@ -3,6 +3,8 @@
  * Used to load CSS via JS so css doesn't block the browser.
  */
 
+/* @codingStandardsIgnoreFile */
+
 /*!
 loadCSS: load a CSS file asynchronously.
 [c]2014 @scottjehl, Filament Group, Inc.

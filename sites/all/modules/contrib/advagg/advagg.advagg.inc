@@ -18,7 +18,7 @@
  * @param array $aggregate_settings
  *   Array of settings.
  * @param array $other_parameters
- *   Array of containing $files & $type.
+ *   Array of containing $files and $type.
  */
 function advagg_advagg_save_aggregate_alter(array &$files_to_save, array $aggregate_settings, array $other_parameters) {
   // Return if gzip is disabled.
@@ -77,7 +77,7 @@ function advagg_advagg_build_aggregate_plans_alter(array &$files, &$modified, $t
     $group = NULL;
     $every_page = NULL;
     foreach ($data['files'] as $fileinfo) {
-      // Grouped by group & every_page variables.
+      // Grouped by group and every_page variables.
       if (is_null($group)) {
         $group = $fileinfo['group'];
       }
@@ -117,13 +117,12 @@ function advagg_advagg_context_alter(&$original, $aggregate_settings, $mode) {
     $GLOBALS['is_https'] = $aggregate_settings['variables']['is_https'];
     if ($aggregate_settings['variables']['is_https']) {
       $GLOBALS['base_root'] = str_replace('http://', 'https://', $GLOBALS['base_root']);
-      $GLOBALS['base_url'] = str_replace('http://', 'https://', $GLOBALS['base_url']);
     }
     else {
       $GLOBALS['base_root'] = str_replace('https://', 'http://', $GLOBALS['base_root']);
-      $GLOBALS['base_url'] = str_replace('https://', 'http://', $GLOBALS['base_url']);
     }
     $GLOBALS['base_path'] = $aggregate_settings['variables']['base_path'];
+    $GLOBALS['base_url'] = rtrim($GLOBALS['base_root'] . $GLOBALS['base_path'], '/');
 
     if (isset($aggregate_settings['variables']['language'])) {
       $languages = language_list();
@@ -214,32 +213,62 @@ function advagg_advagg_context_alter(&$original, $aggregate_settings, $mode) {
  * Used to make sure the info is up to date in the cache.
  */
 function advagg_advagg_get_info_on_files_alter(&$return, $cached_data, $bypass_cache) {
-  // Do nothing if the ie_css_selector_limiter is disabled.
-  if (!variable_get('advagg_ie_css_selector_limiter', ADVAGG_IE_CSS_SELECTOR_LIMITER)) {
-    return;
+  // Check for the ie_css_selector_limiter.
+  if (variable_get('advagg_ie_css_selector_limiter', ADVAGG_IE_CSS_SELECTOR_LIMITER)) {
+    $limit_value = variable_get('advagg_ie_css_selector_limiter_value', ADVAGG_IE_CSS_SELECTOR_LIMITER_VALUE);
+
+    // Get the css path.
+    list($css_path) = advagg_get_root_files_dir();
+    $parts_path = $css_path[1] . '/parts/';
+
+    foreach ($return as &$info) {
+      // Skip if not a css file.
+      if (empty($info['fileext']) || $info['fileext'] !== 'css') {
+        continue;
+      }
+
+      // Check if this is a split css file.
+      if (strpos($info['data'], $parts_path) !== FALSE) {
+        $info['split'] = TRUE;
+      }
+      // Break large file into multiple small files if needed.
+      elseif ($info['linecount'] > $limit_value) {
+        advagg_split_css_file($info);
+      }
+    }
+    unset($info);
   }
-  $limit_value = variable_get('advagg_ie_css_selector_limiter_value', ADVAGG_IE_CSS_SELECTOR_LIMITER_VALUE);
+  // Capture hosts for DNS prefetching.
+  if (variable_get('advagg_browser_dns_prefetch', ADVAGG_BROWSER_DNS_PREFETCH)) {
+    foreach ($return as &$info) {
+      // Skip if not a css file.
+      if (empty($info['fileext']) || $info['fileext'] !== 'css') {
+        continue;
+      }
+      // Get the file contents.
+      $file_contents = (string) @file_get_contents($info['data']);
 
-  // Get the css path.
-  list($css_path) = advagg_get_root_files_dir();
-  $parts_path = $css_path[1] . '/parts';
-
-  foreach ($return as &$info) {
-    // Skip if not a css file.
-    if (empty($info['fileext']) || $info['fileext'] !== 'css') {
-      continue;
+      // Get domain names in this css file.
+      $matches = array();
+      $pattern = '%url\(\s*+[\'"]?+(http:\/\/|https:\/\/|\/\/)([^\'"()\s]++)[\'"]?+\s*+\)%i';
+      preg_match_all($pattern, $file_contents, $matches);
+      $urls = array();
+      if (!empty($matches[1])) {
+        foreach ($matches[1] as $key => $match) {
+          $parse = @parse_url($match . $matches[2][$key]);
+          if (!empty($parse['host']) && empty($urls[$parse['host']])) {
+            $urls[$parse['host']] = $match . $parse['host'] . '/';
+          }
+        }
+        $urls = array_values($urls);
+      }
+      if (!empty($urls)) {
+        $info['dns_prefetch'] = $urls;
+      }
     }
-
-    // Check if this is a split css file.
-    if (strpos($info['data'], $parts_path) === 0) {
-      $info['split'] = TRUE;
-    }
-    // Break large file into multiple small files if needed.
-    elseif ($info['linecount'] > $limit_value) {
-      advagg_split_css_file($info);
-    }
+    unset($info);
   }
-  unset($info);
+
 }
 
 /**
@@ -265,17 +294,16 @@ function advagg_advagg_changed_files(array $files, array $types) {
     return;
   }
 
-  $return = array();
   foreach ($files as $filename => $meta_data) {
     // Only care about css files.
     $ext = pathinfo($filename, PATHINFO_EXTENSION);
     if ($ext != 'css') {
       continue;
     }
-    $return[$filename] = advagg_advagg_scan_for_changes($filename, TRUE);
+    advagg_advagg_scan_for_changes($filename, TRUE);
   }
 
-  // Save error states & clear them.
+  // Save error states and clear them.
   $errors_before = drupal_static('form_set_error', array());
   form_clear_error();
 

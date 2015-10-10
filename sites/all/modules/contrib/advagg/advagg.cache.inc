@@ -193,7 +193,7 @@ function advagg_get_all_files(array $options = array()) {
 }
 
 /**
- * Scan CSS/JS advagg dir & remove that file if atime is grater than 30 days.
+ * Scan CSS/JS advagg dir and remove that file if atime is grater than 30 days.
  *
  * @return array
  *   Array of files that got removed.
@@ -423,7 +423,7 @@ function advagg_remove_missing_files_from_db() {
 }
 
 /**
- * Scan CSS/JS advagg dir & remove file if there is no associated db record.
+ * Scan CSS/JS advagg dir and remove file if there is no associated db record.
  *
  * @return array
  *   Array of files that got removed.
@@ -450,7 +450,7 @@ function advagg_delete_orphaned_aggregates() {
 function advagg_delete_files_if_orphaned(array $files) {
   // Get the uri for the advagg_css/parts directory.
   list($css_path) = advagg_get_root_files_dir();
-  $parts_uri = $css_path[0] . '/parts';
+  $parts_uri = $css_path[0] . '/parts/';
 
   // Array used to record what files were deleted.
   $kill_list = $keyed_file_list = array();
@@ -469,7 +469,7 @@ function advagg_delete_files_if_orphaned(array $files) {
       $start = strpos($file->uri, $parts_uri);
       if ($start !== FALSE) {
         // Get the original filename.
-        $original_file = substr($file->uri, $start + strlen($parts_uri) + 1);
+        $original_file = substr($file->uri, $start + strlen($parts_uri));
         $original_file = preg_replace('/(.\\d+\\.css)$/i', '.css', $original_file);
         if (file_exists($original_file)) {
           // Original file exists, do not delete.
@@ -531,7 +531,7 @@ function advagg_remove_old_unused_aggregates() {
   $query = db_select('advagg_aggregates_versions', 'aav')
     ->fields('aav', array('aggregate_filenames_hash'))
     ->groupBy('aav.aggregate_filenames_hash');
-  // Create join & add in query comment.
+  // Create join and add in query comment.
   $query->leftjoin('advagg_aggregates', 'aa', 'aa.aggregate_filenames_hash=aav.aggregate_filenames_hash');
   $query->isNull('aa.aggregate_filenames_hash');
   $query->comment('Query called from ' . __FUNCTION__ . '()');
@@ -555,7 +555,7 @@ function advagg_remove_old_unused_aggregates() {
   $query = db_select('advagg_aggregates', 'aa')
     ->fields('aa', array('aggregate_filenames_hash'))
     ->groupBy('aa.aggregate_filenames_hash');
-  // Create join & add in query comment.
+  // Create join and add in query comment.
   $query->leftjoin('advagg_aggregates_versions', 'aav', 'aa.aggregate_filenames_hash=aav.aggregate_filenames_hash');
   $query->isNull('aav.aggregate_filenames_hash');
   $query->comment('Query called from ' . __FUNCTION__ . '()');
@@ -594,7 +594,7 @@ function advagg_cleanup_semaphore_table() {
  * See if any of the subfiles has changed.
  *
  * @param string $filename
- *   Name of the file that is related to teh subfiles.
+ *   Name of the file that is related to the subfiles.
  * @param array $subfiles
  *   An array of files to check for changes.
  * @param string $keyname

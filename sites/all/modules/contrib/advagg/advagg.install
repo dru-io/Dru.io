@@ -6,6 +6,32 @@
  */
 
 /**
+ * Implements hook_install().
+ */
+function advagg_install() {
+  $tables = array(
+    'advagg_aggregates' => array(
+      'aggregate_filenames_hash',
+      'filename_hash',
+    ),
+    'advagg_aggregates_versions' => array(
+      'aggregate_filenames_hash',
+      'aggregate_contents_hash',
+    ),
+    'advagg_files' => array(
+      'filename_hash',
+      'content_hash',
+    ),
+  );
+
+  $schema = advagg_schema();
+  foreach ($tables as $table => $fields) {
+    // Change utf8_bin to ascii_bin.
+    advagg_install_change_table_collation($table, $fields, 'ascii_bin', $schema[$table]['fields']);
+  }
+}
+
+/**
  * Implements hook_enable().
  */
 function advagg_enable() {
@@ -74,13 +100,10 @@ function advagg_disable() {
 function advagg_uninstall() {
   // Make sure the advagg_get_root_files_dir() function is available.
   drupal_load('module', 'advagg');
+  list($css_path, $js_path) = advagg_get_root_files_dir();
 
-  // Make sure the advagg_remove_all_aggregated_files() function is available.
-  module_load_include('inc', 'advagg', 'advagg');
+  // Make sure the advagg_flush_all_cache_bins() function is available.
   module_load_include('inc', 'advagg', 'advagg.cache');
-
-  // Remove files.
-  advagg_remove_all_aggregated_files(TRUE);
   // Flush caches.
   advagg_flush_all_cache_bins();
 
@@ -89,10 +112,9 @@ function advagg_uninstall() {
     ->condition('name', 'advagg%', 'LIKE')
     ->execute();
 
-  // Remove Directories.
-  list($css_path, $js_path) = advagg_get_root_files_dir();
-  drupal_rmdir($css_path[0]);
-  drupal_rmdir($js_path[0]);
+  // Remove all files and directories.
+  file_unmanaged_delete_recursive($css_path[0]);
+  file_unmanaged_delete_recursive($js_path[0]);
 }
 
 /**
@@ -120,19 +142,25 @@ function advagg_schema() {
       ),
       'filename_hash' => array(
         'description' => 'Hash of path and filename. Used to join tables.',
-        'type' => 'varchar',
+        'type' => 'char',
         'length' => 43,
         'not null' => TRUE,
         'default' => '',
         'binary' => TRUE,
+        'collation' => 'ascii_bin',
+        'charset' => 'ascii',
+        'mysql_character_set' => 'ascii',
       ),
       'content_hash' => array(
         'description' => 'Hash of the file content. Used to see if the file has changed.',
-        'type' => 'varchar',
+        'type' => 'char',
         'length' => 43,
-        'not null' => TRUE,
+        'not null' => FALSE,
         'default' => '',
         'binary' => TRUE,
+        'collation' => 'ascii_bin',
+        'charset' => 'ascii',
+        'mysql_character_set' => 'ascii',
       ),
       'filetype' => array(
         'description' => 'Filetype.',
@@ -180,19 +208,25 @@ function advagg_schema() {
     'fields' => array(
       'aggregate_filenames_hash' => array(
         'description' => 'Hash of the aggregates list of files. Keep track of what files are in the aggregate.',
-        'type' => 'varchar',
+        'type' => 'char',
         'length' => 43,
         'not null' => TRUE,
         'default' => '',
         'binary' => TRUE,
+        'collation' => 'ascii_bin',
+        'charset' => 'ascii',
+        'mysql_character_set' => 'ascii',
       ),
       'filename_hash' => array(
         'description' => 'Hash of path and filename.',
-        'type' => 'varchar',
+        'type' => 'char',
         'length' => 43,
         'not null' => TRUE,
         'default' => '',
         'binary' => TRUE,
+        'collation' => 'ascii_bin',
+        'charset' => 'ascii',
+        'mysql_character_set' => 'ascii',
       ),
       'porder' => array(
         'description' => 'Processing order.',
@@ -211,6 +245,7 @@ function advagg_schema() {
     ),
     'indexes' => array(
       'porder' => array('porder'),
+      'filename_hash' => array('filename_hash'),
     ),
     'primary key' => array('aggregate_filenames_hash', 'filename_hash'),
   );
@@ -220,19 +255,25 @@ function advagg_schema() {
     'fields' => array(
       'aggregate_filenames_hash' => array(
         'description' => 'Hash of the aggregates list of files. Keep track of what files are in the aggregate.',
-        'type' => 'varchar',
+        'type' => 'char',
         'length' => 43,
         'not null' => TRUE,
         'default' => '',
         'binary' => TRUE,
+        'collation' => 'ascii_bin',
+        'charset' => 'ascii',
+        'mysql_character_set' => 'ascii',
       ),
       'aggregate_contents_hash' => array(
         'description' => 'Hash of all content_hashes in this aggregate. Simple Version control of the aggregate.',
-        'type' => 'varchar',
+        'type' => 'char',
         'length' => 43,
         'not null' => TRUE,
         'default' => '',
         'binary' => TRUE,
+        'collation' => 'ascii_bin',
+        'charset' => 'ascii',
+        'mysql_character_set' => 'ascii',
       ),
       'atime' => array(
         'description' => 'Last access time for this version of the aggregate. Updated every 12 hours.',
@@ -258,7 +299,7 @@ function advagg_schema() {
     'primary key' => array('aggregate_filenames_hash', 'aggregate_contents_hash'),
   );
 
-  // Copy the variable table & change a couple of things.
+  // Copy the variable table and change a couple of things.
   $schema['advagg_aggregates_hashes'] = drupal_get_schema_unprocessed('system', 'variable');
   $schema['advagg_aggregates_hashes']['fields']['hash'] = $schema['advagg_aggregates_hashes']['fields']['name'];
   $schema['advagg_aggregates_hashes']['fields']['hash']['length'] = 255;
@@ -274,7 +315,7 @@ function advagg_schema() {
 }
 
 /**
- * Upgrade AdvAgg previous versions (6.x-1.x & 7.x-1.x) to 7.x-2.x.
+ * Upgrade AdvAgg previous versions (6.x-1.x and 7.x-1.x) to 7.x-2.x.
  *
  * Implements hook_update_N().
  */
@@ -431,7 +472,159 @@ function advagg_update_7206(&$sandbox) {
 }
 
 /**
- * Callback to delete files if size == 0 & modified more than 60 seconds ago.
+ * Implements hook_update_N().
+ *
+ * Update schema making the varchar columns char. Change utf8_bin to ascii_bin.
+ */
+function advagg_update_7207(&$sandbox) {
+  $tables = array(
+    'advagg_aggregates' => array(
+      'aggregate_filenames_hash',
+      'filename_hash',
+    ),
+    'advagg_aggregates_versions' => array(
+      'aggregate_filenames_hash',
+      'aggregate_contents_hash',
+    ),
+    'advagg_files' => array(
+      'filename_hash',
+      'content_hash',
+    ),
+  );
+
+  $schema = advagg_schema();
+  foreach ($tables as $table => $fields) {
+    foreach ($fields as $field) {
+      // Change varchar to char.
+      db_change_field($table, $field, $field, $schema[$table]['fields'][$field]);
+    }
+    // Change utf8_bin to ascii_bin.
+    advagg_install_change_table_collation($table, $fields, 'ascii_bin', $schema[$table]['fields']);
+  }
+  return t('AdvAgg Tables converted from varcahr to char and utf8_bin to ascii_bin.');
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Update schema adding an index to the filename_hash column inside the
+ * advagg_aggregates table.
+ */
+function advagg_update_7208(&$sandbox) {
+  if (!db_index_exists('advagg_aggregates', 'filename_hash')) {
+    db_add_index('advagg_aggregates', 'filename_hash', array('filename_hash'));
+    return t('Database index added to the filename_hash column of the advagg_aggregates table.');
+  }
+  return t('Nothing needed to be done.');
+}
+
+
+/**
+ * Implements hook_update_N().
+ *
+ * Update schema making it match the definition.
+ */
+function advagg_update_7209(&$sandbox) {
+  $tables = array(
+    'advagg_aggregates' => array(
+      'aggregate_filenames_hash',
+      'filename_hash',
+    ),
+    'advagg_aggregates_versions' => array(
+      'aggregate_filenames_hash',
+      'aggregate_contents_hash',
+    ),
+    'advagg_files' => array(
+      'filename_hash',
+      'content_hash',
+    ),
+  );
+
+  $schema = advagg_schema();
+  foreach ($tables as $table => $fields) {
+    foreach ($fields as $field) {
+      // Change varchar to char.
+      db_change_field($table, $field, $field, $schema[$table]['fields'][$field]);
+    }
+    // Change utf8_bin to ascii_bin.
+    advagg_install_change_table_collation($table, $fields, 'ascii_bin', $schema[$table]['fields']);
+  }
+  return t('Database schema was adjusted to match what is listed in advagg_schema.');
+}
+
+/**
+ * Convert the table to the specified collation.
+ *
+ * @param string $table_name
+ *   Preform the operation on this table.
+ * @param array $fields
+ *   An array of field names.
+ * @param string $collation
+ *   The db collation to change to table columns to.
+ * @param array $schema_fields
+ *   An array of field definitions.
+ *
+ * @return array
+ *   Returns an array of tables and column names.
+ */
+function advagg_install_change_table_collation($table_name, array $fields, $collation, array $schema_fields) {
+  $db_type = Database::getConnection()->databaseType();
+  // Skip if not MySQL.
+  if ($db_type !== 'mysql') {
+    return FALSE;
+  }
+  $table_name = Database::getConnection()->prefixTables('{' . db_escape_table($table_name) . '}');
+  $results = db_query("SHOW FULL FIELDS FROM $table_name")->fetchAllAssoc('Field');
+  $db_schema = Database::getConnection()->schema();
+  foreach ($results as $row) {
+    if (!in_array($row->Field, $fields)) {
+      continue;
+    }
+
+    $charset = strtolower(substr($collation, 0, strpos($collation, '_')));
+    $query = "ALTER TABLE $table_name CHANGE `{$row->Field}` `{$row->Field}` {$row->Type}";
+    $query .= " CHARACTER SET $charset COLLATE $collation";
+
+    if (isset($schema_fields[$row->Field]['not null'])) {
+      if ($schema_fields[$row->Field]['not null']) {
+        $query .= ' NOT NULL';
+      }
+      else {
+        $query .= ' NULL';
+      }
+    }
+
+    // $schema_fields[$row->Field]['default'] can be NULL, so we explicitly
+    // check for the key here.
+    if ( isset($schema_fields[$row->Field])
+      && is_array($schema_fields[$row->Field])
+      && array_key_exists('default', $schema_fields[$row->Field])
+    ) {
+      $default = $schema_fields[$row->Field]['default'];
+      if (is_string($default)) {
+        $default = "'" . $default . "'";
+      }
+      elseif (!isset($default)) {
+        $default = 'NULL';
+      }
+      $query .= ' DEFAULT ' . $default;
+    }
+
+    if (empty($schema_fields[$row->Field]['not null']) && !isset($schema_fields[$row->Field]['default'])) {
+      $query .= ' DEFAULT NULL';
+    }
+
+    // Add column comment.
+    if (!empty($schema_fields[$row->Field]['description'])) {
+      $query .= ' COMMENT ' . $db_schema->prepareComment($schema_fields[$row->Field]['description'], 255);
+    }
+
+    db_query($query);
+  }
+}
+
+/**
+ * Callback to delete files if size == 0 and modified more than 60 seconds ago.
  *
  * @param string $uri
  *   Location of the file to check.
@@ -444,10 +637,11 @@ function advagg_install_delete_empty_file_if_stale($uri) {
 }
 
 /**
- * Callback to delete files if size == 0 & modified more than 60 seconds ago.
+ * Callback to delete files if size == 0 and modified more than 60 seconds ago.
  *
  * @param string $has_string
- *   If the .htaccess file contains this string it will be removed & recreated.
+ *   If the .htaccess file contains this string it will be removed and
+ *   recreated.
  * @param string $does_not_have_string
  *   If the .htaccess file does not contains this string it will be removed &
  *   recreated.
@@ -565,6 +759,8 @@ function advagg_requirements($phase) {
   if ($phase !== 'runtime') {
     return $requirements;
   }
+  // Make sure the advagg default values for variable_get are available.
+  drupal_load('module', 'advagg');
 
   // Do the following checks only at runtime.
   list($css_path, $js_path) = advagg_get_root_files_dir();
@@ -588,22 +784,24 @@ function advagg_requirements($phase) {
     );
   }
 
-  // Make sure variables are set correctly.
-  if (variable_get('advagg_enabled', ADVAGG_ENABLED) == FALSE) {
-    $requirements['advagg_not_on'] = array(
-      'title' => $t('Adv CSS/JS Agg - Enabled'),
-      'severity' => REQUIREMENT_WARNING,
-      'value' => $t('Advanced CSS/JS aggregation is disabled.'),
-      'description' => $t('Go to the Advanced CSS/JS aggregation <a href="@settings">settings page</a> and enable it.', array('@settings' => url($config_path . '/advagg'))),
-    );
-  }
-  elseif (!variable_get('preprocess_css', FALSE) || !variable_get('preprocess_js', FALSE)) {
-    $requirements['advagg_core_off'] = array(
-      'title' => $t('Adv CSS/JS Agg - Core Variables'),
-      'severity' => REQUIREMENT_ERROR,
-      'value' => $t('Cores CSS and/or JS aggregation is disabled.'),
-      'description' => $t('"Optimize CSS files" and "Optimize JavaScript files" on the <a href="@performance">performance page</a> should be enabled.', array('@performance' => url('admin/config/development/performance'))),
-    );
+  if (!variable_get('advagg_skip_enabled_preprocess_check', ADVAGG_SKIP_ENABLED_PREPROCESS_CHECK)) {
+    // Make sure variables are set correctly.
+    if (!variable_get('advagg_enabled', ADVAGG_ENABLED)) {
+      $requirements['advagg_not_on'] = array(
+        'title' => $t('Adv CSS/JS Agg - Enabled'),
+        'severity' => REQUIREMENT_WARNING,
+        'value' => $t('Advanced CSS/JS aggregation is disabled.'),
+        'description' => $t('Go to the Advanced CSS/JS aggregation <a href="@settings">settings page</a> and enable it.', array('@settings' => url($config_path . '/advagg'))),
+      );
+    }
+    if (!variable_get('preprocess_css', FALSE) || !variable_get('preprocess_js', FALSE)) {
+      $requirements['advagg_core_off'] = array(
+        'title' => $t('Adv CSS/JS Agg - Core Variables'),
+        'severity' => REQUIREMENT_ERROR,
+        'value' => $t('Cores CSS and/or JS aggregation is disabled.'),
+        'description' => $t('"Optimize CSS files" and "Optimize JavaScript files" on the <a href="@performance">performance page</a> should be enabled.', array('@performance' => url('admin/config/development/performance'))),
+      );
+    }
   }
 
   // Check that the menu router handler is working.
@@ -724,7 +922,9 @@ function advagg_requirements($phase) {
   || (isset($_SERVER[\'HTTP_HTTPS\']) && $_SERVER[\'HTTP_HTTPS\'] == \'on\')
 ) {
   $_SERVER[\'HTTPS\'] = \'on\';
-}')));
+}',
+      )),
+    );
   }
 
   // Make sure $base_url is correct.
@@ -737,7 +937,9 @@ function advagg_requirements($phase) {
         '@code' => 'if (isset($_SERVER["HTTPS"]) && strtolower($_SERVER["HTTPS"]) == "on" && isset($base_url)) {
 $base_url = str_replace("http://", "https://", $base_url);
 }
-')));
+',
+      )),
+    );
   }
 
   // Make sure http requests will work correctly.
@@ -746,6 +948,14 @@ $base_url = str_replace("http://", "https://", $base_url);
   // If all requirements have been met, state advagg should be working.
   if (empty($requirements)) {
     $description = '';
+
+    if (!variable_get('advagg_enabled', ADVAGG_ENABLED)) {
+      $description .= ' ' . $t('Advanced CSS/JS aggregation is disabled. Go to the Advanced CSS/JS aggregation <a href="@settings">settings page</a> and enable it.', array('@settings' => url($config_path . '/advagg')));
+    }
+    if (!variable_get('preprocess_css', FALSE) || !variable_get('preprocess_js', FALSE)) {
+      $description .= ' ' . $t('Cores CSS and/or JS aggregation is disabled. "Optimize CSS files" and "Optimize JavaScript files" on the <a href="@performance">performance page</a> should be enabled.', array('@performance' => url('admin/config/development/performance')));
+    }
+
     if (variable_get('advagg_cache_level', ADVAGG_CACHE_LEVEL) < 0) {
       $description .= ' ' . $t('Currently running in development mode.');
     }
@@ -818,7 +1028,7 @@ function advagg_install_check_via_http(array &$requirements) {
         if ($new_request->code < 0) {
           $description = '';
           if (!module_exists('httprl')) {
-            $description = t('Enabling the <a href="!httprl">HTTP Parallel Request & Threading Library</a> module might be able to fix this as AdvAgg will use HTTPRL to build the URL if it is enabled.', array('!httprl' => 'https://drupal.org/project/httprl'));
+            $description = t('Enabling the <a href="!httprl">HTTP Parallel Request and Threading Library</a> module might be able to fix this as AdvAgg will use HTTPRL to build the URL if it is enabled.', array('!httprl' => 'https://drupal.org/project/httprl'));
           }
           $requirements['advagg_self_request'] = array(
             'title' => $t('Adv CSS/JS Agg - Self Request Failure'),
@@ -941,7 +1151,7 @@ function advagg_install_check_via_http(array &$requirements) {
             'title' => $t('Adv CSS/JS Agg - HTTP Request'),
             'severity' => REQUIREMENT_ERROR,
             'value' => $t('HTTP requests to advagg for ' . $type . ' files are not getting through.'),
-            'description' => $t('AdvAgg will issue a request for a file that does not exist inside of the AdvAgg directory. If AdvAgg sends a 404, everything is ok; if something else sends a 404 then that means that AdvAgg will not be able to generate an aggregate if it is missing as something else is handling the 404 before AdvAgg has a chance to do it. If you are reading this, it means that something else is handling the 404 before AdvAgg can. Raw request info: <pre>@request</pre>', array('@request' => print_r($request, TRUE))),
+            'description' => $t('AdvAgg will issue a request for a file that does not exist inside of the AdvAgg directory. If AdvAgg sends a 404, everything is ok; if something else sends a 404 then that means that AdvAgg will not be able to generate an aggregate if it is missing as something else is handling the 404 before AdvAgg has a chance to do it. If you are reading this, it means that something else is handling the 404 before AdvAgg can. Raw request info: <pre>@request</pre>', array('@request' => var_export($request, TRUE))),
           );
         }
       }
@@ -999,6 +1209,7 @@ function advagg_install_check_via_http(array &$requirements) {
       'version' => '1.0',
     );
     // Test http 1.0
+    $old_requirements = $requirements;
     advagg_install_chk_urls($requirements, $urls, $options, $mod_url, $type, $url_path, $file_path, $filename);
 
     // Test http 1.1
@@ -1006,6 +1217,9 @@ function advagg_install_check_via_http(array &$requirements) {
     if (defined('VERSION') && floatval(VERSION) >= 7.22 && is_callable('httprl_override_core')) {
       $old = variable_get('drupal_http_request_function', FALSE);
       $GLOBALS['conf']['drupal_http_request_function'] = 'httprl_override_core';
+
+      // Only test 1.1; 1.0 is rarely used these days.
+      $requirements = $old_requirements;
 
       $options['version'] = '1.1';
       advagg_install_chk_urls($requirements, $urls, $options, $mod_url, $type, $url_path, $file_path, $filename);
@@ -1054,74 +1268,92 @@ function advagg_install_chk_urls(array &$requirements, array $urls, array $optio
     advagg_install_url_mod($url, $options, $mod_url);
     $request = drupal_http_request($url, $options);
 
-    // @ignore sniffer_commenting_inlinecomment_spacingbefore:4
-    // Check response. Report an error if
-    //  Not a 200.
-    //  Headers do not contain "content-encoding".
-    //  content-encoding is not gzip or deflate.
-    // @ignore sniffer_whitespace_openbracketspacing_openingwhitespace
-    if ( $request->code != 200
-      || empty($request->headers['content-encoding'])
-      || ( $request->headers['content-encoding'] !== 'gzip'
-        && $request->headers['content-encoding'] !== 'deflate'
-      )
-    ) {
-      $config_path = advagg_admin_config_root_path();
-      // Gzip failed.
-      if (!variable_get('advagg_gzip', ADVAGG_GZIP)) {
-        // Recommend that gzip be turned on.
-        $requirements['advagg_' . $type . '_gzip' . $key] = array(
-          'title' => $t('Adv CSS/JS Agg - gzip'),
-          'severity' => REQUIREMENT_WARNING,
-          'value' => $t('Gzip is failing for %type files.', array('%type' => $type)),
-          'description' => $t('Try enabling on the "Create .gz files" setting on the <a href="@advagg">Advanced CSS/JS Aggregation Configuration page</a>', array(
-            '@advagg' => url($config_path . '/advagg'),
-            '%type' => $type,
-          )),
-        );
-      }
-      else {
-        // If the apache_get_modules function doesn't exist, skip this
-        // entirely.
-        $apache_module_missing = FALSE;
-        if (function_exists('apache_get_modules')) {
-          // Get all available Apache modules.
-          $modules = apache_get_modules();
-          if (!in_array('mod_headers', $modules) || !in_array('mod_rewrite', $modules)) {
-            $apache_module_missing = TRUE;
-
-            if (!in_array('mod_headers', $modules)) {
-              $requirements['advagg_mod_headers' . $key] = array(
-                'title'       => $t('Adv CSS/JS Agg - Apache'),
-                'description' => $t('The Apache module "mod_headers" is not available. Enable <a href="!link">mod_headers</a> for Apache if at all possible. This is causing gzip to fail.', array('!link' => 'http://httpd.apache.org/docs/current/mod/mod_headers.html')),
-                'severity'    => REQUIREMENT_WARNING,
-                'value'       => $t('Apache module "mod_headers" is not installed.'),
-              );
-            }
-            if (!in_array('mod_rewrite', $modules)) {
-              $requirements['advagg_mod_rewrite' . $key] = array(
-                'title'       => $t('Adv CSS/JS Agg - Apache'),
-                'description' => $t('The Apache module "mod_rewrite" is not available.  You must enable <a href="!link">mod_rewrite</a> for Apache. This is causing gzip to fail.', array('!link' => 'http://httpd.apache.org/docs/current/mod/mod_rewrite.html')),
-                'severity'    => REQUIREMENT_ERROR,
-                'value'       => $t('Apache module "mod_rewrite" is not installed.'),
-              );
-            }
-          }
-        }
-        if (!$apache_module_missing) {
-          // Recommend servers configuration be adjusted.
-          $request->data = '...';
-          $requirements['advagg_' . $type . '_gzip' . $key . $options['version']] = array(
+    if (!variable_get('advagg_skip_gzip_check', ADVAGG_SKIP_GZIP_CHECK)) {
+      // @ignore sniffer_commenting_inlinecomment_spacingbefore:4
+      // Check response. Report an error if
+      //  Not a 200.
+      //  Headers do not contain "content-encoding".
+      //  content-encoding is not gzip or deflate.
+      // @ignore sniffer_whitespace_openbracketspacing_openingwhitespace
+      if ( $request->code != 200
+        || empty($request->headers['content-encoding'])
+        || ( $request->headers['content-encoding'] !== 'gzip'
+          && $request->headers['content-encoding'] !== 'deflate'
+        )
+      ) {
+        $config_path = advagg_admin_config_root_path();
+        // Gzip failed.
+        if (!variable_get('advagg_gzip', ADVAGG_GZIP)) {
+          // Recommend that gzip be turned on.
+          $requirements['advagg_' . $type . '_gzip' . $key] = array(
             'title' => $t('Adv CSS/JS Agg - gzip'),
             'severity' => REQUIREMENT_WARNING,
             'value' => $t('Gzip is failing for %type files.', array('%type' => $type)),
-            'description' => $t('The web servers configuration will need to be adjusted. In most cases make sure that the webroots .htaccess file still contains this section "Rules to correctly serve gzip compressed CSS and JS files". Certain default web server configurations (<a href="!nginx">nginx</a>) do not gzip HTTP/1.0 requests. If you are using cloudfront you will have to <a href="!cloudfront">add metadata</a> to the .gz files. There are some other options if using <a href="!so">cloudfront</a>. Raw request info: <pre>@request</pre>', array(
-              '!nginx' => 'http://www.cdnplanet.com/blog/gzip-nginx-cloudfront/',
-              '@request' => print_r($request, TRUE),
-              '!cloudfront' => 'http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html#CompressedS3',
-              '!so' => 'http://stackoverflow.com/questions/5442011/serving-gzipped-css-and-javascript-from-amazon-cloudfront-via-s3',
+            'description' => $t('Try enabling on the "Create .gz files" setting on the <a href="@advagg">Advanced CSS/JS Aggregation Configuration page</a>', array(
+              '@advagg' => url($config_path . '/advagg'),
+              '%type' => $type,
             )),
           );
+        }
+        else {
+          // If the apache_get_modules function doesn't exist, skip this
+          // entirely.
+          $apache_module_missing = FALSE;
+          if (function_exists('apache_get_modules')) {
+            // Get all available Apache modules.
+            $modules = apache_get_modules();
+            if (!in_array('mod_headers', $modules) || !in_array('mod_rewrite', $modules)) {
+              $apache_module_missing = TRUE;
+
+              if (!in_array('mod_headers', $modules)) {
+                $requirements['advagg_mod_headers' . $key] = array(
+                  'title'       => $t('Adv CSS/JS Agg - Apache'),
+                  'description' => $t('The Apache module "mod_headers" is not available. Enable <a href="!link">mod_headers</a> for Apache if at all possible. This is causing gzip to fail.', array('!link' => 'http://httpd.apache.org/docs/current/mod/mod_headers.html')),
+                  'severity'    => REQUIREMENT_WARNING,
+                  'value'       => $t('Apache module "mod_headers" is not installed.'),
+                );
+              }
+              if (!in_array('mod_rewrite', $modules)) {
+                $requirements['advagg_mod_rewrite' . $key] = array(
+                  'title'       => $t('Adv CSS/JS Agg - Apache'),
+                  'description' => $t('The Apache module "mod_rewrite" is not available.  You must enable <a href="!link">mod_rewrite</a> for Apache. This is causing gzip to fail.', array('!link' => 'http://httpd.apache.org/docs/current/mod/mod_rewrite.html')),
+                  'severity'    => REQUIREMENT_ERROR,
+                  'value'       => $t('Apache module "mod_rewrite" is not installed.'),
+                );
+              }
+            }
+          }
+          if (!$apache_module_missing) {
+            // No data returned.
+            if (empty($request->data)) {
+              $requirements['advagg_' . $type . '_gzip' . $key . $options['version']] = array(
+                'title' => $t('Adv CSS/JS Agg - gzip'),
+                'severity' => REQUIREMENT_WARNING,
+                'value' => $t('Gzip is failing for %type files.', array('%type' => $type)),
+                'description' => $t('No data was returned from your server; this gzip test can not be done locally. Error: @error - @message You can manually test if gzip is working by <a href="@url">going here</a> and seeing if gzip is enabled. You can turn this warning off by adding this to your settings.php file: <code>@skipcode</code>', array(
+                  '@error' => $request->code,
+                  '@message' => isset($request->error) ? $request->error : '',
+                  '@url' => 'http://checkgzipcompression.com/?url=' . urlencode($url),
+                  '@skipcode' => '$conf[\'advagg_skip_gzip_check\'] = TRUE;',
+                )),
+              );
+            }
+            else {
+              // Recommend servers configuration be adjusted.
+              $request->data = '...';
+              $requirements['advagg_' . $type . '_gzip' . $key . $options['version']] = array(
+                'title' => $t('Adv CSS/JS Agg - gzip'),
+                'severity' => REQUIREMENT_WARNING,
+                'value' => $t('Gzip is failing for %type files.', array('%type' => $type)),
+                'description' => $t('The web servers configuration will need to be adjusted. In most cases make sure that the webroots .htaccess file still contains this section "Rules to correctly serve gzip compressed CSS and JS files". Certain default web server configurations (<a href="!nginx">nginx</a>) do not gzip HTTP/1.0 requests. If you are using cloudfront you will have to <a href="!cloudfront">add metadata</a> to the .gz files. There are some other options if using <a href="!so">cloudfront</a>. Raw request info: <pre>@request</pre>', array(
+                  '!nginx' => 'http://www.cdnplanet.com/blog/gzip-nginx-cloudfront/',
+                  '@request' => print_r($request, TRUE),
+                  '!cloudfront' => 'http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html#CompressedS3',
+                  '!so' => 'http://stackoverflow.com/questions/5442011/serving-gzipped-css-and-javascript-from-amazon-cloudfront-via-s3',
+                )),
+              );
+            }
+          }
         }
       }
     }
@@ -1141,7 +1373,7 @@ function advagg_install_chk_urls(array &$requirements, array $urls, array $optio
           'title' => $t('Adv CSS/JS Agg - Incorrect readings'),
           'severity' => REQUIREMENT_WARNING,
           'value' => $t('The request for a file was served by Drupal instead of the web server (like Apache).', array('%type' => $type)),
-          'description' => $t('It means that AdvAgg can not test for Far-Future headers internally and you will need to use an external tool in order to do so. Warnings given or not given about AdvAgg Expires, Cache-Control, & If-Modified-Since might be incorrect. In the <a href="@readme">readme</a>, under Troubleshooting try the Far-Future recommendations.', array('@readme' => url(drupal_get_path('module', 'advagg') . '/README.txt'))),
+          'description' => $t('It means that AdvAgg can not test for Far-Future headers internally and you will need to use an external tool in order to do so. Warnings given or not given about AdvAgg Expires, Cache-Control, and If-Modified-Since might be incorrect. In the <a href="@readme">readme</a>, under Troubleshooting try the Far-Future recommendations.', array('@readme' => url(drupal_get_path('module', 'advagg') . '/README.txt'))),
         );
       }
 
@@ -1189,48 +1421,53 @@ function advagg_install_chk_urls(array &$requirements, array $urls, array $optio
 
       // Test far future headers.
       $apache_module_missing = FALSE;
-      // Make sure the expires header is at least set to 1 month
-      // (2628000 seconds) in the future.
-      if ( !empty($request->headers['expires'])
-        && strtotime($request->headers['expires']) < time() + 2628000
-      ) {
-        // Recommend servers configuration be adjusted.
-        if (function_exists('apache_get_modules') && !in_array('mod_headers', $modules)) {
-          $apache_module_missing = TRUE;
+      if (!variable_get('advagg_skip_far_future_check', ADVAGG_SKIP_FAR_FUTURE_CHECK)) {
+        // Make sure the expires header is at least set to 1 month
+        // (2628000 seconds) in the future.
+        if ( !empty($request->headers['expires'])
+          && strtotime($request->headers['expires']) < time() + 2628000
+        ) {
+          // Recommend servers configuration be adjusted.
+          if (function_exists('apache_get_modules') && !in_array('mod_headers', $modules)) {
+            $apache_module_missing = TRUE;
+          }
+          else {
+            $requirements['advagg_' . $type . '_expires' . $key] = array(
+              'title' => $t('Adv CSS/JS Agg - Expires'),
+              'severity' => REQUIREMENT_WARNING,
+              'value' => $t('The expires header being sent by your web server is not at least 1 month in the future.', array('%type' => $type)),
+              'description' => $t('The web servers configuration should be adjusted only for AdvAgg files. Was looking for a second counter over 2,628,000 (1 month), actually got <code>@received</code>. You can turn this warning off if you can not adjust this value (Pantheon) by adding this to your settings.php file: <code>@skipcode</code>', array(
+                '@received' => isset($request->headers['expires']) ? number_format(strtotime($request->headers['expires'])) : 'NULL',
+                '@skipcode' => '$conf[\'advagg_skip_far_future_check\'] = TRUE;',
+              )),
+            );
+          }
         }
-        else {
-          $requirements['advagg_' . $type . '_expires' . $key] = array(
-            'title' => $t('Adv CSS/JS Agg - Expires'),
-            'severity' => REQUIREMENT_WARNING,
-            'value' => $t('The expires header being sent by your web server is not at least 1 month in the future.', array('%type' => $type)),
-            'description' => $t('The web servers configuration should be adjusted only for AdvAgg files. Was looking for a second counter over 2,628,000 (1 month), actually got <code>@received</code>.', array(
-              '@received' => isset($request->headers['expires']) ? number_format(strtotime($request->headers['expires'])) : 'NULL',
-            )),
-          );
+        // Make sure the cache-control header max age value is at least set to
+        // 1 month (2628000 seconds) in the future.
+        $matches = array();
+        if ( empty($request->headers['cache-control'])
+          || !preg_match('/max-age=(\\d+)/is', $request->headers['cache-control'], $matches)
+          || $matches[1] < 2628000
+        ) {
+          // Recommend servers configuration be adjusted.
+          if (function_exists('apache_get_modules') && (!in_array('mod_headers', $modules))) {
+            $apache_module_missing = TRUE;
+          }
+          else {
+            $requirements['advagg_' . $type . '_cache_control' . $key] = array(
+              'title' => $t('Adv CSS/JS Agg - Cache-Control'),
+              'severity' => REQUIREMENT_WARNING,
+              'value' => $t("The cache-control's max-age header being sent by your web server is not at least 1 month in the future.", array('%type' => $type)),
+              'description' => $t('The web servers configuration should be adjusted only for AdvAgg files. Was looking that the max-age second counter is over 2,628,000 (1 month), actually got <code>@received</code>. You can turn this warning off if you can not adjust this value (Pantheon) by adding this to your settings.php file: <code>@skipcode</code>', array(
+                '@received' => isset($request->headers['cache-control']) ? $request->headers['cache-control'] : 'NULL',
+                '@skipcode' => '$conf[\'advagg_skip_far_future_check\'] = TRUE;',
+              )),
+            );
+          }
         }
       }
-      // Make sure the cache-control header max age value is at least set to
-      // 1 month (2628000 seconds) in the future.
-      $matches = array();
-      if ( empty($request->headers['cache-control'])
-        || !preg_match('/max-age=(\\d+)/is', $request->headers['cache-control'], $matches)
-        || $matches[1] < 2628000
-      ) {
-        // Recommend servers configuration be adjusted.
-        if (function_exists('apache_get_modules') && (!in_array('mod_headers', $modules))) {
-          $apache_module_missing = TRUE;
-        }
-        else {
-          $requirements['advagg_' . $type . '_cache_control' . $key] = array(
-            'title' => $t('Adv CSS/JS Agg - Cache-Control'),
-            'severity' => REQUIREMENT_WARNING,
-            'value' => $t("The cache-control's max-age header being sent by your web server is not at least 1 month in the future.", array('%type' => $type)),
-            'description' => $t('The web servers configuration should be adjusted only for AdvAgg files. Was looking that the max-age second counter is over 2,628,000 (1 month), actually got <code>@received</code>.', array(
-              '@received' => isset($request->headers['cache-control']) ? $request->headers['cache-control'] : 'NULL',
-            )),
-          );
-        }
-      }
+
       // Handle missing apache modules.
       if ($apache_module_missing && !in_array('mod_headers', $modules)) {
         $requirements['advagg_mod_headers_far_future' . $key] = array(
@@ -1242,8 +1479,36 @@ function advagg_install_chk_urls(array &$requirements, array $urls, array $optio
       }
 
       // Test 304.
+      $etag_works = FALSE;
+      if (isset($request->headers['etag'])) {
+        // Send an Etag header and see if the web server returns a 304.
+        $url = file_create_url($url_path . '/' . $filename);
+        $if_modified_options = $options;
+        $if_modified_options['headers'] = array(
+          'Accept-Encoding' => 'gzip, deflate',
+          'If-None-Match' => $request->headers['etag'],
+        );
+
+        // Send request.
+        advagg_install_url_mod($url, $if_modified_options, $mod_url);
+        $request_304 = drupal_http_request($url, $if_modified_options);
+        if ($request_304->code != 304) {
+          // Recommend servers configuration be adjusted.
+          $requirements['advagg_' . $type . '_304' . $key . '_etag'] = array(
+            'title' => $t('Adv CSS/JS Agg - Etag'),
+            'severity' => REQUIREMENT_WARNING,
+            'value' => $t('The If-None-Match (Etag) header is being ignored by your web server.'),
+            'description' => $t('The web servers configuration will need to be adjusted. The server should have responded with a 304, instead a @code was returned.', array(
+              '@code' => $request_304->code,
+            )),
+          );
+        }
+        else {
+          $etag_works = TRUE;
+        }
+      }
       if (isset($request->headers['last-modified'])) {
-        // Send a If-Modified-Since header and see if the web server returns
+        // Send a If-Modified-Since header and see if the web server returns a
         // 304.
         $url = file_create_url($url_path . '/' . $filename);
         $if_modified_options = $options;
@@ -1254,33 +1519,48 @@ function advagg_install_chk_urls(array &$requirements, array $urls, array $optio
 
         // Send request.
         advagg_install_url_mod($url, $if_modified_options, $mod_url);
-        $request = drupal_http_request($url, $if_modified_options);
-        if ($request->code != 304) {
+        $request_304 = drupal_http_request($url, $if_modified_options);
+        if ($request_304->code != 304) {
           // Recommend servers configuration be adjusted.
-          $requirements['advagg_' . $type . '_304' . $key] = array(
+          $requirements['advagg_' . $type . '_304' . $key . '_last_modified'] = array(
             'title' => $t('Adv CSS/JS Agg - If-Modified-Since'),
             'severity' => REQUIREMENT_WARNING,
-            'value' => $t('The If-Modified-Since header is being ignored by your web server.'),
-            'description' => $t('The web servers configuration will need to be adjusted. The server should have responded with a 304, instead a @code was returned.', array('@code' => $request->code)),
+            'value' => $t('The If-Modified-Since (Last-Modified) header is being ignored by your web server.'),
+            'description' => $t('The web servers configuration will need to be adjusted. The server should have responded with a 304, instead a @code was returned.', array(
+              '@code' => $request_304->code,
+            )),
           );
         }
+        elseif (isset($requirements['advagg_' . $type . '_304' . $key . '_etag'])) {
+          // Last-Modified works, Etag is broken. 304s are working. Don't warn
+          // user.
+          unset($requirements['advagg_' . $type . '_304' . $key . '_etag']);
+        }
       }
-      else {
+      if ($etag_works && isset($requirements['advagg_' . $type . '_304' . $key . '_last_modified'])) {
+        // Etag works, Last-Modified is broken. 304s are working. Don't warn
+        // user.
+        unset($requirements['advagg_' . $type . '_304' . $key . '_last_modified']);
+      }
+
+      // Both the Last-Modified and Etag header are missing.
+      if (empty($request->headers['last-modified']) && empty($request->headers['etag'])) {
         // Get path to advagg .htaccess file.
-        $files = array();
-        $files[] = $file_path . '/.htaccess';
-        $files[] = DRUPAL_ROOT . '/.htaccess';
+        $files = array(
+          $file_path . '/.htaccess',
+          DRUPAL_ROOT . '/.htaccess',
+        );
 
         // Check for bad .htaccess files.
         $bad_config_found = FALSE;
-        foreach ($files as $file) {
+        foreach ($files as $count => $file) {
           if (!file_exists($file)) {
             continue;
           }
           $contents = file_get_contents($file);
           if (strpos($contents, 'Header unset Last-Modified') !== FALSE) {
             $bad_config_found = TRUE;
-            $requirements['advagg_' . $type . '_last-modified_' . $key] = array(
+            $requirements['advagg_' . $type . '_last-modified_' . $key . $count] = array(
               'title' => $t('Adv CSS/JS Agg - Last-Modified'),
               'severity' => REQUIREMENT_WARNING,
               'value' => $t('The Last-Modified header is not being sent out by your web server.'),
@@ -1295,7 +1575,12 @@ function advagg_install_chk_urls(array &$requirements, array $urls, array $optio
             'title' => $t('Adv CSS/JS Agg - Last-Modified'),
             'severity' => REQUIREMENT_WARNING,
             'value' => $t('The Last-Modified header is not being sent out by your web server.'),
-            'description' => $t('The web servers configuration will need to be adjusted. The server should have sent out a Last-Modified header.'),
+            'description' => $t('The web servers configuration will need to be adjusted. The server should have sent out a Last-Modified header and/or an Etag header. If you can not get the Last-Modified header to work, you can try using ETags. Inside <code>@htaccess</code> right before <code>@line1</code> at the bottom of the file add in <code>@line2</code>. You will also need to remove the <code>@line3</code> line further up.', array(
+              '@htaccess' => $file_path . '/.htaccess',
+              '@line1' => '</FilesMatch>',
+              '@line2' => 'FileETag MTime Size',
+              '@line3' => 'Header unset ETag',
+            )),
           );
         }
       }
@@ -1345,7 +1630,7 @@ function advagg_install_get_first_advagg_file($directory) {
       }
     }
 
-    $gzip_filename = $scanned_directory[$key+1];
+    $gzip_filename = $scanned_directory[$key + 1];
     if (variable_get('advagg_gzip', ADVAGG_GZIP)) {
       // Skip if the next file is not a .gz file.
       if (strcmp($filename . '.gz', $gzip_filename) !== 0) {
@@ -1395,12 +1680,6 @@ function advagg_install_url_mod(&$url, array &$options, $mod_url = FALSE) {
     'connect_timeout' => 8,
     'ttfb_timeout' => 8,
   );
-  if (!empty($_SERVER['HTTP_HOST'])) {
-    $options['headers']['Host'] = $_SERVER['HTTP_HOST'];
-  }
-  elseif (!empty($_SERVER['SERVER_NAME'])) {
-    $options['headers']['Host'] = $_SERVER['SERVER_NAME'];
-  }
   // Set connection to closed to prevent keep-alive from causing a timeout.
   $options['headers']['Connection'] = 'close';
   // Set referrer to current page.
@@ -1417,9 +1696,25 @@ function advagg_install_url_mod(&$url, array &$options, $mod_url = FALSE) {
     $parts['user'] = variable_get('shield_user', '');
     $parts['pass'] = variable_get('shield_pass', '');
   }
-  elseif (isset($_SERVER['AUTH_TYPE']) && $_SERVER['AUTH_TYPE'] == 'Basic') {
+  elseif ( isset($_SERVER['AUTH_TYPE'])
+        && $_SERVER['AUTH_TYPE'] == 'Basic'
+  ) {
     $parts['user'] = $_SERVER['PHP_AUTH_USER'];
     $parts['pass'] = $_SERVER['PHP_AUTH_PW'];
+  }
+  elseif ( isset($_SERVER['HTTP_AUTHORIZATION'])
+        && strpos($_SERVER['HTTP_AUTHORIZATION'], 'Basic ') === 0
+  ) {
+    $user_pass = explode(':', base64_decode(substr($_SERVER['HTTP_AUTHORIZATION'], 5)));
+    $parts['user'] = $user_pass[0];
+    $parts['pass'] = $user_pass[1];
+  }
+  elseif ( isset($_SERVER['REDIRECT_HTTP_AUTHORIZATION'])
+        && strpos($_SERVER['REDIRECT_HTTP_AUTHORIZATION'], 'Basic ') === 0
+  ) {
+    $user_pass = explode(':', base64_decode(substr($_SERVER['REDIRECT_HTTP_AUTHORIZATION'], 5)));
+    $parts['user'] = $user_pass[0];
+    $parts['pass'] = $user_pass[1];
   }
   elseif (!empty($advagg_auth_basic_user)) {
     $parts['user'] = $advagg_auth_basic_user;
@@ -1433,14 +1728,20 @@ function advagg_install_url_mod(&$url, array &$options, $mod_url = FALSE) {
       $new_url = httprl_build_url_self($path);
     }
     else {
-      if (!empty($_SERVER['HTTP_HOST']) && $parts['host'] != $_SERVER['HTTP_HOST']) {
-        $parts['host'] = $_SERVER['HTTP_HOST'];
+      if (!empty($_SERVER['HTTP_HOST'])) {
+        if ($parts['host'] != $_SERVER['HTTP_HOST']) {
+          $parts['host'] = $_SERVER['HTTP_HOST'];
+        }
       }
-      elseif (!empty($_SERVER['SERVER_NAME']) && $parts['host'] != $_SERVER['SERVER_NAME']) {
-        $parts['host'] = $_SERVER['SERVER_NAME'];
+      elseif (!empty($_SERVER['SERVER_NAME'])) {
+        if ($parts['host'] != $_SERVER['SERVER_NAME']) {
+          $parts['host'] = $_SERVER['SERVER_NAME'];
+        }
       }
-      elseif (!empty($_SERVER['SERVER_ADDR']) && $parts['host'] != $_SERVER['SERVER_ADDR']) {
-        $parts['host'] = $_SERVER['SERVER_ADDR'];
+      elseif (!empty($_SERVER['SERVER_ADDR'])) {
+        if ($parts['host'] != $_SERVER['SERVER_ADDR']) {
+          $parts['host'] = $_SERVER['SERVER_ADDR'];
+        }
       }
       else {
         $parts['host'] = '127.0.0.1';

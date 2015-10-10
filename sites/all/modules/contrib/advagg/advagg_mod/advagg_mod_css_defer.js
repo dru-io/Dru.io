@@ -10,6 +10,7 @@
  *   URL of the css file to load.
  */
 function advagg_mod_loadStyleSheet(src) {
+  "use strict";
   if (document.createStyleSheet) {
     document.createStyleSheet(src);
   }

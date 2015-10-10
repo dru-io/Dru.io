@@ -224,7 +224,7 @@ class JavaScriptPacker {
 
   private function _analyze($script, $regexp, $encode) {
     // analyse
-    // retreive all words in the script
+    // retrieve all words in the script
     $all = array();
     preg_match_all($regexp, $script, $all);
     $_sorted = array(); // list of words sorted by frequency

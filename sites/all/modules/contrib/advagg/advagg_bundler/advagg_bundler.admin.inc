@@ -83,7 +83,8 @@ function advagg_bundler_admin_settings_form() {
     '#rows' => 30,
   );
 
-  // Clear the cache bins on submit.
+  // Clear the cache bins on submit. Also remove advagg_bundler_info so it
+  // doesn't get added to the variable table.
   $form['#submit'][] = 'advagg_bundler_admin_settings_form_submit';
 
   return system_settings_form($form);
@@ -94,8 +95,11 @@ function advagg_bundler_admin_settings_form() {
  * Clear out the advagg cache bin when the save configuration button is pressed.
  */
 function advagg_bundler_admin_settings_form_submit($form, &$form_state) {
-  $cache_bins = advagg_flush_caches();
-  foreach ($cache_bins as $bin) {
-    cache_clear_all('*', $bin, TRUE);
+  // Clear caches.
+  advagg_cache_clear_admin_submit();
+
+  // Unset advagg_bundler_info.
+  if (isset($form_state['values']['advagg_bundler_info'])) {
+    unset($form_state['values']['advagg_bundler_info']);
   }
 }

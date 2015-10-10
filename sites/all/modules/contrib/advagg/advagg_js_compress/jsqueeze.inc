@@ -33,7 +33,7 @@ namespace Patchwork;
 /*
 *
 * This class shrinks Javascript code
-* (a process called minification nowdays)
+* (a process called minification nowadays)
 *
 * Should work with most valid Javascript code,
 * even when semi-colons are missing.
@@ -52,7 +52,7 @@ namespace Patchwork;
 * Notes:
 * - Source code must be parse error free before processing.
 * - In order to maximise later HTTP compression (deflate, gzip),
-*   new variables names are choosen by considering closures,
+*   new variables names are chosen by considering closures,
 *   variables' frequency and characters' frequency.
 * - If you use with/eval then be careful.
 *
@@ -173,7 +173,7 @@ class JSqueeze
         list($code, $this->strings ) = $this->extractStrings( $code);
         list($code, $this->closures) = $this->extractClosures($code);
 
-        $key = "//''\"\"#0'"; // This crap has a wonderful property: it can not happend in any valid javascript, even in strings
+        $key = "//''\"\"#0'"; // This crap has a wonderful property: it can not happen in any valid javascript, even in strings
         $this->closures[$key] =& $code;
 
         $tree = array($key => array('parent' => false));
@@ -252,7 +252,7 @@ class JSqueeze
                     {
                         if ("/'" == $instr)
                         {
-                            while (false !== strpos('gmi', $f[$i+1])) $s[] = $f[$i++];
+                            while (isset ($f[$i+1]) && false !== strpos('gmi', $f[$i+1])) $s[] = $f[$i++];
                             $s[] = $f[$i];
                         }
 
@@ -280,6 +280,16 @@ class JSqueeze
                         isset($q[$f[$i]]) && ++$q[$f[$i]];
                         $s[] = '\\' . $f[$i];
                     }
+                }
+                else if ('[' == $f[$i] && "/'" == $instr)
+                {
+                    $instr = '/[';
+                    $s[] = '[';
+                }
+                else if (']' == $f[$i] && '/[' == $instr)
+                {
+                    $instr = "/'";
+                    $s[] = ']';
                 }
                 else if ("'" == $f[$i] || '"' == $f[$i])
                 {
@@ -344,7 +354,7 @@ class JSqueeze
             case "'":
             case '"':
                 $instr = $f[$i];
-                $key = "//''\"\"" . $K++ . ('!' == $instr ? '!' : "'");
+                $key = "//''\"\"" . $K++ . ('!' == $instr ? ']' : "'");
                 $a = $j;
                 $code .= $key;
                 while (isset($key[++$j-$a-1])) $code[$j] = $key[$j-$a-1]; --$j;
@@ -488,6 +498,7 @@ class JSqueeze
         $r1 = array( // keywords with a direct object
             'case','delete','do','else','function','in','instanceof','break',
             'new','return','throw','typeof','var','void','yield','let','if',
+            'const',
         );
 
         $r2 = array( // keywords with a subject

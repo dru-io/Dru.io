@@ -30,7 +30,19 @@ function advagg_mod_admin_settings_form() {
     '#type' => 'checkbox',
     '#title' => t('Remove unused JavaScript if possible'),
     '#default_value' => variable_get('advagg_mod_js_remove_unused', ADVAGG_MOD_JS_REMOVE_UNUSED),
-    '#description' => t('This will scan all included JS files for references to jquery and drupal. If none are found then the core JavaScript (jquery.js, drupal.js, & Drupal.settings) is removed and not loaded on that page. If you have a site that does not use a lot of Javascript this might be helpful as it could prevent unused JavaScript from being executed, thus speeding up your sites frontend performance. Enabling this usually has negative backend performance impact.'),
+    '#description' => t('This will scan all included JS files for references to jquery and drupal. If none are found then the core JavaScript (jquery.js, drupal.js, Drupal.settings) is removed and not loaded on that page. If you have a site that does not use a lot of Javascript this might be helpful as it could prevent unused JavaScript from being executed, thus speeding up your sites frontend performance. Enabling this usually has negative backend performance impact.'),
+  );
+  $form['js']['advagg_mod_js_no_ajaxpagestate'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Remove ajaxPageState CSS and JS data if ajax.js is not used on this page'),
+    '#default_value' => variable_get('advagg_mod_js_no_ajaxpagestate', ADVAGG_MOD_JS_NO_AJAXPAGESTATE),
+    '#description' => t('This assumes that the only thing that uses Drupal.settings.ajaxPageState.css and Drupal.settings.ajaxPageState.js is ajax.js.'),
+  );
+  $form['js']['advagg_mod_js_get_external_dns'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('DNS prefetch src attributes found in the HTML content'),
+    '#default_value' => variable_get('advagg_mod_js_get_external_dns', ADVAGG_MOD_JS_GET_EXTERNAL_DNS),
+    '#description' => t('Scan any JavaScript that was added to the content part of the page incorrectly for a src attribute; if found prefetch that DNS entry.'),
   );
   // Optimize JavaScript Ordering.
   $form['js']['adjust_sort'] = array(
@@ -62,7 +74,7 @@ function advagg_mod_admin_settings_form() {
     '#default_value' => variable_get('advagg_mod_js_adjust_sort_browsers', ADVAGG_MOD_JS_ADJUST_SORT_BROWSERS),
     '#description' => t('This will group all browser conditional JavaScript to be in the lowest group of that conditional rule.'),
   );
-  if (module_exists('googleanalytics') && variable_get('googleanalytics_cache', 0)) {
+  if (module_exists('googleanalytics')) {
     $form['js']['adjust_sort']['expert'] = array(
       '#type' => 'fieldset',
       '#title' => t('Experimental Settings'),
@@ -73,6 +85,12 @@ function advagg_mod_admin_settings_form() {
       '#type' => 'checkbox',
       '#title' => t('Move Google Analytics analytics.js code from inline to be a file'),
       '#default_value' => variable_get('advagg_mod_ga_inline_to_file', ADVAGG_MOD_GA_INLINE_TO_FILE),
+    );
+    $form['js']['adjust_sort']['expert']['advagg_mod_prefetch'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Prefetch stats.g.doubleclick.net/robots.txt'),
+      '#default_value' => variable_get('advagg_mod_prefetch', ADVAGG_MOD_PREFETCH),
+      '#description' => t('Opens a connection to stats.g.doubleclick.net in order to speed up the round trip time.'),
     );
   }
 
@@ -89,17 +107,29 @@ function advagg_mod_admin_settings_form() {
     '#options' => array(
       0 => t('Disabled'),
       1 => t('All but JavaScript Libraries'),
-      2 => t('All'),
+      3 => t('All but what is in the $all_in_footer_list'),
+      2 => t('All (might break things)'),
     ),
     '#description' => t("If you have JavaScript inline in the body of your document, such as if you are displaying ads, you may need to keep Drupal JS Libraries in the head instead of moving them to the footer. This will keep all JS added with the JS_LIBRARY group in the head while still moving all other JavaScript to the footer."),
   );
   $form['js']['placement']['advagg_mod_js_defer'] = array(
-    '#type' => 'checkbox',
+    '#type' => 'radios',
     '#title' => t('Deferred JavaScript Execution: Add The defer Tag To All Script Tags'),
     '#default_value' => variable_get('advagg_mod_js_defer', ADVAGG_MOD_JS_DEFER),
+    '#options' => array(
+      0 => t('Disabled'),
+      2 => t('All but external scripts'),
+      1 => t('All (might break things)'),
+    ),
     '#description' => t('This will delay the script execution until the HTML parser has finished. This will have a similar effect to moving all JavaScript to the footer. This might break javascript (especially inline); only use after extensive testing! <a href="@link">More Info</a>', array(
       '@link' => 'http://peter.sh/experiments/asynchronous-and-deferred-javascript-execution-explained/',
     )),
+  );
+  $form['js']['placement']['advagg_mod_js_async_in_header'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Asynchronous JavaScript Execution: Group together in the header'),
+    '#default_value' => variable_get('advagg_mod_js_async_in_header', ADVAGG_MOD_JS_ASYNC_IN_HEADER),
+    '#description' => t('This will move all async JavaScript code to the header in the same group.'),
   );
   $form['js']['placement']['advagg_mod_js_footer_inline_alter'] = array(
     '#type' => 'checkbox',
@@ -110,7 +140,7 @@ function advagg_mod_admin_settings_form() {
     '#states' => array(
       'disabled' => array(
         ':input[name="advagg_mod_js_footer"]' => array('value' => '0'),
-        ':input[name="advagg_mod_js_defer"]' => array('checked' => FALSE),
+        ':input[name="advagg_mod_js_defer"]' => array('value' => '0'),
         ':input[name="advagg_mod_js_async"]' => array('checked' => FALSE),
       ),
     ),
@@ -144,21 +174,62 @@ function advagg_mod_admin_settings_form() {
     '#default_value' => variable_get('advagg_mod_wrap_inline_js_xpath', ADVAGG_MOD_WRAP_INLINE_JS_XPATH),
     '#description' => t('In general this should be disabled due to the unpredictable nature of parsing html snippets using DOMDocument loadHTML(). Only enable if you have script tags inside a textarea that have not been ran through htmlentities().'),
   );
+  $form['js']['placement']['advagg_mod_js_defer_inline_alter'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Deferred inline JavaScript Execution: Put a wrapper around inline JS so it runs from a setTimeout call.'),
+    '#default_value' => variable_get('advagg_mod_js_defer_inline_alter', ADVAGG_MOD_JS_DEFER_INLINE_ALTER),
+    '#description' => t('This will put a wrapper around any inline JavaScript.'),
+  );
+  $advagg_mod_defer_inline_js_skip_list = trim(variable_get('advagg_mod_defer_inline_js_skip_list', ADVAGG_MOD_DEFER_INLINE_JS_SKIP_LIST));
+  $form['js']['placement']['advagg_mod_defer_inline'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Deferred Inline Settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => empty($advagg_mod_defer_inline_js_skip_list),
+    '#states' => array(
+      'visible' => array(
+        ':input[name="advagg_mod_js_defer_inline_alter"]' => array('checked' => TRUE),
+      ),
+    ),
+  );
+  $form['js']['placement']['advagg_mod_defer_inline']['advagg_mod_defer_inline_js_skip_list'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Inline skip list for wrapper code'),
+    '#default_value' => variable_get('advagg_mod_defer_inline_js_skip_list', ADVAGG_MOD_DEFER_INLINE_JS_SKIP_LIST),
+    '#description' => t("If the inline JavaScript matches a given string then the whole inline script will not be wrapped. Enter one per line."),
+  );
+  if (!module_exists('jquery_update') || variable_get('jquery_update_jquery_cdn', 'none') === 'none') {
+    $GLOBALS['conf']['advagg_mod_js_defer_jquery'] = FALSE;
+  }
   $form['js']['placement']['expert'] = array(
     '#type' => 'fieldset',
     '#title' => t('Experimental Settings'),
-    '#description' => t('Here there be dragons.'),
     '#collapsible' => TRUE,
-    '#collapsed' => !variable_get('advagg_mod_js_async', ADVAGG_MOD_JS_ASYNC),
+    '#collapsed' => !variable_get('advagg_mod_js_async', ADVAGG_MOD_JS_ASYNC) && !variable_get('advagg_mod_js_defer_jquery', ADVAGG_MOD_JS_DEFER_JQUERY),
   );
   $form['js']['placement']['expert']['advagg_mod_js_async'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Asynchronous JavaScript Execution: Add The async Tag To All Script Tags'),
+    '#title' => t('Here there be dragons! Asynchronous JavaScript Execution: Add The async Tag To All Script Tags'),
     '#default_value' => variable_get('advagg_mod_js_async', ADVAGG_MOD_JS_ASYNC),
     '#description' => t('This will cause the script to be downloaded in the background and executed out of order. This will break most javascript as most code is not async safe; only use after extensive testing! <a href="@link">More Info</a>', array(
       '@link' => 'http://peter.sh/experiments/asynchronous-and-deferred-javascript-execution-explained/',
     )),
   );
+  if (module_exists('jquery_update') && variable_get('jquery_update_jquery_cdn', 'none') !== 'none') {
+    $form['js']['placement']['expert']['advagg_mod_js_defer_jquery'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Defer CDN version of jquery.js from jquery update'),
+      '#default_value' => variable_get('advagg_mod_js_defer_jquery', ADVAGG_MOD_JS_DEFER_JQUERY),
+      '#description' => t('By default the CDN version of jquery is not defered; this allows for jquery to be defered. Requires the "Deferred inline JavaScript Execution: Put a wrapper around inline JS so it runs from a setTimeout call" setting to be enalbed in order to be used. Not using a CDN in <a href="@url">jQuery Update</a> also means that defer works and does not require this experimental setting.', array(
+        '@url' => url('admin/config/development/jquery_update'),
+      )),
+      '#states' => array(
+        'disabled' => array(
+          ':input[name="advagg_mod_js_defer_inline_alter"]' => array('checked' => FALSE),
+        ),
+      ),
+    );
+  }
   // Outdated settings.
   $form['js']['old'] = array(
     '#type' => 'fieldset',
@@ -268,7 +339,7 @@ function advagg_mod_admin_settings_form() {
     '#options' => array(
       0 => t('Inline javascript loader library (If enabled this is recommended)'),
       2 => t('Local file included in aggregate'),
-      // 4 => t('Externally load the latest from github (SLOW! Not a CDN!!!)'),
+      4 => t('Externally load the latest from github'),
     ),
     '#description' => t('The <a href="@link">loadCSS</a> library can be included in various ways.', array(
       '@link' => 'https://github.com/filamentgroup/loadCSS',
@@ -280,56 +351,110 @@ function advagg_mod_admin_settings_form() {
     ),
   );
 
+  $pages_all = variable_get('advagg_mod_inline_pages', '');
+  $pages_css = variable_get('advagg_mod_inline_css_pages', '');
+  $pages_js = variable_get('advagg_mod_inline_js_pages', '');
   $form['landing_page'] = array(
     '#type' => 'fieldset',
     '#title' => t('Inline CSS/JS on specific pages'),
-    '#description' => t('For most people this is a setting that should not be used. This will prevent all local CSS & JavaScript files from being downloaded; instead the contents of them will all be inlined. This will cause the raw HTML downloaded to be a lot bigger but it will cause less connections to your webserver from being created. This can sometimes be useful for certain landing pages.'),
+    '#description' => t('For most people these are settings that should not be used. This will prevent all local CSS and/or JavaScript files from being downloaded; instead the contents of them will all be inlined. This will cause the raw HTML downloaded to be a lot bigger but it will cause less connections to your webserver from being created. This can sometimes be useful for certain landing pages.'),
     '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
+    '#collapsed' => ($pages_all || $pages_css || $pages_js) ? FALSE : TRUE,
   );
   // Taken from block_admin_configure().
   $access = user_access('use PHP for settings');
-  $visibility = variable_get('advagg_mod_inline_visibility', ADVAGG_MOD_VISIBILITY_LISTED);
-  $pages = variable_get('advagg_mod_inline_pages', '');
-  if ($visibility == ADVAGG_MOD_VISIBILITY_PHP && !$access) {
-    $form['landing_page']['path']['visibility'] = array(
+  $options = array(
+    // ADVAGG_MOD_VISIBILITY_NOTLISTED => t('All pages except those listed'),
+    ADVAGG_MOD_VISIBILITY_LISTED => t('Only the listed pages'),
+  );
+  $description = t("Specify pages by using their paths. Enter one path per line. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page.", array(
+    '%blog' => 'blog',
+    '%blog-wildcard' => 'blog/*',
+    '%front' => '<front>',
+  ));
+
+  if (module_exists('php') && $access) {
+    $options += array(ADVAGG_MOD_VISIBILITY_PHP => t('Pages on which this PHP code returns <code>TRUE</code> (experts only)'));
+    $title = t('Pages or PHP code');
+    $description .= ' ' . t('If the PHP option is chosen, enter PHP code between %php. Note that executing incorrect PHP code can break your Drupal site.', array('%php' => '<?php ?>'));
+  }
+  else {
+    $title = t('Pages');
+  }
+
+  $visibility_all = variable_get('advagg_mod_inline_visibility', ADVAGG_MOD_VISIBILITY_LISTED);
+  if ($visibility_all == ADVAGG_MOD_VISIBILITY_PHP && !$access) {
+    $form['landing_page']['path']['visibility_all'] = array(
       '#type' => 'value',
-      '#value' => $visibility,
+      '#value' => $visibility_all,
     );
-    $form['landing_page']['path']['pages'] = array(
+    $form['landing_page']['path']['pages_all'] = array(
       '#type' => 'value',
-      '#value' => $pages,
+      '#value' => $pages_all,
     );
   }
   else {
-    $options = array(
-      // ADVAGG_MOD_VISIBILITY_NOTLISTED => t('All pages except those listed'),
-      ADVAGG_MOD_VISIBILITY_LISTED => t('Only the listed pages'),
-    );
-    $description = t("Specify pages by using their paths. Enter one path per line. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog. %front is the front page.", array(
-      '%blog' => 'blog',
-      '%blog-wildcard' => 'blog/*',
-      '%front' => '<front>',
-    ));
-
-    if (module_exists('php') && $access) {
-      $options += array(ADVAGG_MOD_VISIBILITY_PHP => t('Pages on which this PHP code returns <code>TRUE</code> (experts only)'));
-      $title = t('Pages or PHP code');
-      $description .= ' ' . t('If the PHP option is chosen, enter PHP code between %php. Note that executing incorrect PHP code can break your Drupal site.', array('%php' => '<?php ?>'));
-    }
-    else {
-      $title = t('Pages');
-    }
-    $form['landing_page']['path']['advagg_mod_inline_settings'] = array(
+    $form['landing_page']['path']['advagg_mod_inline_visibility'] = array(
       '#type' => 'radios',
-      '#title' => t('Inline CSS/JS on specific pages'),
+      '#title' => t('Inline CSS and JS on specific pages'),
       '#options' => $options,
-      '#default_value' => $visibility,
+      '#default_value' => $visibility_all,
     );
     $form['landing_page']['path']['advagg_mod_inline_pages'] = array(
       '#type' => 'textarea',
       '#title' => '<span class="element-invisible">' . $title . '</span>',
-      '#default_value' => $pages,
+      '#default_value' => $pages_all,
+      '#description' => $description,
+    );
+  }
+
+  $visibility_css = variable_get('advagg_mod_inline_css_visibility', ADVAGG_MOD_VISIBILITY_LISTED);
+  if ($visibility_css == ADVAGG_MOD_VISIBILITY_PHP && !$access) {
+    $form['landing_page']['path']['visibility_all'] = array(
+      '#type' => 'value',
+      '#value' => $visibility_css,
+    );
+    $form['landing_page']['path']['pages_all'] = array(
+      '#type' => 'value',
+      '#value' => $pages_css,
+    );
+  }
+  else {
+    $form['landing_page']['path']['advagg_mod_inline_css_visibility'] = array(
+      '#type' => 'radios',
+      '#title' => t('Inline CSS on specific pages'),
+      '#options' => $options,
+      '#default_value' => $visibility_css,
+    );
+    $form['landing_page']['path']['advagg_mod_inline_css_pages'] = array(
+      '#type' => 'textarea',
+      '#title' => '<span class="element-invisible">' . $title . '</span>',
+      '#default_value' => $pages_css,
+      '#description' => $description,
+    );
+  }
+  $visibility_js = variable_get('advagg_mod_inline_js_visibility', ADVAGG_MOD_VISIBILITY_LISTED);
+  if ($visibility_js == ADVAGG_MOD_VISIBILITY_PHP && !$access) {
+    $form['landing_page']['path']['visibility_all'] = array(
+      '#type' => 'value',
+      '#value' => $visibility_js,
+    );
+    $form['landing_page']['path']['pages_all'] = array(
+      '#type' => 'value',
+      '#value' => $pages_js,
+    );
+  }
+  else {
+    $form['landing_page']['path']['advagg_mod_inline_js_visibility'] = array(
+      '#type' => 'radios',
+      '#title' => t('Inline JS on specific pages'),
+      '#options' => $options,
+      '#default_value' => $visibility_js,
+    );
+    $form['landing_page']['path']['advagg_mod_inline_js_pages'] = array(
+      '#type' => 'textarea',
+      '#title' => '<span class="element-invisible">' . $title . '</span>',
+      '#default_value' => $pages_js,
       '#description' => $description,
     );
   }
@@ -396,10 +521,8 @@ function advagg_mod_admin_settings_form_validate($form, &$form_state) {
  * Clear out the advagg cache bin when the save configuration button is pressed.
  */
 function advagg_mod_admin_settings_form_submit($form, &$form_state) {
-  $cache_bins = advagg_flush_caches();
-  foreach ($cache_bins as $bin) {
-    cache_clear_all('*', $bin, TRUE);
-  }
+  // Clear caches.
+  advagg_cache_clear_admin_submit();
 
   // If unified_multisite_dir has changed, flush menu router at the end of the
   // request.
@@ -408,6 +531,10 @@ function advagg_mod_admin_settings_form_submit($form, &$form_state) {
   if ($multisite_dir != $dir) {
     register_shutdown_function('advagg_get_root_files_dir', TRUE);
     register_shutdown_function('menu_rebuild');
+  }
+
+  if (empty($form_state['values']['advagg_mod_js_defer_inline_alter']) && !empty($form_state['values']['advagg_mod_js_defer_jquery'])) {
+    $form_state['values']['advagg_mod_js_defer_jquery'] = FALSE;
   }
 }
 
