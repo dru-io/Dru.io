@@ -75,11 +75,11 @@ function flag_page($action, $flag, $entity_id) {
 /**
  * Form for confirming the (un)flagging of an entity.
  *
- * @param string $action
+ * @param $action
  *   Either 'flag' or 'unflag'.
- * @param flag_flag $flag
+ * @param $flag
  *   A loaded flag object.
- * @param int $entity_id
+ * @param $entity_id
  *   The id of the entity to operate on. The type is implicit in the flag.
  *
  * @see flag_confirm_submit()
