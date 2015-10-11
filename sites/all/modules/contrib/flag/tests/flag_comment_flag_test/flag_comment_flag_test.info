@@ -1,8 +1,9 @@
-name = Flag Bookmark
-description = Provides an example bookmark flag and supporting views.
-core = 7.x
+name = Flag Comment Flag Test
+description = Test module for comment flags.
 dependencies[] = flag
-package = Flags
+dependencies[] = comment
+core = 7.x
+hidden = TRUE
 
 ; Information added by Drupal.org packaging script on 2015-09-20
 version = "7.x-3.6+18-dev"
