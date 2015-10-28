@@ -58,6 +58,8 @@ function druio_theme_preprocess_page(&$variables) {
   if ($status == "403 Forbidden") {
     _druio_theme_preprocess_page_403($variables);
   }
+  drupal_add_feed(url('rss/questions', array('absolute' => TRUE)), variable_get('site_name') . ': Вопросы');
+  drupal_add_feed(url('rss/posts', array('absolute' => TRUE)), variable_get('site_name') . ': Публикации');
 }
 
 /**
