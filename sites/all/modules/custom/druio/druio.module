@@ -5,7 +5,7 @@
  * Main code.
  */
 
-define(DRUIO_MIN_USER_RATING_TO_VOTE, 20);
+define('DRUIO_MIN_USER_RATING_TO_VOTE', 20);
 
 // Tracking messages config.
 module_load_include('inc', 'druio', 'includes/druio.messages');
