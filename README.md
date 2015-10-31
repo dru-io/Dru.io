@@ -1,5 +1,5 @@
 <a href="http://dru.io" title="Русскоязычное сообщество Drupal" alt="Русскоязычное сообщество Drupal">
-<img src="http://dru.io/sites/all/themes/druiot/logo.png" alt="Dru.io" width="170" />
+<img src="http://dru.io/sites/all/themes/druio_theme/logo.png" alt="Dru.io" width="170" />
 </a>
 
 **Адрес сообщества:** <a href="http://dru.io" title="Русскоязычное сообщество Drupal">dru.io</a>
