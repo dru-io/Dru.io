@@ -236,6 +236,13 @@ function druio_theme() {
       'template' => 'templates/theme/add-content-buttons',
       'render element' => 'theme',
     ),
+    'add_question_help_text' => array(
+      'template' => 'theme/add-question-help',
+      'variables' => array(
+        'user_rating' => NULL,
+        'min_rating' => NULL,
+      ),
+    )
   );
 }
 
@@ -331,7 +338,7 @@ function druio_rate_vote_alter($vote, $context) {
   $user_wrapper = entity_metadata_wrapper('user', $user);
   if ($context['widget']->name == 'vote_up_down') {
     if ($user_wrapper->field_user_rating->value() < DRUIO_MIN_USER_RATING_TO_VOTE) {
-      drupal_set_message('Вы не можете изменить рейтинг, так как Ваш рейтинг меньше ' . DRUIO_MIN_USER_RATING_TO_VOTE .'.', 'warning');
+      drupal_set_message('Вы не можете изменить рейтинг, так как Ваш рейтинг меньше ' . DRUIO_MIN_USER_RATING_TO_VOTE . '.', 'warning');
       $context['save'] = FALSE;
       if ($vote['entity_type'] == 'node') {
         $context['redirect'] = url('node/' . $vote['entity_id']);
@@ -348,5 +355,47 @@ function druio_preprocess_node(&$variables) {
   // Redirect user from /answer/NID page to question page.
   if ($node_wrapper->getBundle() == 'answer' && arg(0) == 'node' && $variables['view_mode'] != 'teaser') {
     drupal_goto('node/' . $node_wrapper->field_answer_question_reference->getIdentifier());
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ * FORM_ID:
+ *   question_node_form
+ *
+ * Altering question 'add' form.
+ */
+function druio_form_question_node_form_alter(&$form, &$form_state, $form_id) {
+  global $user;
+  $user_rating = druio_rating_get_user_rating($user);
+  $query_parameters = drupal_get_query_parameters();
+  // Query for forcing this part of code.
+  if ($user_rating < DRUIO_MIN_USER_RATING_TO_VOTE || isset($query_parameters['help'])) {
+    // Hide every form element.
+    foreach ($form as $key => $value) {
+      if (is_array($form[$key]) && !empty($form[$key]['#type'])) {
+        $form[$key]['#states'] = array(
+          'visible' => array(
+            'input[name="i_read_it"]' => array(
+              'checked' => TRUE,
+            ),
+          ),
+        );
+      }
+    }
+
+    $form['new_users_help'] = array(
+      '#theme' => 'add_question_help_text',
+      '#user_rating' => $user_rating,
+      '#min_rating' => DRUIO_MIN_USER_RATING_TO_VOTE,
+      '#weight' => -100,
+    );
+
+    $form['i_read_it'] = array(
+      '#type' => 'checkbox',
+      '#title' => 'Я готов задать вопрос!',
+      '#description' => 'Ставя эту галочку, вы подтерждаете что прочитали рекомендации по добавлению вопросов.',
+      '#weight' => -90,
+    );
   }
 }
