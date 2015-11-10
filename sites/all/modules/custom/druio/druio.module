@@ -425,16 +425,17 @@ function druio_question_node_form_title_suggestions($form, $form_state) {
       ->range(0, 5)
       ->execute();
 
+    $html_result = '';
     if ($result->rowCount()) {
-      $html_result = '<strong>Похожие вопросы:</strong>';
+      $html_result .= '<strong>Похожие вопросы:</strong>';
       $html_result .= '<div class="description">Возможно на ваш вопрос, на который вы ищите ответ, уже давали ответ.</div>';
       foreach ($result as $node) {
         $view = node_view(node_load($node->nid), 'minimal');
         $html_result .= drupal_render($view);
       }
-      $commands = array();
-      $commands[] = ajax_command_html(NULL, $html_result);
-      return array('#type' => 'ajax', '#commands' => $commands);
     }
+    $commands = array();
+    $commands[] = ajax_command_html(NULL, $html_result);
+    return array('#type' => 'ajax', '#commands' => $commands);
   }
 }
