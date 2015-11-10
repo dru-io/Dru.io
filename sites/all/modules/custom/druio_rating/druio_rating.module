@@ -88,8 +88,8 @@ function druio_rating_form_alter(&$form, &$form_state, $form_id) {
  */
 function druio_rating_get_user_rating($user) {
   $wrapper = entity_metadata_wrapper('user', $user);
-  if ($wrapper->__isset('field_user_rating')) {
-    return $wrapper->field_user_rating->value();
+  if ($rating = $wrapper->field_user_rating->value()) {
+    return $rating;
   }
   else {
     return 0;
