@@ -398,4 +398,43 @@ function druio_form_question_node_form_alter(&$form, &$form_state, $form_id) {
       '#weight' => -90,
     );
   }
+
+  $form['title']['#suffix'] = '<div id="suggested-questions"></div>';
+  $form['title']['#attributes'] = array(
+    'autocomplete' => 'off',
+  );
+  $form['title']['#ajax'] = array(
+    'callback' => 'druio_question_node_form_title_suggestions',
+    'wrapper' => 'suggested-questions',
+    //'event' => 'keydown',
+    'keypress' => TRUE,
+    'method' => 'html',
+  );
+}
+
+/**
+ * Callback for question title suggestions on question creation form page.
+ */
+function druio_question_node_form_title_suggestions($form, $form_state) {
+  $values = $form_state['values'];
+  if (!empty($values['title'])) {
+    $result = db_select('node', 'n')
+      ->fields('n', array('nid', 'title'))
+      ->condition('n.type', 'question')
+      ->condition('n.title', '%' . db_like($values['title']) . '%', 'LIKE')
+      ->range(0, 5)
+      ->execute();
+
+    if ($result->rowCount()) {
+      $html_result = '<strong>Похожие вопросы:</strong>';
+      $html_result .= '<div class="description">Возможно на ваш вопрос, на который вы ищите ответ, уже давали ответ.</div>';
+      foreach ($result as $node) {
+        $view = node_view(node_load($node->nid), 'minimal');
+        $html_result .= drupal_render($view);
+      }
+      $commands = array();
+      $commands[] = ajax_command_html(NULL, $html_result);
+      return array('#type' => 'ajax', '#commands' => $commands);
+    }
+  }
 }

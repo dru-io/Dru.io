@@ -1625,3 +1625,19 @@ body {
     }
   }
 }
+
+#suggested-questions {
+  margin-bottom: pxtorem(15px);
+  .description {
+    margin-bottom: pxtorem(10px);
+    @include font-size(12px);
+    color: $gray;
+  }
+  .question-minimal {
+    margin-bottom: pxtorem(10px);
+    &:last-child {
+      padding-bottom: pxtorem(10px);
+      border-bottom: 1px solid $gray-lighter;
+    }
+  }
+}
