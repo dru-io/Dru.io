@@ -1225,6 +1225,34 @@ blockquote {
     margin-right: 0; }
   /* line 68, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
   #drupal-sib {
+    width: 1184px; }
+  /* line 12, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/output/support/_clearfix.scss */
+  #drupal-8-0-promo .features:after {
+    content: " ";
+    display: block;
+    clear: both; }
+  /* line 75, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
+  #drupal-8-0-promo .features .feature {
+    width: 32.20339%;
+    float: left; }
+    /* line 66, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/language/susy/_gallery.scss */
+    #drupal-8-0-promo .features .feature:nth-child(3n + 1) {
+      margin-left: 0;
+      margin-right: -100%;
+      clear: both;
+      margin-left: 0; }
+    /* line 66, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/language/susy/_gallery.scss */
+    #drupal-8-0-promo .features .feature:nth-child(3n + 2) {
+      margin-left: 33.89831%;
+      margin-right: -100%;
+      clear: none; }
+    /* line 66, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/layouts/susy/susy/language/susy/_gallery.scss */
+    #drupal-8-0-promo .features .feature:nth-child(3n + 3) {
+      margin-left: 67.79661%;
+      margin-right: -100%;
+      clear: none; }
+  /* line 81, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_lg.scss */
+  #drupal-8-countdown {
     width: 1184px; } }
 
 @-webkit-keyframes bounce {
@@ -2404,7 +2432,7 @@ blockquote {
 .project-full > .left .dev-status:before,
 .project-full > .left .maintenance-status:before,
 .project-full > .left .version:before,
-.project-full > .left .drupalorg:before, #druio-projects-download-form .archives .title:before, #druio-projects-download-form .drush .title:before, .order-full > .info .left .status:before, .order-full > .info .left .budget:before, .order-full > .info .left .files:before, .order-full > .info .left .files .file:before, .order-full > .info .right .contacts:before, .order-full .flag-ready2work .flag:before, #block-block-1 .social li .item:before, #sidebar-toggle:before, #mobile-menu-button:before, #mobile-menu .header-auth-user .logout:before, .page-403 .auth:before, .page-403 .register:before, #drupal-sib .dates:before, #drupal-sib .buttons .podcast:before, #drupal-sib .buttons .website:before {
+.project-full > .left .drupalorg:before, #druio-projects-download-form .archives .title:before, #druio-projects-download-form .drush .title:before, .order-full > .info .left .status:before, .order-full > .info .left .budget:before, .order-full > .info .left .files:before, .order-full > .info .left .files .file:before, .order-full > .info .right .contacts:before, .order-full .flag-ready2work .flag:before, #block-block-1 .social li .item:before, #sidebar-toggle:before, #mobile-menu-button:before, #mobile-menu .header-auth-user .logout:before, .page-403 .auth:before, .page-403 .register:before, #drupal-sib .dates:before, #drupal-sib .buttons .podcast:before, #drupal-sib .buttons .website:before, #drupal-8-0-promo .features .feature:before, #drupal-8-countdown .buttons .more:before, #drupal-8-countdown .buttons .demo:before {
   display: inline-block;
   font: normal normal normal 14px/1 FontAwesome;
   font-size: inherit;
@@ -2482,7 +2510,7 @@ blockquote {
 .project-full > .left .fa-pull-left.dev-status:before,
 .project-full > .left .fa-pull-left.maintenance-status:before,
 .project-full > .left .fa-pull-left.version:before,
-.project-full > .left .fa-pull-left.drupalorg:before, #druio-projects-download-form .archives .fa-pull-left.title:before, #druio-projects-download-form .drush .fa-pull-left.title:before, .order-full > .info .left .fa-pull-left.status:before, .order-full > .info .left .fa-pull-left.budget:before, .order-full > .info .left .fa-pull-left.files:before, .order-full > .info .left .files .fa-pull-left.file:before, .order-full > .info .right .fa-pull-left.contacts:before, .order-full .flag-ready2work .fa-pull-left.flag:before, #block-block-1 .social li .fa-pull-left.item:before, .fa-pull-left#sidebar-toggle:before, .fa-pull-left#mobile-menu-button:before, #mobile-menu .header-auth-user .fa-pull-left.logout:before, .page-403 .fa-pull-left.auth:before, .page-403 .fa-pull-left.register:before, #drupal-sib .fa-pull-left.dates:before, #drupal-sib .buttons .fa-pull-left.podcast:before, #drupal-sib .buttons .fa-pull-left.website:before {
+.project-full > .left .fa-pull-left.drupalorg:before, #druio-projects-download-form .archives .fa-pull-left.title:before, #druio-projects-download-form .drush .fa-pull-left.title:before, .order-full > .info .left .fa-pull-left.status:before, .order-full > .info .left .fa-pull-left.budget:before, .order-full > .info .left .fa-pull-left.files:before, .order-full > .info .left .files .fa-pull-left.file:before, .order-full > .info .right .fa-pull-left.contacts:before, .order-full .flag-ready2work .fa-pull-left.flag:before, #block-block-1 .social li .fa-pull-left.item:before, .fa-pull-left#sidebar-toggle:before, .fa-pull-left#mobile-menu-button:before, #mobile-menu .header-auth-user .fa-pull-left.logout:before, .page-403 .fa-pull-left.auth:before, .page-403 .fa-pull-left.register:before, #drupal-sib .fa-pull-left.dates:before, #drupal-sib .buttons .fa-pull-left.podcast:before, #drupal-sib .buttons .fa-pull-left.website:before, #drupal-8-0-promo .features .fa-pull-left.feature:before, #drupal-8-countdown .buttons .fa-pull-left.more:before, #drupal-8-countdown .buttons .fa-pull-left.demo:before {
   margin-right: .3em; }
 
 /* line 15, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
@@ -2493,7 +2521,7 @@ blockquote {
 .project-full > .left .fa-pull-right.dev-status:before,
 .project-full > .left .fa-pull-right.maintenance-status:before,
 .project-full > .left .fa-pull-right.version:before,
-.project-full > .left .fa-pull-right.drupalorg:before, #druio-projects-download-form .archives .fa-pull-right.title:before, #druio-projects-download-form .drush .fa-pull-right.title:before, .order-full > .info .left .fa-pull-right.status:before, .order-full > .info .left .fa-pull-right.budget:before, .order-full > .info .left .fa-pull-right.files:before, .order-full > .info .left .files .fa-pull-right.file:before, .order-full > .info .right .fa-pull-right.contacts:before, .order-full .flag-ready2work .fa-pull-right.flag:before, #block-block-1 .social li .fa-pull-right.item:before, .fa-pull-right#sidebar-toggle:before, .fa-pull-right#mobile-menu-button:before, #mobile-menu .header-auth-user .fa-pull-right.logout:before, .page-403 .fa-pull-right.auth:before, .page-403 .fa-pull-right.register:before, #drupal-sib .fa-pull-right.dates:before, #drupal-sib .buttons .fa-pull-right.podcast:before, #drupal-sib .buttons .fa-pull-right.website:before {
+.project-full > .left .fa-pull-right.drupalorg:before, #druio-projects-download-form .archives .fa-pull-right.title:before, #druio-projects-download-form .drush .fa-pull-right.title:before, .order-full > .info .left .fa-pull-right.status:before, .order-full > .info .left .fa-pull-right.budget:before, .order-full > .info .left .fa-pull-right.files:before, .order-full > .info .left .files .fa-pull-right.file:before, .order-full > .info .right .fa-pull-right.contacts:before, .order-full .flag-ready2work .fa-pull-right.flag:before, #block-block-1 .social li .fa-pull-right.item:before, .fa-pull-right#sidebar-toggle:before, .fa-pull-right#mobile-menu-button:before, #mobile-menu .header-auth-user .fa-pull-right.logout:before, .page-403 .fa-pull-right.auth:before, .page-403 .fa-pull-right.register:before, #drupal-sib .fa-pull-right.dates:before, #drupal-sib .buttons .fa-pull-right.podcast:before, #drupal-sib .buttons .fa-pull-right.website:before, #drupal-8-0-promo .features .fa-pull-right.feature:before, #drupal-8-countdown .buttons .fa-pull-right.more:before, #drupal-8-countdown .buttons .fa-pull-right.demo:before {
   margin-left: .3em; }
 
 /* Deprecated as of 4.4.0 */
@@ -2513,7 +2541,7 @@ blockquote {
 .project-full > .left .pull-left.dev-status:before,
 .project-full > .left .pull-left.maintenance-status:before,
 .project-full > .left .pull-left.version:before,
-.project-full > .left .pull-left.drupalorg:before, #druio-projects-download-form .archives .pull-left.title:before, #druio-projects-download-form .drush .pull-left.title:before, .order-full > .info .left .pull-left.status:before, .order-full > .info .left .pull-left.budget:before, .order-full > .info .left .pull-left.files:before, .order-full > .info .left .files .pull-left.file:before, .order-full > .info .right .pull-left.contacts:before, .order-full .flag-ready2work .pull-left.flag:before, #block-block-1 .social li .pull-left.item:before, .pull-left#sidebar-toggle:before, .pull-left#mobile-menu-button:before, #mobile-menu .header-auth-user .pull-left.logout:before, .page-403 .pull-left.auth:before, .page-403 .pull-left.register:before, #drupal-sib .pull-left.dates:before, #drupal-sib .buttons .pull-left.podcast:before, #drupal-sib .buttons .pull-left.website:before {
+.project-full > .left .pull-left.drupalorg:before, #druio-projects-download-form .archives .pull-left.title:before, #druio-projects-download-form .drush .pull-left.title:before, .order-full > .info .left .pull-left.status:before, .order-full > .info .left .pull-left.budget:before, .order-full > .info .left .pull-left.files:before, .order-full > .info .left .files .pull-left.file:before, .order-full > .info .right .pull-left.contacts:before, .order-full .flag-ready2work .pull-left.flag:before, #block-block-1 .social li .pull-left.item:before, .pull-left#sidebar-toggle:before, .pull-left#mobile-menu-button:before, #mobile-menu .header-auth-user .pull-left.logout:before, .page-403 .pull-left.auth:before, .page-403 .pull-left.register:before, #drupal-sib .pull-left.dates:before, #drupal-sib .buttons .pull-left.podcast:before, #drupal-sib .buttons .pull-left.website:before, #drupal-8-0-promo .features .pull-left.feature:before, #drupal-8-countdown .buttons .pull-left.more:before, #drupal-8-countdown .buttons .pull-left.demo:before {
   margin-right: .3em; }
 
 /* line 24, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_bordered-pulled.scss */
@@ -2524,7 +2552,7 @@ blockquote {
 .project-full > .left .pull-right.dev-status:before,
 .project-full > .left .pull-right.maintenance-status:before,
 .project-full > .left .pull-right.version:before,
-.project-full > .left .pull-right.drupalorg:before, #druio-projects-download-form .archives .pull-right.title:before, #druio-projects-download-form .drush .pull-right.title:before, .order-full > .info .left .pull-right.status:before, .order-full > .info .left .pull-right.budget:before, .order-full > .info .left .pull-right.files:before, .order-full > .info .left .files .pull-right.file:before, .order-full > .info .right .pull-right.contacts:before, .order-full .flag-ready2work .pull-right.flag:before, #block-block-1 .social li .pull-right.item:before, .pull-right#sidebar-toggle:before, .pull-right#mobile-menu-button:before, #mobile-menu .header-auth-user .pull-right.logout:before, .page-403 .pull-right.auth:before, .page-403 .pull-right.register:before, #drupal-sib .pull-right.dates:before, #drupal-sib .buttons .pull-right.podcast:before, #drupal-sib .buttons .pull-right.website:before {
+.project-full > .left .pull-right.drupalorg:before, #druio-projects-download-form .archives .pull-right.title:before, #druio-projects-download-form .drush .pull-right.title:before, .order-full > .info .left .pull-right.status:before, .order-full > .info .left .pull-right.budget:before, .order-full > .info .left .pull-right.files:before, .order-full > .info .left .files .pull-right.file:before, .order-full > .info .right .pull-right.contacts:before, .order-full .flag-ready2work .pull-right.flag:before, #block-block-1 .social li .pull-right.item:before, .pull-right#sidebar-toggle:before, .pull-right#mobile-menu-button:before, #mobile-menu .header-auth-user .pull-right.logout:before, .page-403 .pull-right.auth:before, .page-403 .pull-right.register:before, #drupal-sib .pull-right.dates:before, #drupal-sib .buttons .pull-right.podcast:before, #drupal-sib .buttons .pull-right.website:before, #drupal-8-0-promo .features .pull-right.feature:before, #drupal-8-countdown .buttons .pull-right.more:before, #drupal-8-countdown .buttons .pull-right.demo:before {
   margin-left: .3em; }
 
 /* line 4, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_animated.scss */
@@ -2746,7 +2774,7 @@ blockquote {
   content: ""; }
 
 /* line 32, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-play-circle-o:before {
+.fa-play-circle-o:before, #drupal-8-countdown .buttons .demo:before {
   content: ""; }
 
 /* line 33, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -2899,7 +2927,8 @@ blockquote {
 .fa-pencil-square-o:before,
 #make-reply:before,
 .order-full .flag-ready2work .flag.unflagged:before,
-.order-full .flag-ready2work .flag.flag-action:before {
+.order-full .flag-ready2work .flag.flag-action:before,
+#drupal-8-0-promo .features .feature.authoring:before {
   content: ""; }
 
 /* line 69, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -3301,7 +3330,7 @@ blockquote {
 
 /* line 166, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
 .fa-globe:before, .event-teaser .left .city:before,
-.event-full .left .city:before {
+.event-full .left .city:before, #drupal-8-0-promo .features .feature.adopters:before {
   content: ""; }
 
 /* line 167, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -3393,7 +3422,7 @@ blockquote {
   content: ""; }
 
 /* line 187, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-magic:before {
+.fa-magic:before, #drupal-8-0-promo .features .feature.accessibility:before {
   content: ""; }
 
 /* line 188, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -3509,7 +3538,7 @@ blockquote {
   content: ""; }
 
 /* line 214, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-exchange:before {
+.fa-exchange:before, #drupal-8-0-promo .features .feature.web-services:before {
   content: ""; }
 
 /* line 215, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -3545,7 +3574,7 @@ blockquote {
   content: ""; }
 
 /* line 223, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-file-text-o:before, .order-full > .info .left .files:before {
+.fa-file-text-o:before, .order-full > .info .left .files:before, #drupal-8-0-promo .features .feature.field:before, #drupal-8-countdown .buttons .more:before {
   content: ""; }
 
 /* line 224, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -3626,7 +3655,9 @@ blockquote {
 
 /* line 243, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
 .fa-mobile-phone:before,
-.fa-mobile:before {
+.fa-mobile:before,
+#drupal-8-0-promo .features .feature:before,
+#drupal-8-0-promo .features .feature.mobile:before {
   content: ""; }
 
 /* line 244, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -3731,7 +3762,7 @@ blockquote {
   content: ""; }
 
 /* line 268, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-question:before {
+.fa-question:before, #drupal-8-0-promo .features .feature.ux:before {
   content: ""; }
 
 /* line 269, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -3803,7 +3834,7 @@ blockquote {
   content: ""; }
 
 /* line 286, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-html5:before {
+.fa-html5:before, #drupal-8-0-promo .features .feature.markup:before {
   content: ""; }
 
 /* line 287, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -4242,7 +4273,7 @@ blockquote {
   content: ""; }
 
 /* line 391, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-language:before {
+.fa-language:before, #drupal-8-0-promo .features .feature.multilangual:before {
   content: ""; }
 
 /* line 392, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -4270,7 +4301,7 @@ blockquote {
   content: ""; }
 
 /* line 398, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-cubes:before, .question-teaser .right .tags .tag.project:before, .question-full .content-pane > .right .tags .tag.project:before, .project-teaser .type:before, .project-full > .left .type:before {
+.fa-cubes:before, .question-teaser .right .tags .tag.project:before, .question-full .content-pane > .right .tags .tag.project:before, .project-teaser .type:before, .project-full > .left .type:before, #drupal-8-0-promo .features .feature.configuration:before {
   content: ""; }
 
 /* line 399, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -4454,7 +4485,7 @@ blockquote {
   content: ""; }
 
 /* line 439, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-sliders:before {
+.fa-sliders:before, #drupal-8-0-promo .features .feature.views:before {
   content: ""; }
 
 /* line 440, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -4567,7 +4598,7 @@ blockquote {
   content: ""; }
 
 /* line 467, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-paint-brush:before {
+.fa-paint-brush:before, #drupal-8-0-promo .features .feature.theming:before {
   content: ""; }
 
 /* line 468, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -5028,7 +5059,7 @@ blockquote {
   content: ""; }
 
 /* line 578, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
-.fa-industry:before {
+.fa-industry:before, #drupal-8-0-promo .features .feature.industry:before {
   content: ""; }
 
 /* line 579, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/font-awesome/font-awesome/_icons.scss */
@@ -5111,7 +5142,9 @@ input[type="submit"],
 .btn-info,
 .page-403 .auth,
 .page-403 .register,
-#drupal-sib .buttons a {
+#drupal-sib .buttons a,
+#drupal-8-countdown .buttons .more,
+#drupal-8-countdown .buttons .demo {
   cursor: pointer;
   display: inline-block;
   vertical-align: middle;
@@ -5148,7 +5181,9 @@ input[type="submit"],
 .btn-info,
 .page-403 .auth,
 .page-403 .register,
-#drupal-sib .buttons a {
+#drupal-sib .buttons a,
+#drupal-8-countdown .buttons .more,
+#drupal-8-countdown .buttons .demo {
   transition: all 200ms; }
   /* line 38, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/_buttons.scss */
   input[type="button"]:hover, input[type="button"]:focus,
@@ -5170,6 +5205,8 @@ input[type="submit"],
   .page-403 .auth:hover,
   .page-403 .register:hover,
   #drupal-sib .buttons a:hover,
+  #drupal-8-countdown .buttons .more:hover,
+  #drupal-8-countdown .buttons .demo:hover,
   input[type="button"]:focus,
   button:focus,
   .btn:focus,
@@ -5185,7 +5222,9 @@ input[type="submit"],
   .btn-info:focus,
   .page-403 .auth:focus,
   .page-403 .register:focus,
-  #drupal-sib .buttons a:focus {
+  #drupal-sib .buttons a:focus,
+  #drupal-8-countdown .buttons .more:focus,
+  #drupal-8-countdown .buttons .demo:focus {
     color: #333;
     text-decoration: none; }
   /* line 44, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/component/_buttons.scss */
@@ -5206,7 +5245,9 @@ input[type="submit"],
   .btn-info:active,
   .page-403 .auth:active,
   .page-403 .register:active,
-  #drupal-sib .buttons a:active {
+  #drupal-sib .buttons a:active,
+  #drupal-8-countdown .buttons .more:active,
+  #drupal-8-countdown .buttons .demo:active {
     background: #f4f4f4;
     border-color: #729fcf;
     transition: all 200ms; }
@@ -5231,6 +5272,8 @@ input[type="submit"],
   .page-403 .disabled.auth,
   .page-403 .disabled.register,
   #drupal-sib .buttons a.disabled,
+  #drupal-8-countdown .buttons .disabled.more,
+  #drupal-8-countdown .buttons .disabled.demo,
   input[disabled][type="button"],
   button[disabled],
   [disabled].btn,
@@ -5247,6 +5290,8 @@ input[type="submit"],
   .page-403 [disabled].auth,
   .page-403 [disabled].register,
   #drupal-sib .buttons a[disabled],
+  #drupal-8-countdown .buttons [disabled].more,
+  #drupal-8-countdown .buttons [disabled].demo,
   input[type="button"]:disabled,
   button:disabled,
   .btn:disabled,
@@ -5262,7 +5307,9 @@ input[type="submit"],
   .btn-info:disabled,
   .page-403 .auth:disabled,
   .page-403 .register:disabled,
-  #drupal-sib .buttons a:disabled {
+  #drupal-sib .buttons a:disabled,
+  #drupal-8-countdown .buttons .more:disabled,
+  #drupal-8-countdown .buttons .demo:disabled {
     cursor: not-allowed;
     pointer-events: none;
     opacity: 0.7; }
@@ -7629,4 +7676,55 @@ body {
       margin: 0.75rem 0; }
     /* line 1703, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #drupal-sib .buttons .podcast:before, #drupal-sib .buttons .website:before {
+      margin-right: 0.375rem; }
+
+/**
+ * Promo page for Drupal 8.
+ * /drupal-8.0
+ */
+/* line 1722, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+#drupal-8-0-promo .features {
+  margin-top: 1.25rem; }
+  /* line 1724, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  #drupal-8-0-promo .features .feature {
+    position: relative;
+    padding-left: 3.75rem; }
+    /* line 1727, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    #drupal-8-0-promo .features .feature:before {
+      font-size: 40px;
+      font-size: 2.5rem;
+      width: 3.4375rem;
+      text-align: center;
+      color: #2E5B95;
+      position: absolute;
+      left: 0;
+      top: 0; }
+    /* line 1777, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    #drupal-8-0-promo .features .feature > h3 {
+      margin-top: 0; }
+
+/* line 1784, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+#drupal-8-countdown {
+  background: url("../../images/drupal-8.jpg") no-repeat center bottom;
+  background-size: cover;
+  left: -1.25rem;
+  top: -1.25rem;
+  position: relative;
+  padding: 0.375rem 1.25rem 12.5rem 1.25rem;
+  color: white;
+  text-align: center; }
+  /* line 1793, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  #drupal-8-countdown > h2 {
+    font-weight: bold; }
+  /* line 1796, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  #drupal-8-countdown > p {
+    max-width: 37.5rem;
+    display: block;
+    margin: 0 auto 1.25rem; }
+  /* line 1801, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  #drupal-8-countdown .buttons {
+    display: inline-block;
+    margin: 0 auto; }
+    /* line 1806, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    #drupal-8-countdown .buttons .more:before, #drupal-8-countdown .buttons .demo:before {
       margin-right: 0.375rem; }
