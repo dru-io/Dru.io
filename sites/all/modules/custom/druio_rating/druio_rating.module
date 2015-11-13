@@ -116,11 +116,11 @@ function druio_rating_rate_vote_alter($vote, $context) {
     ));
     $sum_node_rating = $votingapi_results[2]['value'];
 
-    // block user
-    if ($rating < DRUIO_RATING_VALUE_FOR_USER_BLOCK) {
-      $entity->author->status->set('0');
-      $entity->author->save();
-    }
+    // block user (pending till official rules)
+    /* if ($rating < DRUIO_RATING_VALUE_FOR_USER_BLOCK) {
+       $entity->author->status->set('0');
+       $entity->author->save();
+    }*/
 
     // depublish node
     if (isset($sum_node_rating) && $sum_node_rating < DRUIO_RATING_VALUE_FOR_DEPUBLISH_NODE) {
