@@ -1,5 +1,8 @@
 <?php
 
+define('DRUIO_RATING_VALUE_FOR_USER_BLOCK', 50);
+define('DRUIO_RATING_VALUE_FOR_DEPUBLISH_NODE', -9);
+
 /*
  * Rating calculation
  * @param integer $uid
@@ -72,7 +75,7 @@ function druio_rating_worker_queue($user) {
 }
 
 /*
- * Implements hook_form_alter
+ * Implements hook_form_alter()
  */
 
 function druio_rating_form_alter(&$form, &$form_state, $form_id) {
@@ -93,5 +96,36 @@ function druio_rating_get_user_rating($user) {
   }
   else {
     return 0;
+  }
+}
+
+/*
+ * Implements hook_rate_vote_alter()
+ */
+
+function druio_rating_rate_vote_alter($vote, $context) {
+  // Block users with low rating
+  if ($vote['value'] == -1 && $vote['entity_type'] == 'node') {
+    $entity = entity_metadata_wrapper('node', $vote['entity_id']);
+    $rating = $entity->author->field_user_rating->value();
+    $votingapi_results = votingapi_select_results(array(
+      'entity_type' => 'node',
+      'entity_id' => $vote['entity_id'],
+      'tag' => $vote['tag'],
+      'value_type' => $vote['value_type'],
+    ));
+    $sum_node_rating = $votingapi_results[2]['value'];
+
+    // block user
+    if ($rating < DRUIO_RATING_VALUE_FOR_USER_BLOCK) {
+      $entity->author->status->set('0');
+      $entity->author->save();
+    }
+
+    // depublish node
+    if (isset($sum_node_rating) && $sum_node_rating < DRUIO_RATING_VALUE_FOR_DEPUBLISH_NODE) {
+      $entity->status->set('0');
+      $entity->save();
+    }
   }
 }
