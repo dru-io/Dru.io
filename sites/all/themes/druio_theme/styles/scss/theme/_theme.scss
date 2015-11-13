@@ -1780,3 +1780,39 @@ body {
     }
   }
 }
+
+#drupal-8-countdown {
+  background: url('../../images/drupal-8.jpg') no-repeat center bottom;
+  background-size: cover;
+  left: pxtorem(-20px);
+  top: pxtorem(-20px);
+  position: relative;
+  padding: pxtorem(6px) pxtorem(20px)  pxtorem(200px) pxtorem(20px);
+  color: white;
+  text-align: center;
+  > h2 {
+    font-weight: bold;
+  }
+  > p {
+    max-width: pxtorem(600px);
+    display: block;
+    margin: 0 auto pxtorem(20px);
+  }
+  .buttons {
+    display: inline-block;
+    margin: 0 auto;
+    .more, .demo {
+      @extend .btn;
+      &:before {
+        @extend .fa;
+        margin-right: pxtorem(6px);
+      }
+    }
+    .demo:before {
+      @extend .fa-play-circle-o;
+    }
+    .more:before {
+      @extend .fa-file-text-o;
+    }
+  }
+}

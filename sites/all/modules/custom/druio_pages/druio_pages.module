@@ -12,7 +12,7 @@ function druio_pages_menu() {
   $items['drupal-8.0'] = array(
     'title' => 'Drupal 8: Сделай что-нибудь удивительное для каждого',
     'page callback' => 'theme',
-    'page arguments' => array('druio_pages_drupal_8.0'),
+    'page arguments' => array('druio_pages_drupal_8_0'),
     'access arguments' => array('access content'),
     'type' => MENU_CALLBACK,
   );
@@ -27,8 +27,12 @@ function druio_pages_theme($existing, $type, $theme, $path) {
   $path = drupal_get_path('module', 'druio_pages') . '/theme';
 
   return array(
-    'druio_pages_drupal_8.0' => array(
+    'druio_pages_drupal_8_0' => array(
       'template' => 'drupal-8-0',
+      'path' => $path,
+    ),
+    'druio_pages_drupal_8_0_countown' => array(
+      'template' => 'drupal-8-0-countdown',
       'path' => $path,
     ),
   );
