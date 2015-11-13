@@ -1,0 +1,5 @@
+name = Dru.io - Pages
+description = Custom pages, defined in code. Prefered to promo-pages.
+version = 7.x-1.x
+core = 7.x
+package = Dru.io
