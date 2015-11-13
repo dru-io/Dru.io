@@ -1713,3 +1713,69 @@ body {
     }
   }
 }
+
+/**
+ * Promo page for Drupal 8.
+ * /drupal-8.0
+ */
+#drupal-8-0-promo {
+  .features {
+    .feature {
+      position: relative;
+      padding-left: pxtorem(60px);
+      &:before {
+        @extend .fa;
+        @extend .fa-mobile;
+        @include font-size(40px);
+        width: pxtorem(55px);
+        text-align: center;
+        color: $brand-color-1;
+        position: absolute;
+        left: 0;
+        top: 0;
+      }
+      &.mobile:before {
+        @extend .fa-mobile;
+      }
+      &.multilangual:before {
+        @extend .fa-language;
+      }
+      &.configuration:before {
+        @extend .fa-cubes;
+      }
+      &.accessibility:before {
+        @extend .fa-magic;
+      }
+      &.ux:before {
+        @extend .fa-question;
+      }
+      &.authoring:before {
+        @extend .fa-pencil-square-o;
+      }
+      &.theming:before {
+        @extend .fa-paint-brush;
+      }
+      &.web-services:before {
+        @extend .fa-exchange;
+      }
+      &.views:before {
+        @extend .fa-sliders;
+      }
+      &.field:before {
+        @extend .fa-file-text-o;
+      }
+      &.markup:before {
+        @extend .fa-html5;
+      }
+      &.industry:before {
+        @extend .fa-industry;
+      }
+      &.adopters:before {
+        @extend .fa-globe;
+      }
+      > h3 {
+        margin-top: 0;
+      }
+    }
+  }
+}
