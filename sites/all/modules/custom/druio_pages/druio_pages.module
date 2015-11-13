@@ -1,0 +1,35 @@
+<?php
+
+/**
+ * @file
+ * Contains code for custom defined pages like promo pages (/drupal-8.0).
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function druio_pages_menu() {
+  $items['drupal-8.0'] = array(
+    'title' => 'Drupal 8: Сделай что-нибудь удивительное для каждого',
+    'page callback' => 'theme',
+    'page arguments' => array('druio_pages_drupal_8.0'),
+    'access arguments' => array('access content'),
+    'type' => MENU_CALLBACK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function druio_pages_theme($existing, $type, $theme, $path) {
+  $path = drupal_get_path('module', 'druio_pages') . '/theme';
+
+  return array(
+    'druio_pages_drupal_8.0' => array(
+      'template' => 'drupal-8-0',
+      'path' => $path,
+    ),
+  );
+}

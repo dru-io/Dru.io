@@ -68,4 +68,13 @@
   #drupal-sib {
     width: $site-width;
   }
+
+  #drupal-8-0-promo {
+    .features {
+      @include susy-clearfix;
+      .feature {
+        @include gallery(4 of 12);
+      }
+    }
+  }
 }
