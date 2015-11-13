@@ -41,4 +41,7 @@
       @include full();
     }
   }
+  #drupal-sib {
+    width: $site-width;
+  }
 }

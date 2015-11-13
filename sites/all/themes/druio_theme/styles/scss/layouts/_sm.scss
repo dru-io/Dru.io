@@ -177,4 +177,8 @@
       @include span(6 last);
     }
   }
+
+  #drupal-sib {
+    width: $site-width;
+  }
 }
