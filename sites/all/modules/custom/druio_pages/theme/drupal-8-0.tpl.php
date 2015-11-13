@@ -5,56 +5,56 @@
   <h2>Некоторые новые возможности и улучшения Drupal 8:</h2>
   <div class="features">
     <div class="feature mobile">
-      <h3>Mobile in its DNA</h3>
-      <p>Deploy content once and watch it display the way you want on any device.</p>
+      <h3>Поддержка мобильных устройств</h3>
+      <p>Сайт удобный для использования на любом устройстве.</p>
     </div>
     <div class="feature multilangual">
-      <h3>Multilingual Capabilities</h3>
-      <p>Translate anything in the system with built-in user interfaces.</p>
+      <h3>Многоязычность</h3>
+      <p>Переводи любой текст с помощью встроенного интерфейса.</p>
     </div>
     <div class="feature configuration">
-      <h3>New Configuration Management</h3>
-      <p>Transport configuration changes and manage versions with ease.</p>
+      <h3>Новый подход к управлению настройками</h3>
+      <p>Удобный перенос настроек между окржуниями и простое управление версиями.</p>
     </div>
     <div class="feature accessibility">
-      <h3>Accessibility Integration</h3>
-      <p>Extensive support for standard accessibility technologies including WAI-ARIA and semantic HTML5.</p>
+      <h3>Доступная среда</h3>
+      <p>Использование технологий для людей с физическими ограничениями, таких как WAI-ARIA и семантический HTML 5.</p>
     </div>
     <div class="feature ux">
-      <h3>A Better User Experience</h3>
+      <h3>Удобный пользовательский интерфейс</h3>
       <p>Leverage jQuery UI's autocomplete and modal dialogs to serve your visitors a better experience. </p>
    </div>
     <div class="feature web-services">
       <h3>Built-in Web Services</h3>
-      <p>Build mobile apps with Drupal as the data source, or even post back to Drupal from the client.</p>
+      <p>Создавай мобильный приложения использую Drupal как источник данных, or even post back to Drupal from the client.</p>
     </div>
     <div class="feature authoring">
-      <h3>Effortless Authoring</h3>
-      <p>Use the WYSIWYG editor and in-place editing to quickly create formatted content and make changes on the fly.</p>
+      <h3>Простое редактирование</h3>
+      <p>Встроенный редактор WYSIWYG и редактирование на лету, чтобы быстро создавать структурированные материалы и изменять их.</p>
     </div>
     <div class="feature theming">
-      <h3>Fun and Fast Theming</h3>
-      <p>Build sites quickly with the fast, secure and flexible Twig template engine.</p>
+      <h3>Веселая и быстрая темизация</h3>
+      <p>Новый быстрый, гибкий и безопасный шаблонизатор Twig, чтобы менять дизайн сайта.</p>
     </div>
     <div class="feature views">
-      <h3>Views, Out of the Box</h3>
-      <p>Easily customize the front page, listing blocks, and more. Simply create custom admin pages, customize filters, actions, and more.</p>
+      <h3>Модуль Views в ядре</h3>
+      <p>Простой способ изменить вид главной страницы, списка блоков, и т.п. Простое создание страниц администрирования, управление фильтрами и действиями, ...</p>
     </div>
     <div class="feature field">
-      <h3>Field Power</h3>
-      <p>Drupal 8 includes more field types in core, and lets you attach fields to more types of content like entity reference, link, date, e-mail, telephone, etc.</p>
+      <h3>Новые Поля</h3>
+      <p>В Drupal 8 включены новые типы полей: ссылки, дата, телефон, e-mail. Теперь поля можно добавлять к новым типам материалам: блокам, форме контактов.</p>
     </div>
     <div class="feature markup">
-      <h3>Better Markup with HTML 5</h3>
-      <p>The page markup in Drupal 8 is now HTML 5-based. Each output template has simplified elements and classes with native input tools for mobile fields like date, email and phone.</p>
+      <h3>HTML 5 разметка</h3>
+      <p>Разметка страниц в Drupal 8 основана на HTML 5. В каждом шаблоне есть упрошенный элементы и классы с нативной поддержкой ввода дааных на мобильных: дата, e-mail, телефон.</p>
     </div>
     <div class="feature industry">
-      <h3>Industry Standard Approach</h3>
+      <h3>Стандарты Индустрии</h3>
       <p>Non-Drupal developers can embrace object oriented programming and proven technologies from the larger PHP community.</p>
     </div>
     <div class="feature adopters">
-      <h3>Early Adopters</h3>
-      <p>Companies and organizations around the world are already using Drupal 8. Will yours be next?</p>
+      <h3>Пионеры</h3>
+      <p>Компании и организации по всему миру уже используют Drupal 8. А когда начнешь ты?</p>
     </div>
   </div>
 </div>
