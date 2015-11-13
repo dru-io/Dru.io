@@ -7663,20 +7663,23 @@ body {
  * Promo page for Drupal 8.
  * /drupal-8.0
  */
-/* line 1723, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
-#drupal-8-0-promo .features .feature {
-  position: relative;
-  padding-left: 3.75rem; }
-  /* line 1726, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
-  #drupal-8-0-promo .features .feature:before {
-    font-size: 40px;
-    font-size: 2.5rem;
-    width: 3.4375rem;
-    text-align: center;
-    color: #2E5B95;
-    position: absolute;
-    left: 0;
-    top: 0; }
-  /* line 1776, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
-  #drupal-8-0-promo .features .feature > h3 {
-    margin-top: 0; }
+/* line 1722, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+#drupal-8-0-promo .features {
+  margin-top: 1.25rem; }
+  /* line 1724, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+  #drupal-8-0-promo .features .feature {
+    position: relative;
+    padding-left: 3.75rem; }
+    /* line 1727, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    #drupal-8-0-promo .features .feature:before {
+      font-size: 40px;
+      font-size: 2.5rem;
+      width: 3.4375rem;
+      text-align: center;
+      color: #2E5B95;
+      position: absolute;
+      left: 0;
+      top: 0; }
+    /* line 1777, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    #drupal-8-0-promo .features .feature > h3 {
+      margin-top: 0; }
