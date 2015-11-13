@@ -14,6 +14,16 @@
   <div class="right"></div>
 </section>
 
+<section id="drupal-sib">
+  <img src="http://camp.drupalsib.ru/sites/all/themes/camp/img/hl-logo.png" alt="Drupal Sib 2015 logo" class="logo">
+  <h3 class="title">DrupalCamp Siberia 2015</h3>
+  <div class="dates">18-20 ДЕКАБРЯ</div>
+  <div class="buttons">
+    <a href="http://podcasts.dru.io/podcast/21" target="_blank" class="podcast">Подкаст с организаторами</a>
+    <a href="http://camp.drupalsib.ru/" target="_blank" class="website">Официальный сайт</a>
+  </div>
+</section>
+
 <section id="frontpage-latest">
   <?php print views_embed_view('posts_node', 'frontpage'); ?>
   <?php print views_embed_view('question_nodes', 'frontpage'); ?>

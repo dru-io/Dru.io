@@ -1641,3 +1641,75 @@ body {
     }
   }
 }
+@keyframes drupalsibbg {
+  0% {
+    background-position-y: 0%;
+  }
+  100% {
+    -ms-background-position-y: 100%;
+  }
+}
+#drupal-sib {
+  height: pxtorem(72px);
+  background: url('../../images/drupal-sib-bg.jpg') 0 78%;
+  animation: drupalsibbg 30s linear 0s infinite alternate;
+  left: pxtorem(-20px);
+  top: pxtorem(-20px);
+  position: relative;
+  padding: pxtorem(6px) pxtorem(20px);
+  @include susy-clearfix;
+  display: none;
+  @include breakpoint($md-media) {
+    display: block;
+  }
+  .logo {
+    height: pxtorem(60px);
+    display: block;
+    float: left;
+    margin-right: pxtorem(15px);
+  }
+  .title {
+    float: left;
+    display: inline-block;
+    color: #00609F;
+    font-weight: bold;
+    margin: 0;
+    line-height: pxtorem(60px);
+    @include font-size(20px);
+    text-shadow: 0px 1px 3px rgba(white, .75);
+    margin-right: pxtorem(25px);
+    @include breakpoint($lg-media) {
+      @include font-size(32px);
+    }
+  }
+  .dates {
+    float: left;
+    color: #00609F;
+    line-height: pxtorem(60px);
+    text-shadow: 0px 1px 3px rgba(white, .75);
+    &:before {
+      @extend .fa;
+      @extend .fa-calendar-check-o;
+      margin-right: pxtorem(6px);
+    }
+  }
+  .buttons {
+    float: right;
+    a {
+      @extend .btn;
+      margin: pxtorem(12px) 0;
+    }
+    .podcast, .website {
+      &:before {
+        @extend .fa;
+        margin-right: pxtorem(6px);
+      }
+    }
+    .podcast:before {
+      @extend .fa-microphone;
+    }
+    .website:before {
+      @extend .fa-external-link;
+    }
+  }
+}
