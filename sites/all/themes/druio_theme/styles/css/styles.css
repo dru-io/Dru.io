@@ -7574,7 +7574,7 @@ body {
 #drupal-sib {
   height: 4.5rem;
   background: url("../../images/drupal-sib-bg.jpg") 0 78%;
-  animation: drupalsibbg 30s linear 0s infinite alternate;
+  animation: drupalsibbg 10s linear 0s infinite alternate;
   left: -1.25rem;
   top: -1.25rem;
   position: relative;
