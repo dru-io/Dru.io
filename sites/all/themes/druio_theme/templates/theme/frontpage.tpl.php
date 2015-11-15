@@ -25,7 +25,7 @@
 </section>
 
 <section id="frontpage-promoted">
-  <?php print views_embed_view('promoted', 'block'); ?>
+  <?php print views_embed_view('promoted_content', 'block'); ?>
 </section>
 
 <section id="frontpage-latest">
