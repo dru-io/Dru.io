@@ -9,14 +9,14 @@
     attach: function (context, settings) {
 
       // Open external links in new window.
-      $("a[href^='http://']").attr('target','_blank');
+      $("a[href^='http://'], a[href^='https://']", context).attr('target','_blank');
 
       // Attach Lightcase for reponsive resized images.
       // @todo: use imagesloaded.js
       $('.question-full .right > .content img, ' +
         '.post-full > .content img,' +
         '.answer-teaser > .right > .content img,' +
-        '.comment-minimal > .content img', $article).one("load", function () {
+        '.comment-minimal > .content img', context).one("load", function () {
         var $this = $(this);
         if ($this.width() != $this[0].naturalWidth) {
           if (0 == $(this).parent('a').length) {
