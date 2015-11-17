@@ -761,7 +761,10 @@ blockquote {
     .answer-teaser > .right {
       width: 83.05085%;
       float: right;
-      margin-right: 0; } }
+      margin-right: 0; }
+  /* line 45, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_xs.scss */
+  #drupal-8-countdown {
+    width: 100vw; } }
 
 /**
  * @file
@@ -1053,6 +1056,9 @@ blockquote {
     margin-right: 0; }
   /* line 181, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_sm.scss */
   #drupal-sib {
+    width: 752px; }
+  /* line 185, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_sm.scss */
+  #drupal-8-countdown {
     width: 752px; } }
 
 /**
@@ -1134,6 +1140,9 @@ blockquote {
       margin-right: 0; }
   /* line 44, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_md.scss */
   #drupal-sib {
+    width: 976px; }
+  /* line 48, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_md.scss */
+  #drupal-8-countdown {
     width: 976px; } }
 
 /**
@@ -7708,7 +7717,7 @@ body {
   background: url("../../images/drupal-8.jpg") no-repeat center bottom;
   background-size: cover;
   left: -1.25rem;
-  top: -1.25rem;
+  top: 1.25rem;
   position: relative;
   padding: 0.375rem 1.25rem 12.5rem 1.25rem;
   color: white;
@@ -7725,6 +7734,9 @@ body {
   #drupal-8-countdown .buttons {
     display: inline-block;
     margin: 0 auto; }
-    /* line 1806, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
-    #drupal-8-countdown .buttons .more:before, #drupal-8-countdown .buttons .demo:before {
-      margin-right: 0.375rem; }
+    /* line 1804, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+    #drupal-8-countdown .buttons .more, #drupal-8-countdown .buttons .demo {
+      margin-bottom: 0.375rem; }
+      /* line 1807, /home/nikita/Projects/druio.dev/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
+      #drupal-8-countdown .buttons .more:before, #drupal-8-countdown .buttons .demo:before {
+        margin-right: 0.375rem; }

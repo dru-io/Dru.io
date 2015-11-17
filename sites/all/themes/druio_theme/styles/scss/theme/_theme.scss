@@ -1785,7 +1785,7 @@ body {
   background: url('../../images/drupal-8.jpg') no-repeat center bottom;
   background-size: cover;
   left: pxtorem(-20px);
-  top: pxtorem(-20px);
+  top: pxtorem(20px);
   position: relative;
   padding: pxtorem(6px) pxtorem(20px)  pxtorem(200px) pxtorem(20px);
   color: white;
@@ -1803,6 +1803,7 @@ body {
     margin: 0 auto;
     .more, .demo {
       @extend .btn;
+      margin-bottom: pxtorem(6px);
       &:before {
         @extend .fa;
         margin-right: pxtorem(6px);
