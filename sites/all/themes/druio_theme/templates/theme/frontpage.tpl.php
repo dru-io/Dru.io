@@ -32,3 +32,5 @@
   <?php print views_embed_view('posts_node', 'frontpage'); ?>
   <?php print views_embed_view('question_nodes', 'frontpage'); ?>
 </section>
+
+<?php print theme('druio_pages_drupal_8_0_countown'); ?>
