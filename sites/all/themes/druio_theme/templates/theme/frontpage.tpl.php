@@ -24,6 +24,10 @@
   </div>
 </section>
 
+<section id="frontpage-promoted">
+  <?php print views_embed_view('promoted_content', 'block'); ?>
+</section>
+
 <section id="frontpage-latest">
   <?php print views_embed_view('posts_node', 'frontpage'); ?>
   <?php print views_embed_view('question_nodes', 'frontpage'); ?>

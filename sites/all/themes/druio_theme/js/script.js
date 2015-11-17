@@ -7,17 +7,16 @@
 
   Drupal.behaviors.druio_theme = {
     attach: function (context, settings) {
-      // Set target="_blank" for links in content section.
-      var $article = $('#content > article', context);
-      $('section.question__right a, section.post__content a', $article)
-        .not('.category a, .projects a, ul.links a')
-        .attr('target', '_blank');
 
+      // Open external links in new window.
+      $("a[href^='http://'], a[href^='https://']", context).attr('target','_blank');
+
+      // Attach Lightcase for reponsive resized images.
       // @todo: use imagesloaded.js
-      $('section.question__right img, ' +
-        'section.post__content img,' +
-        '.answer img,' +
-        '.comments img', $article).one("load", function () {
+      $('.question-full .right > .content img, ' +
+        '.post-full > .content img,' +
+        '.answer-teaser > .right > .content img,' +
+        '.comment-minimal > .content img', context).one("load", function () {
         var $this = $(this);
         if ($this.width() != $this[0].naturalWidth) {
           if (0 == $(this).parent('a').length) {
