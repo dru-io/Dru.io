@@ -1,7 +1,0 @@
-name = Dru.io - Projects
-description = Code for Drupal Projects pages.
-version = 7.x-1.x
-core = 7.x
-package = Dru.io
-dependencies[] = druio
-files[] = inc/DruioProjects.inc

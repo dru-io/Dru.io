@@ -1,8 +1,0 @@
-name = Dru.io rating
-description = Custom code.
-version = 7.x-1.x
-core = 7.x
-package = Dru.io
-
-dependencies[] = votingapi
-dependencies[] = rate

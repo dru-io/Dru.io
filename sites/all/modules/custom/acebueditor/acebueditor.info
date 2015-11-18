@@ -1,5 +1,0 @@
-name = Ace Editor for BUEditor
-description = Provides a toolbar button for writing code with Ace in BUEditor.
-core = 7.x
-package = Content authoring
-dependencies[] = bueditor

@@ -1,8 +1,0 @@
-name = Dru.io - Live to Development.
-description = This module provides tools for preparing site for public sources.
-version = 7.x-1.x
-core = 7.x
-package = Dru.io
-dependencies[] = druio
-dependencides[] = ultimate_cron
-configure = admin/config/druio/livetodev

@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the druio_events feature.
- */
-
-include_once 'druio_events.features.inc';
