@@ -1,14 +1,17 @@
 <?php
 
 define('DRUIO_RATING_VALUE_FOR_USER_BLOCK', -50);
-define('DRUIO_RATING_VALUE_FOR_DEPUBLISH_NODE', -9);
+define('DRUIO_RATING_VALUE_FOR_DEPUBLISH_NODE_FIRST_GRADE', -9);
+// This value used when author has rating lower than -30.
+define('DRUIO_RATING_VALUE_FOR_DEPUBLISH_NODE_SECOND_GRADE', -3);
+// When author has rating lower than -50.
+define('DRUIO_RATING_VALUE_FOR_DEPUBLISH_NODE_THIRD_GRADE', -2);
 
-/*
+/**
  * Rating calculation
  * @param integer $uid
  * @return integer
  */
-
 function druio_rating_count($uid) {
   $vote_query = db_select('votingapi_vote', 'v')
     ->fields('v', array('entity_id', 'value', 'value_type'));
@@ -19,7 +22,7 @@ function druio_rating_count($uid) {
   $votes = $vote_query->execute()->fetchObject()->expression;
 
   $flag_type = 3;
-  $answer_query =  db_select('flagging', 'f')
+  $answer_query = db_select('flagging', 'f')
     ->fields('f', array('fid', 'entity_id'))
     ->condition('f.fid', $flag_type);
   $answer_query->innerJoin('node', 'n', 'n.nid = f.entity_id');
@@ -36,7 +39,6 @@ function druio_rating_count($uid) {
 /**
  * Implements hook_cronapi().
  */
-
 function druio_rating_cronapi() {
   $items = array();
   $items['druio_rating_create_queue'] = array();
@@ -57,7 +59,7 @@ function druio_rating_create_queue() {
 }
 
 function druio_rating_cron_queue_info() {
-  $queues['user_rating'] = array (
+  $queues['user_rating'] = array(
     'worker callback' => 'druio_rating_worker_queue',
     'time' => 60,    // Time, in seconds, to let this process run [Optional]
   );
@@ -66,7 +68,7 @@ function druio_rating_cron_queue_info() {
 
 function druio_rating_worker_queue($user) {
   $uid = $user['uid'];
-  if($uid) {
+  if ($uid) {
     $user_wrapper = entity_metadata_wrapper('user', $uid);
     $user_wrapper->field_user_rating = druio_rating_count($uid);
     $user_wrapper->save();
@@ -99,33 +101,26 @@ function druio_rating_get_user_rating($user) {
   }
 }
 
-/*
+/**
  * Implements hook_rate_vote_alter()
  */
-
 function druio_rating_rate_vote_alter($vote, $context) {
-  // Block users with low rating
   if ($vote['value'] == -1 && $vote['entity_type'] == 'node') {
-    $entity = entity_metadata_wrapper('node', $vote['entity_id']);
-    $rating = $entity->author->field_user_rating->value();
-    $votingapi_results = votingapi_select_results(array(
-      'entity_type' => 'node',
-      'entity_id' => $vote['entity_id'],
-      'tag' => $vote['tag'],
-      'value_type' => $vote['value_type'],
-    ));
-    $sum_node_rating = $votingapi_results[2]['value'];
+    $entity_wrapper = entity_metadata_wrapper('node', $vote['entity_id']);
+    $author_rating = druio_rating_get_user_rating($entity_wrapper->author->getIdentifier());
+    $node_rating_info = rate_get_results('node', $entity_wrapper->getIdentifier(), 1);
+    $node_rating = $node_rating_info['rating'];
 
-    // block user (pending till official rules)
-    /* if ($rating < DRUIO_RATING_VALUE_FOR_USER_BLOCK) {
-       $entity->author->status->set('0');
-       $entity->author->save();
-    }*/
-
-    // depublish node
-    if (isset($sum_node_rating) && $sum_node_rating < DRUIO_RATING_VALUE_FOR_DEPUBLISH_NODE) {
-      $entity->status->set('0');
-      $entity->save();
+    if ($author_rating > -30 && $node_rating <= DRUIO_RATING_VALUE_FOR_DEPUBLISH_NODE_FIRST_GRADE) {
+      $entity_wrapper->status->set('0');
     }
+    elseif ($author_rating > -50 && $author_rating <= -30 && $node_rating <= DRUIO_RATING_VALUE_FOR_DEPUBLISH_NODE_SECOND_GRADE) {
+      $entity_wrapper->status->set('0');
+    }
+    elseif ($author_rating <= -50 && $node_rating <= DRUIO_RATING_VALUE_FOR_DEPUBLISH_NODE_THIRD_GRADE) {
+      $entity_wrapper->status->set('0');
+    }
+
+    $entity_wrapper->save();
   }
 }
