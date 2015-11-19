@@ -1779,41 +1779,56 @@ body {
       }
     }
   }
+  .video-pane {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    .video {
+      border: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 
 #drupal-8-countdown {
-  background: url('../../images/drupal-8.jpg') no-repeat center bottom;
-  background-size: cover;
+  background: url('../../images/drupal-8.png') no-repeat right bottom;
   left: pxtorem(-20px);
   top: pxtorem(20px);
   position: relative;
-  padding: pxtorem(6px) pxtorem(20px)  pxtorem(200px) pxtorem(20px);
-  color: white;
+  padding: pxtorem(35px) pxtorem(20px);
   text-align: center;
-  > h2 {
-    font-weight: bold;
-  }
-  > p {
-    max-width: pxtorem(600px);
-    display: block;
-    margin: 0 auto pxtorem(20px);
-  }
-  .buttons {
-    display: inline-block;
-    margin: 0 auto;
-    .more, .demo {
-      @extend .btn;
-      margin-bottom: pxtorem(6px);
-      &:before {
-        @extend .fa;
-        margin-right: pxtorem(6px);
+  .content {
+    > h2 {
+      font-weight: bold;
+      color: $brand-color-1;
+    }
+    > h3 {
+      color: black;
+      margin-top: 0;
+      @include font-size(18px);
+    }
+    .buttons {
+      display: inline-block;
+      margin: 0 auto;
+      .more, .demo {
+        @extend .btn;
+        margin-bottom: pxtorem(6px);
+        &:before {
+          @extend .fa;
+          margin-right: pxtorem(6px);
+        }
       }
-    }
-    .demo:before {
-      @extend .fa-play-circle-o;
-    }
-    .more:before {
-      @extend .fa-file-text-o;
+      .demo:before {
+        @extend .fa-play-circle-o;
+      }
+      .more:before {
+        @extend .fa-file-text-o;
+      }
     }
   }
 }
