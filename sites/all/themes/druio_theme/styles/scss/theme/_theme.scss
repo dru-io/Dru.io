@@ -1779,6 +1779,20 @@ body {
       }
     }
   }
+  .video-pane {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    .video {
+      border: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
 }
 
 #drupal-8-countdown {
@@ -1792,6 +1806,11 @@ body {
     > h2 {
       font-weight: bold;
       color: $brand-color-1;
+    }
+    > h3 {
+      color: black;
+      margin-top: 0;
+      @include font-size(18px);
     }
     .buttons {
       display: inline-block;
