@@ -1,0 +1,48 @@
+0 info it worked if it ends with ok
+1 verbose cli [ '/usr/bin/node', '/usr/bin/npm', 'link', 'gulp' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.40
+4 verbose node_modules/gulp unbuild
+5 verbose link symlinking /usr/lib/node_modules/gulp to /home/rjynhqto/public_html/core/themes/bartik/node_modules/gulp
+6 info build /home/rjynhqto/public_html/core/themes/bartik/node_modules/gulp
+7 info preinstall gulp@3.8.11
+8 verbose linkStuff [ false,
+8 verbose linkStuff   false,
+8 verbose linkStuff   false,
+8 verbose linkStuff   '/home/rjynhqto/public_html/core/themes/bartik/node_modules' ]
+9 info linkStuff gulp@3.8.11
+10 verbose linkBins gulp@3.8.11
+11 verbose link bins [ { gulp: './bin/gulp.js' },
+11 verbose link bins   '/home/rjynhqto/public_html/core/themes/bartik/node_modules/.bin',
+11 verbose link bins   false ]
+12 verbose linkMans gulp@3.8.11
+13 verbose rebuildBundles gulp@3.8.11
+14 verbose rebuildBundles [ '.bin',
+14 verbose rebuildBundles   'archy',
+14 verbose rebuildBundles   'chalk',
+14 verbose rebuildBundles   'deprecated',
+14 verbose rebuildBundles   'gulp-util',
+14 verbose rebuildBundles   'interpret',
+14 verbose rebuildBundles   'liftoff',
+14 verbose rebuildBundles   'minimist',
+14 verbose rebuildBundles   'orchestrator',
+14 verbose rebuildBundles   'pretty-hrtime',
+14 verbose rebuildBundles   'semver',
+14 verbose rebuildBundles   'tildify',
+14 verbose rebuildBundles   'v8flags',
+14 verbose rebuildBundles   'vinyl-fs' ]
+15 error rofs EROFS, chmod '/home/rjynhqto/public_html/core/themes/bartik/node_modules/gulp/bin/gulp.js'
+15 error rofs This is most likely not a problem with npm itself
+15 error rofs and is related to the file system being read-only.
+15 error rofs
+15 error rofs Often virtualized file systems, or other file systems
+15 error rofs that don't support symlinks, give this error.
+16 error System Linux 2.6.32-604.30.3.lve1.3.63.el6.x86_64
+17 error command "/usr/bin/node" "/usr/bin/npm" "link" "gulp"
+18 error cwd /home/rjynhqto/public_html/core/themes/bartik
+19 error node -v v0.10.40
+20 error npm -v 1.4.28
+21 error path /home/rjynhqto/public_html/core/themes/bartik/node_modules/gulp/bin/gulp.js
+22 error code EROFS
+23 error errno 56
+24 verbose exit [ 56, true ]
