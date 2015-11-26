@@ -16,3 +16,17 @@ $susy: (
   gutter-position: after,
   global-box-sizing: border-box,
 );
+
+
+/* Sticky footer */
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#main {
+  flex: 1;
+  width: 100%;
+}
