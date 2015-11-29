@@ -1,0 +1,22 @@
+uuid: 40a648fe-791c-4c31-8a3e-6271457c85f2
+langcode: ru
+status: true
+dependencies:
+  config:
+    - node.type.answer
+id: node.answer.promote
+field_name: promote
+entity_type: node
+bundle: answer
+label: 'Помещено на главную страницу'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Вкл
+  off_label: Выкл
+field_type: boolean
