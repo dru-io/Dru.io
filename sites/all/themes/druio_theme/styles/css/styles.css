@@ -6010,7 +6010,7 @@ body {
       #header .pane .content .top .search-form:before {
         position: absolute;
         left: 0.875rem;
-        line-height: 2.5rem; }
+        line-height: 37px; }
     /* line 78, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
     #header .pane .content .top .header-links .link {
       position: relative;
