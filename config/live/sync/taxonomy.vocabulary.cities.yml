@@ -1,0 +1,9 @@
+uuid: bff477e8-6542-457a-ba00-a5dfb8f79cfb
+langcode: ru
+status: true
+dependencies: {  }
+name: Города
+vid: cities
+description: ''
+hierarchy: 0
+weight: 0

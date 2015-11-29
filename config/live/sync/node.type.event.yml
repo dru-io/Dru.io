@@ -1,0 +1,17 @@
+uuid: 3383e406-4362-4105-8e05-05045074a53e
+langcode: ru
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Мероприятие
+type: event
+description: ''
+help: ''
+new_revision: false
+preview_mode: 0
+display_submitted: false
