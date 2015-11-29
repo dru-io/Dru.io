@@ -69,16 +69,6 @@ AddEncoding gzip svgz
 <IfModule mod_rewrite.c>
   RewriteEngine on
 
-  # robots.txt development redirect
-  RewriteCond %{HTTP_HOST} examplesite\.ru$ [NC]
-  RewriteRule ^robots\.txt$ /robots-devel\.txt [L,R=301]
-
-  # www redirect
-  RewriteCond %{HTTP_HOST} !.examplesite.ru$ [NC]
-  RewriteCond %{HTTP_HOST} !.xn--p1ai$ [NC]
-  RewriteCond %{HTTP_HOST} !^www\. [NC]
-  RewriteRule ^ http://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
-
   # Set "protossl" to "s" if we were accessed via https://.  This is used later
   # if you enable "www." stripping or enforcement, in order to ensure that
   # you don't bounce between http and https.

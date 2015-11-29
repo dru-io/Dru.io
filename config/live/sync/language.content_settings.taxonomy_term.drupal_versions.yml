@@ -1,0 +1,11 @@
+uuid: 0fe6399a-1760-426e-b709-9e1ad35f17ee
+langcode: ru
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.drupal_versions
+id: taxonomy_term.drupal_versions
+target_entity_type_id: taxonomy_term
+target_bundle: drupal_versions
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,18 @@
+uuid: af79c62c-4c01-47e2-8100-0a70ae98f5a4
+langcode: ru
+status: true
+dependencies:
+  theme:
+    - bartik
+id: bartik_page_title
+theme: bartik
+region: content
+weight: -50
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Заголовок страницы'
+  provider: core
+  label_display: '0'
+visibility: {  }

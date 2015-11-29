@@ -1,0 +1,10 @@
+uuid: 1cd19cd1-2d56-44aa-9107-7c5a2bda027a
+langcode: ru
+status: false
+dependencies:
+  module:
+    - user
+id: user.full
+label: 'Учётная запись пользователя'
+targetEntityType: user
+cache: true

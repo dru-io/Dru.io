@@ -1,0 +1,27 @@
+uuid: 8a42418b-4771-4d89-ad00-a971374feb52
+langcode: ru
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.question.body
+    - node.type.question
+  module:
+    - text
+    - user
+id: node.question.teaser
+targetEntityType: node
+bundle: question
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+  links:
+    weight: 100
+hidden:
+  langcode: true

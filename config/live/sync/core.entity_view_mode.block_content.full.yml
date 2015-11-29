@@ -1,0 +1,10 @@
+uuid: 31a7c6f4-ba83-46f5-9d02-2d3b5487ba2d
+langcode: ru
+status: false
+dependencies:
+  module:
+    - block_content
+id: block_content.full
+label: Полный
+targetEntityType: block_content
+cache: true

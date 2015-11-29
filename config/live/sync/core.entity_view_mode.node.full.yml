@@ -1,0 +1,10 @@
+uuid: 481748d6-25a4-4643-be4b-75333c96da48
+langcode: ru
+status: false
+dependencies:
+  module:
+    - node
+id: node.full
+label: 'Содержимое полностью'
+targetEntityType: node
+cache: true

@@ -1,0 +1,11 @@
+uuid: 27fb0904-f38d-411a-b641-65b15d445ffb
+langcode: ru
+status: true
+dependencies:
+  module:
+    - comment
+id: comment_unpublish_action
+label: 'Снять с публикации комментарий'
+type: comment
+plugin: comment_unpublish_action
+configuration: {  }

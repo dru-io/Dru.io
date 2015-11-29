@@ -1,0 +1,11 @@
+uuid: 9f30e8e6-93a0-476f-8529-4119ec9c24ac
+langcode: ru
+status: true
+dependencies:
+  module:
+    - node
+id: node_unpublish_action
+label: 'Снять материал с публикации'
+type: node
+plugin: node_unpublish_action
+configuration: {  }

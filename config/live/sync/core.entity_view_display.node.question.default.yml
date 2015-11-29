@@ -1,0 +1,41 @@
+uuid: 5c3cea63-23ad-45ba-9f24-368fb1b32547
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.field.node.question.body
+    - field.field.node.question.field_question_category
+    - field.field.node.question.field_question_drupal_version
+    - node.type.question
+  module:
+    - text
+    - user
+id: node.question.default
+targetEntityType: node
+bundle: question
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  field_question_category:
+    weight: 103
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  field_question_drupal_version:
+    weight: 104
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+  links:
+    weight: 100
+hidden:
+  langcode: true

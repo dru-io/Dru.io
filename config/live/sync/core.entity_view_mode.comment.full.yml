@@ -1,0 +1,10 @@
+uuid: 2a09ad7a-35ce-4cf8-b554-841f7da3a576
+langcode: ru
+status: false
+dependencies:
+  module:
+    - comment
+id: comment.full
+label: 'Комментарий полностью'
+targetEntityType: comment
+cache: true

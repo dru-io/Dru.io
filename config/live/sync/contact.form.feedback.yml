@@ -1,0 +1,10 @@
+uuid: 5c86058c-148b-419e-a300-ccf77d00e1fb
+langcode: ru
+status: true
+dependencies: {  }
+id: feedback
+label: 'Обратная связь с сайтом'
+recipients:
+  - robot@sborka8.examplesite.ru
+reply: ''
+weight: 0

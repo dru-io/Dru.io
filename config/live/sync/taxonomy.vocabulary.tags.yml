@@ -1,0 +1,9 @@
+uuid: 03b13efc-5c51-4773-8b00-bfde8baa8fce
+langcode: ru
+status: true
+dependencies: {  }
+name: Теги
+vid: tags
+description: 'Используйте метки для группировки статей по темам.'
+hierarchy: 0
+weight: 0

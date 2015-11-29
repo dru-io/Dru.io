@@ -1,0 +1,11 @@
+uuid: f6c79042-7ae7-4fd1-bf58-88d777b9412f
+langcode: ru
+status: true
+dependencies:
+  module:
+    - node
+id: node_make_sticky_action
+label: 'Закрепить материал вверху списков'
+type: node
+plugin: node_make_sticky_action
+configuration: {  }

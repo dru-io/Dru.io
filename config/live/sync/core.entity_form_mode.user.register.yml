@@ -1,0 +1,10 @@
+uuid: 47d65280-a9ac-4adb-9700-ef7b1a9e0ded
+langcode: ru
+status: true
+dependencies:
+  module:
+    - user
+id: user.register
+label: Регистрация
+targetEntityType: user
+cache: true

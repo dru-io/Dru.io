@@ -1,0 +1,9 @@
+uuid: da6da509-35d7-4169-a316-220db8f190a9
+langcode: ru
+status: true
+dependencies: {  }
+name: Категории
+vid: categories
+description: ''
+hierarchy: 0
+weight: 0

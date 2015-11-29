@@ -1,0 +1,10 @@
+uuid: 1ef3c863-35ff-47da-b500-f9968a6486fa
+langcode: ru
+status: true
+dependencies:
+  module:
+    - user
+id: user.compact
+label: Компактный
+targetEntityType: user
+cache: true

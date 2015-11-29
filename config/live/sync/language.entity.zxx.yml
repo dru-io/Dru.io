@@ -1,0 +1,9 @@
+uuid: 8391cff2-75da-41a8-9a00-ecf77d602aea
+langcode: ru
+status: true
+dependencies: {  }
+id: zxx
+label: 'Не применимо'
+direction: ltr
+weight: 3
+locked: true

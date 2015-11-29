@@ -1,0 +1,11 @@
+uuid: 0d4bbdf6-49b8-4578-8500-b540b51f89bf
+langcode: ru
+status: true
+dependencies: {  }
+name: 'Основная страница'
+type: page
+description: 'Используйте <em>основная страница</em>для статичного контента с редко изменяемой информацией, например страницы ''О сайте''.'
+help: ''
+new_revision: false
+preview_mode: 1
+display_submitted: false

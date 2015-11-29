@@ -1,0 +1,10 @@
+session:
+  parameter: language
+url:
+  source: path_prefix
+  prefixes:
+    ru: ''
+  domains:
+    ru: ''
+selected_langcode: site_default
+langcode: ru

@@ -1,0 +1,9 @@
+uuid: 66778aa8-52f1-4479-8f5d-939b2e039f3b
+langcode: ru
+status: true
+dependencies: {  }
+id: personal
+label: 'Персональная форма контактов'
+recipients: {  }
+reply: ''
+weight: 0
