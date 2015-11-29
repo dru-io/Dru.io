@@ -54,14 +54,14 @@ body {
           float: left;
           position: relative;
           .search-input {
-            height: pxtorem(40px);
+            height: 40px;
             width: 100%;
             border-radius: 0;
             background: rgba(white, 0.1);
             box-shadow: none;
             border: none;
             color: #FFF;
-            padding-left: pxtorem(40px);
+            padding-left: 37px;
             margin: 0;
           }
           &:before {
@@ -79,7 +79,7 @@ body {
             position: relative;
             display: block;
             float: left;
-            line-height: pxtorem(40px);
+            line-height: 37px;
             color: $gray-lighter;
             padding: 0 pxtorem($padding-large-vertical);
             background: transparent;
@@ -93,7 +93,7 @@ body {
               &:before {
                 position: absolute;
                 left: 0;
-                line-height: pxtorem(40px);
+                line-height: 37px;
                 @extend .fa;
                 width: pxtorem($padding-large-vertical * 3.5);
                 text-align: center;

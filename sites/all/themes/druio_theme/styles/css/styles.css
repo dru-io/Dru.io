@@ -5997,14 +5997,14 @@ body {
           width: 15rem; } }
       /* line 56, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       #header .pane .content .top .search-form .search-input {
-        height: 2.5rem;
+        height: 40px;
         width: 100%;
         border-radius: 0;
         background: rgba(255, 255, 255, 0.1);
         box-shadow: none;
         border: none;
         color: #FFF;
-        padding-left: 2.5rem;
+        padding-left: 37px;
         margin: 0; }
       /* line 67, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
       #header .pane .content .top .search-form:before {
@@ -6016,7 +6016,7 @@ body {
       position: relative;
       display: block;
       float: left;
-      line-height: 2.5rem;
+      line-height: 37px;
       color: #eeeeee;
       padding: 0 0.625rem;
       background: transparent;
@@ -6032,7 +6032,7 @@ body {
         #header .pane .content .top .header-links .link.tracker:before, #header .pane .content .top .header-links .link.github:before {
           position: absolute;
           left: 0;
-          line-height: 2.5rem;
+          line-height: 37px;
           width: 2.1875rem;
           text-align: center; }
       /* line 107, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/theme/_theme.scss */
