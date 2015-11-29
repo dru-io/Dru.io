@@ -666,7 +666,7 @@ body {
 
 /* line 29, /home/cxwfrqij/public_html/sites/all/themes/druio_theme/styles/scss/layouts/_layouts.scss */
 #main {
-  flex: 1;
+  flex: 1 0 auto;
   width: 100%; }
 
 /**
