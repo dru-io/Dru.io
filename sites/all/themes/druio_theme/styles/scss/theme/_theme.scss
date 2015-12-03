@@ -1554,6 +1554,8 @@ body {
       margin-left: pxtorem(140px);
     }
   }
+
+
   #frontpage-top {
     display: none;
   }
@@ -1814,7 +1816,7 @@ body {
     }
     .buttons {
       display: inline-block;
-      margin: 0 auto;
+      margin: 0 auto;  
       .more, .demo {
         @extend .btn;
         margin-bottom: pxtorem(6px);
