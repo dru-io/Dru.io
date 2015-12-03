@@ -127,3 +127,14 @@ function hook_hybridauth_user_insert($account, $data) {
 function hook_hybridauth_user_login($account, $data) {
 
 }
+
+/**
+ * Allow modules to alter forms list to optionally add HybridAuth login widget
+ * to. This list is used on the module settings page to enable HybridAuth widget
+ * on selected forms.
+ * @param array $forms
+ *   Array of form_id => form_name.
+ */
+function hook_hybridauth_forms_list_alter(&$forms) {
+
+}

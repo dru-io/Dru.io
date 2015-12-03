@@ -41,53 +41,53 @@ function hybridauth_provider_facebook_configuration_form_callback(&$form, $provi
   $form['vtabs']['advanced']['hybridauth_provider_' . $provider_id . '_scope'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Scope'),
+    '#prefix' => t('Version 2.4 Facebook Login API. Reference and source: @link', array('@link' => 'http://developers.facebook.com/docs/facebook-login/permissions/v2.4')),
     '#default_value' => variable_get('hybridauth_provider_' . $provider_id . '_scope', hybridauth_provider_facebook_scope_default()),
     '#options' => array(
-      // See http://developers.facebook.com/docs/reference/api/permissions/
-      // Regular permissions.
-      'user_about_me'             => '<strong>user_about_me</strong> -- ' . t('Provides access to the "About Me" section of the profile in the about property'),
-      'user_activities'           => '<strong>user_activities</strong> -- ' . t("Provides access to the user's list of activities as the activities connection"),
-      'user_birthday'             => '<strong>user_birthday</strong> -- ' . t('Provides access to the birthday with year as the birthday_date property'),
-      'user_checkins'             => '<strong>user_checkins</strong> -- ' . t("Provides read access to the authorized user's check-ins that the user can see."),
-      'user_education_history'    => '<strong>user_education_history</strong> -- ' . t('Provides access to education history as the education property'),
-      'user_events'               => '<strong>user_events</strong> -- ' . t('Provides access to the list of events the user is attending as the events connection'),
-      'user_groups'               => '<strong>user_groups</strong> -- ' . t('Provides access to the list of groups the user is a member of as the groups connection'),
-      'user_hometown'             => '<strong>user_hometown</strong> -- ' . t("Provides access to the user's hometown in the hometown property"),
-      'user_interests'            => '<strong>user_interests</strong> -- ' . t("Provides access to the user's list of interests as the interests connection"),
-      'user_likes'                => '<strong>user_likes</strong> -- ' . t('Provides access to the list of all of the pages the user has liked as the likes connection'),
-      'user_location'             => '<strong>user_location</strong> -- ' . t("Provides access to the user's current location as the location property"),
-      'user_notes'                => '<strong>user_notes</strong> -- ' . t("Provides access to the user's notes as the notes connection"),
-      'user_online_presence'      => '<strong>user_online_presence</strong> -- ' . t("Provides access to the user's online/offline presence"),
-      'user_photos'               => '<strong>user_photos</strong> -- ' . t('Provides access to the photos the user has uploaded, and photos the user has been tagged in'),
-      'user_questions'            => '<strong>user_questions</strong> -- ' . t('Provides access to the questions the user or friend has asked'),
-      'user_relationships'        => '<strong>user_relationships</strong> -- ' . t("Provides access to the user's family and personal relationships and relationship status"),
-      'user_relationship_details' => '<strong>user_relationship_details</strong> -- ' . t("Provides access to the user's relationship preferences"),
-      'user_religion_politics'    => '<strong>user_religion_politics</strong> -- ' . t("Provides access to the user's religious and political affiliations"),
-      'user_status'               => '<strong>user_status</strong> -- ' . t("Provides access to the user's most recent status message"),
-      'user_videos'               => '<strong>user_videos</strong> -- ' . t('Provides access to the videos the user has uploaded, and videos the user has been tagged in'),
-      'user_website'              => '<strong>user_website</strong> -- ' . t("Provides access to the user's web site URL"),
-      'user_work_history'         => '<strong>user_work_history</strong> -- ' . t('Provides access to work history as the work property'),
-      'email'                     => '<strong>email</strong> -- ' . t("Provides access to the user's primary email address in the email property. Do not spam users. Your use of email must comply both with Facebook policies and with the CAN-SPAM Act."),
+      // See http://developers.facebook.com/docs/facebook-login/permissions/v2.4#reference
 
-      // Extended permissions.
-      'read_friendlists'     => '<strong>read_friendlists</strong> -- ' . t("Provides access to any friend lists the user created. All user's friends are provided as part of basic data, this extended permission grants access to the lists of friends a user has created, and should only be requested if your application utilizes lists of friends."),
-      'read_insights'        => '<strong>read_insights</strong> -- ' . t('Provides read access to the Insights data for pages, applications, and domains the user owns.'),
-      'read_mailbox'         => '<strong>read_mailbox</strong> -- ' . t("Provides the ability to read from a user's Facebook Inbox."),
-      'read_requests'        => '<strong>read_requests</strong> -- ' . t("Provides read access to the user's friend requests"),
-      'read_stream'          => '<strong>read_stream</strong> -- ' . t("Provides access to all the posts in the user's News Feed and enables your application to perform searches against the user's News Feed"),
-      'xmpp_login'           => '<strong>xmpp_login</strong> -- ' . t('Provides applications that integrate with Facebook Chat the ability to log in users.'),
-      'ads_management'       => '<strong>ads_management</strong> -- ' . t('Provides the ability to manage ads and call the Facebook Ads API on behalf of a user.'),
-      'create_event'         => '<strong>create_event</strong> -- ' . t("Enables your application to create and modify events on the user's behalf"),
-      'manage_friendlists'   => '<strong>manage_friendlists</strong> -- ' . t("Enables your app to create and edit the user's friend lists."),
-      'manage_notifications' => '<strong>manage_notifications</strong> -- ' . t('Enables your app to read notifications and mark them as read. This permission will be required to all access to notifications after October 22, 2011.'),
-      // offline_access permission has been removed by Facebook.
-      // 'offline_access'       => '<strong>offline_access</strong> -- ' . t('Enables your app to perform authorized requests on behalf of the user at any time. By default, most access tokens expire after a short time period to ensure applications only make requests on behalf of the user when the are actively using the application. This permission makes the access token returned by our OAuth endpoint long-lived.'),
-      'publish_checkins'     => '<strong>publish_checkins</strong> -- ' . t('Enables your app to perform checkins on behalf of the user.'),
-      // publish_stream permission has been removed by Facebook.
-      // 'publish_stream'       => '<strong>publish_stream</strong> -- ' . t("Enables your app to post content, comments, and likes to a user's stream and to the streams of the user's friends. With this permission, you can publish content to a user's feed at any time, without requiring offline_access. However, please note that Facebook recommends a user-initiated sharing model."),
-      'rsvp_event'           => '<strong>rsvp_event</strong> -- ' . t("Enables your application to RSVP to events on the user's behalf"),
-      'sms'                  => '<strong>sms</strong> -- ' . t('Enables your application to send messages to the user and respond to messages from the user via text message'),
-      'publish_actions'      => '<strong>publish_actions</strong> -- ' . t('Enables your application to publish user scores and achievements.'),
+      // Default permissions, provided without approval by Facebook.
+      'public_profile'               => '<strong>public_profile</strong> -- ' . t("Provides access to a person's basic information, including first name, last name, profile picture, gender and age range.") . ' <em>' . t("This permission is always enabled and provided without approval by Facebook.") . '</em>',
+      // Permissions provided without approval by Facebook.
+      'email'                        => '<strong>email</strong> -- ' . t("Provides access to the person's primary email address.") . ' <em>' . t("This permission is provided without approval by Facebook.") . '</em>',
+      'user_friends'                 => '<strong>user_friends</strong> -- ' . t("Provides access to a person's list of friends that also use your app.") . ' <em>' . t("This permission is provided without approval by Facebook.") . '</em>',
+      // Extended permissions, approval by Facebook required.
+      'manage_notifications'         => '<strong>manage_notifications</strong> -- ' . t("Enables your app to read a person's notifications and mark them as read."),
+      'manage_pages'                 => '<strong>manage_pages</strong> -- ' . t("Enables your app to retrieve Page Access Tokens for the Pages and Apps that the person administrates."),
+      'publish_actions'              => '<strong>publish_actions</strong> -- ' . t("Provides access to publish Posts, Open Graph actions, achievements, scores and other activity on behalf of a person using your app."),
+      'publish_pages'                => '<strong>publish_pages</strong> -- ' . t("When you also have the manage_pages permission, gives your app the ability to post, comment and like as any of the Pages managed by a person using your app."),
+      'read_custom_friendlists'      => '<strong>read_custom_friendlists</strong> -- ' . t("Provides access to the names of custom lists a person has created to organize their friends. This is useful for rendering an audience selector when someone is publishing stories to Facebook from your app."),
+      'read_insights'                => '<strong>read_insights</strong> -- ' . t("Provides read-only access to the Insights data for Pages, Apps and web domains the person owns."),
+      'read_mailbox'                 => '<strong>read_mailbox</strong> -- ' . t("Provides the ability to read the messages in a person's Facebook Inbox through the inbox edge and the thread node."),
+      'read_page_mailboxes'          => '<strong>read_page_mailboxes</strong> -- ' . t("Provides the ability to read from the Page Inboxes of the Pages managed by a person. This permission is often used alongside the manage_pages permission."),
+      'read_stream'                  => '<strong>read_stream</strong> -- ' . t("Provides access to read the posts in a person's News Feed, or the posts on their Profile."),
+      'rsvp_event'                   => '<strong>rsvp_event</strong> -- ' . t("Provides the ability to set a person's attendee status on Facebook Events (e.g. attending, maybe, or declined)."),
+      'user_about_me'                => '<strong>user_about_me</strong> -- ' . t("Provides access to a person's personal description (the 'About Me' section on their Profile) through the bio property on the User object."),
+      'user_actions.books'           => '<strong>user_actions.books</strong> -- ' . t("Provides access to all common books actions published by any app the person has used. This includes books they've read, want to read, rated or quoted."),
+      'user_actions.fitness'         => '<strong>user_actions.fitness</strong> -- ' . t("Provides access to all common Open Graph fitness actions published by any app the person has used. This includes runs, walks and bikes actions."),
+      'user_actions.music'           => '<strong>user_actions.music</strong> -- ' . t("Provides access to all common Open Graph music actions published by any app the person has used. This includes songs they've listened to, and playlists they've created."),
+      'user_actions.news'            => '<strong>user_actions.news</strong> -- ' . t("Provides access to all common Open Graph news actions published by any app the person has used which publishes these actions. This includes news articles they've read or news articles they've published."),
+      'user_actions.video'           => '<strong>user_actions.video</strong> -- ' . t("Provides access to all common Open Graph video actions published by any app the person has used which publishes these actions. This includes videos they've watched, videos they've rated and videos they want to watch."),
+      'user_actions:{app_namespace}' => '<strong>user_actions:{app_namespace}</strong> -- ' . t("Provides access to all of the person's custom Open Graph actions in the given app."),
+      'user_birthday'                => '<strong>user_birthday</strong> -- ' . t("Access the date and month of a person's birthday. This may or may not include the person's year of birth, dependent upon their privacy settings and the access token being used to query this field."),
+      'user_education_history'       => '<strong>user_education_history</strong> -- ' . t("Provides access to a person's education history through the education field on the User object."),
+      'user_events'                  => '<strong>user_events</strong> -- ' . t("Provides read-only access to the Events a person is hosting or has RSVP'd to."),
+      'user_games_activity'          => '<strong>user_games_activity</strong> -- ' . t("Provides access to read a person's game activity (scores, achievements) in any game the person has played."),
+      'user_groups'                  => '<strong>user_groups</strong> -- ' . t("Enables your app to read the Groups a person is a member of through the groups edge on the User object."),
+      'user_hometown'                => '<strong>user_hometown</strong> -- ' . t("Provides access to a person's hometown location through the hometown field on the User object. This is set by the user on the Profile."),
+      'user_likes'                   => '<strong>user_likes</strong> -- ' . t("Provides access to the list of all Facebook Pages and Open Graph objects that a person has liked. This list is available through the likes edge on the User object."),
+      'user_location'                => '<strong>user_location</strong> -- ' . t("Provides access to a person's current city through the location field on the User object. The current city is set by a person on their Profile."),
+      'user_managed_groups'          => '<strong>user_managed_groups</strong> -- ' . t("Enables your app to read the Groups a person is an admin of through the groups edge on the User object."),
+      'user_photos'                  => '<strong>user_photos</strong> -- ' . t("Provides access to the photos a person has uploaded or been tagged in. This is available through the photos edge on the User object."),
+      'user_posts'                   => '<strong>user_posts</strong> -- ' . t("Provides access to the posts on a person's Timeline. Includes their own posts, posts they are tagged in, and posts other people make on their Timeline."),
+      'user_relationship_details'    => '<strong>user_relationship_details</strong> -- ' . t("Provides access to a person's relationship interests as the interested_in field on the User object."),
+      'user_relationships'           => '<strong>user_relationships</strong> -- ' . t("Provides access to a person's relationship status, significant other and family members as fields on the User object."),
+      'user_religion_politics'       => '<strong>user_religion_politics</strong> -- ' . t("Provides access to a person's religious and political affiliations."),
+      'user_status'                  => '<strong>user_status</strong> -- ' . t("Provides access to a person's statuses. These are posts on Facebook which don't include links, videos or photos."),
+      'user_tagged_places'           => '<strong>user_tagged_places</strong> -- ' . t("Provides access to the Places a person has been tagged at in photos, videos, statuses and links."),
+      'user_videos'                  => '<strong>user_videos</strong> -- ' . t("Provides access to the videos a person has uploaded or been tagged in."),
+      'user_website'                 => '<strong>user_website</strong> -- ' . t("Provides access to the person's personal website URL via the website field on the User object."),
+      'user_work_history'            => '<strong>user_work_history</strong> -- ' . t("Provides access to a person's work history and list of employers via the work field on the User object."),
     ),
   );
 }
@@ -99,5 +99,13 @@ function hybridauth_provider_facebook_configuration_callback(&$config, $provider
 }
 
 function hybridauth_provider_facebook_scope_default() {
-  return array('email', 'user_about_me', 'user_birthday', 'user_hometown', 'user_website');
+  return array(
+    'public_profile',
+    'email',
+    'user_friends',
+    'user_about_me',
+    'user_birthday',
+    'user_hometown',
+    'user_website',
+  );
 }

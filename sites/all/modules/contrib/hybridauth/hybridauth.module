@@ -22,6 +22,7 @@ function hybridauth_hook_info() {
     'hybridauth_user_preinsert',
     'hybridauth_user_insert',
     'hybridauth_user_login',
+    'hybridauth_forms_list_alter',
   );
 
   return array_fill_keys($hooks, array('group' => 'hybridauth'));
@@ -276,7 +277,7 @@ function hybridauth_element_info() {
 
   $types['hybridauth_widget'] = array(
     '#input' => FALSE,
-    '#theme' => 'hybridauth_widget',
+    '#pre_render' => array('hybridauth_widget_pre_render'),
     // '#theme_wrappers' => array('form_element'),
     '#hybridauth_id' => 'hybridauth',
     '#title' => variable_get('hybridauth_widget_title', 'Or log in with...'),
@@ -308,6 +309,40 @@ function hybridauth_element_info() {
   );
 
   return $types;
+}
+
+/**
+ * Pre-render callback for the 'hybridauth_widget' element.
+ */
+function hybridauth_widget_pre_render($element) {
+  $element['#theme'] = 'hybridauth_widget';
+
+  $query = $element['#hybridauth_query'];
+  $element['#hybridauth_destination'] = trim($element['#hybridauth_destination']);
+  $element['#hybridauth_destination_error'] = trim($element['#hybridauth_destination_error']);
+  $destination = drupal_get_destination();
+  // Process destination; HTTP_REFERER is needed for widget in modals
+  // to return to the current page.
+  foreach (array('destination', 'destination_error') as $key) {
+    if ($element['#hybridauth_' . $key] == '[HTTP_REFERER]' && isset($_SERVER['HTTP_REFERER'])) {
+      $query += array(
+        $key => $_SERVER['HTTP_REFERER'],
+      );
+    }
+    elseif ($element['#hybridauth_' . $key]) {
+      $query += array(
+        $key => $element['#hybridauth_' . $key],
+      );
+    }
+    else {
+      $query += array(
+        $key => $destination['destination'],
+      );
+    }
+  }
+  $element['#hybridauth_query'] = $query;
+
+  return $element;
 }
 
 /**
@@ -393,13 +428,15 @@ function hybridauth_user_view($account, $view_mode, $langcode) {
 
   $header = array(t('Authentication provider'), t('Identity'));
   $rows = array();
-  $data_array = array();
   foreach ($identities as $identity) {
     $data = unserialize($identity['data']);
-    $data_array[] = $data;
+    $profile_link = '';
+    if (!empty($data['profileURL'])) {
+      $profile_link = l($data['profileURL'], $data['profileURL'], array('attributes' => array('target' => '_blank'), 'external' => TRUE));
+    }
     $rows[] = array(
       $providers[$data['provider']],
-      l($data['profileURL'], $data['profileURL'], array('attributes' => array('target' => '_blank'), 'external' => TRUE)),
+      $profile_link,
     );
   }
 
@@ -491,7 +528,7 @@ function hybridauth_robotstxt() {
 /**
  * Internal functions.
  */
-function hybridauth_providers_list() {
+function hybridauth_providers_list($reset = FALSE) {
   $providers = &drupal_static(__FUNCTION__, NULL);
 
   if (!isset($providers)) {
@@ -534,7 +571,7 @@ function hybridauth_providers_list() {
       'Vkontakte' => t('VKontakte'),
       'Yandex' => t('Yandex'),
     );
-    foreach (hybridauth_providers_files() as $name => $file) {
+    foreach (hybridauth_providers_files($reset) as $name => $file) {
       if (!array_key_exists($name, $raw_providers)) {
         $raw_providers[$name] = t($name);
       }
@@ -553,12 +590,18 @@ function hybridauth_providers_list() {
 /**
  * Returns available providers files, keyed by filename without extension.
  */
-function hybridauth_providers_files() {
-  $cache = cache_get('hybridauth_providers_files');
-  if (!empty($cache->data)) {
-    $files = $cache->data;
+function hybridauth_providers_files($reset = FALSE) {
+  $files = array();
+  // Try to get cached value if allowed: $reset == FALSE.
+  if (!$reset) {
+    $cache = cache_get('hybridauth_providers_files');
+    if (!empty($cache->data)) {
+      $files = $cache->data;
+    }
   }
-  else {
+
+  // Scan Providers directory if $reset == TRUE or there was no cached value.
+  if (empty($files)) {
     $files = file_scan_directory(_hybridauth_library_path() . '/Hybrid/Providers', '/\.php$/', array('key' => 'name'));
     cache_set('hybridauth_providers_files', $files, 'cache', CACHE_TEMPORARY);
   }
@@ -600,12 +643,15 @@ function hybridauth_fields_list() {
  * Returns supported forms.
  */
 function hybridauth_forms_list() {
-  return array(
+  $forms = array(
     'user_login' => t('User login form'),
     'user_login_block' => t('User login block'),
     'user_register_form' => t('User registration form'),
     'comment_form' => t('Comment form'),
   );
+
+  drupal_alter('hybridauth_forms_list', $forms);
+  return $forms;
 }
 
 /**
@@ -677,6 +723,10 @@ function hybridauth_get_config() {
       'debug_mode' => variable_get('hybridauth_debug', 0),
       'debug_file' => $logfile,
     );
+
+    if ($proxy = variable_get('hybridauth_proxy', NULL)) {
+      $config['proxy'] = $proxy;
+    }
 
     foreach (hybridauth_get_enabled_providers() as $provider_id => $provider_name) {
       if ($provider_config = hybridauth_get_provider_config($provider_id)) {
@@ -791,7 +841,19 @@ function _hybridauth_add_icon_pack_files($name) {
   }
 }
 
-function _hybridauth_make_username($data) {
+/**
+ * Helper function to generate user name.
+ *
+ * @param array $data
+ *   The data returned by HybridAuth or entered by the user.
+ * @param bool $allow_empty
+ *  (optional) Allow this function to return empty username.
+ * @return string
+ *   The proposed user name to use for this user.
+ */
+function _hybridauth_make_username($data, $allow_empty = FALSE) {
+  // $data['username'] contains user entered username, we should use it if
+  // available.
   if (empty($data['username'])) {
     $pattern = variable_get('hybridauth_username', '[user:hybridauth:firstName] [user:hybridauth:lastName]');
     $account = new stdClass();
@@ -803,26 +865,29 @@ function _hybridauth_make_username($data) {
     $hybridauth_name = $desired_name = trim($data['username']);
   }
 
-  if (empty($hybridauth_name)) {
+  // Check for empty username and use default one if empty is not allowed.
+  if (empty($hybridauth_name) && !$allow_empty) {
     $hybridauth_name = $desired_name = 'hybridauth_user';
   }
 
-  $counter = 0;
-  while (user_load_by_name($hybridauth_name)) {
-    $counter++;
-    $hybridauth_name = $desired_name . ' ' . $counter;
+  if (!empty($hybridauth_name)) {
+    $counter = 0;
+    while (user_load_by_name($hybridauth_name)) {
+      $counter++;
+      $hybridauth_name = $desired_name . ' ' . $counter;
+    }
   }
   $name = $hybridauth_name;
 
+  // Invoke hook_hybridauth_username_alter().
   drupal_alter('hybridauth_username', $name, $data);
 
   // Check that the altered username is unique.
-  if ($name == $hybridauth_name || user_load_by_name($name)) {
-    return $hybridauth_name;
-  }
-  else {
+  if (!empty($name) && !user_load_by_name($name)) {
     return $name;
   }
+
+  return $hybridauth_name;
 }
 
 /**
@@ -1017,7 +1082,7 @@ function _hybridauth_invoke_hooks($hook, $account, $data) {
  */
 function _hybridauth_language_default() {
   global $language;
-  $language_default = $language;
+  $language_default = clone $language;
   $language_default->prefix = '';
   return $language_default;
 }

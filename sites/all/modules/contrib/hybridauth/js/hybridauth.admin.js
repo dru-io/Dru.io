@@ -174,6 +174,15 @@
       });
       vals.push(label + ': ' + list.join(', '));
 
+      value = $('#edit-hybridauth-proxy', context).attr('value');
+      label = '<span style="font-weight:bold;">' + $.trim($('label[for="edit-hybridauth-proxy"]', context).text()) + '</span>';
+      if (value) {
+        vals.push(label + ': ' + value);
+      }
+      else {
+        vals.push(label + ': ' + Drupal.t('None'));
+      }
+
       label = '<span style="font-weight:bold;">' + $.trim($('label[for="edit-hybridauth-debug"]', context).text()) + '</span>';
       if ($('#edit-hybridauth-debug', context).is(':checked')) {
         vals.push(label + ': ' + Drupal.t('Enabled'));
