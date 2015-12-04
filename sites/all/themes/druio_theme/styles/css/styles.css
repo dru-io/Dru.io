@@ -661,11 +661,47 @@ body {
   #header .pane {
     max-width: 752px;
     margin-left: auto;
-    margin-right: auto; }
+    margin-right: auto;
+    @at-root head {
+      display: block;
+      position: fixed;
+      right: 10px;
+      bottom: 10px;
+      z-index: 999;
+      color: #333;
+      background: rgba(255, 255, 255, 0.25); }
+
+    @at-root head:before {
+      content: "|||";
+      display: block;
+      padding: 5px 10px;
+      font-family: sans-serif;
+      font-size: 16px;
+      font-weight: bold; }
+
+    @at-root head:hover {
+      background: rgba(255, 255, 255, 0.5);
+      color: red; }
+ }
     #header .pane:after {
       content: " ";
       display: block;
       clear: both; }
+    head:hover ~ #header .pane, head:hover ~ body #header .pane {
+      position: relative; }
+      head:hover ~ #header .pane:before, head:hover ~ body #header .pane:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        content: " ";
+        z-index: 998;
+        background-image: linear-gradient(to right, rgba(102, 102, 255, 0.25), rgba(179, 179, 255, 0.25) 80%, transparent 80%);
+        background-size: 8.47458%;
+        background-origin: content-box;
+        background-clip: content-box;
+        background-position: left top; }
     #header .pane .logo {
       width: 11.875rem;
       float: left; }
@@ -679,6 +715,21 @@ body {
       content: " ";
       display: block;
       clear: both; }
+    head:hover ~ #main, head:hover ~ body #main {
+      position: relative; }
+      head:hover ~ #main:before, head:hover ~ body #main:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        content: " ";
+        z-index: 998;
+        background-image: linear-gradient(to right, rgba(102, 102, 255, 0.25), rgba(179, 179, 255, 0.25) 80%, transparent 80%);
+        background-size: 8.47458%;
+        background-origin: content-box;
+        background-clip: content-box;
+        background-position: left top; }
     #main:after {
       content: " ";
       display: block;
@@ -855,6 +906,21 @@ body {
       content: " ";
       display: block;
       clear: both; }
+    head:hover ~ #footer .pane, head:hover ~ body #footer .pane {
+      position: relative; }
+      head:hover ~ #footer .pane:before, head:hover ~ body #footer .pane:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        content: " ";
+        z-index: 998;
+        background-image: linear-gradient(to right, rgba(102, 102, 255, 0.25), rgba(179, 179, 255, 0.25) 80%, transparent 80%);
+        background-size: 8.47458%;
+        background-origin: content-box;
+        background-clip: content-box;
+        background-position: left top; }
     #footer .pane:after {
       content: " ";
       display: block;
@@ -911,6 +977,21 @@ body {
       content: " ";
       display: block;
       clear: both; }
+    head:hover ~ #header .pane, head:hover ~ body #header .pane {
+      position: relative; }
+      head:hover ~ #header .pane:before, head:hover ~ body #header .pane:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        content: " ";
+        z-index: 998;
+        background-image: linear-gradient(to right, rgba(102, 102, 255, 0.25), rgba(179, 179, 255, 0.25) 80%, transparent 80%);
+        background-size: 8.47458%;
+        background-origin: content-box;
+        background-clip: content-box;
+        background-position: left top; }
   #main {
     max-width: 976px;
     margin-left: auto;
@@ -919,6 +1000,21 @@ body {
       content: " ";
       display: block;
       clear: both; }
+    head:hover ~ #main, head:hover ~ body #main {
+      position: relative; }
+      head:hover ~ #main:before, head:hover ~ body #main:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        content: " ";
+        z-index: 998;
+        background-image: linear-gradient(to right, rgba(102, 102, 255, 0.25), rgba(179, 179, 255, 0.25) 80%, transparent 80%);
+        background-size: 8.47458%;
+        background-origin: content-box;
+        background-clip: content-box;
+        background-position: left top; }
   #footer .pane {
     max-width: 976px;
     margin-left: auto;
@@ -927,6 +1023,21 @@ body {
       content: " ";
       display: block;
       clear: both; }
+    head:hover ~ #footer .pane, head:hover ~ body #footer .pane {
+      position: relative; }
+      head:hover ~ #footer .pane:before, head:hover ~ body #footer .pane:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        content: " ";
+        z-index: 998;
+        background-image: linear-gradient(to right, rgba(102, 102, 255, 0.25), rgba(179, 179, 255, 0.25) 80%, transparent 80%);
+        background-size: 8.47458%;
+        background-origin: content-box;
+        background-clip: content-box;
+        background-position: left top; }
   #frontpage-top {
     width: 976px; }
     #frontpage-top .left {
@@ -941,6 +1052,21 @@ body {
       content: " ";
       display: block;
       clear: both; }
+    head:hover ~ #main, head:hover ~ body #main {
+      position: relative; }
+      head:hover ~ #main:before, head:hover ~ body #main:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        content: " ";
+        z-index: 998;
+        background-image: linear-gradient(to right, rgba(102, 102, 255, 0.25), rgba(179, 179, 255, 0.25) 80%, transparent 80%);
+        background-size: 8.47458%;
+        background-origin: content-box;
+        background-clip: content-box;
+        background-position: left top; }
     #main:after {
       content: " ";
       display: block;
@@ -979,6 +1105,21 @@ body {
       content: " ";
       display: block;
       clear: both; }
+    head:hover ~ #header .pane, head:hover ~ body #header .pane {
+      position: relative; }
+      head:hover ~ #header .pane:before, head:hover ~ body #header .pane:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        content: " ";
+        z-index: 998;
+        background-image: linear-gradient(to right, rgba(102, 102, 255, 0.25), rgba(179, 179, 255, 0.25) 80%, transparent 80%);
+        background-size: 8.47458%;
+        background-origin: content-box;
+        background-clip: content-box;
+        background-position: left top; }
   #main {
     max-width: 1184px;
     margin-left: auto;
@@ -987,6 +1128,21 @@ body {
       content: " ";
       display: block;
       clear: both; }
+    head:hover ~ #main, head:hover ~ body #main {
+      position: relative; }
+      head:hover ~ #main:before, head:hover ~ body #main:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        content: " ";
+        z-index: 998;
+        background-image: linear-gradient(to right, rgba(102, 102, 255, 0.25), rgba(179, 179, 255, 0.25) 80%, transparent 80%);
+        background-size: 8.47458%;
+        background-origin: content-box;
+        background-clip: content-box;
+        background-position: left top; }
   #footer .pane {
     max-width: 1184px;
     margin-left: auto;
@@ -995,6 +1151,21 @@ body {
       content: " ";
       display: block;
       clear: both; }
+    head:hover ~ #footer .pane, head:hover ~ body #footer .pane {
+      position: relative; }
+      head:hover ~ #footer .pane:before, head:hover ~ body #footer .pane:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        content: " ";
+        z-index: 998;
+        background-image: linear-gradient(to right, rgba(102, 102, 255, 0.25), rgba(179, 179, 255, 0.25) 80%, transparent 80%);
+        background-size: 8.47458%;
+        background-origin: content-box;
+        background-clip: content-box;
+        background-position: left top; }
   #frontpage-top {
     width: 1184px; }
   .question-teaser .info {
