@@ -176,8 +176,9 @@
     .view-orders-frontpage {
       @include span(6 last);
     }
-    .view-posts-node-frontpage {
+    .view-posts-node-frontpage { 
       @include span(6);
+      clear: right;
     }
     .view-events-frontpage {
       @include span(6 last);

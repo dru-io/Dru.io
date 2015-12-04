@@ -1101,6 +1101,12 @@ body {
   }
 }
 
+.view-orders-frontpage {
+  .order-teaser .info .ready2work {
+    font-size: 0.9rem;
+  }
+}
+
 .order-full {
   > .info {
     margin-bottom: pxtorem(20px);
@@ -1348,6 +1354,13 @@ body {
       @include font-size(14px);
       padding: 0;
     }
+  }
+}
+
+.view-events-frontpage {
+  .event__poster {
+    float: left;
+    margin: 0 0.8rem 0.8rem 0;
   }
 }
 

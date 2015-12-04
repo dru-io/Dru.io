@@ -884,7 +884,8 @@ body {
   #frontpage-latest .view-posts-node-frontpage {
     width: 49.15254%;
     float: left;
-    margin-right: 1.69492%; }
+    margin-right: 1.69492%;
+    clear: right; }
   #frontpage-latest .view-events-frontpage {
     width: 49.15254%;
     float: right;
@@ -5665,6 +5666,9 @@ body {
     padding-top: 0.25rem;
     color: #707070; }
 
+.view-orders-frontpage .order-teaser .info .ready2work {
+  font-size: 0.9rem; }
+
 .order-full > .info {
   margin-bottom: 1.25rem; }
   .order-full > .info .left .status, .order-full > .info .left .budget, .order-full > .info .left .files {
@@ -5830,6 +5834,10 @@ body {
     font-size: 14px;
     font-size: 0.875rem;
     padding: 0; }
+
+.view-events-frontpage .event__poster {
+  float: left;
+  margin: 0 0.8rem 0.8rem 0; }
 
 .bue-ui {
   padding: 0;
