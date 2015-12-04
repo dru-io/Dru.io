@@ -1302,6 +1302,11 @@ body {
   }
 }
 
+
+#frontpage-promoted {
+  margin-bottom: 2rem;
+}
+
 .view-question-nodes-frontpage {
   .question-minimal {
     margin-bottom: pxtorem(10px);
@@ -1310,6 +1315,18 @@ body {
     .answers {
       @include font-size(14px);
       padding: 0;
+    }
+  }
+}
+
+.view-orders-frontpage {
+  border: 1px solid $brand-color-3;
+  padding: 1rem;
+  .views-row-last {
+    .order-teaser {
+      margin: 0;
+      padding: 0;
+      border: none;
     }
   }
 }
@@ -1358,9 +1375,41 @@ body {
 }
 
 .view-events-frontpage {
-  .event__poster {
-    float: left;
-    margin: 0 0.8rem 0.8rem 0;
+  border: 1px solid $brand-info;
+  padding: 1rem;
+  .event-item {
+    margin-bottom: 0.625rem;
+    padding-bottom: 0.625rem;
+    border-bottom: 1px solid #EEE;
+    > div {
+      @include pre(5);
+    }
+    .event__date, .event__city, .event__address {
+      position: relative;
+      padding-left: pxtorem(26px);
+      margin-bottom: pxtorem(6px);
+      &:before {
+        position: absolute;
+        left: 0;
+        @extend .fa;
+        width: pxtorem(20px);
+        text-align: center;
+        margin-right: pxtorem(6px);
+      }
+    }
+    .event__poster {
+      @include pre(0);
+      @include span(5);
+    }
+    .event__date:before {
+      @extend .fa-calendar-check-o;
+    }
+    .event__city:before {
+      @extend .fa-globe;
+    }
+    .event__address:before {
+      @extend .fa-map-marker;
+    }
   }
 }
 

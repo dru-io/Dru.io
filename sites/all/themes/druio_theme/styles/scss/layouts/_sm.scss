@@ -116,12 +116,11 @@
     @include susy-clearfix;
     .info {
       @include span(4);
-      @include susy-clearfix;
       .ready2work {
-        @include span(5);
+        @include span(6);
       }
       .budget {
-        @include span(7 last);
+        @include span(6 last);
       }
     }
     .right {
