@@ -12,8 +12,8 @@ function views_exported_views_api() {
  **/
 function views_exported_views_default_views() {
   //Finds all files that match a given mask in a given directory
-  //In our case, looks for any files named *.view in the /views directory
-  $files = file_scan_directory(drupal_get_path('module', 'views_exported'). '/views', '/.view/');
+  //In our case, looks for any files named *.inc in the /views directory
+  $files = file_scan_directory(drupal_get_path('module', 'views_exported'). '/views', '/.inc/');
   foreach ($files as $filepath => $file) {
     require $filepath;
     if (isset($view)) {
