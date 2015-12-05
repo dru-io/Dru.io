@@ -42,6 +42,7 @@ body {
       .top {
         @include susy-clearfix;
         height: pxtorem(40px);
+        overflow: hidden;
         color: $gray-lighter;
         .search-form {
           width: 100%;

@@ -5078,6 +5078,7 @@ body {
         margin: 0 auto; } }
   #header .pane .content .top {
     height: 2.5rem;
+    overflow: hidden;
     color: #eeeeee; }
     #header .pane .content .top:after {
       content: " ";
@@ -6400,6 +6401,3 @@ body {
       margin-bottom: 0.375rem; }
       #drupal-8-countdown .content .buttons .more:before, #drupal-8-countdown .content .buttons .demo:before {
         margin-right: 0.375rem; }
-
-
-/*# sourceMappingURL=maps/styles.css.map */
