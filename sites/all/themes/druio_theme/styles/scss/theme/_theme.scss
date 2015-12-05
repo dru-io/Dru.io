@@ -1388,6 +1388,7 @@ body {
 .view-events-frontpage {
   margin-top: 1rem;
   .event-item {
+    @include susy-clearfix;
     margin-bottom: 0.625rem;
     padding-bottom: 0.625rem;
     border-bottom: 1px solid #EEE;

@@ -6051,6 +6051,10 @@ body {
     margin-bottom: 0.625rem;
     padding-bottom: 0.625rem;
     border-bottom: 1px solid #EEE; }
+    .view-events-frontpage .event-item:after {
+      content: " ";
+      display: block;
+      clear: both; }
     .view-events-frontpage .event-item.views-row-last {
       border-bottom: none; }
     .view-events-frontpage .event-item > div {
@@ -6407,6 +6411,3 @@ body {
       margin-bottom: 0.375rem; }
       #drupal-8-countdown .content .buttons .more:before, #drupal-8-countdown .content .buttons .demo:before {
         margin-right: 0.375rem; }
-
-
-/*# sourceMappingURL=maps/styles.css.map */
