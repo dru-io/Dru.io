@@ -850,6 +850,26 @@ body {
     width: 49.15254%;
     float: right;
     margin-right: 0; }
+  .view-orders-frontpage .order-teaser:after {
+    content: " ";
+    display: block;
+    clear: both; }
+  .view-orders-frontpage .order-teaser .info {
+    width: 32.20339%;
+    float: left;
+    margin-right: 1.69492%; }
+    .view-orders-frontpage .order-teaser .info .ready2work {
+      width: 49.15254%;
+      float: left;
+      margin-right: 1.69492%; }
+    .view-orders-frontpage .order-teaser .info .budget {
+      width: 49.15254%;
+      float: right;
+      margin-right: 0; }
+  .view-orders-frontpage .order-teaser .right {
+    width: 66.10169%;
+    float: right;
+    margin-right: 0; }
   .order-teaser:after {
     content: " ";
     display: block;
@@ -858,12 +878,16 @@ body {
     width: 32.20339%;
     float: left;
     margin-right: 1.69492%; }
+    .order-teaser .info:after {
+      content: " ";
+      display: block;
+      clear: both; }
     .order-teaser .info .ready2work {
-      width: 49.15254%;
+      width: 40.67797%;
       float: left;
       margin-right: 1.69492%; }
     .order-teaser .info .budget {
-      width: 49.15254%;
+      width: 57.62712%;
       float: right;
       margin-right: 0; }
   .order-teaser .right {
@@ -1181,6 +1205,14 @@ body {
     float: left;
     margin-right: 1.69492%; }
   .event-teaser .right, .event-full .right {
+    width: 74.57627%;
+    float: right;
+    margin-right: 0; }
+  .order-teaser .info {
+    width: 23.72881%;
+    float: left;
+    margin-right: 1.69492%; }
+  .order-teaser .right {
     width: 74.57627%;
     float: right;
     margin-right: 0; }
@@ -6012,6 +6044,8 @@ body {
     margin-bottom: 0.625rem;
     padding-bottom: 0.625rem;
     border-bottom: 1px solid #EEE; }
+    .view-events-frontpage .event-item.views-row-last {
+      border-bottom: none; }
     .view-events-frontpage .event-item > div {
       margin-left: 42.37288%; }
     .view-events-frontpage .event-item .event__date, .view-events-frontpage .event-item .event__city, .view-events-frontpage .event-item .event__address {

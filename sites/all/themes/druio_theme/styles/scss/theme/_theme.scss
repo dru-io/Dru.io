@@ -1381,6 +1381,9 @@ body {
     margin-bottom: 0.625rem;
     padding-bottom: 0.625rem;
     border-bottom: 1px solid #EEE;
+    &.views-row-last {
+      border-bottom: none;
+    }
     > div {
       @include pre(5);
     }

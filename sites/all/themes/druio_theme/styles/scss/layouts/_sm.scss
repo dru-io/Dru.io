@@ -112,15 +112,34 @@
     }
   }
 
+  .view-orders-frontpage {
+    .order-teaser {
+      @include susy-clearfix;
+      .info {
+        @include span(4);
+        .ready2work {
+          @include span(6);
+        }
+        .budget {
+          @include span(6 last);
+        }
+      }
+      .right {
+        @include span(8 last);
+      }
+    }
+  }
+
   .order-teaser {
     @include susy-clearfix;
     .info {
       @include span(4);
+      @include susy-clearfix;
       .ready2work {
-        @include span(6);
+        @include span(5);
       }
       .budget {
-        @include span(6 last);
+        @include span(7 last);
       }
     }
     .right {

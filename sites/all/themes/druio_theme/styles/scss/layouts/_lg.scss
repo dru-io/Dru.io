@@ -45,7 +45,14 @@
     }
   }
 
-  
+  .order-teaser {
+    .info {
+      @include span(3);
+    }
+    .right {
+      @include span(9 last);
+    }
+  }
 
   .order-full {
     .info {
