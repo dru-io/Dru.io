@@ -5983,6 +5983,19 @@ body {
 #frontpage-promoted {
   margin-bottom: 2rem; }
 
+#frontpage-latest header h2.title {
+  margin-top: 1rem; }
+#frontpage-latest .view-orders-frontpage {
+  border: 1px solid #e0f0d3;
+  background: #f9fff4;
+  padding: 1rem; }
+  #frontpage-latest .view-orders-frontpage header h2.title {
+    margin-top: 0; }
+  #frontpage-latest .view-orders-frontpage .views-row-last .order-teaser {
+    margin: 0;
+    padding: 0;
+    border: none; }
+
 .view-question-nodes-frontpage .question-minimal {
   margin-bottom: 0.625rem;
   padding-bottom: 0.625rem;
@@ -5991,14 +6004,6 @@ body {
     font-size: 14px;
     font-size: 0.875rem;
     padding: 0; }
-
-.view-orders-frontpage {
-  border: 1px solid #e0f0d3;
-  padding: 1rem; }
-  .view-orders-frontpage .views-row-last .order-teaser {
-    margin: 0;
-    padding: 0;
-    border: none; }
 
 .view-question-nodes-last-questions .question-minimal {
   margin-bottom: 0.625rem;
@@ -6029,18 +6034,19 @@ body {
     font-size: 1rem;
     line-height: 1.5rem; }
 
-.view-posts-node-frontpage .post-minimal {
-  margin-bottom: 0.625rem;
-  padding-bottom: 0.625rem;
-  border-bottom: 1px solid #eeeeee; }
-  .view-posts-node-frontpage .post-minimal .comments {
-    font-size: 14px;
-    font-size: 0.875rem;
-    padding: 0; }
+.view-posts-node-frontpage {
+  margin-top: 1rem; }
+  .view-posts-node-frontpage .post-minimal {
+    margin-bottom: 0.625rem;
+    padding-bottom: 0.625rem;
+    border-bottom: 1px solid #eeeeee; }
+    .view-posts-node-frontpage .post-minimal .comments {
+      font-size: 14px;
+      font-size: 0.875rem;
+      padding: 0; }
 
 .view-events-frontpage {
-  border: 1px solid #5bc0de;
-  padding: 1rem; }
+  margin-top: 1rem; }
   .view-events-frontpage .event-item {
     margin-bottom: 0.625rem;
     padding-bottom: 0.625rem;
@@ -6401,3 +6407,6 @@ body {
       margin-bottom: 0.375rem; }
       #drupal-8-countdown .content .buttons .more:before, #drupal-8-countdown .content .buttons .demo:before {
         margin-right: 0.375rem; }
+
+
+/*# sourceMappingURL=maps/styles.css.map */

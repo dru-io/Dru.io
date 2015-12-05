@@ -1308,6 +1308,27 @@ body {
   margin-bottom: 2rem;
 }
 
+#frontpage-latest {
+  header h2.title {
+    margin-top: 1rem;
+  }
+  .view-orders-frontpage {
+  border: 1px solid $brand-color-3;
+  background: #f9fff4;
+  padding: 1rem;
+  header h2.title {
+    margin-top: 0;
+  }
+  .views-row-last {
+    .order-teaser {
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+  }
+}
+}
+
 .view-question-nodes-frontpage {
   .question-minimal {
     margin-bottom: pxtorem(10px);
@@ -1316,18 +1337,6 @@ body {
     .answers {
       @include font-size(14px);
       padding: 0;
-    }
-  }
-}
-
-.view-orders-frontpage {
-  border: 1px solid $brand-color-3;
-  padding: 1rem;
-  .views-row-last {
-    .order-teaser {
-      margin: 0;
-      padding: 0;
-      border: none;
     }
   }
 }
@@ -1364,6 +1373,7 @@ body {
 }
 
 .view-posts-node-frontpage {
+  margin-top: 1rem;
   .post-minimal {
     margin-bottom: pxtorem(10px);
     padding-bottom: pxtorem(10px);
@@ -1376,8 +1386,7 @@ body {
 }
 
 .view-events-frontpage {
-  border: 1px solid $brand-info;
-  padding: 1rem;
+  margin-top: 1rem;
   .event-item {
     margin-bottom: 0.625rem;
     padding-bottom: 0.625rem;
