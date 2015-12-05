@@ -3,4 +3,3 @@ description = Views presets for easy deploy
 version = 7.x-1.x
 core = 7.x
 package = Dru.io
-files[] = inc/views_exported_profile.inc

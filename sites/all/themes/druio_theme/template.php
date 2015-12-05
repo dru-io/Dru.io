@@ -39,7 +39,7 @@ function druio_theme_preprocess_page(&$variables) {
     ),
     array(
       'title' => 'GitHub',
-      'href' => 'https://github.com/Niklan/Dru.io',
+      'href' => 'https://github.com/dru-io/Dru.io',
       'classes' => array(
         'github',
       ),

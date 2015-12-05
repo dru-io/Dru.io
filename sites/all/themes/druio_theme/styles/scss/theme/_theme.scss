@@ -1102,6 +1102,12 @@ body {
   }
 }
 
+.view-orders-frontpage {
+  .order-teaser .info .ready2work {
+    font-size: 0.9rem;
+  }
+}
+
 .order-full {
   > .info {
     margin-bottom: pxtorem(20px);
@@ -1297,6 +1303,32 @@ body {
   }
 }
 
+
+#frontpage-promoted {
+  margin-bottom: 2rem;
+}
+
+#frontpage-latest {
+  header h2.title {
+    margin-top: 1rem;
+  }
+  .view-orders-frontpage {
+  border: 1px solid $brand-color-3;
+  background: #f9fff4;
+  padding: 1rem;
+  header h2.title {
+    margin-top: 0;
+  }
+  .views-row-last {
+    .order-teaser {
+      margin: 0;
+      padding: 0;
+      border: none;
+    }
+  }
+}
+}
+
 .view-question-nodes-frontpage {
   .question-minimal {
     margin-bottom: pxtorem(10px);
@@ -1341,6 +1373,7 @@ body {
 }
 
 .view-posts-node-frontpage {
+  margin-top: 1rem;
   .post-minimal {
     margin-bottom: pxtorem(10px);
     padding-bottom: pxtorem(10px);
@@ -1348,6 +1381,47 @@ body {
     .comments {
       @include font-size(14px);
       padding: 0;
+    }
+  }
+}
+
+.view-events-frontpage {
+  margin-top: 1rem;
+  .event-item {
+    margin-bottom: 0.625rem;
+    padding-bottom: 0.625rem;
+    border-bottom: 1px solid #EEE;
+    &.views-row-last {
+      border-bottom: none;
+    }
+    > div {
+      @include pre(5);
+    }
+    .event__date, .event__city, .event__address {
+      position: relative;
+      padding-left: pxtorem(26px);
+      margin-bottom: pxtorem(6px);
+      &:before {
+        position: absolute;
+        left: 0;
+        @extend .fa;
+        width: pxtorem(20px);
+        text-align: center;
+        margin-right: pxtorem(6px);
+      }
+    }
+    .event__poster {
+      @include pre(0);
+      @include span(5);
+    }
+    .event__date:before {
+      @extend .fa-calendar-check-o;
+    }
+    .event__city:before {
+      @extend .fa-globe;
+    }
+    .event__address:before {
+      @extend .fa-map-marker;
     }
   }
 }
@@ -1555,6 +1629,8 @@ body {
       margin-left: pxtorem(140px);
     }
   }
+
+
   #frontpage-top {
     display: none;
   }
@@ -1815,7 +1891,7 @@ body {
     }
     .buttons {
       display: inline-block;
-      margin: 0 auto;
+      margin: 0 auto;  
       .more, .demo {
         @extend .btn;
         margin-bottom: pxtorem(6px);

@@ -1,3 +1,4 @@
+<?php if (user_is_anonymous()): ?>
 <section id="frontpage-top">
   <div class="left">
     <h2 class="welcome">Добро пожаловать на Dru.io</h2>
@@ -13,6 +14,7 @@
   </div>
   <div class="right"></div>
 </section>
+<?php endif; ?>
 
 <section id="drupal-sib">
   <img src="http://camp.drupalsib.ru/sites/all/themes/camp/img/hl-logo.png" alt="Drupal Sib 2015 logo" class="logo">
@@ -29,8 +31,10 @@
 </section>
 
 <section id="frontpage-latest">
-  <?php print views_embed_view('posts_node', 'frontpage'); ?>
   <?php print views_embed_view('question_nodes', 'frontpage'); ?>
+  <?php print views_embed_view('orders', 'frontpage'); ?>
+  <?php print views_embed_view('posts_node', 'frontpage'); ?>
+  <?php print views_embed_view('events', 'frontpage'); ?>
 </section>
 
 <?php print theme('druio_pages_drupal_8_0_countown'); ?>

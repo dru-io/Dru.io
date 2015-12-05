@@ -1,4 +1,4 @@
-/**
+  /**
  * @file
  * Layout settings.
  */
@@ -6,17 +6,17 @@
 // Susy settings.
 // Check out more info: http://susy.readthedocs.org/en/latest/settings/
 $susy: (
-  output: float,
   math: fluid,
-  container: auto,
   container-position: center,
-  last-flow: to,
   columns: 12,
   gutters: .25,
-  gutter-position: after,
   global-box-sizing: border-box,
+  debug: (
+    image: show,
+    output: overlay,
+    toggle: bottom right,
+  ),
 );
-
 
 /* Sticky footer */
 

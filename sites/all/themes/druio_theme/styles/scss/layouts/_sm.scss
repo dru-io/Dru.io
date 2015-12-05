@@ -1,5 +1,5 @@
 /**
- * @file
+ * @file 
  *
  * SM media query styles.
  */
@@ -112,6 +112,24 @@
     }
   }
 
+  .view-orders-frontpage {
+    .order-teaser {
+      @include susy-clearfix;
+      .info {
+        @include span(4);
+        .ready2work {
+          @include span(6);
+        }
+        .budget {
+          @include span(6 last);
+        }
+      }
+      .right {
+        @include span(8 last);
+      }
+    }
+  }
+
   .order-teaser {
     @include susy-clearfix;
     .info {
@@ -170,10 +188,17 @@
 
   #frontpage-latest {
     @include susy-clearfix;
-    .view-posts-node-frontpage {
+    .view-question-nodes-frontpage {
       @include span(6);
     }
-    .view-question-nodes-frontpage {
+    .view-orders-frontpage {
+      @include span(6 last);
+    }
+    .view-posts-node-frontpage { 
+      @include span(6);
+      clear: right;
+    }
+    .view-events-frontpage {
       @include span(6 last);
     }
   }
