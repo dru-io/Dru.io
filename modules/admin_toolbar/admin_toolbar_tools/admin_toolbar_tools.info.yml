@@ -1,0 +1,13 @@
+name: Admin Toolbar Tools
+# core: 8.x
+description: Admin Toolbar Tools lets to add more fonctionalities in the admin menu.
+package: Administration
+type: module
+# version: 1.0
+dependencies:
+  - admin_toolbar
+# Information added by Drupal.org packaging script on 2015-10-20
+version: '8.x-1.10'
+core: '8.x'
+project: 'admin_toolbar'
+datestamp: 1445350445
