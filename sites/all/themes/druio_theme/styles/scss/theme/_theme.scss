@@ -1777,14 +1777,19 @@ body {
       @extend .btn;
       margin: pxtorem(12px) 0;
     }
-    .podcast, .website {
+    .broadcast, .website {
       &:before {
         @extend .fa;
         margin-right: pxtorem(6px);
       }
     }
-    .podcast:before {
-      @extend .fa-microphone;
+    .boradcast {
+      background: #e52d27;
+      border-color: #b31217;
+      color: white;   
+    }
+    .broadcast:before {
+      @extend .fa-youtube-play;
     }
     .website:before {
       @extend .fa-external-link;
