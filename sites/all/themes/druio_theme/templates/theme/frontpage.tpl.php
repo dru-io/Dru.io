@@ -16,16 +16,6 @@
 </section>
 <?php endif; ?>
 
-<section id="drupal-sib">
-  <img src="http://camp.drupalsib.ru/sites/all/themes/camp/img/hl-logo.png" alt="Drupal Sib 2015 logo" class="logo">
-  <h3 class="title">DrupalCamp Siberia 2015</h3>
-  <div class="dates">18-20 ДЕКАБРЯ</div>
-  <div class="buttons">
-    <a href="https://www.youtube.com/watch?v=Gr3k1H1C5eo" target="_blank" class="broadcast">Прямой эфир на YouTube</a>
-    <a href="http://camp.drupalsib.ru/?utm_source=dru.io&utm_medium=text&utm_campaign=frontpage" target="_blank" class="website">Официальный сайт</a>
-  </div>
-</section>
-
 <section id="frontpage-promoted">
   <?php print views_embed_view('promoted_content', 'block'); ?>
 </section>
