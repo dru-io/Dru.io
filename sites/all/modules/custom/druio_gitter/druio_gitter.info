@@ -1,0 +1,6 @@
+name = Dru.io - Gitter integration
+description = Provides an integration for Gitter chat service.
+package = Dru.io
+version = 7.x-1.0-dev
+core = 7.x
+configure = admin/config/druio/gitter

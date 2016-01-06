@@ -1,0 +1,202 @@
+<?php
+
+/**
+ * @file
+ * Primary module hooks for druio_gitter module.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function druio_gitter_menu() {
+
+  $items['admin/config/druio/gitter'] = array(
+    'title' => 'Gitter',
+    'description' => 'Gitter configuration.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('druio_gitter_settings_form'),
+    'access arguments' => array('administer gitter configuration'),
+    'file' => 'druio_gitter.admin.inc',
+  );
+
+  $items['admin/config/druio/gitter/configuration'] = array(
+    'title' => 'Configuration',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+  );
+
+  $items['admin/config/druio/gitter/send-activity'] = array(
+    'title' => 'Send activity',
+    'description' => 'Send activity to a gitter chat.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('druio_gitter_send_activity_form'),
+    'access arguments' => array('administer gitter configuration'),
+    'file' => 'druio_gitter.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
+  return $items;
+}
+
+/**
+ * Implements hook_permission().
+ */
+function druio_gitter_permission() {
+  return array(
+    'administer gitter configuration' => array(
+      'title' => t('Administer gitter configuration'),
+      'restrict access' => TRUE,
+    ),
+  );
+}
+
+/**
+ * Send activity message to a given room.
+ *
+ * @param string $room_id
+ *   The ID of Gitter chat room.
+ * @param string $message
+ *   The activity message.
+ * @param string $type
+ *   (optional) The message type. Possible values: normal, error.
+ *
+ * @return object
+ *   An object that holds result of the http query.
+ *
+ * @see drupal_http_request()
+ */
+function druio_gitter_send_acitvity_message($room_id, $message, $type = 'normal') {
+
+  $urls = variable_get('druio_gitter_webhook_urls');
+
+  $url = $urls[$room_id];
+
+  $data = array(
+    'message' => $message,
+    'level' => $type,
+  );
+
+  $options = array(
+    'method' => 'POST',
+    'data' => drupal_http_build_query($data),
+    'timeout' => 15,
+    'headers' => array('Content-Type' => 'application/x-www-form-urlencoded'),
+  );
+
+  $response = drupal_http_request($url, $options);
+
+  $rooms = druio_gitter_rooms();
+  $room_label = $rooms[$room_id];
+
+  $result = isset($response->data) && $response->data == 'OK';
+
+  if ($result) {
+    drupal_set_message('Your activity message was sent successfully.');
+    watchdog('dru.io gitter', 'New activity message to %room_id room was sent.', array('%room_id' => $room_label));
+  }
+  else {
+    drupal_set_message('Could not sent your activity message.', 'error');
+    watchdog(
+      'dru.io gitter', 'Could not sent activity message to %room_id room. Error: %error.',
+      array(
+        '%room_id' => $room_label,
+        '%error_code' => isset($response->error) ? check_plain($response->error) : '',
+      ),
+      WATCHDOG_WARNING
+    );
+  }
+
+  return $result;
+}
+
+/**
+ * Implements hook_node_insert().
+ */
+function druio_gitter_node_insert($node) {
+  DrupalQueue::get('drupal_gitter')->createItem(array(
+    'type' => 'new_content',
+    'nid' => $node->nid,
+  ));
+}
+
+
+/**
+ * Implements hook_user_insert().
+ */
+function druio_gitter_user_insert(&$edit, $account, $category) {
+  DrupalQueue::get('drupal_gitter')->createItem(array(
+    'type' => 'new_account',
+    'uid' => $account->uid,
+  ));
+}
+
+/**
+ * Implements hook_cron_queue_info().
+ */
+function druio_gitter_cron_queue_info() {
+  $queues['drupal_gitter'] = array(
+    'worker callback' => 'druio_gitter_queue_worker',
+  );
+  return $queues;
+}
+
+/**
+ * Queue worker callback.
+ */
+function druio_gitter_queue_worker($data) {
+
+  if ($data['type'] == 'new_content') {
+
+    $message_templates = array(
+      'post' => "*!author_name* создал публикацию:\n**[!node_title](!node_url)**",
+      'question' => "*!author_name* интересуется:\n**[!node_title](!node_url)**",
+      'order' => "*!author_name* разместил заказ:\n**[!node_title](!node_url)**",
+      'event' => "*!author_name* добавил событие:\n**[!node_title](!node_url)**",
+    );
+
+    $node = node_load($data['nid']);
+    if ($node && $node->status == NODE_PUBLISHED && isset($message_templates[$node->type])) {
+      $author_name = db_query('SELECT name FROM {users} WHERE uid = ? LIMIT 1', array($node->uid))->fetchField();
+
+      $message = format_string(
+        $message_templates[$node->type],
+        array(
+          '!author_name' => check_plain($author_name),
+          '!node_title' => check_plain($node->title),
+          // If cron running in CLI context a valid base url should be specified
+          // in settings.php.
+          '!node_url' => url('node/' . $node->nid, array('absolute' => TRUE)),
+        )
+      );
+
+      druio_gitter_send_acitvity_message('druio_drupal', $message);
+    }
+
+  }
+
+  if ($data['type'] == 'new_account') {
+    if ($account = user_load($data['uid'])) {
+      $message = format_string(
+        "Новый пользователь на сайте: **[!user_name](!user_url)**",
+        array(
+          '!user_name' => check_plain($account->name),
+          '!user_url' => url('user/' . $account->uid, array('absolute' => TRUE)),
+        )
+      );
+
+      druio_gitter_send_acitvity_message('druio_druio', $message);
+    }
+  }
+
+}
+
+/**
+ * Returns list of available Gitter rooms.
+ */
+function druio_gitter_rooms() {
+  return array(
+    'druio_drupal' => t('dru-io/Drupal'),
+    'druio_druio' => t('dru-io/Dru.io'),
+    'druio_l10n' => t('dru-io/L10n'),
+  );
+}

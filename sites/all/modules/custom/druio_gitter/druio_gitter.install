@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the druio_gitter module.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function druio_gitter_uninstall() {
+  variable_del('druio_gitter_webhook_urls');
+}
