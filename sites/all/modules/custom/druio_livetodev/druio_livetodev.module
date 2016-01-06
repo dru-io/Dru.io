@@ -224,6 +224,11 @@ function _druio_livetodev_scrub_data() {
     ->condition('name', db_like('hybridauth_') . '%%', 'LIKE')
     ->execute();
 
+  // Remove gitter webhook urls.
+  db_delete('variable')
+    ->condition('name', 'druio_gitter_webhook_urls')
+    ->execute();
+    
   // Remove mandrill API key.
   db_delete('variable')
     ->condition('name', 'mandrill_api_key')
