@@ -89,7 +89,7 @@ body {
               background: rgba(black, .2);
               transition: all 400ms;
             }
-            &.tracker, &.github {
+            &.tracker, &.github, &.chat {
               padding-left: pxtorem($padding-large-vertical * 3.5);
               &:before {
                 position: absolute;
@@ -116,6 +116,9 @@ body {
             }
             &.github:before {
               @extend .fa-github;
+            }
+            &.chat:before {
+              @extend .fa-comments-o;
             }
           }
         }
