@@ -108,8 +108,8 @@ body {
                 &:before {
                   @extend .fa-bell;
                   @include swing(
-                          $duration: 2s,
-                          $count: infinite
+                    $duration: 2s,
+                    $count: infinite
                   );
                 }
               }
