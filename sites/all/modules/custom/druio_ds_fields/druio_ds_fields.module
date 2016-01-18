@@ -322,7 +322,7 @@ function druio_ds_fields_question_answer(array $field) {
   $entity = $field['entity'];
   $html = '';
 
-  if (arg(0) != 'comment' && arg(1) != 'add') {
+  if (arg(0) != 'comment') {
     $html .= '<h2 class="@answers_title_class">@answers_title</h2>';
     $html .= views_embed_view('answers', 'answers');
 
@@ -590,7 +590,7 @@ function druio_ds_fields_answer_signature($field) {
 function druio_ds_fields_add_comment_link($field) {
   $wrapper = entity_metadata_wrapper('node', $field['entity']);
 
-  if (!user_is_anonymous() && arg(1) != 'add') {
+  if (!user_is_anonymous()) {
     return format_string(
       '<a href="/comment/reply/@id#comment-form" class="add-comment">Добавить комментарий</a>',
       array(
