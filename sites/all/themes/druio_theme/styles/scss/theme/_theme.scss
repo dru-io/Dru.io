@@ -89,7 +89,7 @@ body {
               background: rgba(black, .2);
               transition: all 400ms;
             }
-            &.tracker, &.github {
+            &.tracker, &.github, &.chat {
               padding-left: pxtorem($padding-large-vertical * 3.5);
               &:before {
                 position: absolute;
@@ -116,6 +116,9 @@ body {
             }
             &.github:before {
               @extend .fa-github;
+            }
+            &.chat:before {
+              @extend .fa-comments-o;
             }
           }
         }
@@ -1309,8 +1312,25 @@ body {
 }
 
 #frontpage-latest {
+  > section {
+    position: relative;
+  }
   header h2.title {
     margin-top: 1rem;
+  }
+  .add-content-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    float: right;
+    padding: 0.2rem 1rem;
+    background-color: $brand-color-1;
+    color: #fff;
+    opacity: 0.5;
+    transition: opacity 200ms;
+    &:hover {
+      opacity: 1;
+    }
   }
   .view-orders-frontpage {
   border: 1px solid $brand-color-3;
@@ -1318,6 +1338,9 @@ body {
   padding: 1rem;
   header h2.title {
     margin-top: 0;
+  }
+  .add-content-button {
+    background-color: $brand-color-2;
   }
   .views-row-last {
     .order-teaser {
