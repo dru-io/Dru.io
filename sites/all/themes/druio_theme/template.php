@@ -53,9 +53,6 @@ function druio_theme_preprocess_page(&$variables) {
       'classes' => array(
         'chat'
       ),
-      'attributes' => array(
-        'target' => '_blank'
-      ),
     )
   );
   $variables['header_links'] = theme('druio_theme_header_links', array('links' => $header_links));
