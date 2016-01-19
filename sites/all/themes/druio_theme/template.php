@@ -51,12 +51,9 @@ function druio_theme_preprocess_page(&$variables) {
       'title' => 'Чат',
       'href' => '/chat',
       'classes' => array(
-        'chat'
+        'chat',
       ),
-      'attributes' => array(
-        'target' => '_blank'
-      ),
-    )
+    ),
   );
   $variables['header_links'] = theme('druio_theme_header_links', array('links' => $header_links));
 
@@ -122,8 +119,12 @@ function druio_theme_theme() {
  */
 function druio_theme_preprocess_druio_theme_header_links(&$variables) {
   foreach ($variables['links'] as $key => $link) {
-    $variables['links'][$key]['classes'] = 'link ' . implode(' ', $link['classes']);
-    $variables['links'][$key]['attributes'] = drupal_attributes($link['attributes']);
+    if (isset($variables['links'][$key]['classes'])) {
+      $variables['links'][$key]['classes'] = 'link ' . implode(' ', $link['classes']);
+    }
+    if (isset($variables['links'][$key]['attributes'])) {
+      $variables['links'][$key]['attributes'] = drupal_attributes($link['attributes']);
+    }
   }
 }
 
