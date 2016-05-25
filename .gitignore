@@ -10,3 +10,7 @@ sites/*/private
 
 #theme
 sites/all/themes/druio_theme/styles/css/maps/*
+
+# Ignore dockerized drupal settings for docker envoirment.
+docker-compose.yml
+host.yml

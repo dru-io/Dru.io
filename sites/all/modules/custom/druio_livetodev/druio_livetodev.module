@@ -210,10 +210,10 @@ function _druio_livetodev_scrub_data() {
     ))
     ->execute();
 
-  // Disable modules for dev: hybridauth, mandrill.
+  // Disable modules for dev: hybridauth, smtp.
   module_disable(array(
     'hybridauth',
-    'mandrill',
+    'smtp',
   ));
 
   // Clean after HybridAuth.
@@ -228,11 +228,10 @@ function _druio_livetodev_scrub_data() {
   db_delete('variable')
     ->condition('name', 'druio_gitter_webhook_urls')
     ->execute();
-    
-  // Remove mandrill API key.
-  db_delete('variable')
-    ->condition('name', 'mandrill_api_key')
-    ->execute();
+
+  // Remove SMTP settings.
+  variable_del('smtp_username');
+  variable_del('smtp_password');
 
   // Remove all caches.
   drupal_flush_all_caches();
