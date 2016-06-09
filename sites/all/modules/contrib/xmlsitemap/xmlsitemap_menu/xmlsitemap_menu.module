@@ -288,3 +288,16 @@ function xmlsitemap_menu_variables() {
   }
   return $defaults;
 }
+
+/**
+ * Implements hook_features_pipe_COMPONENT_alter().
+ *
+ * Add variables to exported menus.
+ */
+function xmlsitemap_menu_features_pipe_menu_custom_alter(&$pipe, $data, $export) {
+  if (!empty($data)) {
+    foreach ($data as $menu_name) {
+      $pipe['variable'][] = "xmlsitemap_settings_menu_link_{$menu_name}";
+    }
+  }
+}

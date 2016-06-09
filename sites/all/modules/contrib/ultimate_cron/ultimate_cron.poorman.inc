@@ -158,9 +158,9 @@ function ultimate_cron_exit($dest = NULL) {
  * Postponable poormans cron launching.
  *
  * @param UltimateCronLauncher $launcher
- *   The Ultimate Cron launcher to use for poormans cron
+ *   The Ultimate Cron launcher to use for poormans cron.
  * @param int $postpone
- *   The number of times to postpone via register_shutdown_function
+ *   The number of times to postpone via register_shutdown_function.
  */
 function _ultimate_cron_launch_poorman($launcher, $postpone = 0) {
   if ($postpone > 0) {

@@ -13,7 +13,7 @@ use ReCaptcha\RequestParameters;
 /**
  * Sends POST requests to the reCAPTCHA service.
  */
-class Drupal7 implements RequestMethod {
+class Drupal7Post implements RequestMethod {
 
   /**
    * URL to which requests are POSTed.

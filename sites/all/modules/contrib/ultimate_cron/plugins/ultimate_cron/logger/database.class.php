@@ -8,6 +8,9 @@ define('ULTIMATE_CRON_DATABASE_LOGGER_CLEANUP_METHOD_DISABLED', 1);
 define('ULTIMATE_CRON_DATABASE_LOGGER_CLEANUP_METHOD_EXPIRE', 2);
 define('ULTIMATE_CRON_DATABASE_LOGGER_CLEANUP_METHOD_RETAIN', 3);
 
+/**
+ * Class for using database as log storage.
+ */
 class UltimateCronDatabaseLogger extends UltimateCronLogger {
   public $options = array();
   public $log_entry_class = '\UltimateCronDatabaseLogEntry';
@@ -355,6 +358,9 @@ class UltimateCronDatabaseLogger extends UltimateCronLogger {
 
 }
 
+/**
+ * Class for Ultimate Cron log entries.
+ */
 class UltimateCronDatabaseLogEntry extends UltimateCronLogEntry {
   /**
    * Save log entry.
@@ -418,4 +424,5 @@ class UltimateCronDatabaseLogEntry extends UltimateCronLogEntry {
       }
     }
   }
+
 }

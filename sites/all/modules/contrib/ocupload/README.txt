@@ -12,8 +12,8 @@ Installation:
 2. Enable module "One Click Upload".
 
 
-Integrate to BUEditor:
-----------------------
+Integrate with BUEditor:
+------------------------
 1. Open BUEditor config page "admin/config/content/bueditor".
 
 2. Click "Edit" link for your use editor.
@@ -23,13 +23,13 @@ Integrate to BUEditor:
 4. Click "Save configuration".
 
 
-Integrate to standalone CKEditor module (not Wysiwyg module):
-----------------------------------------------------------------
+Integrate with standalone CKEditor module (not Wysiwyg module):
+---------------------------------------------------------------
 1. Open CKEditor config page "admin/config/content/ckeditor".
 
 2. Click "edit" link for your use editor.
 
-3. Open section "Editor appearance", go to "Toolbar" field and drag&drop "One Click Upload" icon from "All buttons" to "Used buttons".
+3. Open section "Editor appearance", go to "Toolbar" field and drag & drop "One Click Upload" icon from "All buttons" to "Used buttons".
 
 4. Below, in "Plugins" field, choose checkbox "One Click Upload".
 

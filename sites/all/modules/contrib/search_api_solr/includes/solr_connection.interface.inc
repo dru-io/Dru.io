@@ -228,7 +228,7 @@ interface SearchApiSolrConnectionInterface {
   /**
    * Sends a delete request for several documents, based on the document IDs.
    *
-   * @param array $id
+   * @param array $ids
    *   The IDs of the documents which should be deleted. Expected to be UTF-8
    *   encoded.
    * @param int|false $timeout
@@ -306,8 +306,8 @@ interface SearchApiSolrConnectionInterface {
    *
    * @param string $value
    *   The string to escape.
-   * @param string $version
-   *   An integer representing major solr version release.
+   * @param int $version
+   *   An integer representing the major solr version.
    *
    * @return string
    *   An escaped string suitable for passing to Solr.

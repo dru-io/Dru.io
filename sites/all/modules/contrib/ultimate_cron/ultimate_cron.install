@@ -1,7 +1,7 @@
 <?php
 /**
  * @file
- * Installation file for Ultimate Cron
+ * Installation file for Ultimate Cron.
  */
 
 /**
@@ -142,7 +142,7 @@ function ultimate_cron_schema() {
     'primary key' => array('lid'),
     'indexes' => array(
       'idx_last' => array(
-        'name',
+        array('name', 128),
         'start_time',
         'end_time',
         'log_type',
@@ -182,7 +182,10 @@ function ultimate_cron_schema() {
     ),
     'primary key' => array('lid'),
     'unique keys' => array(
-      'idx_name' => array('name', 'current'),
+      'idx_name' => array(
+        array('name', 128),
+        'current',
+      ),
     ),
   );
 
@@ -209,7 +212,10 @@ function ultimate_cron_schema() {
         'default' => 0,
       ),
     ),
-    'primary key' => array('job_name', 'signal_name'),
+    'primary key' => array(
+      array('job_name', 64),
+      array('signal_name', 64),
+    ),
   );
 
   $schema['cache_ultimate_cron'] = drupal_get_schema_unprocessed('system', 'cache');
@@ -713,7 +719,7 @@ function ultimate_cron_update_7200() {
     'primary key' => array('lid'),
     'indexes' => array(
       'idx_last' => array(
-        'name',
+        array('name', 128),
         'start_time',
         'end_time',
       ),
@@ -752,7 +758,10 @@ function ultimate_cron_update_7200() {
     ),
     'primary key' => array('lid'),
     'unique keys' => array(
-      'idx_name' => array('name', 'current'),
+      'idx_name' => array(
+        array('name', 128),
+        'current',
+      ),
     ),
   );
 
@@ -889,7 +898,7 @@ function ultimate_cron_update_7200() {
     'default' => 0,
   ));
   db_add_index('ultimate_cron_log', 'idx_last', array(
-    'name',
+    array('name', 128),
     'start_time',
     'end_time',
   ));
@@ -938,7 +947,7 @@ function ultimate_cron_update_7201() {
   ));
   db_drop_index('ultimate_cron_log', 'idx_last');
   db_add_index('ultimate_cron_log', 'idx_last', array(
-    'name',
+    array('name', 128),
     'start_time',
     'end_time',
     'log_type',
@@ -950,4 +959,27 @@ function ultimate_cron_update_7201() {
  */
 function ultimate_cron_update_7202() {
   db_create_table('cache_ultimate_cron', drupal_get_schema_unprocessed('system', 'cache'));
+}
+
+/**
+ * Fix index sizes.
+ */
+function ultimate_cron_update_7203() {
+  db_drop_index('ultimate_cron_log', 'idx_last');
+  db_add_index('ultimate_cron_log', 'idx_last', array(
+    array('name', 128),
+    'start_time',
+    'end_time',
+    'log_type',
+  ));
+  db_drop_unique_key('ultimate_cron_lock', 'idx_name');
+  db_add_unique_key('ultimate_cron_lock', 'idx_name', array(
+    array('name', 128),
+    'current',
+  ));
+  db_drop_primary_key('ultimate_cron_signal');
+  db_add_primary_key('ultimate_cron_signal', array(
+    array('job_name', 64),
+    array('signal_name', 64),
+  ));
 }

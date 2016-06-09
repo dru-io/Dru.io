@@ -7,7 +7,7 @@
  */
 
 /*~ class.phpmailer.php
-Orginal release information:
+Original release information:
 .---------------------------------------------------------------------------.
 |  Software: PHPMailer - PHP email class                                    |
 |   Version: 5.1                                                            |
@@ -325,6 +325,7 @@ class PHPMailer {
   private   $sign_key_file  = "";
   private   $sign_key_pass  = "";
   private   $exceptions     = FALSE;
+  private   $logging;
 
   /////////////////////////////////////////////////
   // CONSTANTS
@@ -343,6 +344,7 @@ class PHPMailer {
    * @param boolean $exceptions Should we throw external exceptions?
    */
   public function __construct($exceptions = FALSE) {
+    $this->logging = variable_get('smtp_debugging', SMTP_LOGGING_ERRORS);
     $this->exceptions = ($exceptions == TRUE);
   }
 
@@ -455,7 +457,9 @@ class PHPMailer {
    */
   private function AddAnAddress($kind, $address, $name = '') {
     if (!preg_match('/^(to|cc|bcc|ReplyTo)$/', $kind)) {
-      echo 'Invalid recipient array: ' . kind;
+      if ($this->logging) {
+        watchdog('smtp', 'Invalid recipient array: %kind', array('%kind' => $kind), WATCHDOG_ERROR);
+      }
       return FALSE;
     }
     $address = trim($address);
@@ -465,7 +469,9 @@ class PHPMailer {
       if ($this->exceptions) {
         throw new phpmailerException(t('Invalid address') . ': ' . $address);
       }
-      echo t('Invalid address') . ': ' . $address;
+      if ($this->logging) {
+        watchdog('smtp', 'Invalid address: %address', array('%address' => $address), WATCHDOG_ERROR);
+      }
       return FALSE;
     }
     if ($kind != 'ReplyTo') {
@@ -498,7 +504,9 @@ class PHPMailer {
       if ($this->exceptions) {
         throw new phpmailerException(t('Invalid address') . ': ' . $address);
       }
-      echo t('Invalid address') . ': ' . $address;
+      if ($this->logging) {
+        watchdog('smtp', 'Invalid address: %address', array('%address' => $address), WATCHDOG_ERROR);
+      }
       return FALSE;
     }
     $this->From = $address;
@@ -590,7 +598,9 @@ class PHPMailer {
       if ($this->exceptions) {
         throw $e;
       }
-      echo $e->getMessage() . "\n";
+      if ($this->logging) {
+        watchdog_exception('smtp', $e);
+      }
       return FALSE;
     }
   }
@@ -610,7 +620,7 @@ class PHPMailer {
       $sendmail = sprintf("%s -oi -t", escapeshellcmd($this->Sendmail));
     }
     if ($this->SingleTo === TRUE) {
-      foreach ($this->SingleToArray as $key => $val) {
+      foreach ($this->SingleToArray as $val) {
         if (!@$mail = popen($sendmail, 'w')) {
           throw new phpmailerException(t('Could not execute: !smail', array('!smail' => $this->Sendmail)), self::STOP_CRITICAL);
         }
@@ -662,7 +672,7 @@ class PHPMailer {
       $old_from = ini_get('sendmail_from');
       ini_set('sendmail_from', $this->Sender);
       if ($this->SingleTo === TRUE && count($toArr) > 1) {
-        foreach ($toArr as $key => $val) {
+        foreach ($toArr as $val) {
           $rt = @mail($val, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header, $params);
           // implement call back function if it exists
           $isSent = ($rt == 1) ? 1 : 0;
@@ -678,7 +688,7 @@ class PHPMailer {
     }
     else {
       if ($this->SingleTo === TRUE && count($toArr) > 1) {
-        foreach ($toArr as $key => $val) {
+        foreach ($toArr as $val) {
           $rt = @mail($val, $this->EncodeHeader($this->SecureHeader($this->Subject)), $body, $header, $params);
           // implement call back function if it exists
           $isSent = ($rt == 1) ? 1 : 0;
@@ -1361,7 +1371,9 @@ class PHPMailer {
       if ($this->exceptions) {
         throw $e;
       }
-      echo $e->getMessage() . "\n";
+      if ($this->logging) {
+        watchdog_exception('smtp', $e);
+      }
       if ( $e->getCode() == self::STOP_CRITICAL ) {
         return FALSE;
       }
@@ -2217,7 +2229,6 @@ class PHPMailer {
    * @param string $key_pass Password for private key
    */
   public function DKIM_QP($txt) {
-    $tmp="";
     $line="";
     for ($i=0;$i<strlen($txt);$i++) {
       $ord=ord($txt[$i]);

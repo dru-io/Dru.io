@@ -1,5 +1,4 @@
 module.exports = function(grunt) {
-  var browsers = grunt.option('browsers') && grunt.option('browsers').split(',');
   // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
@@ -33,13 +32,12 @@ module.exports = function(grunt) {
     },
     coveralls: {
       options: {
-        coverage_dir: 'coverage/'
+        coverageDir: 'coverage/'
       }
     },
     karma: {
       options: {
-        configFile: 'karma.conf.js',
-        browsers: browsers || ['Chrome']
+        configFile: 'karma.conf.js'
       },
       watch: {
         autoWatch: true,
@@ -50,33 +48,33 @@ module.exports = function(grunt) {
       },
       coverage: {
         singleRun: true,
+        browsers: ['Firefox'],
         reporters: ['progress', 'coverage'],
         preprocessors: {
           'src/*.js': 'coverage'
         },
         coverageReporter: {
           type: "lcov",
-          dir: "coverage/"
+          dir: "coverage"
         }
       },
-      travis: {
+      saucelabs: {
         singleRun: true,
-        reporters: ['progress', 'coverage'],
+        reporters: ['progress', 'saucelabs'],
         preprocessors: {
           'src/*.js': 'coverage'
         },
         coverageReporter: {
           type: "lcov",
-          dir: "coverage/"
+          dir: "coverage"
         },
-        // Buggiest browser
-        browsers: browsers || ['sl_chorme'],
         // global config for SauceLabs
         sauceLabs: {
+          testName: 'flow.js',
           username: grunt.option('sauce-username') || process.env.SAUCE_USERNAME,
           accessKey: grunt.option('sauce-access-key') || process.env.SAUCE_ACCESS_KEY,
-          startConnect: grunt.option('sauce-local') ? false : true ,
-          testName: 'flow.js'
+          tunnelIdentifier: process.env.TRAVIS_JOB_NUMBER,
+          startConnect: false
         }
       }
     },
@@ -85,7 +83,7 @@ module.exports = function(grunt) {
     },
     bump: {
       options: {
-        files: ['package.json', 'bower.json'],
+        files: ['package.json'],
         updateConfigs: ['pkg'],
         commit: true,
         commitMessage: 'Release v%VERSION%',
@@ -128,5 +126,5 @@ module.exports = function(grunt) {
     grunt.task.run('bump-commit');
   });
   // Development
-  grunt.registerTask('test', ["karma:travis"]);
+  grunt.registerTask('test', ["karma:coverage"]);
 };

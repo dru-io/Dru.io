@@ -1,3 +1,20 @@
+Search API Solr Search 1.10 (2016-03-14):
+-----------------------------------------
+- #2604322 by lex0r, drunken monkey: Added the option to log all Solr queries.
+- #2645366 by tedfordgif, drunken monkey: Fixed browser incorrectly filling the
+  HTTP Auth form fields.
+- #2611716 by aditya_anurag, drunken monkey: Improved the method documentation
+  comments.
+- #2599658 by Loparev, drunken monkey: Added the possibility to highlight
+  non-fulltext fields.
+- #2598288 by ethan.han777, JeroenT, drunken monkey: Fixed potential notices in
+  the spellchecker code.
+- #2564927 by thePanz: Added support for random sorting in grouped searches.
+- #2527528 by maximpodorov, drunken monkey: Fixed searching of string fields
+  with leading/trailing spaces.
+- #2513314 by fortis, drunken monkey: Fixed error for empty filters.
+- #2551763 by drunken monkey: Fixed mention of INSTALL.txt in an error message.
+
 Search API Solr Search 1.9 (2015-08-30):
 ----------------------------------------
 - #2503829 by das-peter: Added support for grouping on "magic" fields.

@@ -1,4 +1,6 @@
-# Flow.js [![Build Status](https://travis-ci.org/flowjs/flow.js.png)](https://travis-ci.org/flowjs/flow.js) [![Coverage Status](https://coveralls.io/repos/flowjs/flow.js/badge.png?branch=master)](https://coveralls.io/r/flowjs/flow.js?branch=master)
+# Flow.js [![Build Status](https://travis-ci.org/flowjs/flow.js.svg)](https://travis-ci.org/flowjs/flow.js) [![Coverage Status](https://coveralls.io/repos/flowjs/flow.js/badge.svg?branch=master&service=github)](https://coveralls.io/github/flowjs/flow.js?branch=master)
+
+[![Saucelabs Test Status](https://saucelabs.com/browser-matrix/flowjs.svg)](https://saucelabs.com/u/flowjs)
 
 Flow.js is a JavaScript library providing multiple simultaneous, stable and resumable uploads via the HTML5 File API. 
 
@@ -8,7 +10,7 @@ Flow.js does not have any external dependencies other than the `HTML5 File API`.
 
 Samples and examples are available in the `samples/` folder. Please push your own as Markdown to help document the project.
 
-## Whould you like to contribute? [View our development branch](https://github.com/flowjs/flow.js/tree/develop)
+## Would you like to contribute? [View our development branch](https://github.com/flowjs/flow.js/tree/develop)
 
 ## Can I see a demo?
 [Flow.js + angular.js file upload demo](http://flowjs.github.io/ng-flow/) - ng-flow extension page https://github.com/flowjs/ng-flow
@@ -74,7 +76,7 @@ You should allow for the same chunk to be uploaded more than once; this isn't st
 
 For every request, you can confirm reception in HTTP status codes (can be change through the `permanentErrors` option):
 
-* `200`: The chunk was accepted and correct. No need to re-upload.
+* `200`, `201`, `202`: The chunk was accepted and correct. No need to re-upload.
 * `404`, `415`. `500`, `501`: The file for which the chunk was uploaded is not supported, cancel the entire upload.
 * _Anything else_: Something went wrong, but try reuploading the file.
 
@@ -82,7 +84,7 @@ For every request, you can confirm reception in HTTP status codes (can be change
 
 Enabling the `testChunks` option will allow uploads to be resumed after browser restarts and even across browsers (in theory you could even run the same file upload across multiple tabs or different browsers).  The `POST` data requests listed are required to use Flow.js to receive data, but you can extend support by implementing a corresponding `GET` request with the same parameters:
 
-* If this request returns a `200` HTTP code, the chunks is assumed to have been completed.
+* If this request returns a `200`, `201` or `202` HTTP code, the chunks is assumed to have been completed.
 * If request returns a permanent error status, upload is stopped.
 * If request returns anything else, the chunk will be uploaded in the standard fashion.
 
@@ -115,11 +117,14 @@ function, it will be passed a FlowFile, a FlowChunk and isTest boolean (Default:
 (Default: `false`)
 * `method` Method to use when POSTing chunks to the server (`multipart` or `octet`) (Default: `multipart`)
 * `testMethod` HTTP method to use when chunks are being tested. If set to a function, it will be passed a FlowFile and a FlowChunk arguments. (Default: `GET`)
-* `uploadMethod` HTTP method to use when chunks are being uploaded. If set to a function, it will be passed a FlowFile and a FlowChunk arguments. (Default: `GET`)
+* `uploadMethod` HTTP method to use when chunks are being uploaded. If set to a function, it will be passed a FlowFile and a FlowChunk arguments. (Default: `POST`)
+* `allowDuplicateUploads ` Once a file is uploaded, allow reupload of the same file. By default, if a file is already uploaded, it will be skipped unless the file is removed from the existing Flow object. (Default: `false`)
 * `prioritizeFirstAndLastChunk` Prioritize first and last chunks of all files. This can be handy if you can determine if a file is valid for your service from only the first or last chunk. For example, photo or video meta data is usually located in the first part of a file, making it easy to test support from only the first chunk. (Default: `false`)
 * `testChunks` Make a GET request to the server for each chunks to see if it already exists. If implemented on the server-side, this will allow for upload resumes even after a browser crash or even a computer restart. (Default: `true`)
-* `preprocess` Optional function to process each chunk before testing & sending. Function is passed the chunk as parameter, and should call the `preprocessFinished` method on the chunk when finished. (Default: `null`)
-* `generateUniqueIdentifier` Override the function that generates unique identifiers for each file.  (Default: `null`)
+* `preprocess` Optional function to process each chunk before testing & sending. To the function it will be passed the chunk as parameter, and should call the `preprocessFinished` method on the chunk when finished. (Default: `null`)
+* `initFileFn` Optional function to initialize the fileObject. To the function it will be passed a FlowFile and a FlowChunk arguments.
+* `readFileFn` Optional function wrapping reading operation from the original file. To the function it will be passed the FlowFile, the startByte and endByte, the fileType and the FlowChunk.
+* `generateUniqueIdentifier` Override the function that generates unique identifiers for each file. (Default: `null`)
 * `maxChunkRetries` The maximum number of retries for a chunk before the upload is failed. Valid values are any positive integer and `undefined` for no limit. (Default: `0`)
 * `chunkRetryInterval` The number of milliseconds to wait before retrying a chunk on a non-permanent error.  Valid values are any positive integer and `undefined` for immediate retry. (Default: `undefined`)
 * `progressCallbacksInterval` The time interval in milliseconds between progress reports. Set it
@@ -152,6 +157,7 @@ parameter must be adjusted together with `progressCallbacksInterval` parameter. 
 
    Note: avoid using `a` and `button` tags as file upload buttons, use span instead.
 * `.assignDrop(domNodes)` Assign one or more DOM nodes as a drop target.
+* `.unAssignDrop(domNodes)` Unassign one or more DOM nodes as a drop target.
 * `.on(event, callback)` Listen for event from Flow.js (see below)
 * `.off([event, [callback]])`:
     * `.off()` All events are removed.
@@ -267,7 +273,7 @@ Automated tests is running after every commit at travis-ci.
 1. Connect to sauce labs https://saucelabs.com/docs/connect
 2. `grunt  test --sauce-local=true --sauce-username=**** --sauce-access-key=***`
 
-other browsers can be used with `--browsers` flag, available browsers: sl_opera,sl_iphone,sl_safari,sl_ie10,sl_chorme,sl_firefox
+other browsers can be used with `--browsers` flag, available browsers: sl_opera,sl_iphone,sl_safari,sl_ie10,sl_chrome,sl_firefox
 
 ## Origin
 Flow.js was inspired by and evolved from https://github.com/23/resumable.js. Library has been supplemented with tests and features, such as drag and drop for folders, upload speed, time remaining estimation, separate files pause, resume and more.

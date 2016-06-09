@@ -4,9 +4,13 @@
  * Export-ui handler for the Ultimate Cron jobs.
  */
 
+/**
+ * Class for cTools Export UI.
+ */
 class ultimate_cron_job_ctools_export_ui extends ctools_export_ui {
   /**
    * Accumulator for jobs that are behind.
+   *
    * @var integer
    */
   protected $jobs_behind = 0;
@@ -618,4 +622,5 @@ class ultimate_cron_job_ctools_export_ui extends ctools_export_ui {
       unset($row['sort']);
     }
   }
+
 }

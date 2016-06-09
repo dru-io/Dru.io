@@ -11,9 +11,9 @@ files[] = includes/solr_connection.interface.inc
 files[] = includes/solr_field.inc
 files[] = includes/spellcheck.inc
 
-; Information added by Drupal.org packaging script on 2015-08-30
-version = "7.x-1.9"
+; Information added by Drupal.org packaging script on 2016-03-14
+version = "7.x-1.10"
 core = "7.x"
 project = "search_api_solr"
-datestamp = "1440962648"
+datestamp = "1457970937"
 

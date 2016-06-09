@@ -9,9 +9,10 @@ tags are provided:
 * twitter:url
 * twitter:title
 * twitter:description
-* twitter:image:src
+* twitter:image
 * twitter:image:width
 * twitter:image:height
+* twitter:image:alt
 * twitter:player
 * twitter:player:width
 * twitter:player:height

@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * One Click Upload includes.
+ */
+
+/**
  * Admin page with templates list.
  */
 function ocupload_config_page() {
@@ -36,8 +41,8 @@ function ocupload_config_page() {
 function ocupload_form_settings($form, &$form_state) {
   $form['ocupload_textarea_dragndrop'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Drag&Drop files to textarea\'s'),
-    '#description' => t('Add support Drag&Drop files on textarea\'s'),
+    '#title' => t('Drag & Drop files inside textareas'),
+    '#description' => t('Add support Drag & Drop files inside textareas.'),
     '#default_value' => variable_get('ocupload_textarea_dragndrop', 1),
   );
 
@@ -242,17 +247,26 @@ function ocupload_form_template($form, &$form_state, $template = NULL) {
   $form['field'] = array(
     '#type' => 'select',
     '#title' => t('Entity field'),
-    '#description' => t('Field for storage files on entity form.'),
+    '#description' => t('The entity file or image field in which uploaded files will be stored.'),
     '#options' => $options,
     '#empty_option' => t('<none>'),
     '#default_value' => $template->field,
   );
 
   $transliteration_module_exists = module_exists('transliteration');
+  $transliteration_module_link = l(
+    'Transliteration',
+    'https://www.drupal.org/project/transliteration',
+    array('external' => TRUE)
+  );
   $form['transliterate'] = array(
     '#type' => 'checkbox',
     '#title' => t('Transliterate file names'),
-    '#description' => t('Checked, if you want to transliterate file names. Recomend.'),
+    '#description' => t('Check to transliterate file names when saving. Recommended to avoid file URL issues, and requires the !transliteration module.',
+      array(
+        '!transliteration' => $transliteration_module_link,
+      )
+    ),
     '#default_value' => $transliteration_module_exists && $template->transliterate,
     '#disabled' => !$transliteration_module_exists,
   );
@@ -260,7 +274,7 @@ function ocupload_form_template($form, &$form_state, $template = NULL) {
   $form['roles'] = array(
     '#type' => 'checkboxes',
     '#title' => t('Roles'),
-    '#description' => t('Checked roles which can upload files of this type.'),
+    '#description' => t('Checked roles are allowed to upload files of this type.'),
     '#options' => array_map('check_plain', user_roles()),
     '#default_value' => array_keys(user_roles(FALSE, 'upload files use template ' . $template->tid)),
   );
@@ -585,7 +599,7 @@ function _ocupload_field_value_by_html_name($form_state, $field_name) {
       $value = &$value[$part];
     }
     else {
-      $message = 'Uploaded files will not be saved. Field "@field_name" not exist in "@form_id" form state. Contact to site administrator.';
+      $message = 'Uploaded files will not be saved. Field "@field_name" does not exist in "@form_id" form state. Contact site administrator.';
       $message_vars = array(
         '@field_name' => $field_name,
         '@form_id' => $form_state['build_info']['form_id'],

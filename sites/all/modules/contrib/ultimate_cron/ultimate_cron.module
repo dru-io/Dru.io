@@ -56,6 +56,7 @@ if (!function_exists('array_replace_recursive')) {
 
 /**
  * Memory exhaust protection.
+ *
  * To reduce the risk of shutdown handlers failing, we reserve 2MiB of memory
  * by default. This value is overridable.
  */
@@ -64,6 +65,8 @@ $GLOBALS['__RESERVED_MEMORY'] = str_repeat('0', variable_get('ultimate_cron_rese
 $GLOBALS['ultimate_cron_shutdown_functions'] = array();
 
 /**
+ * Setup shutdown handler.
+ *
  * The shutdown function itself is also overridable, in case it is necessary to
  * add it earlier, say settings.php.
  * Remeber to invoke the registered ultimate cron shutdown handlers.
@@ -116,10 +119,8 @@ if (!function_exists('_ultimate_cron_out_of_memory_protection')) {
  * @param ...
  *   Additional arguments to pass to the shutdown function.
  *
- * @return array
- *   Array of shutdown functions to be executed.
- *
  * @see register_shutdown_function()
+ *
  * @ingroup php_wrappers
  */
 function ultimate_cron_register_shutdown_function($callback) {
@@ -252,7 +253,7 @@ function ultimate_cron_ctools_plugin_type() {
  * Get plugin instance.
  *
  * @param string $type
- *   Type of the plugin (settings, scheduler, launcher, logger)
+ *   Type of the plugin (settings, scheduler, launcher, logger).
  *
  * @return object
  *   The instance of the plugin (singleton).
@@ -270,9 +271,9 @@ function ultimate_cron_ctools_plugin_instance($type, $plugin) {
  * Load callback for plugins.
  *
  * @param string $type
- *   Type of the plugin (settings, scheduler, launcher, logger)
+ *   Type of the plugin (settings, scheduler, launcher, logger).
  * @param string $name
- *   Name of the plugin (general, queue, serial, database, etc.)
+ *   Name of the plugin (general, queue, serial, database, etc.).
  *
  * @return object
  *   The instance of the plugin (singleton).
@@ -290,7 +291,7 @@ function _ultimate_cron_plugin_load($type, $name) {
  * Load all callback for plugins.
  *
  * @param string $type
- *   Type of the plugin (settings, scheduler, launcher, logger)
+ *   Type of the plugin (settings, scheduler, launcher, logger).
  *
  * @return array
  *   The instances of the plugin type (singletons).
@@ -962,6 +963,12 @@ function ultimate_cron_cron_queue_info() {
 
         ultimate_cron_cron_run_compatibility();
       }
+      catch (Throwable $e) {
+        // Restore the user.
+        $GLOBALS['user'] = $GLOBALS['ultimate_cron_original_user'];
+        drupal_save_session($GLOBALS['ultimate_cron_original_session_saving']);
+        throw $e;
+      }
       catch (Exception $e) {
         // Restore the user.
         $GLOBALS['user'] = $GLOBALS['ultimate_cron_original_user'];
@@ -1516,7 +1523,7 @@ function ultimate_cron_plugin_crontab_element_validate_rule($element, &$form_sta
  * Check if rule is valid.
  *
  * @param string $rule
- *   rule to validate.
+ *   The rule to validate.
  *
  * @return bool
  *   TRUE if valid, FALSE if not.
@@ -1575,7 +1582,7 @@ function ultimate_cron_run_scheduled($set_message = TRUE) {
     ultimate_cron_run_launchers();
   }
   else {
-    ultimate_cron_watchdog_message('ultimate_cron', 'Cannot launch scheduled jobs while in maintenance mode!', array(), WATCHDOG_ERROR, 'error', $set_message);
+    ultimate_cron_watchdog_message('ultimate_cron', 'Cannot launch scheduled jobs while in maintenance mode!', array(), WATCHDOG_NOTICE, 'error', $set_message);
   }
 }
 

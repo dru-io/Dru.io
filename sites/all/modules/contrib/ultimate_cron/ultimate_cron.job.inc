@@ -355,6 +355,11 @@ class UltimateCronJob {
           )));
       }
     }
+    catch (Throwable $e) {
+      UltimateCronPlugin::hook_cron_post_invoke($this);
+      module_invoke_all('cron_post_invoke', $this);
+      throw $e;
+    }
     catch (Exception $e) {
       UltimateCronPlugin::hook_cron_post_invoke($this);
       module_invoke_all('cron_post_invoke', $this);
@@ -805,4 +810,5 @@ class UltimateCronJob {
   static public function debugLogCallback($job, $msg) {
     error_log("[$job->name] $msg");
   }
+
 }

@@ -137,6 +137,11 @@ Hidden variables
   what you are doing. Old indexed items will be lost when the hash is changed
   and all items will have to be reindexed. Can only contain alphanumeric
   characters.
+- search_api_solr_highlight_prefix (default: "tm_")
+  The prefix of Solr fields for which field-level highlighting will be enabled.
+  Since the prefix of fields is used to determine the field type (by default),
+  this lets you enable highlighting for other field types. By default,
+  highlighting will be possible for all fulltext fields.
 
 [8] http://wiki.apache.org/solr/UpdateXmlMessages#A.22commit.22_and_.22optimize.22
 

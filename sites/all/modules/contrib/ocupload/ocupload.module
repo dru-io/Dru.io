@@ -1,11 +1,16 @@
 <?php
 
 /**
+ * @file
+ * One Click Upload module.
+ */
+
+/**
  * Implements hook_menu().
  */
 function ocupload_menu() {
   $items = array();
-  
+
   $items['admin/config/content/ocupload'] = array(
     'title' => 'One click upload',
     'description' => 'Configure module',

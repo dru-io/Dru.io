@@ -1,6 +1,11 @@
 <?php
 
 /**
+ * @file
+ * One Click Upload install file.
+ */
+
+/**
  * Implements hook_schema().
  */
 function ocupload_schema() {
@@ -128,7 +133,7 @@ function ocupload_schema() {
  */
 function ocupload_install() {
   module_load_include('inc', 'ocupload');
-  
+
   $templates = array(
     array(
       'mask' => 'jpg,jpeg,gif,png',
