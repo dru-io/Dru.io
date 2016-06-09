@@ -5,9 +5,15 @@ sites/*/settings*.php
 sites/*/files
 sites/*/private
 
+# node.js
+**/node-modules
+
+#theme
+sites/all/themes/druio_theme/styles/css/maps/*
+
+# Ignore dockerized drupal settings for docker envoirment.
+docker-compose.yml
+host.yml
+
 # JetBrains PHPstorm and other settings.
 .idea
-
-# Dockerized drupal and other virtual settings.
-host.yml
-docker-compose.yml
