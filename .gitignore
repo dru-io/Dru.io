@@ -4,3 +4,10 @@ sites/*/settings*.php
 # Ignore paths that contain user-generated content.
 sites/*/files
 sites/*/private
+
+# JetBrains PHPstorm and other settings.
+.idea
+
+# Dockerized drupal and other virtual settings.
+host.yml
+docker-compose.yml
