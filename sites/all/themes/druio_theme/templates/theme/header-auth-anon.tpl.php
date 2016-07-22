@@ -7,5 +7,5 @@
 ?>
 <div class="header-auth-anon">
   <a href="/user/register" class="link sign-up">Регистрация</a>
-  <a href="/user<?php print $destination_after_login?>" class="link sign-in">Вход</a>
+  <a href="<?php print $destination_after_login; ?>" class="link sign-in">Вход</a>
 </div>

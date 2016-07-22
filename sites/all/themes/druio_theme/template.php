@@ -218,5 +218,6 @@ function druio_theme_preprocess_flag(&$variables) {
  * Implements hook_preprocess_hook().
  */
 function druio_theme_preprocess_druio_theme_auth_anon(&$variables) {
-  $variables['destination_after_login'] = url('', array('query' => drupal_get_destination()));
+  $destination = array('query' => drupal_get_destination());
+  $variables['destination_after_login'] = url('user', $destination);
 }
