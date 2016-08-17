@@ -1306,7 +1306,6 @@ body {
   }
 }
 
-
 #frontpage-promoted {
   margin-bottom: 2rem;
 }
@@ -1316,20 +1315,20 @@ body {
     margin-top: 1rem;
   }
   .view-orders-frontpage {
-  border: 1px solid $brand-color-3;
-  background: #f9fff4;
-  padding: 1rem;
-  header h2.title {
-    margin-top: 0;
-  }
-  .views-row-last {
-    .order-teaser {
-      margin: 0;
-      padding: 0;
-      border: none;
+    border: 1px solid $brand-color-3;
+    background: #f9fff4;
+    padding: 1rem;
+    header h2.title {
+      margin-top: 0;
+    }
+    .views-row-last {
+      .order-teaser {
+        margin: 0;
+        padding: 0;
+        border: none;
+      }
     }
   }
-}
 }
 
 .view-question-nodes-frontpage {
@@ -1570,9 +1569,9 @@ body {
         color: white;
         text-align: center;
         background: rgba(white, .2);
+        @include icon('sign-out');
+
         &:before {
-          @extend .fa;
-          @extend .fa-sign-out;
           margin-left: pxtorem(7px);
         }
       }
@@ -1633,7 +1632,6 @@ body {
       margin-left: pxtorem(140px);
     }
   }
-
 
   #frontpage-top {
     display: none;
@@ -1823,7 +1821,7 @@ body {
     }
     .buttons {
       display: inline-block;
-      margin: 0 auto;  
+      margin: 0 auto;
       .more, .demo {
         @extend .btn;
         margin-bottom: pxtorem(6px);
@@ -1841,3 +1839,4 @@ body {
     }
   }
 }
+

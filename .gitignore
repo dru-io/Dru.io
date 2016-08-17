@@ -6,7 +6,7 @@ sites/*/files
 sites/*/private
 
 # node.js
-**/node-modules
+node_modules
 
 #theme
 sites/all/themes/druio_theme/styles/css/maps/*

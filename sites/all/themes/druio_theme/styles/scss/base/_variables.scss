@@ -226,3 +226,6 @@ $primary-tabs-bg:             white;
 $primary-tabs-margin:         1rem 0;
 $primary-tabs-inactive-color: #bdc3c7;
 $primary-tabs-active-color:   $brand-color-1;
+
+// FontAwesome - rewrite to real path of font folder.
+$fa-font-path: '../scss/component/font-awesome/fonts';

@@ -1,0 +1,29 @@
+{
+  "name": "glisseo",
+  "version": "1.0.0",
+  "description": "Glisseo is a base theme for Drupal 7 with starterkit theme.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Niklan/Glisseo.git"
+  },
+  "keywords": [
+    "Drupal",
+    "theme",
+    "SCSS",
+    "susy"
+  ],
+  "author": "Niklan",
+  "license": "GPL-2.0",
+  "bugs": {
+    "url": "https://github.com/Niklan/Glisseo/issues"
+  },
+  "homepage": "https://github.com/Niklan/Glisseo#readme",
+  "dependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.2.0",
+    "gulp-sourcemaps": "^1.6.0"
+  },
+  "scripts": {
+    "postinstall": "find node_modules/ -name '*.info' -type f -delete"
+  }
+}
