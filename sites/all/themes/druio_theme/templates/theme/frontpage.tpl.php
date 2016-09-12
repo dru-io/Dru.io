@@ -20,22 +20,6 @@
   <?php print views_embed_view('promoted_content', 'block'); ?>
 </section>
 
-<section id="drupalug-2016">
-  <a href="http://2016.drupalyug.ru?from=dru.io" rel="nofollow" target="_blank" class="logo">
-    <img src="/sites/all/themes/druio_theme/images/drupalcampug-logo.png" alt="Друпал Юг 2016 логотип">
-  </a>
-
-  <div class="event-name">
-    <div class="name">Краснодар 2016</div>
-    <a href="http://2016.drupalyug.ru?from=dru.io" rel="nofollow" target="_blank" class="web">2016.drupalyug.ru</a>
-  </div>
-
-  <div class="event-date">
-    <div class="period">9 - 11 сентября</div>
-    <div class="place">Кубанский государственный университет</div>
-  </div>
-</section>
-
 <section id="frontpage-latest">
   <?php print views_embed_view('question_nodes', 'frontpage'); ?>
   <?php print views_embed_view('orders', 'frontpage'); ?>

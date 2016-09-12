@@ -953,28 +953,10 @@ body {
     width: 49.15254%;
     float: right;
     margin-right: 0; }
-  #drupal-sib {
-    width: 752px; }
   #drupal-8-countdown {
     width: 752px; }
     #drupal-8-countdown .content {
-      width: 50%; }
-  #drupalug-2016:after {
-    content: " ";
-    display: block;
-    clear: both; }
-  #drupalug-2016 .logo {
-    width: 15.25424%;
-    float: left;
-    margin-right: 1.69492%; }
-  #drupalug-2016 .event-name {
-    width: 32.20339%;
-    float: left;
-    margin-right: 1.69492%; }
-  #drupalug-2016 .event-date {
-    width: 40.67797%;
-    float: right;
-    margin-right: 0; } }
+      width: 50%; } }
 
 /**
  * @file 
@@ -6731,94 +6713,5 @@ body {
       margin-bottom: 0.375rem; }
       #drupal-8-countdown .content .buttons .more:before, #drupal-8-countdown .content .buttons .demo:before {
         margin-right: 0.375rem; }
-
-#drupalug-2016 {
-  background: url("../../images/drupalcampug-bg.jpg");
-  background-size: cover;
-  width: calc(100% + 2.5rem);
-  margin-left: -1.25rem;
-  margin-bottom: 1.25rem;
-  position: relative; }
-  @media (max-width: 768px) {
-    #drupalug-2016 {
-      padding: 1.25rem 0; } }
-  @media (min-width: 768px) {
-    #drupalug-2016 {
-      display: -webkit-box;
-      display: -webkit-flex;
-      display: -ms-flexbox;
-      display: -moz-flex;
-      display: flex;
-      -webkit-box-align: center;
-      -ms-flex-align: center;
-      -webkit-align-items: center;
-      -moz-align-items: center;
-      align-items: center;
-      height: 150px; } }
-  #drupalug-2016 .logo {
-    margin: 0.625rem; }
-    #drupalug-2016 .logo img {
-      display: table;
-      margin: 0.9375rem auto; }
-  @media (max-width: 768px) {
-    #drupalug-2016 .event-name {
-      text-align: center;
-      margin-bottom: 1.25rem; } }
-  #drupalug-2016 .event-name .name {
-    color: #f37068;
-    text-transform: uppercase;
-    font-size: 30px;
-    font-size: 1.875rem;
-    line-height: 1.2;
-    font-weight: bold;
-    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5); }
-    @media (min-width: 768px) {
-      #drupalug-2016 .event-name .name {
-        font-size: 30px;
-        font-size: 1.875rem; } }
-    @media (min-width: 1200px) {
-      #drupalug-2016 .event-name .name {
-        font-size: 40px;
-        font-size: 2.5rem; } }
-  #drupalug-2016 .event-name .web {
-    color: #9EE6FF;
-    border-bottom: 1px solid #9EE6FF;
-    font-size: 30px;
-    font-size: 1.875rem;
-    line-height: 1.2;
-    font-weight: bold; }
-    @media (min-width: 768px) {
-      #drupalug-2016 .event-name .web {
-        font-size: 30px;
-        font-size: 1.875rem; } }
-    @media (min-width: 1200px) {
-      #drupalug-2016 .event-name .web {
-        font-size: 40px;
-        font-size: 2.5rem; } }
-  #drupalug-2016 .event-date {
-    color: white; }
-    @media (max-width: 768px) {
-      #drupalug-2016 .event-date {
-        text-align: center; } }
-    #drupalug-2016 .event-date .period {
-      font-size: 30px;
-      font-size: 1.875rem;
-      line-height: 1.2; }
-      @media (min-width: 768px) {
-        #drupalug-2016 .event-date .period {
-          font-size: 30px;
-          font-size: 1.875rem; } }
-      @media (min-width: 992px) {
-        #drupalug-2016 .event-date .period {
-          font-size: 54px;
-          font-size: 3.375rem; } }
-    #drupalug-2016 .event-date .place {
-      font-size: 16px;
-      font-size: 1rem;
-      line-height: 1.2; }
-      @media (min-width: 768px) {
-        #drupalug-2016 .event-date .place {
-          font-size: 20px;
-          font-size: 1.25rem; } }
 
 /*# sourceMappingURL=maps/styles.css.map */
