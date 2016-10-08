@@ -201,7 +201,7 @@ $handler->display->display_options['style_plugin'] = 'rss';
 $handler->display->display_options['style_options']['description'] = 'Активные заказы';
 $handler->display->display_options['row_plugin'] = 'rss_fields';
 $handler->display->display_options['row_options']['title_field'] = 'title';
-$handler->display->display_options['row_options']['link_field'] = 'view_node';
+$handler->display->display_options['row_options']['link_field'] = 'path';
 $handler->display->display_options['row_options']['description_field'] = 'body';
 $handler->display->display_options['row_options']['creator_field'] = 'name';
 $handler->display->display_options['row_options']['date_field'] = 'created';
@@ -227,13 +227,6 @@ $handler->display->display_options['fields']['title']['element_label_colon'] = F
 $handler->display->display_options['fields']['title']['element_wrapper_type'] = 'div';
 $handler->display->display_options['fields']['title']['element_wrapper_class'] = 'row';
 $handler->display->display_options['fields']['title']['link_to_node'] = FALSE;
-/* Поле: Содержимое: Ссылка */
-$handler->display->display_options['fields']['view_node']['id'] = 'view_node';
-$handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
-$handler->display->display_options['fields']['view_node']['field'] = 'view_node';
-$handler->display->display_options['fields']['view_node']['label'] = '';
-$handler->display->display_options['fields']['view_node']['exclude'] = TRUE;
-$handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
 /* Поле: Содержимое: Бюджет */
 $handler->display->display_options['fields']['field_order_budgeting']['id'] = 'field_order_budgeting';
 $handler->display->display_options['fields']['field_order_budgeting']['table'] = 'field_data_field_order_budgeting';
@@ -274,7 +267,8 @@ $handler->display->display_options['fields']['created']['table'] = 'node';
 $handler->display->display_options['fields']['created']['field'] = 'created';
 $handler->display->display_options['fields']['created']['label'] = '';
 $handler->display->display_options['fields']['created']['element_label_colon'] = FALSE;
-$handler->display->display_options['fields']['created']['date_format'] = 'short';
+$handler->display->display_options['fields']['created']['date_format'] = 'custom';
+$handler->display->display_options['fields']['created']['custom_date_format'] = 'r';
 $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
 /* Поле: Содержимое: Nid */
 $handler->display->display_options['fields']['nid']['id'] = 'nid';
@@ -283,6 +277,13 @@ $handler->display->display_options['fields']['nid']['field'] = 'nid';
 $handler->display->display_options['fields']['nid']['label'] = '';
 $handler->display->display_options['fields']['nid']['exclude'] = TRUE;
 $handler->display->display_options['fields']['nid']['element_label_colon'] = FALSE;
+/* Поле: Содержимое: Путь */
+$handler->display->display_options['fields']['path']['id'] = 'path';
+$handler->display->display_options['fields']['path']['table'] = 'node';
+$handler->display->display_options['fields']['path']['field'] = 'path';
+$handler->display->display_options['fields']['path']['label'] = '';
+$handler->display->display_options['fields']['path']['exclude'] = TRUE;
+$handler->display->display_options['fields']['path']['element_label_colon'] = FALSE;
 $handler->display->display_options['defaults']['filter_groups'] = FALSE;
 $handler->display->display_options['defaults']['filters'] = FALSE;
 /* Критерий фильтра: Содержимое: Опубликовано */
@@ -337,3 +338,4 @@ $translatables['orders'] = array(
   t('[field_order_budgeting]
 [body]'),
 );
+
