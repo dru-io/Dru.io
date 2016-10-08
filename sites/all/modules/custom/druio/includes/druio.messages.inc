@@ -154,6 +154,22 @@ function druio_node_view($node, $view_mode, $langcode) {
 }
 
 /**
+ * Implements hook_node_delete().
+ *
+ * Remove deleted nodes from tracker.
+ */
+
+function druio_node_delete($node) {
+  $valid_types = $node->type == 'question' || $node->type == 'post';
+
+  if ($valid_types) {
+    global $user;
+    _druio_tracker_delete($node->nid, $user->uid);
+  }
+}
+
+
+/**
  * Create entity.
  *
  * @param int $nid
