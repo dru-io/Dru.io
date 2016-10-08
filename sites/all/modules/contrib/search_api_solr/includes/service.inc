@@ -983,7 +983,7 @@ class SearchApiSolrService extends SearchApiAbstractService {
           // If the fq consists only of a filter on this field, replace it with
           // a range.
           $preg_field = preg_quote($escaped_field, '/');
-          if (preg_match('/^' . $preg_field . ':\["?(\*|\d+(?:\.\d+)?)"? TO "?(\*|\d+(?:\.\d+)?)"?\]$/', $value, $m)) {
+          if (preg_match('/^(?:\{!tag[^}]+\})?' . $preg_field . ':\["?(\*|\d+(?:\.\d+)?)"? TO "?(\*|\d+(?:\.\d+)?)"?\]$/', $value, $m)) {
             unset($fq[$key]);
             if ($m[1] && is_numeric($m[1])) {
               $min_radius = isset($min_radius) ? max($min_radius, $m[1]) : $m[1];
@@ -1367,6 +1367,7 @@ class SearchApiSolrService extends SearchApiAbstractService {
       foreach ($response->highlighting->$id->content as $snippet) {
         $snippet = strip_tags($snippet);
         $snippet = preg_replace('/^.*>|<.*$/', '', $snippet);
+        $snippet = check_plain($snippet);
         $snippet = $this->formatHighlighting($snippet);
         // The created fragments sometimes have leading or trailing punctuation.
         // We remove that here for all common cases, but take care not to remove
@@ -1380,9 +1381,12 @@ class SearchApiSolrService extends SearchApiAbstractService {
       $prefix_length = strlen($prefix);
       foreach ($field_mapping as $search_api_property => $solr_property) {
         if (substr($solr_property, 0, $prefix_length) == $prefix && !empty($response->highlighting->$id->$solr_property)) {
-          // Contrary to above, we here want to preserve HTML, so we just
-          // replace the [HIGHLIGHT] tags with the appropriate format.
-          $fields[$search_api_property] = $this->formatHighlighting($response->highlighting->$id->$solr_property);
+          $value = $response->highlighting->$id->$solr_property;
+          $value = $this->sanitizeHighlightValue($value, $search_api_property);
+          $fields[$search_api_property] = array(
+            '#value' => $this->formatHighlighting($value),
+            '#sanitize_callback' => FALSE,
+          );
         }
       }
     }
@@ -1391,12 +1395,33 @@ class SearchApiSolrService extends SearchApiAbstractService {
   }
 
   /**
-   * Changes highlighting tags from our custom, HTML-safe ones to HTML.
+   * Sanitizes a highlighted field value.
    *
-   * @param string|array $snippet
-   *   The snippet(s) to format.
+   * @param string|array $value
+   *   Either a highlighted field value, or an array of such values.
+   * @param string|null $field_id
+   *   (optional) The ID of the field for which this sanitizing occurs, if any.
    *
    * @return string|array
+   *   The sanitized input.
+   */
+  protected function sanitizeHighlightValue($value, $field_id = NULL) {
+    if (is_array($value)) {
+      foreach ($value as $i => $nested_value) {
+        $value[$i] = $this->sanitizeHighlightValue($nested_value, $field_id);
+      }
+      return $value;
+    }
+    return check_plain(strip_tags($value));
+  }
+
+  /**
+   * Changes highlighting tags from our custom, HTML-safe ones to HTML.
+   *
+   * @param string|string[] $snippet
+   *   The snippet(s) to format.
+   *
+   * @return string|string[]
    *   The snippet(s), properly formatted as HTML.
    */
   protected function formatHighlighting($snippet) {

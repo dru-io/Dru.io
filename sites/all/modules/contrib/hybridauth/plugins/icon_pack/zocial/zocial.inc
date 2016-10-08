@@ -13,12 +13,12 @@ $plugin = array(
   'icon_classes_callback' => 'hybridauth_zocial_icon_classes_callback',
 );
 
-function hybridauth_zocial_initialize_callback() {
+function hybridauth_zocial_initialize_callback(&$element) {
   $path = 'sites/all/libraries/zocial';
   if (module_exists('libraries')) {
     $path = libraries_get_path('zocial');
   }
-  drupal_add_css($path . '/css/zocial.css');
+  $element['#attached']['css'][] = $path . '/css/zocial.css';
 }
 
 function hybridauth_zocial_icon_classes_callback(&$classes, $provider_id) {

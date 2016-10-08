@@ -1,0 +1,22 @@
+name = Mandrill
+description = "Allow for site emails to be sent through Mandrill."
+core = 7.x
+package = Mandrill
+
+configure = admin/config/services/mandrill
+
+dependencies[] = mailsystem (>=2.x)
+dependencies[] = libraries (>=2)
+
+files[] = lib/mandrill.mail.inc
+files[] = lib/mandrill.inc
+files[] = tests/includes/mandrill_test.inc
+files[] = tests/mandrill.test
+files[] = tests/mandrill_hooks.test
+
+; Information added by Drupal.org packaging script on 2016-04-19
+version = "7.x-2.3"
+core = "7.x"
+project = "mandrill"
+datestamp = "1461103449"
+

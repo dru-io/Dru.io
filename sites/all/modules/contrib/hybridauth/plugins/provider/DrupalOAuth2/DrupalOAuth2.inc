@@ -8,7 +8,6 @@
  * Plugin declaration.
  */
 $plugin = array(
-  'css' => 'drupaloauth2.css',
   'configuration_form_callback' => 'hybridauth_provider_drupaloauth2_configuration_form_callback',
   'configuration_callback' => 'hybridauth_provider_drupaloauth2_configuration_callback',
 );

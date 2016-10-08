@@ -599,7 +599,7 @@ class UltimateCronPlugin {
    */
   static public function jobSettingsFormValidate($form, &$form_state, $plugin_type, $job = NULL) {
     $name = !empty($form_state['values']['settings'][$plugin_type]['name']) ? $form_state['values']['settings'][$plugin_type]['name'] : $job->hook[$plugin_type]['name'];
-    $plugin = _ultimate_cron_plugin_load($plugin_type, $name);
+    $plugin = _ultimate_cron_plugin_require($plugin_type, $name);
     $plugin->settingsFormValidate($form, $form_state, $job);
   }
 
@@ -608,7 +608,7 @@ class UltimateCronPlugin {
    */
   static public function jobSettingsFormSubmit($form, &$form_state, $plugin_type, $job = NULL) {
     $name = !empty($form_state['values']['settings'][$plugin_type]['name']) ? $form_state['values']['settings'][$plugin_type]['name'] : $job->hook[$plugin_type]['name'];
-    $plugin = _ultimate_cron_plugin_load($plugin_type, $name);
+    $plugin = _ultimate_cron_plugin_require($plugin_type, $name);
     $plugin->settingsFormSubmit($form, $form_state, $job);
 
     // Weed out blank values that have fallbacks.

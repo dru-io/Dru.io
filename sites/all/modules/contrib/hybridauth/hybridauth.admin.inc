@@ -41,11 +41,14 @@ function hybridauth_admin_settings($form, &$form_state) {
   $enabled_providers = array_filter(variable_get('hybridauth_providers', array()));
   $available_providers = hybridauth_providers_files();
   $form['vtabs']['fset_providers']['hybridauth_providers'] = array();
+  // $icon_pack = variable_get('hybridauth_widget_icon_pack', 'hybridauth_32');
+  $icon_pack = 'hybridauth_16';
+  _hybridauth_add_icon_pack_files($icon_pack, $form);
   foreach (array_keys($enabled_providers + $providers) as $provider_id) {
     $available = array_key_exists($provider_id, $available_providers);
     $options[$provider_id] = array(
       'name' => $providers[$provider_id],
-      'icon' => theme('hybridauth_provider_icon', array('provider_id' => $provider_id, 'icon_pack' => 'hybridauth_16')),
+      'icon' => theme('hybridauth_provider_icon', array('icon_pack' => $icon_pack, 'provider_id' => $provider_id, 'provider_name' => $providers[$provider_id])),
       'available' => $available ? t('Yes') : t('No'),
       'settings' => l(t('Settings'), 'admin/config/people/hybridauth/provider/' . $provider_id, array('query' => drupal_get_destination())),
       '#attributes' => array('class' => array('draggable')),
@@ -557,12 +560,12 @@ function hybridauth_report() {
     );
   }
 
-  $form = array();
-  $form['report'] = array(
+  $build = array();
+  $build['report'] = array(
     '#theme' => 'table',
     '#header' => $header,
     '#rows' => $rows,
     '#empty' => t('There are no HybridAuth identities yet.'),
   );
-  return $form;
+  return $build;
 }

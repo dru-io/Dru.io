@@ -17,43 +17,6 @@ function _ultimate_cron_define_log_type_all() {
   return array(ULTIMATE_CRON_LOG_TYPE_NORMAL, ULTIMATE_CRON_LOG_TYPE_ADMIN);
 }
 
-if (!function_exists('array_replace_recursive')) {
-  /**
-   * A array_replace_recursive() for earlier PHP versions.
-   *
-   * Taken from php.net, slightly modified.
-   *
-   * @see http://dk1.php.net/manual/en/function.array-replace-recursive.php#109390
-   */
-  function array_replace_recursive($base, $replacements) {
-    foreach (array_slice(func_get_args(), 1) as $replacements) {
-      $bref_stack = array(&$base);
-      $head_stack = array($replacements);
-
-      do {
-        end($bref_stack);
-
-        $bref = &$bref_stack[key($bref_stack)];
-        $head = array_pop($head_stack);
-
-        unset($bref_stack[key($bref_stack)]);
-
-        foreach (array_keys($head) as $key) {
-          if (isset($bref[$key]) && is_array($bref[$key]) && is_array($head[$key])) {
-            $bref_stack[] = &$bref[$key];
-            $head_stack[] = $head[$key];
-          }
-          else {
-            $bref[$key] = $head[$key];
-          }
-        }
-      } while (count($head_stack));
-    }
-
-    return $base;
-  }
-}
-
 /**
  * Memory exhaust protection.
  *
@@ -262,9 +225,40 @@ function ultimate_cron_ctools_plugin_instance($type, $plugin) {
   static $cache;
   if (!isset($cache[$plugin['name']])) {
     $cache[$plugin['name']] = ctools_plugin_get_class($plugin, 'handler');
+
   }
-  $class = $cache[$plugin['name']];
-  return $class ? $class::factory($class, $type, $plugin) : FALSE;
+
+  if (isset($cache[$plugin['name']]) && class_exists($cache[$plugin['name']])) {
+    $class = $cache[$plugin['name']];
+    return $class::factory($class, $type, $plugin);
+  }
+  else {
+    return NULL;
+  }
+}
+
+/**
+ * Require callback for plugins.
+ *
+ * @param string $type
+ *   Type of the plugin (settings, scheduler, launcher, logger).
+ * @param string $name
+ *   Name of the plugin (general, queue, serial, database, etc.).
+ *
+ * @return object
+ *   The instance of the plugin (singleton).
+ *
+ * @throws \RuntimeException
+ *   Throws a \RuntimeException if the plugin could not be loaded.
+ */
+function _ultimate_cron_plugin_require($type, $name) {
+  $object = _ultimate_cron_plugin_load($type, $name);
+
+  if (!is_object($object)) {
+    throw new \RuntimeException(t('Ultimate Cron failed to require ctools "!type" plugin "!name"', array('!type' => $type, '!name' => $name)));
+  }
+
+  return $object;
 }
 
 /**
@@ -281,10 +275,16 @@ function ultimate_cron_ctools_plugin_instance($type, $plugin) {
 function _ultimate_cron_plugin_load($type, $name) {
   $cache = &drupal_static('ultimate_cron_plugin_load_all', array());
   if (!isset($cache[$type][$name])) {
+    // Will populate the $cache static variable if a plugin is loaded.
     _ultimate_cron_plugin_load_all($type);
-    $cache[$type][$name] = isset($cache[$type][$name]) ? $cache[$type][$name] : FALSE;
   }
-  return $cache[$type][$name];
+
+  if (isset($cache[$type][$name])) {
+    return $cache[$type][$name];
+  }
+  else {
+    return NULL;
+  }
 }
 
 /**
@@ -798,8 +798,36 @@ function ultimate_cron_init() {
 function ultimate_cron_help($path, $arg) {
   switch ($path) {
     case 'admin/help#ultimate_cron':
-      // Return a line-break version of the module README.
-      return '<pre>' . file_get_contents(dirname(__FILE__) . '/README.txt') . '</pre>';
+      $readme = dirname(__FILE__) . '/README.txt';
+      if (is_readable($readme)) {
+        // Return a line-break version of the module README.
+        return '<pre>' . file_get_contents($readme) . '</pre>';
+      }
+      else {
+        $output = '<h3>' . t('About') . '</h3>';
+        $output .= '<p>' . t('The Ultimate Cron handling for Drupal. Runs cron jobs individually in parallel using configurable rules, pool management and load balancing.') . '</p>';
+        $output .= '<h3>' . t('Features') . '</h3>';
+        $output .= '<ul>';
+        $output .= '<li>' . t('Works out-of-the box in most cases (or aims to)') . '</li>';
+        $output .= '<li>' . t('Parallel exection of cron jobs') . '</li>';
+        $output .= '<li>' . t('Configuration per job (enable/disable, rules, etc.)') . '</li>';
+        $output .= '<li>' . t('Multiple rules per cron job') . '</li>';
+        $output .= '<li>' . t('Pool management and load balancing using Background process') . '</li>';
+        $output .= '<li>' . t('Support for Drupal Queues') . '</li>';
+        $output .= '<li>' . t('Overview of cron jobs') . '</li>';
+        $output .= '<li>' . t('Log history of cron jobs') . '</li>';
+        $output .= '<li>' . t('Status/error messages per cron job, providing easy debugging of troublesome cron jobs') . '</li>';
+        $output .= '<li>' . t('hook_cron_alter() for easy adding/manipulating cron jobs') . '</li>';
+        $output .= '<li>' . t('Poormans cron with keepalive a granularity of 1 minute') . '</li>';
+        $output .= '<li>' . t('<a href="@url" rel="nofollow">Drush</a> support (list, start, enable/disable jobs from the command line)', array('@url' => 'https://www.drupal.org/project/drush')) . '</li>';
+        $output .= '</ul>';
+
+        $output .= '<h3>' . t('Useful links') . '</h3>';
+        $output .= '<ul>';
+        $output .= '<li>' . t('<a href="@url">Ultimate Cron project on Drupal.org</a>', array('@url' => 'https://www.drupal.org/project/ultimate_cron')) . '</li>';
+        $output .= '</ul>';
+        return $output;
+      }
   }
 }
 
@@ -1000,7 +1028,7 @@ function ultimate_cron_cron_queue_info() {
 function ultimate_cron_plugin_cleanup($job, $arguments) {
   $type = $arguments['type'];
   $name = $arguments['name'];
-  $plugin = _ultimate_cron_plugin_load($type, $name);
+  $plugin = _ultimate_cron_plugin_require($type, $name);
   $plugin->cleanup();
 }
 

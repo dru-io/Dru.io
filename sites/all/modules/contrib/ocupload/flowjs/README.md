@@ -1,4 +1,4 @@
-# Flow.js [![Build Status](https://travis-ci.org/flowjs/flow.js.svg)](https://travis-ci.org/flowjs/flow.js) [![Coverage Status](https://coveralls.io/repos/flowjs/flow.js/badge.svg?branch=master&service=github)](https://coveralls.io/github/flowjs/flow.js?branch=master)
+# Flow.js [![Build Status](https://travis-ci.org/flowjs/flow.js.svg)](https://travis-ci.org/flowjs/flow.js) [![Test Coverage](https://codeclimate.com/github/flowjs/flow.js/badges/coverage.svg)](https://codeclimate.com/github/flowjs/flow.js/coverage)
 
 [![Saucelabs Test Status](https://saucelabs.com/browser-matrix/flowjs.svg)](https://saucelabs.com/u/flowjs)
 
@@ -9,8 +9,6 @@ The library is designed to introduce fault-tolerance into the upload of large fi
 Flow.js does not have any external dependencies other than the `HTML5 File API`. This is relied on for the ability to chunk files into smaller pieces. Currently, this means that support is limited to Firefox 4+, Chrome 11+, Safari 6+ and Internet Explorer 10+.
 
 Samples and examples are available in the `samples/` folder. Please push your own as Markdown to help document the project.
-
-## Would you like to contribute? [View our development branch](https://github.com/flowjs/flow.js/tree/develop)
 
 ## Can I see a demo?
 [Flow.js + angular.js file upload demo](http://flowjs.github.io/ng-flow/) - ng-flow extension page https://github.com/flowjs/ng-flow
@@ -188,7 +186,8 @@ this means that calling `flow.upload()` function will not start current file upl
 Optionally, you can use the browser `event` object from when the file was
 added.
 * `.filesAdded(array, event)` Same as fileAdded, but used for multiple file validation.
-* `.filesSubmitted(array, event)` Can be used to start upload of currently added files.
+* `.filesSubmitted(array, event)` Same as filesAdded, but happens after the file is added to upload queue. Can be used to start upload of currently added files.
+* `.fileRemoved(file)` The specific file was removed from the upload queue. Combined with filesSubmitted, can be used to notify UI to update its state to match the upload queue.
 * `.fileRetry(file, chunk)` Something went wrong during upload of a specific file, uploading is being 
 retried.
 * `.fileError(file, message, chunk)` An error occurred during upload of a specific file.

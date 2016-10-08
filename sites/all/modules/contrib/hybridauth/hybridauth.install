@@ -50,6 +50,7 @@ function hybridauth_uninstall() {
   variable_del('hybridauth_destination_error');
   variable_del('hybridauth_forms');
   variable_del('hybridauth_duplicate_emails');
+  variable_del('hybridauth_proxy');
   variable_del('hybridauth_debug');
 
   // Some old variables not present in the code now.

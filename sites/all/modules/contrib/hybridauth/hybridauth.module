@@ -67,8 +67,7 @@ function hybridauth_menu() {
   $items['admin/reports/hybridauth'] = array(
     'title' => 'HybridAuth identities',
     'description' => 'View HybridAuth identities counts grouped by authentication provider.',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('hybridauth_report'),
+    'page callback' => 'hybridauth_report',
     'access arguments' => array('access site reports'),
     'file' => 'hybridauth.admin.inc',
     'type' => MENU_NORMAL_ITEM,
@@ -97,8 +96,8 @@ function hybridauth_menu() {
 
   $items['user/%user/hybridauth'] = array(
     'title' => 'HybridAuth',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('hybridauth_user_identity', 1),
+    'page callback' => 'hybridauth_user_identity',
+    'page arguments' => array(1),
     'access callback' => 'user_edit_access',
     'access arguments' => array(1),
     'file' => 'hybridauth.pages.inc',
@@ -133,7 +132,7 @@ function hybridauth_provider_load($requested_provider_id) {
  * Implements hook_menu_site_status_alter().
  */
 function hybridauth_menu_site_status_alter(&$menu_site_status, $path) {
-  // Allow access to ulogin path even if site is in offline mode.
+  // Allow access to hybridauth path even if site is in offline mode.
   if ($menu_site_status == MENU_SITE_OFFLINE && user_is_anonymous() && substr($path, 0, 10) == 'hybridauth') {
     $menu_site_status = MENU_SITE_ONLINE;
   }
@@ -181,6 +180,7 @@ function hybridauth_user_login(&$edit, $account) {
         }
         // Call Hybrid_Auth::restoreSessionData() to set stored data.
         $hybridauth->restoreSessionData($hybridauth_session_data);
+        _hybridauth_session_save($hybridauth_session_data, $account->uid);
       }
     }
   }
@@ -277,6 +277,7 @@ function hybridauth_element_info() {
 
   $types['hybridauth_widget'] = array(
     '#input' => FALSE,
+    '#theme' => 'hybridauth_widget',
     '#pre_render' => array('hybridauth_widget_pre_render'),
     // '#theme_wrappers' => array('form_element'),
     '#hybridauth_id' => 'hybridauth',
@@ -315,18 +316,19 @@ function hybridauth_element_info() {
  * Pre-render callback for the 'hybridauth_widget' element.
  */
 function hybridauth_widget_pre_render($element) {
-  $element['#theme'] = 'hybridauth_widget';
-
   $query = $element['#hybridauth_query'];
   $element['#hybridauth_destination'] = trim($element['#hybridauth_destination']);
   $element['#hybridauth_destination_error'] = trim($element['#hybridauth_destination_error']);
-  $destination = drupal_get_destination();
-  // Process destination; HTTP_REFERER is needed for widget in modals
+  // Process destinations; HTTP_REFERER is needed for widget in modals
   // to return to the current page.
   foreach (array('destination', 'destination_error') as $key) {
     if ($element['#hybridauth_' . $key] == '[HTTP_REFERER]' && isset($_SERVER['HTTP_REFERER'])) {
+      // We need to make this link relative, see https://www.drupal.org/node/2616284.
+      global $base_root, $base_path;
+      $path = str_replace($base_root . $base_path, '', $_SERVER['HTTP_REFERER']);
+      list(, $path) = language_url_split_prefix($path, language_list());
       $query += array(
-        $key => $_SERVER['HTTP_REFERER'],
+        $key => $path,
       );
     }
     elseif ($element['#hybridauth_' . $key]) {
@@ -335,6 +337,7 @@ function hybridauth_widget_pre_render($element) {
       );
     }
     else {
+      $destination = drupal_get_destination();
       $query += array(
         $key => $destination['destination'],
       );
@@ -342,6 +345,162 @@ function hybridauth_widget_pre_render($element) {
   }
   $element['#hybridauth_query'] = $query;
 
+  $element['providers'] = array();
+  switch ($element['#hybridauth_widget_type']) {
+    case 'list':
+      $class = array('hybridauth-widget-provider');
+      $rel = array('nofollow');
+
+      foreach (hybridauth_get_enabled_providers() as $provider_id => $provider_name) {
+        $window_type = variable_get('hybridauth_provider_' . $provider_id . '_window_type', 'current');
+        $window_width = variable_get('hybridauth_provider_' . $provider_id . '_window_width', 800);
+        $window_height = variable_get('hybridauth_provider_' . $provider_id . '_window_height', 500);
+        $query_mod = $element['#hybridauth_query'];
+        $class_mod = $class;
+        $rel_mod = $rel;
+
+        switch ($window_type) {
+          case 'colorbox':
+            $class_mod[] = 'colorbox-load';
+            $query_mod += array(
+              'width' => $window_width,
+              'height' => $window_height,
+              'iframe' => 'true',
+            );
+            break;
+          case 'shadowbox':
+            $rel_mod = array('shadowbox;width=' . $window_width . ';height=' . $window_height, 'nofollow');
+            break;
+          case 'fancybox':
+            $class_mod[] = 'fancybox';
+            $class_mod[] = 'fancybox.iframe';
+            $class_mod[] = '{width:' . $window_width . ',height:' . $window_height . '}';
+            break;
+          case 'lightbox2':
+            $rel_mod = array('lightframe[|width:' . $window_width . 'px; height:' . $window_height . 'px;]', 'nofollow');
+            break;
+        }
+
+        // Determine onclick behavior.
+        $onclick = '';
+        if ($element['#hybridauth_onclick'] === FALSE) {}
+        elseif (!empty($element['#hybridauth_onclick'])) {
+          $onclick = $element['#hybridauth_onclick'];
+        }
+        elseif ($window_type == 'current') {
+          $class_mod[] = 'hybridauth-onclick-current';
+        }
+        elseif ($window_type == 'popup') {
+          $class_mod[] = 'hybridauth-onclick-popup';
+        }
+
+        $text = array(
+          '#theme' => 'hybridauth_provider_icon',
+          '#icon_pack' => $element['#hybridauth_widget_icon_pack'],
+          '#provider_id' => $provider_id,
+          '#provider_name' => $provider_name,
+        );
+        $path = 'hybridauth/window/' . $provider_id;
+        $url = url($path, array('query' => $query_mod));
+        if ($element['#hybridauth_widget_hide_links']) {
+          $path = 'user';
+        }
+        $options = array(
+          'html' => TRUE,
+          'query' => $query_mod,
+          'attributes' => array(
+            'title' => $provider_name,
+            'class' => $class_mod,
+            'rel' => $rel_mod,
+            'data-hybridauth-provider' => $provider_id,
+            'data-hybridauth-url' => $url,
+            // jQuery Mobile compatibility - so it doesn't use AJAX.
+            'data-ajax' => 'false',
+            // Add authentication window width and height.
+            'data-hybridauth-width' => $window_width,
+            'data-hybridauth-height' => $window_height,
+          ) + ($onclick ? array('onclick' => $onclick) : array()),
+        );
+        $element['providers'][$provider_id] = array(
+          'text' => $text,
+          'path' => $path,
+          'options' => $options,
+        );
+      }
+      break;
+
+    case 'button':
+    case 'link':
+      $provider_id = 'none';
+      $class = array();
+      if ($element['#hybridauth_widget_use_overlay']) {
+        $class = array('ctools-use-modal', 'ctools-modal-hybridauthmodal');
+        ctools_include('modal');
+        ctools_modal_add_js();
+        $settings = array(
+          'hybridauthmodal' => array(
+            'modalSize' => array(
+              'type' => 'scale',
+              'width' => '400px',
+              'height' => '200px',
+              'addWidth' => 0,
+              'addHeight' => 0,
+              'contentRight' => 25,
+              'contentBottom' => 45,
+            ),
+            'modalTheme' => 'HybridAuthModalDialog',
+            // 'throbberTheme' => 'HybridAuthModalThrobber',
+            'modalOptions' => array(
+              'opacity' => 0.55,
+              'background' => '#000',
+            ),
+            'animation' => 'fadeIn',
+            'animationSpeed' => 'slow',
+            'closeText' => t('Close'),
+            'closeImage' => '',
+            // 'loadingText' => t('Loading...'),
+            /* 'throbber' => theme('image', array(
+              'path' => ctools_image_path('throbber.gif'),
+              'title' => t('Loading...'),
+              'alt' => t('Loading'),
+            )), */
+          ),
+        );
+        $element['#attached']['js'][] = array(
+          'data' => $settings,
+          'type' => 'setting',
+        );
+      }
+
+      $text = $element['#hybridauth_widget_link_text'];
+      if ($element['#hybridauth_widget_type'] == 'button') {
+        $text = array(
+          '#theme' => 'hybridauth_provider_icon',
+          '#icon_pack' => $element['#hybridauth_widget_icon_pack'],
+          '#provider_id' => $provider_id,
+          '#provider_name' => $element['#hybridauth_widget_link_title'],
+        );
+      }
+      $path = 'hybridauth/providers/nojs/' . $element['#hybridauth_widget_icon_pack'];
+      $options = array(
+        'html' => TRUE,
+        'query' => $element['#hybridauth_query'],
+        'attributes' => array(
+          'title' => $element['#hybridauth_widget_link_title'],
+          'class' => $class,
+          'rel' => array('nofollow'),
+        ),
+      );
+
+      $element['providers'][$provider_id] = array(
+        'text' => $text,
+        'path' => $path,
+        'options' => $options,
+      );
+      break;
+  }
+
+  _hybridauth_add_icon_pack_files($element['#hybridauth_widget_icon_pack'], $element);
   return $element;
 }
 
@@ -688,7 +847,14 @@ function hybridauth_get_instance() {
     $controller = FALSE;
 
     if ($lib_path = _hybridauth_library_path()) {
-      require_once $lib_path . '/Hybrid/Auth.php';
+      // If Composer install was executed in the Hybridauth library use that
+      // autoloader.
+      if (file_exists($lib_path . '/../vendor/autoload.php')) {
+        require_once $lib_path . '/../vendor/autoload.php';
+      }
+      else {
+        require_once $lib_path . '/Hybrid/Auth.php';
+      }
       $config = hybridauth_get_config();
       try {
         $controller = new Hybrid_Auth($config);
@@ -711,16 +877,16 @@ function hybridauth_get_config() {
 
   if (!isset($config)) {
     $logfile = file_directory_temp() . '/hybridauth.debug.log';
-    if (variable_get('hybridauth_debug', 0)) {
-      if (file_put_contents($logfile, PHP_EOL . 'HYBRIDAUTH DEBUG LOG START' . PHP_EOL . PHP_EOL, FILE_APPEND) === FALSE) {
-        watchdog('hybridauth', 'Failed to write to debug log file @logfile.', array('@logfile' => $logfile), WATCHDOG_ERROR);
-      }
+    $hybridauth_debug = variable_get('hybridauth_debug', 0);
+    if ($hybridauth_debug && file_put_contents($logfile, PHP_EOL . 'HYBRIDAUTH DEBUG LOG START' . PHP_EOL . PHP_EOL, FILE_APPEND) === FALSE) {
+      watchdog('hybridauth', 'Failed to write to debug log file @logfile.', array('@logfile' => $logfile), WATCHDOG_ERROR);
+      $hybridauth_debug = 0;
     }
 
     $config = array(
       'base_url' => url('hybridauth/endpoint', array('absolute' => TRUE, 'language' => _hybridauth_language_default())),
       'providers' => array(),
-      'debug_mode' => variable_get('hybridauth_debug', 0),
+      'debug_mode' => $hybridauth_debug,
       'debug_file' => $logfile,
     );
 
@@ -824,19 +990,18 @@ function _hybridauth_library_path() {
   return $library_path;
 }
 
-function _hybridauth_add_icon_pack_files($name) {
+function _hybridauth_add_icon_pack_files($name, &$element) {
   $done = &drupal_static(__FUNCTION__, NULL);
   if (!isset($done[$name])) {
     $done[$name] = TRUE;
     $icon_pack = hybridauth_get_icon_pack($name);
-    if (!empty($icon_pack['css'])) {
-      drupal_add_css($icon_pack['path'] . '/' . $icon_pack['css']);
-    }
-    if (!empty($icon_pack['js'])) {
-      drupal_add_js($icon_pack['path'] . '/' . $icon_pack['js']);
+    foreach (array('css', 'js') as $key) {
+      if (!empty($icon_pack[$key])) {
+        $element['#attached'][$key][] = $icon_pack['path'] . '/' . $icon_pack[$key];
+      }
     }
     if ($function = ctools_plugin_get_function($icon_pack, 'initialize_callback')) {
-      $function();
+      $function($element);
     }
   }
 }
@@ -1085,4 +1250,15 @@ function _hybridauth_language_default() {
   $language_default = clone $language;
   $language_default->prefix = '';
   return $language_default;
+}
+
+/**
+ * Helper function to check if the string is allowed for token replacements.
+ */
+function _hybridauth_allow_token_replace($string) {
+  if ($string == variable_get('hybridauth_destination', '')) {
+    return TRUE;
+  }
+  // TODO: add hook so that other modules can provide strings for token replacements.
+  return FALSE;
 }

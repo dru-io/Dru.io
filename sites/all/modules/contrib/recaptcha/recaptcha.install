@@ -89,3 +89,15 @@ function recaptcha_update_7201() {
 
   return t('Empty tabindex has been upgraded to 0.');
 }
+
+/**
+ * Remove recaptcha_mailhide 7.x-1.x from system table.
+ */
+function recaptcha_update_7202() {
+  // #2487215: Drupal 7.50+ requires system table cleanup.
+  db_delete('system')
+    ->condition('name', 'recaptcha_mailhide')
+    ->execute();
+
+  return t('Removed recaptcha_mailhide module from database.');
+}

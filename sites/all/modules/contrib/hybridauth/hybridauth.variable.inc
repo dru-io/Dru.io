@@ -8,6 +8,13 @@
  * Implements hook_variable_info().
  */
 function hybridauth_variable_info($options = array()) {
+  $variables['hybridauth_providers'] = array(
+    'type' => 'array',
+    'title' => t('HybridAuth - Providers list', array(), $options),
+    'description' => t('List of providers and their status (enabled or not).', array(), $options),
+    'default' => array(),
+    'localize' => TRUE,
+  );
   $variables['hybridauth_widget_title'] = array(
     'type' => 'string',
     'title' => t('HybridAuth widget - Title', array(), $options),

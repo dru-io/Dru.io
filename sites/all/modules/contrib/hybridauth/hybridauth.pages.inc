@@ -10,6 +10,11 @@ function hybridauth_endpoint() {
 
   if ($lib_path = _hybridauth_library_path()) {
     try {
+      // If Composer install was executed in the Hybridauth library use that
+      // autoloader.
+      if (file_exists($lib_path . '/../vendor/autoload.php')) {
+        require_once $lib_path . '/../vendor/autoload.php';
+      }
       require_once $lib_path . '/index.php';
     }
     catch(Exception $e) {
@@ -93,11 +98,21 @@ function _hybridauth_window_close($redirect = TRUE) {
   $GLOBALS['devel_shutdown'] = FALSE;
 
   $destination = drupal_get_destination();
-  $destination = token_replace($destination['destination'], array('user' => $user), array('clear' => TRUE));
+  $destination = $destination['destination'];
+  // Check if token replacements are allowed for the destination string.
+  if (_hybridauth_allow_token_replace($destination)) {
+    $destination = token_replace($destination, array('user' => $user), array('clear' => TRUE));
+  }
   $destination_error = !empty($_GET['destination_error']) ? $_GET['destination_error'] : variable_get('hybridauth_destination_error', '');
 
-  $destination_options = drupal_parse_url($destination) + array('absolute' => TRUE);
-  $destination_error_options = drupal_parse_url($destination_error) + array('absolute' => TRUE);
+  $base_options = array(
+    'absolute' => TRUE,
+    // The redirect target must never be an external URL to prevent open
+    // redirect vulnerabilities.
+    'external' => FALSE,
+  );
+  $destination_options = drupal_parse_url($destination) + $base_options;
+  $destination_error_options = drupal_parse_url($destination_error) + $base_options;
 
   $destination = url($destination_options['path'], $destination_options);
   $destination_error = url($destination_error_options['path'], $destination_error_options);
@@ -110,6 +125,12 @@ function _hybridauth_window_close($redirect = TRUE) {
     )
   ), 'setting');
   drupal_add_js(drupal_get_path('module', 'hybridauth') . '/js/hybridauth.close.js');
+
+  // Make sure that we send the correct content type with charset, otherwise
+  // Firefox might repeat the GET request.
+  // @see https://www.drupal.org/node/2648912
+  drupal_add_http_header('Content-Type', 'text/html; charset=utf-8');
+
   $page = element_info('page');
   // Don't show messages on this closing page, show them later.
   $page['#show_messages'] = FALSE;
@@ -139,12 +160,21 @@ function _hybridauth_window_auth($hybridauth, $provider_id) {
   else {
     $error_code = $hybridauth;
   }
-  
+
   if (!is_null($error_code)) {
     // Destroy the session started in hybridauth_window_start() if user is not
     // logged in.
     if (!user_is_logged_in()) {
-      session_destroy();
+      // Delete session only if it contains just HybridAuth data.
+      $delete_session = TRUE;
+      foreach ($_SESSION as $key => $value) {
+        if (substr($key, 0, 4) != 'HA::') {
+          $delete_session = FALSE;
+        }
+      }
+      if ($delete_session) {
+        session_destroy();
+      }
     }
     switch ($error_code) {
       case 5:
@@ -380,7 +410,13 @@ function _hybridauth_window_process_auth($data) {
     }
     // Visitors can't register accounts through HybridAuth.
     elseif (variable_get('hybridauth_register', 0) == 3) {
-      drupal_set_message(t('New account registration is not allowed.'), 'error');
+      if (variable_get('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL)) {
+        $message = t('Sorry, you are not allowed to login. Please, <a href="@register">create a new account</a>.', array('@register' => url('user/register')));
+      }
+      else {
+        $message = t('New account registration is not allowed.');
+      }
+      drupal_set_message($message, 'error');
       _hybridauth_window_close(FALSE);
     }
     // Only admin can create accounts.
@@ -595,7 +631,7 @@ function hybridauth_openid_form_submit($form, &$form_state) {
 /**
  * Menu callback; manage HybridAuth identities for the specified user.
  */
-function hybridauth_user_identity($form, &$form_state, $account) {
+function hybridauth_user_identity($account) {
   global $user;
   drupal_set_title(format_username($account));
 
@@ -615,9 +651,8 @@ function hybridauth_user_identity($form, &$form_state, $account) {
     );
   }
 
-  $form = array();
-
-  $form['identity'] = array(
+  $build = array();
+  $build['identity'] = array(
     '#theme' => 'table',
     '#header' => $header,
     '#rows' => $rows,
@@ -627,7 +662,7 @@ function hybridauth_user_identity($form, &$form_state, $account) {
 
   // Add more identities.
   if ($account->uid == $user->uid && user_access('use hybridauth')) {
-    $form['hybridauth_widget'] = array(
+    $build['hybridauth_widget'] = array(
       '#type' => 'hybridauth_widget',
       '#title' => t('Add more identities'),
       '#weight' => 10,
@@ -639,7 +674,7 @@ function hybridauth_user_identity($form, &$form_state, $account) {
 
   if (variable_get('hybridauth_debug', 0)) {
     $connected_providers = hybridauth_get_connected_providers();
-    $form['connected_providers'] = array(
+    $build['connected_providers'] = array(
       '#markup' => t('Currently connected to (session data):') . ' ' . implode(', ', $connected_providers),
       '#weight' => 15,
     );
@@ -647,7 +682,7 @@ function hybridauth_user_identity($form, &$form_state, $account) {
 
   // Tokens browser for admins.
   if (user_access('administer site configuration') || user_access('administer users')) {
-    $form['vtabs'] = array(
+    $build['vtabs'] = array(
       '#type' => 'vertical_tabs',
       '#weight' => 20,
     );
@@ -655,7 +690,7 @@ function hybridauth_user_identity($form, &$form_state, $account) {
     $header = array(t('Token'), t('Value'));
     // User tokens.
     if (!empty($account->data['hybridauth'])) {
-      $form['vtabs']['fset_user_tokens'] = array(
+      $build['vtabs']['fset_user_tokens'] = array(
         '#type' => 'fieldset',
         '#title' => t('User tokens'),
       );
@@ -664,7 +699,7 @@ function hybridauth_user_identity($form, &$form_state, $account) {
       foreach ($account->data['hybridauth'] as $key => $value) {
         $rows[] = array('[user:hybridauth:' . $key . ']', $value);
       }
-      $form['vtabs']['fset_user_tokens']['tokens'] = array(
+      $build['vtabs']['fset_user_tokens']['tokens'] = array(
         '#theme' => 'table',
         '#header' => $header,
         '#rows' => $rows,
@@ -674,7 +709,7 @@ function hybridauth_user_identity($form, &$form_state, $account) {
 
     // Data from auth providers.
     foreach ($data_array as $data) {
-      $form['vtabs']['fset_' . $data['provider'] . '_' . $data['identifier']] = array(
+      $build['vtabs']['fset_' . $data['provider'] . '_' . $data['identifier']] = array(
         '#type' => 'fieldset',
         '#title' => $providers[$data['provider']],
       );
@@ -683,7 +718,7 @@ function hybridauth_user_identity($form, &$form_state, $account) {
       foreach ($data as $key => $value) {
         $rows[] = array($key, $value);
       }
-      $form['vtabs']['fset_' . $data['provider'] . '_' . $data['identifier']]['tokens'] = array(
+      $build['vtabs']['fset_' . $data['provider'] . '_' . $data['identifier']]['tokens'] = array(
         '#theme' => 'table',
         '#header' => $header,
         '#rows' => $rows,
@@ -692,7 +727,7 @@ function hybridauth_user_identity($form, &$form_state, $account) {
     }
   }
 
-  return $form;
+  return $build;
 }
 
 function hybridauth_user_identity_delete($form, &$form_state, $account, $id) {
@@ -700,7 +735,7 @@ function hybridauth_user_identity_delete($form, &$form_state, $account, $id) {
   if (!$del_identity || $account->uid != $del_identity['uid']) {
     drupal_set_message(t('You are trying to delete non-existing identity.'), 'error');
     drupal_access_denied();
-    // See https://drupal.org/node/2020351 and 
+    // See https://drupal.org/node/2020351 and
     // https://api.drupal.org/api/drupal/includes%21common.inc/function/drupal_access_denied/7
     drupal_exit();
   }

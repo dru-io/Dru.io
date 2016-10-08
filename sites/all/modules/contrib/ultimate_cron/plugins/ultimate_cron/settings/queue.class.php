@@ -115,7 +115,7 @@ class UltimateCronQueueSettings extends UltimateCronTaggedSettings {
         }
       }
       try {
-        $function($item->data);
+        call_user_func($function, $item->data);
         $queue->deleteItem($item);
         $items++;
         // Sleep after processing retrieving.

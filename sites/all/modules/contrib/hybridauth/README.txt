@@ -12,6 +12,10 @@ Download it at https://github.com/hybridauth/hybridauth/releases and unpack into
 'sites/all/libraries/hybridauth' directory.
 HybridAuth library requires php-curl extension.
 
+Execute "composer install" in 'sites/all/libraries/hybridauth' to generate the
+autoload.php file in 'sites/all/libraries/hybridauth/vendor'. See
+https://getcomposer.org/ for using Composer.
+
 If you need additional providers support like Mail.ru - then you need to
 copy needed additional providers to the library and clear Drupal caches.
 For instance, to get Mail.ru provider working you need to copy

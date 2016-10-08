@@ -56,7 +56,7 @@ function recaptcha_admin_settings() {
     ),
     '#default_value' => variable_get('recaptcha_type', 'image'),
   );
-  $form['widget']['recaptcha_size'] = array(
+  $form['recaptcha_widget_settings']['recaptcha_size'] = array(
     '#default_value' => variable_get('recaptcha_size', ''),
     '#description' => t('The size of CAPTCHA to serve.'),
     '#options' => array(

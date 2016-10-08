@@ -1,3 +1,8 @@
+Search API Solr Search 1.11 (2016-07-06):
+-----------------------------------------
+- #2710397 by drunken monkey: Fixed escaping of highlighting tags.
+- #2636016 by drunken monkey: Fixed location search distance facets.
+
 Search API Solr Search 1.10 (2016-03-14):
 -----------------------------------------
 - #2604322 by lex0r, drunken monkey: Added the option to log all Solr queries.

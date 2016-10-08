@@ -50,6 +50,9 @@
 .hybridauth-disqus-hybridauth-48 {
   background: transparent url(icons/disqus.png) 0px 0px no-repeat;
 }
+.hybridauth-drupaloauth2-hybridauth-48 {
+  background: transparent url(icons/drupaloauth2.png) 0px 0px no-repeat;
+}
 .hybridauth-esia-hybridauth-48 {
   background: transparent url(icons/esia.png) 0px 0px no-repeat;
 }
@@ -106,6 +109,12 @@
 }
 .hybridauth-vkontakte-hybridauth-48 {
   background: transparent url(icons/vkontakte.png) 0px 0px no-repeat;
+}
+.hybridauth-wargaming-hybridauth-48 {
+  background: transparent url(icons/wargaming.png) 0px 0px no-repeat;
+}
+.hybridauth-xing-hybridauth-48 {
+  background: transparent url(icons/xing.png) 0px 0px no-repeat;
 }
 .hybridauth-yandex-hybridauth-48 {
   background: transparent url(icons/yandex.png) 0px 0px no-repeat;
