@@ -450,6 +450,16 @@ body {
       .add-comment {
         @include font-size(13px);
       }
+      .field-name-field-category {
+        a {
+          &:after {
+            content: ", ";
+          }
+          &:last-child:after {
+            content: none;
+          }
+        }
+      }
     }
   }
   .node-answer-form {

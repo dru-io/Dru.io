@@ -1147,7 +1147,7 @@ body {
 .project-full > .left .version:before,
 .project-full > .left .drupalorg:before, #druio-projects-download-form .archives .title:before, #druio-projects-download-form .drush .title:before, .order-full > .info .left .status:before, .order-full > .info .left .budget:before, .order-full > .info .left .files:before, .order-full > .info .left .files .file:before, .order-full > .info .right .contacts:before, .order-full .flag-ready2work .flag:before, #block-block-1 .social li .item:before, .view-events-frontpage .event-item .event__date:before, .view-events-frontpage .event-item .event__city:before, .view-events-frontpage .event-item .event__address:before, #sidebar-toggle:before, #mobile-menu-button:before, .page-403 .auth:before, .page-403 .register:before, #drupal-8-0-promo .features .feature:before, #drupal-8-countdown .content .buttons .more:before, #drupal-8-countdown .content .buttons .demo:before {
   display: inline-block;
-  font: normal normal normal 14px/1 FontAwesome;
+  font: normal normal normal 14px / 1 FontAwesome;
   font-size: inherit;
   text-rendering: auto;
   -webkit-font-smoothing: antialiased;
@@ -5725,6 +5725,10 @@ body {
   .question-full .content-pane > .right .add-comment {
     font-size: 13px;
     font-size: 0.8125rem; }
+  .question-full .content-pane > .right .field-name-field-category a:after {
+    content: ", "; }
+  .question-full .content-pane > .right .field-name-field-category a:last-child:after {
+    content: none; }
 
 .question-full .node-answer-form {
   display: none; }
