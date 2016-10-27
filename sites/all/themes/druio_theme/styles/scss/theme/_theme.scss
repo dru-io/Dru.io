@@ -450,7 +450,8 @@ body {
       .add-comment {
         @include font-size(13px);
       }
-      .field-name-field-category {
+      .field-name-field-category,
+      .field-name-field-project-reference {
         a {
           &:after {
             content: ", ";

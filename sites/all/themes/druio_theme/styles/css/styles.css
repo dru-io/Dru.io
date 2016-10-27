@@ -5725,9 +5725,11 @@ body {
   .question-full .content-pane > .right .add-comment {
     font-size: 13px;
     font-size: 0.8125rem; }
-  .question-full .content-pane > .right .field-name-field-category a:after {
+  .question-full .content-pane > .right .field-name-field-category a:after,
+  .question-full .content-pane > .right .field-name-field-project-reference a:after {
     content: ", "; }
-  .question-full .content-pane > .right .field-name-field-category a:last-child:after {
+  .question-full .content-pane > .right .field-name-field-category a:last-child:after,
+  .question-full .content-pane > .right .field-name-field-project-reference a:last-child:after {
     content: none; }
 
 .question-full .node-answer-form {
