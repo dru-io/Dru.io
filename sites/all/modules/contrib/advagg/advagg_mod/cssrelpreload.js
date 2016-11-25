@@ -4,6 +4,7 @@
  */
 
 /* @codingStandardsIgnoreFile */
+/* eslint-disable */
 
 /*! CSS rel=preload polyfill. Depends on loadCSS function. [c]2016 @scottjehl, Filament Group, Inc. Licensed MIT  */
 (function( w ){
@@ -26,7 +27,7 @@
     for( var i = 0; i < links.length; i++ ){
       var link = links[ i ];
       if( link.rel === "preload" && link.getAttribute( "as" ) === "style" ){
-        w.loadCSS( link.href, link );
+        w.loadCSS( link.href, link, link.getAttribute( "media" ) );
         link.rel = null;
       }
     }
@@ -38,6 +39,7 @@
     var run = w.setInterval( rp.poly, 300 );
     if( w.addEventListener ){
       w.addEventListener( "load", function(){
+        rp.poly();
         w.clearInterval( run );
       } );
     }
