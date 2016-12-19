@@ -65,6 +65,14 @@ class Hybrid_Providers_GitHub extends Hybrid_Provider_Model_OAuth2
 							&& property_exists($email, 'email')
 						) {
 							$this->user->profile->email = $email->email;
+							
+							// record whether the email address is verified
+							if (property_exists($email, 'verified')
+								&& true === $email->verified
+							) {
+								$this->user->profile->emailVerified = $email->email;
+							}
+							
 							break;
 						}
 					}
@@ -76,5 +84,44 @@ class Hybrid_Providers_GitHub extends Hybrid_Provider_Model_OAuth2
 		}
 
 		return $this->user->profile;
+	}
+	/**
+	*
+	*/
+	function getUserContacts() {
+		// refresh tokens if needed
+		$this->refreshToken();
+
+		//
+		$response = array();
+		$contacts = array();
+		try {
+            $response = $this->api->api( "user/followers" );
+        } catch (LinkedInException $e) {
+            throw new Exception("User contacts request failed! {$this->providerId} returned an error: $e");
+        }
+        //
+		if ( isset( $response ) ) {
+			foreach ($response as $contact) {
+                try {
+                    $contactInfo = $this->api->api( "users/".$contact->login );
+                } catch (LinkedInException $e) {
+                    throw new Exception("Contact info request failed for user {$contact->login}! {$this->providerId} returned an error: $e");
+                }
+                //
+				$uc = new Hybrid_User_Contact();
+				//
+				$uc->identifier     = $contact->id;
+				$uc->profileURL     = @$contact->html_url;
+				$uc->webSiteURL     = @$contact->blog;
+				$uc->photoURL       = @$contact->avatar_url;
+				$uc->displayName    = ( isset( $contactInfo->name )?( $contactInfo->name ):( $contact->login ) );
+				//$uc->description	= ;
+				$uc->email          = @$contactInfo->email;
+				//
+				$contacts[] = $uc;
+			}
+		}
+		return $contacts;
 	}
 }
