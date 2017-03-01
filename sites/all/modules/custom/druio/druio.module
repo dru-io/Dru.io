@@ -439,3 +439,20 @@ function druio_question_node_form_title_suggestions($form, $form_state) {
     return array('#type' => 'ajax', '#commands' => $commands);
   }
 }
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function druio_preprocess_page(&$variables) {
+  drupal_set_message('<strong>Внимание!</strong> Ведутся работы по переносу сайта но новый сервер. Пожалуйста, не постите ничего, иначе это будет утеряно. Сайт используйте на данный момент "для чтения", скоро всё будет хорошо!', 'warning');
+}
+
+/**
+ * Implements hook_form_alter(). 
+ */
+function druio_form_alter(&$form, $form_state) {
+  $form['deployment_info'] = array(
+    '#type' => 'markup',
+    '#makrup' => '<strong>Внимание! Ведетеся перенос сайта на новый сервер. Все данные веденный с данным сообщением, будут почти гарантированно утеряны.</strong>',
+  );
+}
