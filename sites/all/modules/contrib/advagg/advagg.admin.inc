@@ -296,6 +296,15 @@ function advagg_admin_settings_form($form, $form_state) {
     '#value' => t('Reset'),
     '#submit' => array('advagg_admin_resource_hints_preload_reset'),
   );
+  $form['global']['resource_hints']['advagg_resource_hints_use_immutable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Send immutable header for all aggregated files.'),
+    '#default_value' => variable_get('advagg_resource_hints_use_immutable', ADVAGG_RESOURCE_HINTS_USE_IMMUTABLE),
+    '#description' => t('Have apache send <a href="@url1">Cache-Control: immutable</a> for all aggregated files. Current <a href="@url2">browser support</a>', array(
+      '@url1' => 'http://bitsup.blogspot.de/2016/05/cache-control-immutable.html',
+      '@url2' => 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#Browser_compatibility',
+    )),
+  );
 
   $form['global']['cron'] = array(
     '#type' => 'fieldset',
@@ -388,14 +397,23 @@ function advagg_admin_settings_form($form, $form_state) {
     '#description' => t('All aggregated files can be pre-compressed into a .gz file and
    served from Apache. This is faster then gzipping the file on each request.'),
   );
-  if (function_exists('brotli_compress') && defined('BROTLI_TEXT')) {
-    $form['global']['obscure']['advagg_brotli'] = array(
-      '#type' => 'checkbox',
-      '#title' => t('Create .br files'),
-      '#default_value' => variable_get('advagg_brotli', ADVAGG_BROTLI),
-      '#description' => t('All aggregated files can be pre-compressed into a .br file and
-    served from Apache. This is faster then brotli compressing the file on each request.'),
-    );
+  $form['global']['obscure']['advagg_brotli'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Create .br files'),
+    '#default_value' => variable_get('advagg_brotli', ADVAGG_BROTLI),
+    '#description' => t('All aggregated files can be pre-compressed into a .br file and
+  served from Apache. This is faster then brotli compressing the file on each request.'),
+  );
+  if (!function_exists('brotli_compress') || !defined('BROTLI_TEXT')) {
+    $form['global']['obscure']['advagg_brotli']['#default_value'] = FALSE;
+    $form['global']['obscure']['advagg_brotli']['#disabled'] = TRUE;
+    $form['global']['obscure']['advagg_brotli']['#description'] .= ' ' . t('The <a href="@url">PHP brotli extension</a> is needed in order to enable this feature.', array('@url' => 'https://github.com/kjdev/php-ext-brotli'));
+    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
+      $form['global']['obscure']['advagg_brotli']['#description'] .= ' ' . t('If running on windows this is a helpful guide on how to compile <a href="@url">PHP extensions</a>. Also noted that <a href"@iis">IIS has a Brotli extension<a/>,', array(
+        '@url' => 'https://wiki.php.net/internals/windows/stepbystepbuild',
+        '@iis' => 'https://www.iis.net/downloads/community/2016/03/iis-brotli',
+      ));
+    }
   }
   $form['global']['obscure']['advagg_ajax_render_alter'] = array(
     '#type' => 'checkbox',
@@ -1002,6 +1020,24 @@ function advagg_admin_settings_form_submit($form, &$form_state) {
     ksort($entry);
   }
   uasort($form_state['values']['advagg_resource_hints_preload_settings'], 'element_sort');
+
+  if (variable_get('advagg_resource_hints_use_immutable', ADVAGG_RESOURCE_HINTS_USE_IMMUTABLE) != $form_state['values']['advagg_resource_hints_use_immutable']) {
+    $GLOBALS['conf']['advagg_resource_hints_use_immutable'] = $form_state['values']['advagg_resource_hints_use_immutable'];
+    // Make sure .htaccess file exists in the advagg dir.
+    if (variable_get('advagg_htaccess_check_generate', ADVAGG_HTACCESS_CHECK_GENERATE)) {
+      // Get paths to .htaccess file.
+      list($css_path, $js_path) = advagg_get_root_files_dir();
+      $files['css'] = $css_path[0] . '/.htaccess';
+      $files['js'] = $js_path[0] . '/.htaccess';
+
+      // Make the advagg_htaccess_check_generate() function available.
+      module_load_include('inc', 'advagg', 'advagg.missing');
+
+      foreach ($files as $type => $uri) {
+        advagg_htaccess_check_generate(array($uri => $type), $type, TRUE);
+      }
+    }
+  }
 
   // Clear caches.
   advagg_cache_clear_admin_submit();

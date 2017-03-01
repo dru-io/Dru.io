@@ -82,6 +82,7 @@ class SearchApiSolrService extends SearchApiAbstractService {
       'skip_schema_check' => FALSE,
       'log_query' => FALSE,
       'log_response' => FALSE,
+      'commits_disabled' => FALSE,
       'solr_version' => '',
       'http_method' => 'AUTO',
       // Default to TRUE for new servers, but to FALSE for existing ones.
@@ -163,7 +164,7 @@ class SearchApiSolrService extends SearchApiAbstractService {
     $form['path'] = array(
       '#type' => 'textfield',
       '#title' => t('Solr path'),
-      '#description' => t('The path that identifies the Solr instance to use on the server. (For Solr 4.x servers, this should include the name of the core to use.)'),
+      '#description' => t('The path that identifies the Solr instance to use on the server. (For Solr versions 4 and above, this should include the name of the core to use.)'),
       '#default_value' => $options['path'],
     );
 
@@ -213,7 +214,7 @@ class SearchApiSolrService extends SearchApiAbstractService {
     $form['advanced']['highlight_data'] = array(
       '#type' => 'checkbox',
       '#title' => t('Highlight retrieved data'),
-      '#description' => t('When retrieving result data from the Solr server, try to highlight the search terms in the returned fulltext fields.'),
+      '#description' => t('When retrieving result data from the Solr server, try to highlight the search terms in the returned fulltext fields. <strong>Note:</strong> Do not use the "Highlighting" processor for the index together with this option – use one or the other.'),
       '#default_value' => $options['highlight_data'],
     );
     // Highlighting retrieved data only makes sense when we retrieve data.
@@ -224,13 +225,13 @@ class SearchApiSolrService extends SearchApiAbstractService {
     $form['advanced']['skip_schema_check'] = array(
       '#type' => 'checkbox',
       '#title' => t('Skip schema verification'),
-      '#description' => t('Skip the automatic check for schema-compatibillity. Use this override if you are seeing an error-message about an incompatible schema.xml configuration file, and you are sure the configuration is compatible.'),
+      '#description' => t('Skip the automatic check for schema-compatibility. Use this override if you are seeing an error-message about an incompatible schema.xml configuration file, and you are sure the configuration is compatible.'),
       '#default_value' => $options['skip_schema_check'],
     );
     $form['advanced']['solr_version'] = array(
       '#type' => 'select',
       '#title' => t('Solr version override'),
-      '#description' => t('Specify the Solr version manually in case it cannot be retrived automatically. The version can be found in the Solr admin interface under "Solr Specification Version" or "solr-spec"'),
+      '#description' => t('Specify the Solr version manually in case it cannot be retrieved automatically. The version can be found in the Solr admin interface under "Solr Specification Version" or "solr-spec".'),
       '#options' => array(
         '' => t('Determine automatically'),
         '3' => '3.x',
@@ -261,6 +262,12 @@ class SearchApiSolrService extends SearchApiAbstractService {
       '#title' => t('Log search results'),
       '#description' => t('Log all search result responses received from Solr. NOTE: This may slow down your site since all response data (including possible retrieved data) will be saved in the Drupal log.'),
       '#default_value' => $options['log_response'],
+    );
+    $form['advanced']['commits_disabled'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Disable explicit committing'),
+      '#description' => t('Do not send any commit commands to the Solr server.'),
+      '#default_value' => $options['commits_disabled'],
     );
 
     if (module_exists('search_api_autocomplete')) {
@@ -586,7 +593,7 @@ class SearchApiSolrService extends SearchApiAbstractService {
 
       // Now add all fields contained in the item, with dynamic fields. Also,
       // gather the contents of all text fields to also add them to "content".
-      $text_content = '';
+      $text_content = array();
       foreach ($item as $key => $field) {
         // If the field is not known for the index, something weird has
         // happened. We refuse to index the items and hope that the others are
@@ -949,7 +956,7 @@ class SearchApiSolrService extends SearchApiAbstractService {
 
         unset($radius);
         $field = $fields[$spatial['field']];
-        $escaped_field = SearchApiSolrConnection::escapeFieldName($field);
+        $escaped_field = call_user_func(array($this->connection_class, 'escapeFieldName'), $field);
 
         // If proper bbox coordinates were given use them to filter.
         if (isset($spatial['bbox'])) {
@@ -1383,10 +1390,25 @@ class SearchApiSolrService extends SearchApiAbstractService {
         if (substr($solr_property, 0, $prefix_length) == $prefix && !empty($response->highlighting->$id->$solr_property)) {
           $value = $response->highlighting->$id->$solr_property;
           $value = $this->sanitizeHighlightValue($value, $search_api_property);
-          $fields[$search_api_property] = array(
-            '#value' => $this->formatHighlighting($value),
-            '#sanitize_callback' => FALSE,
-          );
+          // Remove highlight prefixes and suffixes so we could compare values
+          // in order to replace the correspond items.
+          $orig_value = preg_replace('#\[(/?)HIGHLIGHT\]#', '', $value);
+          $field_values = $this->sanitizeHighlightValue($fields[$search_api_property]);
+          foreach ($field_values as $delta => $field_value) {
+            foreach ($orig_value as $num => $item) {
+              if ($item === $field_value) {
+                $field_values[$delta] = $this->formatHighlighting($value[$num]);
+                $change = TRUE;
+                continue 2;
+              }
+            }
+          }
+          if (!empty($change)) {
+            $fields[$search_api_property] = array(
+              '#value' => $field_values,
+              '#sanitize_callback' => FALSE,
+            );
+          }
         }
       }
     }
@@ -1625,9 +1647,7 @@ class SearchApiSolrService extends SearchApiAbstractService {
       elseif ($f instanceof SearchApiQueryFilterInterface) {
         $q = $this->createFilterQueries($f, $solr_fields, $fields);
         if ($filter->getConjunction() != $f->getConjunction() && count($q) > 1) {
-          // $or == TRUE means the nested filter has conjunction AND, and vice versa
-          $sep = $or ? ' ' : ' OR ';
-          $fq[] = '((' . implode(')' . $sep . '(', $q) . '))';
+          $fq[] = '((' . implode(') ' . $f->getConjunction() . ' (', $q) . '))';
         }
         else {
           $fq = array_merge($fq, $q);
@@ -2353,6 +2373,10 @@ class SearchApiSolrService extends SearchApiAbstractService {
    * Sends a commit command to the Solr server.
    */
   public function commit() {
+    // If committing has been disabled altogether, do nothing here.
+    if (!empty($this->options['commits_disabled'])) {
+      return;
+    }
     try {
       $this->connect();
       return $this->solr->commit(FALSE);

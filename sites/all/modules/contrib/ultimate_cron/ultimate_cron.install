@@ -271,6 +271,18 @@ function ultimate_cron_requirements($phase) {
     case 'install':
       return $response;
 
+    case 'update':
+      if (!module_exists('ctools')) {
+        $t = get_t();
+        $ctools['title'] = 'Ultimate Cron';
+        $ctools['value'] = $t('Error');
+        $ctools['severity'] = REQUIREMENT_ERROR;
+        $ctools['value'] = $t('Chaos tool suite (ctools) is not enabled!');
+        $ctools['description'] = $t('You must install and enable Chaos tool suite (ctools) before upgrading Ultimate Cron.');
+        $response['ultimate_cron'] = $ctools;
+      }
+      return $response;
+
     case 'runtime':
       $t = get_t();
       $response['title'] = 'Ultimate Cron';

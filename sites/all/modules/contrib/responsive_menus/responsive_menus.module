@@ -148,6 +148,13 @@ function responsive_menus_libraries_info() {
       ),
     ),
   );
+  $sidr_theme = variable_get('responsive_menus_sidr_menu_theme', 'dark');
+  if ($sidr_theme == 'light') {
+    $libraries['sidr']['files']['css'] = array('stylesheets/jquery.sidr.light.css');
+  }
+  elseif ($sidr_theme == 'custom') {
+    unset($libraries['sidr']['files']['css']);
+  }
 
   $libraries['GoogleNexusWebsiteMenu'] = array(
     'name' => 'Google Nexus (codrops)',
@@ -202,6 +209,12 @@ function responsive_menus_admin_form($form, &$form_state) {
     '#options' => array(1 => t('I will provide my own jQuery library.')),
     '#default_value' => variable_get('responsive_menus_no_jquery_update', array(1 => 0)),
   );
+  // Ignore admin pages option.
+  $form['responsive_menus_ignore_admin'] = array(
+    '#type' => 'checkboxes',
+    '#options' => array(1 => t('Ignore admin pages?')),
+    '#default_value' => variable_get('responsive_menus_ignore_admin', array(1 => 1)),
+  );
   $jq_update_ignore = $form['responsive_menus_no_jquery_update']['#default_value'];
   $style_info = responsive_menus_style_load($current_style, $jq_update_ignore);
 
@@ -225,12 +238,12 @@ function responsive_menus_admin_form($form, &$form_state) {
     '#type' => 'fieldset',
     '#tree' => TRUE,
   );
-
+  // Which selector to use info.
   if (!empty($style_info['selector'])) {
     $form['responsive_menus_style_settings']['selector_info'] = array(
       '#type' => 'item',
       '#title' => t('Selector(s) to use for this style:'),
-      '#markup' => $style_info['selector'],
+      '#markup' => '<div class="messages status">' . $style_info['selector'] . '</div>',
     );
   }
   // Build additional style settings from style plugins.
@@ -240,12 +253,6 @@ function responsive_menus_admin_form($form, &$form_state) {
       $form['responsive_menus_style_settings'][$name] = $element;
     }
   }
-
-  $form['responsive_menus_ignore_admin'] = array(
-    '#type' => 'checkboxes',
-    '#options' => array(1 => t('Ignore admin pages?')),
-    '#default_value' => variable_get('responsive_menus_ignore_admin', array(1 => 1)),
-  );
 
   $form['actions']['#type'] = 'actions';
   $form['actions']['submit'] = array(
@@ -269,7 +276,7 @@ function responsive_menus_style_settings_form($form, $form_state) {
 }
 
 /**
- * Submit handler for resopnsive_menus_admin_form.
+ * Submit handler for responsive_menus_admin_form.
  */
 function responsive_menus_admin_form_submit($form, &$form_state) {
   // Exclude unnecessary elements.
@@ -287,6 +294,11 @@ function responsive_menus_admin_form_submit($form, &$form_state) {
     else {
       variable_set($key, $value);
     }
+  }
+
+  // Clear libraries cache if Sidr style in use to allow theme to be updated.
+  if ($form_state['values']['responsive_menus_style'] == 'sidr') {
+    cache_clear_all('*', 'cache_libraries', TRUE);
   }
 
   drupal_set_message(t('The configuration options have been saved.'));
@@ -319,6 +331,7 @@ function responsive_menus_style_load($style, $jq_update_ignore) {
   $data = &drupal_static(__FUNCTION__, array());
   if (!isset($data[$style]) && !empty($styles[$style])) {
     $style_info = $styles[$style];
+    // @todo module_load_include() the .inc file for the style being loaded.
     // Check for this style's requirements.
     if (!empty($style_info['jquery_version'])) {
       if (!$jq_update_ignore[1]) {
@@ -327,7 +340,7 @@ function responsive_menus_style_load($style, $jq_update_ignore) {
           drupal_set_message(t('@style style requires !link set to version !version or higher.  Please enable jquery_update.', array('@style' => $style_info['name'], '!link' => l(t('jQuery Update'), 'http://drupal.org/project/jquery_update'), '!version' => $style_info['jquery_version'])), 'warning');
           $error = TRUE;
         }
-        elseif (variable_get('jquery_update_jquery_version', 1.5) < $style_info['jquery_version']) {
+        elseif (version_compare(variable_get('jquery_update_jquery_version', '1.5'), $style_info['jquery_version'], '<')) {
           // jQuery Update version not high enough.
           drupal_set_message(t('@style style requires !link set to version !version or higher.', array('@style' => $style_info['name'], '!version' => $style_info['jquery_version'], '!link' => l(t('jQuery Update'), 'admin/config/development/jquery_update', array('query' => array('destination' => 'admin/config/user-interface/responsive_menus'))))), 'warning');
           $error = TRUE;
@@ -386,6 +399,7 @@ function responsive_menus_responsive_menus_style_info() {
       'js_files' => array($path . '/responsive_menus_simple/js/responsive_menus_simple.js'),
       'css_files' => array($path . '/responsive_menus_simple/css/responsive_menus_simple.css'),
       'js_settings' => 'responsive_menus_simple_style_js_settings',
+      'file' => $path . '/responsive_menus_simple/responsive_menus_simple.inc',
       'selector' => t('Anything.  Example: Given <code>@code</code> you could use !use', array('@ul' => '<ul>', '@code' => '<div id="parent-div"> <ul class="menu"> </ul> </div>', '!use' => '<strong>#parent-div or .menu</strong>')),
     ),
     'mean_menu' => array(
@@ -398,6 +412,7 @@ function responsive_menus_responsive_menus_style_info() {
       'css_files' => array($path . '/meanMenu/meanmenu.min.css'),
       'js_settings' => 'responsive_menus_mean_menu_style_js_settings',
       'jquery_version' => 1.7,
+      'file' => $path . '/meanMenu/meanMenu.inc',
       'selector' => t('Parent of the @ul.  Example: Given <code>@code</code> you would use !use', array('@ul' => '<ul>', '@code' => '<div id="parent-div"> <ul class="menu"> </ul> </div>', '!use' => '<strong>#parent-div</strong>')),
     ),
     'codrops_responsive_multi' => array(
@@ -407,6 +422,7 @@ function responsive_menus_responsive_menus_style_info() {
       'use_libraries' => TRUE,
       'library' => 'ResponsiveMultiLevelMenu',
       'jquery_version' => 1.7,
+      'file' => $path . '/ResponsiveMultiLevelMenu/ResponsiveMultiLevelMenu.inc',
       'selector' => t('Parent of the @ul.  Example: Given <code>@code</code> you would use !use', array('@ul' => '<ul>', '@code' => '<div id="parent-div"> <ul class="menu"> </ul> </div>', '!use' => '<strong>#parent-div</strong>')),
     ),
     'sidr' => array(
@@ -415,6 +431,7 @@ function responsive_menus_responsive_menus_style_info() {
       'js_settings' => 'responsive_menus_sidr_style_js_settings',
       'use_libraries' => TRUE,
       'library' => 'sidr',
+      'file' => $path . '/sidr/sidr.inc',
       'selector' => t('Anything (parent of ul preferred).  Example: Given <code>@code</code> you could use !use', array('@ul' => '<ul>', '@code' => '<div id="parent-div"> <ul class="menu"> </ul> </div>', '!use' => '<strong>#parent-div or .menu</strong>')),
     ),
     'google_nexus' => array(
@@ -423,7 +440,22 @@ function responsive_menus_responsive_menus_style_info() {
       'js_settings' => 'responsive_menus_google_nexus_style_js_settings',
       'use_libraries' => TRUE,
       'library' => 'GoogleNexusWebsiteMenu',
+      'file' => $path . '/google_nexus/google_nexus.inc',
       'selector' => t('The @ul.  Example: Given <code>@code</code> you would use !use', array('@ul' => '<ul>', '@code' => '<div id="parent-div"> <ul class="menu"> </ul> </div>', '!use' => '<strong>.menu</strong>')),
+    ),
+    'mlpm' => array(
+      'name' => t('Multi Level Push Menu'),
+      'form' => 'responsive_menus_mlpm_style_settings',
+      'js_settings' => 'responsive_menus_mlpm_style_js_settings',
+      'css_files' => _responsive_menus_mlpm_get_css(),
+      'js_files' => array(
+        '//oss.maxcdn.com/libs/modernizr/2.6.2/modernizr.min.js',
+        $path . '/mlpm/js/jquery.multilevelpushmenu.min.js',
+        $path . '/mlpm/js/mlpm.js',
+      ),
+      'jquery_version' => 1.10,
+      'file' => $path . '/mlpm/mlpm.inc',
+      'selector' => t('Parent of the @ul.  Example: Given <code>@code</code> you would use !use', array('@ul' => '<ul>', '@code' => '<div id="parent-div"> <ul class="menu"> </ul> </div>', '!use' => '<strong>#parent-div</strong>')),
     ),
   );
 
@@ -471,7 +503,14 @@ function responsive_menus_simple_style_settings() {
     '#title' => t('Screen width to respond to'),
     '#size' => 5,
     '#default_value' => variable_get('responsive_menus_media_size', 768),
-    '#description' => t('Width in pixels when we swap out responsive menu e.g. 768'),
+    '#description' => t('Width when we swap out responsive menu e.g. 768'),
+  );
+  $form['responsive_menus_media_unit'] = array(
+  '#type' => 'select',
+  '#title' => t('Width unit'),
+  '#default_value' => variable_get('responsive_menus_media_unit', 'px'),
+  '#options' => array('px' => 'px', 'em' => 'em'),
+  '#description' => t('Unit for the width above'),
   );
 
   return $form;
@@ -481,11 +520,13 @@ function responsive_menus_simple_style_settings() {
  * JS callback from hook_responsive_menus_style_info().
  */
 function responsive_menus_simple_style_js_settings($js_defaults = array()) {
-  $js_settings = array();
+  $js_settings = array(
+    'toggler_text' => responsive_menus_var_get('responsive_menus_simple_text', '☰ Menu', $js_defaults),
+    'selectors' => responsive_menus_explode_list('responsive_menus_css_selectors', '#main-menu', $js_defaults),
+    'media_size' => responsive_menus_var_get('responsive_menus_media_size', 768, $js_defaults),
+    'media_unit' => responsive_menus_var_get('responsive_menus_media_unit', 'px', $js_defaults),
+  );
 
-  $js_settings['toggler_text'] = responsive_menus_var_get('responsive_menus_simple_text', '☰ Menu', $js_defaults);
-  $js_settings['selectors'] = responsive_menus_explode_list('responsive_menus_css_selectors', '#main-menu', $js_defaults);
-  $js_settings['media_size'] = responsive_menus_var_get('responsive_menus_media_size', 768, $js_defaults);
   $absolute = responsive_menus_var_get('responsive_menus_simple_absolute', array(1 => 1), $js_defaults);
   $disable_mouse = responsive_menus_var_get('responsive_menus_disable_mouse_events', array(1 => 0), $js_defaults);
   $remove_attributes = responsive_menus_var_get('responsive_menus_remove_attributes', array(1 => 1), $js_defaults);
@@ -514,6 +555,12 @@ function responsive_menus_mean_menu_style_settings() {
     '#title' => t('CSS selectors for which menu to responsify'),
     '#default_value' => variable_get('responsive_menus_mean_menu_css_selectors', '#main-menu'),
     '#description' => t('Enter CSS/jQuery selector of menus to responsify.'),
+  );
+  $form['responsive_menus_mean_menu_container'] = array(
+    '#type' => 'textfield',
+    '#title' => t('CSS selector for where to attach the menu on the page'),
+    '#default_value' => variable_get('responsive_menus_mean_menu_container', 'body'),
+    '#description' => t('Enter CSS/jQuery selector of where MeanMenu gets attached.'),
   );
   $form['responsive_menus_mean_menu_trigger_txt'] = array(
     '#type' => 'textarea',
@@ -598,19 +645,20 @@ function responsive_menus_mean_menu_style_settings() {
  * JS callback from hook_responsive_menus_style_info().
  */
 function responsive_menus_mean_menu_style_js_settings($js_defaults = array()) {
-  $js_settings = array();
-
-  $js_settings['selectors'] = responsive_menus_var_get('responsive_menus_mean_menu_css_selectors', '#main-menu', $js_defaults);
-  $js_settings['trigger_txt'] = responsive_menus_var_get('responsive_menus_mean_menu_trigger_txt', '<span /><span /><span />', $js_defaults);
-  $js_settings['close_txt'] = responsive_menus_var_get('responsive_menus_mean_menu_close_txt', 'X', $js_defaults);
-  $js_settings['close_size'] = responsive_menus_var_get('responsive_menus_mean_menu_close_size', '18px', $js_defaults);
-  $js_settings['position'] = responsive_menus_var_get('responsive_menus_mean_menu_position', 'right', $js_defaults);
-  $js_settings['media_size'] = responsive_menus_var_get('responsive_menus_mean_menu_media_size', 480, $js_defaults);
-  $js_settings['show_children'] = responsive_menus_var_get('responsive_menus_mean_menu_show_children', 1, $js_defaults);
-  $js_settings['expand_children'] = responsive_menus_var_get('responsive_menus_mean_menu_expand_children', 1, $js_defaults);
-  $js_settings['expand_txt'] = responsive_menus_var_get('responsive_menus_mean_menu_expand_txt', '+', $js_defaults);
-  $js_settings['contract_txt'] = responsive_menus_var_get('responsive_menus_mean_menu_contract_txt', '-', $js_defaults);
-  $js_settings['remove_attrs'] = responsive_menus_var_get('responsive_menus_mean_menu_remove_attrs', 1, $js_defaults);
+  $js_settings = array(
+    'selectors' => responsive_menus_var_get('responsive_menus_mean_menu_css_selectors', '#main-menu', $js_defaults),
+    'container' => responsive_menus_var_get('responsive_menus_mean_menu_container', 'body', $js_defaults),
+    'trigger_txt' => responsive_menus_var_get('responsive_menus_mean_menu_trigger_txt', '<span /><span /><span />', $js_defaults),
+    'close_txt' => responsive_menus_var_get('responsive_menus_mean_menu_close_txt', 'X', $js_defaults),
+    'close_size' => responsive_menus_var_get('responsive_menus_mean_menu_close_size', '18px', $js_defaults),
+    'position' => responsive_menus_var_get('responsive_menus_mean_menu_position', 'right', $js_defaults),
+    'media_size' => responsive_menus_var_get('responsive_menus_mean_menu_media_size', 480, $js_defaults),
+    'show_children' => responsive_menus_var_get('responsive_menus_mean_menu_show_children', 1, $js_defaults),
+    'expand_children' => responsive_menus_var_get('responsive_menus_mean_menu_expand_children', 1, $js_defaults),
+    'expand_txt' => responsive_menus_var_get('responsive_menus_mean_menu_expand_txt', '+', $js_defaults),
+    'contract_txt' => responsive_menus_var_get('responsive_menus_mean_menu_contract_txt', '-', $js_defaults),
+    'remove_attrs' => responsive_menus_var_get('responsive_menus_mean_menu_remove_attrs', 1, $js_defaults),
+  );
 
   return $js_settings;
 }
@@ -667,12 +715,12 @@ function responsive_menus_codrops_responsive_multi_style_settings() {
  * JS callback from hook_responsive_menus_style_info().
  */
 function responsive_menus_codrops_responsive_multi_style_js_settings($js_defaults = array()) {
-  $js_settings = array();
-
-  $js_settings['selectors'] = responsive_menus_var_get('responsive_menus_codrops_responsive_multi_css_selectors', '#main-menu', $js_defaults);
-  $js_settings['media_size'] = responsive_menus_var_get('responsive_menus_codrops_responsive_multi_media_size', 768, $js_defaults);
-  $js_settings['animation_in'] = responsive_menus_var_get('responsive_menus_codrops_responsive_multi_ani_in', 'dl-animate-in-1', $js_defaults);
-  $js_settings['animation_out'] = responsive_menus_var_get('responsive_menus_codrops_responsive_multi_ani_out', 'dl-animate-out-1', $js_defaults);
+  $js_settings = array(
+    'selectors' => responsive_menus_var_get('responsive_menus_codrops_responsive_multi_css_selectors', '#main-menu', $js_defaults),
+    'media_size' => responsive_menus_var_get('responsive_menus_codrops_responsive_multi_media_size', 768, $js_defaults),
+    'animation_in' => responsive_menus_var_get('responsive_menus_codrops_responsive_multi_ani_in', 'dl-animate-in-1', $js_defaults),
+    'animation_out' => responsive_menus_var_get('responsive_menus_codrops_responsive_multi_ani_out', 'dl-animate-out-1', $js_defaults),
+  );
 
   return $js_settings;
 }
@@ -704,12 +752,23 @@ function responsive_menus_sidr_style_settings() {
     ),
     '#default_value' => variable_get('responsive_menus_sidr_menu_side', array('left' => 'Left')),
   );
+  $form['responsive_menus_sidr_menu_theme'] = array(
+    '#type' => 'select',
+    '#title' => t('Theme'),
+    '#options' => array(
+      'dark' => t('Dark'),
+      'light' => t('Light'),
+      'custom' => t('Custom'),
+    ),
+    '#default_value' => variable_get('responsive_menus_sidr_menu_theme', 'dark'),
+    '#description' => t('Select which <a href="@theme">theme</a> will be used to style the menu. If "Custom" is selected, no CSS will be added; you will need to add your own styles.', array('@theme' => 'http://www.berriart.com/sidr/#themes')),
+  );
   $form['responsive_menus_sidr_animation_speed'] = array(
     '#type' => 'textfield',
     '#title' => t('Sidr animation speed'),
     '#size' => 5,
     '#default_value' => variable_get('responsive_menus_sidr_animation_speed', 200),
-    '#description' => t('Speed of menu open/close.  See !documentation for examples.', array('!documentation' => l(t('Sidr documentation'), 'http://www.berriart.com/sidr/#documentation'))),
+    '#description' => t('Speed (in milliseconds) of menu open/close. 1000 = 1 second.'),
   );
   $form['responsive_menus_sidr_media_size'] = array(
     '#type' => 'textfield',
@@ -727,6 +786,16 @@ function responsive_menus_sidr_style_settings() {
     ),
     '#default_value' => variable_get('responsive_menus_sidr_displace', 1),
     '#description' => t('This setting controls whether the page is pushed when menu is opened.'),
+  );
+  $form['responsive_menus_sidr_renaming'] = array(
+    '#type' => 'select',
+    '#title' => t('Rename classes'),
+    '#options' => array(
+      1 => t('Yes'),
+      0 => t('No'),
+    ),
+    '#default_value' => variable_get('responsive_menus_sidr_renaming', 1),
+    '#description' => t('Controls whether Sidr will rename classes within the the selectors specified.'),
   );
   $form['responsive_menus_sidr_on_open'] = array(
     '#type' => 'textarea',
@@ -761,16 +830,17 @@ function responsive_menus_sidr_style_settings() {
  * JS callback from hook_responsive_menus_style_info().
  */
 function responsive_menus_sidr_style_js_settings($js_defaults = array()) {
-  $js_settings = array();
-
-  $js_settings['selectors'] = responsive_menus_explode_list('responsive_menus_sidr_css_selectors', '#main-menu', $js_defaults);
-  $js_settings['trigger_txt'] = responsive_menus_var_get('responsive_menus_sidr_trigger_txt', t('Menu'), $js_defaults);
-  $js_settings['side'] = responsive_menus_var_get('responsive_menus_sidr_menu_side', array('left' => 'Left'), $js_defaults);
-  $js_settings['speed'] = responsive_menus_var_get('responsive_menus_sidr_animation_speed', 200, $js_defaults);
-  $js_settings['media_size'] = responsive_menus_var_get('responsive_menus_sidr_media_size', 768, $js_defaults);
-  $js_settings['displace'] = responsive_menus_var_get('responsive_menus_sidr_displace', 1, $js_defaults);
-  $js_settings['onOpen'] = responsive_menus_var_get('responsive_menus_sidr_on_open', '', $js_defaults);
-  $js_settings['onClose'] = responsive_menus_var_get('responsive_menus_sidr_on_close', '', $js_defaults);
+  $js_settings = array(
+    'selectors' => responsive_menus_explode_list('responsive_menus_sidr_css_selectors', '#main-menu', $js_defaults),
+    'trigger_txt' => responsive_menus_var_get('responsive_menus_sidr_trigger_txt', t('Menu'), $js_defaults),
+    'side' => responsive_menus_var_get('responsive_menus_sidr_menu_side', array('left' => 'Left'), $js_defaults),
+    'speed' => responsive_menus_var_get('responsive_menus_sidr_animation_speed', 200, $js_defaults),
+    'media_size' => responsive_menus_var_get('responsive_menus_sidr_media_size', 768, $js_defaults),
+    'displace' => responsive_menus_var_get('responsive_menus_sidr_displace', 1, $js_defaults),
+    'renaming' => responsive_menus_var_get('responsive_menus_sidr_renaming', 1, $js_defaults),
+    'onOpen' => responsive_menus_var_get('responsive_menus_sidr_on_open', '', $js_defaults),
+    'onClose' => responsive_menus_var_get('responsive_menus_sidr_on_close', '', $js_defaults),
+  );
 
   return $js_settings;
 }
@@ -818,12 +888,220 @@ function responsive_menus_google_nexus_style_settings() {
  * JS callback from hook_responsive_menus_style_info().
  */
 function responsive_menus_google_nexus_style_js_settings($js_defaults = array()) {
-  $js_settings = array();
+  $js_settings = array(
+    'selectors' => responsive_menus_var_get('responsive_menus_google_nexus_css_selectors', '#main-menu', $js_defaults),
+    'use_ecoicons' => responsive_menus_var_get('responsive_menus_google_nexus_use_ecoicons', 1, $js_defaults),
+    'icons' => responsive_menus_explode_list('responsive_menus_google_nexus_icons', "\ue005\n\ue006", $js_defaults),
+    'icon_fallback' => responsive_menus_var_get('responsive_menus_google_nexus_icon_fallback', '&#57347;', $js_defaults),
+  );
 
-  $js_settings['selectors'] = responsive_menus_var_get('responsive_menus_google_nexus_css_selectors', '#main-menu', $js_defaults);
-  $js_settings['use_ecoicons'] = responsive_menus_var_get('responsive_menus_google_nexus_use_ecoicons', 1, $js_defaults);
-  $js_settings['icons'] = responsive_menus_explode_list('responsive_menus_google_nexus_icons', "\ue005\n\ue006", $js_defaults);
-  $js_settings['icon_fallback'] = responsive_menus_var_get('responsive_menus_google_nexus_icon_fallback', '&#57347;', $js_defaults);
+  return $js_settings;
+}
+
+/**
+ * Form callback from hook_responsive_menus_style_info().
+ *
+ * @return array
+ *   Drupal FAPI formatted array.
+ */
+function responsive_menus_mlpm_style_settings() {
+  $form['responsive_menus_mlpm_css_selectors'] = array(
+    '#type' => 'textfield',
+    '#title' => t('CSS selectors for which menu to responsify'),
+    '#default_value' => variable_get('responsive_menus_mlpm_css_selectors', '#main-menu'),
+    '#description' => t('Enter CSS/jQuery selector of menus to responsify.'),
+  );
+  $form['responsive_menus_mlpm_media_size'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Screen width to respond to'),
+    '#size' => 5,
+    '#default_value' => variable_get('responsive_menus_mlpm_media_size', 768),
+    '#description' => t('Width in pixels when we swap out responsive menu e.g. 768 (0 means the responsive menu will always show)'),
+  );
+  $form['responsive_menus_mlpm_move_to'] = array(
+    '#type' => 'textfield',
+    '#title' => t('CSS selector to move menu to'),
+    '#default_value' => variable_get('responsive_menus_mlpm_move_to', '#page-wrapper'),
+    '#description' => t('Enter a CSS/JQuery selector of the container the nav menu will be moved to. This is useful when using a theme you don\'t want to alter.'),
+  );
+  $form['responsive_menus_mlpm_nav_block'] = array(
+    '#type' => 'select',
+    '#title' => t('Add nav block?'),
+    '#options' => array(
+      1 => t('Yes'),
+      0 => t('No'),
+    ),
+    '#default_value' => variable_get('responsive_menus_mlpm_nav_block', 1),
+    '#description' => t('MLPM requires a nav block to be in place. This can be added using javascript if you don\'t want to alter your theme.'),
+  );
+  $form['responsive_menus_mlpm_nav_block_name'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Id for nav block'),
+    '#default_value' => variable_get('responsive_menus_mlpm_nav_block_name', 'mlpm-menu'),
+    '#description' => t('Enter the id of nav block.'),
+  );
+  $form['responsive_menus_mlpm_push'] = array(
+    '#type' => 'textarea',
+    '#title' => t('CSS selectors of containers to push'),
+    '#default_value' => variable_get('responsive_menus_mlpm_push', '#page'),
+    '#description' => t('CSS/jQuery selectors of the elements that need to be pushed when expading the MLPM (one per line)'),
+  );
+  $form['responsive_menus_mlpm_menu_height'] = array(
+    '#type' => 'textfield',
+    '#title' => 'Menu height',
+    '#description' => "Menu height (integer, '%', 'px', 'em').",
+    '#default_value' => variable_get('responsive_menus_mlpm_menu_height', '100%'),
+  );
+  $form['responsive_menus_mlpm_direction'] = array(
+    '#type' => 'select',
+    '#title' => t('Sliding direction'),
+    '#options' => array(
+      'ltr' => t('Left to right'),
+      'rtl' => t('Right to left'),
+    ),
+    '#description' => '',
+    '#default_value' => variable_get('responsive_menus_mlpm_direction', 'ltr'),
+  );
+  $form['responsive_menus_mlpm_mode'] = array(
+    '#type' => 'select',
+    '#title' => t('Menu sliding mode'),
+    '#options' => array(
+      'overlap' => t('Overlap'),
+      'cover' => t('Cover'),
+    ),
+    '#description' => '',
+    '#default_value' => variable_get('responsive_menus_mlpm_mode', 'overlap'),
+  );
+  $form['responsive_menus_mlpm_collapsed'] = array(
+    '#type' => 'select',
+    '#title' => t('How to load the menu'),
+    '#options' => array(
+      1 => t('Collapsed'),
+      0 => t('Expanded'),
+    ),
+    '#description' => 'Initialize menu in collapsed/expanded mode',
+    '#default_value' => variable_get('responsive_menus_mlpm_collapsed', 1),
+  );
+  $form['responsive_menus_mlpm_full_collapse'] = array(
+    '#type' => 'select',
+    '#title' => t('Full collapse'),
+    '#options' => array(
+      1 => t('Yes'),
+      0 => t('No'),
+    ),
+    '#description' => 'Do you want to fully hide base level holder when collapsed?',
+    '#default_value' => variable_get('responsive_menus_mlpm_full_collapse', 0),
+  );
+  $form['responsive_menus_mlpm_swipe'] = array(
+    '#type' => 'select',
+    '#title' => t('Swipe mode'),
+    '#options' => array(
+      'both' => t('Both'),
+      'desktop' => t('Desktop'),
+      'touchscreen' => t('Touchscreen'),
+    ),
+    '#description' => '',
+    '#default_value' => variable_get('responsive_menus_mlpm_swipe', 'both'),
+  );
+  $form['responsive_menus_mlpm_decoration'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Menu decoration'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $style = variable_get('responsive_menus_mlpm_decoration', array());
+  $form['responsive_menus_mlpm_decoration']['font_awesome'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Include font awesome'),
+    '#description' => t('By default font awesome is used for the menu icons'),
+    '#default_value' => 1,
+  );
+  $form['responsive_menus_mlpm_decoration']['google_fonts'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Include google fonts'),
+    '#description' => t('By default google fonts are used to style this menu.'),
+    '#default_value' => 1,
+  );
+  $form['responsive_menus_mlpm_decoration']['back_text'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Back text'),
+    '#description' => t('The text that will appear on the back links leading you to previous levels of the menu.'),
+    '#default_value' => isset($style['back_text']) ? $style['back_text'] : 'Back',
+  );
+  $form['responsive_menus_mlpm_decoration']['back_class'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Back item class'),
+    '#description' => t('The class of the back link that leads to the pervious levels of the menu.'),
+    '#default_value' => isset($style['back_class']) ? $style['back_class'] : 'backItemClass',
+  );
+  $form['responsive_menus_mlpm_decoration']['back_icon'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Back item icon'),
+    '#description' => t('The icon used for the back link that leads to previous levels of the menu (default requires font awesome).'),
+    '#default_value' => isset($style['back_icon']) ? $style['back_icon'] : 'fa fa-angle-right',
+  );
+  $form['responsive_menus_mlpm_decoration']['group_icon'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Group icon'),
+    '#description' => t('The icon used on menu links that lead into new layers of the menu (default requires font awesome).'),
+    '#default_value' => isset($style['group_icon']) ? $style['group_icon'] : 'fa fa-angle-left',
+  );
+  $form['responsive_menus_mlpm_toggle'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Toggle control'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  $toggle = variable_get('responsive_menus_mlpm_toggle', array());
+  $form['responsive_menus_mlpm_toggle']['container'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Menu toggle control container'),
+    '#description' => t('The CSS/jQuery selector you would like an anchor tag that will toggle the menu open and closed (leave blank for no control).'),
+    '#default_value' => isset($toggle['container']) ? $toggle['container'] : '',
+  );
+  $form['responsive_menus_mlpm_toggle']['text'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Menu toggle control text'),
+    '#description' => t('The text/filtered html you would like inside the toggle control'),
+    '#default_value' => isset($toggle['text']) ? $toggle['text'] : '',
+  );
+  $form['responsive_menus_mlpm_toggle']['off_menu'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Container to detect off menu clicks'),
+    '#description' => t('The CSS/jQuery selector that will close the menu when clicked. This is useful for when you want to be able to close the menu by clicking off of the menu.'),
+    '#default_value' => isset($toggle['off_menu']) ? $toggle['off_menu'] : '',
+  );
+
+  return $form;
+}
+
+/**
+ * JS callback from hook_responsive_menus_style_info().
+ */
+function responsive_menus_mlpm_style_js_settings($js_defaults = array()) {
+  $toggle = variable_get('responsive_menus_mlpm_toggle', array());
+  $style = variable_get('responsive_menus_mlpm_decoration', array());
+  $js_settings = array(
+    'selectors' => responsive_menus_var_get('responsive_menus_mlpm_css_selectors', '#main-menu', $js_defaults),
+    'media_size' => responsive_menus_var_get('responsive_menus_mlpm_media_size', 768, $js_defaults),
+    'move_to' => responsive_menus_var_get('responsive_menus_mlpm_move_to', '#page-wrapper', $js_defaults),
+    'nav_block' => variable_get('responsive_menus_mlpm_nav_block', 1, $js_defaults),
+    'nav_block_name' => variable_get('responsive_menus_mlpm_nav_block_name', 'mlpm-menu', $js_defaults),
+    'push' => explode("\n", variable_get('responsive_menus_mlpm_push', '#page', $js_defaults)),
+    'menu_height' => variable_get('responsive_menus_mlpm_menu_height', '100%', $js_defaults),
+    'direction' => variable_get('responsive_menus_mlpm_direction', 'ltr', $js_defaults),
+    'mode' => variable_get('responsive_menus_mlpm_mode', 'overlap', $js_defaults),
+    'collapsed' => variable_get('responsive_menus_mlpm_collapsed', 1, $js_defaults),
+    'full_collapse' => variable_get('responsive_menus_mlpm_full_collapse', 0, $js_defaults),
+    'swipe' => variable_get('responsive_menus_mlpm_swipe', 'both', $js_defaults),
+    'toggle_container' => isset($toggle['container']) ? $toggle['container'] : '',
+    'toggle_text' => isset($toggle['text']) ? check_markup($toggle['text'], 'filtered_html') : '',
+    'off_menu' => isset($toggle['off_menu']) ? $toggle['off_menu'] : '',
+    'back_text' => isset($style['back_text']) ? $style['back_text'] : 'Back',
+    'back_class' => isset($style['back_class']) ? $style['back_class'] : 'backItemClass',
+    'back_icon' => isset($style['back_icon']) ? $style['back_icon'] : 'fa fa-angle-right',
+    'group_icon' => isset($style['group_icon']) ? $style['group_icon'] : 'fa fa-angle-left',
+  );
 
   return $js_settings;
 }
@@ -976,3 +1254,21 @@ function responsive_menus_execute($style = NULL, $js_defaults = array()) {
   drupal_alter('responsive_menus_execute', $js_settings);
   drupal_add_js(array('responsive_menus' => $js_settings), 'setting');
 }
+
+/**
+ * Get the css to include for the multi-level-push menu based on the configuration.
+ */
+function _responsive_menus_mlpm_get_css() {
+  $path = drupal_get_path('module', 'responsive_menus') . '/styles';
+  $style = variable_get('responsive_menus_mlpm_decoration', array('font_awesome' => 1, 'google_fonts' => 1));
+  $mlpm_css = array();
+  if (!isset($style['google_fonts']) || $style['google_fonts']) {
+    $mlpm_css[] = '//fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700&subset=latin,cyrillic-ext,latin-ext,cyrillic';
+  }
+  if (!isset($style['font_awesome']) || $style['font_awesome']) {
+    $mlpm_css[] = '//netdna.bootstrapcdn.com/font-awesome/4.0.1/css/font-awesome.min.css?the-file-wont-load-without-a-parameter';
+  }
+  $mlpm_css[] = $path . '/mlpm/css/jquery.multilevelpushmenu.css';
+  return $mlpm_css;
+}
+

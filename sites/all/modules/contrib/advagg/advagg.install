@@ -778,6 +778,25 @@ function advagg_update_7217(&$sandbox) {
 }
 
 /**
+ * Implements hook_update_N().
+ *
+ * Update the .htaccess file in the advagg directories fixing some edge cases
+ * with the new rules.
+ */
+function advagg_update_7218(&$sandbox) {
+  return advagg_install_update_htaccess('', 'Options +FollowSymLinks');
+}
+
+/**
+ * Implements hook_update_N().
+ *
+ * Update the .htaccess file in the advagg directories adding immutable header.
+ */
+function advagg_update_7219(&$sandbox) {
+  return advagg_install_update_htaccess('', 'immutable');
+}
+
+/**
  * Convert the table to the specified collation.
  *
  * @param string $table_name
@@ -1712,7 +1731,7 @@ function advagg_install_chk_urls(array &$requirements, array $urls, array $optio
   }
 
   foreach ($urls as $url) {
-    $key = pathinfo($url, PATHINFO_EXTENSION);
+    $key = strtolower(pathinfo($url, PATHINFO_EXTENSION));
     // Make sure the URL contains a schema.
     if (strpos($url, 'http') !== 0) {
       if ($GLOBALS['is_https']) {

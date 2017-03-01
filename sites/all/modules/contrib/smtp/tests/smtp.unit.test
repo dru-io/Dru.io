@@ -98,6 +98,74 @@ class SmtpUnitTest extends DrupalWebTestCase {
   }
 
   /**
+   * Confirm the queue works.
+   */
+  public function testQueue() {
+    // Turn on the queue.
+    variable_set('smtp_queue', TRUE);
+
+    // Send a test message.
+    $langcode = language_default('language');
+    $sender = 'simpletest@example.com';
+    $to_email = 'to_test@example.com';
+    $reply_email = 'reply_test@example.com';
+    $params = array();
+    drupal_mail('smtp_tests', 'smtp_basic_test', $to_email, $langcode, $params);
+
+    // Check the queue for messages.
+    $queue_count = $this->getQueueCount();
+    $this->assertEqual($queue_count, 1, 'An email was found in the send queue.');
+  }
+
+  /**
+   * Confirm the queue works.
+   */
+  public function testFailQueue() {
+    // Turn on the queue failover.
+    variable_set('smtp_queue_fail', TRUE);
+
+    // Make sure the queue is disabled.
+    variable_set('smtp_queue', FALSE);
+
+    // Turn on email delivery.
+    variable_set('smtp_deliver', TRUE);
+
+    // Set some fake values for the delivery, it should fail and then cause the
+    // email to go in to the queue.
+    variable_set('smtp_from', 'drupal@example.com');
+    variable_set('smtp_fromname', 'Drupal Simpletest');
+    variable_set('smtp_host', 'smtp.gmail.com');
+    variable_set('smtp_hostbackup', '');
+    variable_set('smtp_password', 'THIS WILL NOT WORK!');
+    variable_set('smtp_port', '465');
+    variable_set('smtp_protocol', 'ssl');
+    variable_set('smtp_username', 'hello@example.com');
+
+    // Send a test message.
+    $langcode = language_default('language');
+    $sender = 'simpletest@example.com';
+    $to_email = 'to_test@example.com';
+    $reply_email = 'reply_test@example.com';
+    $params = array();
+    drupal_mail('smtp_tests', 'smtp_basic_test', $to_email, $langcode, $params);
+
+    // Check the queue for messages.
+    $queue_count = $this->getQueueCount('smtp_failure_queue');
+    $this->assertEqual($queue_count, 1, 'An email was found in the failure queue.');
+    $queue_count = $this->getQueueCount();
+    $this->assertEqual($queue_count, 0, 'An email was not found in the regular email queue.');
+
+    // Run the queue so that messages can be moved to the normal email queue.
+    drupal_cron_run();
+
+    // Check the queue for messages.
+    $queue_count = $this->getQueueCount();
+    $this->assertEqual($queue_count, 1, 'An email was found in the regular email queue.');
+    $queue_count = $this->getQueueCount('smtp_failure_queue');
+    $this->assertEqual($queue_count, 0, 'An email was not found in the failure queue.');
+  }
+
+  /**
    * Gets the latest Maillog entry.
    *
    * @return array
@@ -112,6 +180,21 @@ class SmtpUnitTest extends DrupalWebTestCase {
       $maillog['header_all'] = unserialize($maillog['header_all']);
     }
     return $maillog;
+  }
+
+  /**
+   * Get the number of emails in a specific queue.
+   *
+   * @param string $queue
+   *   The name of the queue to add the emails to.
+   *
+   * @return int
+   *   The number of messages found in the requested queue.
+   */
+  protected function getQueueCount($queue = 'smtp_send_queue') {
+    return db_query("SELECT count('name') FROM {queue} WHERE name = :queue",
+      array(':queue' => $queue))
+      ->fetchField();
   }
 
 }

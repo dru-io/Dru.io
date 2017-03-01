@@ -6,7 +6,7 @@
   Drupal.behaviors.responsive_menus_codrops_responsive_multi = {
     attach: function (context, settings) {
       settings.responsive_menus = settings.responsive_menus || {};
-      var $windowWidth = document.documentElement.clientWidth || document.body.clientWidth;
+      var $windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
       $.each(settings.responsive_menus, function(ind, iteration) {
         if (iteration.responsive_menus_style != 'codrops_responsive_multi') {
           return true;

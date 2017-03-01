@@ -1,9 +1,9 @@
 
 /*! #######################################################################
 
-	MeanMenu 2.0.6
+	MeanMenu 2.0.7
 	--------
-	
+
 	To be used with jquery.meanmenu.js by Chris Wharton (http://www.meanthemes.com/plugins/meanmenu/)
 
 ####################################################################### */
@@ -133,8 +133,8 @@ a.meanmenu-reveal {
 	font-weight: 700;
 	background: rgba(255,255,255,0.1);
 	border: none !important;
-	border-left: 1px solid rgba(255,255,255,0.4) !important;
-	border-bottom: 1px solid rgba(255,255,255,0.2) !important;
+	border-left: 1px solid rgba(255,255,255,0.4);
+	border-bottom: 1px solid rgba(255,255,255,0.2);
 }
 
 .mean-container .mean-nav ul li a.mean-expand:hover {

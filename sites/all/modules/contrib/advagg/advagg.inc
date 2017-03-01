@@ -600,7 +600,7 @@ function advagg_get_info_on_files(array $files, $bypass_cache = FALSE, $run_alte
     // Get the file contents.
     $file_contents = (string) @file_get_contents($file);
 
-    $ext = pathinfo($file, PATHINFO_EXTENSION);
+    $ext = strtolower(pathinfo($file, PATHINFO_EXTENSION));
     if ($ext !== 'css' && $ext !== 'js') {
       // Get the $ext from the database.
       $row = db_select('advagg_files', 'af')
@@ -822,6 +822,7 @@ function advagg_generate_groups(array $files_to_aggregate, $type) {
         // changed from the previous run of this loop.
         $changed = FALSE;
         $ext = isset($file_info['fileext']) ? $file_info['fileext'] : pathinfo($file_info['data'], PATHINFO_EXTENSION);
+        $ext = strtolower($ext);
         if ($ext !== 'css' && $ext !== 'js') {
           if (empty($last_ext)) {
             // Get the $ext from the database.

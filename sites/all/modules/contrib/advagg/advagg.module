@@ -241,7 +241,7 @@ define('ADVAGG_SHOW_FILE_CHANGED_MESSAGE', TRUE);
 /**
  * How long to wait until an aggregate with a missing file is written to disk.
  */
-define('ADVAGG_FILE_READ_FAILURE_TIMEOUT', 3600);
+define('ADVAGG_FILE_READ_FAILURE_TIMEOUT', 1800);
 
 /**
  * See if the mtime != if TRUE < if FALSE.
@@ -262,6 +262,11 @@ define('ADVAGG_NO_ZOPFLI', FALSE);
  * If true do test for 304 files on the status report page.
  */
 define('ADVAGG_SKIP_304_CHECK', FALSE);
+
+/**
+ * If false do not set the immutable header.
+ */
+define('ADVAGG_RESOURCE_HINTS_USE_IMMUTABLE', TRUE);
 
 // Core hook implementations.
 /**
@@ -1228,6 +1233,21 @@ function advagg_anonymous_login_paths_alter(&$paths) {
   $paths['exclude'][] = $js_path[1] . '/*';
 }
 
+/**
+ * Implements hook_pre_flush_all_caches().
+ */
+function advagg_pre_flush_all_caches() {
+  static $run_once;
+
+  if (!isset($run_once)) {
+    $run_once = TRUE;
+    // Only invoked by registry_rebuild.
+    module_load_include('admin.inc', 'advagg');
+    // Truncate the advagg_files table.
+    advagg_admin_truncate_advagg_files();
+  }
+}
+
 // Core CSS/JS override functions.
 /**
  * Only the alter part of locale_js_alter(), not the parsing part.
@@ -1238,7 +1258,7 @@ function advagg_anonymous_login_paths_alter(&$paths) {
  * @param string $dir
  *   String pointing to the public locale_js_directory.
  */
-function advagg_locale_js_add_translations(&$javascript, $dir) {
+function advagg_locale_js_add_translations(array &$javascript, $dir) {
   // Add the translation JavaScript file to the page.
   if (!empty($GLOBALS['language']->javascript)) {
     // Add the translation JavaScript file to the page.
@@ -1524,9 +1544,11 @@ function _advagg_build_css_arrays_for_rendering($skip_alter = FALSE) {
   // Process and Sort css.
   $full_css = advagg_get_css($raw_css, $skip_alter);
   // Add attached js to drupal_add_js() function.
-  drupal_process_attached($full_css);
-  // Remove #attached since it's been added to the javascript array now.
-  unset($full_css['#attached']);
+  if (!empty($full_css['#attached'])) {
+    drupal_process_attached($full_css);
+    // Remove #attached since it's been added to the javascript array now.
+    unset($full_css['#attached']);
+  }
   return array($raw_css, $full_css);
 }
 
@@ -2243,7 +2265,9 @@ function advagg_add_preload_header($url = '', $as = '') {
   // Output headers.
   if (empty($url)) {
     foreach ($output as $value) {
-      drupal_add_http_header('Link', implode(',', $value), TRUE);
+      if (!empty($value)) {
+        drupal_add_http_header('Link', implode(', ', array_filter($value)), TRUE);
+      }
     }
     return FALSE;
   }
@@ -2347,7 +2371,7 @@ function advagg_add_preload_header($url = '', $as = '') {
   if (!empty($additional_info)) {
     $payload .= "; {$additional_info}";
   }
-  if (!$settings['push'] || !empty($parse['host'])) {
+  if (!$settings['push']) {
     $payload .= "; nopush";
   }
   $list[$url] = TRUE;
@@ -2374,7 +2398,7 @@ function advagg_add_dns_prefetch($url) {
   // Add DNS information for more domains.
   if (strpos($parse['host'], 'fonts.googleapis.com') !== FALSE) {
     // Add fonts.gstatic.com when fonts.googleapis.com is added.
-    advagg_add_dns_prefetch('https://fonts.gstatic.com');
+    advagg_add_dns_prefetch('https://fonts.gstatic.com/#crossorigin');
   }
 
   // Build render array.
@@ -2401,6 +2425,9 @@ function advagg_add_dns_prefetch($url) {
       ),
       '#weight' => $advagg_resource_hints_location == 3 ? -1001 : -999.9,
     );
+    if (!empty($parse['fragment']) && $parse['fragment'] === 'crossorigin') {
+      $element['#attributes']['crossorigin'] = '';
+    }
     // Add markup for dns-prefetch to html_head.
     drupal_add_html_head($element, 'advagg_resource_hints_preconnect:' . $parse['host']);
   }
@@ -3210,7 +3237,7 @@ function advagg_get_current_hooks_hash() {
  * @return MergeQuery
  *   value from db_merge
  */
-function advagg_set_hash_settings($hash, $settings) {
+function advagg_set_hash_settings($hash, array $settings = array()) {
   return db_merge('advagg_aggregates_hashes')
     ->key(array('hash' => $hash))
     ->fields(array(
@@ -3403,7 +3430,7 @@ function advagg_build_aggregates(array $filenames, $type) {
   }
   if (empty($type)) {
     $filename = reset($filenames);
-    $type = pathinfo($filename, PATHINFO_EXTENSION);
+    $type = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
   }
 
   // Call the file generation function directly.

@@ -86,7 +86,7 @@ function hook_advagg_changed_files(array $files, array $types) {
   $return = array();
   foreach ($files as $filename => $meta_data) {
     // Only care about js files.
-    $ext = pathinfo($filename, PATHINFO_EXTENSION);
+    $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
     if ($ext !== 'js') {
       continue;
     }

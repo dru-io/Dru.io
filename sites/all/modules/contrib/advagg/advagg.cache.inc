@@ -110,7 +110,7 @@ function advagg_push_new_changes() {
       // Lookup the aggregates/cache ids that use this file.
       $cache_ids = advagg_get_aggregates_using_file($meta_data['filename_hash'], TRUE);
       $cache_hits = array();
-      $ext = pathinfo($filename, PATHINFO_EXTENSION);
+      $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
       $types[$ext] = TRUE;
 
       if (!empty($cache_ids)) {
@@ -391,7 +391,7 @@ function advagg_remove_missing_files_from_db() {
   $types = array();
   foreach ($missing_files as $filename => $data) {
     // Setup this run.
-    $ext = pathinfo($filename, PATHINFO_EXTENSION);
+    $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
     $advagg_files_del = 0;
     $advagg_aggregates_del = 0;
     $advagg_aggregates_versions_del = 0;

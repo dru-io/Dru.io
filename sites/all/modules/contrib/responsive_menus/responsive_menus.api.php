@@ -46,8 +46,8 @@ function hook_responsive_menus_style_info() {
     'example_style' => array(
       'name' => t('Example Responsive Menus style'),
       'form' => 'example_style_settings',
-      'js_folder' => drupal_get_path('module', 'responsive_menus') . '/js',
-      'css_folder' => drupal_get_path('module', 'responsive_menus') . '/css',
+      'js_folder' => $path . '/js',
+      'css_folder' => $path . '/css',
       'js_files' => array(
         $path . '/js/example1.js',
         $path . '/js/example2.js',
@@ -106,7 +106,7 @@ function example_style_settings() {
  */
 function example_style_js_settings() {
   $js_settings = array();
-  $js_settings['selectors'] = responsive_menus_build_selectors();
+  $js_settings['selectors'] = variable_get('responsive_menus_css_selectors', '#main-menu');
   $js_settings['toggler_text'] = variable_get('responsive_menus_simple_text', '☰ Menu');
   $js_settings['media_size'] = variable_get('responsive_menus_media_size', 768);
 
@@ -138,6 +138,7 @@ function example_style_js_settings() {
  * use_libraries: boolean - TRUE / FALSE to use the Libraries module.
  * library: string - Name of the library, used for Libraries module.
  * selector: string - Text for the admin page describing which selector to use.
+ * file: string - Optional file with the form & js_settings callback functions.
  *
  * Other notes:
  *   If you want to bypass the requirement on the Libraries module for a style,
@@ -172,6 +173,8 @@ function hook_responsive_menus_styles_alter(&$styles) {
     'use_libraries' => TRUE,
     'library' => 'my_style',
     'selector' => t('Text describing what selector to use.  e.g. ul'),
+    // The file parameter can be left empty.  It will look in the .module file.
+    'file' => $path . '/my_style/my_style.inc',
   );
 
   // In this next example, I will override the Sidr style to bypass the Libraries

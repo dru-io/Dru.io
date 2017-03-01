@@ -66,6 +66,15 @@ class SmtpMailSystem implements MailSystemInterface {
     $headers = $message['headers'];
     $subject = $message['subject'];
 
+    // Optionally reroute all emails to a single address.
+    $reroute_address = variable_get('smtp_reroute_address', '');
+    if (!empty($reroute_address)) {
+      $to = $reroute_address;
+      // Remove any CC and BCC headers that might have been set.
+      unset($headers['cc']);
+      unset($headers['bcc']);
+    }
+
     // Create a new PHPMailer object - autoloaded from registry.
     $mailer = new PHPMailer();
 
@@ -81,12 +90,17 @@ class SmtpMailSystem implements MailSystemInterface {
     // of the email being sent.
     $from_name = FALSE;
     if (function_exists('i18n_variable_get')) {
-      if (i18n_variable_get('smtp_fromname', $message['language'], '') != '') {
-        $from_name = i18n_variable_get('smtp_fromname', $message['language'], '');
+      // The 'language' value may be stored as an object.
+      $langcode = $message['language'];
+      if (is_object($langcode)) {
+        $langcode = $langcode->language;
+      }
+      if (i18n_variable_get('smtp_fromname', $langcode, '') != '') {
+        $from_name = i18n_variable_get('smtp_fromname', $langcode, '');
       }
       else {
         // If value is not defined in settings, use site_name.
-        $from_name = i18n_variable_get('site_name', $message['language'], '');
+        $from_name = i18n_variable_get('site_name', $langcode, '');
       }
     }
 
@@ -119,7 +133,7 @@ class SmtpMailSystem implements MailSystemInterface {
       }
       $headers['Reply-To'] = $reply;
     }
-    $properfrom = variable_get('site_mail', '');
+    $properfrom = variable_get('smtp_from', '');
     if (!empty($properfrom)) {
       $headers['From'] = $properfrom;
       $from = $properfrom;
@@ -152,7 +166,7 @@ class SmtpMailSystem implements MailSystemInterface {
 
     // Defines the From value to what we expect.
     $mailer->From     = $from_comp['email'];
-    $mailer->FromName = $from_comp['name'];
+    $mailer->FromName = empty($from_comp['name']) ? $from_name : $from_comp['name'];
     $mailer->Sender   = $from_comp['email'];
 
 

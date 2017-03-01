@@ -6,6 +6,34 @@
  */
 
 /**
+ * Implements hook_requirements().
+ */
+function smtp_requirements($phase) {
+  $requirements = array();
+
+  if ($phase == 'runtime') {
+    if (variable_get('smtp_queue', FALSE) || variable_get('smtp_queue_fail', FALSE)) {
+      $count = db_query("SELECT count('name') FROM {queue} WHERE name='smtp_send_queue'")->fetchField();
+      $requirements['smtp_queue'] = array(
+        'title' => t('SMTP Queue'),
+        'value' => '',
+        'severity' => REQUIREMENT_INFO,
+      );
+      if ($count > 0) {
+        $requirements['smtp_queue']['value'] = format_plural($count, 'There is 1 message queued for delivery.', 'There are @count messages queued for delivery.', array('@count' => $count))
+          . ' '
+          . t('Delivery of the message(s) will be attempted the next time cron runs.');
+      }
+      else {
+        $requirements['smtp_queue']['value'] = t('There are no messages queued for delivery.');
+      }
+    }
+  }
+
+  return $requirements;
+}
+
+/**
  * Implements hook_install().
  */
  function smtp_install() {
@@ -27,12 +55,12 @@ function smtp_uninstall() {
   variable_del('smtp_protocol');
   variable_del('smtp_queue');
   variable_del('smtp_queue_fail');
-  variable_del('smtp_test_address');
   variable_del('smtp_username');
   variable_del('smtp_debugging');
   variable_del('smtp_client_hostname');
   variable_del('smtp_client_helo');
   variable_del('smtp_deliver');
+  variable_del('smtp_reroute_address');
 }
 
 /**
@@ -45,8 +73,10 @@ function smtp_disable() {
 }
 
 /**
- * Implements hook_update_N().
- *
+ * Implementations of hook_update_N().
+ */
+
+/**
  * Upgrade to Drupal 7.x
  */
 function smtp_update_7000() {
@@ -58,8 +88,6 @@ function smtp_update_7000() {
 }
 
 /**
- * Implements hook_update_N().
- *
  * Back to default mail system if the status flag is off.
  */
 function smtp_update_7100() {
@@ -71,8 +99,6 @@ function smtp_update_7100() {
 }
 
 /**
- * Implements hook_update_N().
- *
  * Updating variable value now that new SMTP logging behavior has been
  * implemented.
  */
@@ -93,4 +119,13 @@ function smtp_update_7101() {
  */
 function smtp_update_7102() {
   variable_del('smtp_library');
+}
+
+/**
+ * Delete the variable "smtp_test_address". It is unlikely that this would
+ * actually be set in the normal course of events, and it's no longer needed as
+ * it was replaced with a form submit handler.
+ */
+function smtp_update_7103() {
+  variable_del('smtp_test_address');
 }

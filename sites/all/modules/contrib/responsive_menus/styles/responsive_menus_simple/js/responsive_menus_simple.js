@@ -39,7 +39,7 @@
    */
   function store_classes_ids(menuElement) {
     if (!$(menuElement).attr('id')) {
-      $(menuElement).attr('id', 'rm-no-id');
+      $(menuElement).attr('id', 'rm-no-id-main');
     }
     if (!$(menuElement).attr('class')) {
       $(menuElement).attr('class', 'rm-no-class');
@@ -48,10 +48,12 @@
       .data('rmids', $(menuElement).attr('id'))
       .data('rmclasses', $(menuElement).attr('class'));
     // Handle ULs if selector is parent div.
+    var incr = 0;
     $(menuElement).find('ul').each(function() {
+      incr++;
       // Prevent error if there is no id.
       if (!$(this).attr('id')) {
-        $(this).attr('id', 'rm-no-id');
+        $(this).attr('id', 'rm-no-id-' + incr);
       }
       // Prevent error if there is no class.
       if (!$(this).attr('class')) {
@@ -88,7 +90,7 @@
           $('head').append('<meta name="viewport" content="width=device-width, initial-scale=1.0">');
         }
         // Window width with legacy browsers.
-        var windowWidth = document.documentElement.clientWidth || document.body.clientWidth;
+        var windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         $.each(settings.responsive_menus, function(ind, iteration) {
           if (iteration.responsive_menus_style != 'responsive_menus_simple') {
             return true;
@@ -96,7 +98,15 @@
           if (!iteration.selectors.length) {
             return true;
           }
-          var $media_size = iteration.media_size || 768;
+          var $media_unit = iteration.media_unit || 'px';
+          if ($media_unit === 'em') {
+            var $base_font_size = parseFloat($('body').css('font-size'));
+            var $media_size = iteration.media_size * $base_font_size || 768;
+          }
+          else {
+            var $media_size = iteration.media_size || 768;
+          }
+
           // Handle clicks & toggling.
           var toggler_class = '';
           var toggler_text = iteration.toggler_text;
@@ -178,7 +188,7 @@
         // Handle window resizing.
         $(window).resize(function() {
           // Window width with legacy browsers.
-          windowWidth = document.documentElement.clientWidth || document.body.clientWidth;
+          windowWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
           $('.responsive-menus').each(function(menuIndex, menuValue) {
             var mediasize = $(this).data('mediasize') || 768;
             // Prevent menu from going off the screen.  This only happens in

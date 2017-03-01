@@ -973,19 +973,24 @@ function ultimate_cron_permission() {
  */
 function ultimate_cron_cron_queue_info() {
   $debug = debug_backtrace();
-  if (!empty($debug[3]['function']) && $debug['3']['function'] == 'drupal_cron_run') {
-    if (!empty($debug[4])) {
+  $cron_debug_level = 3;
+  if (version_compare(PHP_VERSION, '7.0.0', '>=')) {
+    // PHP 7 will not include call_user_func_array in the backtrace.
+    $cron_debug_level--;
+  }
+  if (!empty($debug[$cron_debug_level]['function']) && $debug[$cron_debug_level]['function'] == 'drupal_cron_run') {
+    if (!empty($debug[$cron_debug_level + 1])) {
       try {
-        if ($debug['4']['function'] == 'install_finished') {
+        if ($debug[$cron_debug_level + 1]['function'] == 'install_finished') {
           // Looks like drupal_cron_run() was called unexpectedly.
           watchdog('ultimate_cron', 'Running cron in compatibility mode during site install.', array(), WATCHDOG_DEBUG);
         }
         else {
           // Looks like drupal_cron_run() was called unexpectedly.
           watchdog('ultimate_cron', 'drupal_cron_run() called unexpectedly by @file:@line function @function. Running core in compatibility mode.', array(
-            '@function' => $debug['4']['function'],
-            '@line' => $debug['3']['line'],
-            '@file' => $debug['3']['file'],
+            '@function' => $debug[$cron_debug_level + 1]['function'],
+            '@line' => $debug[$cron_debug_level]['line'],
+            '@file' => $debug[$cron_debug_level]['file'],
           ), WATCHDOG_DEBUG);
         }
 

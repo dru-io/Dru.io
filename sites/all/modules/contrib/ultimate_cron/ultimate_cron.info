@@ -19,9 +19,9 @@ files[] = ultimate_cron.cache-signal.inc
 
 configure = admin/config/system/cron/settings
 
-; Information added by Drupal.org packaging script on 2016-09-01
-version = "7.x-2.0"
+; Information added by Drupal.org packaging script on 2017-01-22
+version = "7.x-2.3"
 core = "7.x"
 project = "ultimate_cron"
-datestamp = "1472716411"
+datestamp = "1485097387"
 

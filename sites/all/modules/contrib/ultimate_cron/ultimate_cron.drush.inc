@@ -90,7 +90,7 @@ function ultimate_cron_drush_command() {
       'name' => 'Job to enable',
     ),
     'options' => array(
-      'all' => 'Enabled all jobs',
+      'all' => 'Enable all jobs',
     ),
     'examples' => array(
       'drush cron-enable node_cron' => 'Enable the node_cron job',
@@ -104,7 +104,7 @@ function ultimate_cron_drush_command() {
       'name' => 'Job to disable',
     ),
     'options' => array(
-      'all' => 'Enabled all jobs',
+      'all' => 'Disable all jobs',
     ),
     'examples' => array(
       'drush cron-disable node_cron' => 'Disable the node_cron job',
@@ -118,7 +118,7 @@ function ultimate_cron_drush_command() {
       'name' => 'Job to unlock',
     ),
     'options' => array(
-      'all' => 'Enabled all jobs',
+      'all' => 'Unlock all jobs',
     ),
     'examples' => array(
       'drush cron-unlock node_cron' => 'Unlock the node_cron job',
@@ -312,7 +312,7 @@ function drush_ultimate_cron_cron_logs($name = NULL) {
   );
 
   $lock_id = $job->isLocked();
-  $log_entries = $job->getLogEntries($limit);
+  $log_entries = $job->getLogEntries(ULTIMATE_CRON_LOG_TYPE_ALL, $limit);
   $progress = $job->getProgress();
 
   foreach ($log_entries as $log_entry) {
@@ -454,6 +454,10 @@ function drush_ultimate_cron_cron_enable($name = NULL) {
     return;
   }
   $job = _ultimate_cron_job_load($name);
+  if (!$job) {
+    drush_print(dt('The job named "@name" could not be enabled, be sure this is the correct job name', array('@name' => $name)));
+    return;
+  }
   if ($job->enable()) {
     drush_print(dt('@name enabled', array('@name' => $name)));
   }

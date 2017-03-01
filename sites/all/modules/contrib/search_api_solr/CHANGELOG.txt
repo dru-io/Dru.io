@@ -1,3 +1,21 @@
+Search API Solr Search 1.12 (2017-02-23):
+-----------------------------------------
+- #2612770 by Temoor, drunken monkey: Fixed conjunction in complex filter
+  conditions.
+- #2711685 by berliner: Added support for Solr 6.
+- #2842661 by gabrielu, drunken monkey: Fixed duplicate code line in
+  clearCache().
+- #2834159 by zniki.ru: Fixed left-over explicit
+  SearchApiSolrConnection::escapeFieldName() call.
+- #2677912 by jts86, mian3010: Added option to disable committing for Solr.
+- #2828473 by detroz: Fixed incorrect variable initialization.
+- #2826565 by Sardis, drunken monkey: Fixed multi-valued field highlighting.
+- #2807327 by drunken monkey: Fixed configuration form descriptions.
+- #2772199 by drunken monkey: Added a warning to the description for the
+  highlighting server option.
+- #2733625 by joelstein, drunken monkey: Fixed notice in
+  Connection::getFields().
+
 Search API Solr Search 1.11 (2016-07-06):
 -----------------------------------------
 - #2710397 by drunken monkey: Fixed escaping of highlighting tags.

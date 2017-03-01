@@ -24,15 +24,15 @@ function responsive_menus_context_options_form($form, &$form_state) {
   else {
     $current_style = variable_get('responsive_menus_style', 'responsive_menus_simple');
   }
-  // Some friendly reminders about jQuery 1.7+ requirements of Mean Menus.
-  if ($current_style == 'mean_menu') {
-    if (!module_exists('jquery_update')) {
-      drupal_set_message(t('Mean Menu style requires !link set to version 1.7 or higher.', array('!link' => l(t('jQuery Update'), 'http://drupal.org/project/jquery_update'))), 'warning');
-    }
-    elseif (variable_get('jquery_update_jquery_version', 1.5) < 1.7) {
-      drupal_set_message(t('Mean Menu style requires !link set to version 1.7 or higher.', array('!link' => l(t('jQuery Update'), 'admin/config/development/jquery_update', array('query' => array('destination' => $_GET['q']))))), 'warning');
-    }
-  }
+  // Option to not require jquery_update.
+  $form['responsive_menus_no_jquery_update'] = array(
+    '#type' => 'checkboxes',
+    '#description' => t("If the style you want requires newer jQuery version and you don't want to use jquery_update module."),
+    '#options' => array(1 => t('I will provide my own jQuery library.')),
+    '#default_value' => responsive_menus_var_get('responsive_menus_no_jquery_update', array(1 => 0), $rm_defaults),
+  );
+  $jq_update_ignore = $form['responsive_menus_no_jquery_update']['#default_value'];
+  $style_info = responsive_menus_style_load($current_style, $jq_update_ignore);
 
   $form['responsive_menus_style'] = array(
     '#type' => 'select',
@@ -54,6 +54,14 @@ function responsive_menus_context_options_form($form, &$form_state) {
     '#type' => 'fieldset',
     '#tree' => TRUE,
   );
+  // Which selector to use info.
+  if (!empty($style_info['selector'])) {
+    $form['responsive_menus_style_settings']['selector_info'] = array(
+      '#type' => 'item',
+      '#title' => t('Selector(s) to use for this style:'),
+      '#markup' => '<div class="messages status">' . $style_info['selector'] . '</div>',
+    );
+  }
   // Build additional style settings from style plugins.
   if (!empty($styles[$current_style]['form']) && function_exists($styles[$current_style]['form'])) {
     $styles_function = $styles[$current_style]['form'];

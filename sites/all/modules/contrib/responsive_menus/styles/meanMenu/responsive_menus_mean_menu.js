@@ -25,6 +25,7 @@
         // Call meanmenu() with our custom settings.
         $(iteration.selectors).once('responsive-menus-mean-menu', function() {
           $(this).meanmenu({
+            meanMenuContainer: iteration.container || "body",
             meanMenuClose: iteration.close_txt || "X",
             meanMenuCloseSize: iteration.close_size || "18px",
             meanMenuOpen: iteration.trigger_txt || "<span /><span /><span />",
