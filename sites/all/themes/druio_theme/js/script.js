@@ -13,21 +13,21 @@
 
       // Attach Lightcase for reponsive resized images.
       // @todo: use imagesloaded.js
-      $('.question-full .right > .content img, ' +
-        '.post-full > .content img,' +
-        '.answer-teaser > .right > .content img,' +
-        '.comment-minimal > .content img', context).one("load", function () {
-        var $this = $(this);
-        if ($this.width() != $this[0].naturalWidth) {
-          if (0 == $(this).parent('a').length) {
-            var $link_wrapper = $('<a class="lightcase" href="' + $this.attr('src') + '"></a>');
-            $this.wrap($link_wrapper);
-            Drupal.behaviors.Lightcase.attach($link_wrapper, settings);
-          }
-        }
-      }).each(function () {
-        if (this.complete) $(this).load();
-      });
+//      $('.question-full .right > .content img, ' +
+//        '.post-full > .content img,' +
+//        '.answer-teaser > .right > .content img,' +
+//        '.comment-minimal > .content img', context).one("load", function () {
+//        var $this = $(this);
+//        if ($this.width() != $this[0].naturalWidth) {
+//         if (0 == $(this).parent('a').length) {
+//            var $link_wrapper = $('<a class="lightcase" href="' + $this.attr('src') + '"></a>');
+//            $this.wrap($link_wrapper);
+//            Drupal.behaviors.Lightcase.attach($link_wrapper, settings);
+//          }
+//        }
+//      }).each(function () {
+//        if (this.complete) $(this).load();
+//      });
 
       // Attach highlightjs.
       if ($('pre code').length) {
