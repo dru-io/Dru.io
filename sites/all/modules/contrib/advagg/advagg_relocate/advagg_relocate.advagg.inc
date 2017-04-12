@@ -260,35 +260,35 @@ function advagg_relocate_get_remote_data($url, array $aggregate_settings) {
     // Get ttf.
     if (!empty($aggregate_settings['variables']['advagg_relocate_css_inline_import_browsers']['ttf'])) {
       $options['#font-type'] = 'ttf';
-      $responses[] = drupal_http_request($url . '#ttf', $options);
+      $responses['ttf'] = drupal_http_request($url . '#ttf', $options);
     }
 
     // Get eot.
     if (!empty($aggregate_settings['variables']['advagg_relocate_css_inline_import_browsers']['eot'])) {
       $options['#font-type'] = 'eot';
       $options['headers']['User-Agent'] = 'Mozilla/5.0 (Windows; U; MSIE 7.0; Windows NT 6.0; en-US)';
-      $responses[] = drupal_http_request($url . '#eot', $options);
+      $responses['eot'] = drupal_http_request($url . '#eot', $options);
     }
 
     // Get svg.
     if (!empty($aggregate_settings['variables']['advagg_relocate_css_inline_import_browsers']['svg'])) {
       $options['#font-type'] = 'svg';
       $options['headers']['User-Agent'] = 'Mozilla/5.0 (iPad; U; CPU OS 3_2_2 like Mac OS X; nl-nl) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B500 Safari/531.21.10';
-      $responses[] = drupal_http_request($url . '#svg', $options);
+      $responses['svg'] = drupal_http_request($url . '#svg', $options);
     }
 
     // Get woff.
     if (!empty($aggregate_settings['variables']['advagg_relocate_css_inline_import_browsers']['woff'])) {
       $options['#font-type'] = 'woff';
       $options['headers']['User-Agent'] = 'Mozilla/5.0 (Windows; U; MSIE 9.0; Windows NT 9.0; en-US)';
-      $responses[] = drupal_http_request($url . '#woff', $options);
+      $responses['woff'] = drupal_http_request($url . '#woff', $options);
     }
 
     // Get woff2.
     if (!empty($aggregate_settings['variables']['advagg_relocate_css_inline_import_browsers']['woff2'])) {
       $options['#font-type'] = 'woff2';
       $options['headers']['User-Agent'] = 'Mozilla/5.0 (Windows NT 6.1; WOW64; rv:40.0) Gecko/20100101 Firefox/40.1';
-      $responses[] = drupal_http_request($url . '#woff2', $options);
+      $responses['woff2'] = drupal_http_request($url . '#woff2', $options);
     }
   }
 
@@ -296,10 +296,20 @@ function advagg_relocate_get_remote_data($url, array $aggregate_settings) {
   $font_faces = array();
   $ttl = 0;
   $now = REQUEST_TIME;
-  foreach ($responses as $response) {
+  foreach ($responses as $key => $response) {
     if ($response->code == 304 && !empty($cached_data->data[0])) {
       // This might need to be better handled in the future.
       return $cached_data->data[0];
+    }
+
+    // Set the font type if not set.
+    if (empty($response->options['#font-type'])) {
+      if (!is_numeric($key)) {
+        $response->options['#font-type'] = $key;
+      }
+      else {
+        continue;
+      }
     }
 
     if ($response->code != 200
@@ -379,7 +389,9 @@ function advagg_relocate_get_remote_data($url, array $aggregate_settings) {
   }
 
   // Save data to the cache.
-  cache_set($cid, array($font_faces, $responses), 'cache_advagg_info', REQUEST_TIME + $ttl);
+  if (!empty($font_faces)) {
+    cache_set($cid, array($font_faces, $responses), 'cache_advagg_info', REQUEST_TIME + $ttl);
+  }
   return $font_faces;
 }
 
