@@ -15,7 +15,7 @@
  */
 class Hybrid_Auth {
 
-	public static $version = "2.8.2";
+	public static $version = "2.9.5";
 
 	/**
 	 * Configuration array
@@ -353,7 +353,7 @@ class Hybrid_Auth {
 	 */
 	public static function redirect($url, $mode = "PHP") {
 		if(!$mode){
-			$mode = 'PHP';	
+			$mode = 'PHP';
 		}
 		Hybrid_Logger::info("Enter Hybrid_Auth::redirect( $url, $mode )");
 

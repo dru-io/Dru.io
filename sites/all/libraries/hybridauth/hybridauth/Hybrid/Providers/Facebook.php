@@ -53,6 +53,21 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
 
         $trustForwarded = isset($this->config['trustForwarded']) ? (bool)$this->config['trustForwarded'] : false;
 
+        // Check if there is Graph SDK in thirdparty/Facebook.
+        if (file_exists(Hybrid_Auth::$config["path_libraries"] . "Facebook/autoload.php")) {
+            require_once Hybrid_Auth::$config["path_libraries"] . "Facebook/autoload.php";
+        }
+        else {
+            // If Composer install was executed, try to find autoload.php.
+            $vendorDir = dirname(Hybrid_Auth::$config['path_base']);
+            do {
+                if (file_exists($vendorDir . "/vendor/autoload.php")) {
+                    require_once $vendorDir . "/vendor/autoload.php";
+                    break;
+                }
+            } while (($vendorDir = dirname($vendorDir)) !== '/');
+        }
+
         $this->api = new FacebookSDK([
             'app_id' => $this->config["keys"]["id"],
             'app_secret' => $this->config["keys"]["secret"],
@@ -83,7 +98,7 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
 
         $helper = $this->api->getRedirectLoginHelper();
         try {
-            $accessToken = $helper->getAccessToken();
+            $accessToken = $helper->getAccessToken($this->params['login_done']);
         } catch (Facebook\Exceptions\FacebookResponseException $e) {
             throw new Hybrid_Exception('Facebook Graph returned an error: ' . $e->getMessage());
         } catch (Facebook\Exceptions\FacebookSDKException $e) {
@@ -122,6 +137,82 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
      */
     function logout() {
         parent::logout();
+    }
+
+    /**
+    * Update user status
+    *
+    * @param mixed  $status An array describing the status, or string
+    * @param string $pageid (optional) User page id
+    * @return array
+    * @throw Exception
+    */
+    function setUserStatus($status, $pageid = null) {
+
+      if (!is_array($status)) {
+          $status = array('message' => $status);
+      }
+
+      $access_token = null;
+
+      if (is_null($pageid)) {
+          $pageid = 'me';
+          $access_token = $this->token('access_token');
+
+          // if post on page, get access_token page
+      } else {
+
+          foreach ($this->getUserPages(true) as $p) {
+              if (isset($p['id']) && intval($p['id']) == intval($pageid)) {
+                  $access_token = $p['access_token'];
+                  break;
+              }
+          }
+
+          if (is_null($access_token)) {
+              throw new Exception("Update user page failed, page not found or not writable!");
+          }
+      }
+
+      try {
+          $response = $this->api->post('/' . $pageid . '/feed', $status, $access_token);
+      } catch (FacebookSDKException $e) {
+          throw new Exception("Update user status failed! {$this->providerId} returned an error {$e->getMessage()}", 0, $e);
+      }
+
+      return $response;
+    }
+
+    /**
+    * {@inheridoc}
+    */
+   function getUserPages($writableonly = false) {
+       if (( isset($this->config['scope']) && strpos($this->config['scope'], 'manage_pages') === false ) || (!isset($this->config['scope']) && strpos($this->scope, 'manage_pages') === false ))
+           throw new Exception("User status requires manage_page permission!");
+
+       try {
+           $pages = $this->api->get("/me/accounts", $this->token('access_token'));
+           $pages = $pages->getDecodedBody();
+       } catch (FacebookApiException $e) {
+           throw new Exception("Cannot retrieve user pages! {$this->providerId} returned an error: {$e->getMessage()}", 0, $e);
+       }
+
+       if (!isset($pages['data'])) {
+           return array();
+       }
+
+       if (!$writableonly) {
+           return $pages['data'];
+       }
+
+       $wrpages = array();
+       foreach ($pages['data'] as $p) {
+           if (isset($p['perms']) && in_array('CREATE_CONTENT', $p['perms'])) {
+               $wrpages[] = $p;
+           }
+       }
+
+       return $wrpages;
     }
 
     /**
@@ -169,7 +260,7 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
             $regionArr = explode(',', $this->user->profile->region);
             if (count($regionArr) > 1) {
                 $this->user->profile->city = trim($regionArr[0]);
-                $this->user->profile->country = trim($regionArr[1]);
+                $this->user->profile->country = trim(end($regionArr));
             }
         }
 
@@ -252,6 +343,7 @@ class Hybrid_Providers_Facebook extends Hybrid_Provider_Model {
             } else {
                 $response = $this->api->get('/me/home', $this->token('access_token'));
             }
+            $response = $response->getDecodedBody();
         } catch (FacebookSDKException $e) {
             throw new Hybrid_Exception("User activity stream request failed! {$this->providerId} returned an error: {$e->getMessage()}", 0, $e);
         }
