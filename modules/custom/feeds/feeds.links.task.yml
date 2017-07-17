@@ -1,0 +1,37 @@
+entity.feeds_feed.canonical:
+  route_name: entity.feeds_feed.canonical
+  base_route: entity.feeds_feed.canonical
+  title: 'View'
+
+entity.feeds_feed.edit_form:
+  route_name: entity.feeds_feed.edit_form
+  base_route: entity.feeds_feed.canonical
+  title: Edit
+
+entity.feeds_feed.delete_form:
+  route_name: entity.feeds_feed.delete_form
+  base_route: entity.feeds_feed.canonical
+  title: Delete
+  weight: 10
+
+feeds.item_list:
+  route_name: feeds.item_list
+  base_route: entity.feeds_feed.canonical
+  title: Items
+  weight: 20
+
+entity.feeds_feed_type.edit_form:
+  route_name: entity.feeds_feed_type.edit_form
+  title: Edit
+  base_route: entity.feeds_feed_type.edit_form
+
+entity.feeds_feed_type.mapping:
+  route_name: entity.feeds_feed_type.mapping
+  title: Mapping
+  base_route: entity.feeds_feed_type.edit_form
+  weight: 0
+
+feeds.admin:
+  route_name: feeds.admin
+  title: Feeds
+  base_route: system.admin_content

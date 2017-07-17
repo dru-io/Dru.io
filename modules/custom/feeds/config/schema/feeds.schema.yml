@@ -1,0 +1,102 @@
+feeds.feed_type.*:
+  type: config_entity
+  label: 'Feed type'
+  mapping:
+    label:
+      type: label
+      label: 'Name'
+    id:
+      type: string
+      label: 'Machine-readable name'
+    description:
+      type: text
+      label: 'Description'
+    import_period:
+      type: integer
+      label: 'The import period'
+    fetcher:
+      type: string
+      label: 'Fetcher id'
+    fetcher_configuration:
+      label: 'Fetcher configuration'
+      type: feeds.fetcher.[%parent.fetcher]
+    parser:
+      type: string
+      label: 'Parser id'
+    parser_configuration:
+      label: 'Parser configuration'
+      type: mapping
+    processor:
+      type: string
+      label: 'Processor id'
+    processor_configuration:
+      label: 'Processor configuration'
+      type: feeds.processor.entity
+    mappings:
+      type: sequence
+      sequence:
+        type: mapping
+        mapping:
+          target:
+            type: string
+          map:
+            type: ignore
+          settings:
+            type: ignore
+          unique:
+            type: ignore
+
+
+action.configuration.feeds_feed_delete_action:
+  type: action_configuration_default
+  label: 'Delete feeds configuration'
+
+field.storage_settings.feeds_item:
+  type: base_entity_reference_field_settings
+  label: 'Feeds item settings'
+
+field.field_settings.feeds_item:
+  type: mapping
+  label: 'Feeds item settings'
+  mapping:
+    handler:
+      type: string
+      label: 'Reference method'
+    handler_settings:
+      type: entity_reference_selection.[%parent.handler]
+      label: 'Entity reference selection settings'
+
+feeds.fetcher.http:
+  type: mapping
+  label: 'HTTP fetcher settings'
+  mapping:
+    auto_detect_feeds:
+      type: boolean
+    use_pubsubhubbub:
+      type: boolean
+    fallback_hub:
+      type: string
+    request_timeout:
+      type: integer
+
+feeds.processor.entity:
+  type: mapping
+  label: 'Entity processor settings'
+  mapping:
+    values:
+      type: mapping
+      mapping:
+        type:
+          type: string
+    update_existing:
+      type: integer
+    skip_hash_check:
+      type: boolean
+    authorize:
+      type: boolean
+    expire:
+      type: integer
+    owner_feed_author:
+      type: boolean
+    owner_id:
+      type: integer

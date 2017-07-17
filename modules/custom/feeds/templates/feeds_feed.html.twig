@@ -1,0 +1,14 @@
+{%
+  set classes = [
+    'feeds_feed',
+    'feeds_feed--feed-type-' ~ feed.bundle|clean_class,
+    feed.isActive() ? 'feeds_feed-active',
+    view_mode ? 'feeds_feed--view-mode-' ~ view_mode|clean_class,
+  ]
+%}
+
+<article{{ attributes.addClass(classes) }}>
+  <div{{ content_attributes.addClass('feeds_feed__content') }}>
+    {{ content }}
+  </div>
+</article>

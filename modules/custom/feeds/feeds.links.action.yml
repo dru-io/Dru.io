@@ -1,0 +1,35 @@
+feeds.add_action:
+  route_name: entity.feeds_feed.add_page
+  title: Add feed
+  appears_on:
+    - feeds.admin
+
+feeds.import_action:
+  route_name: entity.feeds_feed.import_form
+  title: Import
+  appears_on:
+    - entity.feeds_feed.canonical
+  cache_tags:
+    - feeds_feed_locked
+
+feeds.clear_action:
+  route_name: entity.feeds_feed.clear_form
+  title: Delete items
+  appears_on:
+    - entity.feeds_feed.canonical
+  cache_tags:
+    - feeds_feed_locked
+
+feeds.unlock_action:
+  route_name: entity.feeds_feed.unlock
+  title: Unlock
+  appears_on:
+    - entity.feeds_feed.canonical
+  cache_tags:
+    - feeds_feed_locked
+
+entity.feeds_feed_type.add_form:
+  route_name: entity.feeds_feed_type.add_form
+  title: Add feed type
+  appears_on:
+    - feeds.overview_types

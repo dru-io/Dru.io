@@ -1,0 +1,8 @@
+feeds.overview_types:
+  title: 'Feed types'
+  parent: system.admin_structure
+  description: 'Configure one or more feed types to aggregate RSS and Atom feeds, import CSV files or more.'
+  route_name: feeds.overview_types
+entity.feeds_feed.add_page:
+  title: 'Add feed'
+  route_name: entity.feeds_feed.add_page

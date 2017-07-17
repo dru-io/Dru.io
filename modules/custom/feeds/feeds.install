@@ -1,0 +1,13 @@
+<?php
+
+/**
+ * @file
+ * Install/update/uninstall hooks.
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function feeds_uninstall() {
+  // @todo remove keyvalue store and queue things.
+}

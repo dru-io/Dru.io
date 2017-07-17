@@ -1,0 +1,22 @@
+.feeds-plugin-inline {
+  float: left;
+  margin-right: 3em;
+}
+
+.feeds-mapping-form td .form-item.form-type-select {
+  margin-bottom: 10px;
+}
+
+.feeds-mapping-form .item-list ul li {
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+}
+
+.feeds-mapping-form .feeds-mapping-settings-editing {
+  background: #d5e9f2;
+}
+
+.feeds-feed-type-secondary-settings {
+  clear: both;
+}
