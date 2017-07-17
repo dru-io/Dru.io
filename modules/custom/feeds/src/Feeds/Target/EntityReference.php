@@ -97,7 +97,10 @@ class EntityReference extends FieldTargetBase implements ConfigurableTargetInter
   protected function getPotentialFields() {
     $field_definitions = $this->entityFieldManager->getBaseFieldDefinitions($this->getEntityType());
     $field_definitions = array_filter($field_definitions, [$this, 'filterFieldTypes']);
-    $options = [];
+    $options = [
+      'guid' => 'GUID',
+      'id' => 'id',
+    ];
     foreach ($field_definitions as $id => $definition) {
       $options[$id] = Html::escape($definition->getLabel());
     }
@@ -174,6 +177,15 @@ class EntityReference extends FieldTargetBase implements ConfigurableTargetInter
    *   The entity id, or false, if not found.
    */
   protected function findEntity($value, $field) {
+    // When referencing by ID just check existing and return.
+    if ($field == 'id') {
+      // TODO: check existing.
+      return (int) $value;
+    }
+    // When referencing by GUID change field.
+    if ($field == 'guid') {
+      $field = 'feeds_item.guid';
+    }
     // When referencing by UUID, use the EntityRepository service.
     if ($this->configuration['reference_by'] === 'uuid') {
       if (NULL !== ($entity = $this->entityRepository->loadEntityByUuid($this->getEntityType(), $value))) {
