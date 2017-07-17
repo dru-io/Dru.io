@@ -1,0 +1,24 @@
+uuid: 9a86ed16-2c7b-4426-b5fa-d81c4fc6a491
+langcode: ru
+status: false
+dependencies:
+  config:
+    - system.menu.main
+  module:
+    - system
+  theme:
+    - druio
+id: menu_main
+theme: druio
+region: ''
+weight: 0
+provider: null
+plugin: 'system_menu_block:main'
+settings:
+  id: 'system_menu_block:main'
+  label: 'Основная навигация'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility: {  }

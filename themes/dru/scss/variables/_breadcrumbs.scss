@@ -1,0 +1,12 @@
+/** init breadcrumbs Vars /scss/variables/_breadcrumbs.scss */
+
+$breadcrumb-padding-vertical:   8px !default;
+$breadcrumb-padding-horizontal: 16px !default;
+$breadcrumb-margin-bottom:      10px !default;
+$breadcrumb-bg:                 #f5f5f5 !default;
+$breadcrumb-delimiter-content:  '››' !default;
+$breadcrumb-delimiter-color:    #ccc !default;
+$breadcrumb-link-color:         $link-color !default;
+$breadcrumb-link-border-enable: false !default;
+$breadcrumb-link-border-color:  rgba($link-color, .5) !default;
+$breadcrumb-font-size:          $font-size-base;

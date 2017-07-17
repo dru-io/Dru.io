@@ -1,0 +1,31 @@
+/*** Navigation */
+@media (max-width: 600px) {
+  #manager-menu {
+    display: none !important;
+  }
+}
+#manager-menu {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px 0 #ccc;
+  padding: 20px;
+  cursor: move;
+  z-index: 8;
+  background: #fff;
+  max-width: 205px;
+  .toggle-manager {
+    position: relative;
+    z-index: 3;
+    max-width: 17px;
+    cursor: pointer;
+  }
+  h2 {
+    margin-bottom: 10px;
+    margin-top: -23px;
+    margin-left: 25px;
+    font-size: 25px;
+    line-height: 25px;
+  }
+}

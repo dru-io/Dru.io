@@ -1,0 +1,22 @@
+uuid: 4654c084-f5c2-4331-a4bb-ba76862db90e
+langcode: ru
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - dru
+_core:
+  default_config_hash: 5MNdk3fpMKx_xxBTcz2T11DL4XEU1H5SgHl8BsYdFsA
+id: dru_messages
+theme: dru
+region: header
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Сообщения статуса'
+  provider: system
+  label_display: '0'
+visibility: {  }

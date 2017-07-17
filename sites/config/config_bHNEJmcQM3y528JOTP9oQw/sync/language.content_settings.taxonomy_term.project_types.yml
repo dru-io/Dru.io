@@ -1,0 +1,11 @@
+uuid: fe194135-13c1-4deb-9f48-042f9f050386
+langcode: ru
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.project_types
+id: taxonomy_term.project_types
+target_entity_type_id: taxonomy_term
+target_bundle: project_types
+default_langcode: site_default
+language_alterable: false

@@ -1,0 +1,28 @@
+uuid: 549bfc0a-f41a-47ab-ae3c-c236b6f7602a
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_maintenance_status
+    - node.type.project
+    - taxonomy.vocabulary.project_maintenance_status
+id: node.project.field_project_maintenance_status
+field_name: field_project_maintenance_status
+entity_type: node
+bundle: project
+label: 'Maintenance status'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      project_maintenance_status: project_maintenance_status
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

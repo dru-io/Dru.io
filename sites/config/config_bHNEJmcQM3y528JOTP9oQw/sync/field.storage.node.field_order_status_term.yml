@@ -1,0 +1,20 @@
+uuid: c14e4bd7-5ec4-4a40-ab63-862090fc11b3
+langcode: ru
+status: true
+dependencies:
+  module:
+    - node
+    - taxonomy
+id: node.field_order_status_term
+field_name: field_order_status_term
+entity_type: node
+type: entity_reference
+settings:
+  target_type: taxonomy_term
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

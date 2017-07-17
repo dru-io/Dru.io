@@ -1,0 +1,19 @@
+uuid: 5354db3b-0787-43db-a8f8-0ed688548f34
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_nid
+    - node.type.project
+id: node.project.field_nid
+field_name: field_nid
+entity_type: node
+bundle: project
+label: nid
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

@@ -1,0 +1,28 @@
+uuid: fffdfe4f-65f7-404f-8b98-3dc5e968feb2
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_category
+    - node.type.question
+    - taxonomy.vocabulary.categories
+id: node.question.field_category
+field_name: field_category
+entity_type: node
+bundle: question
+label: Категория
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      categories: categories
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,0 +1,44 @@
+uuid: 6598fa0f-02a7-4616-b2bc-878941db7991
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.field.node.syspage.body
+    - node.type.syspage
+  module:
+    - path
+    - text
+id: node.syspage.default
+targetEntityType: node
+bundle: syspage
+mode: default
+content:
+  body:
+    weight: 1
+    settings:
+      rows: 9
+      summary_rows: 3
+      placeholder: ''
+    third_party_settings: {  }
+    type: text_textarea_with_summary
+    region: content
+  path:
+    type: path
+    weight: 2
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  title:
+    type: string_textfield
+    weight: 0
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    region: content
+hidden:
+  created: true
+  langcode: true
+  promote: true
+  sticky: true
+  uid: true

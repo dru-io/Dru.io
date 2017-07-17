@@ -1,0 +1,49 @@
+/**
+Synapse - adaptive theme
+.col-xs- <544px Extra small
+.col-sm- ≥544px Small
+.col-md- ≥768px Medium
+.col-lg- ≥992px Large
+.col-xl- ≥1200px Extra large
+Gutter width	1.875rem / 30px (15px on each side of a column)
+*/
+.footer {
+  border-top: #ccc solid 1px;
+  padding-top: 33px;
+  padding-bottom: 23px;
+  .copy {
+    font-size: 14px;
+    display: inline-block;
+    padding-top: 10px;
+    padding-bottom: 15px;
+  }
+  .synapse {
+    padding-top: 13px;
+    &-copy {
+      padding: 10px 0 0;
+      font-size: 14px;
+    }
+    &-logo {
+      position: relative;
+      top: -7px;
+    }
+    &-link {
+      color: #0188ca;
+      font-style: italic;
+      text-decoration: none;
+      border-bottom: solid 1px #0188ca;
+      transition: border-color 0.4s;
+      -webkit-transition: border-color 0.4s;
+      -moz-transition: border-color 0.4s;
+      &:focus,
+      &:hover {
+        color: #0188ca;
+        border-color: transparent;
+        text-decoration: none;
+      }
+      &:active {
+        border-color: #0188ca;
+      }
+    }
+  }
+}

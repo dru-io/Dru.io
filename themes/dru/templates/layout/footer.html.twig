@@ -1,0 +1,24 @@
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      {#<div class="col-lg-2 col-md-3 text-center text-md-left">
+        <div class="footer-logo">
+          <img src="/{{ active_theme_path() }}/logo-footer.svg" alt="" />
+        </div>
+      </div>#}
+      <div class="col-lg-6 col-md-4 text-md-left text-xs-center">
+        <span class="copy">
+        <a href="{{ url('user.login') }}">©</a> {{ "now"|date("Y") }}
+        {{ company.map.name }}. Все права защищены.</span>
+        {{ page.footer }}
+      </div>
+      {#<div class="col-sm-4"><a id="synapse-drupal"
+        href="http://synapse-studio.ru/drupal"
+        title="Сайт работает на CMS Drupal">Работает на <span>Drupal</span></a>
+      </div>#}
+      <div class="col-lg-6 col-md-5 text-md-right text-xs-center">
+        {% include directory ~ '/templates/layout/synapse-copy.html.twig' %}
+      </div>
+    </div>
+  </div>
+</footer>

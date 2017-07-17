@@ -1,0 +1,19 @@
+uuid: 9d4ed824-bf41-4aca-a105-f65539795909
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_releases
+    - node.type.project
+id: node.project.field_project_releases
+field_name: field_project_releases
+entity_type: node
+bundle: project
+label: Releases
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

@@ -1,0 +1,73 @@
+uuid: ca063d9d-9376-4b49-9c41-8e488c9e92d8
+langcode: ru
+status: true
+dependencies:
+  module:
+    - import
+label: 'Node: post'
+id: node_post
+description: ''
+import_period: -1
+fetcher: http
+fetcher_configuration:
+  auto_detect_feeds: false
+  use_pubsubhubbub: false
+  fallback_hub: ''
+  request_timeout: 30
+parser: drunodespost
+parser_configuration: {  }
+processor: 'entity:node'
+processor_configuration:
+  update_existing: 2
+  expire: -1
+  owner_id: 1
+  authorize: false
+  skip_hash_check: true
+  values:
+    type: post
+  owner_feed_author: false
+mappings:
+  -
+    target: feeds_item
+    map:
+      url: path
+      guid: id
+    unique:
+      guid: '1'
+  -
+    target: field_nid
+    map:
+      value: id
+    unique: {  }
+  -
+    target: field_path
+    map:
+      value: path
+    unique: {  }
+  -
+    target: title
+    map:
+      value: title
+    unique: {  }
+  -
+    target: uid
+    map:
+      target_id: uname
+    settings:
+      reference_by: name
+      autocreate: 0
+  -
+    target: status
+    map:
+      value: status
+  -
+    target: body
+    map:
+      value: body
+      summary: ''
+    settings:
+      format: wysiwyg
+  -
+    target: created
+    map:
+      value: created

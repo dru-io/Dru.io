@@ -1,0 +1,20 @@
+uuid: ae796701-e883-43b9-ab10-df7801453b1c
+langcode: ru
+status: true
+dependencies:
+  theme:
+    - dru
+_core:
+  default_config_hash: PffmQ-ABSz5tFjWmVsR7NesunDnEivvopnJnBjl8KNE
+id: dru_local_actions
+theme: dru
+region: content
+weight: -10
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Основные действия администратора'
+  provider: core
+  label_display: '0'
+visibility: {  }

@@ -1,0 +1,9 @@
+uuid: 34834c93-f466-4b5d-ae52-5f12b3b56dcb
+langcode: ru
+status: true
+dependencies: {  }
+name: Cities
+vid: cities
+description: ''
+hierarchy: 0
+weight: 0

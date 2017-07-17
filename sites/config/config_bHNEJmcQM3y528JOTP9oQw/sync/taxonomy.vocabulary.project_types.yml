@@ -1,0 +1,9 @@
+uuid: df5fe76a-b777-40eb-9399-5a003430af7a
+langcode: ru
+status: true
+dependencies: {  }
+name: 'Project: Types'
+vid: project_types
+description: ''
+hierarchy: 0
+weight: 0

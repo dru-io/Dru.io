@@ -1,0 +1,35 @@
+uuid: 6bf7e388-5621-4b77-9b56-486ec31a5b16
+langcode: ru
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.post.body
+    - field.field.node.post.feeds_item
+    - field.field.node.post.field_nid
+    - field.field.node.post.field_path
+    - node.type.post
+  module:
+    - text
+    - user
+id: node.post.teaser
+targetEntityType: node
+bundle: post
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  feeds_item: true
+  field_nid: true
+  field_path: true
+  langcode: true

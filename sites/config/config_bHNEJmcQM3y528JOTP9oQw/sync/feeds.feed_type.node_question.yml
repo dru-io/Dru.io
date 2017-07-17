@@ -1,0 +1,94 @@
+uuid: baa33ecc-1d60-4a85-9496-bf1c51232003
+langcode: ru
+status: true
+dependencies:
+  module:
+    - import
+label: 'Node: question'
+id: node_question
+description: ''
+import_period: -1
+fetcher: http
+fetcher_configuration:
+  auto_detect_feeds: false
+  use_pubsubhubbub: false
+  fallback_hub: ''
+  request_timeout: 30
+parser: drunodesquestion
+parser_configuration: {  }
+processor: 'entity:node'
+processor_configuration:
+  update_existing: 2
+  expire: -1
+  owner_id: 1
+  authorize: false
+  skip_hash_check: true
+  values:
+    type: question
+  owner_feed_author: false
+mappings:
+  -
+    target: feeds_item
+    map:
+      url: path
+      guid: id
+    unique:
+      guid: '1'
+  -
+    target: field_nid
+    map:
+      value: id
+    unique: {  }
+  -
+    target: field_path
+    map:
+      value: path
+    unique: {  }
+  -
+    target: title
+    map:
+      value: title
+    unique: {  }
+  -
+    target: uid
+    map:
+      target_id: uname
+    settings:
+      reference_by: name
+      autocreate: 0
+  -
+    target: status
+    map:
+      value: status
+  -
+    target: body
+    map:
+      value: body
+      summary: ''
+    settings:
+      format: wysiwyg
+  -
+    target: field_drupal_version
+    map:
+      target_id: field_drupal_version
+    settings:
+      reference_by: guid
+      autocreate: 0
+  -
+    target: field_project_reference
+    map:
+      target_id: field_project_reference
+    settings:
+      reference_by: guid
+      autocreate: 0
+  -
+    target: field_category
+    map:
+      target_id: field_category
+    settings:
+      reference_by: guid
+      autocreate: 0
+  -
+    target: created
+    map:
+      value: created

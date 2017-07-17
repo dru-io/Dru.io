@@ -1,0 +1,25 @@
+uuid: 92f5fc66-a6a5-40a3-8ca6-1e99beb714d7
+langcode: ru
+status: true
+dependencies:
+  config:
+    - comment.type.answer
+    - field.storage.comment.feeds_item
+  module:
+    - feeds
+_core:
+  default_config_hash: Zmg95wM7si7OWtQdV3_URUn0SnAvFkhwaAjohvGv8w8
+id: comment.answer.feeds_item
+field_name: feeds_item
+entity_type: comment
+bundle: answer
+label: 'Feeds item'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:feeds_feed'
+  handler_settings: {  }
+field_type: feeds_item

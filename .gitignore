@@ -1,0 +1,37 @@
+# Managed with Composer.
+core
+libraries
+modules/contrib
+modules/features
+modules/custom/synajax
+modules/custom/synapse
+modules/custom/synhelper
+modules/custom/synimage
+modules/custom/synmail
+profiles/synmini
+vendor
+.csslintrc
+.editorconfig
+.eslintignore
+.eslintrc.json
+.htaccess
+autoload.php
+adminer.php
+index.php
+update.php
+
+# Ignore settings, content && sensitive information.
+.pass
+cmd-*.php
+sites/default/settings*.php
+sites/default/devmode.php
+sites/*/files
+sites/*/private
+
+# Trash.
+.well-known
+LICENSE.txt
+README.txt
+web.config
+**/node_modules
+sites/simpletest

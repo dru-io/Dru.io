@@ -1,0 +1,22 @@
+uuid: 11d5484c-2859-429c-92b2-91ab4039a5c3
+langcode: ru
+status: true
+dependencies:
+  module:
+    - user
+  theme:
+    - bartik
+_core:
+  default_config_hash: 4QlSnWBcxxKMIFRM8sbu_MjSkcp3NjGgnVrc-lynQHI
+id: bartik_login
+theme: bartik
+region: sidebar_first
+weight: 0
+provider: null
+plugin: user_login_block
+settings:
+  id: user_login_block
+  label: 'Вход на сайт'
+  provider: user
+  label_display: visible
+visibility: {  }

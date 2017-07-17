@@ -1,0 +1,17 @@
+uuid: b8a0a4c0-4eb0-4a87-8f33-db71868a1549
+langcode: ru
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Подкаст
+type: podcast
+description: ''
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

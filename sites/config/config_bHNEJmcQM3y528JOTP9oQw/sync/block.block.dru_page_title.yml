@@ -1,0 +1,20 @@
+uuid: 648fc78a-7c96-4ca0-8dcf-698059ae2a3e
+langcode: ru
+status: true
+dependencies:
+  theme:
+    - dru
+_core:
+  default_config_hash: 8yptDf6WrXxeyevUz4nP5vfr7BtxQqCBMninhV2IJ1g
+id: dru_page_title
+theme: dru
+region: content
+weight: -30
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Заголовок страницы'
+  provider: core
+  label_display: '0'
+visibility: {  }

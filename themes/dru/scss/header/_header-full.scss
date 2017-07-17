@@ -1,0 +1,33 @@
+#header-full {
+  padding: 8px 3px 2px;
+  nav {
+    padding-top: 23px;
+    padding-left: 25px;
+    li {
+      padding: 0 15px;
+    }
+  }
+  .nav-inline {
+    li {
+      display: inline-block;
+    }
+  }
+  .phone {
+      padding-top: 12px;
+      display: inline-block;
+      position: relative;
+      z-index: 2;
+  }
+  .logo {
+    position: relative;
+    z-index: 2;
+    a {
+      display: inline-block;
+      text-decoration: none;
+    }
+    img {
+      height: 41px;
+      margin-bottom: 5px;
+    }
+  }
+}

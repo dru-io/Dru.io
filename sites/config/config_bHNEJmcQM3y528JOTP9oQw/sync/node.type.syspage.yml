@@ -1,0 +1,17 @@
+uuid: 1c51c6e4-5ea7-4da2-8c7b-dafd5472cce4
+langcode: ru
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: 'Системная страница'
+type: syspage
+description: ''
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

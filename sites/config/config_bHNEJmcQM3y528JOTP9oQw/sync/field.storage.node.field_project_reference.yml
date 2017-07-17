@@ -1,0 +1,19 @@
+uuid: 774bece3-91b0-4720-9b1a-de989496eb4a
+langcode: ru
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_project_reference
+field_name: field_project_reference
+entity_type: node
+type: entity_reference
+settings:
+  target_type: node
+module: core
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

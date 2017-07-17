@@ -1,0 +1,48 @@
+/**
+Synapse - adaptive theme
+.col-xs- <544px Extra small
+.col-sm- ≥544px Small
+.col-md- ≥768px Medium
+.col-lg- ≥992px Large
+.col-xl- ≥1200px Extra large
+Gutter width	1.875rem / 30px (15px on each side of a column)
+*/
+html {
+  position: relative;
+  min-height: 100%;
+}
+#main {
+  position: relative;
+}
+
+/** sidebars **/
+// #content-wrapper {
+//   float: left;
+//   padding: 0;
+//   position: relative;
+//   width: 100%;
+// }
+// .two-sidebars {
+//   #main-content {
+//     padding-left: 250px;
+//     padding-right: 250px;
+//   }
+// }
+// .sidebar-first {
+//   float: left;
+//   margin-left: -100%;
+//   position: relative;
+//   width: 250px;
+//   #main-content {
+//     padding-left: 250px;
+//   }
+// }
+// .sidebar-second {
+//   float: right;
+//   margin-left: -100%;
+//   position: relative;
+//   width: 250px;
+//   #main-content {
+//     padding-right: 250px;
+//   }
+// }

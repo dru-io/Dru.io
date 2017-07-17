@@ -1,0 +1,66 @@
+uuid: dcb9b2b6-8135-41e7-bda9-08ed07e58ce6
+langcode: ru
+status: true
+dependencies:
+  module:
+    - import
+_core:
+  default_config_hash: shFOs_BvXxF-_tZQJYor3a38TyXkGrS6zhVoH26LZZk
+label: Users
+id: users
+description: ''
+import_period: -1
+fetcher: http
+fetcher_configuration:
+  auto_detect_feeds: false
+  use_pubsubhubbub: false
+  fallback_hub: ''
+  request_timeout: 30
+parser: druusers
+parser_configuration: {  }
+processor: 'entity:user'
+processor_configuration:
+  update_existing: 2
+  expire: -1
+  skip_hash_check: true
+  owner_id: 0
+  values:
+    '': null
+  authorize: false
+  owner_feed_author: false
+mappings:
+  -
+    target: feeds_item
+    map:
+      url: path
+      guid: id
+    unique:
+      guid: '1'
+  -
+    target: mail
+    map:
+      value: mail
+    unique: {  }
+    settings:
+      defuse: 0
+  -
+    target: created
+    map:
+      value: created
+  -
+    target: access
+    map:
+      value: access
+  -
+    target: login
+    map:
+      value: login
+  -
+    target: status
+    map:
+      value: status
+  -
+    target: name
+    map:
+      value: name
+    unique: {  }

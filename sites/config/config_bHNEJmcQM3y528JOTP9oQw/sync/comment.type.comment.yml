@@ -1,0 +1,10 @@
+uuid: c19f10de-32f0-4ac9-8ed0-a6ac0bedace6
+langcode: ru
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: SU6Xb7k-U145EKZ55EL_5xCoXM2Cbq69mK_kBHN20R4
+id: comment
+label: Комментарий
+target_entity_type_id: comment
+description: ''

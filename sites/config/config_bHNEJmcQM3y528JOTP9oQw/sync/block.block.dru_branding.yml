@@ -1,0 +1,25 @@
+uuid: 09244872-cc75-41a9-8fe7-c6e45b2b503f
+langcode: ru
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - dru
+_core:
+  default_config_hash: fRKXNB91UxDvEMkzCR8ZBsawfC6Fqbme2gtobei3gu4
+id: dru_branding
+theme: dru
+region: header
+weight: 0
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Брендинг сайта'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }

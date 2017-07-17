@@ -1,0 +1,10 @@
+uuid: 71df58b6-8f96-4c3e-b2db-e7d2902c5b9c
+langcode: ru
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: i3fyW25t0bYrMaTC76bH_TDsf5aeOrSNzLT9vmmISYc
+id: answer
+label: Ответ
+target_entity_type_id: node
+description: ''

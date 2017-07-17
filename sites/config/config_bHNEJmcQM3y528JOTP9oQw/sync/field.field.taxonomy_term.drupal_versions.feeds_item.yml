@@ -1,0 +1,23 @@
+uuid: c1151a4e-a0f9-4ecf-b6b8-8eb1773412bd
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.taxonomy_term.feeds_item
+    - taxonomy.vocabulary.drupal_versions
+  module:
+    - feeds
+id: taxonomy_term.drupal_versions.feeds_item
+field_name: feeds_item
+entity_type: taxonomy_term
+bundle: drupal_versions
+label: 'Feeds item'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:feeds_feed'
+  handler_settings: {  }
+field_type: feeds_item

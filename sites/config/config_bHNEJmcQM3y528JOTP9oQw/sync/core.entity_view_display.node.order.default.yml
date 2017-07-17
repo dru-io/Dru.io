@@ -1,0 +1,94 @@
+uuid: 7595030a-d5ac-427d-91a7-f6ee390c58d9
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.field.node.order.body
+    - field.field.node.order.feeds_item
+    - field.field.node.order.field_nid
+    - field.field.node.order.field_order_budgeting
+    - field.field.node.order.field_order_contacts
+    - field.field.node.order.field_order_notify_email
+    - field.field.node.order.field_order_specification
+    - field.field.node.order.field_order_status_term
+    - field.field.node.order.field_path
+    - node.type.order
+  module:
+    - file
+    - text
+    - user
+id: node.order.default
+targetEntityType: node
+bundle: order
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_nid:
+    weight: 102
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_order_budgeting:
+    weight: 105
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+    type: number_integer
+    region: content
+  field_order_contacts:
+    weight: 106
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_order_notify_email:
+    weight: 108
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_order_specification:
+    weight: 104
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: file_default
+    region: content
+  field_order_status_term:
+    weight: 107
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_path:
+    weight: 103
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  feeds_item: true
+  langcode: true

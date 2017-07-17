@@ -1,0 +1,19 @@
+uuid: d10cc4ed-e90f-496d-8433-42ef0d90a3a0
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_nid
+    - node.type.event
+id: node.event.field_nid
+field_name: field_nid
+entity_type: node
+bundle: event
+label: nid
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

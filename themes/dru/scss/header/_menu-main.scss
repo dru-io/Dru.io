@@ -1,0 +1,32 @@
+.main-menu {
+  .classic-menu-dropdown {
+      position: relative;
+      ul {
+        left: 0;
+        min-width: 175px;
+        position: absolute;
+        z-index: 1000;
+        display: none;
+        float: left;
+        list-style: none;
+        text-shadow: none;
+        padding: 10px 5px;
+        background-color: #ffffff;
+        margin: 0;
+        border: 1px solid #eee;
+        border-radius: 4px;
+        li {
+          line-height: 1.5em;
+        }
+      }
+      &:hover {
+        ul {
+          display: block;
+          position: absolute;
+        }
+      }
+  }
+  .menu-dropdown-trigger {
+    display: none;
+  }
+}

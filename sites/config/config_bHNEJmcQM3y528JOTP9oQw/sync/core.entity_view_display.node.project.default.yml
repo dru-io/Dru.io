@@ -1,0 +1,100 @@
+uuid: 75131d07-fa73-489d-be07-4d369d357e37
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.field.node.project.body
+    - field.field.node.project.feeds_item
+    - field.field.node.project.field_drupal_version
+    - field.field.node.project.field_nid
+    - field.field.node.project.field_path
+    - field.field.node.project.field_project_development_status
+    - field.field.node.project.field_project_maintenance_status
+    - field.field.node.project.field_project_releases
+    - field.field.node.project.field_project_short_name
+    - field.field.node.project.field_project_type
+    - node.type.project
+  module:
+    - text
+    - user
+id: node.project.default
+targetEntityType: node
+bundle: project
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_drupal_version:
+    weight: 107
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_nid:
+    weight: 102
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_path:
+    weight: 103
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_project_development_status:
+    weight: 105
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_project_maintenance_status:
+    weight: 104
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  field_project_releases:
+    weight: 109
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_project_short_name:
+    weight: 108
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_project_type:
+    weight: 106
+    label: above
+    settings:
+      link: true
+    third_party_settings: {  }
+    type: entity_reference_label
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  feeds_item: true
+  langcode: true

@@ -1,0 +1,11 @@
+uuid: 20591830-62f6-41cc-97c2-fdf3f3eb1c6d
+langcode: ru
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.project_development_status
+id: taxonomy_term.project_development_status
+target_entity_type_id: taxonomy_term
+target_bundle: project_development_status
+default_langcode: site_default
+language_alterable: false

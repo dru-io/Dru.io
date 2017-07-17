@@ -1,0 +1,92 @@
+uuid: c2f77611-b9e6-4449-b53b-71302e3f14e5
+langcode: ru
+status: true
+dependencies:
+  module:
+    - import
+label: 'Node:  order'
+id: node_order
+description: ''
+import_period: -1
+fetcher: http
+fetcher_configuration:
+  auto_detect_feeds: false
+  use_pubsubhubbub: false
+  fallback_hub: ''
+  request_timeout: 30
+parser: drunodesorder
+parser_configuration: {  }
+processor: 'entity:node'
+processor_configuration:
+  update_existing: 2
+  expire: -1
+  owner_id: 1
+  authorize: false
+  skip_hash_check: true
+  values:
+    type: order
+  owner_feed_author: false
+mappings:
+  -
+    target: feeds_item
+    map:
+      url: path
+      guid: id
+    unique:
+      guid: '1'
+  -
+    target: field_nid
+    map:
+      value: id
+    unique: {  }
+  -
+    target: field_path
+    map:
+      value: path
+    unique: {  }
+  -
+    target: title
+    map:
+      value: title
+    unique: {  }
+  -
+    target: uid
+    map:
+      target_id: uname
+    settings:
+      reference_by: name
+      autocreate: 0
+  -
+    target: status
+    map:
+      value: status
+  -
+    target: body
+    map:
+      value: body
+      summary: ''
+    settings:
+      format: wysiwyg
+  -
+    target: field_order_budgeting
+    map:
+      value: field_order_budgeting
+  -
+    target: field_order_contacts
+    map:
+      value: field_order_contacts
+  -
+    target: field_order_notify_email
+    map:
+      value: field_order_notify_email
+  -
+    target: field_order_status_term
+    map:
+      target_id: field_order_status_term
+    settings:
+      reference_by: guid
+      autocreate: 0
+  -
+    target: created
+    map:
+      value: created
