@@ -199,9 +199,21 @@ class EntityReference extends FieldTargetBase implements ConfigurableTargetInter
         $query->condition($this->getBundleKey(), $bundles, 'IN');
       }
 
+      // Dru.io hack!
+      $debug = FALSE;
+      if (substr($value, 0, 5) == 'cnode') {
+        $value = substr($value, 1);
+        $debug = TRUE;
+      }
       $ids = array_filter($query->condition($field, $value)->range(0, 1)->execute());
       if ($ids) {
         return reset($ids);
+      }
+      // Dru.io hack!
+      else {
+        if ($debug) {
+          return 26077;
+        }
       }
     }
 
