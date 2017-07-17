@@ -1,0 +1,26 @@
+<?php
+
+/**
+ * @file
+ * Contains form Alters.
+ */
+
+ /**
+  * Node_orders_entity_presave.
+  */
+function import_entity_presave($entity) {
+  //dsm($entity);
+
+  if (method_exists($entity, 'getTypeId')) {
+    $comment = $entity;
+    if ($comment->getTypeId() == 'comment') {
+      $eid = $comment->get('entity_id')->entity->id();
+      $subj = $comment->get('subject')->value;
+      //dsm($eid);
+      $keys = explode('|', $comment->get('feeds_item')->url);
+      //dsm([$eid, $keys, $subj]);
+      //dsm($subj);
+
+    }
+  }
+}
