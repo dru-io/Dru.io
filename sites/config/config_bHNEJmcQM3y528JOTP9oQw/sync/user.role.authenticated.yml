@@ -11,3 +11,4 @@ is_admin: false
 permissions:
   - 'access comments'
   - 'access content'
+  - 'search content'

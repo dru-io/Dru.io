@@ -9,7 +9,7 @@ _core:
 id: dru_local_actions
 theme: dru
 region: content
-weight: -10
+weight: -2
 provider: null
 plugin: local_actions_block
 settings:

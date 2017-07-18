@@ -10,8 +10,8 @@ _core:
   default_config_hash: 5MNdk3fpMKx_xxBTcz2T11DL4XEU1H5SgHl8BsYdFsA
 id: dru_messages
 theme: dru
-region: header
-weight: 0
+region: messages
+weight: -3
 provider: null
 plugin: system_messages_block
 settings:

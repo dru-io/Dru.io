@@ -9,7 +9,7 @@ _core:
 id: seven_local_tasks
 theme: seven
 region: content
-weight: -3
+weight: -2
 provider: null
 plugin: local_tasks_block
 settings:

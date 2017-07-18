@@ -8,8 +8,8 @@ _core:
   default_config_hash: 8yptDf6WrXxeyevUz4nP5vfr7BtxQqCBMninhV2IJ1g
 id: seven_page_title
 theme: seven
-region: content
-weight: -3
+region: header
+weight: -1
 provider: null
 plugin: page_title_block
 settings:

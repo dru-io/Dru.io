@@ -1,0 +1,8 @@
+uuid: 51b07065-6b79-4483-b1f1-3287a73ad730
+langcode: ru
+status: true
+dependencies: {  }
+id: login
+label: Login
+description: ''
+locked: false
