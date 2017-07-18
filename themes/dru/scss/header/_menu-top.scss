@@ -1,0 +1,58 @@
+.region-menu-top {
+  background: #172d4a;
+}
+/** Meu Top */
+#block-top {
+  display: inline-block;
+  font-size: 14px;
+
+  .nav-inline {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+
+    li {
+      padding: 0;
+      display: inline-block;
+    }
+    a {
+      color: #FFF;
+      padding: 10px 1em 9px;
+      text-decoration: none;
+    }
+    a:hover {
+      background: rgba(0,0,0,0.2);
+    }
+    .classic-menu-dropdown {
+      position: relative;
+      ul {
+        background-color: #172d4a;
+        border: 1px solid #172d4a;
+        border-radius: 0;
+        left: 0/*rtl:auto*/;
+        min-width: 175px;
+        position: absolute;
+        z-index: 1000;
+        display: none;
+        float: left;
+        list-style: none;
+        text-shadow: none;
+        margin: 0;
+
+        li {
+          display: block;
+          line-height: 1.5em;
+        }
+      }
+
+    }
+    .classic-menu-dropdown:hover ul {
+     display: block;
+     position: absolute;
+    }
+    .menu-dropdown-trigger {
+      display: none;
+    }
+  }
+
+}

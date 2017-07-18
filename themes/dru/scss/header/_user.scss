@@ -1,0 +1,58 @@
+
+/** Login */
+#block-login {
+  display: block;
+  float: right;
+  margin-left: -20px;
+  .menu {
+    padding: 0;
+    margin: 0;
+    display: inline-block;
+    li {
+      display: inline-block;
+      padding: 0;
+      margin-left: -4px;
+      a {
+       color: #FFF;
+       line-height: 2.5rem;
+       padding: 11px 1.25rem 11px;
+       color: white;
+       font-weight: bold;
+       font-size: 14px;
+     }
+    }
+
+    a[data-drupal-link-system-path='user/register'] {
+      background: #4c9067;
+    }
+  }
+}
+
+@media (max-width: 544px) {
+  #block-login {
+    display: block;
+    float: none;
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+    ul.menu {
+      display: block;
+      float: none;
+      width: 100%;
+      overflow: hidden;
+      margin: 0;
+      li {
+        width: 50%;
+        display: block;
+        float: left;
+        margin: 0;
+        a {
+          display: block;
+          text-align: center;
+          padding: 6px 6px 6px;
+          line-height: 1.8em;
+        }
+      }
+    }
+  }
+}

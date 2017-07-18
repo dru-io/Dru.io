@@ -8,42 +8,27 @@ Synapse - adaptive theme
 Gutter width	1.875rem / 30px (15px on each side of a column)
 */
 .footer {
-  border-top: #ccc solid 1px;
-  padding-top: 33px;
-  padding-bottom: 23px;
-  .copy {
-    font-size: 14px;
-    display: inline-block;
-    padding-top: 10px;
-    padding-bottom: 15px;
+  background: #313132;
+  color: #eeeeee;
+  font-size: 0.84375rem;
+  padding: 0.625rem 0;
+
+  a {
+    color: #FFF;
+    text-decoration: underline;
   }
-  .synapse {
-    padding-top: 13px;
-    &-copy {
-      padding: 10px 0 0;
-      font-size: 14px;
+
+  .social {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 1.125rem;
+
+    li {
+        float: left;
+        margin-right: 0.75rem;
     }
-    &-logo {
-      position: relative;
-      top: -7px;
-    }
-    &-link {
-      color: #0188ca;
-      font-style: italic;
-      text-decoration: none;
-      border-bottom: solid 1px #0188ca;
-      transition: border-color 0.4s;
-      -webkit-transition: border-color 0.4s;
-      -moz-transition: border-color 0.4s;
-      &:focus,
-      &:hover {
-        color: #0188ca;
-        border-color: transparent;
-        text-decoration: none;
-      }
-      &:active {
-        border-color: #0188ca;
-      }
-    }
+
   }
+
 }

@@ -1,0 +1,127 @@
+@charset "UTF-8";
+.kint footer {
+  min-height: 0; }
+
+/** Helpers */
+.element-hidden,
+.hidden {
+  display: none; }
+
+.gray {
+  background-color: #eceeef; }
+
+/*** Images */
+.img-adaptive img,
+img.adaptive {
+  width: 100%;
+  height: auto; }
+
+/** Редактирование изображений */
+form.node-image-form .image-preview {
+  float: left;
+  padding-right: 15px; }
+
+form.node-image-form .image-widget-data {
+  overflow: hidden;
+  padding-bottom: 2px; }
+  form.node-image-form .image-widget-data .form-type-textfield {
+    margin-top: 0; }
+
+/*** Paddings */
+.height-0 {
+  min-height: 0px; }
+
+.padding-top-20 {
+  padding-top: 20px; }
+
+.padding-top-30 {
+  padding-top: 30px; }
+
+.padding-top-40 {
+  padding-top: 40px; }
+
+.padding-top-50 {
+  padding-top: 50px; }
+
+.padding-top-60 {
+  padding-top: 60px; }
+
+.padding-top-70 {
+  padding-top: 70px; }
+
+.padding-bottom-20 {
+  padding-bottom: 20px; }
+
+.padding-bottom-30 {
+  padding-bottom: 30px; }
+
+.padding-bottom-40 {
+  padding-bottom: 40px; }
+
+.padding-bottom-50 {
+  padding-bottom: 50px; }
+
+.padding-bottom-60 {
+  padding-bottom: 60px; }
+
+.padding-bottom-70 {
+  padding-bottom: 70px; }
+
+/*** Navigation */
+@media (max-width: 600px) {
+  #manager-menu {
+    display: none !important; } }
+
+#manager-menu {
+  position: absolute;
+  top: 100px;
+  left: 100px;
+  border: 1px solid #ccc;
+  box-shadow: 0 0 5px 0 #ccc;
+  padding: 20px;
+  cursor: move;
+  z-index: 8;
+  background: #fff;
+  max-width: 205px; }
+  #manager-menu .toggle-manager {
+    position: relative;
+    z-index: 3;
+    max-width: 17px;
+    cursor: pointer; }
+  #manager-menu h2 {
+    margin-bottom: 10px;
+    margin-top: -23px;
+    margin-left: 25px;
+    font-size: 25px;
+    line-height: 25px; }
+
+/**  Modals + webform */
+.modal-content .form-actions {
+  padding: 15px 15px 0 15px;
+  text-align: right;
+  border-top: 1px solid #e5e5e5;
+  margin: 30px -15px 0; }
+
+/** Select fix */
+select.form-control:not([size]):not([multiple]) {
+  height: calc(2.25rem + 6px); }
+  details select.form-control:not([size]):not([multiple]) {
+    height: 1.2rem;
+    width: 80%; }
+
+a.tabledrag-handle .handle {
+  width: 22px;
+  height: 22px; }
+
+/*
+.container-inline {
+  .form-no-label {
+    display: inline-block;
+    width: 45%;
+  }
+  input {
+    box-sizing: border-box;
+  }
+}*/
+
+/*# sourceMappingURL=../_maps/utilities/adaptive.css.map */

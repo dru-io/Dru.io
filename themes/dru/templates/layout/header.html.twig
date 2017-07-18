@@ -1,47 +1,23 @@
 <header id="header" role="banner">
-  <section id="header-info" class="collapse header-info">
-    <div class="header-info__inner">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-6">
-            {{ page.header }}
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="header-small" class="hidden-lg-up header-small">
-    <div class="header-small__inner">
-      <div class="container clearfix">
-        <div id="logo" class="logo logo-small pull-left">
-          <a href="{{ path('<front>') }}"  title="Главная" rel="home">
-            <img src="/{{ active_theme_path() }}/logo.svg" alt="Главная" />
+  <section id="header-full" class="clearfix">
+    <div class="container">
+      <div id="headerinfo" class="collapse">
+        <div class="logo logo-full pull-left">
+          <a href="{{ path('<front>') }}" title="Главная" rel="home">
+            <img src="/{{ active_theme_path() }}/logo.png" alt="Главная" />
           </a>
         </div>
+        {{ page.header }}
+        {{ page.user }}
+        {{ page.menu_top }}
+      </div>
+      <div id="headersmall" class="nav-togglers hidden-sm-up">
+        <span class="small-logo">Dru.io</span>
         {% include directory ~ '/templates/layout/nav-togglers.html.twig' %}
       </div>
-    </div>
-    <div id="small-menu" class="container collapse">
-      <div class="small-menu__inner">
-        {{ page.menu_small }}
+      <div id="headermain" class="collapse">
+        {{ page.menu_main }}
       </div>
-    </div>
-  </section>
-  <section id="header-full" class="hidden-md-down clearfix">
-    <div class="container">
-      <div class="logo logo-full pull-left">
-        <a href="{{ path('<front>') }}" title="Главная" rel="home">
-          <img src="/{{ active_theme_path() }}/logo.svg" alt="Главная" />
-        </a>
-      </div>
-      <span class="phone pull-right">
-        {{ company.phone|raw }}<br/>
-        <button type="button" class="btn btn-sm btn-outline-primary"
-                data-toggle="modal" data-target="#block-adaptive-form-callme">
-          Заказать звонок
-        </button>
-      </span>
-      {{ page.menu_main }}
     </div>
   </section>
 </header>

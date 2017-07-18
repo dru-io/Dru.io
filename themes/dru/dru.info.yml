@@ -12,15 +12,15 @@ ckeditor_stylesheets:
   - css/style.css
 regions:
   header: Header
-  menu_small: Menu Small
+  menu_top: Menu Top
   menu_main: Menu Main
+  user: User
   title: Title
   tabs: Tabs
   breadcrumb: Breadcrumb
   messages: Messages
   featured: Featured
   sidebar: Sidebar
-  order: Order
   slider: Slider
   content: Content
   footer: Footer

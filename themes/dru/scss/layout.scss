@@ -11,8 +11,14 @@ html {
   position: relative;
   min-height: 100%;
 }
+body {
+  background: url('../images/bg.png');
+}
 #main {
   position: relative;
+}
+#main-content {
+  background: #FFF;
 }
 
 /** sidebars **/

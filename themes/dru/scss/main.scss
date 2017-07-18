@@ -9,14 +9,21 @@ Gutter width	1.875rem / 30px (15px on each side of a column)
 */
 
 /** Map */
-#map {
-  position: absolute;
-  height: 100%;
-  width: 100%;
+#main-content {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
-.synmap {
-  min-height: 200px;
+
+
+/** Breadcrumb */
+.breadcrumb {
+  color: #777;
+  padding: 0;
+  margin: 0;
+  background: none;
+  font-size: 0.84375rem;
 }
+
 
 /** Прикреплённая галерея */
 .node {

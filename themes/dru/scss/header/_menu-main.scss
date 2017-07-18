@@ -1,32 +1,108 @@
-.main-menu {
+#block-main-menu {
+  .nav-inline{
+
+    li {
+      display: inline-block;
+      padding: 0;
+    }
+    a {
+      padding: 26px 12px 25px 12px;
+      text-decoration: none;
+      color: #FFF;
+    }
+    a:hover {
+      background: rgba(0,0,0,0.25);
+      transition: all 500ms;
+    }
+  }
+
   .classic-menu-dropdown {
-      position: relative;
-      ul {
-        left: 0;
-        min-width: 175px;
-        position: absolute;
-        z-index: 1000;
-        display: none;
-        float: left;
-        list-style: none;
-        text-shadow: none;
-        padding: 10px 5px;
-        background-color: #ffffff;
-        margin: 0;
-        border: 1px solid #eee;
-        border-radius: 4px;
-        li {
-          line-height: 1.5em;
+    position: relative;
+    ul {
+      left: 0/*rtl:auto*/;
+      min-width: 175px;
+      position: absolute;
+      z-index: 1000;
+      display: none;
+      float: left;
+      list-style: none;
+      text-shadow: none;
+      margin: 0;
+      background-color: #2E5B95;
+      border: 1px solid #2f66ad;
+      border-radius: 0;
+      padding: 0;
+      li {
+        display: block;
+        line-height: 1.5em;
+        a {
+          padding: 6px 12px 5px 12px;
         }
       }
-      &:hover {
-        ul {
-          display: block;
-          position: absolute;
-        }
-      }
+    }
+
+  }
+  .classic-menu-dropdown:hover ul {
+   display: block;
+   position: absolute;
   }
   .menu-dropdown-trigger {
     display: none;
   }
+
+}
+
+@media (max-width: 992px) {
+  #block-main-menu {
+    margin-left: -15px;
+  }
+}
+@media (max-width: 768px) {
+  #block-main-menu {
+    margin: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+    ul.nav a {
+      padding: 16px 6px 15px 6px;
+      font-size: 14px;
+    }
+  }
+}
+@media (max-width: 544px) {
+  #block-main-menu {
+    padding: 0;
+    .nav {
+      display: block;
+    }
+    ul.nav {
+      display: block;
+      li {
+        display: block;
+        float: none;
+        width: 100%;
+        text-align: center;
+        a {
+          text-align: center;
+          border-bottom: solid 1px #21487b;
+        }
+      }
+      .menu {
+        padding: 3px;
+        position: static;
+        float: none;
+        li {
+          text-align: left;
+          padding: 3px 15px;
+        a {
+          display: inline;
+          padding: 0
+        }
+       }
+      }
+    }
+    .menu-dropdown-trigger {
+      display: block;
+    }
+  }
+
 }

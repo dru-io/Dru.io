@@ -56,7 +56,8 @@ function dru_preprocess_node(&$variables) {
  */
 function dru_preprocess_menu(&$variables) {
   $menu_name = $variables['menu_name'];
-  if ($menu_name == 'main' || $menu_name == 'account') {
+  $menus = ['main', 'account', 'top'];
+  if (in_array($menu_name, $menus)) {
     foreach ($variables['items'] as &$item) {
       $item = MenuFaiconsReplace::replaceIcon($item);
     }

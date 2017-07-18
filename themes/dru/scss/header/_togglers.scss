@@ -1,3 +1,7 @@
+$toggler-color: #FFF;
+$toggler-border: #FFF;
+$toggler-collapsed: #FFF;
+
 .nav-togglers {
   padding-top: 0;
 }
@@ -8,9 +12,9 @@
   padding: 0;
   overflow: hidden;
   border-radius: 4px;
-  border: 2px solid #0188ca;
+  border: 2px solid $toggler-color;
   margin-left: 6px;
-  color: #0188ca;
+  color: $toggler-color;
   background: none;
   &:focus {
     outline: none;
@@ -18,7 +22,7 @@
   .icon-bar {
     position: absolute;
     height: 3px;
-    background-color: #0188ca;
+    background-color: $toggler-color;
     display: block;
     border-radius: 1px;
     transition: 0.4s;
@@ -39,10 +43,10 @@
     }
   }
   &.collapsed {
-    color: #444;
-    border-color: #666;
+    color: $toggler-collapsed;
+    border-color: $toggler-color;
     .icon-bar {
-      background-color: #666;
+      background-color: $toggler-color;
     }
   }
 }

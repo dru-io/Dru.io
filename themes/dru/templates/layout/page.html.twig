@@ -6,10 +6,10 @@
 .col-xl- ≥1200px Extra large 1140px
 Gutter width	1.875rem / 30px (15px on each side of a column)
 #}
-{{ attach_library('adaptive/adaptive.faicons') }}
-{{ attach_library('adaptive/adaptive.layout') }}
-{{ attach_library('adaptive/adaptive.theme') }}
-{{ attach_library('adaptive/adaptive.base') }}
+{{ attach_library('dru/dru.faicons') }}
+{{ attach_library('dru/dru.layout') }}
+{{ attach_library('dru/dru.theme') }}
+{{ attach_library('dru/dru.base') }}
 
 <div class="page-wrapper">
 
@@ -55,22 +55,6 @@ Gutter width	1.875rem / 30px (15px on each side of a column)
     </section>
   {% endif %}
 
-  {% if page.order|render %}
-  <section id="order" class="padding-bottom-70 padding-top-40 text-center">
-    <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-lg-6 col-md-6 offset-lg-3 offset-md-3">
-          <h2 class="text-center padding-bottom-30">Свяжитесь с нами</h2>
-          {{ company.contact|raw }}
-          <br><br>
-          <h4>Отправьте сообщение</h4>
-          {{ page.order }}
-        </div>
-      </div>
-    </div>
-  </section>
-  {% endif %}
-
   {% include directory ~ '/templates/layout/footer.html.twig' %}
 
 </div>
@@ -79,7 +63,7 @@ Gutter width	1.875rem / 30px (15px on each side of a column)
 {#
 /**
  * @file
- * Syanpse adaptive theme.
+ * Syanpse dru theme.
  *
  * Available variables:
  *
@@ -102,7 +86,7 @@ Gutter width	1.875rem / 30px (15px on each side of a column)
  *   comment/reply/12345).
  *
  * Regions:
- * @see adaptive.info.yml
+ * @see dru.info.yml
  *
  * @see template_preprocess_page()
  * @see html.html.twig

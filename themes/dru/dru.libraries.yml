@@ -1,4 +1,4 @@
-adaptive.theme:
+dru.theme:
   version: VERSION
   css:
     theme:
@@ -8,13 +8,13 @@ adaptive.theme:
   dependencies:
     - core/jquery
 
-adaptive.base:
+dru.base:
   version: VERSION
   css:
     theme:
       css/base/article.css: {}
 
-adaptive.bootstrap:
+dru.bootstrap:
   version: VERSION
   css:
     layout:
@@ -25,7 +25,7 @@ adaptive.bootstrap:
   dependencies:
     - core/jquery
 
-adaptive.layout:
+dru.layout:
   version: VERSION
   css:
     layout:
@@ -39,7 +39,7 @@ adaptive.layout:
   dependencies:
     - core/jquery
 
-adaptive.faicons:
+dru.faicons:
   remote: https://fortawesome.github.io/Font-Awesome/
   version: 4.7.0
   license:

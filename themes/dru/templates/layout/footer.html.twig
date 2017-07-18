@@ -1,23 +1,24 @@
 <footer class="footer">
   <div class="container">
     <div class="row">
-      {#<div class="col-lg-2 col-md-3 text-center text-md-left">
-        <div class="footer-logo">
-          <img src="/{{ active_theme_path() }}/logo-footer.svg" alt="" />
-        </div>
-      </div>#}
-      <div class="col-lg-6 col-md-4 text-md-left text-xs-center">
-        <span class="copy">
-        <a href="{{ url('user.login') }}">©</a> {{ "now"|date("Y") }}
-        {{ company.map.name }}. Все права защищены.</span>
-        {{ page.footer }}
-      </div>
-      {#<div class="col-sm-4"><a id="synapse-drupal"
-        href="http://synapse-studio.ru/drupal"
-        title="Сайт работает на CMS Drupal">Работает на <span>Drupal</span></a>
-      </div>#}
-      <div class="col-lg-6 col-md-5 text-md-right text-xs-center">
-        {% include directory ~ '/templates/layout/synapse-copy.html.twig' %}
+      <div class="col-md-12 text-left">
+        <p>© Dru.io — Drupal сообщество с открытым исходным кодом,
+          распространяющимся под лицензией GPL v2.<br>
+          Содержимое сайта распространяется под лицензией
+          <a href="//creativecommons.org/licenses/by-sa/3.0/" rel="nofollow">
+          Creative Commons Share Alike 3.0</a>.
+        </p>
+        <p>Drupal — зарегистрированная торговая марка, принадлежит
+          <a href="//buytaert.net/" rel="nofollow">Dries Buytaert</a>.
+        </p>
+        <ul class="social">
+          <li><a href="https://www.facebook.com/druio" target="_blank"
+            rel="nofollow" class="item"><i class="fa fa-facebook"></i></a></li>
+          <li><a href="https://vk.com/druio" target="_blank"
+            rel="nofollow" class="item"><i class="fa fa-vk"></i></a></li>
+          <li><a href="https://twitter.com/dru_io" target="_blank"
+            rel="nofollow" class="item"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+        </ul>
       </div>
     </div>
   </div>
