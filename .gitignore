@@ -31,3 +31,4 @@ example.gitignore
 sites/default/services*.yml
 # KDE
 .directory
+docker-compose.yml
