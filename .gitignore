@@ -1,37 +1,31 @@
-# Managed with Composer.
-core
-libraries
-modules/contrib
-modules/features
-modules/custom/synajax
-modules/custom/synapse
-modules/custom/synhelper
-modules/custom/synimage
-modules/custom/synmail
-profiles/synmini
-vendor
+#Ignore configuration files that may contain sensitive information.
+sites/*/settings.php
+## # Ignore paths that contain user-generated content.
+sites/*/files
+sites/*/private
+**/.sass-cache
+**/*.log
+error_log
+**/node_modules
+/core/*
+/vendor/*
+actions/*
+modules/contrib/*
+**/.css.map
+.well-known
+#default files
 .csslintrc
 .editorconfig
 .eslintignore
+.eslintrc
 .eslintrc.json
 .htaccess
-autoload.php
-adminer.php
-index.php
-update.php
-
-# Ignore settings, content && sensitive information.
-.pass
-cmd-*.php
-sites/default/settings*.php
-sites/default/devmode.php
-sites/*/files
-sites/*/private
-
-# Trash.
-.well-known
 LICENSE.txt
 README.txt
-web.config
-**/node_modules
-sites/simpletest
+autoload.php
+index.php
+composer.lock
+example.gitignore
+.gitattributes
+.idea
+sites/default/services*.yml
