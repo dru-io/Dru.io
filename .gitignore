@@ -29,3 +29,5 @@ example.gitignore
 .gitattributes
 .idea
 sites/default/services*.yml
+# KDE
+.directory
