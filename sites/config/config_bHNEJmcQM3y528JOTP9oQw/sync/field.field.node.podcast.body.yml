@@ -1,0 +1,22 @@
+uuid: 498543a7-cce4-4ad7-a235-120007234cd1
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.podcast
+  module:
+    - text
+id: node.podcast.body
+field_name: body
+entity_type: node
+bundle: podcast
+label: Текст
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings:
+  display_summary: false
+field_type: text_with_summary

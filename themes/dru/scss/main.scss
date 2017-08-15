@@ -1,0 +1,41 @@
+/**
+Synapse - adaptive theme
+.col-xs- <544px Extra small
+.col-sm- ≥544px Small
+.col-md- ≥768px Medium
+.col-lg- ≥992px Large
+.col-xl- ≥1200px Extra large
+Gutter width	1.875rem / 30px (15px on each side of a column)
+*/
+
+/** Map */
+#main-content {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+
+/** Breadcrumb */
+.breadcrumb {
+  color: #777;
+  padding: 0;
+  margin: 0;
+  background: none;
+  font-size: 0.84375rem;
+}
+
+
+/** Прикреплённая галерея */
+.node {
+  .field--name-field-gallery {
+    &::after {
+      content: '';
+      display: table;
+      clear: both;
+    }
+    .field__item {
+      float: left;
+      margin: 0 15px 15px 0;
+    }
+  }
+}

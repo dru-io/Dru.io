@@ -1,0 +1,31 @@
+/**
+ * Synapse - adaptive theme
+ */
+
+/** Header */
+
+header {
+  background: #2E5B95;
+  #headersmall {
+    color: #FFF;
+    padding: 3px 15px;
+    .small-logo {
+      font-weight: bold;
+      font-size: 38px;
+      line-height: 1em;
+    }
+  }
+}
+
+@import "header/header-full";
+@import "header/menu-main";
+@import "header/menu-top";
+@import "header/block-search";
+@import "header/user";
+@import "header/togglers";
+
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+  }
+}

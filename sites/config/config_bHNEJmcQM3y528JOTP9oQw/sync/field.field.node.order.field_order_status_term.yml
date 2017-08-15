@@ -1,0 +1,30 @@
+uuid: b31b11c6-1927-4b15-adef-33845ebbde51
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_order_status_term
+    - node.type.order
+    - taxonomy.vocabulary.order_status
+id: node.order.field_order_status_term
+field_name: field_order_status_term
+entity_type: node
+bundle: order
+label: Статус
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    target_uuid: fc572cf9-3b1d-4a78-98e3-2a718c92af8a
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      order_status: order_status
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

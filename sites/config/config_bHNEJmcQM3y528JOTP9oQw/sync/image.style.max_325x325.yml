@@ -1,0 +1,18 @@
+uuid: 56a4ec66-8c2f-4a47-b371-f8e004b2fb09
+langcode: ru
+status: true
+dependencies:
+  enforced:
+    module:
+      - responsive_image
+name: max_325x325
+label: 'Макс. 325x325'
+effects:
+  cb842cc8-682f-42a6-bd05-5a1ac726f0d8:
+    uuid: cb842cc8-682f-42a6-bd05-5a1ac726f0d8
+    id: image_scale
+    weight: 1
+    data:
+      width: 325
+      height: 325
+      upscale: false

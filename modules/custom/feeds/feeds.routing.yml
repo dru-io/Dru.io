@@ -1,0 +1,89 @@
+feeds.admin:
+  path: '/admin/content/feed'
+  defaults:
+    _title: 'Feeds'
+    _entity_list: 'feeds_feed'
+  requirements:
+    _permission: 'access administration pages'
+
+feeds.item_list:
+  path: '/feed/{feeds_feed}/list'
+  defaults:
+    _controller: 'Drupal\feeds\Controller\ItemListController:listItems'
+    _title: 'Feed items'
+  requirements:
+    _entity_access: 'feeds_feed.view'
+    feeds_feed: \d+
+
+feeds.multiple_delete_confirm:
+  path: '/admin/content/feed/delete'
+  defaults:
+    _form: 'Drupal\feeds\Form\DeleteMultiple'
+  requirements:
+    _permission: 'administer feeds'
+
+entity.feeds_feed.import_form:
+  path: '/feed/{feeds_feed}/import'
+  defaults:
+    _entity_form: 'feeds_feed.import'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _entity_access: 'feeds_feed.import'
+    feeds_feed: \d+
+
+entity.feeds_feed.clear_form:
+  path: '/feed/{feeds_feed}/delete-items'
+  defaults:
+    _entity_form: 'feeds_feed.clear'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _entity_access: 'feeds_feed.clear'
+    feeds_feed: \d+
+
+entity.feeds_feed.unlock:
+  path: '/feed/{feeds_feed}/unlock'
+  defaults:
+    _entity_form: 'feeds_feed.unlock'
+  options:
+    _admin_route: TRUE
+  requirements:
+    _entity_access: 'feeds_feed.unlock'
+    feeds_feed: \d+
+
+entity.feeds_feed.receive:
+  path: '/feed/{feeds_subscription}/{feeds_push_token}/push_callback'
+  defaults:
+    _controller: 'Drupal\feeds\Controller\SubscriptionController::receive'
+  requirements:
+    _access: 'TRUE'
+    feeds_subscription: \d+
+  methods: [POST]
+
+entity.feeds_feed.subscribe:
+  path: '/feed/{feeds_subscription_id}/{feeds_push_token}/push_callback'
+  defaults:
+    _controller: 'Drupal\feeds\Controller\SubscriptionController::subscribe'
+  requirements:
+    _access: 'TRUE'
+    feeds_subscription_id: \d+
+  methods: [GET]
+
+# Admin UI routes.
+
+feeds.overview_types:
+  path: '/admin/structure/feeds'
+  defaults:
+    _title: 'Feed types'
+    _entity_list: 'feeds_feed_type'
+  requirements:
+    _permission: 'administer feeds'
+
+entity.feeds_feed_type.mapping:
+  path: '/admin/structure/feeds/manage/{feeds_feed_type}/mapping'
+  defaults:
+    _form: '\Drupal\feeds\Form\MappingForm'
+    _title_callback: '\Drupal\feeds\Form\MappingForm::mappingTitle'
+  requirements:
+    _entity_access: 'feeds_feed_type.mapping'

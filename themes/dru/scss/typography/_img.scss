@@ -1,0 +1,22 @@
+/** Img */
+img {
+  max-width: 100%;
+  height: auto;
+  .text-xs {
+    &-right{
+      float: right;
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+    &-left{
+      float: left;
+      margin-right: 20px;
+      margin-bottom: 15px;
+    }
+    &-center{
+      width: 100%;
+      height: auto;
+      margin: 10px 0;
+    }
+  }
+}

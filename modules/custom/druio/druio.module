@@ -1,0 +1,27 @@
+<?php
+
+/**
+ * @file
+ * Honeypot module, for deterring spam bots from completing Drupal forms.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * Implements hook_form_alter().
+ */
+function druio_form_alter(&$form, FormStateInterface $form_state, $form_id) {
+  if (defined('MAINTENANCE_MODE')) {
+    return;
+  }
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function druio_form_search_block_form_alter(&$form, $form_state, $form_id) {
+  $button = '<i class="fa fa-search" aria-hidden="true"></i>';
+  $form['actions']['submit']['#prefix'] = $button;
+  $form['actions']['submit']['#value'] = '';
+  $form['keys']['#placeholder'] = 'Поиск по сообществу';
+}

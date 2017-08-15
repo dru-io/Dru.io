@@ -1,0 +1,6 @@
+name: Dru import
+type: module
+description: 'Dru-io'
+package: "druio"
+hidden: false
+core: '8.x'

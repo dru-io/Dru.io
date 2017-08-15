@@ -1,0 +1,45 @@
+uuid: 464efb36-8db9-4f4c-8913-3a7164ffc1a3
+langcode: ru
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.order.body
+    - field.field.node.order.feeds_item
+    - field.field.node.order.field_nid
+    - field.field.node.order.field_order_budgeting
+    - field.field.node.order.field_order_contacts
+    - field.field.node.order.field_order_notify_email
+    - field.field.node.order.field_order_specification
+    - field.field.node.order.field_order_status_term
+    - field.field.node.order.field_path
+    - node.type.order
+  module:
+    - text
+    - user
+id: node.order.teaser
+targetEntityType: node
+bundle: order
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 101
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  feeds_item: true
+  field_nid: true
+  field_order_budgeting: true
+  field_order_contacts: true
+  field_order_notify_email: true
+  field_order_specification: true
+  field_order_status_term: true
+  field_path: true
+  langcode: true

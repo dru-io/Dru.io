@@ -1,0 +1,33 @@
+uuid: edf00056-9c5a-4e85-98e6-8adcc426281c
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_comment
+    - node.type.question
+  module:
+    - comment
+id: node.question.field_comment
+field_name: field_comment
+entity_type: node
+bundle: question
+label: Ответ
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    status: 2
+    cid: 0
+    last_comment_timestamp: 0
+    last_comment_name: null
+    last_comment_uid: 0
+    comment_count: 0
+default_value_callback: ''
+settings:
+  default_mode: 0
+  per_page: 50
+  anonymous: 0
+  form_location: true
+  preview: 0
+field_type: comment

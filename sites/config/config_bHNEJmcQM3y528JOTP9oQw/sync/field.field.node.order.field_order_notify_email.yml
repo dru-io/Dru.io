@@ -1,0 +1,23 @@
+uuid: 7fff0b2e-1121-40ff-8202-883c5137b0a6
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_order_notify_email
+    - node.type.order
+id: node.order.field_order_notify_email
+field_name: field_order_notify_email
+entity_type: node
+bundle: order
+label: 'Получать уведомление о новых откликах на почту'
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    value: 1
+default_value_callback: ''
+settings:
+  on_label: Вкл
+  off_label: Выкл
+field_type: boolean

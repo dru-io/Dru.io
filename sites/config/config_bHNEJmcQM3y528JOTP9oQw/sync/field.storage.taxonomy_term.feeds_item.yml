@@ -1,0 +1,20 @@
+uuid: 95e5a2cb-5ecd-4dc3-8ae9-7f29b4d69bc1
+langcode: ru
+status: true
+dependencies:
+  module:
+    - feeds
+    - taxonomy
+id: taxonomy_term.feeds_item
+field_name: feeds_item
+entity_type: taxonomy_term
+type: feeds_item
+settings:
+  target_type: feeds_feed
+module: feeds
+locked: false
+cardinality: 1
+translatable: false
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

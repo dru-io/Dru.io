@@ -1,0 +1,31 @@
+/** Tables */
+table {
+  width: 100%;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  th, td {
+    padding: .75rem;
+    line-height: 1.5;
+    vertical-align: top;
+    border-top: 1px solid #eceeef;
+  }
+  thead {
+    th {
+      vertical-align: bottom;
+      border-bottom: 2px solid #eceeef;
+    }
+  }
+  tbody {
+    tr {
+      &:nth-of-type(odd) {
+        background-color: #f9f9f9;
+      }
+    }
+    & + tbody {
+      border-top: 2px solid #eceeef;
+    }
+  }
+  table {
+    background-color: #fff;
+  }
+}

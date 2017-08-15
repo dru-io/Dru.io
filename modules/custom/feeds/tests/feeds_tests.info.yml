@@ -1,0 +1,6 @@
+name: 'Feeds module tests'
+description: 'Support module for Feeds related testing.'
+package: Testing
+core: 8.x
+type: module
+hidden: true

@@ -1,0 +1,51 @@
+dru.theme:
+  version: VERSION
+  css:
+    theme:
+      css/main.css: {}
+  js:
+    js/script.js: {}
+  dependencies:
+    - core/jquery
+
+dru.base:
+  version: VERSION
+  css:
+    theme:
+      css/base/article.css: {}
+
+dru.bootstrap:
+  version: VERSION
+  css:
+    layout:
+      bootstrap4/alpha6/css/bootstrap.css: {}
+  js:
+    bootstrap4/tether133/js/tether.min.js: {}
+    bootstrap4/alpha6/js/bootstrap.min.js: {}
+  dependencies:
+    - core/jquery
+
+dru.layout:
+  version: VERSION
+  css:
+    layout:
+      css/style.css: {}
+      css/utilities/adaptive.css: {}
+      css/utilities/tabs.css: {}
+      css/layout.css: {}
+      css/header.css: {}
+      css/footer.css: {}
+      css/utilities/print.css: { media: print }
+  dependencies:
+    - core/jquery
+
+dru.faicons:
+  remote: https://fortawesome.github.io/Font-Awesome/
+  version: 4.7.0
+  license:
+    name: MIT
+    url: https://fortawesome.github.io/Font-Awesome/license/
+    gpl-compatible: true
+  css:
+    theme:
+      https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css: { type: external, minified: true }

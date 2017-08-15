@@ -1,12 +1,37 @@
-# Ignore configuration files that may contain sensitive information.
-sites/*/settings*.php
-sites/*/services*.yml
+# Managed with Composer.
+core
+libraries
+modules/contrib
+modules/features
+modules/custom/synajax
+modules/custom/synapse
+modules/custom/synhelper
+modules/custom/synimage
+modules/custom/synmail
+profiles/synmini
+vendor
+.csslintrc
+.editorconfig
+.eslintignore
+.eslintrc.json
+.htaccess
+autoload.php
+adminer.php
+index.php
+update.php
 
-# Ignore paths that contain user-generated content.
+# Ignore settings, content && sensitive information.
+.pass
+cmd-*.php
+sites/default/settings*.php
+sites/default/devmode.php
 sites/*/files
 sites/*/private
 
-# node.js
-**/node-modules
-
-.idea
+# Trash.
+.well-known
+LICENSE.txt
+README.txt
+web.config
+**/node_modules
+sites/simpletest

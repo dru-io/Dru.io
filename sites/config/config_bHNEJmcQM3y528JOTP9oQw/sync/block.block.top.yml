@@ -1,0 +1,24 @@
+uuid: e6cc8630-567b-4a22-a2e6-c97a578ccef3
+langcode: ru
+status: true
+dependencies:
+  config:
+    - system.menu.top
+  module:
+    - system
+  theme:
+    - dru
+id: top
+theme: dru
+region: menu_top
+weight: 0
+provider: null
+plugin: 'system_menu_block:top'
+settings:
+  id: 'system_menu_block:top'
+  label: Top
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility: {  }

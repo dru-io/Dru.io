@@ -1,0 +1,23 @@
+uuid: afe00b6b-da51-46c0-9cf6-504e4eec406b
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_order_budgeting
+    - node.type.order
+id: node.order.field_order_budgeting
+field_name: field_order_budgeting
+entity_type: node
+bundle: order
+label: Бюджет
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  min: 0
+  max: null
+  prefix: ''
+  suffix: ' руб.'
+field_type: integer

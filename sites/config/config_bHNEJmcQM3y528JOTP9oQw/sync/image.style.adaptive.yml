@@ -1,0 +1,18 @@
+uuid: 0b82f302-15df-494b-bc06-6bbd623f641e
+langcode: ru
+status: true
+dependencies:
+  enforced:
+    module:
+      - responsive_image
+name: adaptive
+label: adaptive-768
+effects:
+  cb842cc8-682f-42a6-bd05-5a1ac726f0d0:
+    uuid: cb842cc8-682f-42a6-bd05-5a1ac726f0d0
+    id: image_scale
+    weight: 1
+    data:
+      width: 768
+      height: null
+      upscale: false

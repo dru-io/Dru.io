@@ -1,0 +1,17 @@
+uuid: 3ccb83bb-6cf0-4d13-a490-ab03ea4d807e
+langcode: ru
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Публикация
+type: post
+description: ''
+help: ''
+new_revision: true
+preview_mode: 0
+display_submitted: false

@@ -1,0 +1,11 @@
+uuid: fca34bee-36c8-45c6-9289-4a26550af824
+langcode: ru
+status: true
+dependencies:
+  config:
+    - node.type.podcast
+id: node.podcast
+target_entity_type_id: node
+target_bundle: podcast
+default_langcode: site_default
+language_alterable: false

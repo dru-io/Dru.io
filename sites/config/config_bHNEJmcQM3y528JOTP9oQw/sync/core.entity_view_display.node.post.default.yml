@@ -1,0 +1,47 @@
+uuid: 02febcae-0f72-4c68-8445-6c43e77b42a3
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.field.node.post.body
+    - field.field.node.post.feeds_item
+    - field.field.node.post.field_nid
+    - field.field.node.post.field_path
+    - node.type.post
+  module:
+    - text
+    - user
+id: node.post.default
+targetEntityType: node
+bundle: post
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_nid:
+    weight: 102
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_path:
+    weight: 103
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  feeds_item: true
+  langcode: true

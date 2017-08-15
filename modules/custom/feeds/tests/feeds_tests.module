@@ -1,0 +1,105 @@
+<?php
+
+/**
+ * @file
+ * Helper module for Feeds tests.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function feeds_tests_menu() {
+  $items['testing/feeds/flickr.xml'] = [
+    'page callback' => 'feeds_tests_flickr',
+    'access arguments' => ['access content'],
+    'type' => MENU_CALLBACK,
+  ];
+  $items['testing/feeds/files.csv'] = [
+    'page callback' => 'feeds_tests_files',
+    'access arguments' => ['access content'],
+    'type' => MENU_CALLBACK,
+  ];
+  $items['testing/feeds/files-remote.csv'] = [
+    'page callback' => 'feeds_tests_files_remote',
+    'access arguments' => ['access content'],
+    'type' => MENU_CALLBACK,
+  ];
+  return $items;
+}
+
+/**
+ * Implements hook_theme().
+ */
+function feeds_tests_theme() {
+  return [
+    'feeds_tests_flickr' => [
+      'variables' => ['image_urls' => []],
+      'path' => drupal_get_path('module', 'feeds_tests') . '/feeds',
+      'template' => 'feeds-tests-flickr',
+    ],
+    'feeds_tests_files' => [
+      'variables' => ['files' => []],
+      'path' => drupal_get_path('module', 'feeds_tests') . '/feeds',
+      'template' => 'feeds-tests-files',
+    ],
+  ];
+}
+
+/**
+ * Outputs flickr test feed.
+ */
+function feeds_tests_flickr() {
+  $images = [
+    0 => "tubing.jpeg",
+    1 => "foosball.jpeg",
+    2 => "attersee.jpeg",
+    3 => "hstreet.jpeg",
+    4 => "la fayette.jpeg",
+  ];
+  $path = drupal_get_path('module', 'feeds_tests') . '/feeds/assets';
+  foreach ($images as &$image) {
+    $image = file_create_url("$path/$image");
+  }
+  drupal_add_http_header('Content-Type', 'application/rss+xml; charset=utf-8');
+  print theme('feeds_tests_flickr', ['image_urls' => $images]);
+  die();
+}
+
+/**
+ * Outputs a CSV file pointing to files.
+ */
+function feeds_tests_files() {
+  $images = [
+    0 => "tubing.jpeg",
+    1 => "foosball.jpeg",
+    2 => "attersee.jpeg",
+    3 => "hstreet.jpeg",
+    4 => "la fayette.jpeg",
+  ];
+  foreach ($images as &$image) {
+    $image = "public://images/$image";
+  }
+  drupal_add_http_header('Content-Type', 'text/plain; charset=utf-8');
+  print theme('feeds_tests_files', ['files' => $images]);
+  die();
+}
+
+/**
+ * Outputs a CSV file pointing to files to download.
+ */
+function feeds_tests_files_remote() {
+  $images = [
+    0 => 'tubing.jpeg',
+    1 => 'foosball.jpeg',
+    2 => 'attersee.jpeg',
+    3 => 'hstreet.jpeg',
+    4 => 'la fayette.jpeg',
+  ];
+  $path = drupal_get_path('module', 'feeds_tests') . '/feeds/assets';
+  foreach ($images as &$image) {
+    $image = file_create_url("$path/$image");
+  }
+  drupal_add_http_header('Content-Type', 'text/plain; charset=utf-8');
+  print theme('feeds_tests_files', ['files' => $images]);
+  die();
+}

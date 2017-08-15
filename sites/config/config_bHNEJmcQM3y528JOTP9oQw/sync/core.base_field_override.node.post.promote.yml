@@ -1,0 +1,22 @@
+uuid: b01650b2-2120-4b45-8732-14f31799bf33
+langcode: ru
+status: true
+dependencies:
+  config:
+    - node.type.post
+id: node.post.promote
+field_name: promote
+entity_type: node
+bundle: post
+label: 'Помещено на главную страницу'
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    value: 0
+default_value_callback: ''
+settings:
+  on_label: Вкл
+  off_label: Выкл
+field_type: boolean

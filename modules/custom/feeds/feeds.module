@@ -1,0 +1,185 @@
+<?php
+
+/**
+ * @file
+ * Feeds hook implementations.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Render\Element;
+use Drupal\Core\Routing\RouteMatchInterface;
+use Drupal\Core\Template\Attribute;
+use Drupal\feeds\Entity\Feed;
+use Drupal\feeds\Plugin\QueueWorker\FeedRefresh;
+
+/**
+ * Implements hook_help().
+ */
+function feeds_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'feeds.overview_types':
+      return '<p>' . t('Create one or more feed types for pulling content into Drupal.') . '</p>';
+  }
+}
+
+/**
+ * Implements hook_cron().
+ */
+function feeds_cron() {
+  $ids = \Drupal::entityQuery('feeds_feed')
+    ->condition('queued', 0)
+    ->condition('next', REQUEST_TIME, '<=')
+    ->condition('next', -1, '<>')
+    ->condition('status', 1)
+    ->range(0, 100)
+    ->sort('imported')
+    ->execute();
+
+  foreach (Feed::loadMultiple($ids) as $feed) {
+    if ($feed->isLocked()) {
+      continue;
+    }
+    $queue = \Drupal::queue('feeds_feed_refresh:' . $feed->bundle());
+
+    if ($queue->createItem([$feed, FeedRefresh::BEGIN, []])) {
+      // Add timestamp to avoid queueing item more than once.
+      $feed->setQueuedTime(REQUEST_TIME);
+      $feed->save();
+    }
+  }
+
+  // Delete queued timestamp after 12 hours assuming the update has failed.
+  $ids = \Drupal::entityQuery('feeds_feed')
+    ->condition('queued', REQUEST_TIME - (3600 * 12), '<')
+    ->execute();
+
+  foreach (Feed::loadMultiple($ids) as $feed) {
+    $feed->setQueuedTime(0);
+    $feed->save();
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function feeds_theme() {
+  return [
+    'feeds_feed_status' => [
+      'variables' => [
+        'progress_importing' => NULL,
+        'progress_clearing' => NULL,
+        'imported' => NULL,
+        'count' => NULL,
+      ],
+      'file' => 'feeds.theme.inc',
+    ],
+    'feeds_feed' => [
+      'render element' => 'elements',
+      'template' => 'feeds_feed',
+    ],
+  ];
+}
+
+/**
+ * Implements hook_file_download().
+ */
+function feeds_file_download($uri) {
+  // Get the file record based on the URI. If not in the database just return.
+  /** @var \Drupal\file\FileInterface[] $files */
+  $files = \Drupal::entityTypeManager()
+    ->getStorage('file')
+    ->loadByProperties(['uri' => $uri]);
+
+  foreach ($files as $item) {
+    // Since some database servers sometimes use a case-insensitive comparison
+    // by default, double check that the filename is an exact match.
+    if ($item->getFileUri() === $uri) {
+      $file = $item;
+      break;
+    }
+  }
+
+  if (!isset($file)) {
+    return;
+  }
+
+  // Check if this file belongs to Feeds.
+  $usage = \Drupal::service('file.usage')->listUsage($file);
+  if (!isset($usage['feeds'])) {
+    return;
+  }
+
+  $feeds = \Drupal::entityTypeManager()
+    ->getStorage('feeds_feed')
+    ->loadByProperties(['source' => $uri]);
+
+  foreach ($feeds as $feed) {
+    if ($feed->getSource() === $uri && $feed->access('import')) {
+      return file_get_content_headers($file);
+    }
+  }
+
+  return -1;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Remove our field from the Field UI overview form.
+ */
+function feeds_form_field_ui_field_overview_form_alter(array &$form, FormStateInterface $form_state) {
+  // if (in_array('feeds_item', $form['#fields'])) {
+
+  //   unset($form['#fields'][array_search('feeds_item', $form['#fields'])]);
+  //   unset($form['fields']['feeds_item']);
+
+  //   $rows_order = $form['fields']['#regions']['content']['rows_order'];
+  //   $key = array_search('feeds_item', $rows_order);
+  //   unset($form['fields']['#regions']['content']['rows_order'][$key]);
+  // }
+}
+
+/**
+ * Prepares variables for feed templates.
+ *
+ * Default template: feeds_feed.html.twig.
+ *
+ * Most themes utilize their own copy of feeds_feed.html.twig. The default is
+ * located inside "modules/feeds/templates/feeds_feedhtml.twig". Look in there
+ * for the full list of variables.
+ *
+ * @param array $variables
+ *   An associative array containing:
+ *   - elements: An array of elements to display in view mode.
+ *   - feed: The feed object.
+ *   - view_mode: View mode; e.g., 'full', 'teaser'...
+ */
+function template_preprocess_feeds_feed(&$variables) {
+  $variables['view_mode'] = $variables['elements']['#view_mode'];
+  $variables['feed'] = $feed = $variables['elements']['#feeds_feed'];
+
+  $variables['page'] = $variables['view_mode'] === 'full';
+
+  $variables['date'] = \Drupal::service('renderer')->render($variables['elements']['created']);
+  unset($variables['elements']['created']);
+  $variables['author_name'] = \Drupal::service('renderer')->render($variables['elements']['uid']);
+  unset($variables['elements']['uid']);
+
+  $variables['url'] = $feed->url('canonical', [
+    'language' => $feed->language(),
+  ]);
+  $variables['label'] = $variables['elements']['title'];
+  unset($variables['elements']['title']);
+
+  // Helpful $content variable for templates.
+  $variables += ['content' => []];
+  foreach (Element::children($variables['elements']) as $key) {
+    $variables['content'][$key] = $variables['elements'][$key];
+  }
+
+  // Used by RDF to add attributes around the author and date submitted.
+  $variables['author_attributes'] = new Attribute();
+
+  // Add article ARIA role.
+  $variables['attributes']['role'] = 'article';
+}

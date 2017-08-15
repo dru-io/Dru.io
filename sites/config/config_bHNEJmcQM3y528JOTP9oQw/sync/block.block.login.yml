@@ -1,0 +1,24 @@
+uuid: d80b5525-665c-4a39-a2e3-6e87dda96f2e
+langcode: ru
+status: true
+dependencies:
+  config:
+    - system.menu.login
+  module:
+    - system
+  theme:
+    - dru
+id: login
+theme: dru
+region: user
+weight: -4
+provider: null
+plugin: 'system_menu_block:login'
+settings:
+  id: 'system_menu_block:login'
+  label: Login
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility: {  }

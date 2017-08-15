@@ -1,0 +1,27 @@
+name: Dru
+description: Dru-io theme.
+type: theme
+base theme: classy
+core: 8.x
+libraries:
+  - dru/dru.bootstrap
+  - dru/dru.faicons
+  - dru/dru.layout
+  - dru/dru.theme
+ckeditor_stylesheets:
+  - css/style.css
+regions:
+  header: Header
+  menu_top: Menu Top
+  menu_main: Menu Main
+  user: User
+  title: Title
+  tabs: Tabs
+  breadcrumb: Breadcrumb
+  messages: Messages
+  featured: Featured
+  sidebar: Sidebar
+  slider: Slider
+  content: Content
+  footer: Footer
+  bottom: Bottom

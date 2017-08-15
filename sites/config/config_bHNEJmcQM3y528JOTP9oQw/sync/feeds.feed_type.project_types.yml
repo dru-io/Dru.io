@@ -1,0 +1,51 @@
+uuid: 2b1f329a-ecdb-4905-b11d-e97d68c54bac
+langcode: ru
+status: true
+dependencies:
+  module:
+    - import
+label: 'Project: Types'
+id: project_types
+description: ''
+import_period: -1
+fetcher: http
+fetcher_configuration:
+  auto_detect_feeds: false
+  use_pubsubhubbub: false
+  fallback_hub: ''
+  request_timeout: 30
+parser: druterms
+parser_configuration: {  }
+processor: 'entity:taxonomy_term'
+processor_configuration:
+  update_existing: 2
+  expire: -1
+  skip_hash_check: true
+  values:
+    vid: project_types
+  owner_id: 0
+  authorize: false
+  owner_feed_author: false
+mappings:
+  -
+    target: feeds_item
+    map:
+      url: path
+      guid: id
+    unique:
+      guid: '1'
+  -
+    target: name
+    map:
+      value: name
+    unique: {  }
+  -
+    target: weight
+    map:
+      value: weight
+  -
+    target: description
+    map:
+      value: path
+    settings:
+      format: plain_text

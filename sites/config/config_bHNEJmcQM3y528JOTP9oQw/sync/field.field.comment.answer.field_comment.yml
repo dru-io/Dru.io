@@ -1,0 +1,35 @@
+uuid: de4cf1a5-2400-4612-973b-917fabe61641
+langcode: ru
+status: true
+dependencies:
+  config:
+    - comment.type.answer
+    - field.storage.comment.field_comment
+  module:
+    - comment
+_core:
+  default_config_hash: nq0NIrYnBaNEq8z5lGqDOwJ-kEOgzuNlnM9NCyt5i8U
+id: comment.answer.field_comment
+field_name: field_comment
+entity_type: comment
+bundle: answer
+label: Комментарий
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    status: 2
+    cid: 0
+    last_comment_timestamp: 0
+    last_comment_name: null
+    last_comment_uid: 0
+    comment_count: 0
+default_value_callback: ''
+settings:
+  default_mode: 1
+  per_page: 10
+  anonymous: 0
+  form_location: false
+  preview: 0
+field_type: comment

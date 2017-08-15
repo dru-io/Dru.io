@@ -1,0 +1,12 @@
+/** Modals */
+.ui-dialog-titlebar-close {
+  background: url(../images/icon-close.png) no-repeat 0 0 !important;
+  width: 15px !important;
+  height: 15px !important;
+}
+body {
+  &.modal-open {
+    overflow: inherit;
+    padding-right: 0 !important;
+  }
+}

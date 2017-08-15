@@ -1,0 +1,9 @@
+uuid: fbeb572c-8379-46c8-abf5-cc23ec72687d
+langcode: ru
+status: true
+dependencies: {  }
+name: 'Project: Mnt status'
+vid: project_maintenance_status
+description: ''
+hierarchy: 0
+weight: 0

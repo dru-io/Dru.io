@@ -1,0 +1,19 @@
+uuid: de7be369-ca23-4e81-9386-02ab44e62b49
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_short_name
+    - node.type.project
+id: node.project.field_project_short_name
+field_name: field_project_short_name
+entity_type: node
+bundle: project
+label: 'Short name'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string
