@@ -2,19 +2,8 @@
 
 /**
  * @file
- * Honeypot module, for deterring spam bots from completing Drupal forms.
+ * Main file for hooks and custom functions.
  */
-
-use Drupal\Core\Form\FormStateInterface;
-
-/**
- * Implements hook_form_alter().
- */
-function druio_form_alter(&$form, FormStateInterface $form_state, $form_id) {
-  if (defined('MAINTENANCE_MODE')) {
-    return;
-  }
-}
 
 /**
  * Implements hook_form_alter().
