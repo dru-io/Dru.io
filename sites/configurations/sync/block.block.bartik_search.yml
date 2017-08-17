@@ -1,0 +1,22 @@
+uuid: 75340228-2166-4dd9-b528-cfce0533f2a2
+langcode: ru
+status: true
+dependencies:
+  module:
+    - search
+  theme:
+    - bartik
+_core:
+  default_config_hash: za-39d5WDUg6XvbyqSnuVYEeq6QM4qKJxW8MnoAha5A
+id: bartik_search
+theme: bartik
+region: sidebar_first
+weight: -1
+provider: null
+plugin: search_form_block
+settings:
+  id: search_form_block
+  label: Поиск
+  provider: search
+  label_display: visible
+visibility: {  }

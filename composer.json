@@ -1,19 +1,22 @@
 {
     "name": "drupal/drupal",
-    "description": "Drupal is an open source CMS.",
+    "description": "Drupal is an open source content management platform powering millions of websites and applications.",
     "type": "project",
     "license": "GPL-2.0+",
     "require": {
-        "composer/installers": "^1.3",
-        "wikimedia/composer-merge-plugin": "~1.3",
-        "drupal/core": "^8.3",
-        "drush/drush": "~8.0",
-        "drupal/console": "~1.0",
+        "composer/installers": "^1.0.24",
+        "wikimedia/composer-merge-plugin": "~1.4",
+        "cweagans/composer-patches": "^1.6",
+        "drupal/core": "~8.3",
         "drupal/admin_toolbar": "^1.19",
-        "drupal/devel" : "^1.0@RC",
-        "drupal/field_group" : "^1.0@RC",
+        "drupal/ctools": "^3.0",
+        "drupal/paragraphs": "^1.1",
+        "drupal/module_filter": "^3.0",
         "drupal/pathauto": "^1.0",
-        "drupal/token": "^1.0"
+        "drupal/field_group": "^1.0@RC",
+        "drupal/devel": "^1.0@RC",
+        "drupal/imagemagick": "^2.0",
+        "drupal/console": "~1.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
@@ -22,13 +25,6 @@
         "autoloader-suffix": "Drupal8"
     },
     "extra": {
-        "drupal-scaffold": {
-          "excludes": [
-            "robots.txt",
-            "web.config",
-            ".gitignore"
-          ]
-        },
         "_readme": [
             "By default Drupal loads the autoloader from ./vendor/autoload.php.",
             "To change the autoloader you can edit ./autoload.php.",
@@ -51,9 +47,18 @@
             "themes/contrib/{$name}": ["type:drupal-theme"],
             "drush/contrib/{$name}": ["type:drupal-drush"],
             "modules/custom/{$name}": ["type:drupal-custom-module"],
-            "modules/features/{$name}": ["type:drupal-custom-feature"],
-            "themes/custom/{$name}": ["type:drupal-custom-theme"],
-            "libraries/{$name}": ["type:drupal-library"]
+            "themes/custom/{$name}": ["type:drupal-custom-theme"]
+        },
+        "patches": {
+            "drupal/ace_editor": {
+                "Ace Editor not working in quickedit forms": "https://www.drupal.org/files/issues/ace_editor_for_quickedit-2869357.patch"
+            },
+            "drupal/photoswipe": {
+                "Error: Call to a member function view() on null in template_preprocess_photoswipe_image_formatter()": "https://www.drupal.org/files/issues/photoswipe-caption-unset-2666636-3-D8.patch"
+            },
+            "drupal/metatag": {
+                "Fix translation issue": "https://www.drupal.org/files/issues/metatag-n2899752-3.patch"
+            }
         }
     },
     "autoload": {
@@ -62,13 +67,21 @@
         }
     },
     "scripts": {
-        "drupal-scaffold": "DrupalComposer\\DrupalScaffold\\Plugin::scaffold",
         "pre-autoload-dump": "Drupal\\Core\\Composer\\Composer::preAutoloadDump",
-        "post-autoload-dump": "Drupal\\Core\\Composer\\Composer::ensureHtaccess",
+        "post-autoload-dump": [
+          "Drupal\\Core\\Composer\\Composer::ensureHtaccess"
+        ],
         "post-package-install": "Drupal\\Core\\Composer\\Composer::vendorTestCodeCleanup",
         "post-package-update": "Drupal\\Core\\Composer\\Composer::vendorTestCodeCleanup"
     },
     "repositories": [
-        {"type": "composer", "url": "https://packages.drupal.org/8"}
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "git",
+            "url": "https://github.com/Niklan/youtube_optimized_formatter.git"
+        }
     ]
 }

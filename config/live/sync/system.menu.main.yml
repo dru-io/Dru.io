@@ -1,8 +1,0 @@
-uuid: 3b1d4d1b-c063-4751-8a5a-9091e60bea32
-langcode: ru
-status: true
-dependencies: {  }
-id: main
-label: 'Main navigation'
-description: 'Site section links'
-locked: true

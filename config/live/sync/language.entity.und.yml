@@ -1,9 +1,0 @@
-uuid: 946605e5-be3b-4463-b73e-62213d980737
-langcode: ru
-status: true
-dependencies: {  }
-id: und
-label: 'Не указано'
-direction: ltr
-weight: 2
-locked: true

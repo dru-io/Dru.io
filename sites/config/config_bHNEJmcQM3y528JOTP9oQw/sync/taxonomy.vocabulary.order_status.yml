@@ -1,9 +1,0 @@
-uuid: d695ca03-f4a5-4cb3-a144-60b987aef519
-langcode: ru
-status: true
-dependencies: {  }
-name: 'Order: status'
-vid: order_status
-description: ''
-hierarchy: 0
-weight: 0
