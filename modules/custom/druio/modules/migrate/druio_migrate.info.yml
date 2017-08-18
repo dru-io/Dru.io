@@ -1,0 +1,11 @@
+name: Dru.io — Migrate
+description: 'Migration from Drupal 7'
+type: module
+core: 8.x
+version: 1.x
+
+package: Dru.io
+
+dependencies:
+ - migrate
+ - migrate_plus
