@@ -20,6 +20,7 @@ process:
     plugin: default_value
     default_value: 0
   'body/value': body
+  'field_project_development_status/value': development_status
 
 migration_dependencies:
   required:

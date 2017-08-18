@@ -45,6 +45,8 @@ class NodeProject extends SqlBase {
       'status' => $this->t('Boolean indicating whether the node is published (visible to non-administrators)'),
       'created' => $this->t('The Unix timestamp when the node was created'),
       'changed' => $this->t('The Unix timestamp when the node was most recently saved.'),
+      // Fields below is add programmatically in prepare row method.
+      'development_status' => $this->t('Development status of module'),
     ];
 
     return $fields;
@@ -66,6 +68,27 @@ class NodeProject extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
+    $nid = $row->getSourceProperty('nid');
+    // Association for development status. TID in Drupal 7 and key for field in
+    // Drupal 8.
+    $development_statuses = [
+      21 => 'maintenance_fixes_only',
+      22 => 'no_further_development',
+      23 => 'obsolete',
+      20 => 'under_active_development',
+    ];
+
+    $development_status_query = $this->select('field_data_field_project_development_status', 'ds')
+      ->fields('ds', ['field_project_development_status_tid'])
+      ->condition('entity_type', 'node')
+      ->condition('bundle', 'project')
+      ->condition('entity_id', $nid)
+      ->execute()
+      ->fetchCol();
+
+    $development_status_tid = $development_status_query[0];
+    $development_status = $development_statuses[$development_status_tid];
+    $row->setSourceProperty('development_status', $development_status);
     return parent::prepareRow($row);
   }
 

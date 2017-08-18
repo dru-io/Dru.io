@@ -14,3 +14,13 @@ function druio_form_search_block_form_alter(&$form, $form_state, $form_id) {
   $form['actions']['submit']['#value'] = '';
   $form['keys']['#placeholder'] = 'Поиск по сообществу';
 }
+
+/**
+ * DON'T FORGET TO REMOVE IT.
+ *
+ * Used for testing purposes.
+ */
+function druio_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  ksm($node->field_project_development_status);
+}
