@@ -1,0 +1,30 @@
+# Migration Project node type content.
+id: druio_node_project
+label: Projects from drupal.org
+migration_group: druio
+source:
+  plugin: druio_node_project
+destination:
+  plugin: entity:node
+process:
+  type:
+    plugin: default_value
+    default_value: project
+  title: title
+  nid: nid
+  uid:
+    plugin: migration
+    migration: druio_users
+    source: uid
+  sticky:
+    plugin: default_value
+    default_value: 0
+  'body/value': body
+
+migration_dependencies:
+  required:
+    - druio_users
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
