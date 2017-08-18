@@ -13,12 +13,7 @@ process:
   roles:
     plugin: default_value
     default_value: 2
-  name:
-    plugin: dedupe_entity
-    source: name
-    entity_type: user
-    field: name
-    postfix: _
+  name: name
   created: created
   changed: '@created'
   access: access
