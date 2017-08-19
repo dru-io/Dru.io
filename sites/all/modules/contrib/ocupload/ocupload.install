@@ -329,3 +329,10 @@ function ocupload_update_7203() {
     'default' => '',
   ));
 }
+
+/**
+ * Remove unused variable.
+ */
+function ocupload_update_7204() {
+  variable_del('ocupload_status_message');
+}

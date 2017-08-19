@@ -6,6 +6,11 @@
  */
 
 /**
+ * @addtogroup hooks
+ * @{
+ */
+
+/**
  * Implements hook_requirements().
  */
 function advagg_css_compress_requirements($phase) {
@@ -103,3 +108,7 @@ function advagg_css_compress_update_7202(&$sandbox) {
     ->condition('name', 'advagg_css_compressor_file_settings_%', 'LIKE')
     ->execute();
 }
+
+/**
+ * @} End of "addtogroup hooks".
+ */

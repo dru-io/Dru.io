@@ -6,6 +6,11 @@
  */
 
 /**
+ * @addtogroup advagg_hooks
+ * @{
+ */
+
+/**
  * Implements hook_advagg_get_info_on_files_alter().
  *
  * Used to make sure the info is up to date in the cache.
@@ -54,6 +59,21 @@ function advagg_mod_advagg_get_css_file_contents_alter(&$contents, $filename, $a
 }
 
 /**
+ * Implements hook_advagg_update_github_versions_alter().
+ */
+function advagg_mod_advagg_update_github_versions_alter(&$projects) {
+  $projects['loadCSS'] = array(
+    'callback' => 'advagg_get_github_version',
+    'url' => 'https://rawgit.com/filamentgroup/loadCSS/master/package.json',
+    'variable_name' => 'advagg_mod_github_version_loadcss',
+  );
+}
+
+/**
+ * @} End of "addtogroup advagg_hooks".
+ */
+
+/**
  * Run preg matches through the t() function.
  *
  * @param array $matches
@@ -81,21 +101,8 @@ function advagg_mod_advagg_css_content_t_replace_callback(array $matches) {
   }
 
   // Run t function.
-  // @ignore sniffer_semantics_functioncall_notliteralstring
+  // @codingStandardsIgnoreLine
   $after = t($before);
   // Put back.
   return str_replace($matches[1], str_replace($before, $after, $matches[1]), $matches[0]);
-}
-
-/**
- * Implements hook_advagg_update_github_versions_alter().
- */
-function advagg_mod_advagg_update_github_versions_alter(&$projects) {
-  $projects = array(
-    'loadCSS' => array(
-      'callback' => 'advagg_get_github_version',
-      'url' => 'https://rawgit.com/filamentgroup/loadCSS/master/package.json',
-      'variable_name' => 'advagg_mod_github_version_loadcss',
-    ),
-  );
 }

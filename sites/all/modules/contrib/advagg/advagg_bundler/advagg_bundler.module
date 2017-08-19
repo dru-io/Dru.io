@@ -6,6 +6,11 @@
  */
 
 /**
+ * @addtogroup default_variables
+ * @{
+ */
+
+/**
  * Default for maximum number of CSS bundles used in a themes region.
  */
 define('ADVAGG_BUNDLER_MAX_CSS', 4);
@@ -34,6 +39,15 @@ define('ADVAGG_BUNDLER_ACTIVE', TRUE);
  * Default value to for bundler, set to file count.
  */
 define('ADVAGG_BUNDLER_GROUPING_LOGIC', 0);
+
+/**
+ * @} End of "addtogroup default_variables".
+ */
+
+/**
+ * @addtogroup hooks
+ * @{
+ */
 
 /**
  * Implements hook_menu().
@@ -85,6 +99,10 @@ function advagg_bundler_form_advagg_admin_settings_form_alter(&$form, $form_stat
     $form['global']['advagg_core_groups']['#states'] = array();
   }
 }
+
+/**
+ * @} End of "addtogroup hooks".
+ */
 
 /**
  * Returns TRUE if the bundler will run.

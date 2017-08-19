@@ -261,8 +261,8 @@ function ocupload_form_template($form, &$form_state, $template = NULL) {
   );
   $form['transliterate'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Transliterate file names'),
-    '#description' => t('Check to transliterate file names when saving. Recommended to avoid file URL issues, and requires the !transliteration module.',
+    '#title' => t('Transliterate file names (highly recommended)'),
+    '#description' => t('Transliterate file names before saving. Highly recommended to avoid file URL issues, and requires the !transliteration module.',
       array(
         '!transliteration' => $transliteration_module_link,
       )
@@ -498,7 +498,10 @@ function ocupload_upload() {
     $files = $cache->data;
   }
   $field_name = check_plain($_POST['fieldName']);
-  $files[$field_name][$file->fid] = drupal_basename($file->uri);
+  $files[$field_name][$file->fid] = array(
+    'uri' => $file->uri,
+    'noticed' => FALSE,
+  );
   cache_set($cid, $files, 'cache', REQUEST_TIME + DRUPAL_MAXIMUM_TEMP_FILE_AGE);
 
   return _ocupload_answer(TRUE, $data);
@@ -556,6 +559,7 @@ function _ocupload_answer($status, $data) {
     'status' => $status,
     'data' => $data,
   ));
+  return NULL;
 }
 
 /**

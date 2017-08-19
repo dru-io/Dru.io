@@ -7,7 +7,7 @@ class File
     /**
      * @var RequestInterface
      */
-    private $request;
+    protected $request;
 
     /**
      * @var ConfigInterface
@@ -58,7 +58,7 @@ class File
      */
     public function getChunkPath($index)
     {
-        return $this->config->getTempDir().DIRECTORY_SEPARATOR.$this->identifier.'_'.$index;
+        return $this->config->getTempDir().DIRECTORY_SEPARATOR.basename($this->identifier).'_'. (int) $index;
     }
 
     /**
@@ -121,7 +121,7 @@ class File
         $totalChunks = $this->request->getTotalChunks();
         $totalChunksSize = 0;
 
-        for ($i = 1; $i <= $totalChunks; $i++) {
+        for ($i = $totalChunks; $i >= 1; $i--) {
             $file = $this->getChunkPath($i);
             if (!file_exists($file)) {
                 return false;

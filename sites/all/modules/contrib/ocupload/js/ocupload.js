@@ -31,7 +31,16 @@
    * Return true if response in JSON format.
    */
   Drupal.ocupload.checkResponse = function (response) {
-    return $.trim(response.substring(0, 1)) == '{';
+    return $.trim(response).substring(0, 1) == '{';
+  };
+
+  /**
+   * Return target textarea.
+   */
+  Drupal.ocupload.findTextarea = function(element) {
+    var $parent = $(element).parent();
+    var $textarea = $parent.find('textarea:first');
+    return ($textarea.length == 0) ? Drupal.ocupload.findTextarea($parent) : $textarea;
   };
 
   /**
@@ -49,7 +58,7 @@
    */
   Drupal.ocupload.onFilesSubmitted = function (files, event) {
     var flow = this;
-    var $textarea = $(event.target).closest('.form-item').find('textarea');
+    var $textarea = Drupal.ocupload.findTextarea(event.target);
     var $queue = $('#upload-queue');
 
     if ($queue.length == 0) {

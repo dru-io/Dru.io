@@ -237,6 +237,7 @@ function advagg_missing_send_saved_file(array $files_to_save, $uri, $created, $f
       $uri .= '.gz';
     }
     if (!isset($files_to_save[$uri]) && file_exists($uri) && filesize($uri)) {
+      // Do not use advagg_file_get_contents here.
       $files_to_save[$uri] = (string) @file_get_contents($uri);
     }
   }
@@ -487,7 +488,7 @@ function advagg_htaccess_check_generate(array $files_to_save, $type, $force = FA
   $data .= "    # Serve brotli compressed ${type_upper} files if they exist and the client accepts br.\n";
   $data .= "    RewriteCond %{HTTP:Accept-encoding} br\n";
   $data .= "    RewriteCond %{REQUEST_FILENAME}\.br -s\n";
-  $data .= "    RewriteRule ^(.*)\.${type} $1\.${type}\.br [QSA]\n";
+  $data .= "    RewriteRule ^(.*)\.${type} " . '$1' . "\.${type}\.br [QSA]\n";
   if ($type === 'css') {
     $data .= "    RewriteRule \.${type}\.br$ - [T=text/${content_type},E=no-gzip:1]\n";
   }
@@ -505,7 +506,7 @@ function advagg_htaccess_check_generate(array $files_to_save, $type, $force = FA
   $data .= "    # Serve gzip compressed ${type_upper} files if they exist and the client accepts gzip.\n";
   $data .= "    RewriteCond %{HTTP:Accept-encoding} gzip\n";
   $data .= "    RewriteCond %{REQUEST_FILENAME}\.gz -s\n";
-  $data .= "    RewriteRule ^(.*)\.${type} $1\.${type}\.gz [QSA]\n";
+  $data .= "    RewriteRule ^(.*)\.${type} " . '$1' . "\.${type}\.gz [QSA]\n";
   if ($type === 'css') {
     $data .= "    RewriteRule \.${type}\.gz$ - [T=text/${content_type},E=no-gzip:1]\n";
   }
@@ -592,7 +593,6 @@ function advagg_htaccess_check_generate(array $files_to_save, $type, $force = FA
   return $errors;
 }
 
-// Lookup functions.
 /**
  * Given a filename return the type and 2 hashes.
  *
@@ -691,7 +691,6 @@ function advagg_get_files_from_hashes($type, $aggregate_filenames_hash, $aggrega
   return $files;
 }
 
-// Read CSS/JS files.
 /**
  * Given a list of files, grab their contents and glue it into one big string.
  *
@@ -778,7 +777,7 @@ function advagg_get_css_aggregate_contents(array $files, array $aggregate_settin
       }
       if (is_readable($file)) {
         // Get the files contents.
-        $file_contents = (string) @file_get_contents($file);
+        $file_contents = (string) @advagg_file_get_contents($file);
         // Get a hash of the file's contents.
         $file_contents_hash = drupal_hash_base64($file_contents);
         $cid = 'advagg:file:' . advagg_drupal_hash_base64($file);
@@ -963,7 +962,7 @@ function advagg_get_js_aggregate_contents(array $files, array $aggregate_setting
       // Append a ';' and a newline after each JS file to prevent them from
       // running together. Also close any comment blocks.
       if (is_readable($filename)) {
-        $file_contents = (string) @file_get_contents($filename);
+        $file_contents = (string) @advagg_file_get_contents($filename);
         $file_contents_hash = drupal_hash_base64($file_contents);
         $cid = 'advagg:file:' . advagg_drupal_hash_base64($filename);
         if (empty($info_on_files[$cid]['content_hash'])) {
@@ -980,17 +979,12 @@ function advagg_get_js_aggregate_contents(array $files, array $aggregate_setting
           $write_aggregate = advagg_missing_file_not_readable($filename, $aggregate_filename, FALSE);
         }
 
-        $contents .= $file_contents;
-        // If a BOM is found, convert the file to UTF-8.
-        $encoding = advagg_get_encoding_from_bom($contents);
-        if (!empty($encoding)) {
-          $contents = advagg_convert_to_utf8($contents, $encoding);
-        }
         // Make sure that the file is ended properly.
-        $contents .= ";/**/\n";
+        $file_contents .= ";/**/\n";
         if (variable_get('advagg_cache_level', ADVAGG_CACHE_LEVEL) < 0) {
-          $contents .= "/* Above code came from $filename */\n\n";
+          $file_contents .= "/* Above code came from $filename */\n\n";
         }
+        $contents .= $file_contents;
       }
       else {
         // File is not readable.
@@ -1068,7 +1062,6 @@ function advagg_missing_file_not_readable($filename, $aggregate_filename = '', $
   return $write_aggregate;
 }
 
-// File save functions.
 /**
  * Save an aggregate given a filename, the files included in it, and the type.
  *
@@ -1191,6 +1184,15 @@ function advagg_save_data($uri, $data, $overwrite = FALSE) {
   // Clear the stat cache.
   module_load_include('inc', 'advagg', 'advagg');
   advagg_clearstatcache($uri);
+
+  // Prepare dir if needed.
+  $dir = dirname($uri);
+  $dir_good = file_prepare_directory($dir, FILE_CREATE_DIRECTORY);
+  if (!$dir_good) {
+    $errors[1] = $t('The directory for @file can not be created or is not writable.', array('@file' => $uri));
+    return $errors;
+  }
+
   // File already exists.
   if (!$overwrite && file_exists($uri) && filesize($uri) > 0) {
     $errors[2] = $t('File (@file) already exits.', array('@file' => $uri));
@@ -1216,10 +1218,12 @@ function advagg_save_data($uri, $data, $overwrite = FALSE) {
   $scheme = file_uri_scheme($uri_dir);
   if ($scheme && file_stream_wrapper_valid_scheme($scheme)) {
     $wrapper = file_stream_wrapper_get_instance_by_scheme($scheme);
-    $wrapper_dir_path = $wrapper->getDirectoryPath();
-    if (!empty($wrapper_dir_path)) {
-      $dir = $wrapper_dir_path . '/' . substr($uri_dir, strlen($scheme . '://'));
-      $uri = $dir . substr($uri, strlen($uri_dir));
+    if ($wrapper && method_exists($wrapper, 'getDirectoryPath')) {
+      $wrapper_dir_path = $wrapper->getDirectoryPath();
+      if (!empty($wrapper_dir_path)) {
+        $dir = $wrapper_dir_path . '/' . substr($uri_dir, strlen($scheme . '://'));
+        $uri = $dir . substr($uri, strlen($uri_dir));
+      }
     }
   }
 
@@ -1342,7 +1346,6 @@ function advagg_rename($source, $destination) {
   return $destination;
 }
 
-// Helper functions.
 /**
  * Send out a fast 404 and exit.
  *

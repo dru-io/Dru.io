@@ -5,7 +5,11 @@
  * Advanced aggregation modifier module.
  */
 
-// Define default variables.
+/**
+ * @addtogroup default_variables
+ * @{
+ */
+
 /**
  * Default value to move all JS to the footer.
  */
@@ -191,7 +195,15 @@ define('ADVAGG_MOD_CSS_DEFER_INLINE_SIZE_LIMIT', 12288);
  */
 define('ADVAGG_MOD_GITHUB_VERSION_LOADCSS', '1.3.1');
 
-// Core hook implementations.
+/**
+ * @} End of "addtogroup default_variables".
+ */
+
+/**
+ * @addtogroup hooks
+ * @{
+ */
+
 /**
  * Implements hook_module_implements_alter().
  */
@@ -206,6 +218,20 @@ function advagg_mod_module_implements_alter(&$implementations, $hook) {
   // Remove advagg_mod. Function gets called directly.
   if ($hook === 'html_head_alter' && array_key_exists('advagg_mod', $implementations)) {
     unset($implementations['advagg_mod']);
+  }
+
+  // Move advagg_mod_css_post_alter to the bottom.
+  if ($hook === 'css_post_alter' && array_key_exists('advagg_mod', $implementations)) {
+    $item = $implementations['advagg_mod'];
+    unset($implementations['advagg_mod']);
+    $implementations['advagg_mod'] = $item;
+  }
+
+  // Move advagg_mod_js_post_alter to the bottom.
+  if ($hook === 'js_post_alter' && array_key_exists('advagg_mod', $implementations)) {
+    $item = $implementations['advagg_mod'];
+    unset($implementations['advagg_mod']);
+    $implementations['advagg_mod'] = $item;
   }
 }
 
@@ -257,7 +283,7 @@ function advagg_mod_init() {
       advagg_save_data($counter_filename, $local_counter);
     }
     else {
-      $shared_counter = (int) file_get_contents($counter_filename);
+      $shared_counter = (int) advagg_file_get_contents($counter_filename);
 
       if ($shared_counter == $local_counter) {
         // Counters are the same, return.
@@ -313,110 +339,6 @@ function advagg_mod_menu() {
 }
 
 /**
- * Implements hook_js_alter().
- */
-function advagg_mod_js_alter(&$js) {
-  if (!module_exists('advagg') || !advagg_enabled()) {
-    return;
-  }
-
-  // Change google analytics inline loader to be inside of an aggregrated file.
-  if (variable_get('advagg_mod_ga_inline_to_file', ADVAGG_MOD_GA_INLINE_TO_FILE)) {
-    advagg_mod_ga_inline_to_file($js);
-  }
-
-  // Only add JS if it's actually needed.
-  if (variable_get('advagg_mod_js_remove_unused', ADVAGG_MOD_JS_REMOVE_UNUSED)) {
-    advagg_remove_js_if_not_used($js);
-  }
-
-  // Change sort order so aggregates do not get split up.
-  if (variable_get('advagg_mod_js_adjust_sort_external', ADVAGG_MOD_JS_ADJUST_SORT_EXTERNAL)
-    || variable_get('advagg_mod_js_adjust_sort_inline', ADVAGG_MOD_JS_ADJUST_SORT_INLINE)
-    || variable_get('advagg_mod_js_adjust_sort_browsers', ADVAGG_MOD_JS_ADJUST_SORT_BROWSERS)
-  ) {
-    advagg_mod_sort_css_js($js, 'js');
-  }
-
-  // Move JS to the footer.
-  advagg_mod_js_move_to_footer($js);
-
-  // Force all JS to be preprocessed.
-  if (variable_get('advagg_mod_js_preprocess', ADVAGG_MOD_JS_PREPROCESS)) {
-    foreach ($js as &$values) {
-      $values['preprocess'] = TRUE;
-      $values['cache'] = TRUE;
-    }
-    unset($values);
-  }
-
-  // Add the defer or the async tag to JS.
-  $jquery_defered = advagg_mod_js_async_defer($js);
-  // Inline JS defer.
-  advagg_mod_inline_defer($js, $jquery_defered);
-
-  // Move all async JS to the header.
-  if (variable_get('advagg_mod_js_async_in_header', ADVAGG_MOD_JS_ASYNC_IN_HEADER)) {
-    foreach ($js as &$values) {
-      // Skip if not file or external.
-      if ($values['type'] !== 'file' && $values['type'] !== 'external') {
-        continue;
-      }
-      // Skip if not async.
-      if (empty($values['async']) && empty($values['attributes']['async'])) {
-        continue;
-      }
-
-      // Move to the header with a group of 1000.
-      $values['scope'] = 'header';
-      $values['group'] = 1000;
-    }
-    unset($values);
-  }
-
-  advagg_mod_prefetch_link($js);
-}
-
-/**
- * Have the browser prefech this domain to open the connection.
- *
- * @param array $js
- *   JS array.
- */
-function advagg_mod_prefetch_link(array &$js) {
-  if (!variable_get('advagg_mod_prefetch', ADVAGG_MOD_PREFETCH)) {
-    return;
-  }
-  foreach ($js as &$values) {
-    if (!isset($values['dns_prefetch'])) {
-      continue;
-    }
-    foreach ($values['dns_prefetch'] as &$url) {
-      // Prefetch stats.g.doubleclick.net domain.
-      if (strpos($url, '//stats.g.doubleclick.net') === FALSE) {
-        continue;
-      }
-      if (variable_get('advagg_resource_hints_preconnect', ADVAGG_RESOURCE_HINTS_PRECONNECT)) {
-        $parse = @parse_url($url);
-        $inline_script = 'var preconnect_support = false; try {if (document.createElement("link").relList.supports("preconnect")) {preconnect_support = true;}} catch (e) {} if (!preconnect_support) { var prefetch = document.createElement("link"); prefetch.href = "https://' . $parse['host'] . '/robots.txt"; prefetch.rel="prefetch"; document.getElementsByTagName("head")[0].appendChild(prefetch);}';
-        $js['advagg_preconnect_support'] = array(
-          'type' => 'inline',
-          'group' => JS_LIBRARY - 1,
-          'weight' => -50000,
-          'scope_lock' => TRUE,
-          'movable' => FALSE,
-          'no_defer' => TRUE,
-          'data' => $inline_script,
-        ) + drupal_js_defaults($inline_script);
-      }
-      else {
-        $url .= '#prefetch';
-      }
-    }
-  }
-}
-
-/**
  * Implements hook_element_info_alter().
  */
 function advagg_mod_element_info_alter(&$type) {
@@ -467,20 +389,29 @@ function advagg_mod_css_alter(&$css) {
     return;
   }
 
-  // Change sort order so aggregates do not get split up.
-  if (variable_get('advagg_mod_css_adjust_sort_external', ADVAGG_MOD_CSS_ADJUST_SORT_EXTERNAL)
-    || variable_get('advagg_mod_css_adjust_sort_inline', ADVAGG_MOD_CSS_ADJUST_SORT_INLINE)
-    || variable_get('advagg_mod_css_adjust_sort_browsers', ADVAGG_MOD_CSS_ADJUST_SORT_BROWSERS)
-  ) {
-    advagg_mod_sort_css_js($css, 'css');
-  }
-
   // Force all CSS to be preprocessed.
   if (variable_get('advagg_mod_css_preprocess', ADVAGG_MOD_CSS_PREPROCESS)) {
     foreach ($css as &$values) {
       $values['preprocess'] = TRUE;
     }
     unset($values);
+  }
+}
+
+/**
+ * Implements hook_css_post_alter().
+ */
+function advagg_mod_css_post_alter(&$css) {
+  if (!module_exists('advagg') || !advagg_enabled()) {
+    return;
+  }
+
+  // Change sort order so aggregates do not get split up.
+  if (variable_get('advagg_mod_css_adjust_sort_external', ADVAGG_MOD_CSS_ADJUST_SORT_EXTERNAL)
+    || variable_get('advagg_mod_css_adjust_sort_inline', ADVAGG_MOD_CSS_ADJUST_SORT_INLINE)
+    || variable_get('advagg_mod_css_adjust_sort_browsers', ADVAGG_MOD_CSS_ADJUST_SORT_BROWSERS)
+  ) {
+    advagg_mod_sort_css_js($css, 'css');
   }
 }
 
@@ -502,7 +433,6 @@ function advagg_mod_html_head_alter(&$head_elements) {
       && !empty($element['#attributes']['href'])
     ) {
       $type = 'file';
-      // @ignore sniffer_whitespace_openbracketspacing_openingwhitespace
       if (strpos($element['#attributes']['href'], 'http://') === 0
         || strpos($element['#attributes']['href'], 'https://') === 0
         || strpos($element['#attributes']['href'], '//') === 0
@@ -526,7 +456,6 @@ function advagg_mod_html_head_alter(&$head_elements) {
       && !empty($element['#attributes']['src'])
     ) {
       $type = 'file';
-      // @ignore sniffer_whitespace_openbracketspacing_openingwhitespace
       if (strpos($element['#attributes']['src'], 'http://') === 0
         || strpos($element['#attributes']['src'], 'https://') === 0
         || strpos($element['#attributes']['src'], '//') === 0
@@ -623,7 +552,15 @@ function advagg_mod_process_move_js(array &$variables) {
   }
 }
 
-// AdvAgg hook implementations.
+/**
+ * @} End of "addtogroup hooks".
+ */
+
+/**
+ * @addtogroup advagg_hooks
+ * @{
+ */
+
 /**
  * Implements hook_advagg_modify_js_pre_render_alter().
  */
@@ -765,22 +702,31 @@ function advagg_mod_advagg_modify_css_pre_render_alter(&$children, &$elements) {
     return;
   }
 
-  // Return early if we're in a page that is not specified in the settings for
-  // specific pages.
-  if (!advagg_mod_css_defer_page()) {
-    return;
-  }
-
   // Return early if this setting is disabled.
   list(, , , , , , , , , , $css_defer) = advagg_mod_get_lists(array(), $elements['#items']);
   if (empty($css_defer)) {
     return;
   }
 
-  // Return early if we're in the admin theme and this setting is disabled.
-  $css_defer_admin = variable_get('advagg_mod_css_defer_admin', ADVAGG_MOD_CSS_DEFER_ADMIN);
-  if (empty($css_defer_admin) && path_is_admin(current_path())) {
-    return;
+  $critical_css = FALSE;
+  foreach ($elements['#items'] as $item) {
+    if ($item['type'] === 'inline' && !empty($item['critical-css'])) {
+      $critical_css = TRUE;
+    }
+  }
+
+  if (!$critical_css) {
+    // Return early if we're in a page that is not specified in the settings for
+    // specific pages.
+    if (!advagg_mod_css_defer_page()) {
+      return;
+    }
+
+    // Return early if we're in the admin theme and this setting is disabled.
+    $css_defer_admin = variable_get('advagg_mod_css_defer_admin', ADVAGG_MOD_CSS_DEFER_ADMIN);
+    if (empty($css_defer_admin) && path_is_admin(current_path())) {
+      return;
+    }
   }
 
   $css_defer_js_code = variable_get('advagg_mod_css_defer_js_code', ADVAGG_MOD_CSS_DEFER_JS_CODE);
@@ -791,7 +737,7 @@ function advagg_mod_advagg_modify_css_pre_render_alter(&$children, &$elements) {
   $type = 'external';
   // https://github.com/filamentgroup/loadCSS.
   $version = variable_get('advagg_mod_github_version_loadcss', ADVAGG_MOD_GITHUB_VERSION_LOADCSS);
-  $data = "//cdn.rawgit.com/filamentgroup/loadCSS/$version/src/loadCSS.js";
+  $data = "//cdn.rawgit.com/filamentgroup/loadCSS/v$version/src/loadCSS.js";
   $min = '';
   if (variable_get('advagg_cache_level', ADVAGG_CACHE_LEVEL) >= 0) {
     $min = '.min';
@@ -830,7 +776,7 @@ function advagg_mod_advagg_modify_css_pre_render_alter(&$children, &$elements) {
     // Make cssrelpreload available.
     $type = 'external';
     // https://github.com/filamentgroup/loadCSS.
-    $data = "//cdn.rawgit.com/filamentgroup/loadCSS/$version/src/cssrelpreload.js";
+    $data = "//cdn.rawgit.com/filamentgroup/loadCSS/v$version/src/cssrelpreload.js";
     $min = '';
     if (variable_get('advagg_cache_level', ADVAGG_CACHE_LEVEL) >= 0) {
       $min = '.min';
@@ -990,12 +936,13 @@ function advagg_mod_advagg_current_hooks_hash_array_alter(&$aggregate_settings) 
     $aggregate_settings['variables']['advagg_mod_css_translate_lang'] = isset($GLOBALS['language']->language) ? $GLOBALS['language']->language : 'en';
   }
 
+  $aggregate_settings['variables']['advagg_mod_css_adjust_sort_external'] = variable_get('advagg_mod_css_adjust_sort_external', ADVAGG_MOD_CSS_ADJUST_SORT_EXTERNAL);
+  $aggregate_settings['variables']['advagg_mod_css_adjust_sort_inline'] = variable_get('advagg_mod_css_adjust_sort_inline', ADVAGG_MOD_CSS_ADJUST_SORT_INLINE);
+
   // Make safe if using the aggressive cache.
   if (variable_get('advagg_cache_level', ADVAGG_CACHE_LEVEL) >= 5) {
     $aggregate_settings['variables']['advagg_mod_css_preprocess'] = variable_get('advagg_mod_css_preprocess', ADVAGG_MOD_CSS_PREPROCESS);
     $aggregate_settings['variables']['advagg_mod_css_head_extract'] = variable_get('advagg_mod_css_head_extract', ADVAGG_MOD_CSS_HEAD_EXTRACT);
-    $aggregate_settings['variables']['advagg_mod_css_adjust_sort_external'] = variable_get('advagg_mod_css_adjust_sort_external', ADVAGG_MOD_CSS_ADJUST_SORT_EXTERNAL);
-    $aggregate_settings['variables']['advagg_mod_css_adjust_sort_inline'] = variable_get('advagg_mod_css_adjust_sort_inline', ADVAGG_MOD_CSS_ADJUST_SORT_INLINE);
     $aggregate_settings['variables']['advagg_mod_css_adjust_sort_browsers'] = variable_get('advagg_mod_css_adjust_sort_browsers', ADVAGG_MOD_CSS_ADJUST_SORT_BROWSERS);
     $aggregate_settings['variables']['advagg_mod_css_defer'] = variable_get('advagg_mod_css_defer', ADVAGG_MOD_CSS_DEFER);
     $aggregate_settings['variables']['advagg_mod_css_defer_js_code'] = variable_get('advagg_mod_css_defer_js_code', ADVAGG_MOD_CSS_DEFER_JS_CODE);
@@ -1004,7 +951,196 @@ function advagg_mod_advagg_current_hooks_hash_array_alter(&$aggregate_settings) 
   }
 }
 
-// Helper Functions.
+/**
+ * @} End of "addtogroup advagg_hooks".
+ */
+
+/**
+ * @addtogroup 3rd_party_hooks
+ * @{
+ */
+
+/**
+ * Implements hook_magic().
+ */
+function advagg_mod_magic(array $magic_settings, $theme) {
+  // $magic_settings is READ ONLY.
+  $settings = array();
+
+  // If possible disable access and set default to false.
+  if (!isset($magic_settings['css']['magic_embedded_mqs']['#access'])) {
+    $settings['css']['magic_embedded_mqs']['#access'] = FALSE;
+  }
+  if (!isset($magic_settings['css']['magic_embedded_mqs']['#default_value'])) {
+    $settings['css']['magic_embedded_mqs']['#default_value'] = FALSE;
+  }
+  if (!isset($magic_settings['js']['magic_footer_js']['#access'])) {
+    $settings['js']['magic_footer_js']['#access'] = FALSE;
+  }
+  if (!isset($magic_settings['js']['magic_footer_js']['#default_value'])) {
+    $settings['js']['magic_footer_js']['#default_value'] = FALSE;
+  }
+  if (!isset($magic_settings['js']['magic_library_head']['#access'])) {
+    $settings['js']['magic_library_head']['#access'] = FALSE;
+  }
+  if (!isset($magic_settings['js']['magic_library_head']['#default_value'])) {
+    $settings['js']['magic_library_head']['#default_value'] = FALSE;
+  }
+  if (!isset($magic_settings['js']['magic_experimental_js']['#access'])) {
+    $settings['js']['magic_experimental_js']['#access'] = FALSE;
+  }
+  if (!isset($magic_settings['js']['magic_experimental_js']['#default_value'])) {
+    $settings['js']['magic_experimental_js']['#default_value'] = FALSE;
+  }
+
+  // Add in our own validate function so we can preprocess variables before
+  // they are saved.
+  $settings['#validate'] = array('advagg_mod_magic_form_validate');
+  // Must not contain anything from the $magic_settings array.
+  return $settings;
+}
+
+/**
+ * @} End of "addtogroup 3rd_party_hooks".
+ */
+
+/**
+ * Form validation handler. Disable certain magic settings before being saved.
+ */
+function advagg_mod_magic_form_validate($form, &$form_state) {
+  // Disable magic functionality if it is a duplicate of AdvAgg.
+  $form_state['values']['magic_embedded_mqs'] = 0;
+  $form_state['values']['magic_footer_js'] = 0;
+  $form_state['values']['magic_library_head'] = 0;
+  $form_state['values']['magic_experimental_js'] = 0;
+}
+
+/**
+ * Alter the js array.
+ *
+ * @param array $js
+ *   JS array.
+ */
+function advagg_mod_js_pre_alter(array &$js) {
+  if (!module_exists('advagg') || !advagg_enabled()) {
+    return;
+  }
+
+  // Change google analytics inline loader to be inside of an aggregrated file.
+  if (variable_get('advagg_mod_ga_inline_to_file', ADVAGG_MOD_GA_INLINE_TO_FILE)) {
+    advagg_mod_ga_inline_to_file($js);
+  }
+}
+
+/**
+ * Alter the js array.
+ *
+ * @param array $js
+ *   JS array.
+ */
+function advagg_mod_js_post_alter(array &$js) {
+  if (!module_exists('advagg') || !advagg_enabled()) {
+    return;
+  }
+
+  // Only add JS if it's actually needed.
+  if (variable_get('advagg_mod_js_remove_unused', ADVAGG_MOD_JS_REMOVE_UNUSED)) {
+    advagg_remove_js_if_not_used($js);
+  }
+
+  // Change sort order so aggregates do not get split up.
+  if (variable_get('advagg_mod_js_adjust_sort_external', ADVAGG_MOD_JS_ADJUST_SORT_EXTERNAL)
+    || variable_get('advagg_mod_js_adjust_sort_inline', ADVAGG_MOD_JS_ADJUST_SORT_INLINE)
+    || variable_get('advagg_mod_js_adjust_sort_browsers', ADVAGG_MOD_JS_ADJUST_SORT_BROWSERS)
+  ) {
+    advagg_mod_sort_css_js($js, 'js');
+  }
+
+  // Move JS to the footer.
+  advagg_mod_js_move_to_footer($js);
+
+  // Force all JS to be preprocessed.
+  if (variable_get('advagg_mod_js_preprocess', ADVAGG_MOD_JS_PREPROCESS)) {
+    foreach ($js as &$values) {
+      if (!empty($values['preprocess_lock'])) {
+        continue;
+      }
+      $values['preprocess'] = TRUE;
+      $values['cache'] = TRUE;
+    }
+    unset($values);
+  }
+
+  // Add the defer or the async tag to JS.
+  $jquery_defered = advagg_mod_js_async_defer($js);
+  // Inline JS defer.
+  advagg_mod_inline_defer($js, $jquery_defered);
+
+  // Move all async JS to the header.
+  if (variable_get('advagg_mod_js_async_in_header', ADVAGG_MOD_JS_ASYNC_IN_HEADER)) {
+    foreach ($js as &$values) {
+      // Skip if not file or external.
+      if ($values['type'] !== 'file' && $values['type'] !== 'external') {
+        continue;
+      }
+      // Skip if not async.
+      if (empty($values['async']) && empty($values['attributes']['async'])) {
+        continue;
+      }
+      // Skip if scope locked.
+      if (!empty($values['scope_lock'])) {
+        continue;
+      }
+
+      // Move to the header with a group of 1000.
+      $values['scope'] = 'header';
+      $values['group'] = 1000;
+    }
+    unset($values);
+  }
+
+  advagg_mod_prefetch_link($js);
+}
+
+/**
+ * Have the browser prefech this domain to open the connection.
+ *
+ * @param array $js
+ *   JS array.
+ */
+function advagg_mod_prefetch_link(array &$js) {
+  if (!variable_get('advagg_mod_prefetch', ADVAGG_MOD_PREFETCH)) {
+    return;
+  }
+  foreach ($js as &$values) {
+    if (!isset($values['dns_prefetch'])) {
+      continue;
+    }
+    foreach ($values['dns_prefetch'] as &$url) {
+      // Prefetch stats.g.doubleclick.net domain.
+      if (strpos($url, '//stats.g.doubleclick.net') === FALSE) {
+        continue;
+      }
+      if (variable_get('advagg_resource_hints_preconnect', ADVAGG_RESOURCE_HINTS_PRECONNECT)) {
+        $parse = @parse_url($url);
+        $inline_script = 'var preconnect_support = false; try {if (document.createElement("link").relList.supports("preconnect")) {preconnect_support = true;}} catch (e) {} if (!preconnect_support) { var prefetch = document.createElement("link"); prefetch.href = "https://' . $parse['host'] . '/robots.txt"; prefetch.rel="prefetch"; document.getElementsByTagName("head")[0].appendChild(prefetch);}';
+        $js['advagg_preconnect_support'] = array(
+          'type' => 'inline',
+          'group' => JS_LIBRARY - 1,
+          'weight' => -50000,
+          'scope_lock' => TRUE,
+          'movable' => FALSE,
+          'no_defer' => TRUE,
+          'data' => $inline_script,
+        ) + drupal_js_defaults($inline_script);
+      }
+      else {
+        $url .= '#prefetch';
+      }
+    }
+  }
+}
+
 /**
  * Remove ajaxPageState CSS/JS if misc/ajax.js is not used.
  *
@@ -1101,17 +1237,25 @@ function advagg_mod_get_lists(array $js = array(), array $css = array()) {
 
     // Get inline wrap js skip list string and convert it to an array.
     $inline_js_wrap_skip_list = array_filter(array_map('trim', explode("\n", variable_get('advagg_mod_wrap_inline_js_skip_list', ADVAGG_MOD_WRAP_INLINE_JS_SKIP_LIST))));
+    $inline_js_wrap_skip_list[] = '.write(';
+    $inline_js_wrap_skip_list[] = '._fbq';
+    $inline_js_wrap_skip_list[] = '.fbq';
+    $inline_js_wrap_skip_list[] = 'gtm.start';
     if (module_exists('devel')) {
       $inline_js_wrap_skip_list[] = 'function krumo(';
     }
     if (module_exists('googleanalytics')) {
       $inline_js_wrap_skip_list[] = '_gaq.push(["_';
       $inline_js_wrap_skip_list[] = '"GoogleAnalyticsObject"';
+      $header_inline_list[] = 'GoogleAnalyticsObject';
     }
 
     // Get inline defer js skip list string and convert it to an array.
     $inline_js_defer_skip_list = array_filter(array_map('trim', explode("\n", variable_get('advagg_mod_defer_inline_js_skip_list', ADVAGG_MOD_DEFER_INLINE_JS_SKIP_LIST))));
     $inline_js_defer_skip_list[] = 'loadCSS(';
+    $inline_js_defer_skip_list[] = '._fbq';
+    $inline_js_defer_skip_list[] = '.fbq';
+    $inline_js_defer_skip_list[] = 'gtm.start';
     if (module_exists('googleanalytics')) {
       $inline_js_defer_skip_list[] = '_gaq.push(["_';
       $inline_js_defer_skip_list[] = '"GoogleAnalyticsObject"';
@@ -1238,6 +1382,10 @@ function advagg_mod_js_move_to_footer(array &$js) {
     // If scope is not set, this js is not getting used. remove it.
     if (!isset($values['scope'])) {
       unset($js[$key]);
+      continue;
+    }
+
+    if (strpos($values['scope'], ':') !== FALSE) {
       continue;
     }
 
@@ -1381,11 +1529,11 @@ function advagg_mod_js_async_defer(array &$js) {
     }
 
     // Everything is defer.
-    if (variable_get('advagg_mod_js_defer', ADVAGG_MOD_JS_DEFER)) {
+    if (variable_get('advagg_mod_js_defer', ADVAGG_MOD_JS_DEFER) && empty($values['nodefer'])) {
       $values['defer'] = TRUE;
     }
     // Everything is async.
-    if (variable_get('advagg_mod_js_async', ADVAGG_MOD_JS_ASYNC)) {
+    if (variable_get('advagg_mod_js_async', ADVAGG_MOD_JS_ASYNC) && empty($values['noasync'])) {
       $values['async'] = TRUE;
     }
 
@@ -1873,7 +2021,6 @@ advagg_mod_${counter}_check();";
  *   String: css or js.
  */
 function advagg_mod_sort_css_js(array &$array, $type) {
-  // @ignore sniffer_whitespace_openbracketspacing_openingwhitespace:3
   if (($type === 'js' && variable_get('advagg_mod_js_adjust_sort_external', ADVAGG_MOD_JS_ADJUST_SORT_EXTERNAL))
     || ($type === 'css' && variable_get('advagg_mod_css_adjust_sort_external', ADVAGG_MOD_CSS_ADJUST_SORT_EXTERNAL))
   ) {
@@ -2150,7 +2297,7 @@ function advagg_mod_inline_js(array &$js) {
     }
     $filename = $values['data'];
     if (file_exists($filename)) {
-      $contents = (string) @file_get_contents($filename);
+      $contents = (string) @advagg_file_get_contents($filename);
     }
     // Allow other modules to modify this files contents.
     // Call hook_advagg_get_js_file_contents_alter().
@@ -2287,7 +2434,6 @@ function advagg_mod_js_contains_jquery_drupal($filename, $type = '') {
     if ($type === 'inline') {
       $contents = $filename;
     }
-    // @ignore sniffer_whitespace_openbracketspacing_openingwhitespace:1
     elseif ($type === 'external'
           || strpos($filename, 'http://') === 0
           || strpos($filename, 'https://') === 0
@@ -2299,7 +2445,7 @@ function advagg_mod_js_contains_jquery_drupal($filename, $type = '') {
       }
     }
     elseif (file_exists($filename)) {
-      $contents = (string) @file_get_contents($filename);
+      $contents = (string) @advagg_file_get_contents($filename);
     }
   }
 
@@ -2341,7 +2487,10 @@ function advagg_mod_js_contains_jquery_drupal($filename, $type = '') {
  */
 function advagg_mod_ga_inline_to_file(array &$js) {
   // Do nothing if the googleanalytics module is not enabled.
-  if (!module_exists('googleanalytics')) {
+  if (!module_exists('googleanalytics')
+    || !is_callable('googleanalytics_api')
+    || !is_callable('_googleanalytics_cache')
+  ) {
     return;
   }
 
@@ -2563,7 +2712,6 @@ function advagg_mod_js_inline_processor(&$html) {
     $callback = 'advagg_mod_wrap_inline_js';
     // Wrap inline JS with a check so that it only runs once Drupal.settings &
     // jQuery are not undefined.
-    // @ignore sniffer_whitespace_openbracketspacing_openingwhitespace
     if (variable_get('advagg_mod_wrap_inline_js_xpath', ADVAGG_MOD_WRAP_INLINE_JS_XPATH)) {
       $html = advagg_mod_xpath_script_wrapper($html);
     }
@@ -2571,57 +2719,6 @@ function advagg_mod_js_inline_processor(&$html) {
       $html = preg_replace_callback($pattern, $callback, $html);
     }
   }
-}
-
-/**
- * Implements hook_magic().
- */
-function advagg_mod_magic(array $magic_settings, $theme) {
-  // $magic_settings is READ ONLY.
-  $settings = array();
-
-  // If possible disable access and set default to false.
-  if (!isset($magic_settings['css']['magic_embedded_mqs']['#access'])) {
-    $settings['css']['magic_embedded_mqs']['#access'] = FALSE;
-  }
-  if (!isset($magic_settings['css']['magic_embedded_mqs']['#default_value'])) {
-    $settings['css']['magic_embedded_mqs']['#default_value'] = FALSE;
-  }
-  if (!isset($magic_settings['js']['magic_footer_js']['#access'])) {
-    $settings['js']['magic_footer_js']['#access'] = FALSE;
-  }
-  if (!isset($magic_settings['js']['magic_footer_js']['#default_value'])) {
-    $settings['js']['magic_footer_js']['#default_value'] = FALSE;
-  }
-  if (!isset($magic_settings['js']['magic_library_head']['#access'])) {
-    $settings['js']['magic_library_head']['#access'] = FALSE;
-  }
-  if (!isset($magic_settings['js']['magic_library_head']['#default_value'])) {
-    $settings['js']['magic_library_head']['#default_value'] = FALSE;
-  }
-  if (!isset($magic_settings['js']['magic_experimental_js']['#access'])) {
-    $settings['js']['magic_experimental_js']['#access'] = FALSE;
-  }
-  if (!isset($magic_settings['js']['magic_experimental_js']['#default_value'])) {
-    $settings['js']['magic_experimental_js']['#default_value'] = FALSE;
-  }
-
-  // Add in our own validate function so we can preprocess variables before
-  // they are saved.
-  $settings['#validate'] = array('advagg_mod_magic_form_validate');
-  // Must not contain anything from the $magic_settings array.
-  return $settings;
-}
-
-/**
- * Form validation handler. Disable certain magic settings before being saved.
- */
-function advagg_mod_magic_form_validate($form, &$form_state) {
-  // Disable magic functionality if it is a duplicate of AdvAgg.
-  $form_state['values']['magic_embedded_mqs'] = 0;
-  $form_state['values']['magic_footer_js'] = 0;
-  $form_state['values']['magic_library_head'] = 0;
-  $form_state['values']['magic_experimental_js'] = 0;
 }
 
 /**
@@ -2708,6 +2805,7 @@ function advagg_mod_devel_shutdown_query($queries) {
       advagg_mod_devel_query_put_contents($queries);
     }
     else {
+      // @codingStandardsIgnoreLine
       $output = '</div>' . dprint_r($queries, TRUE);
     }
     return $output;

@@ -7,7 +7,6 @@
  * Functions used for clearing caches and killing files.
  */
 
-// Cache and file flushing.
 /**
  * Uses the database to scan CSS/JS files for changes.
  *
@@ -91,16 +90,18 @@ function advagg_scan_for_changes() {
  * @return array
  *   Array of files that have changed and caches flushed.
  */
-function advagg_push_new_changes() {
+function advagg_push_new_changes(array $files = array()) {
+  $results = array();
+  // Scan the file system for changes to CSS/JS files.
+  if (empty($files)) {
+    $files = advagg_scan_for_changes();
+  }
+
   // Clear some static caches.
   drupal_static_reset('advagg_get_info_on_file');
   drupal_static_reset('advagg_drupal_hash_base64');
   drupal_static_reset('advagg_current_hooks_hash_array');
   drupal_static_reset('advagg_get_current_hooks_hash');
-
-  // Scan the file system for changes to CSS/JS files.
-  $files = advagg_scan_for_changes();
-  $results = array();
 
   // If something changed, flush the correct caches so that change goes out.
   if (!empty($files)) {
@@ -897,7 +898,7 @@ function advagg_detect_subfile_changes($filename, array $subfiles, $keyname, $sa
     // Get the current info on the file.
     if (file_exists($subfile)) {
       $current_file_info = array(
-        'hash' => drupal_hash_base64((string) @file_get_contents($subfile)),
+        'hash' => drupal_hash_base64((string) @advagg_file_get_contents($subfile)),
         'size' => filesize($subfile),
         'mtime' => filemtime($subfile),
       );

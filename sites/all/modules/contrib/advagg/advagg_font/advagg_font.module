@@ -5,7 +5,11 @@
  * Advanced aggregation font module.
  */
 
-// Define default variables.
+/**
+ * @addtogroup default_variables
+ * @{
+ */
+
 /**
  * Default value to use font face observer for asynchronous font loading.
  */
@@ -26,7 +30,15 @@ define('ADVAGG_FONT_NO_FOUT', 0);
  */
 define('ADVAGG_FONT_GITHUB_VERSION_FONTFACEOBSERVER', '2.0.9');
 
-// Core hook implementations.
+/**
+ * @} End of "addtogroup default_variables".
+ */
+
+/**
+ * @addtogroup hooks
+ * @{
+ */
+
 /**
  * Implements hook_module_implements_alter().
  */
@@ -100,7 +112,7 @@ function advagg_font_page_alter(&$page) {
   }
   if ($advagg_font_ffo == 6) {
     $current_version = variable_get('advagg_font_github_version_fontfaceobserver', ADVAGG_FONT_GITHUB_VERSION_FONTFACEOBSERVER);
-    $page['content']['#attached']['js']["https://cdn.rawgit.com/bramstein/fontfaceobserver/$current_version/fontfaceobserver.js"] = array(
+    $page['content']['#attached']['js']["https://cdn.rawgit.com/bramstein/fontfaceobserver/v$current_version/fontfaceobserver.js"] = array(
       'type' => 'external',
       'async' => TRUE,
       'defer' => TRUE,
@@ -122,7 +134,7 @@ function advagg_font_js_alter(&$js) {
     foreach ($js as $name => &$values) {
       if ($values['type'] === 'file' && stripos($name, '/fontfaceobserver.js') !== FALSE && is_readable($values['data'])) {
         $values['type'] = 'inline';
-        $values['data'] = (string) @file_get_contents($values['data']);
+        $values['data'] = (string) @advagg_file_get_contents($values['data']);
       }
     }
   }
@@ -150,7 +162,15 @@ function advagg_font_menu() {
   return $items;
 }
 
-// Contrib hook implementations.
+/**
+ * @} End of "addtogroup hooks".
+ */
+
+/**
+ * @addtogroup 3rd_party_hooks
+ * @{
+ */
+
 /**
  * Implements hook_libraries_info().
  */
@@ -182,13 +202,25 @@ function advagg_font_libraries_info() {
 }
 
 /**
+ * @} End of "addtogroup 3rd_party_hooks".
+ */
+
+/**
+ * @addtogroup advagg_hooks
+ * @{
+ */
+
+/**
  * Implements hook_advagg_current_hooks_hash_array_alter().
  */
 function advagg_font_advagg_current_hooks_hash_array_alter(&$aggregate_settings) {
   $aggregate_settings['variables']['advagg_font_fontfaceobserver'] = variable_get('advagg_font_fontfaceobserver', ADVAGG_FONT_FONTFACEOBSERVER);
 }
 
-// Helper functions.
+/**
+ * @} End of "addtogroup advagg_hooks".
+ */
+
 /**
  * Get the replacements array for the css.
  *
@@ -329,10 +361,10 @@ function advagg_font_get_replacements_array($css_string) {
     // From advagg_load_stylesheet_content().
     // Perform some safe CSS optimizations.
     // Regexp to match comment blocks.
-    $comment     = '/\*[^*]*\*+(?:[^/*][^*]*\*+)*/';
     // Regexp to match double quoted strings.
-    $double_quot = '"[^"\\\\]*(?:\\\\.[^"\\\\]*)*"';
     // Regexp to match single quoted strings.
+    $comment     = '/\*[^*]*\*+(?:[^/*][^*]*\*+)*/';
+    $double_quot = '"[^"\\\\]*(?:\\\\.[^"\\\\]*)*"';
     $single_quot = "'[^'\\\\]*(?:\\\\.[^'\\\\]*)*'";
     // Strip all comment blocks, but keep double/single quoted strings.
     $selectors_stripped = preg_replace(

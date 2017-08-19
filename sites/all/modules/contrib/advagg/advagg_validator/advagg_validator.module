@@ -5,7 +5,11 @@
  * Advanced aggregation validation module.
  */
 
-// Define default variables.
+/**
+ * @addtogroup default_variables
+ * @{
+ */
+
 /**
  * Default css lint ignore settings.
  */
@@ -15,6 +19,15 @@ define('ADVAGG_VALIDATOR_CSSLINT_IGNORE', '');
  * Default js hint ignore settings.
  */
 define('ADVAGG_VALIDATOR_JSHINT_IGNORE', '');
+
+/**
+ * @} End of "addtogroup default_variables".
+ */
+
+/**
+ * @addtogroup hooks
+ * @{
+ */
 
 /**
  * Implements hook_menu().
@@ -95,3 +108,7 @@ function advagg_validator_menu_alter(&$items) {
     );
   }
 }
+
+/**
+ * @} End of "addtogroup hooks".
+ */

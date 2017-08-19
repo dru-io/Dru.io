@@ -125,7 +125,7 @@ class UltimateCronQueueSettings extends UltimateCronTaggedSettings {
       }
       catch (Throwable $e) {
         // Just continue ...
-        watchdog($job->hook['module'], "Queue item @item_id from queue @queue failed with message @message", array(
+        watchdog_exception($job->hook['module'], $e, "Queue item @item_id from queue @queue failed with message @message", array(
           '@item_id' => $item->item_id,
           '@queue' => $settings['queue']['name'],
           '@message' => (string) $e,
@@ -133,7 +133,7 @@ class UltimateCronQueueSettings extends UltimateCronTaggedSettings {
       }
       catch (Exception $e) {
         // Just continue ...
-        watchdog($job->hook['module'], "Queue item @item_id from queue @queue failed with message @message", array(
+        watchdog_exception($job->hook['module'], $e, "Queue item @item_id from queue @queue failed with message @message", array(
           '@item_id' => $item->item_id,
           '@queue' => $settings['queue']['name'],
           '@message' => (string) $e,

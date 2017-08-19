@@ -11,6 +11,11 @@ if (defined('PHP_VERSION_ID') && constant('PHP_VERSION_ID') >= 50300) {
 }
 
 /**
+ * @addtogroup advagg_hooks
+ * @{
+ */
+
+/**
  * Implements hook_advagg_get_info_on_files_alter().
  *
  * Used to make sure the info is up to date in the cache.
@@ -182,6 +187,10 @@ function advagg_js_compress_advagg_save_aggregate_alter(&$files_to_save, $aggreg
 }
 
 /**
+ * @} End of "addtogroup advagg_hooks".
+ */
+
+/**
  * Get a list of enabled compressors.
  *
  * @param array $aggregate_settings
@@ -255,17 +264,15 @@ function advagg_js_compress_get_enabled_compressors(array $aggregate_settings = 
  *   FALSE to disable logging to watchdog on failure.
  * @param bool $test_ratios
  *   FALSE to disable compression ratio testing.
+ * @param bool $force_run
+ *   TRUE to skip cache and force the compression test.
  */
-function advagg_js_compress_prep(&$contents, $filename, array $aggregate_settings, $add_licensing = TRUE, $log_errors = TRUE, $test_ratios = TRUE) {
+function advagg_js_compress_prep(&$contents, $filename, array $aggregate_settings, $add_licensing = TRUE, $log_errors = TRUE, $test_ratios = TRUE, $force_run = FALSE) {
   // Get the info on this file.
   module_load_include('inc', 'advagg', 'advagg');
   $compressor = $aggregate_settings['variables']['advagg_js_compressor'];
 
   if ($compressor == 0) {
-    return;
-  }
-  // Do nothing if the cache settings are set to Development.
-  if (variable_get('advagg_cache_level', ADVAGG_CACHE_LEVEL) < 0) {
     return;
   }
   // Do nothing if the file is already minified.
@@ -318,7 +325,7 @@ function advagg_js_compress_prep(&$contents, $filename, array $aggregate_setting
   $cache_id = 'advagg:js_compress:' . $compressor . ':' . $info['filename_hash'];
   $cache_id .= !empty($info['content_hash']) ? ':' . $info['content_hash'] : '';
   $cache = cache_get($cache_id, 'cache_advagg_aggregates');
-  if (!empty($cache->data)) {
+  if (!$force_run && !empty($cache->data)) {
     $contents = $cache->data;
   }
   else {
@@ -346,10 +353,17 @@ function advagg_js_compress_prep(&$contents, $filename, array $aggregate_setting
     // extraneous/wrong chars at the end of the string. This work-around will
     // remove these chars if necessary. See https://www.drupal.org/node/2627468.
     // Also see https://github.com/sqmk/pecl-jsmin/issues/46.
-    $a = strrpos($contents, ';');
-    $b = strrpos($contents, '}');
-    $c = strrpos($contents, ')');
-    $contents = substr($contents, 0, 1 + max($a, $b, $c));
+    if ($compressor == 3 || $compressor == 5) {
+      $a = strrpos($contents, ';');
+      $b = strrpos($contents, '}');
+      $c = strrpos($contents, ')');
+
+      // Simple scripts can just end, check to make sure there's a
+      // match before cutting.
+      if ($a !== FALSE || $b !== FALSE || $c !== FALSE) {
+        $contents = substr($contents, 0, 1 + max($a, $b, $c));
+      }
+    }
 
     // Ensure that $contents ends with ; or }.
     if (strpbrk(substr(trim($contents), -1), ';}') === FALSE) {
@@ -390,6 +404,11 @@ function advagg_js_compress_prep(&$contents, $filename, array $aggregate_setting
       $url = file_create_url($filename);
       $contents = "/* Source and licensing information for the line(s) below can be found at $url. */\n" . $contents . ";\n/* Source and licensing information for the above line(s) can be found at $url. */\n";
     }
+  }
+
+  // Reset if cache settings are set to Development.
+  if (variable_get('advagg_cache_level', ADVAGG_CACHE_LEVEL) < 0) {
+    $contents = $contents_before;
   }
 }
 
@@ -525,6 +544,7 @@ function advagg_js_compress_run_test($filename, array $info = array(), array $co
     foreach ($compressor_list as $key => $name) {
       $results[$key] = array('code' => -1, 'ratio' => 0, 'name' => $name);
     }
+    $run_locally = TRUE;
     // Run this via httprl if possible.
     if (module_exists('httprl') && httprl_is_background_callback_capable()) {
       // Setup callback options array.
@@ -561,8 +581,16 @@ function advagg_js_compress_run_test($filename, array $info = array(), array $co
           $results[$key] = $sub_result[$key];
         }
       }
+
+      // Try locally if all return back -1 (something wrong with httprl).
+      foreach ($results as $key => $value) {
+        if ($value['code'] != -1) {
+          $run_locally = FALSE;
+          break;
+        }
+      }
     }
-    else {
+    if ($run_locally) {
       // Save results, so if PHP bombs, this file is marked as bad.
       // CACHE_PERMANENT isn't good here. Use 2 weeks from now + 0-45 days.
       // The random 0 to 45 day addition is to prevent a cache stampeed.

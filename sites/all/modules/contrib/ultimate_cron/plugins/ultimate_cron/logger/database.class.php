@@ -418,7 +418,7 @@ class UltimateCronDatabaseLogEntry extends UltimateCronLogEntry {
         $retry++;
         if ($retry > 3) {
           $retry = 0;
-          watchdog('database_logger', (string) $e, array(), WATCHDOG_CRITICAL);
+          watchdog_exception('database_logger', $e, NULL, array(), WATCHDOG_CRITICAL);
           return;
         }
 

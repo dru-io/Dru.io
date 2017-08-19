@@ -6,6 +6,11 @@
  */
 
 /**
+ * @addtogroup 3rd_party_hooks
+ * @{
+ */
+
+/**
  * Implements hook_drush_cache_clear().
  */
 function advagg_drush_cache_clear(&$types) {
@@ -67,6 +72,10 @@ function advagg_drush_command() {
   );
   return $items;
 }
+
+/**
+ * @} End of "addtogroup 3rd_party_hooks".
+ */
 
 /**
  * Callback function for drush advagg-force-new-aggregates.

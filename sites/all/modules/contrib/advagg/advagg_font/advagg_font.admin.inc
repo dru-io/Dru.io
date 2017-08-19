@@ -18,6 +18,9 @@ function advagg_font_admin_settings_form() {
 
   module_load_include('advagg.inc', 'advagg_font');
   $version = advagg_update_github_versions('fontfaceobserver');
+  if (!is_string($version)) {
+    $version = 'NULL';
+  }
   $options = array(
     0 => t('Disabled'),
     6 => t('Externally load the latest from github (version: @version)', array('@version' => $version)),
@@ -107,7 +110,7 @@ function advagg_font_admin_settings_form() {
       continue;
     }
     // Get the file contents.
-    $file_contents = (string) @file_get_contents($row['filename']);
+    $file_contents = (string) @advagg_file_get_contents($row['filename']);
     // Get font names.
     $replacements = advagg_font_get_replacements_array($file_contents);
     if (!empty($replacements)) {
@@ -153,9 +156,10 @@ function advagg_font_admin_settings_form() {
   return system_settings_form($form);
 }
 
-// Submit callback.
 /**
- * Clear out the advagg cache bin when the save configuration button is pressed.
+ * Submit callback, clear out the advagg cache bin.
+ *
+ * @ingroup advagg_forms_callback
  */
 function advagg_font_admin_settings_form_submit($form, &$form_state) {
   // Clear caches.

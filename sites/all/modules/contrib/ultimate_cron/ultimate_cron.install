@@ -251,6 +251,8 @@ function ultimate_cron_enable() {
  * Implements hook_uninstall().
  */
 function ultimate_cron_uninstall() {
+  variable_del('ultimate_cron_disable_scheduled');
+
   db_delete('variable')
     ->condition('name', db_like('default_ultimate_cron_job') . '%', 'LIKE')
     ->execute();
@@ -332,6 +334,18 @@ function ultimate_cron_requirements($phase) {
         $response['severity'] = $response['severity'] > REQUIREMENT_WARNING ? $response['severity'] : REQUIREMENT_WARNING;
         $response['value'][] = $t('Safe mode enabled');
         $response['description'][] = $t('Safe mode enabled. Ultimate Cron is unable to control maximum execution time for cron jobs. This may cause cron jobs to end prematurely.');
+      }
+
+      if (variable_get('ultimate_cron_disable_scheduled', 0)) {
+        $response['severity'] = $response['severity'] > REQUIREMENT_WARNING ? $response['severity'] : REQUIREMENT_WARNING;
+        $response['value'][] = $t('Scheduling disabled');
+        $response['description'][] = $t('Scheduling disabled. Cannot launch scheduled jobs while <tt>ultimate_cron_disable_scheduled</tt> variable is set.');
+      }
+
+      if (variable_get('maintenance_mode', 0)) {
+        $response['severity'] = $response['severity'] > REQUIREMENT_WARNING ? $response['severity'] : REQUIREMENT_WARNING;
+        $response['value'][] = $t('Maintenance mode enabled');
+        $response['description'][] = $t('Maintenance mode enabled. Cannot launch scheduled jobs while in maintenance mode.');
       }
 
       // Compose result.

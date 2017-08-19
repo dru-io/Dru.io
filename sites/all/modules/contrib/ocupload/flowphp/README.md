@@ -10,16 +10,32 @@ PHP library for handling chunk uploads. Library contains helper methods for:
 
 This library is compatible with HTML5 file upload library: https://github.com/flowjs/flow.js
 
-Basic Usage
+How to get started?
 --------------
+Setup Composer: https://getcomposer.org/doc/00-intro.md
+
+Run this command in your project:
+```
+composer require flowjs/flow-php-server
+```
+This will create a vendor directory for you, which contains an autoload.php file.
+
+Create a new php file named `upload.php`:
 ```php
-if (\Flow\Basic::save('./final_file_destination', './chunks_temp_folder')) {
+//Path to autoload.php from current location
+require_once './vendor/autoload.php';
+
+$config = new \Flow\Config();
+$config->setTempDir('./chunks_temp_folder');
+$request = new \Flow\Request();
+if (\Flow\Basic::save('./' . $request->getIdentifier(), $config, $request)) {
   // file saved successfully and can be accessed at './final_file_destination'
 } else {
   // This is not a final chunk or request is invalid, continue to upload.
 }
 ```
-Make sure that `./chunks_temp_folder` path exists. All chunks will be save in this temporary folder.
+
+Make sure that `./chunks_temp_folder` path exists and is writable. All chunks will be saved in this folder.
 
 If you are stuck with this example, please read this issue: [How to use the flow-php-server](https://github.com/flowjs/flow-php-server/issues/3#issuecomment-46979467)
 

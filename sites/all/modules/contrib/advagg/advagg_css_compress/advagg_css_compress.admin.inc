@@ -104,11 +104,12 @@ function advagg_css_compress_admin_settings_form($form, $form_state) {
   return system_settings_form($form);
 }
 
-// Submit callback.
 /**
- * Clear out the advagg cache bin when the save configuration button is pressed.
+ * Submit callback that clears out the advagg cache bin.
  *
  * Also remove default settings inside of the per_file_settings fieldgroup.
+ *
+ * @ingroup advagg_forms_callback
  */
 function advagg_css_compress_admin_settings_form_submit($form, &$form_state) {
   // Clear caches.

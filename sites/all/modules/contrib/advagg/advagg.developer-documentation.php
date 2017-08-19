@@ -6,6 +6,8 @@
  */
 
 /**
+ * Advanced Aggreggates API & development documentation.
+ *
  * @mainpage Advanced Aggreggates API & Developer Documentation
  * Welcome to the Advanced Aggreggates API & development documentation.
  *

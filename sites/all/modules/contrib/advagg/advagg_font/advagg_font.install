@@ -6,6 +6,11 @@
  */
 
 /**
+ * @addtogroup hooks
+ * @{
+ */
+
+/**
  * Implements hook_requirements().
  */
 function advagg_font_requirements($phase) {
@@ -21,6 +26,9 @@ function advagg_font_requirements($phase) {
   // Get local and external fontfaceobserver version numbers.
   module_load_include('advagg.inc', 'advagg_font');
   $version = advagg_update_github_versions('fontfaceobserver');
+  if (!is_string($version)) {
+    $version = 'NULL';
+  }
 
   $lib_info = array();
   if (function_exists('libraries_info')) {
@@ -45,6 +53,7 @@ function advagg_font_requirements($phase) {
 
   // See if locally hosted if not in dev mode.
   if (empty($lib_info)
+    || !$lib_info['installed']
     || (variable_get('advagg_font_fontfaceobserver', ADVAGG_FONT_FONTFACEOBSERVER) == 6
     && variable_get('advagg_cache_level', ADVAGG_CACHE_LEVEL) >= 0
     )
@@ -53,18 +62,23 @@ function advagg_font_requirements($phase) {
       'title' => $t('AdvAgg Font - Host locally'),
       'severity' => REQUIREMENT_WARNING,
       'value' => $t('The fontfaceobserver.js file should be local for better performance.'),
-      'description' => empty($lib_info['version']) ?
-        $t('Directions on how to install it can be found on the <a href="@url">Async Font Loader</a> settings page', array(
-          '@url' => url($config_path . '/advagg/font'),
-        )) :
-        $t('Please go to the <a href="@url">Async Font Loader</a> settings page and choose inline or local.', array(
-          '@url' => url($config_path . '/advagg/font'),
-        )),
     );
+    $advagg_font_url = url($config_path . '/advagg/font');
+    if (empty($lib_info['version'])) {
+      $requirements['advagg_font_rawgithub']['description'] = $t('Directions on how to install it can be found on the <a href="@url">Async Font Loader</a> settings page', array(
+        '@url' => $advagg_font_url,
+      ));
+    }
+    else {
+      $requirements['advagg_font_rawgithub']['description'] = $t('Please go to the <a href="@url">Async Font Loader</a> settings page and choose inline or local.', array(
+        '@url' => $advagg_font_url,
+      ));
+    }
   }
 
   // Check version.
   if (isset($lib_info['version'])
+    && !empty($lib_info['installed'])
     && !empty($version)
     && version_compare($version, $lib_info['version']) >= 1
   ) {
@@ -92,3 +106,7 @@ function advagg_font_requirements($phase) {
 
   return $requirements;
 }
+
+/**
+ * @} End of "addtogroup hooks".
+ */

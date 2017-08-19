@@ -5,7 +5,11 @@
  * Advanced CSS/JS aggregation external compression module.
  */
 
-// Core hook implementations.
+/**
+ * @addtogroup hooks
+ * @{
+ */
+
 /**
  * Implements hook_menu().
  */
@@ -28,7 +32,15 @@ function advagg_ext_compress_menu() {
   return $items;
 }
 
-// Contrib hook implemtations.
+/**
+ * @} End of "addtogroup hooks".
+ */
+
+/**
+ * @addtogroup advagg_hooks
+ * @{
+ */
+
 /**
  * Implements hook_advagg_js_compress_configuration_alter().
  */
@@ -62,7 +74,10 @@ function advagg_ext_compress_advagg_css_compress_configuration_alter(&$options_d
   $options_desc = array($options, $description);
 }
 
-// Helper functions.
+/**
+ * @} End of "addtogroup advagg_hooks".
+ */
+
 /**
  * Compress Javascript using via command line.
  *
@@ -184,7 +199,7 @@ function advagg_ext_compress_string(&$contents, $type, $log_errors) {
   drupal_chmod($new_temp_file);
   $debug = array();
   $output = advagg_ext_compress_execute_cmd($temp_file_full, $type, $debug);
-  $new_contents = file_get_contents($output);
+  $new_contents = advagg_file_get_contents($output);
   if (strpos($new_contents, 'Error') === 0) {
     if ($log_errors) {
       watchdog('advagg_ext_compress', "@a \n<br>\n<br> @b", array(

@@ -6,6 +6,11 @@
  */
 
 /**
+ * @addtogroup default_variables
+ * @{
+ */
+
+/**
  * Default value for which css compression library to use. 0 is Disabled.
  */
 define('ADVAGG_CSS_COMPRESSOR', 2);
@@ -24,6 +29,15 @@ define('ADVAGG_CSS_COMPRESS_INLINE_IF_NOT_CACHEABLE', FALSE);
  * Default value for per file compression settings.
  */
 define('ADVAGG_CSS_COMPRESSOR_FILE_SETTINGS', -10);
+
+/**
+ * @} End of "addtogroup default_variables".
+ */
+
+/**
+ * @addtogroup hooks
+ * @{
+ */
 
 /**
  * Implements hook_menu().
@@ -46,6 +60,15 @@ function advagg_css_compress_menu() {
 
   return $items;
 }
+
+/**
+ * @} End of "addtogroup hooks".
+ */
+
+/**
+ * @addtogroup advagg_hooks
+ * @{
+ */
 
 /**
  * Implements hook_advagg_current_hooks_hash_array_alter().
@@ -86,6 +109,10 @@ function advagg_css_compress_advagg_modify_css_pre_render_alter(&$children, &$el
     unset($values);
   }
 }
+
+/**
+ * @} End of "addtogroup advagg_hooks".
+ */
 
 /**
  * Generate the js compress configuration.

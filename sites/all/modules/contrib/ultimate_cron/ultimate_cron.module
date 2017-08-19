@@ -1611,12 +1611,19 @@ function ultimate_cron_run_scheduled_page($dest = NULL) {
  *   Set Drupal system message instead of watchdog logging.
  */
 function ultimate_cron_run_scheduled($set_message = TRUE) {
-  if (!variable_get('maintenance_mode', 0)) {
-    ultimate_cron_run_launchers();
+  if (variable_get('ultimate_cron_disable_scheduled', 0)) {
+    ultimate_cron_watchdog_message('ultimate_cron', 'Cannot launch scheduled jobs while ultimate_cron_disable_scheduled variable is set!', array(), WATCHDOG_NOTICE, 'error', $set_message);
+
+    return;
   }
-  else {
+
+  if (variable_get('maintenance_mode', 0)) {
     ultimate_cron_watchdog_message('ultimate_cron', 'Cannot launch scheduled jobs while in maintenance mode!', array(), WATCHDOG_NOTICE, 'error', $set_message);
+
+    return;
   }
+
+  ultimate_cron_run_launchers();
 }
 
 /**

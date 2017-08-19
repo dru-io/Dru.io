@@ -6,6 +6,11 @@
  */
 
 /**
+ * @addtogroup advagg_hooks
+ * @{
+ */
+
+/**
  * Implements hook_advagg_get_css_aggregate_contents_alter().
  */
 function advagg_relocate_advagg_get_css_aggregate_contents_alter(&$data, $files, $aggregate_settings) {
@@ -29,35 +34,8 @@ function advagg_relocate_advagg_get_css_aggregate_contents_alter(&$data, $files,
 }
 
 /**
- * Verifies that the external CSS file is from a domain we allow for inlining.
- *
- * @param string $url
- *   The full URL of the css file.
- * @param array $aggregate_settings
- *   Array of settings.
- *
- * @return bool
- *   TRUE if the URL can be inlined.
+ * @} End of "addtogroup advagg_hooks".
  */
-function advagg_relocate_check_domain_of_url($url, array $aggregate_settings) {
-  // Bail if the host or path and query string are empty.
-  $parse = @parse_url($url);
-  if (empty($parse)
-    || empty($parse['host'])
-    || (empty($parse['path']) && empty($parse['query']))
-  ) {
-    return FALSE;
-  }
-
-  // Bail if the host doesn't match one of the listed domains.
-  if (!isset($aggregate_settings['variables']['advagg_relocate_css_file_domains'])) {
-    $aggregate_settings['variables']['advagg_relocate_css_file_domains'] = variable_get('advagg_relocate_css_file_domains', ADVAGG_RELOCATE_CSS_FILE_DOMAINS);
-  }
-  if (strpos($aggregate_settings['variables']['advagg_relocate_css_file_domains'], $parse['host']) === FALSE) {
-    return FALSE;
-  }
-  return TRUE;
-}
 
 /**
  * Gets external CSS files and puts the contents of it in the aggregate.
@@ -92,7 +70,7 @@ function _advagg_relocate_callback(array $matches = array(), array $files = arra
   }
 
   // Check URL.
-  if (!advagg_relocate_check_domain_of_url($matches[1], $_args['aggregate_settings'])) {
+  if (!advagg_relocate_check_domain_of_font_url($matches[1], $_args['aggregate_settings'])) {
     return $matches[0];
   }
 
@@ -112,9 +90,8 @@ function _advagg_relocate_callback(array $matches = array(), array $files = arra
     }
   }
 
-  $font_faces = advagg_relocate_get_remote_data($matches[1], $_args['aggregate_settings']);
+  $font_faces = advagg_relocate_get_remote_font_data($matches[1], $_args['aggregate_settings']);
   return advagg_relocate_font_face_parser($font_faces);
-
 }
 
 /**
@@ -164,7 +141,288 @@ function advagg_relocate_font_face_parser(array $font_faces) {
 }
 
 /**
- * Gets external CSS files and puts the contents of it in the aggregate.
+ * Gets external CSS and JS files; caches and returns response.
+ *
+ * @param string $urls
+ *   URLs to get.
+ * @param string $type
+ *   Will be css or js.
+ * @param array $options
+ *   Array of settings for the http request.
+ * @param bool $force_check
+ *   TRUE if you want to force check the external source.
+ *
+ * @return array
+ *   Array of http responses.
+ */
+function advagg_relocate_get_remote_data($urls, $type, array $options = array(), $force_check = FALSE) {
+  // Set arguments for drupal_http_request().
+  $options += array(
+    'headers' => array(
+      'Accept-Encoding' => 'gzip, deflate',
+      'Connection' => 'close',
+      'Referer' => $GLOBALS['base_root'] . request_uri(),
+    ),
+    'timeout' => 8,
+    'version' => '1.0',
+  );
+  if (function_exists('brotli_uncompress')) {
+    $options['headers']['Accept-Encoding'] .= ', br';
+  }
+
+  // Build CID.
+  $cids = array();
+  foreach ($urls as $k => $v) {
+    $cids["advagg_relocate_{$type}_external:{$k}"] = "advagg_relocate_{$type}_external:{$k}";
+  }
+
+  // Try local cache.
+  $return = array();
+  $responses = array();
+  $cached_data = cache_get_multiple($cids, 'cache_advagg_info');
+  $cached_data = array_merge($cids, $cached_data);
+  $url_to_cid = array();
+  foreach ($cached_data as $cid => $cache) {
+    // Reset headers if needed.
+    if (isset($options['headers']['If-None-Match'])) {
+      unset($options['headers']['If-None-Match']);
+    }
+    if (isset($options['headers']['If-Modified-Since'])) {
+      unset($options['headers']['If-Modified-Since']);
+    }
+
+    // Use cached data or setup for 304.
+    if (!empty($cache->data)) {
+      if ($cache->expire >= REQUEST_TIME && isset($cache->data->url) && !$force_check) {
+        $return[$cache->data->url] = $cache->data;
+        continue;
+      }
+      else {
+        // Set header for 304 response.
+        if (isset($cached_data->data->headers['etag'])) {
+          $options['headers']['If-None-Match'] = $cached_data->data->headers['etag'];
+        }
+        if (isset($cached_data->created)) {
+          $options['headers']['If-Modified-Since'] = gmdate('D, d M Y H:i:s T', $cached_data->created);
+        }
+      }
+    }
+
+    // Set cid, filename and get url.
+    $options['cid'] = $cid;
+    $options['filename'] = substr($cid, 26 + strlen($type));
+    $url = advagg_force_https_path($urls[$options['filename']]);
+    $url_to_cid[$url] = $cid;
+
+    // Get data.
+    if (module_exists('httprl')) {
+      httprl_request($url, $options);
+    }
+    else {
+      $responses[$url] = drupal_http_request($url, $options);
+    }
+  }
+  if (module_exists('httprl')) {
+    $responses = httprl_send_request();
+  }
+  if (empty($responses)) {
+    return $return;
+  }
+
+  // Try failures again.
+  foreach ($responses as $key => $response) {
+    if ($response->code == 0) {
+      if (isset($response->options)) {
+        $options = $response->options;
+      }
+      $responses[$key] = drupal_http_request($key, $options);
+    }
+  }
+
+  // Process remote data.
+  foreach ($responses as $url => $response) {
+    // No url is a no go.
+    if (empty($response->url)) {
+      $response->url = $url;
+    }
+    if (isset($response->options['cid'])) {
+      $cid = $response->options['cid'];
+    }
+    elseif (isset($url_to_cid[$response->url])) {
+      $cid = $url_to_cid[$response->url];
+    }
+    else {
+      // Can't match up url to the cid.
+      continue;
+    }
+    // Update object.
+    if (!isset($response->options['filename'])) {
+      $response->options['filename'] = substr($cid, 26 + strlen($type));
+    }
+    if (!isset($response->options['cid'])) {
+      $response->options['cid'] = $cid;
+    }
+
+    advagg_relocate_process_http_request($response, $type);
+
+    if ($response->code == 304 && !empty($cached_data->data)) {
+      // Update cache expire time.
+      cache_set($cid, $cached_data->data, 'cache_advagg_info', REQUEST_TIME + $response->ttl);
+
+      // Return cached data.
+      $return[$cached_data->data->url] = $cached_data->data;
+    }
+
+    // Skip if not a 200.
+    if ($response->code != 200
+      && $response->code != 201
+      && $response->code != 202
+      && $response->code != 206
+    ) {
+      continue;
+    }
+    if (empty($response->data)) {
+      continue;
+    }
+
+    $response->local_cache = FALSE;
+    // Save data to the cache.
+    if (!empty($response->data)) {
+      $response->hash = drupal_hash_base64($response->data);
+      $response->local_cache = TRUE;
+      cache_set($cid, $response, 'cache_advagg_info', REQUEST_TIME + $response->ttl);
+      $response->local_cache = FALSE;
+    }
+    $return[$response->url] = $response;
+  }
+  return $return;
+}
+
+/**
+ * Get the TTL and decompress the data.
+ *
+ * @param object $response
+ *   Response from http request.
+ * @param string $type
+ *   Can be css, js, or font.
+ */
+function advagg_relocate_process_http_request(&$response, $type) {
+  // Get ttl from response.
+  $ttl = 0;
+  $now = REQUEST_TIME;
+  if (isset($response->headers['expires'])) {
+    $expires = strtotime($response->headers['expires']);
+    if (isset($response->headers['date'])) {
+      $now = max($now, strtotime($response->headers['date']));
+    }
+    $ttl = max($ttl, $expires - $now);
+  }
+  if (isset($response->headers['cache-control'])) {
+    $cache_control_array = advagg_relocate_parse_cache_control($response->headers['cache-control']);
+    if (isset($cache_control_array['max-age']) && is_numeric($cache_control_array['max-age'])) {
+      $ttl = max($ttl, $cache_control_array['max-age']);
+    }
+    if (isset($cache_control_array['s-maxage']) && is_numeric($cache_control_array['s-maxage'])) {
+      $ttl = max($ttl, $cache_control_array['s-maxage']);
+    }
+  }
+  $response->ttl = $ttl;
+
+  // Uncompress.
+  if (!empty($response->headers['content-encoding'])
+    && !empty($response->data)
+    && !isset($response->chunk_size)
+    && ($response->headers['content-encoding'] === 'gzip'
+      || $response->headers['content-encoding'] === 'deflate'
+      || $response->headers['content-encoding'] === 'br'
+  )) {
+    // Do the first level of decoding if not already done.
+    if ($response->headers['content-encoding'] === 'gzip') {
+      $response->data = @gzinflate(substr($response->data, 10));
+    }
+    elseif ($response->headers['content-encoding'] === 'deflate') {
+      $response->data = @gzinflate($response->data);
+    }
+    elseif ($response->headers['content-encoding'] === 'br' && is_callable('brotli_uncompress')) {
+      $response->data = @brotli_uncompress($response->data);
+    }
+  }
+
+  // If a BOM is found, convert the string to UTF-8.
+  $encoding = advagg_get_encoding_from_bom($response->data);
+  if (!empty($encoding)) {
+    $response->data = advagg_convert_to_utf8($response->data, $encoding);
+  }
+
+  drupal_alter('advagg_relocate_process_http_request', $response, $type);
+}
+
+/**
+ * Implements hook_advagg_relocate_process_http_request_alter().
+ */
+function advagg_relocate_advagg_relocate_process_http_request_alter(&$response, $type) {
+  if ($type === 'js') {
+    if (strpos($response->url, 'connect.facebook.net/en_US/fbevents.js') !== FALSE) {
+      $baseURL = 'https://connect.facebook.net';
+      // Fix loader so it works if not loaded from connect.facebook.net.
+      $response->data = str_replace("function xb(){var ac=null,bc=null,cc=rb.getElementsByTagName('script');", "function xb(){var ac='$baseURL',cc=rb.getElementsByTagName('script'),bc=cc[0];", $response->data);
+
+      // Get Facebook IDs.
+      $fb_ids = array_filter(array_map('trim', explode("\n", variable_get('advagg_relocate_js_fbevents_local_ids', ADVAGG_RELOCATE_JS_FBEVENTS_LOCAL_IDS))));
+      if (empty($fb_ids)) {
+        return;
+      }
+
+      // Get Facebook Version.
+      $matches = array();
+      preg_match('/fbq.version\s*=\s*[\'"]([\.\d]+)[\'"]/', $response->data, $matches);
+      if (empty($matches[1])) {
+        return;
+      }
+      $version = $matches[1];
+
+      // Update local copies of the /signals/config/ js.
+      $js = array();
+      foreach ($fb_ids as $fb_id) {
+        $url = "$baseURL/signals/config/$fb_id?v=$version";
+        $js[$url]['data'] = $url;
+        $js[$url]['type'] = 'external';
+        $js[$url]['#fbid'] = $fb_id;
+      }
+      if (!empty($js)) {
+        advagg_relocate_js_post_alter($js, TRUE);
+      }
+      // Get a list of the local copies for this version.
+      $local_copies = array();
+      foreach ($js as $values) {
+        if ($values['type'] === 'file') {
+          // Create an aggregate just for this file.
+          $values += drupal_js_defaults($values);
+          $elements = array($values);
+          $groups = advagg_group_js($elements);
+          _advagg_aggregate_js($groups);
+          if (isset($groups[0]['data'])) {
+            $local_copies[$values['#fbid']] = advagg_file_create_url($groups[0]['data']);
+          }
+        }
+      }
+      if (empty($local_copies)) {
+        return;
+      }
+
+      // Add the local copies to the js file.
+      $local_copies = json_encode($local_copies);
+      $response->data = str_replace("return {baseURL:ac,scriptElement:bc}", "return {baseURL:ac,scriptElement:bc,localCopies:$local_copies}", $response->data);
+      // Change logic so it'll use the local copy if it exists.
+      $response->data = str_replace("var yc=xc.baseURL+'/signals/config/'+vc+'?v='+wc,zc=rb.createElement('script');zc.src=yc;", "var yc=xc.baseURL+'/signals/config/'+vc+'?v='+wc,zc=rb.createElement('script');if (xc.localCopies && xc.localCopies[vc]) {yc = xc.localCopies[vc];}zc.src=yc;", $response->data);
+      // Change logic so it'll use the local copy if it exists.
+      $response->data = str_replace("if(sb.baseURL&&sb.scriptElement){var tb=sb.baseURL+'/signals/plugins/'+qb+'.js?v='+g.version;", "if(sb.baseURL&&sb.scriptElement){var tb=sb.baseURL+'/signals/plugins/'+qb+'.js?v='+g.version;if (sb.localCopies && sb.localCopies[qb]) {yc = sb.localCopies[qb];}", $response->data);
+    }
+  }
+}
+
+/**
+ * Gets external CSS files; caches it and returns css font rules.
  *
  * @param string $url
  *   URL of the CSS file to import.
@@ -174,7 +432,7 @@ function advagg_relocate_font_face_parser(array $font_faces) {
  * @return array
  *   Array of font data.
  */
-function advagg_relocate_get_remote_data($url, array $aggregate_settings) {
+function advagg_relocate_get_remote_font_data($url, array $aggregate_settings) {
   // Set settings if needed.
   if (!isset($aggregate_settings['variables']['advagg_relocate_css_inline_import_browsers'])) {
     $defaults = array(
@@ -292,10 +550,16 @@ function advagg_relocate_get_remote_data($url, array $aggregate_settings) {
     }
   }
 
+  // Try failures again.
+  foreach ($responses as $key => $response) {
+    if ($response->code == 0) {
+      $responses[$key] = drupal_http_request($response->url, $response->options);
+    }
+  }
+
   // Parse data.
   $font_faces = array();
   $ttl = 0;
-  $now = REQUEST_TIME;
   foreach ($responses as $key => $response) {
     if ($response->code == 304 && !empty($cached_data->data[0])) {
       // This might need to be better handled in the future.
@@ -323,43 +587,8 @@ function advagg_relocate_get_remote_data($url, array $aggregate_settings) {
       return FALSE;
     }
 
-    // Uncompress.
-    if (!empty($response->headers['content-encoding'])
-      && !empty($response->data)
-      && !isset($response->chunk_size)
-      && ($response->headers['content-encoding'] === 'gzip'
-        || $response->headers['content-encoding'] === 'deflate'
-        || $response->headers['content-encoding'] === 'br'
-    )) {
-      // Do the first level of decoding if not already done.
-      if ($response->headers['content-encoding'] === 'gzip') {
-        $response->data = @gzinflate(substr($response->data, 10));
-      }
-      elseif ($response->headers['content-encoding'] === 'deflate') {
-        $response->data = @gzinflate($response->data);
-      }
-      elseif ($response->headers['content-encoding'] === 'br' && is_callable('brotli_uncompress')) {
-        $response->data = @brotli_uncompress($response->data);
-      }
-    }
-
-    // Get ttl.
-    if (isset($response->headers['expires'])) {
-      $expires = strtotime($response->headers['expires']);
-      if (isset($response->headers['date'])) {
-        $now = max($now, strtotime($response->headers['date']));
-      }
-      $ttl = max($ttl, $expires - $now);
-    }
-    if (isset($response->headers['cache-control'])) {
-      $cache_control_array = advagg_relocate_parse_cache_control($response->headers['cache-control']);
-      if (isset($cache_control_array['max-age']) && is_numeric($cache_control_array['max-age'])) {
-        $ttl = max($ttl, $cache_control_array['max-age']);
-      }
-      if (isset($cache_control_array['s-maxage']) && is_numeric($cache_control_array['s-maxage'])) {
-        $ttl = max($ttl, $cache_control_array['s-maxage']);
-      }
-    }
+    advagg_relocate_process_http_request($response, 'font');
+    $ttl = max($ttl, $response->ttl);
 
     // Parse the CSS.
     $font_face = advagg_relocate_parse_css_font_face(
@@ -533,4 +762,43 @@ function advagg_relocate_parse_css_font_face($css_string, array $properties, $ty
   }
 
   return $output;
+}
+
+/**
+ * Parse the font family string into a structured array.
+ *
+ * @param string $filename
+ *   The filename to save.
+ * @param string $data
+ *   The data to save to the file.
+ * @param bool $local_cache
+ *   TRUE if the data came from the cache bin.
+ * @param string $hash
+ *   Contents hash; if different resave data.
+ *
+ * @return array
+ *   Returns an array of errors that might have happened.
+ */
+function _advagg_relocate_save_remote_asset($filename, $data, $local_cache, $hash) {
+  // Save remote data.
+  $errors = array();
+  $saved = FALSE;
+  $dir = variable_get('advagg_relocate_directory', ADVAGG_RELOCATE_DIRECTORY);
+  $full_filename = $dir . $filename;
+  $local_hash = '';
+  if (!is_readable($full_filename)) {
+    $errors = advagg_save_data($full_filename, $data);
+    $saved = TRUE;
+  }
+  elseif (empty($local_cache)) {
+    $file_contents = @advagg_file_get_contents($full_filename);
+    if (!empty($file_contents)) {
+      $local_hash = drupal_hash_base64($file_contents);
+    }
+    if ($hash !== $local_hash) {
+      $errors = advagg_save_data($full_filename, $data, TRUE);
+      $saved = TRUE;
+    }
+  }
+  return array($full_filename, $errors, $saved);
 }

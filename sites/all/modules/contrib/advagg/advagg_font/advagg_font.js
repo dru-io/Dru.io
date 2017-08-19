@@ -50,12 +50,12 @@ function advagg_run_check(key, value) {
 function advagg_run_check_inner(key, value) {
   'use strict';
   // Set Class.
-  if (Drupal.settings.advagg_font_no_fout != 1) {
+  if (parseInt(Drupal.settings.advagg_font_no_fout, 10) !== 1) {
     window.document.documentElement.className += ' ' + key;
   }
 
   // Set Cookie for a day.
-  if (Drupal.settings.advagg_font_cookie == 1) {
+  if (parseInt(Drupal.settings.advagg_font_cookie, 10) === 1) {
     var expire_date = new Date(new Date().getTime() + 86400 * 1000);
     document.cookie = 'advaggfont_' + key + '=' + value
       + '; expires=' + expire_date.toUTCString()

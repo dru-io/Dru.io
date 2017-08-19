@@ -222,20 +222,25 @@ function ocupload_change_files_status($form, &$form_state) {
         continue;
       }
 
-      foreach ($files as $fid => $file_name) {
-        if (strpos($field_value, drupal_encode_path($file_name)) !== FALSE) {
+      foreach ($files as $fid => $file_info) {
+        $filename = drupal_basename($file_info['uri']);
+
+        // Check filename in text
+        if (strpos($field_value, drupal_encode_path($filename)) !== FALSE) {
           // Change file status to permanent
           $file = file_load($fid);
           $file->status = FILE_STATUS_PERMANENT;
           file_save($file);
 
           // Attach file to field
-          $file_extension = _ocupload_get_file_extension($file_name);
+          $file_extension = _ocupload_get_file_extension($filename);
           $template = _ocupload_get_appropriate_template($file_extension);
-          if ($template->field
-            && isset($form['#entity_type'])
-            && isset($form['#bundle'])
-            && isset($form_state['values'][$template->field])) {
+          if (
+            $template->field &&
+            isset($form['#entity_type']) &&
+            isset($form['#bundle']) &&
+            isset($form_state['values'][$template->field])
+          ) {
             $form_state['values'][$template->field][LANGUAGE_NONE][] = array(
               'fid' => $file->fid,
               'display' => 0,
@@ -255,6 +260,27 @@ function ocupload_change_files_status($form, &$form_state) {
 
     if ($permanent_files) {
       drupal_alter('ocupload_saved_data', $permanent_files, $form, $form_state);
+    }
+
+    // Write unused files in log and status message
+    if ($cache->data) {
+      $temp_files = array();
+
+      foreach ($cache->data as $field_name => $files) {
+        foreach ($files as $fid => $file_info) {
+          if (!$file_info['noticed']) {
+            $file_url = file_create_url($file_info['uri']);
+            $temp_files[] = l($file_url, $file_url);
+            $cache->data[$field_name][$fid]['noticed'] = TRUE;
+          }
+        }
+      }
+
+      if ($temp_files) {
+        $temp_files_list = theme('item_list', array('items' => $temp_files));
+        drupal_set_message(t('The following files are not used in text and will be deleted: !files', array('!files' => $temp_files_list)), 'warning');
+        watchdog('ocupload', 'The following files are not used in text and will be deleted: !files', array('!files' => $temp_files_list), WATCHDOG_NOTICE);
+      }
     }
 
     $expire = count($cache->data) > 0 ? $cache->expire : CACHE_TEMPORARY;

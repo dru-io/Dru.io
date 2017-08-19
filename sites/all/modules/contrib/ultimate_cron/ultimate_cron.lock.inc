@@ -257,9 +257,11 @@ class UltimateCronLock {
         }
       }
     } while ($lids);
-    watchdog('ultimate_cron_lock', 'Cleaned up @count released locks', array(
-      '@count' => $count,
-    ), WATCHDOG_DEBUG);
+    if ($count > 0) {
+      watchdog('ultimate_cron_lock', 'Cleaned up @count released locks', array(
+        '@count' => $count,
+      ), WATCHDOG_DEBUG);
+    }
   }
 
 }

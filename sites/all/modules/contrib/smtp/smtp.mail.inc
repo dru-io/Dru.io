@@ -81,7 +81,7 @@ class SmtpMailSystem implements MailSystemInterface {
     $logging = variable_get('smtp_debugging', SMTP_LOGGING_ERRORS);
 
     // Turn on debugging, if requested.
-    if ($logging == SMTP_LOGGING_ALL) {
+    if ($logging == SMTP_LOGGING_ALL && user_access('administer smtp module')) {
       $mailer->SMTPDebug = TRUE;
     }
 

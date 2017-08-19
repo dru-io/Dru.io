@@ -6,6 +6,11 @@
  */
 
 /**
+ * @addtogroup hooks
+ * @{
+ */
+
+/**
  * Implements hook_install().
  */
 function advagg_validator_install() {
@@ -130,3 +135,7 @@ function advagg_validator_update_7202(&$sandbox) {
     advagg_install_change_table_collation($table, $fields, 'ascii_bin', $schema[$table]['fields']);
   }
 }
+
+/**
+ * @} End of "addtogroup hooks".
+ */

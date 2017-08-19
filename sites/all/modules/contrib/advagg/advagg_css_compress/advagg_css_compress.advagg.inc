@@ -6,6 +6,11 @@
  */
 
 /**
+ * @addtogroup advagg_hooks
+ * @{
+ */
+
+/**
  * Implements hook_advagg_get_css_file_contents_pre_alter().
  */
 function advagg_css_compress_advagg_get_css_file_contents_pre_alter(&$file, &$optimize, &$aggregate_settings) {
@@ -59,6 +64,10 @@ function advagg_css_compress_advagg_get_css_aggregate_contents_alter(&$data, $fi
     }
   }
 }
+
+/**
+ * @} End of "addtogroup advagg_hooks".
+ */
 
 /**
  * Use the CSSmin library from YUI to compress the CSS.
