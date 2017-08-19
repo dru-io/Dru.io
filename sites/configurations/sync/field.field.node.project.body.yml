@@ -1,24 +1,22 @@
-uuid: 231f1917-e10f-46d2-900a-9f886aa0805d
+uuid: e3886527-6d6b-4a0f-837b-1458a1303734
 langcode: ru
 status: true
 dependencies:
   config:
     - field.storage.node.body
-    - node.type.article
+    - node.type.project
   module:
     - text
-_core:
-  default_config_hash: Ay3b2hq42cpQTFB_lNu8S2ZxuVIY6-dlBsc7vLeJ-YY
-id: node.article.body
+id: node.project.body
 field_name: body
 entity_type: node
-bundle: article
-label: Содержимое
+bundle: project
+label: Описание
 description: ''
 required: false
 translatable: true
 default_value: {  }
 default_value_callback: ''
 settings:
-  display_summary: true
+  display_summary: false
 field_type: text_with_summary

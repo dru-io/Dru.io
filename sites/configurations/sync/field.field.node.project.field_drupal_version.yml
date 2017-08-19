@@ -1,0 +1,21 @@
+uuid: 706c8325-ff63-4d31-a1db-0da19670ef12
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_drupal_version
+    - node.type.project
+  module:
+    - options
+id: node.project.field_drupal_version
+field_name: field_drupal_version
+entity_type: node
+bundle: project
+label: 'Версия Drupal'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

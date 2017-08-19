@@ -1,0 +1,21 @@
+uuid: 95b3f471-305a-45a9-95f0-846f071b2e28
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_type
+    - node.type.project
+  module:
+    - options
+id: node.project.field_project_type
+field_name: field_project_type
+entity_type: node
+bundle: project
+label: 'Тип проекта'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

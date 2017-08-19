@@ -1,0 +1,39 @@
+uuid: 2323dd67-5cb2-4608-b4ea-48e547c3ae13
+langcode: ru
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_drupal_version
+field_name: field_drupal_version
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: 8.x
+      label: 8.x
+    -
+      value: 7.x
+      label: 7.x
+    -
+      value: 6.x
+      label: 6.x
+    -
+      value: 5.x
+      label: 5.x
+    -
+      value: '4.7'
+      label: '4.7'
+    -
+      value: '4.6'
+      label: '4.6'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: -1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

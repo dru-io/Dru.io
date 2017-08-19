@@ -1,0 +1,33 @@
+uuid: db3752e7-eea3-4dac-ad12-0d04494aef72
+langcode: ru
+status: true
+dependencies:
+  module:
+    - node
+    - options
+id: node.field_project_development_status
+field_name: field_project_development_status
+entity_type: node
+type: list_string
+settings:
+  allowed_values:
+    -
+      value: maintenance_fixes_only
+      label: 'Maintenance fixes only'
+    -
+      value: no_further_development
+      label: 'No further development'
+    -
+      value: obsolete
+      label: Obsolete
+    -
+      value: under_active_development
+      label: 'Under active development'
+  allowed_values_function: ''
+module: options
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

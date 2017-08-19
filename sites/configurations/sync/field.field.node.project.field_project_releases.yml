@@ -1,0 +1,19 @@
+uuid: d7ba2339-f731-4720-95ed-b25b67e14d91
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_releases
+    - node.type.project
+id: node.project.field_project_releases
+field_name: field_project_releases
+entity_type: node
+bundle: project
+label: Релизы
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string_long

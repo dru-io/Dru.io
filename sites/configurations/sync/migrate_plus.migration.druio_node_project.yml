@@ -1,11 +1,18 @@
-# Migration Project node type content.
+uuid: f532cdd4-b440-4a7a-959e-adcacd56f859
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
+_core:
+  default_config_hash: E5KmK4pk_pVAkpK_uF5P0C21EbJIkMQ_iTqLcTDJyEg
 id: druio_node_project
-label: Projects from drupal.org
+migration_tags: null
 migration_group: druio
+label: 'Projects from drupal.org'
 source:
   plugin: druio_node_project
-destination:
-  plugin: entity:node
 process:
   type:
     plugin: default_value
@@ -19,18 +26,15 @@ process:
   sticky:
     plugin: default_value
     default_value: 0
-  'body/value': body
+  body/value: body
   field_project_development_status: development_status
   field_project_maintenance_status: maintenance_status
   field_project_type: project_type
   field_drupal_version: drupal_version
   field_project_short_name: project_short_name
-  'field_project_releases/value': project_releases
-
+  field_project_releases/value: project_releases
+destination:
+  plugin: 'entity:node'
 migration_dependencies:
   required:
     - druio_users
-dependencies:
-  enforced:
-    module:
-      - druio_migrate

@@ -1,0 +1,21 @@
+uuid: b2fd4d93-e1cb-4710-b8f5-6a5268de7b43
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_maintenance_status
+    - node.type.project
+  module:
+    - options
+id: node.project.field_project_maintenance_status
+field_name: field_project_maintenance_status
+entity_type: node
+bundle: project
+label: 'Статус поддержки'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

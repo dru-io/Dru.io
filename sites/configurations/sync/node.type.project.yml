@@ -1,0 +1,17 @@
+uuid: 03d9c2e9-d399-4769-bd60-6d07a5aab5dc
+langcode: ru
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Проект
+type: project
+description: 'Информация о проекте с drupal.org'
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: false
