@@ -1,0 +1,38 @@
+uuid: 44cb20b0-9eb7-4aa8-94cb-4289f15c739c
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.field.node.post.body
+    - field.field.node.post.field_paragraphs
+    - node.type.post
+  module:
+    - entity_reference_revisions
+    - text
+    - user
+id: node.post.default
+targetEntityType: node
+bundle: post
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_paragraphs:
+    type: entity_reference_revisions_entity_view
+    weight: 102
+    label: above
+    settings:
+      view_mode: default
+      link: ''
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  langcode: true

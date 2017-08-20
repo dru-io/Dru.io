@@ -1,4 +1,4 @@
-uuid: f532cdd4-b440-4a7a-959e-adcacd56f859
+uuid: 7546eab7-5daf-4a1e-b163-0c00eefa21aa
 langcode: en
 status: true
 dependencies:
@@ -6,7 +6,7 @@ dependencies:
     module:
       - druio_migrate
 _core:
-  default_config_hash: E5KmK4pk_pVAkpK_uF5P0C21EbJIkMQ_iTqLcTDJyEg
+  default_config_hash: ldqgblOZ029zLLZKfLq6BtSpweQ-ZQXXZ_r5fzbOSvI
 id: druio_node_project
 migration_tags: null
 migration_group: druio
@@ -26,6 +26,9 @@ process:
   sticky:
     plugin: default_value
     default_value: 0
+  status: status
+  created: created
+  changed: changed
   body/value: body
   field_project_development_status: development_status
   field_project_maintenance_status: maintenance_status

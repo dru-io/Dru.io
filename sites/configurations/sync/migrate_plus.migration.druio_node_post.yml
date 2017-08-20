@@ -1,0 +1,38 @@
+uuid: aeadbe4b-2059-48ff-980e-e59c9a3aa994
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
+_core:
+  default_config_hash: EHMozM_osGNAsI37VlBraNqTi2_Wl0tj6bIFa8JXxlc
+id: druio_node_post
+migration_tags: null
+migration_group: druio
+label: Posts
+source:
+  plugin: druio_node_post
+process:
+  type:
+    plugin: default_value
+    default_value: post
+  title: title
+  nid: nid
+  uid:
+    plugin: migration
+    migration: druio_users
+    source: uid
+  sticky:
+    plugin: default_value
+    default_value: 0
+  status: status
+  created: created
+  changed: changed
+  body/value: body_value
+  body/format: body_format
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - druio_users

@@ -22,5 +22,5 @@ function druio_form_search_block_form_alter(&$form, $form_state, $form_id) {
  */
 function druio_preprocess_node(&$variables) {
   $node = $variables['node'];
-  ksm($node->field_project_development_status);
+  #ksm($node->field_project_development_status);
 }

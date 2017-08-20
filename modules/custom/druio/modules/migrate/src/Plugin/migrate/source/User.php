@@ -67,9 +67,6 @@ class User extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
-    #if ($value = $row->getSourceProperty('beers')) {
-    #  $row->setSourceProperty('beers', explode('|', $value));
-    #}
     return parent::prepareRow($row);
   }
 

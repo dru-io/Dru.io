@@ -19,6 +19,9 @@ process:
   sticky:
     plugin: default_value
     default_value: 0
+  status: status
+  created: created
+  changed: changed
   'body/value': body
   field_project_development_status: development_status
   field_project_maintenance_status: maintenance_status

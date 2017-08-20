@@ -89,7 +89,7 @@ tips:
   views-ui-preview:
     id: views-ui-preview
     plugin: text
-    label: Предпросмотр
+    label: Preview
     body: 'Показать предварительный просмотр вывода представления.'
     weight: 10
     location: left

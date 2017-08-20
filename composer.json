@@ -18,7 +18,8 @@
         "drupal/imagemagick": "^2.0",
         "drupal/console": "~1.0",
         "drupal/migrate_plus": "^2.0",
-        "drupal/migrate_tools": "^2.0"
+        "drupal/migrate_tools": "^2.0",
+        "drupal/markdown": "^1.2"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
