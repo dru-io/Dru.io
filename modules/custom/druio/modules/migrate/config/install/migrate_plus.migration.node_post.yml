@@ -24,7 +24,9 @@ process:
   changed: changed
   'body/value': body_value
   'body/format': body_format
-  # @todo move content to paragraphs.
+  field_paragraphs:
+    plugin: druio_paragraphs
+    source: paragraphs
 
 migration_dependencies:
   required:

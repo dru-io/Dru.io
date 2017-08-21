@@ -48,6 +48,7 @@ class NodePost extends SqlBase {
       // Custom added fields.
       'body_value' => $this->t('The value of body field'),
       'body_format' => $this->t('The format of body field'),
+      'paragraphs' => $this->t('Paragraphs created from old body'),
     ];
 
     return $fields;
@@ -81,6 +82,19 @@ class NodePost extends SqlBase {
       ->fetch();
     $row->setSourceProperty('body_value', $body_query['body_value']);
     $row->setSourceProperty('body_format', $body_query['body_format']);
+
+    // Paragraphs.
+    $paragraphs = [];
+    $paragraphs[] = [
+      'type' => 'text',
+      'fields' => [
+        'field_text' => [
+          'value' => $body_query['body_value'],
+          'format' => $body_query['body_format'],
+        ],
+      ],
+    ];
+    $row->setSourceProperty('paragraphs', $paragraphs);
     return parent::prepareRow($row);
   }
 
