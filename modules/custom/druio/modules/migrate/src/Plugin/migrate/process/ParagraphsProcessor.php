@@ -13,7 +13,8 @@ use Drupal\paragraphs\Entity\Paragraph;
  * @see \Drupal\migrate\Plugin\MigrateProcessInterface
  *
  * @MigrateProcessPlugin(
- *   id = "druio_paragraphs"
+ *   id = "druio_paragraphs",
+ *   handle_multiples = TRUE
  * )
  */
 class ParagraphsProcessor extends ProcessPluginBase {
@@ -24,20 +25,20 @@ class ParagraphsProcessor extends ProcessPluginBase {
   public function transform($value, MigrateExecutableInterface $migrate_executable, Row $row, $destination_property) {
     $result = [];
     if (is_array($value)) {
-      // Maybe we need to control delta for paragraphs. If there is multiple
-      // paragraphs to migrate, this will fail.
-      $paragraph = $this->getParagraph($value['type'], $row, $destination_property);
-      foreach ($value['fields'] as $field_name => $field_value) {
-        if ($paragraph->hasField($field_name)) {
-          $paragraph->$field_name = $field_value;
+      foreach ($value as $delta => $item) {
+        $paragraph = $this->getParagraph($item['type'], $row, $destination_property, $delta);
+        foreach ($item['fields'] as $field_name => $field_value) {
+          if ($paragraph->hasField($field_name)) {
+            $paragraph->$field_name = $field_value;
+          }
         }
+        $paragraph->save();
+        $result[] = [
+          'target_id' => $paragraph->id(),
+          'target_revision_id' => $paragraph->getRevisionId(),
+          'entity' => $paragraph,
+        ];
       }
-      $paragraph->save();
-      $result = [
-        'target_id' => $paragraph->id(),
-        'target_revision_id' => $paragraph->getRevisionId(),
-        'entity' => $paragraph,
-      ];
     }
     else {
       throw new MigrateException('Paragraphs value must be an array.');
@@ -55,11 +56,11 @@ class ParagraphsProcessor extends ProcessPluginBase {
   /**
    * Trying to get existed paragraph otherwise creates new.
    */
-  public function getParagraph($type, Row $row, $field_name) {
+  public function getParagraph($type, Row $row, $field_name, $delta) {
     // Trying to get existed paragraph.
     if ($row->getDestinationProperty('nid') && $node = Node::load($row->getDestinationProperty('nid'))) {
-      if (isset($node->$field_name[0]) && $node->$field_name[0]->getEntity()) {
-        $paragraph = $node->$field_name[0]->getEntity();
+      if (isset($node->$field_name[$delta]) && $node->$field_name[$delta]->getEntity()) {
+        $paragraph = $node->$field_name[$delta]->getEntity();
         return $paragraph;
       }
     }
