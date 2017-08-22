@@ -32,7 +32,7 @@ process:
 
 migration_dependencies:
   required:
-    - druio_users
+    - druio_user
 dependencies:
   enforced:
     module:

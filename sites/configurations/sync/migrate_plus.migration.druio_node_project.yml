@@ -1,4 +1,4 @@
-uuid: 62f37337-161f-4266-9fcb-7b55b2bee877
+uuid: e1e8ff68-0fb8-4283-ac19-ee21724af22f
 langcode: en
 status: true
 dependencies:
@@ -6,7 +6,7 @@ dependencies:
     module:
       - druio_migrate
 _core:
-  default_config_hash: ldqgblOZ029zLLZKfLq6BtSpweQ-ZQXXZ_r5fzbOSvI
+  default_config_hash: '-OTO5Vm75OVti0AAFjav1wdKtilVlCM8Md3LuKwu-Ig'
 id: druio_node_project
 migration_tags: null
 migration_group: druio
@@ -40,4 +40,4 @@ destination:
   plugin: 'entity:node'
 migration_dependencies:
   required:
-    - druio_users
+    - druio_user

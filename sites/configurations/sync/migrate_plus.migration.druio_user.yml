@@ -1,4 +1,4 @@
-uuid: bab33cc9-b551-4216-9f2d-4d3ad4359a79
+uuid: 44899d1a-902b-4aca-a4b5-c25cf5f945e2
 langcode: en
 status: true
 dependencies:
@@ -6,8 +6,8 @@ dependencies:
     module:
       - druio_migrate
 _core:
-  default_config_hash: K-sqSlkEOHZcdj-jfEF20JEJjVOty8NN1Y8rSVHQ8Wk
-id: druio_users
+  default_config_hash: AQPLajUKu3v5smr0gwCaUYu-4ANy4HJx9jtEchvjk2s
+id: druio_user
 migration_tags: null
 migration_group: druio
 label: 'User migration'
@@ -21,7 +21,10 @@ process:
   roles:
     plugin: default_value
     default_value: 2
-  name: name
+  name:
+    plugin: dedupe_entity
+    entity_type: user
+    field: name
   created: created
   changed: '@created'
   access: access

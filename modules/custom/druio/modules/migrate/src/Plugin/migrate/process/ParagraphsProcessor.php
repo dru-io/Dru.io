@@ -12,6 +12,9 @@ use Drupal\paragraphs\Entity\Paragraph;
 /**
  * @see \Drupal\migrate\Plugin\MigrateProcessInterface
  *
+ * @todo Find out why during update paragraphs get veir values from random
+ * nodes.
+ *
  * @MigrateProcessPlugin(
  *   id = "druio_paragraphs",
  *   handle_multiples = TRUE
@@ -36,7 +39,6 @@ class ParagraphsProcessor extends ProcessPluginBase {
         $result[] = [
           'target_id' => $paragraph->id(),
           'target_revision_id' => $paragraph->getRevisionId(),
-          'entity' => $paragraph,
         ];
       }
     }

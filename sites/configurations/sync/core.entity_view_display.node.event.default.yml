@@ -1,0 +1,27 @@
+uuid: 3740ec5b-f44f-41d4-9819-a185fce8588a
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.field.node.event.body
+    - node.type.event
+  module:
+    - text
+    - user
+id: node.event.default
+targetEntityType: node
+bundle: event
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  langcode: true

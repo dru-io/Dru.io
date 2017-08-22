@@ -1,0 +1,41 @@
+# Migration for files.
+id: druio_file
+label: Files from old dru.io
+migration_group: druio
+source:
+  plugin: druio_file
+destination:
+  plugin: entity:file
+process:
+  fid: fid
+  filename: filename
+  source_full_path:
+    -
+      plugin: concat
+      delimiter: /
+      source:
+        - constants/source_base_path
+        - filepath
+    -
+      plugin: urlencode
+  uri:
+    plugin: file_copy
+    source:
+      - '@source_full_path'
+      - uri
+  filemime: filemime
+  status: status
+  created: timestamp
+  changed: timestamp
+  uid:
+    plugin: migration
+    migration: druio_users
+    source: uid
+
+migration_dependencies:
+  required:
+    - druio_user
+dependencies:
+  enforced:
+    module:
+      - druio_migrate

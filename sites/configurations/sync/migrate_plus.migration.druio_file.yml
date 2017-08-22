@@ -1,0 +1,45 @@
+uuid: e0b2f634-90fd-4948-80b9-f41af5b9959c
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
+_core:
+  default_config_hash: aAwX8TVkRxIKGLFv57-EXL-0u4uaoqZ-lZ7Cmitos0I
+id: druio_file
+migration_tags: null
+migration_group: druio
+label: 'Files from old dru.io'
+source:
+  plugin: druio_file
+process:
+  fid: fid
+  filename: filename
+  source_full_path:
+    -
+      plugin: concat
+      delimiter: /
+      source:
+        - constants/source_base_path
+        - filepath
+    -
+      plugin: urlencode
+  uri:
+    plugin: file_copy
+    source:
+      - '@source_full_path'
+      - uri
+  filemime: filemime
+  status: status
+  created: timestamp
+  changed: timestamp
+  uid:
+    plugin: migration
+    migration: druio_users
+    source: uid
+destination:
+  plugin: 'entity:file'
+migration_dependencies:
+  required:
+    - druio_user

@@ -1,4 +1,4 @@
-uuid: 86355bb6-70d5-4878-b740-f6d818fefd28
+uuid: 1f46bd61-e333-4c42-81a4-779010049e09
 langcode: en
 status: true
 dependencies:
@@ -6,7 +6,7 @@ dependencies:
     module:
       - druio_migrate
 _core:
-  default_config_hash: VHVSgUnQ4DrzfGHmYRX27AxVfq2qcAJ-v_LsmafVick
+  default_config_hash: 1Ge4vqUPXrKOENH67lbxs6EB_Xi_f2GxhHhfQLVQx9w
 id: druio_node_post
 migration_tags: null
 migration_group: druio
@@ -14,9 +14,6 @@ label: Posts
 source:
   plugin: druio_node_post
 process:
-  langcode:
-    plugin: default_value
-    default_value: ru
   type:
     plugin: default_value
     default_value: post
@@ -41,4 +38,4 @@ destination:
   plugin: 'entity:node'
 migration_dependencies:
   required:
-    - druio_users
+    - druio_user

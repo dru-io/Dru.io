@@ -8,6 +8,6 @@ dependencies:
 _core:
   default_config_hash: mYceWZ4FHflXMWwxiO7ePCeXvKMl9F-ARIQ9p4IpvWE
 id: devel
-label: Development
+label: Разработка
 description: 'Links related to Devel module.'
 locked: true

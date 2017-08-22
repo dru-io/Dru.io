@@ -1,4 +1,4 @@
-id: druio_users
+id: druio_user
 label: User migration
 migration_group: druio
 source:
@@ -13,7 +13,10 @@ process:
   roles:
     plugin: default_value
     default_value: 2
-  name: name
+  name:
+    plugin: dedupe_entity
+    entity_type: user
+    field: name
   created: created
   changed: '@created'
   access: access

@@ -94,15 +94,6 @@ class NodePost extends SqlBase {
         ],
       ],
     ];
-    $paragraphs[] = [
-      'type' => 'text',
-      'fields' => [
-        'field_text' => [
-          'value' => $body_query['body_value'],
-          'format' => $body_query['body_format'],
-        ],
-      ],
-    ];
     $row->setSourceProperty('paragraphs', $paragraphs);
     return parent::prepareRow($row);
   }
