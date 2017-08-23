@@ -1,0 +1,35 @@
+# Migration Event node type content.
+id: druio_event
+label: Events
+migration_group: druio
+source:
+  plugin: druio_event
+destination:
+  plugin: entity:node
+process:
+  type:
+    plugin: default_value
+    default_value: event
+  title: title
+  nid: nid
+  uid:
+    plugin: migration
+    migration: druio_users
+    source: uid
+  sticky:
+    plugin: default_value
+    default_value: 0
+  status: status
+  created: created
+  changed: changed
+  'body/value': body_value
+  'body/format': body_format
+
+migration_dependencies:
+  required:
+    - druio_user
+    - druio_file
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
