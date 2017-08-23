@@ -14,9 +14,10 @@ process:
     plugin: default_value
     default_value: 2
   name:
-    plugin: dedupe_entity
+    plugin: make_unique_entity_field
     entity_type: user
     field: name
+    source: name
   created: created
   changed: '@created'
   access: access
