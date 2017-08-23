@@ -4,6 +4,8 @@ label: Files from old dru.io
 migration_group: druio
 source:
   plugin: druio_file
+  constants:
+    source_base_path: 'sites/default/files'
 destination:
   plugin: entity:file
 process:
@@ -15,7 +17,7 @@ process:
       delimiter: /
       source:
         - constants/source_base_path
-        - filepath
+        - uri
     -
       plugin: urlencode
   uri:

@@ -17,7 +17,7 @@ class File extends SqlBase {
    */
   public function query() {
     return $this->select('file_managed', 'fm')
-      ->fields('u', [
+      ->fields('fm', [
         'fid',
         'uid',
         'filename',
@@ -63,7 +63,7 @@ class File extends SqlBase {
   public function prepareRow(Row $row) {
     // Before the actual migration for faster and easier testing all files uri's
     // will replaced by single image.
-    $row->setSourceProperty('uri', 'public://sample.jpg');
+    $row->setSourceProperty('uri', 'sample.jpg');
     return parent::prepareRow($row);
   }
 
