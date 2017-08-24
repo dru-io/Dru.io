@@ -20,7 +20,8 @@
         "drupal/migrate_plus": "^2.0",
         "drupal/migrate_tools": "^2.0",
         "drupal/markdown": "^1.2",
-        "drupal/config_installer": "^1.4"
+        "drupal/config_installer": "^1.4",
+        "drupal/migrate_source_csv": "^2.0"
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
