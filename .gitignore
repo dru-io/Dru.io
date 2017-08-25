@@ -11,6 +11,7 @@ error_log
 /vendor/*
 actions/*
 modules/contrib/*
+profiles/contrib/*
 **/.css.map
 .well-known
 #default files
