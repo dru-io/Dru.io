@@ -28,6 +28,9 @@ process:
     plugin: migration_lookup
     migration: druio_file
     source: field_event_poster_fid
+  'field_event_date/value': field_event_date_value
+  'field_event_place/value': field_event_place_value
+  'field_event_city/target_id': city_tid
 
 migration_dependencies:
   required:
