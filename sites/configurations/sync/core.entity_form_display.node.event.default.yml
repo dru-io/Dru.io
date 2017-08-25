@@ -4,8 +4,15 @@ status: true
 dependencies:
   config:
     - field.field.node.event.body
+    - field.field.node.event.field_event_city
+    - field.field.node.event.field_event_date
+    - field.field.node.event.field_event_place
+    - field.field.node.event.field_image
+    - image.style.thumbnail
     - node.type.event
   module:
+    - datetime
+    - image
     - path
     - text
 id: node.event.default
@@ -28,6 +35,37 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_event_city:
+    weight: 35
+    settings:
+      match_operator: CONTAINS
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: entity_reference_autocomplete
+    region: content
+  field_event_date:
+    weight: 33
+    settings: {  }
+    third_party_settings: {  }
+    type: datetime_default
+    region: content
+  field_event_place:
+    weight: 34
+    settings:
+      size: 60
+      placeholder: ''
+    third_party_settings: {  }
+    type: string_textfield
+    region: content
+  field_image:
+    weight: 32
+    settings:
+      progress_indicator: throbber
+      preview_image_style: thumbnail
+    third_party_settings: {  }
+    type: image_image
+    region: content
   langcode:
     type: language_select
     weight: 2

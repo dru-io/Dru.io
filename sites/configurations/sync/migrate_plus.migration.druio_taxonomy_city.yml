@@ -1,0 +1,46 @@
+uuid: 2e842c93-e450-428e-815a-1efd8b1a8c98
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
+_core:
+  default_config_hash: cJmbGj4kiM4ggQwXmKiyyTTIfYbEgBPbqTDsggqS2g8
+id: druio_taxonomy_city
+migration_tags: null
+migration_group: druio
+label: 'Cities tree'
+source:
+  plugin: csv
+  path: /assets/cities.csv
+  header_row_count: 1
+  keys:
+    - tid
+  column_names:
+    -
+      tid: Identifier
+    -
+      parent: 'Parent TID'
+    -
+      weight: 'Term weight'
+    -
+      name: 'City name'
+process:
+  vid:
+    plugin: default_value
+    default_value: cities
+  name: name
+  parent:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: parent
+    -
+      plugin: migration_lookup
+      migration: druio_taxonomy_city
+      source: parent
+  weight: weight
+destination:
+  plugin: 'entity:taxonomy_term'
+migration_dependencies: null

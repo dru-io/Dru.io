@@ -1,4 +1,4 @@
-uuid: b280ce63-45af-4312-9349-1a04b4aa1b2e
+uuid: 0f5a1e89-af8c-4033-96d1-ab22099163b9
 langcode: en
 status: true
 dependencies:
@@ -6,21 +6,21 @@ dependencies:
     module:
       - druio_migrate
 _core:
-  default_config_hash: HfRm6XGA-uwnYuBqyzV3PnaiKjPD290HG0TVN70aUk4
-id: druio_node_post
+  default_config_hash: 1q0uhmqyoGJqhyDoXqUB4n1uFSsFrlKDi9TQLnlF0Uk
+id: druio_event
 migration_tags: null
 migration_group: druio
-label: Posts
+label: Events
 source:
-  plugin: druio_node_post
+  plugin: druio_event
 process:
   type:
     plugin: default_value
-    default_value: post
+    default_value: event
   title: title
   nid: nid
   uid:
-    plugin: migration_lookup
+    plugin: migration
     migration: druio_users
     source: uid
   sticky:
@@ -31,11 +31,16 @@ process:
   changed: changed
   body/value: body_value
   body/format: body_format
-  field_paragraphs:
-    plugin: druio_paragraphs
-    source: paragraphs
+  field_image/target_id:
+    plugin: migration_lookup
+    migration: druio_file
+    source: field_event_poster_fid
+  field_event_date/value: field_event_date_value
+  field_event_place/value: field_event_place_value
+  field_event_city/target_id: city_tid
 destination:
   plugin: 'entity:node'
 migration_dependencies:
   required:
     - druio_user
+    - druio_file

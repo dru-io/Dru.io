@@ -1,4 +1,4 @@
-uuid: 44899d1a-902b-4aca-a4b5-c25cf5f945e2
+uuid: 338bd008-2e47-4a1b-8dc8-4a2208488289
 langcode: en
 status: true
 dependencies:
@@ -6,7 +6,7 @@ dependencies:
     module:
       - druio_migrate
 _core:
-  default_config_hash: AQPLajUKu3v5smr0gwCaUYu-4ANy4HJx9jtEchvjk2s
+  default_config_hash: h126kfNt7MGVrVDTL8_2ycvL-ymp9yWVIcdEvxpfFRU
 id: druio_user
 migration_tags: null
 migration_group: druio
@@ -22,9 +22,10 @@ process:
     plugin: default_value
     default_value: 2
   name:
-    plugin: dedupe_entity
+    plugin: make_unique_entity_field
     entity_type: user
     field: name
+    source: name
   created: created
   changed: '@created'
   access: access
