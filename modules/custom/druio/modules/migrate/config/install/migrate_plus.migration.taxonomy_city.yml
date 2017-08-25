@@ -35,7 +35,7 @@ process:
       method: process
       source: parent
     -
-      plugin: migration
+      plugin: migration_lookup
       migration: druio_taxonomy_city
       source: parent
   weight: weight

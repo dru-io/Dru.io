@@ -24,6 +24,10 @@ process:
   changed: changed
   'body/value': body_value
   'body/format': body_format
+  'field_image/fid':
+    plugin: migration_lookup
+    migration: druio_file
+    source: field_event_poster_fid
 
 migration_dependencies:
   required:

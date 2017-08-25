@@ -17,7 +17,7 @@ process:
       delimiter: /
       source:
         - constants/source_base_path
-        - uri
+        - filepath
     -
       plugin: urlencode
   uri:
@@ -30,7 +30,7 @@ process:
   created: timestamp
   changed: timestamp
   uid:
-    plugin: migration
+    plugin: migration_lookup
     migration: druio_users
     source: uid
 

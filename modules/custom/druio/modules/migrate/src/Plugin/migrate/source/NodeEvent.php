@@ -48,6 +48,7 @@ class NodeEvent extends SqlBase {
       // Custom added fields.
       'body_value' => $this->t('The value of body field'),
       'body_format' => $this->t('The format of body field'),
+      'field_event_poster_fid' => $this->t('File ID for poster image'),
     ];
 
     return $fields;
@@ -81,6 +82,16 @@ class NodeEvent extends SqlBase {
       ->fetch();
     $row->setSourceProperty('body_value', $body_query['body_value']);
     $row->setSourceProperty('body_format', $body_query['body_format']);
+
+    // Poster FID.
+    $body_query = $this->select('field_data_field_event_poster', 'p')
+      ->fields('p', ['field_event_poster_fid'])
+      ->condition('entity_type', 'node')
+      ->condition('bundle', 'event')
+      ->condition('entity_id', $nid)
+      ->execute()
+      ->fetch();
+    $row->setSourceProperty('field_event_poster_fid', $body_query['field_event_poster_fid']);
     return parent::prepareRow($row);
   }
 

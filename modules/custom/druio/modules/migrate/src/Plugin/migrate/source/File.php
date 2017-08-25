@@ -40,6 +40,8 @@ class File extends SqlBase {
       'filemime' => $this->t('The file’s MIME type'),
       'status' => $this->t('A field indicating the status of the file. Two status are defined in core: temporary (0) and permanent (1)'),
       'timestamp' => $this->t('UNIX timestamp for when the file was added'),
+      // Custom fields.
+      'filepath' => $this->t('Path to source file'),
     ];
 
     return $fields;
@@ -61,9 +63,12 @@ class File extends SqlBase {
    * {@inheritdoc}
    */
   public function prepareRow(Row $row) {
+    $path = str_replace('public:/', 'sites/default/files', $row->getSourceProperty('uri'));
+    $path = str_replace($this->configuration['constants']['source_base_path'], NULL, $path);
     // Before the actual migration for faster and easier testing all files uri's
     // will replaced by single image.
-    $row->setSourceProperty('uri', 'sample.jpg');
+    $row->setSourceProperty('filepath', '/sample.jpg');
+    // @todo handle uri to migrate all files in the new structure.
     return parent::prepareRow($row);
   }
 
