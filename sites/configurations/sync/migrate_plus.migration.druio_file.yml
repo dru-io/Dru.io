@@ -1,4 +1,4 @@
-uuid: ed300bf8-5cd0-4312-9135-6d8e56b5c1d6
+uuid: 70fceb1e-d005-4baf-942d-00877f6061c7
 langcode: en
 status: true
 dependencies:
@@ -6,7 +6,7 @@ dependencies:
     module:
       - druio_migrate
 _core:
-  default_config_hash: eVNrIWLyfBM40Z_LQcRedfM3aj_o-nWopIhI8JBY0Zk
+  default_config_hash: KS70laEKRQw9UahtyXM4JGHdtGrQpmtNV5eZgDdrxW4
 id: druio_file
 migration_tags: null
 migration_group: druio

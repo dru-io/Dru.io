@@ -1,4 +1,4 @@
-uuid: 82141d69-4d70-4a91-9a3f-be0be401aa3a
+uuid: 98942b80-c36c-469d-a29b-ccec40eb3859
 langcode: en
 status: true
 dependencies:
@@ -6,21 +6,21 @@ dependencies:
     module:
       - druio_migrate
 _core:
-  default_config_hash: 3DH_lnmKGoft47VdJkb8YGhUZ0Vhw36CYDNk05xa5bY
-id: druio_node_post
+  default_config_hash: mOOpaK1kIo-SEAPwJKNOTM2E_6UmQKGuJ_LDmwik3Og
+id: druio_order
 migration_tags: null
 migration_group: druio
-label: Posts
+label: Orders
 source:
-  plugin: druio_node_post
+  plugin: druio_order
 process:
   type:
     plugin: default_value
-    default_value: post
+    default_value: order
   title: title
   nid: nid
   uid:
-    plugin: migration_lookup
+    plugin: migration
     migration: druio_user
     source: uid
   sticky:
@@ -31,11 +31,10 @@ process:
   changed: changed
   body/value: body_value
   body/format: body_format
-  field_paragraphs:
-    plugin: druio_paragraphs
-    source: paragraphs
+  field_order_status/value: order_status
 destination:
   plugin: 'entity:node'
 migration_dependencies:
   required:
     - druio_user
+    - druio_file

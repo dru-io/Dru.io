@@ -1,0 +1,40 @@
+uuid: 14a3526a-c145-4ac1-a4b8-d5fa0098a7bc
+langcode: ru
+status: true
+dependencies:
+  config:
+    - core.entity_view_mode.node.teaser
+    - field.field.node.order.body
+    - field.field.node.order.field_order_status
+    - node.type.order
+  module:
+    - options
+    - text
+    - user
+id: node.order.teaser
+targetEntityType: node
+bundle: order
+mode: teaser
+content:
+  body:
+    label: hidden
+    type: text_summary_or_trimmed
+    weight: 2
+    settings:
+      trim_length: 600
+    third_party_settings: {  }
+    region: content
+  field_order_status:
+    type: list_default
+    weight: 1
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  links:
+    weight: 0
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+hidden:
+  langcode: true

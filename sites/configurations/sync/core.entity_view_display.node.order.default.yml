@@ -1,0 +1,47 @@
+uuid: f00e133a-5e20-4a29-a463-79820fe37d05
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.field.node.order.body
+    - field.field.node.order.field_order_notify_email
+    - field.field.node.order.field_order_status
+    - node.type.order
+  module:
+    - options
+    - text
+    - user
+id: node.order.default
+targetEntityType: node
+bundle: order
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_order_notify_email:
+    weight: 103
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+    type: boolean
+    region: content
+  field_order_status:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  langcode: true
