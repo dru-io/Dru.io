@@ -1,19 +1,27 @@
-# Migration Post node type content.
-id: druio_node_post
-label: Posts
+# Migration Order node type content.
+id: druio_order
+label: Orders
 migration_group: druio
+migration_dependencies:
+  required:
+    - druio_user
+    - druio_file
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
 source:
-  plugin: druio_node_post
+  plugin: druio_order
 destination:
   plugin: entity:node
 process:
   type:
     plugin: default_value
-    default_value: post
+    default_value: order
   title: title
   nid: nid
   uid:
-    plugin: migration_lookup
+    plugin: migration
     migration: druio_user
     source: uid
   sticky:
@@ -24,14 +32,6 @@ process:
   changed: changed
   'body/value': body_value
   'body/format': body_format
-  field_paragraphs:
-    plugin: druio_paragraphs
-    source: paragraphs
+  'field_order_status/value': order_status
 
-migration_dependencies:
-  required:
-    - druio_user
-dependencies:
-  enforced:
-    module:
-      - druio_migrate
+

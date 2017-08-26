@@ -2,6 +2,13 @@
 id: druio_file
 label: Files from old dru.io
 migration_group: druio
+migration_dependencies:
+  required:
+    - druio_user
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
 source:
   plugin: druio_file
   constants:
@@ -34,10 +41,3 @@ process:
     migration: druio_users
     source: uid
 
-migration_dependencies:
-  required:
-    - druio_user
-dependencies:
-  enforced:
-    module:
-      - druio_migrate

@@ -14,7 +14,7 @@ process:
   nid: nid
   uid:
     plugin: migration
-    migration: druio_users
+    migration: druio_user
     source: uid
   sticky:
     plugin: default_value
