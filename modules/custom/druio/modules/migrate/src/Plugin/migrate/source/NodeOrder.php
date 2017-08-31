@@ -101,6 +101,48 @@ class NodeOrder extends SqlBase {
     $order_status = $order_statuses[$order_status_tid];
     $row->setSourceProperty('order_status', $order_status);
 
+
+    // Notify by email.
+    $order_notify_by_email = $this->select('field_data_field_order_notify_email', 'ne')
+      ->fields('ne', ['field_order_notify_email_value'])
+      ->condition('entity_type', 'node')
+      ->condition('bundle', 'order')
+      ->condition('entity_id', $nid)
+      ->execute()
+      ->fetch();
+    $row->setSourceProperty('is_notify_email', $order_notify_by_email);
+
+    // Specification.
+    $order_specification = $this->select('field_data_field_order_specification', 'os')
+      ->fields('os', ['entity_id'])
+      ->condition('entity_type', 'node')
+      ->condition('bundle', 'order')
+      ->condition('entity_id', $nid)
+      ->execute()
+      ->fetch();
+    $row->setSourceProperty('order_specification', $order_specification);
+
+    // Order budget.
+    $order_budget = $this->select('field_data_field_order_budgeting', 'b')
+      ->fields('b', ['field_order_budgeting_value'])
+      ->condition('entity_type', 'node')
+      ->condition('bundle', 'order')
+      ->condition('entity_id', $nid)
+      ->execute()
+      ->fetch();
+    $row->setSourceProperty('order_budget', $order_budget['field_order_budgeting_value']);
+
+    // Order contacts.
+    $order_contacts = $this->select('field_data_field_order_contacts', 'c')
+      ->fields('c', ['field_order_contacts_value', 'field_order_contacts_format'])
+      ->condition('entity_type', 'node')
+      ->condition('bundle', 'order')
+      ->condition('entity_id', $nid)
+      ->execute()
+      ->fetch();
+    $row->setSourceProperty('order_contacts_value', $order_contacts['field_order_contacts_value']);
+    $row->setSourceProperty('order_contacts_format', $order_contacts['field_order_contacts_format']);
+
     return parent::prepareRow($row);
   }
 
