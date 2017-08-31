@@ -5,9 +5,14 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.order.body
+    - field.field.node.order.field_order_budget
+    - field.field.node.order.field_order_contacts
+    - field.field.node.order.field_order_notify_email
+    - field.field.node.order.field_order_specification
     - field.field.node.order.field_order_status
     - node.type.order
   module:
+    - file
     - options
     - text
     - user
@@ -19,14 +24,47 @@ content:
   body:
     label: hidden
     type: text_summary_or_trimmed
-    weight: 2
+    weight: 5
     settings:
       trim_length: 600
     third_party_settings: {  }
     region: content
+  field_order_budget:
+    type: number_integer
+    weight: 1
+    region: content
+    label: above
+    settings:
+      thousand_separator: ''
+      prefix_suffix: true
+    third_party_settings: {  }
+  field_order_contacts:
+    type: text_default
+    weight: 6
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+  field_order_notify_email:
+    type: boolean
+    weight: 3
+    region: content
+    label: above
+    settings:
+      format: default
+      format_custom_false: ''
+      format_custom_true: ''
+    third_party_settings: {  }
+  field_order_specification:
+    type: file_default
+    weight: 4
+    region: content
+    label: above
+    settings: {  }
+    third_party_settings: {  }
   field_order_status:
     type: list_default
-    weight: 1
+    weight: 2
     region: content
     label: above
     settings: {  }

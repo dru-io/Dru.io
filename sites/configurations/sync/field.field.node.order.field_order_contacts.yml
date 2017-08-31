@@ -1,0 +1,21 @@
+uuid: 2c99b9e0-c9ca-4eb2-8466-97f0ad24f8a9
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_order_contacts
+    - node.type.order
+  module:
+    - text
+id: node.order.field_order_contacts
+field_name: field_order_contacts
+entity_type: node
+bundle: order
+label: 'Контактные данные'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

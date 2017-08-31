@@ -1,0 +1,20 @@
+uuid: 9a308399-578b-4c44-906c-211de53482da
+langcode: ru
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_order_budget
+field_name: field_order_budget
+entity_type: node
+type: integer
+settings:
+  unsigned: false
+  size: normal
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

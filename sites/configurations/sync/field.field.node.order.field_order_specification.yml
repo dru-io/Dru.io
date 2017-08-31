@@ -1,0 +1,27 @@
+uuid: 87bff164-5f37-4f7e-a681-38b2f35370b8
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_order_specification
+    - node.type.order
+  module:
+    - file
+id: node.order.field_order_specification
+field_name: field_order_specification
+entity_type: node
+bundle: order
+label: 'Техническое задание'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  file_directory: '[date:custom:Y]-[date:custom:m]'
+  file_extensions: 'txt pdf zip rar doc docx xls tar.gz tar.bz jpg png xlsx gif tiff psd cdr xlst ods odt pptx'
+  max_filesize: ''
+  description_field: false
+  handler: 'default:file'
+  handler_settings: {  }
+field_type: file
