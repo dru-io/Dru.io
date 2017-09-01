@@ -1,0 +1,11 @@
+uuid: 94b49fbc-7b30-4dc4-a42c-0f2583dde82c
+langcode: ru
+status: true
+dependencies:
+  config:
+    - taxonomy.vocabulary.question_category
+id: taxonomy_term.question_category
+target_entity_type_id: taxonomy_term
+target_bundle: question_category
+default_langcode: site_default
+language_alterable: false

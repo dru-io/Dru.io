@@ -1,0 +1,24 @@
+uuid: 9ecf8872-ecdd-4ded-976f-baff25e242ae
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
+_core:
+  default_config_hash: d65JfDZ8x3oXA7SSxmLgJgE7bOeVnRi3bWRNJTTB12Y
+id: druio_taxonomy_question_category
+migration_tags: null
+migration_group: druio
+label: 'Question category'
+source:
+  plugin: druio_taxonomy_question_category
+process:
+  vid:
+    plugin: default_value
+    default_value: question_category
+  name: name
+  weight: weight
+destination:
+  plugin: 'entity:taxonomy_term'
+migration_dependencies: null
