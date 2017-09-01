@@ -45,3 +45,14 @@ $databases['druio_old']['default'] = array (
   'driver' => 'mysql',
 );
 ```
+
+## Дерево зависимостей для миграций чтобы было проще ориентироваться
+
+- [druio_user](config/install/migrate_plus.migration.user.yml)
+  - [druio_file](config/install/migrate_plus.migration.file.yml)
+    - [druio_event](config/install/migrate_plus.migration.node_event.yml)
+    - [druio_order](config/install/migrate_plus.migration.node_order.yml)
+  - [druio_node_post](config/install/migrate_plus.migration.node_post.yml)
+  - [druio_node_project](config/install/migrate_plus.migration.node_project.yml)
+- [druio_taxonomy_question_category](config/install/migrate_plus.migration.taxonomy_question_category.yml)
+- [druio_taxonomy_city](config/install/migrate_plus.migration.taxonomy_city.yml)
