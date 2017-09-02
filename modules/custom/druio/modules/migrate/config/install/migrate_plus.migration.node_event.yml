@@ -36,6 +36,7 @@ migration_dependencies:
   required:
     - druio_user
     - druio_file
+    - druio_taxonomy_city
 dependencies:
   enforced:
     module:
