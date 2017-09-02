@@ -1,4 +1,4 @@
-uuid: 49445f64-6526-4d42-af65-6bf3b59fa4c3
+uuid: c096c5d5-0fd1-403d-af3e-d996aa9af65b
 langcode: en
 status: true
 dependencies:
@@ -6,17 +6,17 @@ dependencies:
     module:
       - druio_migrate
 _core:
-  default_config_hash: d65JfDZ8x3oXA7SSxmLgJgE7bOeVnRi3bWRNJTTB12Y
-id: druio_taxonomy_question_category
+  default_config_hash: W20Qh_RrxvIeLqP3OM6QXFh49oy5CXI4ScRa_I0aH58
+id: druio_taxonomy_drupal_version
 migration_tags: null
 migration_group: druio
-label: 'Question category'
+label: 'Drupal version'
 source:
-  plugin: druio_taxonomy_question_category
+  plugin: druio_taxonomy_drupal_version
 process:
   vid:
     plugin: default_value
-    default_value: question_category
+    default_value: drupal_version
   name: name
   weight: weight
 destination:
