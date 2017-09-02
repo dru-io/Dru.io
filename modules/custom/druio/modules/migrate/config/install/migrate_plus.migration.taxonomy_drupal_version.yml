@@ -1,0 +1,18 @@
+id: druio_taxonomy_drupal_version
+label: Drupal version
+migration_group: druio
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
+source:
+  plugin: druio_taxonomy_drupal_version
+destination:
+  plugin: entity:taxonomy_term
+process:
+  vid:
+    plugin: default_value
+    default_value: drupal_version
+  name: name
+  weight: weight
+

@@ -46,7 +46,9 @@ $databases['druio_old']['default'] = array (
 );
 ```
 
-## Дерево зависимостей для миграций чтобы было проще ориентироваться
+## Дерево зависимостей миграций
+
+Для более простой ориентаци и понимания что происходит.
 
 - [druio_user](config/install/migrate_plus.migration.user.yml)
   - [druio_file](config/install/migrate_plus.migration.file.yml)
@@ -56,3 +58,8 @@ $databases['druio_old']['default'] = array (
   - [druio_node_project](config/install/migrate_plus.migration.node_project.yml)
 - [druio_taxonomy_question_category](config/install/migrate_plus.migration.taxonomy_question_category.yml)
 - [druio_taxonomy_city](config/install/migrate_plus.migration.taxonomy_city.yml)
+  - [druio_event](config/install/migrate_plus.migration.node_event.yml)
+- [druio_taxonomy_drupal_version](config/install/migrate_plus.migration.taxonomy_drupal_version.yml)
+
+
+Для выполнения всех миграций разом существует группа `druio`, можно вызывать миграцию сразу по ней и все дерево будет выполнено в аналогичной последовательности. `drush mi --group=druio`
