@@ -1,0 +1,35 @@
+id: druio_node_question
+label: Questions
+migration_group: druio
+source:
+  plugin: druio_node_question
+destination:
+  plugin: entity:node
+process:
+  type:
+    plugin: default_value
+    default_value: question
+  title: title
+  nid: nid
+  uid:
+    plugin: migration_lookup
+    migration: druio_user
+    source: uid
+  sticky:
+    plugin: default_value
+    default_value: 0
+  status: status
+  created: created
+  changed: changed
+  'body/value': body_value
+  'body/format': body_format
+  field_drupal_version: drupal_version
+
+migration_dependencies:
+  required:
+    - druio_user
+    - druio_taxonomy_drupal_version
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
