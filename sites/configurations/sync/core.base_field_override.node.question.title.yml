@@ -1,0 +1,18 @@
+uuid: 29a3789f-85d2-470a-a236-761967922002
+langcode: ru
+status: true
+dependencies:
+  config:
+    - node.type.question
+id: node.question.title
+field_name: title
+entity_type: node
+bundle: question
+label: Вопрос
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

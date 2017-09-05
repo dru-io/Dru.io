@@ -1,0 +1,28 @@
+uuid: 3bdd1129-e3f3-430c-b351-4a409296e565
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_question_categories
+    - node.type.question
+    - taxonomy.vocabulary.question_category
+id: node.question.field_question_categories
+field_name: field_question_categories
+entity_type: node
+bundle: question
+label: Категории
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings:
+  handler: 'default:taxonomy_term'
+  handler_settings:
+    target_bundles:
+      question_category: question_category
+    sort:
+      field: _none
+    auto_create: false
+    auto_create_bundle: ''
+field_type: entity_reference

@@ -1,4 +1,4 @@
-uuid: cebfda18-40fd-467c-b756-41586438fc73
+uuid: 0264fda7-7806-4205-9543-b2b8300e3f1f
 langcode: en
 status: true
 dependencies:
@@ -6,7 +6,7 @@ dependencies:
     module:
       - druio_migrate
 _core:
-  default_config_hash: bSRzohiEwLBuho4xe9ixfIjJLExmE8V26yO42KQPTxQ
+  default_config_hash: EUb98Ia8vQJSke7_2WfLrLSnmCJzlsmEXbHufSYaw8Y
 id: druio_event
 migration_tags: null
 migration_group: druio
@@ -44,3 +44,4 @@ migration_dependencies:
   required:
     - druio_user
     - druio_file
+    - druio_taxonomy_city
