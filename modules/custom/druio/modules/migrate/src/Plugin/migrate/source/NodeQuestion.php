@@ -107,6 +107,26 @@ class NodeQuestion extends SqlBase {
     }
     $row->setSourceProperty('drupal_version', $drupal_versions_array);
 
+    // Project references.
+    $project_references_query = $this->select('field_data_field_project_reference', 'pr')
+      ->fields('pr', ['field_project_reference_target_id'])
+      ->condition('entity_type', 'node')
+      ->condition('bundle', 'question')
+      ->condition('entity_id', $nid)
+      ->execute()
+      ->fetch();
+    $row->setSourceProperty('project_references', $project_references_query);
+
+    // Question categories.
+    $question_categories = $this->select('field_data_field_category', 'c')
+      ->fields('c', ['field_category_tid'])
+      ->condition('entity_type', 'node')
+      ->condition('bundle', 'question')
+      ->condition('entity_id', $nid)
+      ->execute()
+      ->fetch();
+    $row->setSourceProperty('question_categories', $question_categories);
+
     return parent::prepareRow($row);
   }
 

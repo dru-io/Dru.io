@@ -56,10 +56,14 @@ $databases['druio_old']['default'] = array (
     - [druio_order](config/install/migrate_plus.migration.node_order.yml)
   - [druio_node_post](config/install/migrate_plus.migration.node_post.yml)
   - [druio_node_project](config/install/migrate_plus.migration.node_project.yml)
+    - [druio_node_question](config/install/migrate_plus.migration.node_question.yml)
+  - [druio_node_question](config/install/migrate_plus.migration.node_question.yml)
 - [druio_taxonomy_question_category](config/install/migrate_plus.migration.taxonomy_question_category.yml)
+  - [druio_node_question](config/install/migrate_plus.migration.node_question.yml)
 - [druio_taxonomy_city](config/install/migrate_plus.migration.taxonomy_city.yml)
   - [druio_event](config/install/migrate_plus.migration.node_event.yml)
 - [druio_taxonomy_drupal_version](config/install/migrate_plus.migration.taxonomy_drupal_version.yml)
+  - [druio_node_question](config/install/migrate_plus.migration.node_question.yml)
 
 
 Для выполнения всех миграций разом существует группа `druio`, можно вызывать миграцию сразу по ней и все дерево будет выполнено в аналогичной последовательности. `drush mi --group=druio`
