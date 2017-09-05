@@ -25,6 +25,7 @@ LICENSE.txt
 README.txt
 autoload.php
 index.php
+update.php
 composer.lock
 example.gitignore
 .gitattributes
