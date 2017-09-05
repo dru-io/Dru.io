@@ -1,8 +1,0 @@
-uuid: fa773994-c26c-4ecb-8047-71608f17a388
-langcode: ru
-status: true
-dependencies: {  }
-id: basic
-label: 'Базовый блок'
-revision: 0
-description: 'Базовый блок содержит заголовок и тело.'

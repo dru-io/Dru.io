@@ -1,9 +1,0 @@
-uuid: 922c2b04-2849-4632-9a89-4fe13d6a1b11
-langcode: ru
-status: true
-dependencies: {  }
-name: 'Drupal: Versions'
-vid: drupal_versions
-description: ''
-hierarchy: 0
-weight: 0

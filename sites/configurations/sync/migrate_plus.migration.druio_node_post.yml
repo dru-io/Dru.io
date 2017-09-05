@@ -1,0 +1,41 @@
+uuid: 0b53f5ee-571e-40b0-ab0c-5b4bd56bec07
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
+_core:
+  default_config_hash: 3DH_lnmKGoft47VdJkb8YGhUZ0Vhw36CYDNk05xa5bY
+id: druio_node_post
+migration_tags: null
+migration_group: druio
+label: Posts
+source:
+  plugin: druio_node_post
+process:
+  type:
+    plugin: default_value
+    default_value: post
+  title: title
+  nid: nid
+  uid:
+    plugin: migration_lookup
+    migration: druio_user
+    source: uid
+  sticky:
+    plugin: default_value
+    default_value: 0
+  status: status
+  created: created
+  changed: changed
+  body/value: body_value
+  body/format: body_format
+  field_paragraphs:
+    plugin: druio_paragraphs
+    source: paragraphs
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - druio_user

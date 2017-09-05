@@ -1,0 +1,9 @@
+uuid: 26ab819e-6978-499c-b40b-53fb858e5c4f
+langcode: ru
+status: true
+dependencies: {  }
+name: 'Версии Drupal'
+vid: drupal_version
+description: ''
+hierarchy: 0
+weight: 0

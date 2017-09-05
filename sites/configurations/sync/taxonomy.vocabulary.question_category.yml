@@ -1,0 +1,9 @@
+uuid: 287c881f-9e55-4e49-9914-dc195479073e
+langcode: ru
+status: true
+dependencies: {  }
+name: 'Категории вопросов'
+vid: question_category
+description: ''
+hierarchy: 0
+weight: 0

@@ -1,0 +1,19 @@
+uuid: a5f34a5f-401c-4803-aa3c-d3dc0aa2dd13
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_project_short_name
+    - node.type.project
+id: node.project.field_project_short_name
+field_name: field_project_short_name
+entity_type: node
+bundle: project
+label: 'Короткое название проекта'
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

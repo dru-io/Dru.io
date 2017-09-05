@@ -1,0 +1,17 @@
+uuid: 5f9c3449-db09-4ef4-94d1-f88c18bca7d1
+langcode: ru
+status: true
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
+_core:
+  default_config_hash: SosXm-lIKz7gSj63MyretHvF0IrvMBYdIqz_SvjQF3g
+id: druio
+label: 'Dru.io migration'
+description: 'Migrations for Dru.io content. From old Drupal 7 site to new Drupal 8.'
+source_type: 'Drupal 7'
+module: null
+shared_configuration:
+  source:
+    key: druio_old

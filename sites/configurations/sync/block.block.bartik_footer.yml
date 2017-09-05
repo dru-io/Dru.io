@@ -1,0 +1,26 @@
+uuid: 94c9ad71-6e5c-430d-bdd6-a8fb9db9942f
+langcode: ru
+status: true
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - system
+  theme:
+    - bartik
+_core:
+  default_config_hash: kkISXE1LT2FJEoYnqCrCpeFB-2pmGmMxMklVk7rQcfg
+id: bartik_footer
+theme: bartik
+region: footer_fifth
+weight: 0
+provider: null
+plugin: 'system_menu_block:footer'
+settings:
+  id: 'system_menu_block:footer'
+  label: 'Меню в подвале'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility: {  }

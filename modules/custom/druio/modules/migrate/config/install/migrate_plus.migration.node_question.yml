@@ -1,0 +1,63 @@
+id: druio_node_question
+label: Questions
+migration_group: druio
+source:
+  plugin: druio_node_question
+destination:
+  plugin: entity:node
+process:
+  type:
+    plugin: default_value
+    default_value: question
+  title: title
+  nid: nid
+  uid:
+    plugin: migration_lookup
+    migration: druio_user
+    source: uid
+  sticky:
+    plugin: default_value
+    default_value: 0
+  status: status
+  created: created
+  changed: changed
+  'body/value': body_value
+  'body/format': body_format
+  field_drupal_version: drupal_version
+  field_project_references:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: project_references
+    -
+      plugin: iterator
+      source: project_references
+      process:
+        target_id:
+          plugin: migration_lookup
+          migration: druio_node_project
+          source: field_project_reference_target_id
+  field_question_categories:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: question_categories
+    -
+      plugin: iterator
+      source: question_categories
+      process:
+        target_id:
+          plugin: migration_lookup
+          migration: druio_taxonomy_question_category
+          source: field_category_tid
+
+migration_dependencies:
+  required:
+    - druio_user
+    - druio_taxonomy_drupal_version
+    - druio_node_project
+    - druio_taxonomy_question_category
+dependencies:
+  enforced:
+    module:
+      - druio_migrate

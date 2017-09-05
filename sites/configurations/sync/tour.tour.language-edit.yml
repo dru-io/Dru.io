@@ -1,0 +1,51 @@
+uuid: df470af3-d37e-4cd0-8d0d-3395192b2bcf
+langcode: ru
+status: true
+dependencies:
+  module:
+    - language
+_core:
+  default_config_hash: uwUxQwqEzjNphw2r1_eXr3GJkw1uI0gWkmWQ6J5OvPI
+id: language-edit
+label: 'Редактирование языков'
+module: language
+routes:
+  -
+    route_name: entity.configurable_language.edit_form
+tips:
+  language-edit-overview:
+    id: language-edit-overview
+    plugin: text
+    label: 'Редактирование языков'
+    body: '<p>Эта страница предоставляет возможность редактировать язык на вашем сайте, включая собственные языки.</p>'
+    weight: 1
+  language-edit-langcode:
+    id: language-edit-langcode
+    plugin: text
+    label: 'Код языка'
+    body: '<p>Невозможно изменить код языка сайта, так как он используется системой для отслеживания языка.</p>'
+    weight: 2
+    attributes:
+      data-id: edit-langcode-view
+  language-edit-label:
+    id: language-edit-label
+    plugin: text
+    label: 'Название языка'
+    body: 'Название языка используется по всему сайту для всех пользователей и пишется на английском языке. Названия встроенных языков могут быть переведены с помощью модуля Interface Translation, а названия встроенных и собственных языков могут быть переведены с помощью модуля Configuration Translation.'
+    weight: 3
+    attributes:
+      data-id: edit-label
+  language-edit-direction:
+    id: language-edit-direction
+    plugin: text
+    label: 'Направление языка'
+    body: '<p>Выберите направление языка - "Слева-направо" или "Справа-налево".</p><p>Обратите внимание, что не все темы поддерживают направление "Справа-налево", поэтому проверьте свою тему перед использованием направления "Справа-налево".</p>'
+    weight: 4
+    attributes:
+      data-id: edit-direction--wrapper--description
+  language-edit-continue:
+    id: language-edit-continue
+    plugin: text
+    label: Продолжение
+    body: '<p>Now that you have an overview of the "Edit language" feature, you can continue by:<ul><li>Editing a language</li><li><a href="[site:url]admin/config/regional/language">Viewing configured languages</a></li></ul></p>'
+    weight: 5

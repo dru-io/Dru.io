@@ -1,0 +1,57 @@
+uuid: 8b77b24d-ecf9-4ecb-b89d-99219f4005a0
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
+_core:
+  default_config_hash: omGx3zd7V-KpxH8pK33s-0707LfLNAnt8XfTEVXvPlw
+id: druio_order
+migration_tags: null
+migration_group: druio
+label: Orders
+source:
+  plugin: druio_order
+process:
+  type:
+    plugin: default_value
+    default_value: order
+  title: title
+  nid: nid
+  uid:
+    plugin: migration
+    migration: druio_user
+    source: uid
+  sticky:
+    plugin: default_value
+    default_value: 0
+  status: status
+  created: created
+  changed: changed
+  body/value: body_value
+  body/format: body_format
+  field_order_status/value: order_status
+  field_order_notify_email/value: is_notify_email
+  field_order_specification:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: order_specification
+    -
+      plugin: iterator
+      source: order_specification
+      process:
+        target_id:
+          plugin: migration_lookup
+          migration: druio_file
+          source: entity_id
+  field_order_budget/value: order_budget
+  field_order_contacts/value: order_contacts_value
+  field_order_contacts/format: order_contacts_format
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - druio_user
+    - druio_file

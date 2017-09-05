@@ -1,0 +1,19 @@
+uuid: ace4c3cd-a7f0-41cf-94a6-e672c6fb5a6d
+langcode: ru
+status: true
+dependencies:
+  module:
+    - node
+id: node.field_project_releases
+field_name: field_project_releases
+entity_type: node
+type: string_long
+settings:
+  case_sensitive: false
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

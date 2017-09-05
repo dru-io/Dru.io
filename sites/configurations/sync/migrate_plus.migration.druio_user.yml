@@ -1,0 +1,35 @@
+uuid: ffe9975a-959e-4444-af02-bd4444ce6c82
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
+_core:
+  default_config_hash: h126kfNt7MGVrVDTL8_2ycvL-ymp9yWVIcdEvxpfFRU
+id: druio_user
+migration_tags: null
+migration_group: druio
+label: 'User migration'
+source:
+  plugin: druio_user
+process:
+  pass: password
+  mail: email
+  init: email
+  status: status
+  roles:
+    plugin: default_value
+    default_value: 2
+  name:
+    plugin: make_unique_entity_field
+    entity_type: user
+    field: name
+    source: name
+  created: created
+  changed: '@created'
+  access: access
+  login: login
+destination:
+  plugin: 'entity:user'
+migration_dependencies: {  }

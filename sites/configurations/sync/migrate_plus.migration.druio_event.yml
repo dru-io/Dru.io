@@ -1,0 +1,47 @@
+uuid: 0264fda7-7806-4205-9543-b2b8300e3f1f
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
+_core:
+  default_config_hash: EUb98Ia8vQJSke7_2WfLrLSnmCJzlsmEXbHufSYaw8Y
+id: druio_event
+migration_tags: null
+migration_group: druio
+label: Events
+source:
+  plugin: druio_event
+process:
+  type:
+    plugin: default_value
+    default_value: event
+  title: title
+  nid: nid
+  uid:
+    plugin: migration
+    migration: druio_user
+    source: uid
+  sticky:
+    plugin: default_value
+    default_value: 0
+  status: status
+  created: created
+  changed: changed
+  body/value: body_value
+  body/format: body_format
+  field_image/target_id:
+    plugin: migration_lookup
+    migration: druio_file
+    source: field_event_poster_fid
+  field_event_date/value: field_event_date_value
+  field_event_place/value: field_event_place_value
+  field_event_city/target_id: city_tid
+destination:
+  plugin: 'entity:node'
+migration_dependencies:
+  required:
+    - druio_user
+    - druio_file
+    - druio_taxonomy_city

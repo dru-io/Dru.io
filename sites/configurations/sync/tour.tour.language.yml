@@ -1,0 +1,59 @@
+uuid: 9233c922-a5d8-4825-a386-52714d51a5d3
+langcode: ru
+status: true
+dependencies:
+  module:
+    - language
+_core:
+  default_config_hash: K3KVksdkREnIdd2idoIA9TDHQew_WreFzTG-DHmz9Z4
+id: language
+label: Язык
+module: language
+routes:
+  -
+    route_name: entity.configurable_language.collection
+tips:
+  language-overview:
+    id: language-overview
+    plugin: text
+    label: Языки
+    body: '<p>Страница "Языки" позволяет вам добавлять, редактировать, удалять, и упорядочивать языки для сайта.</p>'
+    weight: 1
+  language-add:
+    id: language-add
+    plugin: text
+    label: 'Добавление языков'
+    body: '<p>Для добавления языков на ваш сайт, нажмите кнопку "Добавить язык".</p><p>Добавленные языки будут отображаться в списке языков и потом могут быть отредактированы или удалены.</p>'
+    weight: 2
+    attributes:
+      data-class: button-action
+  language-reorder:
+    id: language-reorder
+    plugin: text
+    label: 'Переупорядочивание языков'
+    body: '<p>Чтобы изменить порядок языков на сайте, используйте иконки перемещения рядом с каждым языком.</p><p>В указанной здесь последовательности языки будут отображаться в списках языков на сайте, например в блоках переключения языков, которые предоставляются модулями Перевод Интерфейса и Перевод Материалов.</p><p>После окончания изменения порядка языков, нажмите на кнопку "Сохранить конфигурацию" чтобы изменения вступили в силу.</p>'
+    weight: 3
+    attributes:
+      data-class: draggable
+  language-default:
+    id: language-default
+    plugin: text
+    label: 'Установить языком по умолчанию'
+    body: '<p>Вы можете выбрать язык сайта по умолчанию, выбрав один из настроенных языков языком по умолчанию. Сайт будет использовать язык по умолчанию в ситуациях, когда выбор не сделан, но язык должен быть установлен, например язык отображаемого интерфейса.</p>'
+    weight: 4
+    attributes:
+      data-class: js-form-item-site-default-language
+  language-operations:
+    id: language-operations
+    plugin: text
+    label: 'Изменение языков'
+    body: '<p>Операции предназначенные для редактирования и удаления ваших языков.</p><p>Вы можете отредактировать имя и направление языка.</p><p>Удалённые языки можно вернуть обратно позже. Удаление языка удалит все переводы интерфейса связанные с ним, и для всех материалов на этом языке будет установлен нейтральный язык. Обратите внимание, что вы не можете удалить язык установленный по умолчанию для сайта.</p>'
+    weight: 5
+    attributes:
+      data-class: dropbutton-wrapper
+  language-continue:
+    id: language-continue
+    plugin: text
+    label: Продолжение
+    body: '<p>Now that you have an overview of the "Languages" page, you can continue by:<ul><li><a href="[site:url]admin/config/regional/language/add">Adding a language</a></li><li>Reordering languages</li><li>Editing a language</li><li>Deleting a language</li></ul></p>'
+    weight: 6

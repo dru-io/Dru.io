@@ -1,0 +1,42 @@
+# Import cities in taxonomy.
+id: druio_taxonomy_city
+label: Cities tree
+migration_group: druio
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
+source:
+  plugin: csv
+  # This path is altered in .module file.
+  path: '/assets/cities.csv'
+  header_row_count: 1
+  keys:
+    - tid
+  column_names:
+    0:
+      tid: Identifier
+    1:
+      parent: Parent TID
+    2:
+      weight: Term weight
+    3:
+      name: City name
+destination:
+  plugin: entity:taxonomy_term
+process:
+  vid:
+    plugin: default_value
+    default_value: cities
+  name: name
+  parent:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: parent
+    -
+      plugin: migration_lookup
+      migration: druio_taxonomy_city
+      source: parent
+  weight: weight
+

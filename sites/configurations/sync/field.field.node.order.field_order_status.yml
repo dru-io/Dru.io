@@ -1,0 +1,23 @@
+uuid: 462abf1b-dd9b-41a7-bb2a-29a1bb612877
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_order_status
+    - node.type.order
+  module:
+    - options
+id: node.order.field_order_status
+field_name: field_order_status
+entity_type: node
+bundle: order
+label: 'Статус заказа'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    value: active
+default_value_callback: ''
+settings: {  }
+field_type: list_string

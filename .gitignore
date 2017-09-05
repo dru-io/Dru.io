@@ -11,6 +11,7 @@ error_log
 /vendor/*
 actions/*
 modules/contrib/*
+profiles/contrib/*
 **/.css.map
 .well-known
 #default files
@@ -24,6 +25,7 @@ LICENSE.txt
 README.txt
 autoload.php
 index.php
+update.php
 composer.lock
 example.gitignore
 .gitattributes
@@ -31,3 +33,4 @@ example.gitignore
 sites/default/services*.yml
 # KDE
 .directory
+docker-compose.yml

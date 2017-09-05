@@ -1,0 +1,18 @@
+id: druio_taxonomy_question_category
+label: Question category
+migration_group: druio
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
+source:
+  plugin: druio_taxonomy_question_category
+destination:
+  plugin: entity:taxonomy_term
+process:
+  vid:
+    plugin: default_value
+    default_value: question_category
+  name: name
+  weight: weight
+

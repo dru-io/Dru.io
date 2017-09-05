@@ -1,0 +1,24 @@
+uuid: 3a9a074f-ef18-413e-a376-085cabe756a0
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
+_core:
+  default_config_hash: W20Qh_RrxvIeLqP3OM6QXFh49oy5CXI4ScRa_I0aH58
+id: druio_taxonomy_drupal_version
+migration_tags: null
+migration_group: druio
+label: 'Drupal version'
+source:
+  plugin: druio_taxonomy_drupal_version
+process:
+  vid:
+    plugin: default_value
+    default_value: drupal_version
+  name: name
+  weight: weight
+destination:
+  plugin: 'entity:taxonomy_term'
+migration_dependencies: null

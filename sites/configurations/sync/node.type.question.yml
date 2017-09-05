@@ -1,0 +1,17 @@
+uuid: 503bba12-e4a1-4fdc-b7e3-0d42ed8efc1e
+langcode: ru
+status: true
+dependencies:
+  module:
+    - menu_ui
+third_party_settings:
+  menu_ui:
+    available_menus: {  }
+    parent: ''
+name: Вопрос
+type: question
+description: ''
+help: ''
+new_revision: true
+preview_mode: 1
+display_submitted: true

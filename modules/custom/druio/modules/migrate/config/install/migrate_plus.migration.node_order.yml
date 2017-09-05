@@ -1,0 +1,66 @@
+# Migration Order node type content.
+id: druio_order
+label: Orders
+migration_group: druio
+migration_dependencies:
+  required:
+    - druio_user
+    - druio_file
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
+source:
+  plugin: druio_order
+destination:
+  plugin: entity:node
+process:
+  type:
+    plugin: default_value
+    default_value: order
+  title: title
+  nid: nid
+  uid:
+    plugin: migration
+    migration: druio_user
+    source: uid
+  sticky:
+    plugin: default_value
+    default_value: 0
+  status: status
+  created: created
+  changed: changed
+  'body/value': body_value
+  'body/format': body_format
+  'field_order_status/value': order_status
+  'field_order_notify_email/value': is_notify_email
+  # The source 'order_specification' is array with referenced file id's.
+  # @code
+  # order_specification: array(
+  #   array(
+  #     'entity_id' => 1,
+  #   ),
+  #   array(
+  #     'entity_id' => 2,
+  #   ),
+  # ),
+  # @endcode
+  #
+  # So wee need to loop over array and pass every value separately.
+  #
+  field_order_specification:
+    -
+      plugin: skip_on_empty
+      method: process
+      source: order_specification
+    -
+      plugin: iterator
+      source: order_specification
+      process:
+        target_id:
+          plugin: migration_lookup
+          migration: druio_file
+          source: entity_id
+  'field_order_budget/value': order_budget
+  'field_order_contacts/value': order_contacts_value
+  'field_order_contacts/format': order_contacts_format

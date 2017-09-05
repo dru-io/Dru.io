@@ -1,0 +1,39 @@
+# Migration Project node type content.
+id: druio_node_project
+label: Projects from drupal.org
+migration_group: druio
+source:
+  plugin: druio_node_project
+destination:
+  plugin: entity:node
+process:
+  type:
+    plugin: default_value
+    default_value: project
+  title: title
+  nid: nid
+  uid:
+    plugin: migration_lookup
+    migration: druio_user
+    source: uid
+  sticky:
+    plugin: default_value
+    default_value: 0
+  status: status
+  created: created
+  changed: changed
+  'body/value': body
+  field_project_development_status: development_status
+  field_project_maintenance_status: maintenance_status
+  field_project_type: project_type
+  field_drupal_version: drupal_version
+  field_project_short_name: project_short_name
+  'field_project_releases/value': project_releases
+
+migration_dependencies:
+  required:
+    - druio_user
+dependencies:
+  enforced:
+    module:
+      - druio_migrate

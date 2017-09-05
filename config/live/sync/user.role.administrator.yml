@@ -1,9 +1,0 @@
-uuid: 9e029663-9f1c-42c0-b700-e5fe86f0e915
-langcode: ru
-status: true
-dependencies: {  }
-id: administrator
-label: Администратор
-weight: 2
-is_admin: true
-permissions: {  }

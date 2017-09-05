@@ -1,0 +1,23 @@
+uuid: dd77ec18-48cf-4387-aeb0-5aab85ad1b7b
+langcode: ru
+status: true
+dependencies:
+  module:
+    - file
+    - node
+id: node.field_order_specification
+field_name: field_order_specification
+entity_type: node
+type: file
+settings:
+  display_field: false
+  display_default: false
+  uri_scheme: public
+  target_type: file
+module: file
+locked: false
+cardinality: 3
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

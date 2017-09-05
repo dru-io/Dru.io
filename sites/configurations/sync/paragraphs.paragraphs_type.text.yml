@@ -1,0 +1,7 @@
+uuid: 0cbe4a52-0352-4ae2-81cf-77ee296553a1
+langcode: ru
+status: true
+dependencies: {  }
+id: text
+label: Текст
+behavior_plugins: {  }

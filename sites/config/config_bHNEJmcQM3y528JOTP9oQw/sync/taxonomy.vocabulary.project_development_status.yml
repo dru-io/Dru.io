@@ -1,9 +1,0 @@
-uuid: 20b594ae-898c-4f40-9650-2e4d37f404dd
-langcode: ru
-status: true
-dependencies: {  }
-name: 'Project: Dev status'
-vid: project_development_status
-description: ''
-hierarchy: 0
-weight: 0

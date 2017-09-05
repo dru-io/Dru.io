@@ -1,0 +1,43 @@
+# Migration Event node type content.
+id: druio_event
+label: Events
+migration_group: druio
+source:
+  plugin: druio_event
+destination:
+  plugin: entity:node
+process:
+  type:
+    plugin: default_value
+    default_value: event
+  title: title
+  nid: nid
+  uid:
+    plugin: migration
+    migration: druio_user
+    source: uid
+  sticky:
+    plugin: default_value
+    default_value: 0
+  status: status
+  created: created
+  changed: changed
+  'body/value': body_value
+  'body/format': body_format
+  'field_image/target_id':
+    plugin: migration_lookup
+    migration: druio_file
+    source: field_event_poster_fid
+  'field_event_date/value': field_event_date_value
+  'field_event_place/value': field_event_place_value
+  'field_event_city/target_id': city_tid
+
+migration_dependencies:
+  required:
+    - druio_user
+    - druio_file
+    - druio_taxonomy_city
+dependencies:
+  enforced:
+    module:
+      - druio_migrate

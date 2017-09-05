@@ -1,8 +1,0 @@
-uuid: e1b8b605-f7a9-4b14-8156-86a1dbf9a354
-langcode: ru
-status: true
-dependencies: {  }
-id: footer
-label: Подвал
-description: 'Site information links'
-locked: true

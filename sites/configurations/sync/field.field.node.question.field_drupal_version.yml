@@ -1,0 +1,21 @@
+uuid: 0b4732c1-abe7-417e-97c6-b0f5ad481757
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_drupal_version
+    - node.type.question
+  module:
+    - options
+id: node.question.field_drupal_version
+field_name: field_drupal_version
+entity_type: node
+bundle: question
+label: 'Версия Drupal'
+description: ''
+required: false
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: list_string

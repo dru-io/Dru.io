@@ -1,0 +1,77 @@
+uuid: 604a2b84-a11d-4060-aef5-26acba94bc02
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.field.node.project.body
+    - field.field.node.project.field_drupal_version
+    - field.field.node.project.field_project_development_status
+    - field.field.node.project.field_project_maintenance_status
+    - field.field.node.project.field_project_releases
+    - field.field.node.project.field_project_short_name
+    - field.field.node.project.field_project_type
+    - node.type.project
+  module:
+    - options
+    - text
+    - user
+id: node.project.default
+targetEntityType: node
+bundle: project
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  field_drupal_version:
+    weight: 105
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_project_development_status:
+    weight: 103
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_project_maintenance_status:
+    weight: 102
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  field_project_releases:
+    weight: 107
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: basic_string
+    region: content
+  field_project_short_name:
+    weight: 106
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_project_type:
+    weight: 104
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: list_default
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  langcode: true
