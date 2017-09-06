@@ -1,0 +1,46 @@
+uuid: 05e5bb38-61ba-4e71-bdd5-6fe7689922fc
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
+_core:
+  default_config_hash: zyppwta5YeInepiOgkBPfi1lC5xrZEDIJ8XGCAhXtd4
+id: druio_comment_question_answer
+migration_tags: null
+migration_group: druio
+label: 'Comment — answer'
+source:
+  plugin: druio_comment_question_answer
+  constants:
+    entity_type: node
+    comment_type: question_answer
+    field_name: field_question_answers
+    pid: 0
+    status: 1
+    comment_body_format: markdown
+process:
+  entity_type: constants/entity_type
+  comment_type: constants/comment_type
+  field_name: constants/field_name
+  pid: constants/pid
+  status: constants/status
+  endity_id:
+    plugin: migration_lookup
+    migration: druio_node_question
+    source: question_target_id
+  uid:
+    plugin: migration_lookup
+    migration: druio_user
+    source: uid
+  created: created
+  changed: changed
+  comment_body/value: body_value
+  comment_body/format: constants/comment_body_format
+destination:
+  plugin: 'entity:comment'
+migration_dependencies:
+  required:
+    - druio_user
+    - druio_node_question

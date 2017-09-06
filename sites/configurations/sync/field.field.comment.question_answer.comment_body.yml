@@ -1,0 +1,21 @@
+uuid: 6c42ebae-0212-4a38-8754-2cfd81f8f5f3
+langcode: ru
+status: true
+dependencies:
+  config:
+    - comment.type.question_answer
+    - field.storage.comment.comment_body
+  module:
+    - text
+id: comment.question_answer.comment_body
+field_name: comment_body
+entity_type: comment
+bundle: question_answer
+label: Ответ
+description: ''
+required: true
+translatable: true
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: text_long

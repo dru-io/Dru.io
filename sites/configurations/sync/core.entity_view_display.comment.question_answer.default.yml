@@ -1,0 +1,26 @@
+uuid: 8e07b832-f661-4906-b759-9705851c13a6
+langcode: ru
+status: true
+dependencies:
+  config:
+    - comment.type.question_answer
+    - field.field.comment.question_answer.comment_body
+  module:
+    - text
+id: comment.question_answer.default
+targetEntityType: comment
+bundle: question_answer
+mode: default
+content:
+  comment_body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  langcode: true

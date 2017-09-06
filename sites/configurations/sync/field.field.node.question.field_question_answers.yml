@@ -1,0 +1,33 @@
+uuid: 348b6a7a-9b62-4f39-8353-e466c690519d
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_question_answers
+    - node.type.question
+  module:
+    - comment
+id: node.question.field_question_answers
+field_name: field_question_answers
+entity_type: node
+bundle: question
+label: Ответы
+description: ''
+required: false
+translatable: false
+default_value:
+  -
+    status: 2
+    cid: 0
+    last_comment_timestamp: 0
+    last_comment_name: null
+    last_comment_uid: 0
+    comment_count: 0
+default_value_callback: ''
+settings:
+  default_mode: 0
+  per_page: 50
+  anonymous: 0
+  form_location: true
+  preview: 1
+field_type: comment

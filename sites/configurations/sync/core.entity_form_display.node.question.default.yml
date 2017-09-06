@@ -6,9 +6,11 @@ dependencies:
     - field.field.node.question.body
     - field.field.node.question.field_drupal_version
     - field.field.node.question.field_project_references
+    - field.field.node.question.field_question_answers
     - field.field.node.question.field_question_categories
     - node.type.question
   module:
+    - comment
     - path
     - text
 id: node.question.default
@@ -45,6 +47,12 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
+    region: content
+  field_question_answers:
+    weight: 35
+    settings: {  }
+    third_party_settings: {  }
+    type: comment_default
     region: content
   field_question_categories:
     weight: 34
