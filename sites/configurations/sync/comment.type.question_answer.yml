@@ -1,0 +1,8 @@
+uuid: f9a908d0-f756-4661-bcf5-7e0942b768c2
+langcode: ru
+status: true
+dependencies: {  }
+id: question_answer
+label: 'Ответ на вопрос'
+target_entity_type_id: node
+description: 'Комментарий-ответ на вопрос.'

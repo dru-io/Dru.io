@@ -6,9 +6,11 @@ dependencies:
     - field.field.node.question.body
     - field.field.node.question.field_drupal_version
     - field.field.node.question.field_project_references
+    - field.field.node.question.field_question_answers
     - field.field.node.question.field_question_categories
     - node.type.question
   module:
+    - comment
     - options
     - text
     - user
@@ -38,6 +40,15 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_question_answers:
+    weight: 105
+    label: above
+    settings:
+      view_mode: default
+      pager_id: 0
+    third_party_settings: {  }
+    type: comment_default
     region: content
   field_question_categories:
     weight: 104

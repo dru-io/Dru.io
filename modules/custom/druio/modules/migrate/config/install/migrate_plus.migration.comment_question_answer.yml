@@ -1,0 +1,38 @@
+id: druio_comment_question_answer
+label: Comment — answer
+migration_group: druio
+source:
+  plugin: druio_comment_question_answer
+  constants:
+    entity_type: node
+    comment_type: question_answer
+    field_name: field_question_answers
+    status: 1
+    comment_body_format: markdown
+process:
+  entity_type: 'constants/entity_type'
+  comment_type: 'constants/comment_type'
+  field_name: 'constants/field_name'
+  status: 'constants/status'
+  entity_id:
+    plugin: migration_lookup
+    migration: druio_node_question
+    source: question_target_id
+  uid:
+    plugin: migration_lookup
+    migration: druio_user
+    source: uid
+  created: created
+  changed: changed
+  'comment_body/value': body_value
+  'comment_body/format': 'constants/comment_body_format'
+destination:
+  plugin: entity:comment
+migration_dependencies:
+  required:
+    - druio_user
+    - druio_node_question
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
