@@ -3,7 +3,9 @@ langcode: ru
 status: true
 dependencies:
   config:
+    - core.entity_view_display.comment.question_answer.default
     - field.field.node.question.body
+    - field.field.node.question.field_comments
     - field.field.node.question.field_drupal_version
     - field.field.node.question.field_project_references
     - field.field.node.question.field_question_answers
@@ -25,6 +27,15 @@ content:
     weight: 101
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_comments:
+    weight: 106
+    label: above
+    settings:
+      view_mode: default
+      pager_id: 0
+    third_party_settings: {  }
+    type: comment_default
     region: content
   field_drupal_version:
     weight: 102

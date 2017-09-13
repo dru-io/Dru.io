@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - field.field.node.question.body
+    - field.field.node.question.field_comments
     - field.field.node.question.field_drupal_version
     - field.field.node.question.field_project_references
     - field.field.node.question.field_question_answers
@@ -33,6 +34,12 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  field_comments:
+    weight: 36
+    settings: {  }
+    third_party_settings: {  }
+    type: comment_default
+    region: content
   field_drupal_version:
     weight: 32
     settings: {  }
