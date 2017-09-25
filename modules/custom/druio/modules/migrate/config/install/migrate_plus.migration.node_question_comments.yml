@@ -1,4 +1,3 @@
-# @todo complete it.
 id: druio_node_question_comments
 label: Question comments
 migration_group: druio
@@ -9,11 +8,14 @@ source:
     comment_type: comment
     field_name: field_comments
     comment_body_format: markdown
+    status: 1
+destination:
+  plugin: entity:comment
 process:
   entity_type: 'constants/entity_type'
   comment_type: 'constants/comment_type'
   field_name: 'constants/field_name'
-  status: 1
+  status: 'constants/status'
   entity_id:
     plugin: migration_lookup
     migration: druio_node_question
@@ -24,8 +26,8 @@ process:
     source: uid
   created: created
   changed: changed
-destination:
-  plugin: entity:comment
+  'comment_body/value': body_value
+  'comment_body/format': 'constants/comment_body_format'
 migration_dependencies:
   required:
     - druio_user

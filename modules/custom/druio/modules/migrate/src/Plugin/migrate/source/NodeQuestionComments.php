@@ -46,15 +46,32 @@ class NodeQuestionComments extends SqlBase {
    */
   public function prepareRow(Row $row) {
     $nid = $row->getSourceProperty('nid');
-    /*$query = $this->select('node', 'n')
+    $is_comment_to_question = $this->select('node', 'n')
+      ->fields('n')
       ->condition('n.type', 'question')
       ->condition('n.nid', $nid)
-      ->count()
+      ->countQuery()
       ->execute()
-      ->fetch();
+      ->fetchField();
 
-    throw new MigrateSkipProcessException();*/
-    return parent::prepareRow($row);
+    // We only process comments which created to question node type. Otherwise
+    // we skip row.
+    if ($is_comment_to_question) {
+      $cid = $row->getSourceProperty('cid');
+
+      // Body field.
+      $body_query = $this->select('field_data_comment_body', 'b')
+        ->fields('b', ['comment_body_value', 'comment_body_format'])
+        ->condition('entity_id', $cid)
+        ->execute()
+        ->fetch();
+      $row->setSourceProperty('body_value', $body_query['comment_body_value']);
+      return parent::prepareRow($row);
+    }
+    else {
+      return FALSE;
+    }
+
   }
 
   /**
