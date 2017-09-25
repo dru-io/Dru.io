@@ -1,0 +1,38 @@
+id: druio_node_question_comments
+label: Question comments
+migration_group: druio
+source:
+  plugin: druio_node_question_comments
+  constants:
+    entity_type: node
+    comment_type: comment
+    field_name: field_comments
+    comment_body_format: markdown
+    status: 1
+destination:
+  plugin: entity:comment
+process:
+  entity_type: 'constants/entity_type'
+  comment_type: 'constants/comment_type'
+  field_name: 'constants/field_name'
+  status: 'constants/status'
+  entity_id:
+    plugin: migration_lookup
+    migration: druio_node_question
+    source: nid
+  uid:
+    plugin: migration_lookup
+    migration: druio_user
+    source: uid
+  created: created
+  changed: changed
+  'comment_body/value': body_value
+  'comment_body/format': 'constants/comment_body_format'
+migration_dependencies:
+  required:
+    - druio_user
+    - druio_node_question
+dependencies:
+  enforced:
+    module:
+      - druio_migrate
