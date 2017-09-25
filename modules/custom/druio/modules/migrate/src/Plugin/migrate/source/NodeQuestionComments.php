@@ -46,15 +46,14 @@ class NodeQuestionComments extends SqlBase {
    */
   public function prepareRow(Row $row) {
     $nid = $row->getSourceProperty('nid');
-    $query = $this->select('node', 'n')
+    /*$query = $this->select('node', 'n')
       ->condition('n.type', 'question')
       ->condition('n.nid', $nid)
       ->count()
       ->execute()
       ->fetch();
-    print_r('1');
 
-    throw new MigrateSkipProcessException();
+    throw new MigrateSkipProcessException();*/
     return parent::prepareRow($row);
   }
 
@@ -81,7 +80,12 @@ class NodeQuestionComments extends SqlBase {
    * {@inheritdoc}
    */
   public function getIds() {
-    $ids['cid']['type'] = 'integer';
+    return [
+      'cid' => [
+        'type' => 'integer',
+        'alias' => 'c',
+      ],
+    ];
   }
 
 }
