@@ -1,0 +1,26 @@
+uuid: ffa71019-3cf1-4e47-a7b2-a36e0324cec5
+langcode: ru
+status: true
+dependencies:
+  config:
+    - comment.type.answer_comment
+    - field.field.comment.answer_comment.comment_body
+  module:
+    - text
+id: comment.answer_comment.default
+targetEntityType: comment
+bundle: answer_comment
+mode: default
+content:
+  comment_body:
+    label: hidden
+    type: text_default
+    weight: 0
+    settings: {  }
+    third_party_settings: {  }
+    region: content
+  links:
+    weight: 100
+    region: content
+hidden:
+  langcode: true

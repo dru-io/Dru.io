@@ -1,16 +1,16 @@
-uuid: 75e9f538-f39b-4a62-8fe7-b5ed32d2a9a0
+uuid: 693e1319-b6c9-452b-b34c-bf5ab19b83e0
 langcode: ru
 status: true
 dependencies:
   config:
-    - field.storage.node.field_comments
-    - node.type.question
+    - comment.type.question_answer
+    - field.storage.comment.field_question_answer_comments
   module:
     - comment
-id: node.question.field_comments
-field_name: field_comments
-entity_type: node
-bundle: question
+id: comment.question_answer.field_question_answer_comments
+field_name: field_question_answer_comments
+entity_type: comment
+bundle: question_answer
 label: Комментарии
 description: ''
 required: false
@@ -29,5 +29,5 @@ settings:
   per_page: 50
   anonymous: 0
   form_location: false
-  preview: 0
+  preview: 1
 field_type: comment

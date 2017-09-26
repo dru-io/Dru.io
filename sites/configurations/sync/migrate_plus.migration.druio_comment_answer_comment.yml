@@ -1,4 +1,4 @@
-uuid: 609c9f41-3d64-4074-93f1-ba055c2e1e2f
+uuid: a7752a6d-6730-4ace-8652-83a6587f1969
 langcode: en
 status: true
 dependencies:
@@ -6,19 +6,19 @@ dependencies:
     module:
       - druio_migrate
 _core:
-  default_config_hash: grdJb6LfzF7q-VwP9a_NevyJXx47qqtLHy2p2wKjrpk
-id: druio_node_question_comments
+  default_config_hash: vzhYYhufMRNFIslEMusndGqStqKHuak8vwmSrLEPJ0U
+id: druio_comment_answer_comment
 migration_tags: null
 migration_group: druio
-label: 'Question comments'
+label: 'Comment — comments for answer comment type.'
 source:
-  plugin: druio_node_question_comments
+  plugin: druio_comment_answer_comment
   constants:
-    entity_type: node
-    comment_type: comment
-    field_name: field_comments
-    comment_body_format: markdown
+    entity_type: comment
+    comment_type: answer_comment
+    field_name: field_question_answer_comments
     status: 1
+    comment_body_format: markdown
 process:
   entity_type: constants/entity_type
   comment_type: constants/comment_type
@@ -26,8 +26,9 @@ process:
   status: constants/status
   entity_id:
     plugin: migration_lookup
-    migration: druio_node_question
+    migration: druio_comment_question_answer
     source: nid
+    no_stub: true
   uid:
     plugin: migration_lookup
     migration: druio_user
@@ -41,4 +42,4 @@ destination:
 migration_dependencies:
   required:
     - druio_user
-    - druio_node_question
+    - druio_comment_question_answer

@@ -1,0 +1,8 @@
+uuid: f37614f3-6871-40e0-a947-84f00319fb7f
+langcode: ru
+status: true
+dependencies: {  }
+id: answer_comment
+label: 'Комментарии на ответ'
+target_entity_type_id: comment
+description: 'Комментарий, к типу комментария комментарий-ответ. /o\'

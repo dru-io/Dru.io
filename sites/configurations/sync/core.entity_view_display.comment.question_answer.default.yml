@@ -5,7 +5,9 @@ dependencies:
   config:
     - comment.type.question_answer
     - field.field.comment.question_answer.comment_body
+    - field.field.comment.question_answer.field_question_answer_comments
   module:
+    - comment
     - text
 id: comment.question_answer.default
 targetEntityType: comment
@@ -18,6 +20,15 @@ content:
     weight: 0
     settings: {  }
     third_party_settings: {  }
+    region: content
+  field_question_answer_comments:
+    weight: 101
+    label: above
+    settings:
+      view_mode: default
+      pager_id: 0
+    third_party_settings: {  }
+    type: comment_default
     region: content
   links:
     weight: 100

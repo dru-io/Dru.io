@@ -1,17 +1,15 @@
-uuid: 93c43495-088d-4933-ae5b-a1250b1a05f8
+uuid: 0ff36956-50bd-4da9-813d-6595dace5be0
 langcode: ru
 status: true
 dependencies:
   config:
-    - comment.type.question_answer
-    - field.field.comment.question_answer.comment_body
-    - field.field.comment.question_answer.field_question_answer_comments
+    - comment.type.answer_comment
+    - field.field.comment.answer_comment.comment_body
   module:
-    - comment
     - text
-id: comment.question_answer.default
+id: comment.answer_comment.default
 targetEntityType: comment
-bundle: question_answer
+bundle: answer_comment
 mode: default
 content:
   author:
@@ -24,12 +22,6 @@ content:
       rows: 5
       placeholder: ''
     third_party_settings: {  }
-    region: content
-  field_question_answer_comments:
-    weight: 12
-    settings: {  }
-    third_party_settings: {  }
-    type: comment_default
     region: content
   langcode:
     type: language_select
