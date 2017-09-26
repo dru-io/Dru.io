@@ -39,7 +39,7 @@ tips:
     id: locale-filter
     plugin: text
     label: 'Фильтрация результатов поиска'
-    body: 'You can search for untranslated strings if you want to translate something that isn''t translated yet. If you want to modify an existing translation, you might want to search only for translated strings.'
+    body: 'Вы можете искать непереведённые строки, если вы хотите перевести что-нибудь ещё непереведённое. Если вы хотите изменить существующий перевод, вы можете искать только переведённые строки.'
     weight: 4
     attributes:
       data-id: edit-translation
