@@ -134,4 +134,27 @@
     }
   };
 
+  /**
+   * For drupalcamp ug frontpage banner.
+   */
+  Drupal.behaviors.drupalCampUg2017 = {
+    attach: function(context, settings) {
+      const banner = $(context).find('#drupalcamp-ug-2017').once('druplug2017');
+
+      if (banner.length) {
+        const videoCode = '<iframe width="560" height="315" class="iframe" src="https://www.youtube.com/embed/pL8ci9F-2wM?rel=0&amp;showinfo=0&autoplay=1" frameborder="0" allowfullscreen></iframe>';
+
+        $(banner).find('.youtube-button').on('click', () => {
+          $(banner).find('.video-pane .video').html(videoCode);
+          $(banner).find('.video-pane').addClass('is-active');
+        });
+
+        $(banner).find('.video-pane .close').on('click', () => {
+          $(banner).find('.video-pane .video').html('');
+          $(banner).find('.video-pane').removeClass('is-active');
+        });
+      }
+    }
+  }
+
 })(jQuery, Drupal, this, this.document);
