@@ -1,0 +1,5 @@
+name = Dru.io telegram job posts
+description = Custom code.
+version = 7.x-1.x
+core = 7.x
+package = Dru.io
