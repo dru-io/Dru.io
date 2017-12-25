@@ -1,0 +1,103 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ * Описываем страницу конфигурации модуля
+ */
+function druio_telegram_menu() {
+  $items = array();
+
+  $items['admin/config/services/telegram-item'] = array(
+	'title' => t('Telegram item config'),
+	'description' => t('Send message to telegram channel'),
+	'page callback' => 'drupal_get_form',
+	'page arguments' => array('druio_telegram_config_form'),
+	'access arguments' => array('access telegram item'),
+	'file' => 'druio_telegram_config.inc',
+  );
+
+  return $items;
+}
+
+
+/**
+ * Implements hook_permission().
+ * Создаем права доступа
+ */
+function druio_telegram_permission() {
+  return array(
+	'access telegram item' => array(
+	  'title' => t('Administer telegram item'),
+	  'description' => t('Access permission to telegram item'),
+	),
+  );
+}
+
+
+/**
+ * Implements hook_module_implements_alter().
+ * Перемещаем hook_insert нашего модуля в самый низ (после модуля pathauto)
+ * Это нужно, чтобы получить alias для url ноды через модуль pathauto
+ */
+function druio_telegram_module_implements_alter(&$implementations, $hook) {
+  $module = basename(__FILE__, '.module');
+  if(!empty($implementations[$module])){
+	$group = $implementations[$module];
+	unset($implementations[$module]);
+	$implementations[$module] = $group;
+  }
+}
+
+
+/**
+ * Implements hook_node_insert().
+ */
+function druio_telegram_node_insert($node) {
+  if ($node->type == 'order') {
+    __druio_telegram_process_node($node);
+  }
+}
+
+/**
+ * Implements hook_node_update().
+ */
+function druio_telegram_node_update($node) {
+  if ($node->type == 'order') {
+    __druio_telegram_process_node($node);
+  }
+}
+
+/**
+ * Функция отправки сообщения в Telegram channel
+ */
+function __druio_telegram_process_node($node) {
+  $apikey = variable_get('druio_telegram_apikey');
+  $channel = variable_get('druio_telegram_channel_name');
+
+  if ($apikey && $channel) {
+	global $base_url;
+	// добавляем заголовок
+	$message = $node->title . "\r\n";
+
+	// добавляем url ноды
+	$message .= $base_url . '/' . drupal_get_path_alias('node/' . $node->nid);
+
+	$message = urlencode($message);
+	__druio_telegram_send_message($message, $apikey, $channel);
+  }
+}
+
+function __druio_telegram_send_message($message, $apikey, $channel) {
+  // составляем запрос по всем правилам Telegram api
+  $query = "https://api.telegram.org/bot" . $apikey .
+	"/sendMessage?disable_web_page_preview=true&chat_id=" . $channel .
+	"&text=" . $message;
+
+  // выполняем наш запрос через curl
+  $curl = curl_init();
+  curl_setopt($curl, CURLOPT_URL, $query);
+  curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+  curl_setopt($curl, CURLOPT_HEADER, 0);
+  curl_exec($curl);
+  curl_close($curl);
+}
