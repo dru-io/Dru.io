@@ -58,14 +58,6 @@ function druio_telegram_node_insert($node) {
   }
 }
 
-/**
- * Implements hook_node_update().
- */
-function druio_telegram_node_update($node) {
-  if ($node->type == 'order') {
-    __druio_telegram_process_node($node);
-  }
-}
 
 /**
  * Функция отправки сообщения в Telegram channel
