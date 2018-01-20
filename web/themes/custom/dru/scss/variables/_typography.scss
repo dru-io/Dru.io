@@ -1,0 +1,47 @@
+/** init typography Vars /scss/variables/_typography.scss */
+
+// Font family.
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:400,400i,300,300i,600,600i,700,700i);
+@import url(https://fonts.googleapis.com/css?family=Exo+2:400,400i,300,300i,600,600i,700,700i);
+
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif;
+$font-family-serif:      Georgia, "Times New Roman", Times, serif;
+$font-family-monospace:  Menlo, Monaco, Consolas, "Courier New", monospace;
+$font-opensans:          "Open Sans",Helvetica,Arial,sans-serif;
+$font-exo2:              "Exo 2",Helvetica,Arial,sans-serif;
+$font-family:            $font-opensans;
+$font-body:              $font-opensans;
+$font-headers:           $font-exo2;
+$font-headers-weight:    300;
+
+// Font sizes.
+$font-size-base:  16px;
+$font-size-large: ceil($font-size-base * 1.25);
+$font-size-small: ceil($font-size-base * 0.85);
+$font-size-h1: 2.1rem;
+$font-size-h2: 2rem;
+$font-size-h3: 1.75rem;
+$font-size-h4: 1.5rem;
+$font-size-h5: $font-size-base;
+$font-size-h6: ceil($font-size-base * 0.85);
+
+// Line height.
+// Unit-less cuz used in buttons, inputs, etc.
+$line-height-base:     1.5 !default;
+$line-height-computed: floor($line-height-base * $font-size-base);
+// Used in compontents.
+$line-height-large: 1.3333333;
+$line-height-small: 1.5;
+
+// Headers default settings.
+$headings-font-family:    inherit !default;
+$headings-font-weight:    500 !default;
+$headings-line-height:    1.1 !default;
+$headings-color:          inherit !default;
+
+// Blockqoutes.
+$blockquote-font-size:    ($font-size-base * 1.25) !default;
+$blockquote-border-color: $gray-lighter !default;
+
+// <hr> tag.
+$hr-border-color: $gray-lighter !default;

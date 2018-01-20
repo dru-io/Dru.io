@@ -1,0 +1,66 @@
+#block-search {
+  display: block;
+  float: left;
+  background: #2f425c;
+  overflow: hidden;
+  height: 40px;
+  width: 240px;
+  position: relative;
+  padding-left: 37px;
+  font-size: 14px;
+  i {
+    color: #FFF;
+    width: 37px;
+    text-align: center;
+    line-height: 37px;
+  }
+  .form-search {
+    display: block;
+    float: left;
+    width: 100%;
+    background: none;
+    border: none;
+    font-size: 14px;
+    height: 40px;
+    color: #FFF;
+    box-shadow: none;
+    padding: 0;
+  }
+  .form-actions {
+    position: absolute;
+    left: 0;
+    top:0;
+    width: 37px;
+    overflow: hidden;
+    .form-submit {
+     opacity: 0.0;
+     width: 37px;
+     height: 40px;
+     position: absolute;
+     left: 0;
+     top:0;
+     margin: 0;
+     padding: 0;
+     background: none;
+   }
+  }
+}
+@media (max-width: 992px) {
+  #block-search {
+    width: 300px;
+  }
+}
+@media (max-width: 768px) {
+  #block-search {
+    width: 210px;
+  }
+}
+@media (max-width: 544px) {
+  #block-search {
+    display: block;
+    float: none;
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+  }
+}

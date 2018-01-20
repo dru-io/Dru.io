@@ -1,0 +1,51 @@
+services:
+  cache.backend.null:
+    class: Drupal\Core\Cache\NullBackendFactory
+parameters:
+  session.storage.options:
+    gc_probability: 1
+    gc_divisor: 100
+    gc_maxlifetime: 200000
+    cookie_lifetime: 2000000
+  twig.config:
+    debug: true
+    auto_reload: true
+    cache: false
+  renderer.config:
+    required_cache_contexts:
+      - url
+      - route
+      - languages:language_interface
+      - theme
+      - user.permissions
+    auto_placeholder_conditions:
+      max-age: 0
+      contexts:
+        - session
+        - user
+      tags: [ ]
+  http.response.debug_cacheability_headers: true
+  factory.keyvalue: [ ]
+  factory.keyvalue.expirable: [ ]
+  filter_protocols:
+    - http
+    - https
+    - mailto
+    - ssh
+    - sftp
+  # Configure Cross-Site HTTP requests (CORS).
+  cors.config:
+    enabled: false
+    # Specify allowed headers, like 'x-allowed-header'.
+    allowedHeaders: [ ]
+    # Specify allowed request methods, specify ['*'] to allow all possible ones.
+    allowedMethods: [ ]
+    # Configure requests allowed from specific origins.
+    allowedOrigins:
+      - "*"
+    # Sets the Access-Control-Expose-Headers header.
+    exposedHeaders: false
+    # Sets the Access-Control-Max-Age header.
+    maxAge: false
+    # Sets the Access-Control-Allow-Credentials header.
+    supportsCredentials: false

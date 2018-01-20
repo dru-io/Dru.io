@@ -1,0 +1,62 @@
+/** init colors Vars /scss/variables/_colors.scss */
+
+// UI colors.
+$ui-site-color-1: red;
+$ui-site-color-2: blue;
+$ui-site-color-3: green;
+
+// Background color for <body>.
+$body-bg: #fff;
+$body-color: #373a3c;
+
+// Base colors.
+$gray-base:    #000;
+$gray-darken:  lighten($gray-base, 13.5%);
+$gray-dark:    lighten($gray-base, 20%);
+$gray:         lighten($gray-base, 33.5%);
+$gray-light:   lighten($gray-base, 46.7%);
+$gray-lighter: lighten($gray-base, 93.5%);
+
+// Branding.
+$brand-main:         #f44336;
+$brand-border-color: #E8E8E8;
+$brand-primary:      #2185d0;
+$brand-success:      #4CAF50 !default;
+$brand-info:         #29B6F6 !default;
+$brand-warning:      #FFC107 !default;
+$brand-error:        #d9534f !default;
+
+// Typo colors.
+// Global text color on <body>.
+$text-color:           $gray-dark;
+$text-color-subtle:    $gray-light;
+$text-color-highlight: $gray-darken;
+$text-color-info:      $brand-info;
+$text-color-success:   $brand-success;
+$text-color-warning:   $brand-warning;
+$text-color-error:     $brand-error;
+
+// Links
+$link-color:            #4183C4;
+$link-decoration:       none;
+$link-hover-color:      darken($link-color, 15%);
+$link-hover-decoration: none;
+
+// Background and text colors for selected elements.
+$selection-bg:    $gray-lighter;
+$selection-color: inherit;
+
+// Highlight colors.
+$highlight-color:         #d7dae0;
+$highlight-bg:            #31363f;
+$highlight-info-color:    lighten($brand-info, 40%);
+$highlight-info-bg:       $brand-info;
+$highlight-success-color: lighten($brand-success, 40%);
+$highlight-success-bg:    $brand-success;
+$highlight-warning-color: lighten($brand-warning, 40%);
+$highlight-warning-bg:    $brand-warning;
+$highlight-error-color:   lighten($brand-error, 40%);
+$highlight-error-bg:      $brand-error;
+
+// <mark> tag.
+$mark-bg: #DFF0D8;
