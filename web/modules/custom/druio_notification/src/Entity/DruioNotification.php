@@ -148,12 +148,10 @@ class DruioNotification extends ContentEntityBase implements DruioNotificationIn
     $fields = parent::baseFieldDefinitions($entity_type);
 
     $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
-      ->setLabel(t('Authored by'))
-      ->setDescription(t('The user ID of author of the Druio notification entity.'))
-      ->setRevisionable(TRUE)
+      ->setLabel(t('User'))
+      ->setDescription(t('The user ID for which the notification is intended.'))
       ->setSetting('target_type', 'user')
       ->setSetting('handler', 'default')
-      ->setTranslatable(TRUE)
       ->setDisplayOptions('view', [
         'label' => 'hidden',
         'type' => 'author',
@@ -161,7 +159,7 @@ class DruioNotification extends ContentEntityBase implements DruioNotificationIn
       ])
       ->setDisplayOptions('form', [
         'type' => 'entity_reference_autocomplete',
-        'weight' => 5,
+        'weight' => 0,
         'settings' => [
           'match_operator' => 'CONTAINS',
           'size' => '60',
@@ -172,9 +170,9 @@ class DruioNotification extends ContentEntityBase implements DruioNotificationIn
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['name'] = BaseFieldDefinition::create('string')
-      ->setLabel(t('Name'))
-      ->setDescription(t('The name of the Druio notification entity.'))
+    $fields['subject'] = BaseFieldDefinition::create('string')
+      ->setLabel(t('Subject'))
+      ->setDescription(t('The subject of notification.'))
       ->setSettings([
         'max_length' => 50,
         'text_processing' => 0,
@@ -183,27 +181,35 @@ class DruioNotification extends ContentEntityBase implements DruioNotificationIn
       ->setDisplayOptions('view', [
         'label' => 'above',
         'type' => 'string',
-        'weight' => -4,
+        'weight' => 10,
       ])
       ->setDisplayOptions('form', [
         'type' => 'string_textfield',
-        'weight' => -4,
+        'weight' => 10,
       ])
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
-    $fields['status'] = BaseFieldDefinition::create('boolean')
-      ->setLabel(t('Publishing status'))
-      ->setDescription(t('A boolean indicating whether the Druio notification is published.'))
-      ->setDefaultValue(TRUE);
+    $fields['message'] = BaseFieldDefinition::create('text_long')
+      ->setLabel(t('Message'))
+      ->setDisplayOptions('view', [
+        'type' => 'text_default',
+        'weight' => 20,
+      ])
+      ->setDisplayConfigurable('view', TRUE)
+      ->setDisplayOptions('form', [
+        'type' => 'text_textfield',
+        'weight' => 20,
+      ])
+      ->setDisplayConfigurable('form', TRUE);
+
+    $fields['is_read'] = BaseFieldDefinition::create('boolean')
+      ->setLabel(t('Is notification read'))
+      ->setDefaultValue(FALSE);
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
       ->setDescription(t('The time that the entity was created.'));
-
-    $fields['changed'] = BaseFieldDefinition::create('changed')
-      ->setLabel(t('Changed'))
-      ->setDescription(t('The time that the entity was last edited.'));
 
     return $fields;
   }
