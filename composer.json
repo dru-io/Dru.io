@@ -28,7 +28,7 @@
         "drupal/field_group": "^1.0@RC",
         "drupal/imagemagick": "^2.0",
         "drupal/markdown": "^1.2",
-        "drupal/migrate_plus": "^2.0",
+        "drupal/migrate_plus": "^4.0",
         "drupal/migrate_source_csv": "^2.0",
         "drupal/migrate_tools": "^4.0",
         "drupal/module_filter": "^3.0",
