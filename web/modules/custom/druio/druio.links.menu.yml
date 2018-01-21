@@ -1,0 +1,6 @@
+# Main container for all Dru.io admin menu items.
+druio.toolbar_item:
+  title: 'Dru.io'
+  parent: system.admin
+  route_name: druio.toolbar_group
+  weight: -50

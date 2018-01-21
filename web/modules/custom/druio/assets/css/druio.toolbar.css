@@ -1,0 +1,3 @@
+.toolbar-icon-druio-toolbar-item::before {
+  background-image: url('../img/druio-minilogo.svg');
+}

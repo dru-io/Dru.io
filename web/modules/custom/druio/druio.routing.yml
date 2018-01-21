@@ -1,0 +1,7 @@
+druio.toolbar_group:
+  path: '/admin/druio'
+  defaults:
+    _controller: '\Drupal\system\Controller\SystemController::systemAdminMenuBlockPage'
+    _title: 'Dru.io'
+  requirements:
+    _permission: 'access administration pages'

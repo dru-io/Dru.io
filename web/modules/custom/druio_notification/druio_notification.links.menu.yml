@@ -1,14 +1,14 @@
 
 # Druio notification menu items definition
 entity.druio_notification.collection:
-  title: 'Druio notification list'
+  title: 'List of notifications'
   route_name: entity.druio_notification.collection
   description: 'List Druio notification entities'
-  parent: system.admin_structure
+  parent: druio.toolbar_item
   weight: 100
 
 druio_notification.admin.structure.settings:
-  title: 'Druio notification settings'
+  title: 'Settings'
   description: 'Configure Druio notification entities'
   route_name: druio_notification.settings
-  parent: system.admin_structure
+  parent: entity.druio_notification.collection
