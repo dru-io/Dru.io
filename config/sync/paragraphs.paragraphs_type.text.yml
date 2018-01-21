@@ -4,4 +4,6 @@ status: true
 dependencies: {  }
 id: text
 label: Текст
+icon_uuid: null
+description: null
 behavior_plugins: {  }

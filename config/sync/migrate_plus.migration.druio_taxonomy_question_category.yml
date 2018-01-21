@@ -1,4 +1,4 @@
-uuid: dfedd6db-2434-4a55-9458-782cee59cf4f
+uuid: c15d96c7-c789-4315-af1a-eabdb107e638
 langcode: en
 status: true
 dependencies:
@@ -8,6 +8,9 @@ dependencies:
 _core:
   default_config_hash: d65JfDZ8x3oXA7SSxmLgJgE7bOeVnRi3bWRNJTTB12Y
 id: druio_taxonomy_question_category
+class: null
+field_plugin_method: null
+cck_plugin_method: null
 migration_tags: null
 migration_group: druio
 label: 'Question category'

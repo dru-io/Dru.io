@@ -1,0 +1,22 @@
+{#
+/**
+ * @file druio_notification.html.twig
+ * Default theme implementation to present Druio notification data.
+ *
+ * This template is used when viewing Druio notification pages.
+ *
+ *
+ * Available variables:
+ * - content: A list of content items. Use 'content' to print all content, or
+ * - attributes: HTML attributes for the container element.
+ *
+ * @see template_preprocess_druio_notification()
+ *
+ * @ingroup themeable
+ */
+#}
+<div{{ attributes.addClass('druio_notification') }}>
+  {% if content %}
+    {{- content -}}
+  {% endif %}
+</div>

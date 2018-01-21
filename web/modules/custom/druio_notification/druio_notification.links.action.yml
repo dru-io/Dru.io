@@ -1,0 +1,5 @@
+entity.druio_notification.add_form:
+  route_name: entity.druio_notification.add_form
+  title: 'Add Druio notification'
+  appears_on:
+    - entity.druio_notification.collection

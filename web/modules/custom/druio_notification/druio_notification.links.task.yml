@@ -1,0 +1,22 @@
+# Druio notification routing definition
+druio_notification.settings_tab:
+  route_name: druio_notification.settings
+  title: 'Settings'
+  base_route: druio_notification.settings
+
+entity.druio_notification.canonical:
+  route_name: entity.druio_notification.canonical
+  base_route: entity.druio_notification.canonical
+  title: 'View'
+
+entity.druio_notification.edit_form:
+  route_name: entity.druio_notification.edit_form
+  base_route: entity.druio_notification.canonical
+  title: 'Edit'
+
+entity.druio_notification.delete_form:
+  route_name:  entity.druio_notification.delete_form
+  base_route:  entity.druio_notification.canonical
+  title: Delete
+  weight: 10
+

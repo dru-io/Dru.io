@@ -568,7 +568,7 @@ display:
           decimal: .
           separator: ','
           format_plural: true
-          format_plural_string: "@count место\x03@count места\x03@count[2] мест"
+          format_plural_string: !!binary QGNvdW50INC80LXRgdGC0L4DQGNvdW50INC80LXRgdGC0LADQGNvdW50WzJdINC80LXRgdGC
           prefix: ''
           suffix: ''
           plugin_id: numeric
@@ -1010,7 +1010,7 @@ display:
           decimal: .
           separator: ','
           format_plural: false
-          format_plural_string: "@count\x03@count\x03@count[2]"
+          format_plural_string: !!binary QGNvdW50A0Bjb3VudANAY291bnRbMl0=
           prefix: ''
           suffix: ''
           plugin_id: numeric

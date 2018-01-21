@@ -1,0 +1,19 @@
+add druio notification entities:
+  title: 'Create new Druio notification entities'
+
+administer druio notification entities:
+  title: 'Administer Druio notification entities'
+  description: 'Allow to access the administration form to configure Druio notification entities.'
+  restrict access: true
+
+delete druio notification entities:
+  title: 'Delete Druio notification entities'
+
+edit druio notification entities:
+  title: 'Edit Druio notification entities'
+
+view published druio notification entities:
+  title: 'View published Druio notification entities'
+
+view unpublished druio notification entities:
+  title: 'View unpublished Druio notification entities'

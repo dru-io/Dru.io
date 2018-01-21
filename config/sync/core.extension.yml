@@ -17,6 +17,7 @@ module:
   devel: 0
   druio: 0
   druio_migrate: 0
+  druio_notification: 0
   dynamic_page_cache: 0
   editor: 0
   entity_reference_revisions: 0

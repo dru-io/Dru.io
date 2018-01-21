@@ -1,4 +1,4 @@
-uuid: db7aa099-caba-4302-ac4b-744d1e3908a6
+uuid: 6714e5af-a027-4830-acd4-70241286bdd3
 langcode: en
 status: true
 dependencies:
@@ -8,6 +8,9 @@ dependencies:
 _core:
   default_config_hash: h126kfNt7MGVrVDTL8_2ycvL-ymp9yWVIcdEvxpfFRU
 id: druio_user
+class: null
+field_plugin_method: null
+cck_plugin_method: null
 migration_tags: null
 migration_group: druio
 label: 'User migration'
