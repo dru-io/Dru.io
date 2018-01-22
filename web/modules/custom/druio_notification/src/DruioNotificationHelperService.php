@@ -16,6 +16,11 @@ class DruioNotificationHelperService {
   protected $entityTypeManager;
 
   /**
+   * Denotes how much entities to load.
+   */
+  protected $limit = 5;
+
+  /**
    * Constructs a new DruioNotificationHelperService object.
    */
   public function __construct(EntityTypeManager $entityTypeManager) {
@@ -25,22 +30,25 @@ class DruioNotificationHelperService {
   /**
    * Returns user notifications.
    *
-   * @todo add limit.
-   *
    * @param int $uid
    *   User ID for which need to load notifications.
+   * @param int $limit
+   *   How much notifications to load.
    *
    * @return \Drupal\Core\Entity\EntityInterface[]
    *   Notification entities if found, NULL if not.
    */
-  public function getUserNotifications($uid = NULL) {
+  public function getUserNotifications($uid = NULL, $limit = NULL) {
     if (!isset($uid)) {
       $uid = \Drupal::currentUser()->id();
     }
-    return $this->entityTypeManager->getStorage('druio_notification')
-      ->loadByProperties([
-        'user_id' => $uid,
-      ]);
+    $query = $this->entityTypeManager->getStorage('druio_notification')
+      ->getQuery()
+      ->condition('user_id', $uid)
+      ->range(0, isset($limit) ? $limit : $this->limit);
+    $result = $query->execute();
+    return $result ? $this->entityTypeManager->getStorage('druio_notification')
+      ->loadMultiple($result) : [];
   }
 
   /**

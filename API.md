@@ -23,6 +23,8 @@ Returns user notifications.
    `_format=[string]` - Format in which return values. Allowed: `json`, `xml`.
 
    **Optional:**
+   
+   `limit=[int]` - How much notifications to load. Default value is 5.
  
    To be done
 
@@ -50,3 +52,6 @@ Returns user notifications.
       console.log(notifications);
     });
   ```
+* **Notes:**
+
+  This API method required to be authenticated by user for which need to access notifications.
