@@ -69,36 +69,6 @@ class DruioNotification extends ContentEntityBase implements DruioNotificationIn
   /**
    * {@inheritdoc}
    */
-  public function getName() {
-    return $this->get('name')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setName($name) {
-    $this->set('name', $name);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function getCreatedTime() {
-    return $this->get('created')->value;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public function setCreatedTime($timestamp) {
-    $this->set('created', $timestamp);
-    return $this;
-  }
-
-  /**
-   * {@inheritdoc}
-   */
   public function getOwner() {
     return $this->get('user_id')->entity;
   }
@@ -129,16 +99,16 @@ class DruioNotification extends ContentEntityBase implements DruioNotificationIn
   /**
    * {@inheritdoc}
    */
-  public function isPublished() {
-    return (bool) $this->getEntityKey('status');
+  public function markAsRead() {
+    $this->set('is_read', TRUE);
+    return $this;
   }
 
   /**
    * {@inheritdoc}
    */
-  public function setPublished($published) {
-    $this->set('status', $published ? TRUE : FALSE);
-    return $this;
+  public function getCreated() {
+    return $this->get('created');
   }
 
   /**
