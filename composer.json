@@ -34,6 +34,7 @@
         "drupal/module_filter": "^3.0",
         "drupal/paragraphs": "^1.1",
         "drupal/pathauto": "^1.0",
+        "drupal/restui": "^1.15",
         "drush/drush": "^9",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",
