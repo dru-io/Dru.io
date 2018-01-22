@@ -25,6 +25,8 @@ class DruioNotificationHelperService {
   /**
    * Returns user notifications.
    *
+   * @todo add limit.
+   *
    * @param int $uid
    *   User ID for which need to load notifications.
    *

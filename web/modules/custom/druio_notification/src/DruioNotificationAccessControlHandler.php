@@ -21,6 +21,7 @@ class DruioNotificationAccessControlHandler extends EntityAccessControlHandler {
     /** @var \Drupal\druio_notification\Entity\DruioNotificationInterface $entity */
     switch ($operation) {
       case 'view':
+        // @todo make new permission specific for notifications.
 //        if (!$entity->isPublished()) {
 //          return AccessResult::allowedIfHasPermission($account, 'view unpublished druio notification entities');
 //        }
