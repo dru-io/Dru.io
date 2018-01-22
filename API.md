@@ -2,7 +2,7 @@
 
 * **Notifications**
 
-  * [Get user notifications](#get-user-notification)
+  * [Get user notifications](#get-user-notifications)
 
 ### Get user notifications
 
@@ -42,11 +42,11 @@ Returns user notifications.
 * **Sample Call:**
 
   ```js
-    fetch('/api/notifications/get-notifications?_format=json')
-      .then(response => {
-        return response.json();
-      })
-      .then(notifications => {
-        console.log(notifications);
-      });
+  fetch('/api/notifications/get-notifications?_format=json')
+    .then(response => {
+      return response.json();
+    })
+    .then(notifications => {
+      console.log(notifications);
+    });
   ```
