@@ -31,7 +31,10 @@ class DruioNotificationHelperService {
    * @return \Drupal\Core\Entity\EntityInterface[]
    *   Notification entities if found, NULL if not.
    */
-  public function getUserNotifications($uid) {
+  public function getUserNotifications($uid = NULL) {
+    if (!isset($uid)) {
+      $uid = \Drupal::currentUser()->id();
+    }
     return $this->entityTypeManager->getStorage('druio_notification')
       ->loadByProperties([
         'user_id' => $uid,
@@ -48,6 +51,9 @@ class DruioNotificationHelperService {
    *   The number of unread notifications.
    */
   public function getUserUnreadCount($uid) {
+    if (!isset($uid)) {
+      $uid = \Drupal::currentUser()->id();
+    }
     $query = $this->entityTypeManager->getStorage('druio_notification')
       ->getQuery()
       ->condition('user_id', $uid)
