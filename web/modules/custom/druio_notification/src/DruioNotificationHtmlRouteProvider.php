@@ -40,7 +40,7 @@ class DruioNotificationHtmlRouteProvider extends AdminHtmlRouteProvider {
    */
   protected function getSettingsFormRoute(EntityTypeInterface $entity_type) {
     if (!$entity_type->getBundleEntityType()) {
-      $route = new Route("/admin/structure/{$entity_type->id()}/settings");
+      $route = new Route("/admin/druio/notification/settings");
       $route
         ->setDefaults([
           '_form' => 'Drupal\druio_notification\Form\DruioNotificationSettingsForm',

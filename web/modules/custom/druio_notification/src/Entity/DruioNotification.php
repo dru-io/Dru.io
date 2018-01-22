@@ -36,18 +36,17 @@ use Drupal\user\UserInterface;
  *   admin_permission = "administer druio notification entities",
  *   entity_keys = {
  *     "id" = "id",
- *     "label" = "name",
+ *     "label" = "subject",
  *     "uuid" = "uuid",
  *     "uid" = "user_id",
  *     "langcode" = "langcode",
- *     "status" = "status",
  *   },
  *   links = {
- *     "canonical" = "/admin/structure/druio_notification/{druio_notification}",
- *     "add-form" = "/admin/structure/druio_notification/add",
- *     "edit-form" = "/admin/structure/druio_notification/{druio_notification}/edit",
- *     "delete-form" = "/admin/structure/druio_notification/{druio_notification}/delete",
- *     "collection" = "/admin/structure/druio_notification",
+ *     "canonical" = "/admin/druio/notification/{druio_notification}",
+ *     "add-form" = "/admin/druio/notification/add",
+ *     "edit-form" = "/admin/druio/notification/{druio_notification}/edit",
+ *     "delete-form" = "/admin/druio/notification/{druio_notification}/delete",
+ *     "collection" = "/admin/druio/notification",
  *   },
  *   field_ui_base_route = "druio_notification.settings"
  * )
