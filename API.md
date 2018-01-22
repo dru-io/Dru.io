@@ -3,6 +3,7 @@
 * **Notifications**
 
   * [Get user notifications](#get-user-notifications)
+  * [Get unread count](#get-unread-count)
 
 ### Get user notifications
 
@@ -25,8 +26,6 @@ Returns user notifications.
    **Optional:**
    
    `limit=[int]` - How much notifications to load. Default value is 5.
- 
-   To be done
 
 * **Data Params**
 
@@ -54,4 +53,50 @@ Returns user notifications.
   ```
 * **Notes:**
 
-  This API method required to be authenticated by user for which need to access notifications.
+  This API method required to be authenticated as user for which need to access notifications.
+  
+### Get unread count
+
+Returns count of unread notifications.
+
+* **URL**
+
+  /api/notifications/get-unread-count
+
+* **Method:**
+
+  `GET`
+  
+*  **URL Params**
+
+   **Required:**
+ 
+   `_format=[string]` - Format in which return values. Allowed: `json`, `xml`.
+ 
+* **Data Params**
+
+  None
+
+* **Success Response:**
+
+  * **Code:** 200 <br />
+    **Content:** `{"unread_count":"1"}`
+ 
+* **Error Response:**
+
+  * **Code:** 400 Bad Request<br />
+
+* **Sample Call:**
+
+  ```js
+  fetch('/api/notifications/get-unread-count?_format=json')
+    .then(response => {
+      return response.json();
+    })
+    .then(notifications => {
+      console.log(notifications);
+    });
+  ```
+* **Notes:**
+
+  This API method required to be authenticated as user for which need to access result.

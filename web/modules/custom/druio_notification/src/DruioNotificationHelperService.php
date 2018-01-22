@@ -60,7 +60,7 @@ class DruioNotificationHelperService {
    * @return int
    *   The number of unread notifications.
    */
-  public function getUserUnreadCount($uid) {
+  public function getUserUnreadCount($uid = NULL) {
     if (!isset($uid)) {
       $uid = \Drupal::currentUser()->id();
     }
