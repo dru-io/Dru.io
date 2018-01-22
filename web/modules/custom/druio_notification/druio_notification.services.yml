@@ -1,0 +1,5 @@
+services:
+  druio_notification.helper:
+    class: Drupal\druio_notification\DruioNotificationHelperService
+    arguments: []
+
