@@ -36,7 +36,7 @@ class DruioNotificationHelperService {
    *   How much notifications to load.
    *
    * @return \Drupal\Core\Entity\EntityInterface[]
-   *   Notification entities if found, NULL if not.
+   *   Notification entities if found, empty array if not.
    */
   public function getUserNotifications($uid = NULL, $limit = NULL) {
     if (!isset($uid)) {
@@ -46,6 +46,28 @@ class DruioNotificationHelperService {
       ->getQuery()
       ->condition('user_id', $uid)
       ->range(0, isset($limit) ? $limit : $this->limit);
+    $result = $query->execute();
+    return $result ? $this->entityTypeManager->getStorage('druio_notification')
+      ->loadMultiple($result) : [];
+  }
+
+  /**
+   * Returns user unread notifications.
+   *
+   * @param int $uid
+   *   User ID for which need to load notifications.
+   *
+   * @return \Drupal\Core\Entity\EntityInterface[]
+   *   Notification entities if found, empty array if not.
+   */
+  public function getUserUnreadNotifications($uid = NULL) {
+    if (!isset($uid)) {
+      $uid = \Drupal::currentUser()->id();
+    }
+    $query = $this->entityTypeManager->getStorage('druio_notification')
+      ->getQuery()
+      ->condition('user_id', $uid)
+      ->condition('is_read', DruioNotificationInterface::NOT_READ);
     $result = $query->execute();
     return $result ? $this->entityTypeManager->getStorage('druio_notification')
       ->loadMultiple($result) : [];
