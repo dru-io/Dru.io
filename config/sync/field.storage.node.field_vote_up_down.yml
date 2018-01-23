@@ -1,0 +1,20 @@
+uuid: 6542e09d-b406-4e9e-b6f8-8f4bd0c1b271
+langcode: ru
+status: true
+dependencies:
+  module:
+    - node
+    - vud
+id: node.field_vote_up_down
+field_name: field_vote_up_down
+entity_type: node
+type: vote_up_down_field
+settings:
+  widget: upanddown
+module: vud
+locked: false
+cardinality: 1
+translatable: true
+indexes: {  }
+persist_with_no_fields: false
+custom_storage: false

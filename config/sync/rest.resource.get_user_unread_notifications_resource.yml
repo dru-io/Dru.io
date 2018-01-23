@@ -1,0 +1,19 @@
+uuid: 56ce09c0-b835-40b1-add1-8def83d0a5a3
+langcode: ru
+status: true
+dependencies:
+  module:
+    - druio_notification
+    - serialization
+    - user
+id: get_user_unread_notifications_resource
+plugin_id: get_user_unread_notifications_resource
+granularity: resource
+configuration:
+  methods:
+    - GET
+  formats:
+    - json
+    - xml
+  authentication:
+    - cookie

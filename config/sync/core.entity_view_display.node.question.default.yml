@@ -10,12 +10,14 @@ dependencies:
     - field.field.node.question.field_project_references
     - field.field.node.question.field_question_answers
     - field.field.node.question.field_question_categories
+    - field.field.node.question.field_vote_up_down
     - node.type.question
   module:
     - comment
     - options
     - text
     - user
+    - vud
 id: node.question.default
 targetEntityType: node
 bundle: question
@@ -68,6 +70,13 @@ content:
       link: true
     third_party_settings: {  }
     type: entity_reference_label
+    region: content
+  field_vote_up_down:
+    weight: 107
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    type: vote_up_down_formatter_type
     region: content
   links:
     weight: 100
