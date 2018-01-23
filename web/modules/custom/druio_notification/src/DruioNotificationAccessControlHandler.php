@@ -2,10 +2,10 @@
 
 namespace Drupal\druio_notification;
 
+use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Entity\EntityAccessControlHandler;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\Core\Session\AccountInterface;
-use Drupal\Core\Access\AccessResult;
 
 /**
  * Access controller for the Druio notification entity.
@@ -21,11 +21,10 @@ class DruioNotificationAccessControlHandler extends EntityAccessControlHandler {
     /** @var \Drupal\druio_notification\Entity\DruioNotificationInterface $entity */
     switch ($operation) {
       case 'view':
-        // @todo make new permission specific for notifications.
-//        if (!$entity->isPublished()) {
-//          return AccessResult::allowedIfHasPermission($account, 'view unpublished druio notification entities');
-//        }
-        return AccessResult::allowedIfHasPermission($account, 'view published druio notification entities');
+        return AccessResult::allowedIfHasPermissions($account, [
+          'view own druio notification entities',
+          'view all druio notification entities',
+        ], 'OR');
 
       case 'update':
         return AccessResult::allowedIfHasPermission($account, 'edit druio notification entities');

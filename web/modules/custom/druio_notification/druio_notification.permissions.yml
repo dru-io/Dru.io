@@ -12,8 +12,8 @@ delete druio notification entities:
 edit druio notification entities:
   title: 'Edit Druio notification entities'
 
-view published druio notification entities:
-  title: 'View published Druio notification entities'
+view own druio notification entities:
+  title: 'View own Druio notification entities'
 
-view unpublished druio notification entities:
-  title: 'View unpublished Druio notification entities'
+view all druio notification entities:
+  title: 'View all Druio notification entities'
