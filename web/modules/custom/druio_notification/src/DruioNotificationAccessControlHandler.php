@@ -21,10 +21,16 @@ class DruioNotificationAccessControlHandler extends EntityAccessControlHandler {
     /** @var \Drupal\druio_notification\Entity\DruioNotificationInterface $entity */
     switch ($operation) {
       case 'view':
-        return AccessResult::allowedIfHasPermissions($account, [
-          'view own druio notification entities',
-          'view all druio notification entities',
-        ], 'OR');
+        if ($entity->user_id->target_id == $account->id()) {
+          // If user is owner of notification we check two permissions.
+          return AccessResult::allowedIfHasPermissions($account, [
+            'view own druio notification entities',
+            'view all druio notification entities',
+          ], 'OR');
+        }
+        else {
+          return AccessResult::allowedIfHasPermission($account, 'view all druio notification entities');
+        }
 
       case 'update':
         return AccessResult::allowedIfHasPermission($account, 'edit druio notification entities');
