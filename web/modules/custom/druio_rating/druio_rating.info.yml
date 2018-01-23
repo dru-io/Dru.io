@@ -1,0 +1,7 @@
+name: 'druio_rating'
+type: module
+description: 'Dru.io — Rating'
+core: 8.x
+package: 'Dru.io'
+dependencies:
+  - votingapi
