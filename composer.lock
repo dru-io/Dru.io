@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "248e458396f0135e4fbfc2427eec8a65",
+    "content-hash": "d89f0ccbf4e7340c0b2ab6b678452c3f",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2966,6 +2966,81 @@
             "homepage": "https://www.drupal.org/project/token",
             "support": {
                 "source": "http://cgit.drupalcode.org/token"
+            }
+        },
+        {
+            "name": "drupal/votingapi",
+            "version": "3.0.0-alpha2",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/votingapi",
+                "reference": "8.x-3.0-alpha2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/votingapi-8.x-3.0-alpha2.zip",
+                "reference": "8.x-3.0-alpha2",
+                "shasum": "d4e4c2857beefdac6fd1152185a8e1be3ea6afe5"
+            },
+            "require": {
+                "drupal/core": "~8.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-3.x": "3.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-3.0-alpha2",
+                    "datestamp": "1468999039",
+                    "security-coverage": {
+                        "status": "not-covered",
+                        "message": "Alpha releases are not covered by Drupal security advisories."
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "ChrisKennedy",
+                    "homepage": "https://www.drupal.org/user/32005"
+                },
+                {
+                    "name": "FatGuyLaughing",
+                    "homepage": "https://www.drupal.org/user/377114"
+                },
+                {
+                    "name": "Scott Reynolds",
+                    "homepage": "https://www.drupal.org/user/60009"
+                },
+                {
+                    "name": "eaton",
+                    "homepage": "https://www.drupal.org/user/16496"
+                },
+                {
+                    "name": "moshe weitzman",
+                    "homepage": "https://www.drupal.org/user/23"
+                },
+                {
+                    "name": "pedrorocha",
+                    "homepage": "https://www.drupal.org/user/218937"
+                },
+                {
+                    "name": "torotil",
+                    "homepage": "https://www.drupal.org/user/865256"
+                }
+            ],
+            "description": "Voting API",
+            "homepage": "http://drupal.org/project/votingapi",
+            "keywords": [
+                "Drupal"
+            ],
+            "support": {
+                "source": "http://cgit.drupalcode.org/votingapi",
+                "issues": "http://drupal.org/project/issues/votingapi"
             }
         },
         {
@@ -7967,7 +8042,8 @@
     "minimum-stability": "dev",
     "stability-flags": {
         "drupal/devel": 5,
-        "drupal/field_group": 5
+        "drupal/field_group": 5,
+        "drupal/votingapi": 15
     },
     "prefer-stable": true,
     "prefer-lowest": false,
