@@ -1,0 +1,25 @@
+uuid: f8071e11-88bd-41c9-886f-9ad34663bb8d
+langcode: ru
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - druio_theme
+_core:
+  default_config_hash: NDwadleLD3YVSbDUaakxyYZyINYtkFtOVGShfq4kWy8
+id: druio_theme_branding
+theme: druio_theme
+region: header
+weight: 0
+provider: null
+plugin: system_branding_block
+settings:
+  id: system_branding_block
+  label: 'Брендинг сайта'
+  provider: system
+  label_display: '0'
+  use_site_logo: true
+  use_site_name: true
+  use_site_slogan: true
+visibility: {  }

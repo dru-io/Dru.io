@@ -1,5 +1,5 @@
 admin: seven
-default: bartik
+default: druio_theme
 _core:
   default_config_hash: fOjer9hADYYnbCJVZMFZIIM1azTFWyg84ZkFDHfAbUg
 langcode: ru

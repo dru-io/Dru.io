@@ -1,0 +1,22 @@
+uuid: 60ba047c-9699-4ac2-91f0-24ea71f09220
+langcode: ru
+status: true
+dependencies:
+  module:
+    - help
+  theme:
+    - glisseo
+_core:
+  default_config_hash: 8I8iACSa0sKO3k3jlvUG1ge52rfcKX7USJAQYnzuBgg
+id: glisseo_help
+theme: glisseo
+region: content
+weight: -30
+provider: null
+plugin: help_block
+settings:
+  id: help_block
+  label: Справка
+  provider: help
+  label_display: '0'
+visibility: {  }

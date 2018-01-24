@@ -1,0 +1,20 @@
+uuid: c0418ce5-1be9-477d-a197-f0a4614af82d
+langcode: ru
+status: true
+dependencies:
+  theme:
+    - druio_theme
+_core:
+  default_config_hash: 13GQpeITIJsp1kyPniXtWZfyFH87vb1xxJCHifL4UeE
+id: druio_theme_local_actions
+theme: druio_theme
+region: content
+weight: -20
+provider: null
+plugin: local_actions_block
+settings:
+  id: local_actions_block
+  label: 'Основные действия администратора'
+  provider: core
+  label_display: '0'
+visibility: {  }

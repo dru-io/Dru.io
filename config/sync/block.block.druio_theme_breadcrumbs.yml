@@ -1,0 +1,22 @@
+uuid: d43f8453-0182-4094-87c6-4f710d1970a2
+langcode: ru
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - druio_theme
+_core:
+  default_config_hash: oXUb3JZR2WW5VOdw4HrhRicCsq51mCgLfRyvheG68ck
+id: druio_theme_breadcrumbs
+theme: druio_theme
+region: header
+weight: 0
+provider: null
+plugin: system_breadcrumb_block
+settings:
+  id: system_breadcrumb_block
+  label: 'Строка навигации'
+  provider: system
+  label_display: '0'
+visibility: {  }

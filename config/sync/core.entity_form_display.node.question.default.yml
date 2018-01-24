@@ -9,13 +9,11 @@ dependencies:
     - field.field.node.question.field_project_references
     - field.field.node.question.field_question_answers
     - field.field.node.question.field_question_categories
-    - field.field.node.question.field_vote_up_down
     - node.type.question
   module:
     - comment
     - path
     - text
-    - vud
 id: node.question.default
 targetEntityType: node
 bundle: question
@@ -71,13 +69,6 @@ content:
       placeholder: ''
     third_party_settings: {  }
     type: entity_reference_autocomplete
-    region: content
-  field_vote_up_down:
-    weight: 121
-    settings:
-      vote_tag: vote
-    third_party_settings: {  }
-    type: vote_up_down_widget_type
     region: content
   langcode:
     type: language_select

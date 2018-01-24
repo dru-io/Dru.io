@@ -1,0 +1,22 @@
+uuid: bf335e25-8ca7-4cf8-b1fb-53e91294326a
+langcode: ru
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - druio_theme
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: druio_theme_messages
+theme: druio_theme
+region: header
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Сообщения статуса'
+  provider: system
+  label_display: '0'
+visibility: {  }

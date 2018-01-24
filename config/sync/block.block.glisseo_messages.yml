@@ -1,0 +1,22 @@
+uuid: 616fac45-c3b6-429f-b0b8-5afda1288be9
+langcode: ru
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - glisseo
+_core:
+  default_config_hash: KHQIJ7Vfl25lTjzIc7qIvnuistt-Mw2O0kG4jCofmkI
+id: glisseo_messages
+theme: glisseo
+region: navigation
+weight: 0
+provider: null
+plugin: system_messages_block
+settings:
+  id: system_messages_block
+  label: 'Сообщения статуса'
+  provider: system
+  label_display: '0'
+visibility: {  }

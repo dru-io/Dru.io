@@ -1,0 +1,20 @@
+uuid: 5594e9d6-5dbe-4ffe-8f49-b7738e598fba
+langcode: ru
+status: true
+dependencies:
+  theme:
+    - druio_theme
+_core:
+  default_config_hash: 7rR9chwXvdM2H8OYMAYx9Zj3GGlPMrZp_M3ZA4thYTk
+id: druio_theme_page_title
+theme: druio_theme
+region: content
+weight: -50
+provider: null
+plugin: page_title_block
+settings:
+  id: page_title_block
+  label: 'Заголовок страницы'
+  provider: core
+  label_display: '0'
+visibility: {  }

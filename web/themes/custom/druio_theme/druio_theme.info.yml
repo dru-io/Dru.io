@@ -3,10 +3,11 @@ screenshot: screenshot.png
 name: Dru.io theme
 type: theme
 base theme: glisseo
-description: 'Glisseo is a base theme for fast and easy start to theme your project.'
+description: 'Drupal community website theme.'
 package: Glisseo
+core: 8.x
 libraries:
-  - bfh_theme/global-styling
+  - druio_theme/global-styling
 regions:
   header: Header
   navigation: Navigation

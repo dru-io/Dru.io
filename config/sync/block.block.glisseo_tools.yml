@@ -1,0 +1,26 @@
+uuid: e1e21612-64ad-4e04-a23a-99ff75182936
+langcode: ru
+status: true
+dependencies:
+  config:
+    - system.menu.tools
+  module:
+    - system
+  theme:
+    - glisseo
+_core:
+  default_config_hash: NeHSoqm4XFqA7_0bDmR429ZZQt3LRbZMNRJTMsFyOfI
+id: glisseo_tools
+theme: glisseo
+region: sidebar_first
+weight: 0
+provider: null
+plugin: 'system_menu_block:tools'
+settings:
+  id: 'system_menu_block:tools'
+  label: Инструменты
+  provider: system
+  label_display: visible
+  level: 1
+  depth: 0
+visibility: {  }

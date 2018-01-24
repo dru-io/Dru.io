@@ -1,0 +1,26 @@
+uuid: cdf7f48f-617a-4a4a-8120-8ae4361e7013
+langcode: ru
+status: true
+dependencies:
+  config:
+    - system.menu.footer
+  module:
+    - system
+  theme:
+    - druio_theme
+_core:
+  default_config_hash: kkISXE1LT2FJEoYnqCrCpeFB-2pmGmMxMklVk7rQcfg
+id: druio_theme_footer
+theme: druio_theme
+region: header
+weight: 0
+provider: null
+plugin: 'system_menu_block:footer'
+settings:
+  id: 'system_menu_block:footer'
+  label: 'Меню в подвале'
+  provider: system
+  label_display: '0'
+  level: 1
+  depth: 0
+visibility: {  }
