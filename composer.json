@@ -26,6 +26,7 @@
         "drupal/ctools": "^3.0",
         "drupal/devel": "^1.0@RC",
         "drupal/field_group": "^1.0@RC",
+        "drupal/glisseo": "1.0-alpha2",
         "drupal/imagemagick": "^2.0",
         "drupal/markdown": "^1.2",
         "drupal/migrate_plus": "^4.0",
