@@ -1,0 +1,31 @@
+.pager__items {
+  margin: $pager-list-margin;
+  padding: $pager-list-padding;
+  list-style: none outside none;
+  display: table;
+  background: #FFF;
+  overflow: hidden;
+
+  .pager__item {
+    display: inline-block;
+    color: $pager-item-color;
+    margin: $pager-item-margin;
+    padding: $pager-item-padding;
+
+    a {
+      display: block;
+      border-bottom: $pager-item-link-border-bottom;
+      padding: $pager-item-link-padding;
+      font-weight: $pager-item-link-font-weight;
+      text-decoration: none;
+      color: $pager-item-link-color;
+    }
+
+    &.is-active {
+      a {
+        border-bottom-color: $pager-item-link-border-active-color;
+        color: $pager-item-link-active-color;
+      }
+    }
+  }
+}

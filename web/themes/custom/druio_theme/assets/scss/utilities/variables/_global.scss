@@ -1,0 +1,111 @@
+/**
+ * @file
+ * Global default variables.
+ */
+
+// Base colors.
+$white:    #fff !default;
+$gray-100: #f8f9fa !default;
+$gray-200: #e9ecef !default;
+$gray-300: #dee2e6 !default;
+$gray-400: #ced4da !default;
+$gray-500: #adb5bd !default;
+$gray-600: #868e96 !default;
+$gray-700: #495057 !default;
+$gray-800: #343a40 !default;
+$gray-900: #212529 !default;
+$black:    #000 !default;
+
+$grays: () !default;
+$grays: map-merge((
+  '100': $gray-100,
+  '200': $gray-200,
+  '300': $gray-300,
+  '400': $gray-400,
+  '500': $gray-500,
+  '600': $gray-600,
+  '700': $gray-700,
+  '800': $gray-800,
+  '900': $gray-900
+), $grays);
+
+$blue:    #007bff !default;
+$indigo:  #6610f2 !default;
+$purple:  #6f42c1 !default;
+$pink:    #e83e8c !default;
+$red:     #dc3545 !default;
+$orange:  #fd7e14 !default;
+$yellow:  #ffc107 !default;
+$green:   #28a745 !default;
+$teal:    #20c997 !default;
+$cyan:    #17a2b8 !default;
+
+$colors: () !default;
+$colors: map-merge((
+  'blue':       $blue,
+  'indigo':     $indigo,
+  'purple':     $purple,
+  'pink':       $pink,
+  'red':        $red,
+  'orange':     $orange,
+  'yellow':     $yellow,
+  'green':      $green,
+  'teal':       $teal,
+  'cyan':       $cyan,
+  'white':      $white,
+  'gray':       $gray-600,
+  'gray-dark':  $gray-800
+), $colors);
+
+// Colors used in theme. Such as text colors, buttons, links and so on.
+// Here is main colors of the theme. If you want to add custom color just for
+// special usage, use $colors instead.
+$theme-colors: () !default;
+$theme-colors: map-merge((
+  'primary':   $blue,
+  'secondary': $gray-600,
+  'success':   #4CAF50,
+  'info':      #29B6F6,
+  'warning':   #FF9800,
+  'error':     #F44336,
+), $theme-colors);
+
+$theme-color-interval: 8% !default;
+
+$yiq-text-dark: $gray-900 !default;
+$yiq-text-light: $white !default;
+
+// Border radius.
+$border-radius-small: 3px !default;
+$border-radius-base:  4px !default;
+$border-radius-large: 6px !default;
+
+/**
+ * Media breakpoints.
+ */
+// Minimum width for breakpoints.
+$media-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px
+) !default;
+
+// Gutters for container.
+$media-gutter-width: (
+  xs: 30px,
+  sm: 30px,
+  md: 30px,
+  lg: 30px,
+  xl: 30px,
+) !default;
+
+// Maximum width for container.
+// @see mixin media-containers-max-width()
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px
+) !default;

@@ -1,0 +1,147 @@
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+input[type="number"],
+input[type="date"],
+input[type="month"],
+input[type="week"],
+input[type="time"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[autofocus],
+input[required],
+textarea,
+select {
+  display: block;
+  max-width: 100%;
+  width: 100%;
+  padding: $input-btn-padding-y $input-btn-padding-x;
+  line-height: $input-btn-line-height;
+  background-color: $input-bg;
+  border-width: 1px;
+  border-style: solid;
+  border-color: $input-border;
+  border-radius: $input-border-radius;
+  box-sizing: border-box;
+  transition: all .15s ease-in-out;
+  @if ($input-enable-shadows) {
+    box-shadow: $input-box-shadow;
+  }
+
+  &.error {
+    border-color: theme-color('error');
+  }
+
+  &:focus {
+    outline: medium none;
+    border-color: $input-border-focus;
+
+    @if ($input-enable-shadows) {
+      box-shadow: $input-focus-box-shadow;
+    }
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    background: $input-bg-disabled;
+    font-size: 100%;
+    color: $input-color-disabled;
+    text-shadow: none;
+  }
+}
+
+input[type="checkbox"] {
+  display: inline-block;
+  width: auto;
+}
+
+textarea {
+  height: auto;
+}
+
+select {
+  @include gradient-y(white, #F9F9F9);
+}
+
+label {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: .5rem;
+
+  @if ($label-required-enabled) {
+    &.form-required {
+      &:after {
+        content: $label-required-content;
+        display: inline-block;
+        color: $label-required-color;
+        margin: $label-required-margin;
+      }
+    }
+  }
+}
+
+fieldset {
+  border: 1px solid #D0D0D0;
+  padding: 15px;
+  position: relative;
+  margin: 15px 0px;
+
+  .fieldset-legend {
+    font-weight: bold;
+    margin-top: 5px;
+    position: absolute;
+    text-transform: uppercase;
+  }
+
+  .fieldset-wrapper {
+    margin: 20px 0px 0 0;
+  }
+}
+
+html.js {
+  fieldset {
+    &.collapsed {
+      border-width: 1px;
+    }
+
+    &.collapsible {
+      .fieldset-legend {
+        padding-left: 15px;
+      }
+    }
+  }
+}
+
+
+/**
+ * Drupal specific styles.
+ */
+.form-item {
+  margin: 0 0 1rem;
+
+  .description {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: .25rem;
+    color: $text-color-subtle;
+  }
+}
+
+.form-actions {
+  input {
+    margin: 0 .5rem 0 0;
+
+    &:last-child {
+      margin: 0;
+    }
+  }
+}
+
+// Fix tabledrag handle.
+a.tabledrag-handle .handle {
+  height: rem(24);
+  width: rem(20);
+}

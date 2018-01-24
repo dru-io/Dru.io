@@ -1,0 +1,32 @@
+/**
+ * Find next breakpoint, otherwise return nothing.
+ * @example
+ *   breakpoint-next(sm);
+ *   return: md
+ */
+@function breakpoint-next($name, $breakpoints: $media-breakpoints, $breakpoint-names: map-keys($breakpoints)) {
+  $n: index($breakpoint-names, $name);
+  @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+}
+
+/**
+ * Returns minimum width for provided breakpoint.
+ * @example
+ *   breakpoint-min(sm);
+ *   return: 576px
+ */
+@function breakpoint-min($name, $breakpoints: $media-breakpoints) {
+  $min: map-get($breakpoints, $name);
+  @return if($min != 0, $min, null);
+}
+
+/**
+ * Returns maximum width for provided breakpoint.
+ * @example
+ *   breakpoint-min(sm);
+ *   return: 768px
+ */
+@function breakpoint-max($name, $breakpoints: $media-breakpoints) {
+  $next: breakpoint-next($name, $breakpoints);
+  @return if($next, breakpoint-min($next, $breakpoints) - 1px, null);
+}

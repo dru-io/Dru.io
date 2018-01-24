@@ -1,0 +1,1 @@
+Here you can store styles for content.

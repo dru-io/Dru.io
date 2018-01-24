@@ -1,0 +1,44 @@
+/**
+ * Compares contrast of a given color to the light/dark arguments and returns
+ * whichever is most "contrasty".
+ */
+@function color-yiq($color, $dark: $yiq-text-dark, $light: $yiq-text-light) {
+  @if $color == null {
+    @return null;
+  }
+  @else {
+    $yiq: (red($color) * 299 + green($color) * 587 + blue($color) * 114) / 1000;
+    @return if($yiq >= 128, $dark, $light);
+  }
+}
+
+/**
+ * Return color by his key.
+ */
+@function color($key: 'blue') {
+  @return map-get($colors, $key);
+}
+
+/**
+ * Return color by his key.
+ */
+@function theme-color($key: 'primary') {
+  @return map-get($theme-colors, $key);
+}
+
+/**
+ * Return mixed color by his key.
+ */
+@function theme-color-level($color-name: 'primary', $level: 0) {
+  $color: theme-color($color-name);
+  $color-base: if($level > 0, #000, #fff);
+  $level: abs($level);
+  @return mix($color-base, $color, $level * $theme-color-interval);
+}
+
+/**
+ * Return grey color by his key.
+ */
+@function gray($key: '100') {
+  @return map-get($grays, $key);
+}

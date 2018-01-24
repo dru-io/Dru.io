@@ -1,0 +1,95 @@
+/**
+* @file
+* Typography styles.
+*/
+
+html {
+  font-size: 1rem; // Hardcoded, because we need inherit user font-size.
+}
+
+body {
+  font-size: $font-size-base;
+  line-height: $line-height-base;
+  font-family: $font-family;
+  color: $text-color;
+}
+
+a {
+  color: $link-color;
+  text-decoration: $link-decoration;
+  &:hover {
+    color: $link-hover-color;
+    text-decoration: $link-hover-decoration;
+  }
+}
+
+ol, ul {
+  margin: 1em 0 1em 1.45em;
+  padding: 0;
+}
+
+p {
+  margin: 0 0 ($line-height-computed / 2);
+  
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $headings-font-family;
+  font-weight: $headings-font-weight;
+  line-height: $headings-line-height;
+  color: $headings-color;
+}
+
+h1, h2, h3 {
+  margin-top: $line-height-computed;
+  margin-bottom: ($line-height-computed / 2);
+}
+
+h4, h5, h6 {
+  margin-top: ($line-height-computed / 2);
+  margin-bottom: ($line-height-computed / 2);
+}
+
+h1 { font-size: $font-size-h1; }
+h2 { font-size: $font-size-h2; }
+h3 { font-size: $font-size-h3; }
+h4 { font-size: $font-size-h4; }
+h5 { font-size: $font-size-h5; }
+h6 { font-size: $font-size-h6; }
+
+small,
+.text-small {
+  font-size: $font-size-small;
+}
+big,
+.text-big {
+  font-size: $font-size-large;
+}
+
+hr {
+  margin-top:    $line-height-computed;
+  margin-bottom: $line-height-computed;
+  border: 0;
+  border-top: 1px solid $hr-border-color;
+}
+
+mark {
+  padding: .2em;
+  background-color: $mark-bg;
+}
+
+pre {
+  code {
+    font-family: $font-family-monospace;
+  }
+}
+
+blockquote {
+  padding: ($line-height-computed / 2) $line-height-computed;
+  margin: 0 0 $line-height-computed;
+  font-size: $blockquote-font-size;
+  border-left: 5px solid $blockquote-border-color;
+}

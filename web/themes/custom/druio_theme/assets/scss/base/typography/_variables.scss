@@ -1,0 +1,52 @@
+$font-family-sans-serif: "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$font-family-serif:      Georgia, "Times New Roman", Times, serif !default;
+$font-family-monospace:  Menlo, Monaco, Consolas, "Courier New", monospace !default;
+$font-family:            $font-family-sans-serif !default;
+
+// Font sizes.
+$font-size-base:  14px !default;
+$font-size-large: ceil($font-size-base * 1.25) !default;
+$font-size-small: ceil($font-size-base * 0.85) !default;
+$font-size-h1:    floor($font-size-base * 2) !default;
+$font-size-h2:    floor($font-size-base * 1.75) !default;
+$font-size-h3:    ceil($font-size-base * 1.5) !default;
+$font-size-h4:    ceil($font-size-base * 1.25) !default;
+$font-size-h5:    $font-size-base !default;
+$font-size-h6:    ceil($font-size-base * 0.85) !default;
+
+// Line height.
+// Unit-less cuz used in buttons, inputs, etc.
+$line-height-base:     1.5 !default;
+$line-height-computed: floor($line-height-base * $font-size-base) !default;
+
+// Headers default settings.
+$headings-font-family:    inherit !default;
+$headings-font-weight:    500 !default;
+$headings-line-height:    1.1 !default;
+$headings-color:          inherit !default;
+
+// Typo colors.
+// Global text color on <body>.
+$text-color:           #333  !default;
+$text-color-subtle:    gray('500') !default;
+$text-color-highlight: gray('600') !default;
+$text-color-info:      theme-color('info') !default;
+$text-color-success:   theme-color('success') !default;
+$text-color-warning:   theme-color('warning') !default;
+$text-color-error:     theme-color('error') !default;
+
+// Links
+$link-color:            theme-color('primary') !default;
+$link-decoration:       none !default;
+$link-hover-color:      theme-color-level('primary', 4) !default;
+$link-hover-decoration: none !default;
+
+// <mark> tag.
+$mark-bg: #FFF9C4;
+
+// Blockqoutes.
+$blockquote-font-size:    ($font-size-base * 1.15) !default;
+$blockquote-border-color: gray('500') !default;
+
+// <hr> tag.
+$hr-border-color: gray('500') !default;

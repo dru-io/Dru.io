@@ -1,0 +1,10 @@
+$highlight-color:         #d7dae0 !default;
+$highlight-bg:            #31363f !default;
+$highlight-info-color:    lighten(theme-color('info'), 40%) !default;
+$highlight-info-bg:       theme-color('info') !default;
+$highlight-success-color: lighten(theme-color('success'), 40%) !default;
+$highlight-success-bg:    theme-color('success') !default;
+$highlight-warning-color: lighten(theme-color('warning'), 40%) !default;
+$highlight-warning-bg:    theme-color('warning') !default;
+$highlight-error-color:   lighten(theme-color('error'), 40%) !default;
+$highlight-error-bg:      theme-color('error') !default;

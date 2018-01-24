@@ -1,0 +1,45 @@
+.breadcrumbs {
+  background: $breadcrumb-bg;
+  padding: $breadcrumb-padding-vertical $breadcrumb-padding-horizontal;
+  margin-bottom: $breadcrumb-margin-bottom;
+  border-radius: $border-radius-base;
+  font-size: $breadcrumb-font-size;
+
+  .delimiter {
+    color: $breadcrumb-delimiter-color;
+  }
+
+  ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    li {
+      display: inline-block;
+
+      &:not(:last-child) {
+        &:after {
+          content: $breadcrumb-delimiter-content;
+          display: inline-block;
+          color: $breadcrumb-delimiter-color;
+        }
+      }
+
+      a {
+        color: $breadcrumb-link-color;
+
+        @if ($breadcrumb-link-border-enable) {
+          border-bottom: 1px solid $breadcrumb-link-border-color;
+        }
+
+        &:hover {
+          color: darken($breadcrumb-link-color, 10%);
+
+          @if ($breadcrumb-link-border-enable) {
+            border-color: darken($breadcrumb-link-border-color, 12%);
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,96 @@
+.primary-tabs {
+  @include clearfix;
+  background: $primary-tabs-bg;
+  margin: $primary-tabs-margin;
+  padding: $primary-tabs-padding;
+  list-style: none;
+
+  li {
+    float: left;
+    border: $primary-tabs-tab-border;
+
+    @if ($primary-tabs-tab-border-remove-right) {
+      &:not(:last-child) {
+        border-right: none;
+      }
+    }
+
+    a {
+      display: block;
+      color: $primary-tabs-task-color;
+      background: $primary-tabs-task-background;
+      padding: $primary-tabs-tab-padding;
+
+      &:hover {
+        background: darken($primary-tabs-task-background, 5%);
+      }
+
+      &.is-active {
+        color: $primary-tabs-task-active-color;
+        background: $primary-tabs-task-active-background;
+      }
+    }
+  }
+}
+
+.secondary-tabs {
+  @include clearfix;
+  background: $secondary-tabs-bg;
+  margin: $secondary-tabs-margin;
+  padding: $secondary-tabs-padding;
+  list-style: none;
+
+  li {
+    float: left;
+    border-bottom: $secondary-tabs-tab-border;
+    margin: $secondary-tabs-tab-margin;
+
+    a {
+      display: block;
+      color: $secondary-tabs-task-color;
+      background: $secondary-tabs-task-background;
+      padding: $secondary-tabs-tab-padding;
+
+      &:hover {
+        background: darken($secondary-tabs-task-background, 5%);
+      }
+
+      &.is-active {
+        color: $secondary-tabs-task-active-color;
+        background: $secondary-tabs-task-active-background;
+      }
+    }
+  }
+}
+
+// Vertical tabs.
+.vertical-tabs {
+  background: $vertical-tabs-bg;
+
+  .vertical-tabs__menu {
+    background: $vertical-tabs-list-bg;
+    border: $vertical-tabs-list-border;
+
+    .vertical-tabs__menu-item {
+      border: none;
+
+      a {
+        color: $vertical-tabs-button-color;
+        border: none;
+      }
+
+      &.selected {
+        background: $vertical-tabs-button-bg-selected;
+
+        strong, .summary {
+          color: $vertical-tabs-button-color-selected;
+          text-shadow: $vertical-tabs-button-text-shadow;
+        }
+      }
+    }
+  }
+
+  .vertical-tabs__panes {
+    padding: 1rem;
+  }
+}

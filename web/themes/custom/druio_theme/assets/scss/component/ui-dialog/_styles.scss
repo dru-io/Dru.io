@@ -1,0 +1,93 @@
+.ui-widget-overlay {
+  background: $dialog-overlay-background;
+  opacity: $dialog-overlay-opacity;
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+}
+
+.ui-dialog {
+  z-index: 100;
+  background: $dialog-background;
+  color: $dialog-color;
+  padding: $dialog-padding;
+  border-radius: $dialog-border-radius;
+  border: $dialog-border;
+  max-width: 100%;
+  font-size: $font-size-base;
+  @if ($dialog-enable-shadows) {
+    box-shadow: $dialog-box-shadow;
+  }
+
+  .ui-widget-header {
+    border-radius: $dialog-border-radius;
+    background: $dialog-header-background;
+    color: $dialog-header-color;
+    padding: $dialog-header-padding;
+    @if ($dialog-header-border-only-bottom) {
+      border: none;
+      border-bottom: $dialog-header-border;
+    } @else {
+      border: $dialog-header-border;
+    }
+
+    .ui-dialog-title {
+      color: $dialog-title-color;
+      font-weight: $dialog-title-weight;
+      font-size: $dialog-title-size;
+    }
+
+    .ui-dialog-titlebar-close {
+      float: right;
+      background: none;
+      width: auto;
+      border: none;
+
+      .ui-icon {
+        &:before {
+          margin: 0;
+        }
+      }
+
+      .ui-button-text {
+        padding: 0;
+        font-size: $font-family;
+        line-height: $line-height-base;
+      }
+    }
+  }
+
+  .ui-dialog-content {
+    padding: $dialog-content-padding;
+    border: none;
+    overflow: auto;
+  }
+
+  .ui-dialog-buttonpane {
+    background: $dialog-buttonpane-background;
+    padding: $dialog-buttonpane-padding;
+    @if ($dialog-buttonpane-border-only-top) {
+      border: none;
+      border-top: $dialog-buttonpane-border;
+    } @else {
+      border: $dialog-buttonpane-border;
+    }
+
+    .ui-dialog-buttonset {
+      @if ($dialog-buttonpane-buttons-align-right) {
+        float: right;
+      }
+
+      .button {
+        @extend .button-primary;
+
+        .ui-button-text {
+          padding: 0;
+        }
+      }
+    }
+  }
+}

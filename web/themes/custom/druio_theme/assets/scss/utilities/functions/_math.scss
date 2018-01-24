@@ -1,0 +1,30 @@
+/**
+ * Remove units and return plain number.
+ */
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return $number / ($number * 0 + 1);
+  }
+
+  @return $number;
+}
+
+/**
+ * Calculating rem size.
+ * @param
+ *   $size - size need to be converted to rem.
+ */
+@function rem($size) {
+  $remSize: strip-unit($size) / 16;
+  @return #{$remSize}rem;
+}
+
+/**
+ * Calculating em size.
+ * @param
+ *   $size - size need to be converted to em.
+ */
+@function em($size) {
+  $remSize: strip-unit($size) / 16;
+  @return #{$remSize}rem;
+}

@@ -1,0 +1,30 @@
+STARTER.xs:
+  label: XS
+  mediaQuery: ''
+  weight: 0
+  multipliers:
+  - 1x
+STARTER.sm:
+  label: SM
+  mediaQuery: '(min-width: 576px)'
+  weight: 0
+  multipliers:
+  - 1x
+STARTER.md:
+  label: MD
+  mediaQuery: '(min-width: 768px)'
+  weight: 0
+  multipliers:
+  - 1x
+STARTER.lg:
+  label: LG
+  mediaQuery: '(min-width: 992px)'
+  weight: 0
+  multipliers:
+  - 1x
+STARTER.xl:
+  label: XL
+  mediaQuery: '(min-width: 1200px)'
+  weight: 0
+  multipliers:
+  - 1x

@@ -1,0 +1,18 @@
+/**
+ * Font size with line-height.
+ */
+@mixin font-size($size) {
+  font-size: #{strip-unit($size)}px;
+  line-height: #{strip-unit(floor($line-height-base * $size))}px;
+}
+
+/**
+ * Font size calculation with rem.
+ */
+@mixin font-size-rem($size, $computeLineHeight: false) {
+  font-size: #{strip-unit($size)}px;
+  font-size: rem($size);
+  @if $computeLineHeight == true {
+    line-height: #{floor($line-height-base * $size)}px;
+  }
+}
