@@ -25,3 +25,6 @@
 
 # Docker file.
 docker-compose.yml
+
+# NPM, Yarn.
+node_modules/
