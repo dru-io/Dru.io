@@ -526,11 +526,11 @@ template {
  * Clearfix.
  */
 :focus {
-  outline: 2px solid rgba(0, 123, 255, 0.3); }
+  outline: 2px solid rgba(255, 185, 38, 0.3); }
 
 ::selection {
-  background: #007bff;
-  color: #fff; }
+  background: #FFB926;
+  color: #212529; }
 
 body {
   background: white; }
@@ -555,10 +555,10 @@ body {
   color: #333; }
 
 a {
-  color: #007bff;
+  color: #0077C0;
   text-decoration: none; }
   a:hover {
-    color: #0054ad;
+    color: #ad7e1a;
     text-decoration: none; }
 
 ol, ul {
@@ -691,7 +691,7 @@ blockquote {
 .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset .button,
 .button-action {
   color: white;
-  background-color: #007bff;
+  background-color: #FFB926;
   background-image: none;
   border-color: transparent;
   transition: all .15s ease-in-out;
@@ -704,19 +704,19 @@ blockquote {
   .button-action:focus,
   .button-action:hover {
     color: white;
-    background-color: #0062cc;
+    background-color: #f2a400;
     border-color: transparent; }
   .form-submit:focus,
   .button-primary:focus,
   .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset .button:focus,
   .button-action:focus {
     outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); }
+    box-shadow: 0 0 0 3px rgba(255, 185, 38, 0.5); }
   .form-submit:disabled,
   .button-primary:disabled,
   .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset .button:disabled,
   .button-action:disabled {
-    background-color: #007bff;
+    background-color: #FFB926;
     border-color: transparent;
     opacity: .65; }
   .form-submit:active,
@@ -724,10 +724,10 @@ blockquote {
   .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset .button:active,
   .button-action:active {
     color: white;
-    background-color: #0062cc;
+    background-color: #f2a400;
     background-image: none;
     border-color: transparent;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.5); }
+    box-shadow: 0 0 0 3px rgba(255, 185, 38, 0.5); }
 
 /**
  * Warning and preview buttons style.
@@ -872,9 +872,9 @@ blockquote {
         display: inline-block;
         color: #ccc; }
       .breadcrumbs ol li a {
-        color: #007bff; }
+        color: #0077C0; }
         .breadcrumbs ol li a:hover {
-          color: #0062cc; }
+          color: #00578d; }
 
 .contextual-region .contextual-links {
   background: white;
@@ -951,7 +951,7 @@ select {
   textarea:focus,
   select:focus {
     outline: medium none;
-    border-color: #007bff; }
+    border-color: #FFB926; }
   input[type="text"]:disabled,
   input[type="password"]:disabled,
   input[type="email"]:disabled,
@@ -1091,10 +1091,10 @@ a.tabledrag-handle .handle {
       padding: 0 0.25rem 0.25rem;
       font-weight: 600;
       text-decoration: none;
-      color: #007bff; }
+      color: #0077C0; }
     .pager__items .pager__item.is-active a {
-      border-bottom-color: #004a99;
-      color: #004a99; }
+      border-bottom-color: #00385a;
+      color: #00385a; }
 
 .primary-tabs {
   background: #F5F5F5;
@@ -1132,18 +1132,18 @@ a.tabledrag-handle .handle {
     clear: both; }
   .secondary-tabs li {
     float: left;
-    border-bottom: 3px solid #007bff;
+    border-bottom: 3px solid #0077C0;
     margin: 0 0.5rem 0 0; }
     .secondary-tabs li a {
       display: block;
-      color: #007bff;
+      color: #0077C0;
       background: transparent;
       padding: 0.5rem; }
       .secondary-tabs li a:hover {
         background: transparent; }
       .secondary-tabs li a.is-active {
         color: white;
-        background: #007bff; }
+        background: #0077C0; }
 
 .vertical-tabs {
   background: white; }

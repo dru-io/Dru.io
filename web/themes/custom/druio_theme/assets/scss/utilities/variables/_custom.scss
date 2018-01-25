@@ -3,7 +3,13 @@
  * Custom variables and overrides of existing.
  */
 
-$theme-colors: ();
-$colors: ();
+$theme-colors: (
+  'primary': #FFB926,
+  'secondary': #7BB7DB,
+);
+$colors: (
+  'dark': #181818,
+);
 
 $grid-gutters: 30px;
+$link-color: #0077C0;
