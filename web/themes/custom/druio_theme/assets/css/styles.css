@@ -1374,6 +1374,44 @@ th {
  * @file
  * Main layouts and styles for #app and other elements inside.
  */
+.region--header > .container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px; }
+  @media (min-width: 576px) {
+    .region--header > .container {
+      width: 540px;
+      max-width: 100%; } }
+  @media (min-width: 768px) {
+    .region--header > .container {
+      width: 720px;
+      max-width: 100%; } }
+  @media (min-width: 992px) {
+    .region--header > .container {
+      width: 960px;
+      max-width: 100%; } }
+  @media (min-width: 1200px) {
+    .region--header > .container {
+      width: 1170px;
+      max-width: 100%; } }
+  @media (min-width: 576px) {
+    .region--header > .container {
+      padding-right: 15px;
+      padding-left: 15px; } }
+  @media (min-width: 768px) {
+    .region--header > .container {
+      padding-right: 15px;
+      padding-left: 15px; } }
+  @media (min-width: 992px) {
+    .region--header > .container {
+      padding-right: 15px;
+      padding-left: 15px; } }
+  @media (min-width: 1200px) {
+    .region--header > .container {
+      padding-right: 7.5px;
+      padding-left: 7.5px; } }
+
 /**
  * @file
  * Styles which you want to use more than few times and they always the same.
