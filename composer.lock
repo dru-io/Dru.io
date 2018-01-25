@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "89819ad4b2735987dc76e58a81447c31",
+    "content-hash": "39fce83a27f68bd67312186e6981e8a8",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -2947,6 +2947,58 @@
             "homepage": "https://www.drupal.org/project/restui",
             "support": {
                 "source": "http://cgit.drupalcode.org/restui"
+            }
+        },
+        {
+            "name": "drupal/snippet_manager",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://git.drupal.org/project/snippet_manager",
+                "reference": "8.x-1.0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://ftp.drupal.org/files/projects/snippet_manager-8.x-1.0.zip",
+                "reference": "8.x-1.0",
+                "shasum": "318529b6bfffcdd972d51c716646664bc9c6256e"
+            },
+            "require": {
+                "drupal/core": "^8.2.0"
+            },
+            "type": "drupal-module",
+            "extra": {
+                "branch-alias": {
+                    "dev-1.x": "1.x-dev"
+                },
+                "drupal": {
+                    "version": "8.x-1.0",
+                    "datestamp": "1513441685",
+                    "security-coverage": {
+                        "status": "covered",
+                        "message": "Covered by Drupal's security advisory policy"
+                    }
+                },
+                "drush": {
+                    "services": {
+                        "drush.services.yml": "^9"
+                    }
+                }
+            },
+            "notification-url": "https://packages.drupal.org/8/downloads",
+            "license": [
+                "GPL-2.0+"
+            ],
+            "authors": [
+                {
+                    "name": "Chi",
+                    "homepage": "https://www.drupal.org/user/556138"
+                }
+            ],
+            "description": "Manages code snippets on Drupal site.",
+            "homepage": "https://drupal.org/project/snippet_manager",
+            "support": {
+                "source": "http://cgit.drupalcode.org/snippet_manager"
             }
         },
         {
