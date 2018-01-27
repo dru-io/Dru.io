@@ -1,0 +1,37 @@
+{#
+/**
+ * @file
+ * Default theme implementation to display a single page.
+ *
+ * @see template_preprocess_page()
+ */
+#}
+
+<div id="app">
+  <div class="region--top-line">
+    <div class="container">
+      <div class="static-menu">
+        <a href="/tracker" class="item tracker">Трекер</a>
+        <a href="https://github.com/dru-io/Dru.io" target="_blank" rel="nofollow" class="item github">GitHub</a>
+        <a href="/chat" class="item chat">Чат</a>
+      </div>
+
+      <div class="fake-auth">
+        Вход | Регистрация
+      </div>
+
+      <div class="fake-search">
+        <input type="text">
+      </div>
+    </div>
+  </div>
+  {{ page.header }}
+  {{ page.navigation }}
+
+  <main id="main">
+    {{ page.sidebar_first }}
+    {{ page.content }}
+  </main>
+
+  {{ page.footer }}
+</div>

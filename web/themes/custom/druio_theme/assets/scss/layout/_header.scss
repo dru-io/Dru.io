@@ -1,5 +1,12 @@
 .region--header {
+  border-bottom: 2px solid theme-color('primary');
+  background: rgba(color('dark'), .8);
+
   > .container {
     @include media-container;
+    display: grid;
+    grid-gap: $grid-gap;
+    grid-template-columns: 200px 1fr;
+    align-items: center;
   }
 }

@@ -1,1 +1,34 @@
- 
+#block-druio-theme-branding {
+  > a {
+    display: block;
+
+    img {
+      height: 26px;
+    }
+  }
+}
+
+#block-druio-theme-main-menu {
+  > ul {
+    @include list-unstyled;
+    display: flex;
+    justify-content: flex-end;
+
+    li {
+      flex: 0 1 auto;
+
+      a {
+        display: block;
+        color: white;
+        line-height: 50px;
+        padding: 0 15px;
+      }
+
+      &:last-child {
+        a {
+          padding-right: 0;
+        }
+      }
+    }
+  }
+}

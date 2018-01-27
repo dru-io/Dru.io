@@ -1,0 +1,46 @@
+.region--top-line {
+  background: color('dark');
+  color: rgba(white, .6);
+
+  > .container {
+    @include media-container;
+    display: grid;
+    grid-gap: $grid-gap;
+    grid-template-columns: 1fr auto 270px;
+
+    .static-menu {
+      $icons: (
+        'tracker': 'bell-outline',
+        'github': 'github-circle',
+        'chat': 'message-text',
+      );
+
+      .item {
+        display: inline-block;
+        color: rgba(white, .6);
+        line-height: 34px;
+        padding: 0 8px;
+        font-size: 85%;
+
+        @each $class, $icon in $icons {
+          &.#{$class} {
+            @include mdi-icon($icon);
+          }
+        }
+
+        &:before {
+          font-size: 135%;
+          line-height: 34px;
+        }
+
+        &:hover {
+          color: white;
+        }
+
+        &:first-child {
+          padding-left: 0;
+        }
+      }
+    }
+  }
+}

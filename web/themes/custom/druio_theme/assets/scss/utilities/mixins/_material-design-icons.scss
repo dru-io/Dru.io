@@ -1,0 +1,22 @@
+/**
+ * Material Design Icons
+ * @see https://materialdesignicons.com
+ */
+$mdi-font-path: "../../node_modules/mdi/fonts";
+@import "../../../../node_modules/mdi/scss/materialdesignicons";
+
+@mixin mdi-icon($name, $position: before, $margin-size: 0.4em) {
+  &:#{$position} {
+    content: mdi($name);
+    font-family: $mdi-font-name;
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: inherit;
+    @if $position == before {
+      margin-right: $margin-size;
+    } @else {
+      margin-left: $margin-size;
+    }
+  }
+}
