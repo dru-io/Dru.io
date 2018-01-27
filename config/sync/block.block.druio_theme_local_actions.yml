@@ -9,7 +9,7 @@ _core:
 id: druio_theme_local_actions
 theme: druio_theme
 region: content
-weight: -20
+weight: -2
 provider: null
 plugin: local_actions_block
 settings:
