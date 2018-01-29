@@ -1,0 +1,24 @@
+{#
+/**
+ * @file
+ * Template for top line user "block".
+ *
+ * Available variables:
+ * - attributes: Attributes for main wrapper.
+ * - is_authenticated: Denotes is user authenticated or not.
+ * - user: If user authenticated will be user object, NULL instead.
+ *
+ * @see druio_theme_preprocess_druio_theme_top_line_user()
+ */
+#}
+<div{{ attributes }}>
+  {% if not is_authenticated %}
+    <div class="links">
+      <a href="{{ url('user.login') }}" class="item login">Вход</a>
+      <span class="separator">|</span>
+      <a href="{{ url('user.register') }}" class="item login">Регистрация</a>
+    </div>
+  {% else %}
+    <a href="{{ url('user.page') }}">{{ user.label }}</a>
+  {% endif %}
+</div>
