@@ -2,3 +2,7 @@
  * @file
  * Main layouts and styles for #app and other elements inside.
  */
+
+#main {
+  @include media-container;
+}

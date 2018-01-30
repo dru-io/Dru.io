@@ -7124,7 +7124,7 @@ template {
 
 ::selection {
   background: #FFB926;
-  color: #212529; }
+  color: #212121; }
 
 body {
   background: white; }
@@ -7208,7 +7208,7 @@ hr {
   margin-top: 21px;
   margin-bottom: 21px;
   border: 0;
-  border-top: 1px solid #adb5bd; }
+  border-top: 1px solid #9E9E9E; }
 
 mark {
   padding: .2em;
@@ -7221,7 +7221,7 @@ blockquote {
   padding: 10.5px 21px;
   margin: 0 0 21px;
   font-size: 16.1px;
-  border-left: 5px solid #adb5bd; }
+  border-left: 5px solid #9E9E9E; }
 
 /**
  * Button style generator.
@@ -7618,7 +7618,7 @@ html.js fieldset.collapsible .fieldset-legend {
     display: block;
     margin-top: 5px;
     margin-bottom: .25rem;
-    color: #adb5bd; }
+    color: #9E9E9E; }
 
 .form-actions input {
   margin: 0 .5rem 0 0; }
@@ -7763,7 +7763,7 @@ table {
 caption {
   padding-top: 0.75rem;
   padding-bottom: 0.75rem;
-  color: #adb5bd;
+  color: #9E9E9E;
   text-align: left; }
 
 th {
@@ -7857,10 +7857,10 @@ th {
  * text-* classes.
  */
 .text-subtle {
-  color: #adb5bd; }
+  color: #9E9E9E; }
 
 .text-highlight {
-  color: #868e96; }
+  color: #757575; }
 
 .text-info {
   color: #29B6F6; }
@@ -7923,7 +7923,7 @@ th {
   box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.15); }
   .ui-dialog .ui-widget-header {
     border-radius: 0;
-    background: #f8f9fa;
+    background: #F5F5F5;
     color: #333;
     padding: 8px 16px;
     border: none;
@@ -7948,7 +7948,7 @@ th {
     border: none;
     overflow: auto; }
   .ui-dialog .ui-dialog-buttonpane {
-    background: #f8f9fa;
+    background: #F5F5F5;
     padding: 8px 16px;
     border: none;
     border-top: 1px solid #c1c1c1; }
@@ -7968,6 +7968,44 @@ th {
  * @file
  * Main layouts and styles for #app and other elements inside.
  */
+#main {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px; }
+  @media (min-width: 576px) {
+    #main {
+      width: 540px;
+      max-width: 100%; } }
+  @media (min-width: 768px) {
+    #main {
+      width: 720px;
+      max-width: 100%; } }
+  @media (min-width: 992px) {
+    #main {
+      width: 960px;
+      max-width: 100%; } }
+  @media (min-width: 1200px) {
+    #main {
+      width: 1170px;
+      max-width: 100%; } }
+  @media (min-width: 576px) {
+    #main {
+      padding-right: 15px;
+      padding-left: 15px; } }
+  @media (min-width: 768px) {
+    #main {
+      padding-right: 15px;
+      padding-left: 15px; } }
+  @media (min-width: 992px) {
+    #main {
+      padding-right: 15px;
+      padding-left: 15px; } }
+  @media (min-width: 1200px) {
+    #main {
+      padding-right: 7.5px;
+      padding-left: 7.5px; } }
+
 .region--header {
   border-bottom: 2px solid #FFB926;
   background: rgba(24, 24, 24, 0.8); }
@@ -7978,7 +8016,7 @@ th {
     padding-left: 15px;
     display: grid;
     grid-gap: 30px;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: auto 1fr;
     align-items: center; }
     @media (min-width: 576px) {
       .region--header > .container {
@@ -8056,43 +8094,96 @@ th {
       .region--top-line > .container {
         padding-right: 7.5px;
         padding-left: 7.5px; } }
-    .region--top-line > .container .static-menu .item {
-      display: inline-block;
-      color: rgba(255, 255, 255, 0.6);
-      line-height: 34px;
-      padding: 0 8px;
-      font-size: 85%; }
-      .region--top-line > .container .static-menu .item.tracker:before {
-        content: "\F09C";
-        font-family: "Material Design Icons";
-        font-weight: normal;
-        font-style: normal;
-        display: inline-block;
-        text-decoration: inherit;
-        margin-right: 0.4em; }
-      .region--top-line > .container .static-menu .item.github:before {
-        content: "\F2A4";
-        font-family: "Material Design Icons";
-        font-weight: normal;
-        font-style: normal;
-        display: inline-block;
-        text-decoration: inherit;
-        margin-right: 0.4em; }
-      .region--top-line > .container .static-menu .item.chat:before {
-        content: "\F369";
-        font-family: "Material Design Icons";
-        font-weight: normal;
-        font-style: normal;
-        display: inline-block;
-        text-decoration: inherit;
-        margin-right: 0.4em; }
-      .region--top-line > .container .static-menu .item:before {
-        font-size: 135%;
-        line-height: 34px; }
-      .region--top-line > .container .static-menu .item:hover {
-        color: white; }
-      .region--top-line > .container .static-menu .item:first-child {
-        padding-left: 0; }
+    .region--top-line > .container .static-menu {
+      display: flex; }
+      .region--top-line > .container .static-menu .item {
+        display: block;
+        color: rgba(255, 255, 255, 0.6);
+        height: 34px;
+        padding: 0 8px;
+        font-size: 85%; }
+        .region--top-line > .container .static-menu .item.tracker:before {
+          content: "\F09C";
+          font-family: "Material Design Icons";
+          font-weight: normal;
+          font-style: normal;
+          display: inline-block;
+          text-decoration: inherit;
+          margin-right: 0.4em; }
+        .region--top-line > .container .static-menu .item.github:before {
+          content: "\F2A4";
+          font-family: "Material Design Icons";
+          font-weight: normal;
+          font-style: normal;
+          display: inline-block;
+          text-decoration: inherit;
+          margin-right: 0.4em; }
+        .region--top-line > .container .static-menu .item.chat:before {
+          content: "\F369";
+          font-family: "Material Design Icons";
+          font-weight: normal;
+          font-style: normal;
+          display: inline-block;
+          text-decoration: inherit;
+          margin-right: 0.4em; }
+        .region--top-line > .container .static-menu .item:before {
+          font-size: 135%;
+          line-height: 34px; }
+        .region--top-line > .container .static-menu .item:hover {
+          color: white; }
+        .region--top-line > .container .static-menu .item:first-child {
+          padding-left: 0; }
+
+.region--footer {
+  background: #242424;
+  color: white;
+  padding: 62px; }
+  .region--footer a {
+    color: white; }
+  .region--footer > .container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: grid;
+    grid-gap: 30px;
+    grid-row-gap: 80px;
+    grid-template-columns: 400px auto 270px;
+    grid-template-areas: "logo space social" "copy copy copy"; }
+    @media (min-width: 576px) {
+      .region--footer > .container {
+        width: 540px;
+        max-width: 100%; } }
+    @media (min-width: 768px) {
+      .region--footer > .container {
+        width: 720px;
+        max-width: 100%; } }
+    @media (min-width: 992px) {
+      .region--footer > .container {
+        width: 960px;
+        max-width: 100%; } }
+    @media (min-width: 1200px) {
+      .region--footer > .container {
+        width: 1170px;
+        max-width: 100%; } }
+    @media (min-width: 576px) {
+      .region--footer > .container {
+        padding-right: 15px;
+        padding-left: 15px; } }
+    @media (min-width: 768px) {
+      .region--footer > .container {
+        padding-right: 15px;
+        padding-left: 15px; } }
+    @media (min-width: 992px) {
+      .region--footer > .container {
+        padding-right: 15px;
+        padding-left: 15px; } }
+    @media (min-width: 1200px) {
+      .region--footer > .container {
+        padding-right: 7.5px;
+        padding-left: 7.5px; } }
+    .region--footer > .container #block-footer-copyright {
+      grid-area: copy; }
 
 #block-druio-theme-branding > a {
   display: block; }
@@ -8115,7 +8206,54 @@ th {
     #block-druio-theme-main-menu > ul li:last-child a {
       padding-right: 0; }
 
+.druio-theme-top-line-user {
+  font-size: 13px; }
+  .druio-theme-top-line-user a {
+    color: white; }
+  .druio-theme-top-line-user.is-authenticated .profile {
+    line-height: 34px; }
+  .druio-theme-top-line-user.is-anonymous {
+    line-height: 34px; }
+
+.druio-theme-top-line-search .search-input-pane {
+  position: relative; }
+  .druio-theme-top-line-search .search-input-pane .input {
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    border: none;
+    height: 34px; }
+  .druio-theme-top-line-search .search-input-pane .icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 5;
+    color: #333;
+    line-height: 34px;
+    width: 34px;
+    text-align: center;
+    font-size: 20px; }
+    .druio-theme-top-line-search .search-input-pane .icon:before {
+      content: "\F349";
+      font-family: "Material Design Icons";
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: 0.4em; }
+    .druio-theme-top-line-search .search-input-pane .icon::before {
+      margin: 0; }
+
 /**
  * @file
  * Styles which you want to use more than few times and they always the same.
  */
+.snippet-footer-logo .logo {
+  margin-bottom: 16px;
+  height: 26px; }
+
+.snippet-footer-logo .description {
+  font-size: 13px; }
+
+.snippet-footer-copyright {
+  color: #9E9E9E; }

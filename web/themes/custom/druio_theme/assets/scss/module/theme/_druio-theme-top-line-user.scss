@@ -1,0 +1,17 @@
+.druio-theme-top-line-user {
+  font-size: 13px;
+
+  a {
+    color: white;
+  }
+
+  &.is-authenticated {
+    .profile {
+      line-height: 34px;
+    }
+  }
+
+  &.is-anonymous {
+    line-height: 34px;
+  }
+}

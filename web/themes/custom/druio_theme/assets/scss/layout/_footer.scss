@@ -1,0 +1,23 @@
+.region--footer {
+  background: #242424;
+  color: white;
+  padding: 62px;
+
+  a {
+    color: white;
+  }
+
+  > .container {
+    @include media-container;
+    display: grid;
+    grid-gap: $grid-gap;
+    grid-row-gap: 80px;
+    grid-template-columns: 400px auto 270px;
+    grid-template-areas: "logo space social"
+                         "copy copy copy";
+
+    #block-footer-copyright {
+      grid-area: copy;
+    }
+  }
+}

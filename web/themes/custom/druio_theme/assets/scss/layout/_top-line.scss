@@ -9,6 +9,7 @@
     grid-template-columns: 1fr auto 270px;
 
     .static-menu {
+      display: flex;
       $icons: (
         'tracker': 'bell-outline',
         'github': 'github-circle',
@@ -16,9 +17,9 @@
       );
 
       .item {
-        display: inline-block;
+        display: block;
         color: rgba(white, .6);
-        line-height: 34px;
+        height: 34px;
         padding: 0 8px;
         font-size: 85%;
 

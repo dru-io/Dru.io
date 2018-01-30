@@ -1,0 +1,30 @@
+.druio-theme-top-line-search {
+  .search-input-pane {
+    position: relative;
+
+    .input {
+      border-radius: 0;
+      background: rgba(white, .8);
+      color: $text-color;
+      border: none;
+      height: 34px;
+    }
+
+    .icon {
+      @include mdi-icon('magnify');
+      position: absolute;
+      top: 0;
+      right: 0;
+      z-index: 5;
+      color: $text-color;
+      line-height: 34px;
+      width: 34px;
+      text-align: center;
+      font-size: 20px;
+
+      &::before {
+        margin: 0;
+      }
+    }
+  }
+}

@@ -12,4 +12,7 @@ function druio_theme_preprocess_page(&$variables) {
   $variables['top_line_auth'] = [
     '#theme' => 'druio_theme_top_line_user',
   ];
+  $variables['top_line_search'] = [
+    '#theme' => 'druio_theme_top_line_search',
+  ];
 }

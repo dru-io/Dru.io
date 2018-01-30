@@ -19,6 +19,6 @@
       <a href="{{ url('user.register') }}" class="item login">Регистрация</a>
     </div>
   {% else %}
-    <a href="{{ url('user.page') }}">{{ user.label }}</a>
+    <a href="{{ url('user.page') }}" class="profile">{{ user.label }}</a>
   {% endif %}
 </div>
