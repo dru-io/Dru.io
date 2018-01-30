@@ -1,0 +1,20 @@
+uuid: ae842907-dfd2-4457-888a-847e4d121348
+langcode: ru
+status: true
+dependencies:
+  module:
+    - snippet_manager
+  theme:
+    - druio_theme
+id: footer_copyright
+theme: druio_theme
+region: footer
+weight: -4
+provider: null
+plugin: 'snippet:footer_copyright'
+settings:
+  id: 'snippet:footer_copyright'
+  label: 'Подвал: Копирайты'
+  provider: snippet_manager
+  label_display: '0'
+visibility: {  }

@@ -1,0 +1,8 @@
+codemirror:
+  cdn: true
+  toolbar: true
+  theme: default
+  mode: html_twig
+_core:
+  default_config_hash: 5zeJBy1qxyL6r9oBwuJ9rlS8Y-jZ5uFA-s7UKYwDhM8
+langcode: ru

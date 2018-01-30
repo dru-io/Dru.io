@@ -1,0 +1,39 @@
+uuid: 05cd4f14-2a15-414c-8fab-86aadecd125f
+langcode: ru
+status: true
+dependencies: {  }
+id: footer_copyright
+label: 'Подвал: Копирайты'
+page:
+  status: false
+  title: ''
+  path: ''
+  theme: ''
+  display_variant: ''
+  access:
+    type: all
+    permission: ''
+    role: {  }
+block:
+  status: true
+  name: ''
+display_variant:
+  status: false
+  admin_label: ''
+layout:
+  status: false
+  label: null
+  default_region: null
+template:
+  value: "<div class=\"snippet-footer-copyright\">\r\n  © Dru.io — Drupal сообщество с открытым исходным кодомм, распространяющимся под лицензией GPL v2.\r\n</div>"
+  format: full_html
+css:
+  status: false
+  value: null
+  format: full_html
+  group: component
+js:
+  status: false
+  value: null
+  format: full_html
+variables: {  }

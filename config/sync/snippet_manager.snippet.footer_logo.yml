@@ -1,0 +1,39 @@
+uuid: b91c20f4-19e0-4b44-9c36-ad2f9b7101a2
+langcode: ru
+status: true
+dependencies: {  }
+id: footer_logo
+label: 'Подвал: Логотип'
+page:
+  status: false
+  title: ''
+  path: ''
+  theme: ''
+  display_variant: ''
+  access:
+    type: all
+    permission: ''
+    role: {  }
+block:
+  status: true
+  name: ''
+display_variant:
+  status: false
+  admin_label: ''
+layout:
+  status: false
+  label: null
+  default_region: null
+template:
+  value: "{% set theme_path = '/themes/custom/druio_theme' %}\r\n\r\n<div class=\"snippet-footer-logo\">\r\n  <img src=\"{{ theme_path}}/logo.svg\" alt=\"Dru.io — логотип.\" class=\"logo\">\r\n  \r\n  <div class=\"description\">\r\n    <p>Содержимое сайта распространяется под лицензией Creative Commons Share Alike 3.0. Drupal — зарегистрированная торговая марка, принадлежит Dries Bautaert.</p>\r\n  </div>\r\n</div>"
+  format: full_html
+css:
+  status: false
+  value: null
+  format: full_html
+  group: component
+js:
+  status: false
+  value: null
+  format: full_html
+variables: {  }

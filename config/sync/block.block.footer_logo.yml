@@ -1,0 +1,20 @@
+uuid: 596ea102-5322-4a17-bd5d-dd368905e438
+langcode: ru
+status: true
+dependencies:
+  module:
+    - snippet_manager
+  theme:
+    - druio_theme
+id: footer_logo
+theme: druio_theme
+region: footer
+weight: -5
+provider: null
+plugin: 'snippet:footer_logo'
+settings:
+  id: 'snippet:footer_logo'
+  label: 'Подвал: Логотип'
+  provider: snippet_manager
+  label_display: '0'
+visibility: {  }
