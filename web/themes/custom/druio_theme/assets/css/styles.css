@@ -412,6 +412,9 @@ template {
  *   $size - size need to be converted to em.
  */
 /**
+ * Calculate gap.
+ */
+/**
  * Find next breakpoint, otherwise return nothing.
  * @example
  *   breakpoint-next(sm);
@@ -7448,9 +7451,9 @@ blockquote {
     box-shadow: 0 0 0 3px rgba(41, 182, 246, 0.5); }
 
 .breadcrumbs {
-  background: #f5f5f5;
-  padding: 8px 16px;
-  margin-bottom: 10px;
+  background: transprent;
+  padding: 0 0;
+  margin-bottom: 16px;
   border-radius: 4px;
   font-size: 14px; }
   .breadcrumbs .delimiter {
@@ -7466,9 +7469,9 @@ blockquote {
         display: inline-block;
         color: #ccc; }
       .breadcrumbs ol li a {
-        color: #0077C0; }
+        color: #616161; }
         .breadcrumbs ol li a:hover {
-          color: #00578d; }
+          color: #484848; }
 
 .contextual-region .contextual-links {
   background: white;
@@ -7969,42 +7972,53 @@ th {
  * Main layouts and styles for #app and other elements inside.
  */
 #main {
-  margin-right: auto;
-  margin-left: auto;
-  padding-right: 15px;
-  padding-left: 15px; }
-  @media (min-width: 576px) {
-    #main {
-      width: 540px;
-      max-width: 100%; } }
-  @media (min-width: 768px) {
-    #main {
-      width: 720px;
-      max-width: 100%; } }
-  @media (min-width: 992px) {
-    #main {
-      width: 960px;
-      max-width: 100%; } }
-  @media (min-width: 1200px) {
-    #main {
-      width: 1170px;
-      max-width: 100%; } }
-  @media (min-width: 576px) {
-    #main {
-      padding-right: 15px;
-      padding-left: 15px; } }
-  @media (min-width: 768px) {
-    #main {
-      padding-right: 15px;
-      padding-left: 15px; } }
-  @media (min-width: 992px) {
-    #main {
-      padding-right: 15px;
-      padding-left: 15px; } }
-  @media (min-width: 1200px) {
-    #main {
-      padding-right: 7.5px;
-      padding-left: 7.5px; } }
+  padding: 32px 0; }
+  #main .content-and-sidebars {
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: grid;
+    grid-gap: 30px; }
+    @media (min-width: 576px) {
+      #main .content-and-sidebars {
+        width: 540px;
+        max-width: 100%; } }
+    @media (min-width: 768px) {
+      #main .content-and-sidebars {
+        width: 720px;
+        max-width: 100%; } }
+    @media (min-width: 992px) {
+      #main .content-and-sidebars {
+        width: 960px;
+        max-width: 100%; } }
+    @media (min-width: 1200px) {
+      #main .content-and-sidebars {
+        width: 1170px;
+        max-width: 100%; } }
+    @media (min-width: 576px) {
+      #main .content-and-sidebars {
+        padding-right: 15px;
+        padding-left: 15px; } }
+    @media (min-width: 768px) {
+      #main .content-and-sidebars {
+        padding-right: 15px;
+        padding-left: 15px; } }
+    @media (min-width: 992px) {
+      #main .content-and-sidebars {
+        padding-right: 15px;
+        padding-left: 15px; } }
+    @media (min-width: 1200px) {
+      #main .content-and-sidebars {
+        padding-right: 7.5px;
+        padding-left: 7.5px; } }
+    body.is-layout-sidebar-right #main .content-and-sidebars {
+      grid-template-areas: 'content right';
+      grid-template-columns: 1fr 270px; }
+      body.is-layout-sidebar-right #main .content-and-sidebars .region--content {
+        grid-area: content; }
+      body.is-layout-sidebar-right #main .content-and-sidebars .region--sidebar-right {
+        grid-area: right; }
 
 .region--header {
   border-bottom: 2px solid #FFB926;
@@ -8149,7 +8163,7 @@ th {
     grid-gap: 30px;
     grid-row-gap: 80px;
     grid-template-columns: 400px auto 270px;
-    grid-template-areas: "logo space social" "copy copy copy"; }
+    grid-template-areas: "logo empty social" "copy copy copy"; }
     @media (min-width: 576px) {
       .region--footer > .container {
         width: 540px;

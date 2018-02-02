@@ -4,5 +4,28 @@
  */
 
 #main {
-  @include media-container;
+  padding: gap(4) 0;
+
+  .content-and-sidebars {
+    @include media-container;
+    display: grid;
+    grid-gap: $grid-gap;
+
+    // No sidebars.
+    body.is-layout-no-sidebars & {}
+
+    // With right sidebar.
+    body.is-layout-sidebar-right & {
+      grid-template-areas: 'content right';
+      grid-template-columns: 1fr 270px;
+
+      .region--content {
+        grid-area: content;
+      }
+
+      .region--sidebar-right {
+        grid-area: right;
+      }
+    }
+  }
 }

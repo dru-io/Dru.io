@@ -20,11 +20,12 @@
     </div>
   </div>
   {{ page.header }}
-  {{ page.navigation }}
 
   <main id="main">
-    {{ page.sidebar_first }}
-    {{ page.content }}
+    <div class="content-and-sidebars">
+      {{ page.content }}
+      {{ page.sidebar_right }}
+    </div>
   </main>
 
   {{ page.footer }}

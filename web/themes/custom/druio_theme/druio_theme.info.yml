@@ -10,7 +10,6 @@ libraries:
   - druio_theme/global-styling
 regions:
   header: Header
-  navigation: Navigation
   content: Content
-  sidebar_first: 'Sidebar first'
+  sidebar_right: 'Sidebar right'
   footer: Footer

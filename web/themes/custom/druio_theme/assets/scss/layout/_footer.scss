@@ -13,7 +13,7 @@
     grid-gap: $grid-gap;
     grid-row-gap: 80px;
     grid-template-columns: 400px auto 270px;
-    grid-template-areas: "logo space social"
+    grid-template-areas: "logo empty social"
                          "copy copy copy";
 
     #block-footer-copyright {

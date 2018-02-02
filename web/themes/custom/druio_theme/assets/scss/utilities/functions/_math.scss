@@ -28,3 +28,10 @@
   $remSize: strip-unit($size) / 16;
   @return #{$remSize}rem;
 }
+
+/**
+ * Calculate gap.
+ */
+@function gap($size: 1) {
+  @return $base-gap * $size;
+}
