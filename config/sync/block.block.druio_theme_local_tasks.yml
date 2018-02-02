@@ -9,7 +9,7 @@ _core:
 id: druio_theme_local_tasks
 theme: druio_theme
 region: content
-weight: -6
+weight: -4
 provider: null
 plugin: local_tasks_block
 settings:

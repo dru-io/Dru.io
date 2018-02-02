@@ -1,6 +1,6 @@
 uuid: ce8bf918-570f-40f8-ac40-b4e51cf7f106
 langcode: ru
-status: true
+status: false
 dependencies:
   config:
     - system.menu.tools
@@ -12,7 +12,7 @@ _core:
   default_config_hash: NeHSoqm4XFqA7_0bDmR429ZZQt3LRbZMNRJTMsFyOfI
 id: druio_theme_tools
 theme: druio_theme
-region: sidebar_first
+region: header
 weight: 0
 provider: null
 plugin: 'system_menu_block:tools'

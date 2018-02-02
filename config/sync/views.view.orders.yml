@@ -217,6 +217,7 @@ display:
         type: normal
         title: Заказы
         menu_name: main
+        weight: -48
     cache_metadata:
       max-age: -1
       contexts:

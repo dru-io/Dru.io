@@ -1,0 +1,20 @@
+uuid: fc9040ce-4260-436e-bae3-9e1345820623
+langcode: ru
+status: true
+dependencies:
+  module:
+    - system
+  theme:
+    - druio_theme
+id: sdelanonadrupal
+theme: druio_theme
+region: sidebar_right
+weight: 0
+provider: null
+plugin: system_powered_by_block
+settings:
+  id: system_powered_by_block
+  label: 'Сделано на Drupal'
+  provider: system
+  label_display: '0'
+visibility: {  }

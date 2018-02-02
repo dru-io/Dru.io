@@ -186,6 +186,7 @@ display:
         type: normal
         title: Публикации
         menu_name: main
+        weight: -46
     cache_metadata:
       max-age: -1
       contexts:

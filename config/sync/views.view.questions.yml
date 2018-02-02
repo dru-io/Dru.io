@@ -189,6 +189,7 @@ display:
         type: normal
         title: Вопросы
         menu_name: main
+        weight: -49
       display_description: ''
     cache_metadata:
       max-age: -1
