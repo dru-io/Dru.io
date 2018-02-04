@@ -5,8 +5,10 @@ dependencies:
   config:
     - core.entity_view_mode.node.teaser
     - field.field.node.question.body
+    - field.field.node.question.field_comments
     - field.field.node.question.field_drupal_version
     - field.field.node.question.field_project_references
+    - field.field.node.question.field_question_answers
     - field.field.node.question.field_question_categories
     - node.type.question
   module:
@@ -26,6 +28,11 @@ content:
       trim_length: 600
     third_party_settings: {  }
     region: content
+  druio_question_meta:
+    weight: 5
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_drupal_version:
     type: list_default
     weight: 2

@@ -18,6 +18,7 @@ module:
   druio: 0
   druio_migrate: 0
   druio_notification: 0
+  druio_question: 0
   dynamic_page_cache: 0
   editor: 0
   entity_reference_revisions: 0
@@ -54,6 +55,7 @@ module:
   token: 0
   toolbar: 0
   tour: 0
+  twig_tweak: 0
   update: 0
   user: 0
   views_ui: 0
