@@ -2,3 +2,12 @@
  * @file
  * Styles which you want to use more than few times and they always the same.
  */
+
+%link-with-border-on-hover-dark {
+  color: $text-color;
+  border-bottom: 1px solid transparent;
+
+  &:hover {
+    border-bottom: 1px solid rgba($text-color, 0.2);
+  }
+}

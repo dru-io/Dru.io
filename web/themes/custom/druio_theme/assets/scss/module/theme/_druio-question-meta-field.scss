@@ -1,0 +1,26 @@
+.druio-question-meta-field {
+  display: flex;
+  flex-flow: wrap;
+
+  > .item {
+    flex: 0 0 auto;
+    background: gray('100');
+    padding: 4px gap();
+    font-size: 12px;
+    margin-right: gap();
+    -moz-user-select: none;
+    user-select: none;
+
+    &.drupal-version {
+      @include mdi-icon('drupal');
+    }
+
+    &.category {
+      @include mdi-icon('tag');
+    }
+
+    &.project {
+      @include mdi-icon('puzzle');
+    }
+  }
+}

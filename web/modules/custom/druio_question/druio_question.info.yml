@@ -1,0 +1,5 @@
+name: 'druio_question'
+type: module
+description: 'Dru.io — Question'
+core: 8.x
+package: 'Dru.io'

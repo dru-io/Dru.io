@@ -1,0 +1,23 @@
+{#
+  /**
+   * @file
+   *
+   * Available variables:
+   * - items: Items for template.
+   *
+   * Item's element variables:
+   * - label: Label for item.
+   * - class: An array with additional classes for item.
+   */
+#}
+{% if items|length %}
+  <div class="druio-question-meta-field">
+    {% for item in items %}
+      {% set item_attributes = create_attribute() %}
+      {% set item_attributes = item_attributes.addClass('item') %}
+      <div{{ item_attributes.addClass(item.class) }}>
+        {{ item.label }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}

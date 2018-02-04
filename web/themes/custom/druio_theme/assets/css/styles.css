@@ -8199,6 +8199,81 @@ th {
     .region--footer > .container #block-footer-copyright {
       grid-area: copy; }
 
+.node--question.view-mode--teaser {
+  display: flex;
+  position: relative; }
+  .node--question.view-mode--teaser::before {
+    content: '';
+    box-shadow: 0 0 0 transparent;
+    position: absolute;
+    z-index: -1;
+    top: -20px;
+    right: -20px;
+    bottom: -20px;
+    left: -20px;
+    background: white;
+    display: block;
+    transition: box-shadow .25s ease; }
+  .node--question.view-mode--teaser > .rating {
+    flex: 0 0 60px;
+    height: 60px;
+    margin-right: 10px;
+    align-self: flex-start;
+    border: 2px solid #EEEEEE;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    cursor: default;
+    -moz-user-select: none;
+    user-select: none;
+    color: #616161; }
+    .node--question.view-mode--teaser > .rating .count {
+      font-size: 20px; }
+    .node--question.view-mode--teaser > .rating .value {
+      font-size: 10px; }
+  .node--question.view-mode--teaser > .answers {
+    flex: 0 0 60px;
+    height: 60px;
+    align-self: flex-start;
+    border: 2px solid #FFB926;
+    text-align: center;
+    margin-right: 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    -moz-user-select: none;
+    user-select: none;
+    color: #616161; }
+    .node--question.view-mode--teaser > .answers .count {
+      font-size: 20px; }
+    .node--question.view-mode--teaser > .answers .value {
+      font-size: 10px; }
+  .node--question.view-mode--teaser .content {
+    flex: 1 1 auto; }
+    .node--question.view-mode--teaser .content .title {
+      margin-top: 0;
+      font-size: 14px;
+      margin-bottom: 16px; }
+    .node--question.view-mode--teaser .content .info {
+      display: flex;
+      flex-flow: wrap; }
+      .node--question.view-mode--teaser .content .info .druio-question-meta-field {
+        flex: 0 1 calc(70% - 16px);
+        margin-right: 16px; }
+      .node--question.view-mode--teaser .content .info .author-and-date {
+        flex: 0 1 30%; }
+  .node--question.view-mode--teaser:hover .rating,
+  .node--question.view-mode--teaser:hover .answers,
+  .node--question.view-mode--teaser:hover .content {
+    position: relative;
+    z-index: 2; }
+  .node--question.view-mode--teaser:hover::before {
+    display: block;
+    box-shadow: 0 3px 17px rgba(0, 0, 0, 0.2);
+    transition: box-shadow .25s ease;
+    z-index: 1; }
+
 #block-druio-theme-branding > a {
   display: block; }
   #block-druio-theme-branding > a img {
@@ -8219,6 +8294,9 @@ th {
       padding: 0 15px; }
     #block-druio-theme-main-menu > ul li:last-child a {
       padding-right: 0; }
+
+.view--questions.display-id--page > .content > .row {
+  margin-top: 32px; }
 
 .druio-theme-top-line-user {
   font-size: 13px; }
@@ -8258,10 +8336,52 @@ th {
     .druio-theme-top-line-search .search-input-pane .icon::before {
       margin: 0; }
 
+.druio-question-meta-field {
+  display: flex;
+  flex-flow: wrap; }
+  .druio-question-meta-field > .item {
+    flex: 0 0 auto;
+    background: #F5F5F5;
+    padding: 4px 8px;
+    font-size: 12px;
+    margin-right: 8px;
+    -moz-user-select: none;
+    user-select: none; }
+    .druio-question-meta-field > .item.drupal-version:before {
+      content: "\F1E4";
+      font-family: "Material Design Icons";
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: 0.4em; }
+    .druio-question-meta-field > .item.category:before {
+      content: "\F4F9";
+      font-family: "Material Design Icons";
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: 0.4em; }
+    .druio-question-meta-field > .item.project:before {
+      content: "\F431";
+      font-family: "Material Design Icons";
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: 0.4em; }
+
 /**
  * @file
  * Styles which you want to use more than few times and they always the same.
  */
+.node--question.view-mode--teaser .content .title a {
+  color: #333;
+  border-bottom: 1px solid transparent; }
+  .node--question.view-mode--teaser .content .title a:hover {
+    border-bottom: 1px solid rgba(51, 51, 51, 0.2); }
+
 .snippet-footer-logo .logo {
   margin-bottom: 16px;
   height: 26px; }
