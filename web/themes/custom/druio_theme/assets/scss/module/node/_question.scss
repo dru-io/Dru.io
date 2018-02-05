@@ -80,13 +80,29 @@
       display: flex;
       flex-flow: wrap;
 
-      .druio-question-meta-field {
-        flex: 0 1 calc(70% - #{gap(2)});
+      .meta {
+        flex: 0 1 calc(60% - #{gap(2)});
         margin-right: gap(2);
       }
 
       .author-and-date {
-        flex: 0 1 30%;
+        flex: 0 1 40%;
+        align-self: flex-end;
+        display: flex;
+
+        .druio-author-min {
+          flex: 0 1 50%;
+          margin-right: gap();
+
+          .link {
+            font-size: 11px;
+
+            .avatar {
+              height: 17px;
+              width: 17px;
+            }
+          }
+        }
       }
     }
   }

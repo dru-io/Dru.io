@@ -1,0 +1,26 @@
+.druio-author-min {
+  .link {
+    display: flex;
+    align-items: center;
+
+    .avatar {
+      height: 22px;
+      width: 22px;
+      margin-right: gap();
+      border-radius: 50%;
+    }
+
+    .username {
+      color: $text-color;
+      border-bottom: 1px solid rgba($text-color, .3);
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      min-width: 0;
+
+      &:hover {
+        border-bottom-color: $text-color;
+      }
+    }
+  }
+}

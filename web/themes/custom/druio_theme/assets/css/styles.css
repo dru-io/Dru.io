@@ -8258,11 +8258,21 @@ th {
     .node--question.view-mode--teaser .content .info {
       display: flex;
       flex-flow: wrap; }
-      .node--question.view-mode--teaser .content .info .druio-question-meta-field {
-        flex: 0 1 calc(70% - 16px);
+      .node--question.view-mode--teaser .content .info .meta {
+        flex: 0 1 calc(60% - 16px);
         margin-right: 16px; }
       .node--question.view-mode--teaser .content .info .author-and-date {
-        flex: 0 1 30%; }
+        flex: 0 1 40%;
+        align-self: flex-end;
+        display: flex; }
+        .node--question.view-mode--teaser .content .info .author-and-date .druio-author-min {
+          flex: 0 1 50%;
+          margin-right: 8px; }
+          .node--question.view-mode--teaser .content .info .author-and-date .druio-author-min .link {
+            font-size: 11px; }
+            .node--question.view-mode--teaser .content .info .author-and-date .druio-author-min .link .avatar {
+              height: 17px;
+              width: 17px; }
   .node--question.view-mode--teaser:hover .rating,
   .node--question.view-mode--teaser:hover .answers,
   .node--question.view-mode--teaser:hover .content {
@@ -8338,7 +8348,8 @@ th {
 
 .druio-question-meta-field {
   display: flex;
-  flex-flow: wrap; }
+  flex-flow: wrap;
+  margin-top: -8px; }
   .druio-question-meta-field > .item {
     flex: 0 0 auto;
     background: #F5F5F5;
@@ -8346,7 +8357,8 @@ th {
     font-size: 12px;
     margin-right: 8px;
     -moz-user-select: none;
-    user-select: none; }
+    user-select: none;
+    margin-top: 8px; }
     .druio-question-meta-field > .item.drupal-version:before {
       content: "\F1E4";
       font-family: "Material Design Icons";
@@ -8371,6 +8383,24 @@ th {
       display: inline-block;
       text-decoration: inherit;
       margin-right: 0.4em; }
+
+.druio-author-min .link {
+  display: flex;
+  align-items: center; }
+  .druio-author-min .link .avatar {
+    height: 22px;
+    width: 22px;
+    margin-right: 8px;
+    border-radius: 50%; }
+  .druio-author-min .link .username {
+    color: #333;
+    border-bottom: 1px solid rgba(51, 51, 51, 0.3);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: 0; }
+    .druio-author-min .link .username:hover {
+      border-bottom-color: #333; }
 
 /**
  * @file

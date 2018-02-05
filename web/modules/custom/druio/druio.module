@@ -5,9 +5,58 @@
  * Main file for hooks and custom functions.
  */
 
+use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
+use Drupal\Core\Entity\EntityInterface;
+use Drupal\node\Entity\NodeType;
+
 /**
  * Implements hook_preprocess_HOOK().
  */
 function druio_preprocess_toolbar(&$variables) {
   $variables['#attached']['library'][] = 'druio/toolbar-styles';
+}
+
+/**
+ * Implements hook_entity_extra_field_info().
+ */
+function druio_entity_extra_field_info() {
+  $extra = [];
+
+  foreach (NodeType::loadMultiple() as $bundle) {
+    $extra['node'][$bundle->id()]['display']['druio_author_min'] = [
+      'label' => 'Dru.io: Author minimal',
+      'description' => 'Link to author with small avatar.',
+      'weight' => '100',
+      'visible' => FALSE,
+    ];
+  }
+
+  return $extra;
+}
+
+/**
+ * Implements hook_entity_view().
+ */
+function druio_entity_view(array &$build, EntityInterface $entity, EntityViewDisplayInterface $display, $view_mode) {
+  if ($display->getComponent('druio_author_min')) {
+    $build['druio_author_min'] = [
+      '#theme' => 'druio_author_min',
+      '#user' => $entity->getOwner(),
+    ];
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function druio_theme($existing, $type, $theme, $path) {
+  $file = 'druio.theme.inc';
+  return [
+    'druio_author_min' => [
+      'variables' => [
+        'user' => NULL,
+      ],
+      'file' => $file,
+    ],
+  ];
 }

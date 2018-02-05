@@ -1,6 +1,7 @@
 .druio-question-meta-field {
   display: flex;
   flex-flow: wrap;
+  margin-top: gap(-1);
 
   > .item {
     flex: 0 0 auto;
@@ -10,6 +11,7 @@
     margin-right: gap();
     -moz-user-select: none;
     user-select: none;
+    margin-top: gap();
 
     &.drupal-version {
       @include mdi-icon('drupal');

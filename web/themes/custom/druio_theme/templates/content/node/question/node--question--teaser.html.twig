@@ -32,9 +32,13 @@
   <div class="content">
     <h2 class="title"><a href="{{ url }}">{{ label }}</a></h2>
     <div class="info">
-      {{ content.druio_question_meta }}
+      <div class="meta">
+        {{ content.druio_question_meta }}
+      </div>
+
       <div class="author-and-date">
-        Author and date
+        {{ content.druio_author_min }}
+        Последний ответ: 1 час назад
       </div>
     </div>
   </div>
