@@ -31,8 +31,10 @@ class DruioQuestionService {
    *   The answers count for question.
    */
   public function getQuestionAnswerCount($qid) {
-    $query = $this->entityTypeManager->getStorage('node')
-      ->condition('type', 'question');
+    $query = $this->entityTypeManager->getStorage('comment')
+      ->getQuery()
+      ->condition('comment_type', 'question_answer')
+      ->condition('entity_id', $qid);
     return $query->count()->execute();
   }
 

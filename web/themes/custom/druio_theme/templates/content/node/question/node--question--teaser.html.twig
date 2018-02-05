@@ -19,8 +19,14 @@
   </div>
 
   <div class="answers">
-    <div class="count">5</div>
-    <div class="value">Ответов</div>
+    <div class="count">{{ answers_count }}</div>
+    <div class="value">
+      {% trans %}
+        Answer
+      {% plural answers_count %}
+        Answers
+      {% endtrans %}
+    </div>
   </div>
 
   <div class="content">

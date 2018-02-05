@@ -1,5 +1,4 @@
 services:
-  druio_notification:
+  druio_question:
     class: Drupal\druio_question\DruioQuestionService
     arguments: ['@entity_type.manager']
-
