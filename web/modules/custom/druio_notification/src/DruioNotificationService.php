@@ -6,9 +6,9 @@ use Drupal\Core\Entity\EntityTypeManager;
 use Drupal\druio_notification\Entity\DruioNotificationInterface;
 
 /**
- * Class DruioNotificationHelperService.
+ * Class DruioNotificationService.
  */
-class DruioNotificationHelperService {
+class DruioNotificationService {
 
   /**
    * @var EntityTypeManager.

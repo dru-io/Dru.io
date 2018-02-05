@@ -74,7 +74,7 @@ class GetUserUnreadNotificationsResource extends ResourceBase {
    * Responds to GET requests.
    */
   public function get() {
-    $result = \Drupal::service('druio_notification.helper')->getUserUnreadNotifications();
+    $result = \Drupal::service('druio_notification')->getUserUnreadNotifications();
     return new ResourceResponse($result, 200);
   }
 

@@ -74,7 +74,7 @@ class GetUserNotificationsResource extends ResourceBase {
    * Responds to GET requests.
    */
   public function get() {
-    $notifications = \Drupal::service('druio_notification.helper')
+    $notifications = \Drupal::service('druio_notification')
       ->getUserNotifications($this->currentUser->id(), \Drupal::request()->query->get('limit'));
     return new ResourceResponse($notifications, 200);
   }

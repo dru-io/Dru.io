@@ -74,7 +74,7 @@ class GetUserUnreadCountResource extends ResourceBase {
    * Responds to GET requests.
    */
   public function get() {
-    $result = \Drupal::service('druio_notification.helper')
+    $result = \Drupal::service('druio_notification')
       ->getUserUnreadCount();
     return ResourceResponse::create(['unread_count' => $result], 200);
   }
