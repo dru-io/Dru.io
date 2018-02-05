@@ -28,6 +28,11 @@ content:
       trim_length: 600
     third_party_settings: {  }
     region: content
+  druio_author_min:
+    weight: 6
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   druio_question_meta:
     weight: 5
     region: content

@@ -1,0 +1,14 @@
+uuid: cb7fdadc-5f71-441d-88f9-5524640a12ed
+langcode: ru
+status: true
+dependencies: {  }
+name: user_avatar_min
+label: 'User avatar min'
+effects:
+  656389ff-ccef-4c72-a0d3-7ad3f17f47d2:
+    uuid: 656389ff-ccef-4c72-a0d3-7ad3f17f47d2
+    id: image_scale_and_crop
+    weight: 1
+    data:
+      width: 100
+      height: 100
