@@ -9,12 +9,6 @@
             "role": ""
         }
     ],
-    "repositories": [
-        {
-            "type": "composer",
-            "url": "https://packages.drupal.org/8"
-        }
-    ],
     "require": {
         "composer/installers": "^1.2",
         "cweagans/composer-patches": "^1.6",
@@ -41,6 +35,7 @@
         "drupal/vote_up_down": "^1.0@alpha",
         "drupal/votingapi": "^3.0@alpha",
         "drush/drush": "^9",
+        "moment/luxon": "master",
         "symfony/var-dumper": "^3.4",
         "webflo/drupal-finder": "^1.0.0",
         "webmozart/path-util": "^2.3",
@@ -100,5 +95,23 @@
             "replace": false,
             "merge-extra": false
         }
-    }
+    },
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/8"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "moment/luxon",
+                "type": "drupal-library",
+                "version": "master",
+                "dist": {
+                    "url": "http://moment.github.io/luxon/global/luxon.min.js",
+                    "type": "file"
+                }
+            }
+        }
+    ]
 }

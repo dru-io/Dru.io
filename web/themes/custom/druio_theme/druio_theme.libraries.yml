@@ -3,3 +3,23 @@ global-styling:
   css:
     theme:
       assets/css/styles.css: {}
+
+created-relative-time:
+  version: VERSION
+  js:
+    assets/js/created-relative-time.js: {}
+  dependencies:
+    - druio_theme/luxon
+    - core/jquery.once
+    - core/drupal
+
+# Third party libraries.
+luxon:
+  version: 0.4.0
+  remote: https://moment.github.io/luxon/
+  license:
+    name: MIT
+    url: https://en.wikipedia.org/wiki/MIT_License
+    gpl-compatible: true
+  js:
+    /libraries/luxon/luxon.min.js: { minified: true }

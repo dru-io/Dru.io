@@ -29,6 +29,13 @@ function druio_entity_extra_field_info() {
       'weight' => '100',
       'visible' => FALSE,
     ];
+
+    $extra['node'][$bundle->id()]['display']['druio_theme_created_relative'] = [
+      'label' => 'Dru.io: Created relative',
+      'description' => 'Relative date of creation.',
+      'weight' => '100',
+      'visible' => FALSE,
+    ];
   }
 
   return $extra;
@@ -42,6 +49,13 @@ function druio_entity_view(array &$build, EntityInterface $entity, EntityViewDis
     $build['druio_author_min'] = [
       '#theme' => 'druio_author_min',
       '#user' => $entity->getOwner(),
+    ];
+  }
+
+  if ($display->getComponent('druio_theme_created_relative')) {
+    $build['druio_theme_created_relative'] = [
+      '#theme' => 'druio_theme_created_relative',
+      '#timestamp' => $entity->created->value,
     ];
   }
 }

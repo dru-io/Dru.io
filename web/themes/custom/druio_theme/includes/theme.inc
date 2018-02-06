@@ -23,6 +23,13 @@ function druio_theme_theme($existing, $type, $theme, $path) {
       'variables' => [],
       'path' => $templates_path,
     ],
+    'druio_theme_created_relative' => [
+      'variables' => [
+        'timestamp' => NULL,
+        'format' => 'd.m.Y',
+      ],
+      'path' => $templates_path,
+    ],
   ];
 }
 

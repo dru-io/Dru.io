@@ -1,0 +1,20 @@
+{#
+  /**
+   * @file
+   * Custom template for relative date.
+   *
+   * This time will be also processed with JS to dynamic change. By default
+   * html will have rendered fixed date by provided format.
+   *
+   * Available variables:
+   * - timestamp: UNIX timestamp for date.
+   * - format: Format for static date render.
+   */
+#}
+{{ attach_library('druio_theme/created-relative-time') }}
+{% set attributes = create_attribute() %}
+{% set attributes = attributes.addClass('druio-theme-created-relative') %}
+{% set attributes = attributes.setAttribute('data-timestamp', timestamp) %}
+<span{{ attributes }}>
+  {{ timestamp|date(format) }}
+</span>

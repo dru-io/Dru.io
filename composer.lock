@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "3624debde17c0f90717ffc9744954447",
+    "content-hash": "522e9e3631924b2a8ae68046b60ed56a",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -4169,6 +4169,17 @@
                 "markdown"
             ],
             "time": "2018-01-15T00:49:33+00:00"
+        },
+        {
+            "name": "moment/luxon",
+            "version": "master",
+            "dist": {
+                "type": "file",
+                "url": "http://moment.github.io/luxon/global/luxon.min.js",
+                "reference": null,
+                "shasum": null
+            },
+            "type": "drupal-library"
         },
         {
             "name": "nikic/php-parser",

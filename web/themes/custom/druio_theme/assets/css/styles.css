@@ -8273,6 +8273,9 @@ th {
             .node--question.view-mode--teaser .content .info .author-and-date .druio-author-min .link .avatar {
               height: 17px;
               width: 17px; }
+        .node--question.view-mode--teaser .content .info .author-and-date .created {
+          font-size: 11px;
+          color: #757575; }
   .node--question.view-mode--teaser:hover .rating,
   .node--question.view-mode--teaser:hover .answers,
   .node--question.view-mode--teaser:hover .content {
