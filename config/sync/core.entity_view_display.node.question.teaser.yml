@@ -38,6 +38,11 @@ content:
     region: content
     settings: {  }
     third_party_settings: {  }
+  druio_theme_created_relative:
+    weight: 7
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_drupal_version:
     type: list_default
     weight: 2
