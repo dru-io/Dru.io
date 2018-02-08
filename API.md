@@ -1,6 +1,6 @@
 # API for website
 
-+ [Notifications](#notifications)
++ [Notifications](#notifications) ([druio_notification.rest](/web/modules/custom/druio_notification/druio_notification.rest))
 
 # Notifications
 

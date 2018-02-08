@@ -1,0 +1,23 @@
+GET http://{{host}}/api/notifications/get-notifications?_format=json
+
+### /api/notifications/get-notifications
+GET http://{{host}}/api/notifications/get-notifications?_format=json
+Authorization: {{authorization}}
+Content-Type: application/json
+
+### /api/notifications/get-notifications
+GET http://{{host}}/api/notifications/get-notifications?_format=json&limit=15
+Authorization: {{authorization}}
+Content-Type: application/json
+
+### /api/notifications/get-unread-count
+GET http://{{host}}/api/notifications/get-unread-count?_format=json
+Authorization: {{authorization}}
+Content-Type: application/json
+
+### /api/notifications/get-unread-notifications
+GET http://{{host}}/api/notifications/get-unread-notifications?_format=json
+Authorization: {{authorization}}
+Content-Type: application/json
+
+###

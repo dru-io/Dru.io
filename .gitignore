@@ -28,3 +28,6 @@ docker-compose.yml
 
 # NPM, Yarn.
 node_modules/
+
+# REST client environment variables to protect data leaking.
+rest-client.env.json
