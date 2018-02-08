@@ -3,6 +3,7 @@ langcode: ru
 status: true
 dependencies:
   module:
+    - basic_auth
     - druio_notification
     - serialization
     - user
@@ -16,4 +17,5 @@ configuration:
     - json
     - xml
   authentication:
+    - basic_auth
     - cookie
