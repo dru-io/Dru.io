@@ -45,12 +45,14 @@ module:
   page_cache: 0
   path: 0
   quickedit: 0
+  rdf: 0
   rest: 0
   restui: 0
   serialization: 0
   shortcut: 0
   snippet_manager: 0
   system: 0
+  search: 0
   taxonomy: 0
   text: 0
   token: 0
