@@ -1,0 +1,45 @@
+.comment--comment.comment--node--question {
+  font-size: 90%;
+
+  > .footer {
+    display: flex;
+    margin-top: gap();
+
+    .links {
+      @include list-unstyled;
+      display: flex;
+
+      li {
+        &:not(:last-child) {
+          margin-right: gap();
+        }
+
+        a {
+          @extend %link-with-border-on-hover-dark;
+        }
+
+        $icons: (
+          'delete': 'delete',
+          'edit': 'pencil',
+          'reply': 'reply',
+        );
+
+        @each $class, $icon in $icons {
+          &.comment-#{$class} {
+            a {
+              @include mdi-icon($icon);
+            }
+          }
+        }
+      }
+    }
+
+    .date-and-author {
+      margin-left: auto;
+
+      .created {
+        color: gray('700');
+      }
+    }
+  }
+}

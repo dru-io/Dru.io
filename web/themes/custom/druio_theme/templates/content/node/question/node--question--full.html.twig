@@ -1,0 +1,40 @@
+{%
+  set classes = [
+    'node',
+    node.isPromoted() ? 'promoted',
+    node.isSticky() ? 'sticky',
+    not node.isPublished() ? 'unpublished',
+    'node--' ~ node.bundle|clean_class,
+    view_mode ? 'view-mode--' ~ view_mode|clean_class,
+  ]
+%}
+{#
+  // @todo complete it.
+#}
+<article{{ attributes.addClass(classes) }}>
+  {{ title_suffix }}
+  <div class="question">
+    <div class="left">
+      @todo рейтинг
+    </div>
+
+    <div class="content">
+      {{ content.body }}
+
+      <div class="bottom">
+        <div class="meta">
+          {{ content.druio_question_meta }}
+        </div>
+
+        <div class="date-and-author">
+          {{ content.druio_author_min }}
+          {{ content.druio_theme_created_relative }}
+        </div>
+      </div>
+
+      {{ content.field_comments }}
+    </div>
+  </div>
+
+  {{ content.field_question_answers }}
+</article>

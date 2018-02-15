@@ -1,0 +1,24 @@
+{% set classes = [
+  'comment',
+  'comment--' ~ comment.bundle|clean_class,
+  'comment--' ~ comment.getCommentedEntityTypeId|clean_class ~ '--' ~ comment.getCommentedEntity.bundle|clean_class,
+  'view-mode--' ~ elements['#view_mode'],
+  'is-' ~ status,
+] %}
+
+<article{{ attributes.addClass(classes).addClass('js-comment') }}>
+  <mark class="hidden"
+        data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
+
+  <div class="content">
+    {{ content|without('links') }}
+  </div>
+
+  <footer class="footer">
+    {{ content.links }}
+    <div class="date-and-author">
+      <a href="{{ url('user.page', { user: comment.getOwner.id }) }}" class="author">{{ comment.getOwner.label }}</a>
+      <a href="#comment-{{ comment.id }}" class="created">{{ comment.created.value|date('d.m.Y H:i') }}</a>
+    </div>
+  </footer>
+</article>
