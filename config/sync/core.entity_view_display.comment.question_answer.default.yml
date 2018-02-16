@@ -4,6 +4,7 @@ status: true
 dependencies:
   config:
     - comment.type.question_answer
+    - core.entity_view_display.comment.answer_comment.default
     - field.field.comment.question_answer.comment_body
     - field.field.comment.question_answer.field_question_answer_comments
   module:
@@ -21,8 +22,18 @@ content:
     settings: {  }
     third_party_settings: {  }
     region: content
+  druio_author_min:
+    weight: 2
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  druio_theme_created_relative:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_question_answer_comments:
-    weight: 101
+    weight: 4
     label: above
     settings:
       view_mode: default
@@ -31,7 +42,9 @@ content:
     type: comment_default
     region: content
   links:
-    weight: 100
+    weight: 1
     region: content
+    settings: {  }
+    third_party_settings: {  }
 hidden:
   langcode: true
