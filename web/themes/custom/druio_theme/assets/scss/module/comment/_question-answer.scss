@@ -1,0 +1,58 @@
+.comment--question-answer.comment--node--question {
+  .answer {
+    display: flex;
+    margin-bottom: gap(4);
+
+    > .left {
+      flex: 0 0 50px;
+      margin-right: $grid-gap;
+    }
+
+    > .content {
+      flex: 0 1 calc(100% - 50px - #{$grid-gap});
+
+      .bottom {
+        margin-top: gap(2);
+        display: flex;
+        margin-bottom: gap(2);
+
+        .links {
+          flex: 1 1 auto;
+          margin-right: $grid-gap;
+        }
+
+        .date-and-author {
+          flex: 0 1 200px;
+
+          .druio-author-min {
+            margin-bottom: gap();
+          }
+
+          .druio-theme-created-relative {
+            color: gray('700');
+          }
+        }
+      }
+
+      .comments {
+        border-top: 1px solid gray('200');
+        padding-top: gap(2);
+
+        .comment {
+          margin-bottom: gap();
+          padding-bottom: gap();
+          border-bottom: 1px solid gray('200');
+
+          &:last-child {
+            border: none;
+            margin: 0;
+          }
+        }
+
+        .add-comment {
+          @extend %link-with-border-on-hover-dark;
+        }
+      }
+    }
+  }
+}

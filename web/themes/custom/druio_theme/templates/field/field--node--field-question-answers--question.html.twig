@@ -1,0 +1,12 @@
+{% set node = element['#object'] %}
+{% set count = node.field_question_answers.comment_count %}
+<section{{ attributes.addClass('answers') }}>
+  <h2 class="title">
+    {% trans %}
+      {{ count }} answer
+    {% plural count %}
+      {{ count }} answers
+    {% endtrans %}
+  </h2>
+  {{ comments }}
+</section>

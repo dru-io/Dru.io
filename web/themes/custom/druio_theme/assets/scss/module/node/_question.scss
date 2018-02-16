@@ -70,6 +70,7 @@
       margin-top: 0;
       font-size: $font-size-base;
       margin-bottom: gap(2);
+      word-break: break-all;
 
       a {
         @extend %link-with-border-on-hover-dark;
@@ -132,6 +133,7 @@
 .node--question.view-mode--full {
   .question {
     display: flex;
+    margin-bottom: gap(4);
 
     > .left {
       flex: 0 0 50px;
@@ -183,6 +185,15 @@
           @extend %link-with-border-on-hover-dark;
         }
       }
+    }
+  }
+
+  .answers {
+    > .title {
+      margin-top: 0;
+      border-bottom: 1px solid gray('200');
+      margin-bottom: gap(2);
+      padding-bottom: gap(2);
     }
   }
 }

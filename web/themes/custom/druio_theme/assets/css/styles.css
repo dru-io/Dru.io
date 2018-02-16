@@ -8254,7 +8254,8 @@ th {
     .node--question.view-mode--teaser .content .title {
       margin-top: 0;
       font-size: 14px;
-      margin-bottom: 16px; }
+      margin-bottom: 16px;
+      word-break: break-all; }
     .node--question.view-mode--teaser .content .info {
       display: flex;
       flex-flow: wrap; }
@@ -8288,7 +8289,8 @@ th {
     z-index: 1; }
 
 .node--question.view-mode--full .question {
-  display: flex; }
+  display: flex;
+  margin-bottom: 32px; }
   .node--question.view-mode--full .question > .left {
     flex: 0 0 50px;
     margin-right: 30px; }
@@ -8317,6 +8319,12 @@ th {
         .node--question.view-mode--full .question > .content .comments .comment:last-child {
           border: none;
           margin: 0; }
+
+.node--question.view-mode--full .answers > .title {
+  margin-top: 0;
+  border-bottom: 1px solid #EEEEEE;
+  margin-bottom: 16px;
+  padding-bottom: 16px; }
 
 #block-druio-theme-page-title {
   margin-bottom: 32px; }
@@ -8445,10 +8453,10 @@ th {
  * @file
  * Styles which you want to use more than few times and they always the same.
  */
-.node--question.view-mode--teaser .content .title a, .node--question.view-mode--full .question > .content .comments .add-comment, .comment--comment.comment--node--question > .footer .links li a {
+.node--question.view-mode--teaser .content .title a, .node--question.view-mode--full .question > .content .comments .add-comment, .comment--comment.comment--node--question > .footer .links li a, .comment--question-answer.comment--node--question .answer > .content .comments .add-comment {
   color: #333;
   border-bottom: 1px solid transparent; }
-  .node--question.view-mode--teaser .content .title a:hover, .node--question.view-mode--full .question > .content .comments .add-comment:hover, .comment--comment.comment--node--question > .footer .links li a:hover {
+  .node--question.view-mode--teaser .content .title a:hover, .node--question.view-mode--full .question > .content .comments .add-comment:hover, .comment--comment.comment--node--question > .footer .links li a:hover, .comment--question-answer.comment--node--question .answer > .content .comments .add-comment:hover {
     border-bottom: 1px solid rgba(51, 51, 51, 0.2); }
 
 .snippet-footer-logo .logo {
@@ -8501,3 +8509,35 @@ th {
       margin-left: auto; }
       .comment--comment.comment--node--question > .footer .date-and-author .created {
         color: #616161; }
+
+.comment--question-answer.comment--node--question .answer {
+  display: flex;
+  margin-bottom: 32px; }
+  .comment--question-answer.comment--node--question .answer > .left {
+    flex: 0 0 50px;
+    margin-right: 30px; }
+  .comment--question-answer.comment--node--question .answer > .content {
+    flex: 0 1 calc(100% - 50px - 30px); }
+    .comment--question-answer.comment--node--question .answer > .content .bottom {
+      margin-top: 16px;
+      display: flex;
+      margin-bottom: 16px; }
+      .comment--question-answer.comment--node--question .answer > .content .bottom .links {
+        flex: 1 1 auto;
+        margin-right: 30px; }
+      .comment--question-answer.comment--node--question .answer > .content .bottom .date-and-author {
+        flex: 0 1 200px; }
+        .comment--question-answer.comment--node--question .answer > .content .bottom .date-and-author .druio-author-min {
+          margin-bottom: 8px; }
+        .comment--question-answer.comment--node--question .answer > .content .bottom .date-and-author .druio-theme-created-relative {
+          color: #616161; }
+    .comment--question-answer.comment--node--question .answer > .content .comments {
+      border-top: 1px solid #EEEEEE;
+      padding-top: 16px; }
+      .comment--question-answer.comment--node--question .answer > .content .comments .comment {
+        margin-bottom: 8px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid #EEEEEE; }
+        .comment--question-answer.comment--node--question .answer > .content .comments .comment:last-child {
+          border: none;
+          margin: 0; }

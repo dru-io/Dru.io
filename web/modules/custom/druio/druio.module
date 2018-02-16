@@ -5,6 +5,7 @@
  * Main file for hooks and custom functions.
  */
 
+use Drupal\comment\Entity\CommentType;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
 use Drupal\node\Entity\NodeType;
@@ -31,6 +32,22 @@ function druio_entity_extra_field_info() {
     ];
 
     $extra['node'][$bundle->id()]['display']['druio_theme_created_relative'] = [
+      'label' => 'Dru.io: Created relative',
+      'description' => 'Relative date of creation.',
+      'weight' => '100',
+      'visible' => FALSE,
+    ];
+  }
+
+  foreach (CommentType::loadMultiple() as $bundle) {
+    $extra['comment'][$bundle->id()]['display']['druio_author_min'] = [
+      'label' => 'Dru.io: Author minimal',
+      'description' => 'Link to author with small avatar.',
+      'weight' => '100',
+      'visible' => FALSE,
+    ];
+
+    $extra['comment'][$bundle->id()]['display']['druio_theme_created_relative'] = [
       'label' => 'Dru.io: Created relative',
       'description' => 'Relative date of creation.',
       'weight' => '100',

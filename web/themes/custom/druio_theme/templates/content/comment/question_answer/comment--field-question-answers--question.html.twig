@@ -1,0 +1,34 @@
+{% set classes = [
+  'comment',
+  'comment--' ~ comment.bundle|clean_class,
+  'comment--' ~ comment.getCommentedEntityTypeId|clean_class ~ '--' ~ comment.getCommentedEntity.bundle|clean_class,
+  'view-mode--' ~ elements['#view_mode'],
+  'is-' ~ status,
+] %}
+
+<article{{ attributes.addClass(classes).addClass('js-comment') }}>
+  <mark class="hidden"
+        data-comment-timestamp="{{ new_indicator_timestamp }}"></mark>
+
+  <div class="answer">
+    <div class="left">
+      @todo рейтинг
+    </div>
+
+    <div class="content">
+      {{ content.comment_body }}
+
+      <div class="bottom">
+        <div class="links">
+          {{ content.links }}
+        </div>
+        <div class="date-and-author">
+          {{ content.druio_author_min }}
+          {{ content.druio_theme_created_relative }}
+        </div>
+      </div>
+
+      {{ content.field_comments }}
+    </div>
+  </div>
+</article>
