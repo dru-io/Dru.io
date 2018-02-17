@@ -15,7 +15,7 @@
         }
 
         a {
-          @extend %link-with-border-on-hover-dark;
+          @extend %link-dimmed-dark;
         }
 
         $icons: (

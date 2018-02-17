@@ -1,7 +1,6 @@
 .comment--question-answer.comment--node--question {
   .answer {
     display: flex;
-    margin-bottom: gap(4);
 
     > .left {
       flex: 0 0 50px;
@@ -14,11 +13,36 @@
       .bottom {
         margin-top: gap(2);
         display: flex;
-        margin-bottom: gap(2);
 
         .links {
           flex: 1 1 auto;
+          @include list-unstyled;
+          display: flex;
           margin-right: $grid-gap;
+
+          li {
+            &:not(:last-child) {
+              margin-right: gap();
+            }
+
+            a {
+              @extend %link-dimmed-dark;
+            }
+
+            $icons: (
+              'delete': 'delete',
+              'edit': 'pencil',
+              'reply': 'reply',
+            );
+
+            @each $class, $icon in $icons {
+              &.comment-#{$class} {
+                a {
+                  @include mdi-icon($icon);
+                }
+              }
+            }
+          }
         }
 
         .date-and-author {
@@ -28,8 +52,9 @@
             margin-bottom: gap();
           }
 
-          .druio-theme-created-relative {
+          .created {
             color: gray('700');
+            font-size: 80%;
           }
         }
       }

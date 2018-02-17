@@ -106,8 +106,8 @@
         }
 
         .created {
-          font-size: 11px;
-          color: gray('600');
+          color: gray('700');
+          font-size: 80%;
         }
       }
     }
@@ -160,8 +160,9 @@
             margin-bottom: gap();
           }
 
-          .druio-theme-created-relative {
+          .created {
             color: gray('700');
+            font-size: 80%;
           }
         }
       }
@@ -194,6 +195,16 @@
       border-bottom: 1px solid gray('200');
       margin-bottom: gap(2);
       padding-bottom: gap(2);
+    }
+
+    > .comment {
+      border-bottom: 1px solid gray('200');
+      padding-bottom: gap(2);
+      margin-bottom: gap(2);
+
+      &:last-child {
+        border-bottom: 0;
+      }
     }
   }
 }

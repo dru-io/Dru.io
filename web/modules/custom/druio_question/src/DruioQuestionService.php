@@ -38,4 +38,33 @@ class DruioQuestionService {
     return $query->count()->execute();
   }
 
+  /**
+   * Return last answer creation time, otherwise question creation time.
+   *
+   * @param int $qid
+   *   Question NID.
+   *
+   * @return int
+   *   UNIX timestamp with time of last answer for needed question, if question
+   *   has no answers, the question time will return.
+   */
+  public function getQuestionLastAnswerCreatedTime($qid) {
+    $comment_storage = $this->entityTypeManager->getStorage('comment');
+    $query = $comment_storage
+      ->getQuery()
+      ->condition('comment_type', 'question_answer')
+      ->condition('entity_id', $qid)
+      ->range(0, 1)
+      ->sort('created', 'DESC');
+    $result = $query->execute();
+    if (!empty($result)) {
+      $answer = $comment_storage->load(reset($result));
+      return $answer->getCreatedTime();
+    }
+    else {
+      $question = $this->entityTypeManager->getStorage('node')->load($qid);
+      return $question->getCreatedTime();
+    }
+  }
+
 }
