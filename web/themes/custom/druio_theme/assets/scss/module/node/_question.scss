@@ -137,20 +137,52 @@
 
     > .left {
       flex: 0 0 50px;
-      margin-right: $grid-gap;
+      margin-right: gap(2);
     }
 
     > .content {
-      flex: 0 1 calc(100% - 50px - #{$grid-gap});
+      flex: 0 1 calc(100% - 50px - #{gap(2)});
 
       .bottom {
         margin-top: gap(2);
         display: flex;
         margin-bottom: gap(2);
 
-        .meta {
+        .meta-and-links {
           flex: 1 1 auto;
-          margin-right: $grid-gap;
+          margin-right: gap(2);
+
+          .druio-question-meta-field {
+            margin-bottom: gap();
+          }
+
+          .links {
+            @include list-unstyled;
+            display: flex;
+
+            li {
+              &:not(:last-child) {
+                margin-right: gap();
+              }
+
+              a {
+                @extend %link-dimmed-dark;
+              }
+
+              $icons: (
+                'comment-add': 'comment-processing-outline',
+                'answer-add': 'reply',
+              );
+
+              @each $class, $icon in $icons {
+                &.#{$class} {
+                  a {
+                    @include mdi-icon($icon);
+                  }
+                }
+              }
+            }
+          }
         }
 
         .date-and-author {

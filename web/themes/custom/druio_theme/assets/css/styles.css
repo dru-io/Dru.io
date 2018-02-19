@@ -8293,16 +8293,41 @@ th {
   margin-bottom: 32px; }
   .node--question.view-mode--full .question > .left {
     flex: 0 0 50px;
-    margin-right: 30px; }
+    margin-right: 16px; }
   .node--question.view-mode--full .question > .content {
-    flex: 0 1 calc(100% - 50px - 30px); }
+    flex: 0 1 calc(100% - 50px - 16px); }
     .node--question.view-mode--full .question > .content .bottom {
       margin-top: 16px;
       display: flex;
       margin-bottom: 16px; }
-      .node--question.view-mode--full .question > .content .bottom .meta {
+      .node--question.view-mode--full .question > .content .bottom .meta-and-links {
         flex: 1 1 auto;
-        margin-right: 30px; }
+        margin-right: 16px; }
+        .node--question.view-mode--full .question > .content .bottom .meta-and-links .druio-question-meta-field {
+          margin-bottom: 8px; }
+        .node--question.view-mode--full .question > .content .bottom .meta-and-links .links {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+          display: flex; }
+          .node--question.view-mode--full .question > .content .bottom .meta-and-links .links li:not(:last-child) {
+            margin-right: 8px; }
+          .node--question.view-mode--full .question > .content .bottom .meta-and-links .links li.comment-add a:before {
+            content: "\F185";
+            font-family: "Material Design Icons";
+            font-weight: normal;
+            font-style: normal;
+            display: inline-block;
+            text-decoration: inherit;
+            margin-right: 0.4em; }
+          .node--question.view-mode--full .question > .content .bottom .meta-and-links .links li.answer-add a:before {
+            content: "\F45A";
+            font-family: "Material Design Icons";
+            font-weight: normal;
+            font-style: normal;
+            display: inline-block;
+            text-decoration: inherit;
+            margin-right: 0.4em; }
       .node--question.view-mode--full .question > .content .bottom .date-and-author {
         flex: 0 1 200px; }
         .node--question.view-mode--full .question > .content .bottom .date-and-author .druio-author-min {
@@ -8457,6 +8482,49 @@ th {
     .druio-author-min .link .username:hover {
       border-bottom-color: #333; }
 
+.druio-rating .vote-up {
+  font-size: 18px;
+  text-align: center; }
+  .druio-rating .vote-up:before {
+    content: "\F143";
+    font-family: "Material Design Icons";
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: inherit;
+    margin-right: 0; }
+
+.druio-rating .rating {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold; }
+
+.druio-rating .vote-up:before {
+  content: "\F143";
+  font-family: "Material Design Icons";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  margin-right: 0; }
+
+.druio-rating .vote-down:before {
+  content: "\F140";
+  font-family: "Material Design Icons";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  margin-right: 0; }
+
+.druio-rating .vote-up,
+.druio-rating .vote-down {
+  font-size: 50px;
+  line-height: 18px;
+  text-align: center;
+  color: #9E9E9E;
+  cursor: pointer; }
+
 /**
  * @file
  * Styles which you want to use more than few times and they always the same.
@@ -8467,10 +8535,10 @@ th {
   .node--question.view-mode--teaser .content .title a:hover, .node--question.view-mode--full .question > .content .comments .add-comment:hover, .comment--question-answer.comment--node--question .answer > .content .comments .add-comment:hover {
     border-bottom: 1px solid rgba(51, 51, 51, 0.2); }
 
-.comment--comment.comment--node--question > .footer .links li a, .comment--question-answer.comment--node--question .answer > .content .bottom .links li a {
+.node--question.view-mode--full .question > .content .bottom .meta-and-links .links li a, .comment--comment.comment--node--question > .footer .links li a, .comment--question-answer.comment--node--question .answer > .content .bottom .links li a {
   color: #9E9E9E;
   border-bottom: 1px solid transparent; }
-  .comment--comment.comment--node--question > .footer .links li a:hover, .comment--question-answer.comment--node--question .answer > .content .bottom .links li a:hover {
+  .node--question.view-mode--full .question > .content .bottom .meta-and-links .links li a:hover, .comment--comment.comment--node--question > .footer .links li a:hover, .comment--question-answer.comment--node--question .answer > .content .bottom .links li a:hover {
     color: #333; }
 
 .snippet-footer-logo .logo {
@@ -8528,9 +8596,9 @@ th {
   display: flex; }
   .comment--question-answer.comment--node--question .answer > .left {
     flex: 0 0 50px;
-    margin-right: 30px; }
+    margin-right: 16px; }
   .comment--question-answer.comment--node--question .answer > .content {
-    flex: 0 1 calc(100% - 50px - 30px); }
+    flex: 0 1 calc(100% - 50px - 16px); }
     .comment--question-answer.comment--node--question .answer > .content .bottom {
       margin-top: 16px;
       display: flex; }
@@ -8540,7 +8608,7 @@ th {
         padding: 0;
         list-style: none;
         display: flex;
-        margin-right: 30px; }
+        margin-right: 16px; }
         .comment--question-answer.comment--node--question .answer > .content .bottom .links li:not(:last-child) {
           margin-right: 8px; }
         .comment--question-answer.comment--node--question .answer > .content .bottom .links li.comment-delete a:before {
@@ -8560,7 +8628,7 @@ th {
           text-decoration: inherit;
           margin-right: 0.4em; }
         .comment--question-answer.comment--node--question .answer > .content .bottom .links li.comment-reply a:before {
-          content: "\F45A";
+          content: "\F185";
           font-family: "Material Design Icons";
           font-weight: normal;
           font-style: normal;

@@ -5,8 +5,11 @@
  * Contains druio_question.module.
  */
 
+use Drupal\comment\CommentInterface;
 use Drupal\Core\Entity\Display\EntityViewDisplayInterface;
 use Drupal\Core\Entity\EntityInterface;
+use Drupal\Core\Url;
+use Drupal\node\NodeInterface;
 
 /**
  * Implements hook_entity_extra_field_info().
@@ -49,4 +52,40 @@ function druio_question_theme($existing, $type, $theme, $path) {
       'file' => $file,
     ],
   ];
+}
+
+/**
+ * Implements hook_node_links_alter().
+ */
+function druio_question_node_links_alter(array &$links, NodeInterface $entity, array &$context) {
+  $current_user = \Drupal::currentUser();
+  if ($entity->bundle() == 'question' && $context['view_mode'] == 'full') {
+    // Remove default links. They are works incorrect with two comment fields.
+    unset($links['comment__field_question_answers']);
+    unset($links['comment__field_comments']);
+
+    if ($current_user->isAuthenticated()) {
+      $links['druio_question'] = [
+        '#theme' => 'links',
+        '#links' => [
+          'answer-add' => [
+            'title' => 'Добавить ответ',
+            'url' => Url::fromRoute('comment.reply', [
+              'entity_type' => $entity->getEntityTypeId(),
+              'entity' => $entity->id(),
+              'field_name' => 'field_question_answers',
+            ]),
+          ],
+          'comment-add' => [
+            'title' => 'Добавить комментарий',
+            'url' => Url::fromRoute('comment.reply', [
+              'entity_type' => $entity->getEntityTypeId(),
+              'entity' => $entity->id(),
+              'field_name' => 'field_comments',
+            ]),
+          ],
+        ],
+      ];
+    }
+  }
 }

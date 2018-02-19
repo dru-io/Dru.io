@@ -1,0 +1,17 @@
+<?php
+
+/**
+ * @file
+ * Contains custom functions and hooks.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function druio_rating_theme($existing, $type, $theme, $path) {
+  return [
+    'druio_rating' => [
+      'variables' => [],
+    ],
+  ];
+}

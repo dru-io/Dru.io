@@ -4,11 +4,11 @@
 
     > .left {
       flex: 0 0 50px;
-      margin-right: $grid-gap;
+      margin-right: gap(2);
     }
 
     > .content {
-      flex: 0 1 calc(100% - 50px - #{$grid-gap});
+      flex: 0 1 calc(100% - 50px - #{gap(2)});
 
       .bottom {
         margin-top: gap(2);
@@ -18,7 +18,7 @@
           flex: 1 1 auto;
           @include list-unstyled;
           display: flex;
-          margin-right: $grid-gap;
+          margin-right: gap(2);
 
           li {
             &:not(:last-child) {
@@ -32,7 +32,7 @@
             $icons: (
               'delete': 'delete',
               'edit': 'pencil',
-              'reply': 'reply',
+              'reply': 'comment-processing-outline',
             );
 
             @each $class, $icon in $icons {

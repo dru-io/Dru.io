@@ -1,0 +1,30 @@
+.druio-rating {
+  .vote-up {
+    @include mdi-icon('chevron-up', before, 0);
+    font-size: 18px;
+    text-align: center;
+  }
+
+  .rating {
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .vote-up {
+    @include mdi-icon('chevron-up', before, 0);
+  }
+
+  .vote-down {
+    @include mdi-icon('chevron-down', before, 0);
+  }
+
+  .vote-up,
+  .vote-down {
+    font-size: 50px;
+    line-height: 18px;
+    text-align: center;
+    color: gray('500');
+    cursor: pointer;
+  }
+}
