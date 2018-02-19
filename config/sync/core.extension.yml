@@ -20,6 +20,7 @@ module:
   druio_migrate: 0
   druio_notification: 0
   druio_question: 0
+  druio_rating: 0
   dynamic_page_cache: 0
   editor: 0
   entity_reference_revisions: 0
@@ -48,11 +49,11 @@ module:
   rdf: 0
   rest: 0
   restui: 0
+  search: 0
   serialization: 0
   shortcut: 0
   snippet_manager: 0
   system: 0
-  search: 0
   taxonomy: 0
   text: 0
   token: 0
