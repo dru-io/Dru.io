@@ -19,6 +19,7 @@
           @include list-unstyled;
           display: flex;
           margin-right: gap(2);
+          font-size: 90%;
 
           li {
             &:not(:last-child) {
@@ -62,6 +63,7 @@
       .comments {
         border-top: 1px solid gray('200');
         padding-top: gap(2);
+        margin-top: gap(2);
 
         .comment {
           margin-bottom: gap();

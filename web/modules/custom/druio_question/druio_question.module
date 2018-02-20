@@ -89,3 +89,18 @@ function druio_question_node_links_alter(array &$links, NodeInterface $entity, a
     }
   }
 }
+
+
+/**
+ * Implements hook_comment_links_alter().
+ */
+function druio_question_comment_links_alter(array &$links, CommentInterface $entity, array &$context) {
+  if ($entity->bundle() == 'question_answer' && $context['view_mode'] == 'default') {
+    $links['comment']['#links']['comment-reply']['title'] = 'Добавить комментарий';
+    $links['comment']['#links']['comment-reply']['url'] = Url::fromRoute('comment.reply', [
+      'entity_type' => $entity->getEntityTypeId(),
+      'entity' => $entity->id(),
+      'field_name' => 'field_question_answer_comments',
+    ]);
+  }
+}

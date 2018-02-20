@@ -8298,8 +8298,7 @@ th {
     flex: 0 1 calc(100% - 50px - 16px); }
     .node--question.view-mode--full .question > .content .bottom {
       margin-top: 16px;
-      display: flex;
-      margin-bottom: 16px; }
+      display: flex; }
       .node--question.view-mode--full .question > .content .bottom .meta-and-links {
         flex: 1 1 auto;
         margin-right: 16px; }
@@ -8309,7 +8308,8 @@ th {
           margin: 0;
           padding: 0;
           list-style: none;
-          display: flex; }
+          display: flex;
+          font-size: 90%; }
           .node--question.view-mode--full .question > .content .bottom .meta-and-links .links li:not(:last-child) {
             margin-right: 8px; }
           .node--question.view-mode--full .question > .content .bottom .meta-and-links .links li.comment-add a:before {
@@ -8337,7 +8337,8 @@ th {
           font-size: 80%; }
     .node--question.view-mode--full .question > .content .comments {
       border-top: 1px solid #EEEEEE;
-      padding-top: 16px; }
+      padding-top: 8px;
+      margin-top: 16px; }
       .node--question.view-mode--full .question > .content .comments .comment {
         margin-bottom: 8px;
         padding-bottom: 8px;
@@ -8497,7 +8498,8 @@ th {
 .druio-rating .rating {
   text-align: center;
   font-size: 28px;
-  font-weight: bold; }
+  font-weight: bold;
+  color: #757575; }
 
 .druio-rating .vote-up:before {
   content: "\F143";
@@ -8535,10 +8537,10 @@ th {
   .node--question.view-mode--teaser .content .title a:hover, .node--question.view-mode--full .question > .content .comments .add-comment:hover, .comment--question-answer.comment--node--question .answer > .content .comments .add-comment:hover {
     border-bottom: 1px solid rgba(51, 51, 51, 0.2); }
 
-.node--question.view-mode--full .question > .content .bottom .meta-and-links .links li a, .comment--comment.comment--node--question > .footer .links li a, .comment--question-answer.comment--node--question .answer > .content .bottom .links li a {
-  color: #9E9E9E;
+.node--question.view-mode--full .question > .content .bottom .meta-and-links .links li a, .comment--comment.comment--node--question > .footer .links li a, .comment--question-answer.comment--node--question .answer > .content .bottom .links li a, .comment--answer-comment.comment--comment--question-answer > .footer .links li a {
+  color: #BDBDBD;
   border-bottom: 1px solid transparent; }
-  .node--question.view-mode--full .question > .content .bottom .meta-and-links .links li a:hover, .comment--comment.comment--node--question > .footer .links li a:hover, .comment--question-answer.comment--node--question .answer > .content .bottom .links li a:hover {
+  .node--question.view-mode--full .question > .content .bottom .meta-and-links .links li a:hover, .comment--comment.comment--node--question > .footer .links li a:hover, .comment--question-answer.comment--node--question .answer > .content .bottom .links li a:hover, .comment--answer-comment.comment--comment--question-answer > .footer .links li a:hover {
     color: #333; }
 
 .snippet-footer-logo .logo {
@@ -8608,7 +8610,8 @@ th {
         padding: 0;
         list-style: none;
         display: flex;
-        margin-right: 16px; }
+        margin-right: 16px;
+        font-size: 90%; }
         .comment--question-answer.comment--node--question .answer > .content .bottom .links li:not(:last-child) {
           margin-right: 8px; }
         .comment--question-answer.comment--node--question .answer > .content .bottom .links li.comment-delete a:before {
@@ -8644,7 +8647,8 @@ th {
           font-size: 80%; }
     .comment--question-answer.comment--node--question .answer > .content .comments {
       border-top: 1px solid #EEEEEE;
-      padding-top: 16px; }
+      padding-top: 16px;
+      margin-top: 16px; }
       .comment--question-answer.comment--node--question .answer > .content .comments .comment {
         margin-bottom: 8px;
         padding-bottom: 8px;
@@ -8652,3 +8656,44 @@ th {
         .comment--question-answer.comment--node--question .answer > .content .comments .comment:last-child {
           border: none;
           margin: 0; }
+
+.comment--answer-comment.comment--comment--question-answer {
+  font-size: 90%; }
+  .comment--answer-comment.comment--comment--question-answer > .footer {
+    display: flex;
+    margin-top: 8px; }
+    .comment--answer-comment.comment--comment--question-answer > .footer .links {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex; }
+      .comment--answer-comment.comment--comment--question-answer > .footer .links li:not(:last-child) {
+        margin-right: 8px; }
+      .comment--answer-comment.comment--comment--question-answer > .footer .links li.comment-delete a:before {
+        content: "\F1C0";
+        font-family: "Material Design Icons";
+        font-weight: normal;
+        font-style: normal;
+        display: inline-block;
+        text-decoration: inherit;
+        margin-right: 0.4em; }
+      .comment--answer-comment.comment--comment--question-answer > .footer .links li.comment-edit a:before {
+        content: "\F3EB";
+        font-family: "Material Design Icons";
+        font-weight: normal;
+        font-style: normal;
+        display: inline-block;
+        text-decoration: inherit;
+        margin-right: 0.4em; }
+      .comment--answer-comment.comment--comment--question-answer > .footer .links li.comment-reply a:before {
+        content: "\F45A";
+        font-family: "Material Design Icons";
+        font-weight: normal;
+        font-style: normal;
+        display: inline-block;
+        text-decoration: inherit;
+        margin-right: 0.4em; }
+    .comment--answer-comment.comment--comment--question-answer > .footer .date-and-author {
+      margin-left: auto; }
+      .comment--answer-comment.comment--comment--question-answer > .footer .date-and-author .created {
+        color: #616161; }
