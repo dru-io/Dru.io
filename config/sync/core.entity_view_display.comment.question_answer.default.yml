@@ -34,7 +34,7 @@ content:
     third_party_settings: {  }
   field_question_answer_comments:
     weight: 4
-    label: above
+    label: hidden
     settings:
       view_mode: default
       pager_id: 0
