@@ -8340,8 +8340,8 @@ th {
       padding-top: 8px;
       margin-top: 16px; }
       .node--question.view-mode--full .question > .content .comments .comment {
-        margin-bottom: 8px;
-        padding-bottom: 8px;
+        margin-bottom: 16px;
+        padding-bottom: 16px;
         border-bottom: 1px solid #EEEEEE; }
         .node--question.view-mode--full .question > .content .comments .comment:last-child {
           border: none;
@@ -8359,6 +8359,55 @@ th {
   margin-bottom: 16px; }
   .node--question.view-mode--full .answers > .comment:last-child {
     border-bottom: 0; }
+
+.node--post.view-mode--teaser > .title {
+  margin-top: 0;
+  margin-bottom: 16px; }
+
+.node--post.view-mode--teaser > .footer {
+  margin-top: 16px;
+  background: #F5F5F5;
+  border-radius: 4px;
+  display: flex;
+  overflow: hidden; }
+  .node--post.view-mode--teaser > .footer .comments {
+    margin-right: 16px;
+    padding: 8px;
+    display: block; }
+    .node--post.view-mode--teaser > .footer .comments:before {
+      content: "\F368";
+      font-family: "Material Design Icons";
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: 8px; }
+    .node--post.view-mode--teaser > .footer .comments::before {
+      color: #757575; }
+  .node--post.view-mode--teaser > .footer .druio-theme-created-relative {
+    margin-right: 16px;
+    padding: 8px;
+    display: block; }
+    .node--post.view-mode--teaser > .footer .druio-theme-created-relative:before {
+      content: "\F150";
+      font-family: "Material Design Icons";
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: 8px; }
+    .node--post.view-mode--teaser > .footer .druio-theme-created-relative::before {
+      color: #757575; }
+  .node--post.view-mode--teaser > .footer .druio-author-min {
+    padding: 8px; }
+  .node--post.view-mode--teaser > .footer .read-more {
+    margin-left: auto;
+    display: block;
+    background: #EEEEEE;
+    padding: 8px;
+    color: #333; }
+    .node--post.view-mode--teaser > .footer .read-more:hover {
+      background: #FFB926; }
 
 #block-druio-theme-page-title {
   margin-bottom: 32px; }
@@ -8388,6 +8437,9 @@ th {
 
 .view--questions.display-id--page > .content > .row {
   margin-top: 32px; }
+
+.view--posts.display-id--page .content > .row {
+  margin-top: 24px; }
 
 .druio-theme-top-line-user {
   font-size: 13px; }
@@ -8650,8 +8702,8 @@ th {
       padding-top: 16px;
       margin-top: 16px; }
       .comment--question-answer.comment--node--question .answer > .content .comments .comment {
-        margin-bottom: 8px;
-        padding-bottom: 8px;
+        margin-bottom: 16px;
+        padding-bottom: 16px;
         border-bottom: 1px solid #EEEEEE; }
         .comment--question-answer.comment--node--question .answer > .content .comments .comment:last-child {
           border: none;

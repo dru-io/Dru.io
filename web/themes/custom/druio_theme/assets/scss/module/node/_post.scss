@@ -1,0 +1,52 @@
+.node--post.view-mode--teaser {
+  > .title {
+    margin-top: 0;
+    margin-bottom: gap(2);
+  }
+
+  > .footer {
+    margin-top: gap(2);
+    background: gray('100');
+    border-radius: 4px;
+    display: flex;
+    overflow: hidden;
+
+    .comments {
+      @include mdi-icon('message-reply-text', before, gap());
+      margin-right: gap(2);
+      padding: gap();
+      display: block;
+
+      &::before {
+        color: gray('600');
+      }
+    }
+
+    .druio-theme-created-relative {
+      @include mdi-icon('clock', before, gap());
+      margin-right: gap(2);
+      padding: gap();
+      display: block;
+
+      &::before {
+        color: gray('600');
+      }
+    }
+
+    .druio-author-min {
+      padding: gap();
+    }
+
+    .read-more {
+      margin-left: auto;
+      display: block;
+      background: gray('200');
+      padding: gap();
+      color: $text-color;
+
+      &:hover {
+        background: theme-color('primary');
+      }
+    }
+  }
+}

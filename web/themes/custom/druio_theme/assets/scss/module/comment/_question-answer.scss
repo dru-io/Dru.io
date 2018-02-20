@@ -66,8 +66,8 @@
         margin-top: gap(2);
 
         .comment {
-          margin-bottom: gap();
-          padding-bottom: gap();
+          margin-bottom: gap(2);
+          padding-bottom: gap(2);
           border-bottom: 1px solid gray('200');
 
           &:last-child {
