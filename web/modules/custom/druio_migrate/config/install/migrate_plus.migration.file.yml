@@ -40,4 +40,5 @@ process:
     plugin: migration_lookup
     migration: druio_users
     source: uid
-
+migration_tags:
+  - Content

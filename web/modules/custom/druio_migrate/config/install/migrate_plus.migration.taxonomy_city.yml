@@ -39,4 +39,5 @@ process:
       migration: druio_taxonomy_city
       source: parent
   weight: weight
-
+migration_tags:
+  - Content

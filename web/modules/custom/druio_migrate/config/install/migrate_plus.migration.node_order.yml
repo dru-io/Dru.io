@@ -64,3 +64,5 @@ process:
   'field_order_budget/value': order_budget
   'field_order_contacts/value': order_contacts_value
   'field_order_contacts/format': order_contacts_format
+migration_tags:
+  - Content

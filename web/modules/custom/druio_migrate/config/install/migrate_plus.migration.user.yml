@@ -22,10 +22,9 @@ process:
   changed: '@created'
   access: access
   login: login
-
-migration_dependencies: {}
-
 dependencies:
   enforced:
     module:
       - druio_migrate
+migration_tags:
+  - Content

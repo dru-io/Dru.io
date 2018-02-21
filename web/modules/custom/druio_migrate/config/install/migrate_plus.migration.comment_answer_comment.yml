@@ -37,3 +37,5 @@ dependencies:
   enforced:
     module:
       - druio_migrate
+migration_tags:
+  - Content

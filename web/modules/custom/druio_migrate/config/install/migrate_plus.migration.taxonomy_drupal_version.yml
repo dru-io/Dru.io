@@ -15,4 +15,5 @@ process:
     default_value: drupal_version
   name: name
   weight: weight
-
+migration_tags:
+  - Content

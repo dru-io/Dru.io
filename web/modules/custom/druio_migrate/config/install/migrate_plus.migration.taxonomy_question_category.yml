@@ -15,4 +15,5 @@ process:
     default_value: question_category
   name: name
   weight: weight
-
+migration_tags:
+  - Content

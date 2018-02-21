@@ -2,12 +2,12 @@ id: druio
 label: Dru.io migration
 description: Migrations for Dru.io content. From old Drupal 7 site to new Drupal 8.
 source_type: Drupal 7
-
 shared_configuration:
   source:
     key: druio_old
-
 dependencies:
   enforced:
     module:
       - druio_migrate
+migration_tags:
+  - Content
