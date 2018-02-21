@@ -2,9 +2,9 @@
 
 namespace Drupal\druio_migrate\Plugin\migrate\source;
 
-use Drupal\Core\Datetime\DrupalDateTime;
 use Drupal\migrate\Plugin\migrate\source\SqlBase;
 use Drupal\migrate\Row;
+use Drupal\node\NodeInterface;
 
 /**
  * @MigrateSource(
@@ -30,6 +30,7 @@ class NodeQuestion extends SqlBase {
         'created',
         'changed',
       ])
+      ->condition('n.status', NodeInterface::PUBLISHED)
       ->condition('n.type', 'question');
     return $query;
   }
