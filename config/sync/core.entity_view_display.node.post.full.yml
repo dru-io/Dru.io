@@ -1,9 +1,10 @@
-uuid: 44cb20b0-9eb7-4aa8-94cb-4289f15c739c
+uuid: 615b76c3-bbd6-4e80-bdae-f7e39509809c
 langcode: ru
 status: true
 dependencies:
   config:
     - core.entity_view_display.comment.comment.default
+    - core.entity_view_mode.node.full
     - field.field.node.post.body
     - field.field.node.post.field_comments
     - field.field.node.post.field_paragraphs
@@ -13,30 +14,40 @@ dependencies:
     - entity_reference_revisions
     - text
     - user
-id: node.post.default
+id: node.post.full
 targetEntityType: node
 bundle: post
-mode: default
+mode: full
 content:
   body:
     label: hidden
     type: text_default
-    weight: 101
+    weight: 1
     settings: {  }
     third_party_settings: {  }
     region: content
+  druio_author_min:
+    weight: 3
+    region: content
+    settings: {  }
+    third_party_settings: {  }
+  druio_theme_created_relative:
+    weight: 4
+    region: content
+    settings: {  }
+    third_party_settings: {  }
   field_comments:
-    weight: 103
-    label: above
+    type: comment_default
+    weight: 5
+    region: content
+    label: hidden
     settings:
       view_mode: default
       pager_id: 0
     third_party_settings: {  }
-    type: comment_default
-    region: content
   field_paragraphs:
     type: entity_reference_revisions_entity_view
-    weight: 102
+    weight: 2
     label: above
     settings:
       view_mode: default
@@ -44,11 +55,9 @@ content:
     third_party_settings: {  }
     region: content
   links:
-    weight: 100
+    weight: 0
     region: content
     settings: {  }
     third_party_settings: {  }
 hidden:
-  druio_author_min: true
-  druio_theme_created_relative: true
   langcode: true

@@ -1,0 +1,33 @@
+uuid: 6b2ae3df-cc70-4e19-9d24-a4db03440dd5
+langcode: ru
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_comments
+    - node.type.post
+  module:
+    - comment
+id: node.post.field_comments
+field_name: field_comments
+entity_type: node
+bundle: post
+label: Комментарии
+description: ''
+required: false
+translatable: true
+default_value:
+  -
+    status: 2
+    cid: 0
+    last_comment_timestamp: 0
+    last_comment_name: null
+    last_comment_uid: 0
+    comment_count: 0
+default_value_callback: ''
+settings:
+  default_mode: 1
+  per_page: 50
+  anonymous: 0
+  form_location: true
+  preview: 1
+field_type: comment
