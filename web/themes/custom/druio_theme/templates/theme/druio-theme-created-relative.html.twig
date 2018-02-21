@@ -16,5 +16,5 @@
 {% set attributes = attributes.addClass('druio-theme-created-relative') %}
 {% set attributes = attributes.setAttribute('data-timestamp', timestamp) %}
 <span{{ attributes }}>
-  {{ timestamp|date(format) }}
+  {{- timestamp|date(format) -}}
 </span>

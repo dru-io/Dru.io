@@ -1,0 +1,21 @@
+{%
+  set classes = [
+    'node',
+    node.isPromoted() ? 'promoted',
+    node.isSticky() ? 'sticky',
+    not node.isPublished() ? 'unpublished',
+    'node--' ~ node.bundle|clean_class,
+    view_mode ? 'view-mode--' ~ view_mode|clean_class,
+  ]
+%}
+<article{{ attributes.addClass(classes) }}>
+  {{ title_suffix }}
+  {{ content.body }}
+  <footer class="footer">
+    <div class="comments">27</div>
+    {{ content.druio_theme_created_relative }}
+    {{ content.druio_author_min }}
+  </footer>
+
+  {{ content.field_comments }}
+</article>

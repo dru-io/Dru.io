@@ -8409,6 +8409,47 @@ th {
     .node--post.view-mode--teaser > .footer .read-more:hover {
       background: #FFB926; }
 
+.node--post.view-mode--full > .title {
+  margin-top: 0;
+  margin-bottom: 16px; }
+
+.node--post.view-mode--full > .footer {
+  margin-top: 16px;
+  background: #F5F5F5;
+  border-radius: 4px;
+  display: flex;
+  overflow: hidden; }
+  .node--post.view-mode--full > .footer .comments {
+    margin-right: 16px;
+    padding: 8px;
+    display: block; }
+    .node--post.view-mode--full > .footer .comments:before {
+      content: "\F368";
+      font-family: "Material Design Icons";
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: 8px; }
+    .node--post.view-mode--full > .footer .comments::before {
+      color: #757575; }
+  .node--post.view-mode--full > .footer .druio-theme-created-relative {
+    margin-right: 16px;
+    padding: 8px;
+    display: block; }
+    .node--post.view-mode--full > .footer .druio-theme-created-relative:before {
+      content: "\F150";
+      font-family: "Material Design Icons";
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: 8px; }
+    .node--post.view-mode--full > .footer .druio-theme-created-relative::before {
+      color: #757575; }
+  .node--post.view-mode--full > .footer .druio-author-min {
+    padding: 8px; }
+
 #block-druio-theme-page-title {
   margin-bottom: 32px; }
   #block-druio-theme-page-title h1 {
