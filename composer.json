@@ -108,7 +108,7 @@
                 "type": "drupal-library",
                 "version": "master",
                 "dist": {
-                    "url": "http://moment.github.io/luxon/global/luxon.min.js",
+                    "url": "https://moment.github.io/luxon/global/luxon.min.js",
                     "type": "file"
                 }
             }
