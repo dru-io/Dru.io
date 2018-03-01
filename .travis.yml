@@ -13,7 +13,7 @@ before_script:
   - git clone --branch=8.x https://github.com/dru-io/Dru.io.git /opt/druio-html
 
 script:
-  - composer install --with-dependencies -d /opt/druio-html
+  - composer install -d /opt/druio-html
   - tar czf druio.tar.gz -C /opt/druio-html .
   - aws s3 rm s3://druio/druio.tar.gz
   - aws s3 cp druio.tar.gz s3://druio/druio.tar.gz
