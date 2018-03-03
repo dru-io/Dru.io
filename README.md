@@ -17,6 +17,7 @@
 * [Описание](#description)
 * [Создание локальной копии ресурса](#local-copy)
   * [Чистая копия ресурса](#clean-copy)
+* [Исходники дизайна](https://yadi.sk/d/8mesiVIA3MKZUj)
 
 <a name="description"></a>
 
