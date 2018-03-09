@@ -9,5 +9,5 @@ _core:
 id: node_unpublish_action
 label: 'Снять материал с публикации'
 type: node
-plugin: node_unpublish_action
+plugin: 'entity:unpublish_action:node'
 configuration: {  }

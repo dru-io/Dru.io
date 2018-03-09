@@ -39,5 +39,6 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  field_comments: true
   field_paragraphs: true
   langcode: true
