@@ -37,7 +37,7 @@ pipeline:
   telegram:
       image: appleboy/drone-telegram
       token: 559655423:AAGFHWcS-kgyTRMqNa3ZcOTFvyfZEPJ4a8Y
-      to: DrupalMigrate
+      to: -1001370646921
       when:
         status: [ success, failure ]
       template: >
