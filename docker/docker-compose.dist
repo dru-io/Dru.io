@@ -1,0 +1,40 @@
+# For development purpose only
+
+version: "3.3"
+
+services:
+  php:
+    build:
+      context: ../
+      dockerfile: php/Dockerfile.dev
+    environment:
+      DATABASE_URL: SECRET_VALUE
+      APP_ENV: dev
+      APP_SECRET: SECRET_VALUE
+    depends_on:
+      - mysql
+    volumes:
+      - "../:/var/www/html"
+
+  nginx:
+    build:
+      context: ../
+      dockerfile: nginx/Dockerfile.dev
+    ports:
+      - "80:80"
+    depends_on:
+      - php
+    volumes:
+      - "../:/var/www/html"
+
+  mysql:
+    image: mysql:8
+    environment:
+      - MYSQL_ROOT_PASSWORD=SECRET_VALUE
+    volumes:
+      - mysql:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+volumes:
+  mysql:

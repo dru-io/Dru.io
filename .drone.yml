@@ -1,0 +1,50 @@
+pipeline:
+  restore_cache:
+    image: drillster/drone-volume-cache
+    restore: true
+    ttl: 7
+    mount:
+      - /drone/docker
+      - ./vendor
+    # Mount the cache volume, needs "Trusted"
+    volumes:
+      - /tmp/cache:/cache
+
+  php:
+    image: plugins/docker
+    repo: fortis/druio-php
+    tags: [ 1, latest ]
+    dockerfile: docker/php/Dockerfile
+    storage_path: /drone/docker
+    secrets: [ docker_username, docker_password ]
+
+  nginx:
+    image: plugins/docker
+    repo: fortis/druio-nginx
+    tags: [ 1, latest ]
+    dockerfile: docker/nginx/Dockerfile
+    storage_path: /drone/docker
+    secrets: [ docker_username, docker_password ]
+
+  rebuild_cache:
+    image: drillster/drone-volume-cache
+    rebuild: true
+    mount:
+      - /drone/docker
+      - ./vendor
+    # Mount the cache volume, needs "Trusted"
+    volumes:
+      - /tmp/cache:/cache
+
+  telegram:
+      image: appleboy/drone-telegram
+      token: 559655423:AAGFHWcS-kgyTRMqNa3ZcOTFvyfZEPJ4a8Y
+      to: DrupalMigrate
+      when:
+        status: [ success, failure ]
+      template: >
+        {{#success build.status}}
+          *success* `build #{{build.number}}` <{{build.link}}|{{repo.name}}#{{truncate build.commit 8}}> ({{build.branch}}) by {{build.author}}.
+        {{else}}
+          *failed* `build #{{build.number}}` <{{build.link}}|{{repo.name}}#{{truncate build.commit 8}}> ({{build.branch}}) by {{build.author}}. Fix me man.
+        {{/success}}
