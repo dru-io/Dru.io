@@ -9,5 +9,5 @@ _core:
 id: comment_publish_action
 label: 'Опубликовать комментарий'
 type: comment
-plugin: comment_publish_action
+plugin: 'entity:publish_action:comment'
 configuration: {  }

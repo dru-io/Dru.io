@@ -69,4 +69,6 @@ content:
     settings: {  }
     third_party_settings: {  }
 hidden:
+  druio_author_min: true
+  druio_theme_created_relative: true
   langcode: true
