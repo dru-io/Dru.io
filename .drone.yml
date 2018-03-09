@@ -6,7 +6,6 @@ pipeline:
     mount:
       - /drone/docker
       - ./vendor
-    # Mount the cache volume, needs "Trusted"
     volumes:
       - /tmp/cache:/cache
 
@@ -32,7 +31,6 @@ pipeline:
     mount:
       - /drone/docker
       - ./vendor
-    # Mount the cache volume, needs "Trusted"
     volumes:
       - /tmp/cache:/cache
 
