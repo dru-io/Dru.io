@@ -11,7 +11,6 @@ RUN apk add --no-cache git openssl \
 # Install PHP Extensions
 RUN apk add --no-cache --virtual .build-deps build-base autoconf git \
     && yes | pecl install apcu opcache \
-    && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
     # APCU config
     && echo "extension=apcu.so" > /usr/local/etc/php/conf.d/apcu.ini \
     && echo "apc.enable_cli=1" >> /usr/local/etc/php/conf.d/apcu.ini \

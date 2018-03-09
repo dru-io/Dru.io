@@ -11,10 +11,7 @@ RUN apk add --no-cache git openssl \
 
 # Install PHP Extensions
 RUN apk add --no-cache --virtual .build-deps build-base autoconf git \
-    && yes | pecl install apcu xdebug ast igbinary redis \
-    # intl - causes error: Unable to detect ICU prefix
-    && echo "extension=igbinary.so" > /usr/local/etc/php/conf.d/igbinary.ini \
-    && echo "extension=redis.so" > /usr/local/etc/php/conf.d/redis.ini \
+    && yes | pecl install apcu xdebug ast \
     # APCU config
     && echo "extension=apcu.so" > /usr/local/etc/php/conf.d/apcu.ini \
     && echo "apc.enable_cli=1" >> /usr/local/etc/php/conf.d/apcu.ini \
