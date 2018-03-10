@@ -1,22 +1,46 @@
 FROM php:7.2-fpm-alpine
 
-RUN apk add --no-cache git openssl \
-    && apk add --no-cache --virtual .persistent-deps postgresql-dev icu-dev libmcrypt-dev \
-    && apk add --no-cache --virtual .build-deps build-base gmp-dev zlib-dev \
-    && docker-php-ext-install mbstring opcache pdo pdo_mysql zip \
+ARG DRUPAL_ENV=prod
+
+RUN apk add --no-cache --virtual .persistent-deps git curl openssl \
+    && apk add --no-cache --virtual .build-deps libpng-dev tzdata build-base zlib-dev \
+    && docker-php-ext-install mbstring opcache pdo_mysql zip gd bcmath exif \
+    # Set Europe/Moscow as local timezone
+    && cp /usr/share/zoneinfo/Europe/Moscow /etc/localtime \
+    && echo "Europe/Moscow" > /etc/timezone \
     # Cleanup
     && apk del .build-deps \
     && rm -rf /tmp/*
 
 # Install PHP Extensions
 RUN apk add --no-cache --virtual .build-deps build-base autoconf git \
-    && yes | pecl install apcu opcache \
-    # APCU config
+    && yes | pecl install apcu xdebug opcache \
+    # GD
+    && echo "extension=gd.so" > /usr/local/etc/php/conf.d/gd.ini \
+    # APCU
     && echo "extension=apcu.so" > /usr/local/etc/php/conf.d/apcu.ini \
     && echo "apc.enable_cli=1" >> /usr/local/etc/php/conf.d/apcu.ini \
+    # Opcache
+    && echo "extension=opcache.so" > /usr/local/etc/php/conf.d/opcache.ini \
+    && echo "opcache.enable = 1" >> /usr/local/etc/php/conf.d/opcache.ini \
+    && echo "opcache.validate_timestamps = 1" >> /usr/local/etc/php/conf.d/opcache.ini \
+    && echo "opcache.revalidate_freq = 2" >> /usr/local/etc/php/conf.d/opcache.ini \
+    && echo "opcache.max_accelerated_files = 20000" >> /usr/local/etc/php/conf.d/opcache.ini \
+    && echo "opcache.memory_consumption = 96" >> /usr/local/etc/php/conf.d/opcache.ini \
+    && echo "opcache.interned_strings_buffer = 16" >> /usr/local/etc/php/conf.d/opcache.ini \
+    && echo "opcache.fast_shutdown = 1" >> /usr/local/etc/php/conf.d/opcache.ini \
     # Cleanup
     && apk del .build-deps \
     && rm -rf /tmp/*
+
+RUN if [ $DRUPAL_ENV = "dev" ] ; then \
+    # Xdebug config
+    echo "zend_extension=xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_enable = 1" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_autostart = 1" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.remote_host = 10.254.254.254" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    && echo "xdebug.max_nesting_level = 1000" >> /usr/local/etc/php/conf.d/xdebug.ini \
+    ; fi
 
 # Add Composer
 ENV COMPOSER_ALLOW_SUPERUSER 1
@@ -29,7 +53,6 @@ ADD . /var/www/html
 COPY docker/php/www.conf /usr/local/etc/php-fpm.d/www.conf
 
 WORKDIR /var/www/html
-ENV APP_ENV prod
 
 # Blackfire
 #RUN version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
