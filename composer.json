@@ -94,6 +94,11 @@
             "recurse": false,
             "replace": false,
             "merge-extra": false
+        },
+        "patches": {
+            "drupal/config_installer": {
+                "Call to a member function isValid() on null": "https://www.drupal.org/files/issues/2018-03-10/2951712-8.patch"
+            }
         }
     },
     "repositories": [
