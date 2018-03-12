@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "7f471a898f8d9025fbb236fbecf47aac",
+    "content-hash": "219e484e48c7d428fc71122276100171",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -1449,6 +1449,9 @@
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
                     }
+                },
+                "patches_applied": {
+                    "Call to a member function isValid() on null": "https://www.drupal.org/files/issues/2018-03-10/2951712-8.patch"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -2019,10 +2022,6 @@
                     "role": "Maintainer"
                 },
                 {
-                    "name": "joelpittet",
-                    "homepage": "https://www.drupal.org/user/160302"
-                },
-                {
                     "name": "merlinofchaos",
                     "homepage": "https://www.drupal.org/user/26979"
                 },
@@ -2168,7 +2167,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -2292,7 +2291,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -2332,7 +2331,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -2370,7 +2369,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.0-alpha2",
-                    "datestamp": "1518862980",
+                    "datestamp": "1510900684",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
@@ -2760,7 +2759,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -2949,7 +2948,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -2999,7 +2998,7 @@
                 },
                 "drupal": {
                     "version": "8.x-1.2",
-                    "datestamp": "1518946592",
+                    "datestamp": "1518946383",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -3060,7 +3059,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -3185,7 +3184,7 @@
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
             "license": [
-                "GPL-2.0-or-later"
+                "GPL-2.0+"
             ],
             "authors": [
                 {
@@ -4148,7 +4147,7 @@
             "version": "master",
             "dist": {
                 "type": "file",
-                "url": "https://moment.github.io/luxon/global/luxon.min.js",
+                "url": "http://moment.github.io/luxon/global/luxon.min.js",
                 "reference": null,
                 "shasum": null
             },
