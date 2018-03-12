@@ -23,8 +23,12 @@
 # KDE
 .directory
 
-# Docker file.
+# Docker4Drupal
 docker-compose.yml
+.env
+Makefile
+docker-sync.yml
+traefik.yml
 
 # NPM, Yarn.
 node_modules/
