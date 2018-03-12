@@ -3,3 +3,6 @@ type: module
 description: 'Entity and other stuff for it.'
 core: 8.x
 package: 'Dru.io'
+
+dependencies:
+ - text
