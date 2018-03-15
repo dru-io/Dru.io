@@ -4147,7 +4147,7 @@
             "version": "master",
             "dist": {
                 "type": "file",
-                "url": "http://moment.github.io/luxon/global/luxon.min.js",
+                "url": "https://moment.github.io/luxon/global/luxon.min.js",
                 "reference": null,
                 "shasum": null
             },
