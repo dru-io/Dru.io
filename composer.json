@@ -18,6 +18,7 @@
         "drupal/console": "^1.0.2",
         "drupal/core": "~8.5",
         "drupal/ctools": "^3.0",
+        "drupal/default_content": "^1.0@alpha",
         "drupal/devel": "^1.0@RC",
         "drupal/field_group": "^1.0@RC",
         "drupal/glisseo": "1.0-alpha2",
