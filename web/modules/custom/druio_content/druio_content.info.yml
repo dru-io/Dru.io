@@ -1,0 +1,10 @@
+name: druio_content
+type: module
+description: Dru.io default content
+core: 8.x
+package: Dru.io
+dependencies:
+  - default_content
+default_content:
+  block_content:
+    - cff3632c-a929-498c-9b4e-d9782a5e6f98

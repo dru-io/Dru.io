@@ -1,0 +1,31 @@
+uuid: 0d92eba2-4631-4d1c-8530-0fd0d92a3e38
+langcode: ru
+status: true
+dependencies:
+  content:
+    - 'block_content:basic:cff3632c-a929-498c-9b4e-d9782a5e6f98'
+  module:
+    - block_content
+    - system
+  theme:
+    - druio_theme
+id: russkoazycnoedrupalsoobsestvo
+theme: druio_theme
+region: header
+weight: 0
+provider: null
+plugin: 'block_content:cff3632c-a929-498c-9b4e-d9782a5e6f98'
+settings:
+  id: 'block_content:cff3632c-a929-498c-9b4e-d9782a5e6f98'
+  label: 'Русскоязычное Drupal сообщество'
+  provider: block_content
+  label_display: visible
+  status: true
+  info: ''
+  view_mode: full
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

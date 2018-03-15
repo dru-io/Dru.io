@@ -1,0 +1,82 @@
+{
+    "_links": {
+        "self": {
+            "href": "http:\/\/default\/block\/1?_format=hal_json"
+        },
+        "type": {
+            "href": "http:\/\/drupal.org\/rest\/type\/block_content\/basic"
+        }
+    },
+    "id": [
+        {
+            "value": 1
+        }
+    ],
+    "uuid": [
+        {
+            "value": "cff3632c-a929-498c-9b4e-d9782a5e6f98"
+        }
+    ],
+    "revision_id": [
+        {
+            "value": 1
+        }
+    ],
+    "langcode": [
+        {
+            "value": "ru",
+            "lang": "ru"
+        }
+    ],
+    "type": [
+        {
+            "target_id": "basic"
+        }
+    ],
+    "revision_created": [
+        {
+            "value": "2018-03-15T21:33:09+00:00",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "status": [
+        {
+            "value": true,
+            "lang": "ru"
+        }
+    ],
+    "info": [
+        {
+            "value": "\u0420\u0443\u0441\u0441\u043a\u043e\u044f\u0437\u044b\u0447\u043d\u043e\u0435 Drupal \u0441\u043e\u043e\u0431\u0449\u0435\u0441\u0442\u0432\u043e",
+            "lang": "ru"
+        }
+    ],
+    "changed": [
+        {
+            "value": "2018-03-15T21:33:09+00:00",
+            "lang": "ru",
+            "format": "Y-m-d\\TH:i:sP"
+        }
+    ],
+    "default_langcode": [
+        {
+            "value": true,
+            "lang": "ru"
+        }
+    ],
+    "revision_translation_affected": [
+        {
+            "value": true,
+            "lang": "ru"
+        }
+    ],
+    "body": [
+        {
+            "value": "<p>Dru.io - \u043c\u0435\u0441\u0442\u043e, \u0433\u0434\u0435 \u0432\u044b \u043c\u043e\u0436\u0435\u0442\u0435 \u0437\u0430\u0434\u0430\u0442\u044c \u0438\u043d\u0442\u0435\u0440\u0435\u0441\u0443\u044e\u0449\u0438\u0435 \u0432\u0430\u0441 \u0432\u043e\u043f\u0440\u043e\u0441\u044b \u043f\u043e Drupal, \u043f\u043e\u043e\u0431\u0449\u0430\u0442\u044c\u0441\u044f \u0441 \u043f\u0440\u043e\u0444\u0435\u0441\u0441\u0438\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u043c\u0438 \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u0447\u0438\u043a\u0430\u043c\u0438, \u043f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u0443\u044e \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0443, \u0443\u0437\u043d\u0430\u0442\u044c \u0441\u0430\u043c\u0443\u044e \u0441\u0432\u0435\u0436\u0443\u044e \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u0438 \u0441\u0442\u0430\u0442\u044c \u0447\u0430\u0441\u0442\u044c\u044e \u043d\u0430\u0448\u0435\u0433\u043e \u0434\u0440\u0443\u0436\u043d\u043e\u0433\u043e \u0441\u043e\u043e\u0431\u0449\u0435\u0441\u0442\u0432\u0430.<\/p>\r\n\r\n<a href=\"#\" class=\"header__promo-link\">Drupal Promo<\/a><a href=\"#\" class=\"header__download-link\">\u0421\u043a\u0430\u0447\u0430\u0442\u044c Drupal<\/a>",
+            "format": "full_html",
+            "processed": "<p>Dru.io - \u043c\u0435\u0441\u0442\u043e, \u0433\u0434\u0435 \u0432\u044b \u043c\u043e\u0436\u0435\u0442\u0435 \u0437\u0430\u0434\u0430\u0442\u044c \u0438\u043d\u0442\u0435\u0440\u0435\u0441\u0443\u044e\u0449\u0438\u0435 \u0432\u0430\u0441 \u0432\u043e\u043f\u0440\u043e\u0441\u044b \u043f\u043e Drupal, \u043f\u043e\u043e\u0431\u0449\u0430\u0442\u044c\u0441\u044f \u0441 \u043f\u0440\u043e\u0444\u0435\u0441\u0441\u0438\u043e\u043d\u0430\u043b\u044c\u043d\u044b\u043c\u0438 \u0440\u0430\u0437\u0440\u0430\u0431\u043e\u0442\u0447\u0438\u043a\u0430\u043c\u0438, \u043f\u043e\u043b\u0443\u0447\u0438\u0442\u044c \u0431\u0435\u0441\u043f\u043b\u0430\u0442\u043d\u0443\u044e \u043f\u043e\u0434\u0434\u0435\u0440\u0436\u043a\u0443, \u0443\u0437\u043d\u0430\u0442\u044c \u0441\u0430\u043c\u0443\u044e \u0441\u0432\u0435\u0436\u0443\u044e \u0438\u043d\u0444\u043e\u0440\u043c\u0430\u0446\u0438\u044e \u0438 \u0441\u0442\u0430\u0442\u044c \u0447\u0430\u0441\u0442\u044c\u044e \u043d\u0430\u0448\u0435\u0433\u043e \u0434\u0440\u0443\u0436\u043d\u043e\u0433\u043e \u0441\u043e\u043e\u0431\u0449\u0435\u0441\u0442\u0432\u0430.<\/p>\n\n<a href=\"#\" class=\"header__promo-link\">Drupal Promo<\/a><a href=\"#\" class=\"header__download-link\">\u0421\u043a\u0430\u0447\u0430\u0442\u044c Drupal<\/a>",
+            "summary": "",
+            "lang": "ru"
+        }
+    ]
+}
