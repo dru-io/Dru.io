@@ -101,7 +101,7 @@
                 "Call to a member function isValid() on null": "https://www.drupal.org/files/issues/2018-03-10/2951712-8.patch"
             },
             "drupal/snippet_manager": {
-                "Dependency for filter or module itself is required": "https://www.drupal.org/files/issues/2018-03-15/2952920-2.patch"
+                "Dependency for filter or module itself is required": "https://cgit.drupalcode.org/snippet_manager/patch/?id=0608b96f3162f1ad41de61e05aade6845ccfb136"
             }
         }
     },

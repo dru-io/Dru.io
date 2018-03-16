@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "06570d26395138fc299b8992d64d36f2",
+    "content-hash": "5a4e756f13ff5ab0eee3ab9b141a75e0",
     "packages": [
         {
             "name": "alchemy/zippy",
@@ -3081,7 +3081,7 @@
                     }
                 },
                 "patches_applied": {
-                    "Dependency for filter or module itself is required": "https://www.drupal.org/files/issues/2018-03-15/2952920-2.patch"
+                    "Dependency for filter or module itself is required": "https://cgit.drupalcode.org/snippet_manager/patch/?id=0608b96f3162f1ad41de61e05aade6845ccfb136"
                 }
             },
             "notification-url": "https://packages.drupal.org/8/downloads",
@@ -4221,7 +4221,7 @@
             "version": "master",
             "dist": {
                 "type": "file",
-                "url": "http://moment.github.io/luxon/global/luxon.min.js",
+                "url": "https://moment.github.io/luxon/global/luxon.min.js",
                 "reference": null,
                 "shasum": null
             },
