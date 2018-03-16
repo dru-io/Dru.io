@@ -19,6 +19,7 @@ module:
   devel: 0
   druio: 0
   druio_content: 0
+  druio_latest_drupal: 0
   druio_migrate: 0
   druio_notification: 0
   druio_question: 0

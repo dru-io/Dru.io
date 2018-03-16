@@ -1,0 +1,8 @@
+
+druio_latest_drupal.default_controller_getLink:
+  path: '/download-drupal'
+  defaults:
+    _controller: '\Drupal\druio_content\Controller\DefaultController::getLink'
+    _title: 'getLink'
+  requirements:
+    _permission: 'access content'
