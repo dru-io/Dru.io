@@ -23,18 +23,25 @@ class DefaultController extends ControllerBase {
    *   Return Hello string.
    */
   public function getLink() {
-    $releases = $this->checkReleases();
-    $latest = $this->checkLatest($releases);
-    $link = \Drupal::cache()->get('drupal_download_link')->data;
-    $expire = 3600*2;
-    if (!$link) {
-      $link = $this->createLink($latest);
-      \Drupal::cache()->set('drupal_download_link', $link, time() + $expire);
-    }
+    try {
+      $releases = $this->checkReleases();
+      $latest = $this->checkLatest($releases);
+      $link = \Drupal::cache()->get('drupal_download_link')->data;
+      $expire = 3600*2;
+      if (!$link) {
+        $link = $this->createLink($latest);
+        \Drupal::cache()->set('drupal_download_link', $link, time() + $expire);
+      }
 
-    $response = new RedirectResponse($link);
+      $response = new RedirectResponse($link);
+      $response->send();
+    }
+    catch (Exception $e) {
+      \Drupal::logger('druio_defaultcontent')->error($e->getMessage());
+    }
+    
+    $response = new RedirectResponse('http://drupal.org/project/drupal');
     $response->send();
-    return;
   }
 
   private function checkReleases() {
