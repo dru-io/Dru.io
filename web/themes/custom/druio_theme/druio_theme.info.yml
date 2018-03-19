@@ -10,6 +10,8 @@ libraries:
   - druio_theme/global-styling
 regions:
   header: Header
+  content_top: 'Under content'
   content: Content
   sidebar_right: 'Sidebar right'
+  content_bottom: 'Below content'
   footer: Footer
