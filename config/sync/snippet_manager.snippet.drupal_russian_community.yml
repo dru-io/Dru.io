@@ -1,0 +1,42 @@
+uuid: b1f81f95-2ee6-455a-bd74-33c6ee1809d9
+langcode: ru
+status: true
+dependencies: {  }
+id: drupal_russian_community
+label: 'Русскоязычное Drupal сообщество'
+page:
+  status: false
+  title: ''
+  path: ''
+  theme: ''
+  display_variant: ''
+  access:
+    type: all
+    permission: ''
+    role:
+      anonymous: '0'
+      authenticated: '0'
+      administrator: '0'
+block:
+  status: true
+  name: ''
+display_variant:
+  status: false
+  admin_label: ''
+layout:
+  status: false
+  label: null
+  default_region: null
+template:
+  value: "<p>Dru.io - место, где вы можете задать интересующие вас вопросы по Drupal, пообщаться с профессиональными разработчиками, получить бесплатную поддержку, узнать самую свежую информацию и стать частью нашего дружного сообщества.</p>\r\n\r\n<p>\r\n  <a class=\"header__promo-link\" href=\"http://why.drupal.ru\">Drupal Promo</a><a class=\"header__download-link\" href=\"/download\">Скачать Drupal</a>\r\n</p>\r\n"
+  format: full_html
+css:
+  status: false
+  value: null
+  format: full_html
+  group: component
+js:
+  status: false
+  value: null
+  format: full_html
+variables: {  }

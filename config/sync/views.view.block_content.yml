@@ -8,7 +8,7 @@ dependencies:
 _core:
   default_config_hash: msYnighLW1IbiBfyQbwbQwb2cU-5LECiFryt60k0Nfk
 id: block_content
-label: 'Библиотека пользовательских блоков'
+label: 'Пользовательские блоки'
 module: views
 description: 'Поиск и управление пользовательскими блоками.'
 tag: default
@@ -436,7 +436,7 @@ display:
           entity_field: type
           plugin_id: bundle
       sorts: {  }
-      title: 'Библиотека пользовательских блоков'
+      title: 'Пользовательские блоки'
       header: {  }
       footer: {  }
       empty:
@@ -484,7 +484,7 @@ display:
       path: admin/structure/block/block-content
       menu:
         type: tab
-        title: 'Библиотека пользовательских блоков'
+        title: 'Пользовательские блоки'
         description: ''
         parent: block.admin_display
         weight: 0

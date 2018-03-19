@@ -25,4 +25,6 @@ content:
     weight: 100
     region: content
 hidden:
+  druio_author_min: true
+  druio_theme_created_relative: true
   langcode: true

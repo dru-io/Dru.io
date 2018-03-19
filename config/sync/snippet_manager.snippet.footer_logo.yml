@@ -1,7 +1,7 @@
 uuid: b91c20f4-19e0-4b44-9c36-ad2f9b7101a2
 langcode: ru
 status: true
-dependencies: { }
+dependencies: {  }
 id: footer_logo
 label: 'Подвал: Логотип'
 page:

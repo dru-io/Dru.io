@@ -1,7 +1,7 @@
 uuid: 05cd4f14-2a15-414c-8fab-86aadecd125f
 langcode: ru
 status: true
-dependencies: { }
+dependencies: {  }
 id: footer_copyright
 label: 'Подвал: Копирайты'
 page:

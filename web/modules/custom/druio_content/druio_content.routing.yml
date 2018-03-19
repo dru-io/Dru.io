@@ -1,8 +1,7 @@
-
-druio_latest_drupal.default_controller_getLink:
-  path: '/download-drupal'
+druio_content.download_drupal:
+  path: '/download'
   defaults:
-    _controller: '\Drupal\druio_content\Controller\DefaultController::getLink'
-    _title: 'getLink'
+    _controller: '\Drupal\druio_content\Controller\DownloadDrupalController::content'
+    _title: 'Download latest Drupal version'
   requirements:
     _permission: 'access content'
