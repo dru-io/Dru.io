@@ -1,0 +1,49 @@
+.drupal-russian-community {
+  background: url('../images/drupal-russian-community--bg.jpg') center center / cover;
+  padding: gap(6) 0;
+  position: relative;
+
+  &::before {
+    content: '';
+    display: block;
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    @include gradient-y(rgba(black, .1), rgba(black, .5));
+  }
+
+  > .container {
+    @include media-container();
+    display: flex;
+    flex-flow: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__description {
+    flex: 0 1 50%;
+    color: white;
+
+    .title {
+      font-weight: bold;
+      font-size: 40px;
+    }
+
+    .drupal-russian-community-links {
+      &__promo {
+        @include button-variant($text-color, theme-color('primary'));
+      }
+
+      &__download {
+        @include button-variant($text-color, white);
+      }
+    }
+  }
+
+  &__auth {
+    flex: 0 1 50%;
+  }
+}

@@ -1,0 +1,26 @@
+uuid: 2139869a-0526-4660-a51f-fb18c0c488d5
+langcode: ru
+status: true
+dependencies:
+  module:
+    - snippet_manager
+    - system
+  theme:
+    - druio_theme
+id: drupal_russian_community
+theme: druio_theme
+region: content_top
+weight: 0
+provider: null
+plugin: 'snippet:drupal_russian_community'
+settings:
+  id: 'snippet:drupal_russian_community'
+  label: 'Русскоязычное Drupal сообщество'
+  provider: snippet_manager
+  label_display: '0'
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

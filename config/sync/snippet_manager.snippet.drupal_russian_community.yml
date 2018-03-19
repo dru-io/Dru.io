@@ -28,7 +28,7 @@ layout:
   label: null
   default_region: null
 template:
-  value: "<p>Dru.io - место, где вы можете задать интересующие вас вопросы по Drupal, пообщаться с профессиональными разработчиками, получить бесплатную поддержку, узнать самую свежую информацию и стать частью нашего дружного сообщества.</p>\r\n\r\n<p>\r\n  <a class=\"header__promo-link\" href=\"http://why.drupal.ru\">Drupal Promo</a><a class=\"header__download-link\" href=\"/download\">Скачать Drupal</a>\r\n</p>\r\n"
+  value: "<div class=\"drupal-russian-community\">\r\n  <div class=\"container\">\r\n  \t<div class=\"drupal-russian-community__description\">\r\n      <h1 class=\"title\">Русскоязычное Drupal сообщество</h1>\r\n      <p>Dru.io - место, где вы можете задать интересующие вас вопросы по Drupal, пообщаться с профессиональными разработчиками, получить бесплатную поддержку, узнать самую свежую информацию и стать частью нашего дружного сообщества.</p>\r\n\r\n      <div class=\"drupal-russian-community-links\">\r\n        <a class=\"drupal-russian-community-links__promo\" href=\"http://why.drupal.ru\">Drupal Promo</a><a class=\"drupal-russian-community-links__download\" href=\"/download\">Скачать Drupal</a>\r\n      </div>\r\n    </div>\r\n \r\n    <div class=\"drupal-russian-community__auth\">\r\n      {# тут будет форма регистрации\\авторизации #}\r\n    </div>\r\n  </div>\r\n</div>"
   format: full_html
 css:
   status: false

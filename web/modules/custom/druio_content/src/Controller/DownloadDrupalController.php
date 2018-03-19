@@ -7,7 +7,6 @@ use Drupal\Core\Controller\ControllerBase;
 use http\Exception;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
-
 /**
  * Class DownloadDrupalController.
  */
