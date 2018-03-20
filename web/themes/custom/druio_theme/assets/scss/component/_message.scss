@@ -1,0 +1,56 @@
+$message-padding-y:     1rem !default;
+$message-padding-x:     1rem !default;
+$message-border-width:  1px !default;
+$message-border-radius: $border-radius-small !default;
+$message-margin:        0 0 1rem !default;
+
+$message-default-bg:  #FAFAFA !default;
+$message-default-border: #EEEEEE !default;
+$message-default-color: #5D5D5D !default;
+
+$message-error-bg:     #FFF6F6 !default;
+$message-error-border: #E0B4B4 !default;
+$message-error-color:  #9F3A38 !default;
+
+$message-status-bg:     #FCFFF5 !default;
+$message-status-border: #A3C293 !default;
+$message-status-color:  #2C662D !default;
+
+$message-warning-bg:     #FFFAF3 !default;
+$message-warning-border: #C9BA9B !default;
+$message-warning-color:  #573A08 !default;
+
+@mixin message-variant($background, $border, $color) {
+  color: $color;
+  background-color: $background;
+  border-color: $border;
+
+  hr {
+    border-top-color: darken($border, 5%);
+  }
+
+  a {
+    color: darken($color, 10%);
+  }
+}
+
+.messages {
+  position: relative;
+  margin: $message-margin;
+  padding: $message-padding-y $message-padding-x;
+  border-radius: $message-border-radius;
+  border: $message-border-width solid transparent;
+  @include message-variant($message-default-bg, $message-default-border, $message-default-color);
+
+  &.error {
+    @include message-variant($message-error-bg, $message-error-border, $message-error-color);
+  }
+
+  &.status {
+    @include message-variant($message-status-bg, $message-status-border, $message-status-color);
+  }
+
+  &.warning {
+    @include message-variant($message-warning-bg, $message-warning-border, $message-warning-color);
+  }
+}

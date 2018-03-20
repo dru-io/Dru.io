@@ -1,3 +1,38 @@
+// Vertical tabs.
+$vertical-tabs-bg:                    white !default;
+$vertical-tabs-list-bg:               #fbfaf8 !default;
+$vertical-tabs-button-color:          #555459 !default;
+$vertical-tabs-button-color-selected: white !default;
+$vertical-tabs-button-bg-selected:    #439fe0 !default;
+$vertical-tabs-button-text-shadow:    0 1px 0 rgba(0,0,0,.1) !default;
+$vertical-tabs-list-border:           1px solid #DDD !default;
+
+// Primary tabs.
+$primary-tabs-bg:                      #F5F5F5 !default;
+$primary-tabs-margin:                  0 0 1rem !default;
+$primary-tabs-padding:                 .25rem !default;
+$primary-tabs-inactive-color:          #bdc3c7 !default;
+$primary-tabs-task-background:         white !default;
+$primary-tabs-task-color:              $text-color !default;
+$primary-tabs-tab-padding:             .5rem !default;
+$primary-tabs-task-active-color:       black !default;
+$primary-tabs-task-active-background:  #F5F5F5 !default;
+$primary-tabs-tab-border:              1px solid #CCC !default;
+$primary-tabs-tab-border-remove-right: true !default;
+
+// Secondary tabs.
+$secondary-tabs-bg:                      transparent !default;
+$secondary-tabs-margin:                  0 0 1rem !default;
+$secondary-tabs-padding:                 .25rem !default;
+$secondary-tabs-inactive-color:          #bdc3c7 !default;
+$secondary-tabs-task-background:         transparent !default;
+$secondary-tabs-task-color:              $link-color !default;
+$secondary-tabs-tab-padding:             .5rem !default;
+$secondary-tabs-tab-margin:              0 .5rem 0 0 !default;
+$secondary-tabs-task-active-color:       white !default;
+$secondary-tabs-task-active-background:  $link-color !default;
+$secondary-tabs-tab-border:              3px solid $link-color !default;
+
 .primary-tabs {
   @include clearfix;
   background: $primary-tabs-bg;

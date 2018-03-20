@@ -1,3 +1,18 @@
+$pager-list-margin:     1rem auto !default;
+$pager-list-padding:    0 !default;
+$pager-list-background: #FFF !default;
+
+$pager-item-color: #8C8C8C !default;
+$pager-item-margin: 0 !default;
+$pager-item-padding: 0 .25rem !default;
+
+$pager-item-link-border-bottom: 3px solid transparent !default;
+$pager-item-link-border-active-color: darken($link-color, 20%) !default;
+$pager-item-link-padding: 0 .25rem .25rem !default;
+$pager-item-link-font-weight: 600 !default;
+$pager-item-link-color: $link-color !default;
+$pager-item-link-active-color: darken($link-color, 20%) !default;
+
 .pager__items {
   margin: $pager-list-margin;
   padding: $pager-list-padding;

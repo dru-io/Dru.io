@@ -4,15 +4,18 @@ const gulp = require('gulp');
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const autoprefixer = require('gulp-autoprefixer');
+const sassGlob = require('gulp-sass-glob');
 
 gulp.task('sass', function () {
-  return gulp.src('./assets/scss/styles.scss')
+  return gulp
+    .src('./assets/scss/styles.scss')
     // Something wronng with sourcemap. Temporary disabled.
     //.pipe(sourcemaps.init())
     .pipe(autoprefixer({
       browsers: ['last 2 versions'],
       cascade: false
     }))
+    .pipe(sassGlob())
     .pipe(sass().on('error', sass.logError))
     //.pipe(sourcemaps.write('./maps'))
     .pipe(gulp.dest('./assets/css/'));

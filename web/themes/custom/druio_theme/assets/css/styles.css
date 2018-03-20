@@ -2,7 +2,56 @@
  * @file
  * This file contain all imports and compile to final file.
  */
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i,800,800i");
+/**
+ * Compares contrast of a given color to the light/dark arguments and returns
+ * whichever is most "contrasty".
+ */
+/**
+ * Return color by his key.
+ */
+/**
+ * Return color by his key.
+ */
+/**
+ * Return mixed color by his key.
+ */
+/**
+ * Return grey color by his key.
+ */
+/**
+ * Remove units and return plain number.
+ */
+/**
+ * Calculating rem size.
+ * @param
+ *   $size - size need to be converted to rem.
+ */
+/**
+ * Calculating em size.
+ * @param
+ *   $size - size need to be converted to em.
+ */
+/**
+ * Calculate gap.
+ */
+/**
+ * Find next breakpoint, otherwise return nothing.
+ * @example
+ *   breakpoint-next(sm);
+ *   return: md
+ */
+/**
+ * Returns minimum width for provided breakpoint.
+ * @example
+ *   breakpoint-min(sm);
+ *   return: 576px
+ */
+/**
+ * Returns maximum width for provided breakpoint.
+ * @example
+ *   breakpoint-min(sm);
+ *   return: 768px
+ */
 /**
  * Normalize.css
  * @see https://necolas.github.io/normalize.css/
@@ -398,106 +447,6 @@ template {
 [hidden] {
   display: none; }
 
-/**
- * Remove units and return plain number.
- */
-/**
- * Calculating rem size.
- * @param
- *   $size - size need to be converted to rem.
- */
-/**
- * Calculating em size.
- * @param
- *   $size - size need to be converted to em.
- */
-/**
- * Calculate gap.
- */
-/**
- * Find next breakpoint, otherwise return nothing.
- * @example
- *   breakpoint-next(sm);
- *   return: md
- */
-/**
- * Returns minimum width for provided breakpoint.
- * @example
- *   breakpoint-min(sm);
- *   return: 576px
- */
-/**
- * Returns maximum width for provided breakpoint.
- * @example
- *   breakpoint-min(sm);
- *   return: 768px
- */
-/**
- * Compares contrast of a given color to the light/dark arguments and returns
- * whichever is most "contrasty".
- */
-/**
- * Return color by his key.
- */
-/**
- * Return color by his key.
- */
-/**
- * Return mixed color by his key.
- */
-/**
- * Return grey color by his key.
- */
-/**
- * @file
- * Custom variables and overrides of existing.
- */
-/**
- * @file
- * Global default variables.
- */
-/**
- * Media breakpoints.
- */
-/**
- * Apply styles for provided breakpoint and higher.
- * @example
- *   media-breakpoint-up(md)
- *   Will apply style to 768px and higher.
- */
-/**
- * Apply styles for provided breakpoint and lower.
- * @example
- *   media-breakpoint-down(md)
- *   Will apply style to 768px and lowe.
- */
-/**
- * Apply styles between two provided breakpoints.
- * @example
- *   media-breakpoint-between(md, lg)
- *   Will apply style between 768px and 1199px.
- */
-/**
- * Apply styles only for provided breakpoint.
- * @example
- *   media-breakpoint-only(md)
- *   Will apply style between 768px and 991px.
- */
-/**
- * Container maximize width allowed for container without gutters.
- */
-/**
- * Gutters with centering for container.
- */
-/**
- * Container max width with centering and gutters.
- */
-/**
- * Font size with line-height.
- */
-/**
- * Font size calculation with rem.
- */
 /**
  * Left to right.
  */
@@ -7122,6 +7071,56 @@ template {
     -webkit-transform: rotate(359deg);
     transform: rotate(359deg); } }
 
+/**
+ * Apply styles for provided breakpoint and higher.
+ * @example
+ *   media-breakpoint-up(md)
+ *   Will apply style to 768px and higher.
+ */
+/**
+ * Apply styles for provided breakpoint and lower.
+ * @example
+ *   media-breakpoint-down(md)
+ *   Will apply style to 768px and lowe.
+ */
+/**
+ * Apply styles between two provided breakpoints.
+ * @example
+ *   media-breakpoint-between(md, lg)
+ *   Will apply style between 768px and 1199px.
+ */
+/**
+ * Apply styles only for provided breakpoint.
+ * @example
+ *   media-breakpoint-only(md)
+ *   Will apply style between 768px and 991px.
+ */
+/**
+ * Container maximize width allowed for container without gutters.
+ */
+/**
+ * Gutters with centering for container.
+ */
+/**
+ * Container max width with centering and gutters.
+ */
+/**
+ * Font size with line-height.
+ */
+/**
+ * Font size calculation with rem.
+ */
+/**
+ * @file
+ * Custom variables and overrides of existing.
+ */
+/**
+ * @file
+ * Global default variables.
+ */
+/**
+ * Media breakpoints.
+ */
 :focus {
   outline: 2px solid rgba(255, 185, 38, 0.3); }
 
@@ -7138,10 +7137,6 @@ img {
   display: block;
   vertical-align: bottom; }
 
-/**
-* @file
-* Typography styles.
-*/
 html {
   font-size: 1rem; }
 
@@ -7227,6 +7222,29 @@ blockquote {
   margin: 0 0 21px;
   font-size: 16.1px;
   border-left: 5px solid #9E9E9E; }
+
+.breadcrumbs {
+  background: transprent;
+  padding: 0 0;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  font-size: 14px; }
+  .breadcrumbs .delimiter {
+    color: #ccc; }
+  .breadcrumbs ol {
+    margin: 0;
+    padding: 0;
+    list-style: none; }
+    .breadcrumbs ol li {
+      display: inline-block; }
+      .breadcrumbs ol li:not(:last-child):after {
+        content: "/";
+        display: inline-block;
+        color: #ccc; }
+      .breadcrumbs ol li a {
+        color: #616161; }
+        .breadcrumbs ol li a:hover {
+          color: #484848; }
 
 /**
  * Button style generator.
@@ -7452,29 +7470,6 @@ blockquote {
     border-color: #0887c0;
     box-shadow: 0 0 0 3px rgba(41, 182, 246, 0.5); }
 
-.breadcrumbs {
-  background: transprent;
-  padding: 0 0;
-  margin-bottom: 16px;
-  border-radius: 4px;
-  font-size: 14px; }
-  .breadcrumbs .delimiter {
-    color: #ccc; }
-  .breadcrumbs ol {
-    margin: 0;
-    padding: 0;
-    list-style: none; }
-    .breadcrumbs ol li {
-      display: inline-block; }
-      .breadcrumbs ol li:not(:last-child):after {
-        content: "/";
-        display: inline-block;
-        color: #ccc; }
-      .breadcrumbs ol li a {
-        color: #616161; }
-        .breadcrumbs ol li a:hover {
-          color: #484848; }
-
 .contextual-region .contextual-links {
   background: white;
   border: 1px solid #ddd;
@@ -7695,73 +7690,6 @@ a.tabledrag-handle .handle {
       border-bottom-color: #00385a;
       color: #00385a; }
 
-.primary-tabs {
-  background: #F5F5F5;
-  margin: 0 0 1rem;
-  padding: 0.25rem;
-  list-style: none; }
-  .primary-tabs:after {
-    content: '';
-    display: block;
-    clear: both; }
-  .primary-tabs li {
-    float: left;
-    border: 1px solid #CCC; }
-    .primary-tabs li:not(:last-child) {
-      border-right: none; }
-    .primary-tabs li a {
-      display: block;
-      color: #333;
-      background: white;
-      padding: 0.5rem; }
-      .primary-tabs li a:hover {
-        background: #f2f2f2; }
-      .primary-tabs li a.is-active {
-        color: black;
-        background: #F5F5F5; }
-
-.secondary-tabs {
-  background: transparent;
-  margin: 0 0 1rem;
-  padding: 0.25rem;
-  list-style: none; }
-  .secondary-tabs:after {
-    content: '';
-    display: block;
-    clear: both; }
-  .secondary-tabs li {
-    float: left;
-    border-bottom: 3px solid #0077C0;
-    margin: 0 0.5rem 0 0; }
-    .secondary-tabs li a {
-      display: block;
-      color: #0077C0;
-      background: transparent;
-      padding: 0.5rem; }
-      .secondary-tabs li a:hover {
-        background: transparent; }
-      .secondary-tabs li a.is-active {
-        color: white;
-        background: #0077C0; }
-
-.vertical-tabs {
-  background: white; }
-  .vertical-tabs .vertical-tabs__menu {
-    background: #fbfaf8;
-    border: 1px solid #DDD; }
-    .vertical-tabs .vertical-tabs__menu .vertical-tabs__menu-item {
-      border: none; }
-      .vertical-tabs .vertical-tabs__menu .vertical-tabs__menu-item a {
-        color: #555459;
-        border: none; }
-      .vertical-tabs .vertical-tabs__menu .vertical-tabs__menu-item.selected {
-        background: #439fe0; }
-        .vertical-tabs .vertical-tabs__menu .vertical-tabs__menu-item.selected strong, .vertical-tabs .vertical-tabs__menu .vertical-tabs__menu-item.selected .summary {
-          color: white;
-          text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1); }
-  .vertical-tabs .vertical-tabs__panes {
-    padding: 1rem; }
-
 table {
   background: transparent; }
 
@@ -7858,53 +7786,72 @@ th {
         .table-responsive > .table-bordered > tfoot > tr:last-child > td {
           border-bottom: 0; } }
 
-/**
- * text-* classes.
- */
-.text-subtle {
-  color: #9E9E9E; }
+.primary-tabs {
+  background: #F5F5F5;
+  margin: 0 0 1rem;
+  padding: 0.25rem;
+  list-style: none; }
+  .primary-tabs:after {
+    content: '';
+    display: block;
+    clear: both; }
+  .primary-tabs li {
+    float: left;
+    border: 1px solid #CCC; }
+    .primary-tabs li:not(:last-child) {
+      border-right: none; }
+    .primary-tabs li a {
+      display: block;
+      color: #333;
+      background: white;
+      padding: 0.5rem; }
+      .primary-tabs li a:hover {
+        background: #f2f2f2; }
+      .primary-tabs li a.is-active {
+        color: black;
+        background: #F5F5F5; }
 
-.text-highlight {
-  color: #757575; }
+.secondary-tabs {
+  background: transparent;
+  margin: 0 0 1rem;
+  padding: 0.25rem;
+  list-style: none; }
+  .secondary-tabs:after {
+    content: '';
+    display: block;
+    clear: both; }
+  .secondary-tabs li {
+    float: left;
+    border-bottom: 3px solid #0077C0;
+    margin: 0 0.5rem 0 0; }
+    .secondary-tabs li a {
+      display: block;
+      color: #0077C0;
+      background: transparent;
+      padding: 0.5rem; }
+      .secondary-tabs li a:hover {
+        background: transparent; }
+      .secondary-tabs li a.is-active {
+        color: white;
+        background: #0077C0; }
 
-.text-info {
-  color: #29B6F6; }
-
-.text-success {
-  color: #4CAF50; }
-
-.text-warning {
-  color: #FF9800; }
-
-.text-error {
-  color: #F44336; }
-
-/**
- * highlight-* classes.
- */
-.highlight, .highlight-info, .highlight-success, .highlight-warning, .highlight-error {
-  padding: 1px 4px;
-  font-weight: bold;
-  text-shadow: none;
-  border-radius: 3px;
-  color: #d7dae0;
-  background: #31363f; }
-
-.highlight-info {
-  color: #edf9fe;
-  background: #29B6F6; }
-
-.highlight-success {
-  color: #d9eeda;
-  background: #4CAF50; }
-
-.highlight-warning {
-  color: #ffeacc;
-  background: #FF9800; }
-
-.highlight-error {
-  color: #fff8f7;
-  background: #F44336; }
+.vertical-tabs {
+  background: white; }
+  .vertical-tabs .vertical-tabs__menu {
+    background: #fbfaf8;
+    border: 1px solid #DDD; }
+    .vertical-tabs .vertical-tabs__menu .vertical-tabs__menu-item {
+      border: none; }
+      .vertical-tabs .vertical-tabs__menu .vertical-tabs__menu-item a {
+        color: #555459;
+        border: none; }
+      .vertical-tabs .vertical-tabs__menu .vertical-tabs__menu-item.selected {
+        background: #439fe0; }
+        .vertical-tabs .vertical-tabs__menu .vertical-tabs__menu-item.selected strong, .vertical-tabs .vertical-tabs__menu .vertical-tabs__menu-item.selected .summary {
+          color: white;
+          text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1); }
+  .vertical-tabs .vertical-tabs__panes {
+    padding: 1rem; }
 
 .ui-widget-overlay {
   background: black;
@@ -7964,13 +7911,6 @@ th {
 
 /**
  * @file
- * Layout settings.
- */
-* {
-  box-sizing: border-box; }
-
-/**
- * @file
  * Main layouts and styles for #app and other elements inside.
  */
 #main {
@@ -8022,6 +7962,57 @@ th {
       body.is-layout-sidebar-right #main .content-and-sidebars .region--sidebar-right {
         grid-area: right; }
 
+.region--footer {
+  background: #242424;
+  color: white;
+  padding: 62px; }
+  .region--footer a {
+    color: white; }
+  .region--footer > .container {
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: 15px;
+    padding-left: 15px;
+    display: grid;
+    grid-gap: 30px;
+    grid-row-gap: 80px;
+    grid-template-columns: 400px auto 270px;
+    grid-template-areas: "logo empty social" "copy copy copy"; }
+    @media (min-width: 576px) {
+      .region--footer > .container {
+        width: 540px;
+        max-width: 100%; } }
+    @media (min-width: 768px) {
+      .region--footer > .container {
+        width: 720px;
+        max-width: 100%; } }
+    @media (min-width: 992px) {
+      .region--footer > .container {
+        width: 960px;
+        max-width: 100%; } }
+    @media (min-width: 1200px) {
+      .region--footer > .container {
+        width: 1170px;
+        max-width: 100%; } }
+    @media (min-width: 576px) {
+      .region--footer > .container {
+        padding-right: 15px;
+        padding-left: 15px; } }
+    @media (min-width: 768px) {
+      .region--footer > .container {
+        padding-right: 15px;
+        padding-left: 15px; } }
+    @media (min-width: 992px) {
+      .region--footer > .container {
+        padding-right: 15px;
+        padding-left: 15px; } }
+    @media (min-width: 1200px) {
+      .region--footer > .container {
+        padding-right: 7.5px;
+        padding-left: 7.5px; } }
+    .region--footer > .container #block-footer-copyright {
+      grid-area: copy; }
+
 .region--header {
   border-bottom: 2px solid #FFB926;
   background: rgba(24, 24, 24, 0.8); }
@@ -8066,6 +8057,17 @@ th {
       .region--header > .container {
         padding-right: 7.5px;
         padding-left: 7.5px; } }
+
+/**
+ * @file
+ * Layout settings.
+ */
+* {
+  box-sizing: border-box; }
+
+.region--content-top {
+  margin-top: -32px;
+  margin-bottom: 32px; }
 
 .region--top-line {
   background: #181818;
@@ -8150,60 +8152,266 @@ th {
         .region--top-line > .container .static-menu .item:first-child {
           padding-left: 0; }
 
-.region--footer {
-  background: #242424;
-  color: white;
-  padding: 62px; }
-  .region--footer a {
-    color: white; }
-  .region--footer > .container {
-    margin-right: auto;
-    margin-left: auto;
-    padding-right: 15px;
-    padding-left: 15px;
-    display: grid;
-    grid-gap: 30px;
-    grid-row-gap: 80px;
-    grid-template-columns: 400px auto 270px;
-    grid-template-areas: "logo empty social" "copy copy copy"; }
-    @media (min-width: 576px) {
-      .region--footer > .container {
-        width: 540px;
-        max-width: 100%; } }
-    @media (min-width: 768px) {
-      .region--footer > .container {
-        width: 720px;
-        max-width: 100%; } }
-    @media (min-width: 992px) {
-      .region--footer > .container {
-        width: 960px;
-        max-width: 100%; } }
-    @media (min-width: 1200px) {
-      .region--footer > .container {
-        width: 1170px;
-        max-width: 100%; } }
-    @media (min-width: 576px) {
-      .region--footer > .container {
-        padding-right: 15px;
-        padding-left: 15px; } }
-    @media (min-width: 768px) {
-      .region--footer > .container {
-        padding-right: 15px;
-        padding-left: 15px; } }
-    @media (min-width: 992px) {
-      .region--footer > .container {
-        padding-right: 15px;
-        padding-left: 15px; } }
-    @media (min-width: 1200px) {
-      .region--footer > .container {
-        padding-right: 7.5px;
-        padding-left: 7.5px; } }
-    .region--footer > .container #block-footer-copyright {
-      grid-area: copy; }
-
-.region--content-top {
-  margin-top: -32px;
+#block-druio-theme-page-title {
   margin-bottom: 32px; }
+  #block-druio-theme-page-title h1 {
+    margin: 0; }
+
+#block-druio-theme-branding > a {
+  display: block; }
+  #block-druio-theme-branding > a img {
+    height: 26px; }
+
+#block-druio-theme-main-menu > ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  justify-content: flex-end; }
+  #block-druio-theme-main-menu > ul li {
+    flex: 0 1 auto; }
+    #block-druio-theme-main-menu > ul li a {
+      display: block;
+      color: white;
+      line-height: 50px;
+      padding: 0 15px; }
+    #block-druio-theme-main-menu > ul li:last-child a {
+      padding-right: 0; }
+
+.comment--answer-comment.comment--comment--question-answer {
+  font-size: 90%; }
+  .comment--answer-comment.comment--comment--question-answer > .footer {
+    display: flex;
+    margin-top: 8px; }
+    .comment--answer-comment.comment--comment--question-answer > .footer .links {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex; }
+      .comment--answer-comment.comment--comment--question-answer > .footer .links li:not(:last-child) {
+        margin-right: 8px; }
+      .comment--answer-comment.comment--comment--question-answer > .footer .links li.comment-delete a:before {
+        content: "\F1C0";
+        font-family: "Material Design Icons";
+        font-weight: normal;
+        font-style: normal;
+        display: inline-block;
+        text-decoration: inherit;
+        margin-right: 0.4em; }
+      .comment--answer-comment.comment--comment--question-answer > .footer .links li.comment-edit a:before {
+        content: "\F3EB";
+        font-family: "Material Design Icons";
+        font-weight: normal;
+        font-style: normal;
+        display: inline-block;
+        text-decoration: inherit;
+        margin-right: 0.4em; }
+      .comment--answer-comment.comment--comment--question-answer > .footer .links li.comment-reply a:before {
+        content: "\F45A";
+        font-family: "Material Design Icons";
+        font-weight: normal;
+        font-style: normal;
+        display: inline-block;
+        text-decoration: inherit;
+        margin-right: 0.4em; }
+    .comment--answer-comment.comment--comment--question-answer > .footer .date-and-author {
+      margin-left: auto; }
+      .comment--answer-comment.comment--comment--question-answer > .footer .date-and-author .created {
+        color: #616161; }
+
+.comment--comment.comment--node--question {
+  font-size: 90%; }
+  .comment--comment.comment--node--question > .footer {
+    display: flex;
+    margin-top: 8px; }
+    .comment--comment.comment--node--question > .footer .links {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex; }
+      .comment--comment.comment--node--question > .footer .links li:not(:last-child) {
+        margin-right: 8px; }
+      .comment--comment.comment--node--question > .footer .links li.comment-delete a:before {
+        content: "\F1C0";
+        font-family: "Material Design Icons";
+        font-weight: normal;
+        font-style: normal;
+        display: inline-block;
+        text-decoration: inherit;
+        margin-right: 0.4em; }
+      .comment--comment.comment--node--question > .footer .links li.comment-edit a:before {
+        content: "\F3EB";
+        font-family: "Material Design Icons";
+        font-weight: normal;
+        font-style: normal;
+        display: inline-block;
+        text-decoration: inherit;
+        margin-right: 0.4em; }
+      .comment--comment.comment--node--question > .footer .links li.comment-reply a:before {
+        content: "\F45A";
+        font-family: "Material Design Icons";
+        font-weight: normal;
+        font-style: normal;
+        display: inline-block;
+        text-decoration: inherit;
+        margin-right: 0.4em; }
+    .comment--comment.comment--node--question > .footer .date-and-author {
+      margin-left: auto; }
+      .comment--comment.comment--node--question > .footer .date-and-author .created {
+        color: #616161; }
+
+.comment--question-answer.comment--node--question .answer {
+  display: flex; }
+  .comment--question-answer.comment--node--question .answer > .left {
+    flex: 0 0 50px;
+    margin-right: 16px; }
+  .comment--question-answer.comment--node--question .answer > .content {
+    flex: 0 1 calc(100% - 50px - 16px); }
+    .comment--question-answer.comment--node--question .answer > .content .bottom {
+      margin-top: 16px;
+      display: flex; }
+      .comment--question-answer.comment--node--question .answer > .content .bottom .links {
+        flex: 1 1 auto;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        margin-right: 16px;
+        font-size: 90%; }
+        .comment--question-answer.comment--node--question .answer > .content .bottom .links li:not(:last-child) {
+          margin-right: 8px; }
+        .comment--question-answer.comment--node--question .answer > .content .bottom .links li.comment-delete a:before {
+          content: "\F1C0";
+          font-family: "Material Design Icons";
+          font-weight: normal;
+          font-style: normal;
+          display: inline-block;
+          text-decoration: inherit;
+          margin-right: 0.4em; }
+        .comment--question-answer.comment--node--question .answer > .content .bottom .links li.comment-edit a:before {
+          content: "\F3EB";
+          font-family: "Material Design Icons";
+          font-weight: normal;
+          font-style: normal;
+          display: inline-block;
+          text-decoration: inherit;
+          margin-right: 0.4em; }
+        .comment--question-answer.comment--node--question .answer > .content .bottom .links li.comment-reply a:before {
+          content: "\F185";
+          font-family: "Material Design Icons";
+          font-weight: normal;
+          font-style: normal;
+          display: inline-block;
+          text-decoration: inherit;
+          margin-right: 0.4em; }
+      .comment--question-answer.comment--node--question .answer > .content .bottom .date-and-author {
+        flex: 0 1 200px; }
+        .comment--question-answer.comment--node--question .answer > .content .bottom .date-and-author .druio-author-min {
+          margin-bottom: 8px; }
+        .comment--question-answer.comment--node--question .answer > .content .bottom .date-and-author .created {
+          color: #616161;
+          font-size: 80%; }
+    .comment--question-answer.comment--node--question .answer > .content .comments {
+      border-top: 1px solid #EEEEEE;
+      padding-top: 16px;
+      margin-top: 16px; }
+      .comment--question-answer.comment--node--question .answer > .content .comments .comment {
+        margin-bottom: 16px;
+        padding-bottom: 16px;
+        border-bottom: 1px solid #EEEEEE; }
+        .comment--question-answer.comment--node--question .answer > .content .comments .comment:last-child {
+          border: none;
+          margin: 0; }
+
+.node--post.view-mode--teaser > .title {
+  margin-top: 0;
+  margin-bottom: 16px; }
+
+.node--post.view-mode--teaser > .footer {
+  margin-top: 16px;
+  background: #F5F5F5;
+  border-radius: 4px;
+  display: flex;
+  overflow: hidden; }
+  .node--post.view-mode--teaser > .footer .comments {
+    margin-right: 16px;
+    padding: 8px;
+    display: block; }
+    .node--post.view-mode--teaser > .footer .comments:before {
+      content: "\F368";
+      font-family: "Material Design Icons";
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: 8px; }
+    .node--post.view-mode--teaser > .footer .comments::before {
+      color: #757575; }
+  .node--post.view-mode--teaser > .footer .druio-theme-created-relative {
+    margin-right: 16px;
+    padding: 8px;
+    display: block; }
+    .node--post.view-mode--teaser > .footer .druio-theme-created-relative:before {
+      content: "\F150";
+      font-family: "Material Design Icons";
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: 8px; }
+    .node--post.view-mode--teaser > .footer .druio-theme-created-relative::before {
+      color: #757575; }
+  .node--post.view-mode--teaser > .footer .druio-author-min {
+    padding: 8px; }
+  .node--post.view-mode--teaser > .footer .read-more {
+    margin-left: auto;
+    display: block;
+    background: #EEEEEE;
+    padding: 8px;
+    color: #333; }
+    .node--post.view-mode--teaser > .footer .read-more:hover {
+      background: #FFB926; }
+
+.node--post.view-mode--full > .title {
+  margin-top: 0;
+  margin-bottom: 16px; }
+
+.node--post.view-mode--full > .footer {
+  margin-top: 16px;
+  background: #F5F5F5;
+  border-radius: 4px;
+  display: flex;
+  overflow: hidden; }
+  .node--post.view-mode--full > .footer .comments {
+    margin-right: 16px;
+    padding: 8px;
+    display: block; }
+    .node--post.view-mode--full > .footer .comments:before {
+      content: "\F368";
+      font-family: "Material Design Icons";
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: 8px; }
+    .node--post.view-mode--full > .footer .comments::before {
+      color: #757575; }
+  .node--post.view-mode--full > .footer .druio-theme-created-relative {
+    margin-right: 16px;
+    padding: 8px;
+    display: block; }
+    .node--post.view-mode--full > .footer .druio-theme-created-relative:before {
+      content: "\F150";
+      font-family: "Material Design Icons";
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: 8px; }
+    .node--post.view-mode--full > .footer .druio-theme-created-relative::before {
+      color: #757575; }
+  .node--post.view-mode--full > .footer .druio-author-min {
+    padding: 8px; }
 
 .node--question.view-mode--teaser {
   display: flex;
@@ -8366,291 +8574,21 @@ th {
   .node--question.view-mode--full .answers > .comment:last-child {
     border-bottom: 0; }
 
-.node--post.view-mode--teaser > .title {
-  margin-top: 0;
-  margin-bottom: 16px; }
-
-.node--post.view-mode--teaser > .footer {
-  margin-top: 16px;
-  background: #F5F5F5;
-  border-radius: 4px;
-  display: flex;
-  overflow: hidden; }
-  .node--post.view-mode--teaser > .footer .comments {
-    margin-right: 16px;
-    padding: 8px;
-    display: block; }
-    .node--post.view-mode--teaser > .footer .comments:before {
-      content: "\F368";
-      font-family: "Material Design Icons";
-      font-weight: normal;
-      font-style: normal;
-      display: inline-block;
-      text-decoration: inherit;
-      margin-right: 8px; }
-    .node--post.view-mode--teaser > .footer .comments::before {
-      color: #757575; }
-  .node--post.view-mode--teaser > .footer .druio-theme-created-relative {
-    margin-right: 16px;
-    padding: 8px;
-    display: block; }
-    .node--post.view-mode--teaser > .footer .druio-theme-created-relative:before {
-      content: "\F150";
-      font-family: "Material Design Icons";
-      font-weight: normal;
-      font-style: normal;
-      display: inline-block;
-      text-decoration: inherit;
-      margin-right: 8px; }
-    .node--post.view-mode--teaser > .footer .druio-theme-created-relative::before {
-      color: #757575; }
-  .node--post.view-mode--teaser > .footer .druio-author-min {
-    padding: 8px; }
-  .node--post.view-mode--teaser > .footer .read-more {
-    margin-left: auto;
-    display: block;
-    background: #EEEEEE;
-    padding: 8px;
-    color: #333; }
-    .node--post.view-mode--teaser > .footer .read-more:hover {
-      background: #FFB926; }
-
-.node--post.view-mode--full > .title {
-  margin-top: 0;
-  margin-bottom: 16px; }
-
-.node--post.view-mode--full > .footer {
-  margin-top: 16px;
-  background: #F5F5F5;
-  border-radius: 4px;
-  display: flex;
-  overflow: hidden; }
-  .node--post.view-mode--full > .footer .comments {
-    margin-right: 16px;
-    padding: 8px;
-    display: block; }
-    .node--post.view-mode--full > .footer .comments:before {
-      content: "\F368";
-      font-family: "Material Design Icons";
-      font-weight: normal;
-      font-style: normal;
-      display: inline-block;
-      text-decoration: inherit;
-      margin-right: 8px; }
-    .node--post.view-mode--full > .footer .comments::before {
-      color: #757575; }
-  .node--post.view-mode--full > .footer .druio-theme-created-relative {
-    margin-right: 16px;
-    padding: 8px;
-    display: block; }
-    .node--post.view-mode--full > .footer .druio-theme-created-relative:before {
-      content: "\F150";
-      font-family: "Material Design Icons";
-      font-weight: normal;
-      font-style: normal;
-      display: inline-block;
-      text-decoration: inherit;
-      margin-right: 8px; }
-    .node--post.view-mode--full > .footer .druio-theme-created-relative::before {
-      color: #757575; }
-  .node--post.view-mode--full > .footer .druio-author-min {
-    padding: 8px; }
-
-#block-druio-theme-page-title {
-  margin-bottom: 32px; }
-  #block-druio-theme-page-title h1 {
-    margin: 0; }
-
-#block-druio-theme-branding > a {
-  display: block; }
-  #block-druio-theme-branding > a img {
-    height: 26px; }
-
-#block-druio-theme-main-menu > ul {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-  display: flex;
-  justify-content: flex-end; }
-  #block-druio-theme-main-menu > ul li {
-    flex: 0 1 auto; }
-    #block-druio-theme-main-menu > ul li a {
-      display: block;
-      color: white;
-      line-height: 50px;
-      padding: 0 15px; }
-    #block-druio-theme-main-menu > ul li:last-child a {
-      padding-right: 0; }
-
-.view--questions.display-id--page > .content > .row {
-  margin-top: 32px; }
-
-.view--posts.display-id--page .content > .row {
-  margin-top: 24px; }
-
-.druio-theme-top-line-user {
-  font-size: 13px; }
-  .druio-theme-top-line-user a {
-    color: white; }
-  .druio-theme-top-line-user.is-authenticated .profile {
-    line-height: 34px; }
-  .druio-theme-top-line-user.is-anonymous {
-    line-height: 34px; }
-
-.druio-theme-top-line-search .search-input-pane {
-  position: relative; }
-  .druio-theme-top-line-search .search-input-pane .input {
-    border-radius: 0;
-    background: rgba(255, 255, 255, 0.8);
-    color: #333;
-    border: none;
-    height: 34px; }
-  .druio-theme-top-line-search .search-input-pane .icon {
-    position: absolute;
-    top: 0;
-    right: 0;
-    z-index: 5;
-    color: #333;
-    line-height: 34px;
-    width: 34px;
-    text-align: center;
-    font-size: 20px; }
-    .druio-theme-top-line-search .search-input-pane .icon:before {
-      content: "\F349";
-      font-family: "Material Design Icons";
-      font-weight: normal;
-      font-style: normal;
-      display: inline-block;
-      text-decoration: inherit;
-      margin-right: 0.4em; }
-    .druio-theme-top-line-search .search-input-pane .icon::before {
-      margin: 0; }
-
-.druio-question-meta-field {
-  display: flex;
-  flex-flow: wrap;
-  margin-top: -8px; }
-  .druio-question-meta-field > .item {
-    flex: 0 0 auto;
-    background: #F5F5F5;
-    padding: 4px 8px;
-    font-size: 12px;
-    margin-right: 8px;
-    -moz-user-select: none;
-    user-select: none;
-    margin-top: 8px; }
-    .druio-question-meta-field > .item.drupal-version:before {
-      content: "\F1E4";
-      font-family: "Material Design Icons";
-      font-weight: normal;
-      font-style: normal;
-      display: inline-block;
-      text-decoration: inherit;
-      margin-right: 0.4em; }
-    .druio-question-meta-field > .item.category:before {
-      content: "\F4F9";
-      font-family: "Material Design Icons";
-      font-weight: normal;
-      font-style: normal;
-      display: inline-block;
-      text-decoration: inherit;
-      margin-right: 0.4em; }
-    .druio-question-meta-field > .item.project:before {
-      content: "\F431";
-      font-family: "Material Design Icons";
-      font-weight: normal;
-      font-style: normal;
-      display: inline-block;
-      text-decoration: inherit;
-      margin-right: 0.4em; }
-
-.druio-author-min .link {
-  display: flex;
-  align-items: center; }
-  .druio-author-min .link .avatar {
-    height: 22px;
-    width: 22px;
-    margin-right: 8px;
-    border-radius: 50%; }
-  .druio-author-min .link .username {
-    color: #333;
-    border-bottom: 1px solid rgba(51, 51, 51, 0.3);
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-    min-width: 0; }
-    .druio-author-min .link .username:hover {
-      border-bottom-color: #333; }
-
-.druio-rating .vote-up {
-  font-size: 18px;
-  text-align: center; }
-  .druio-rating .vote-up:before {
-    content: "\F143";
-    font-family: "Material Design Icons";
-    font-weight: normal;
-    font-style: normal;
-    display: inline-block;
-    text-decoration: inherit;
-    margin-right: 0; }
-
-.druio-rating .rating {
-  text-align: center;
-  font-size: 28px;
-  font-weight: bold;
-  color: #757575; }
-
-.druio-rating .vote-up:before {
-  content: "\F143";
-  font-family: "Material Design Icons";
-  font-weight: normal;
-  font-style: normal;
-  display: inline-block;
-  text-decoration: inherit;
-  margin-right: 0; }
-
-.druio-rating .vote-down:before {
-  content: "\F140";
-  font-family: "Material Design Icons";
-  font-weight: normal;
-  font-style: normal;
-  display: inline-block;
-  text-decoration: inherit;
-  margin-right: 0; }
-
-.druio-rating .vote-up,
-.druio-rating .vote-down {
-  font-size: 50px;
-  line-height: 18px;
-  text-align: center;
-  color: #9E9E9E;
-  cursor: pointer; }
-
 /**
  * @file
  * Styles which you want to use more than few times and they always the same.
  */
-.node--question.view-mode--teaser .content .title a, .node--question.view-mode--full .question > .content .comments .add-comment, .comment--question-answer.comment--node--question .answer > .content .comments .add-comment {
+.comment--question-answer.comment--node--question .answer > .content .comments .add-comment, .node--question.view-mode--teaser .content .title a, .node--question.view-mode--full .question > .content .comments .add-comment {
   color: #333;
   border-bottom: 1px solid transparent; }
-  .node--question.view-mode--teaser .content .title a:hover, .node--question.view-mode--full .question > .content .comments .add-comment:hover, .comment--question-answer.comment--node--question .answer > .content .comments .add-comment:hover {
+  .comment--question-answer.comment--node--question .answer > .content .comments .add-comment:hover, .node--question.view-mode--teaser .content .title a:hover, .node--question.view-mode--full .question > .content .comments .add-comment:hover {
     border-bottom: 1px solid rgba(51, 51, 51, 0.2); }
 
-.node--question.view-mode--full .question > .content .bottom .meta-and-links .links li a, .comment--comment.comment--node--question > .footer .links li a, .comment--question-answer.comment--node--question .answer > .content .bottom .links li a, .comment--answer-comment.comment--comment--question-answer > .footer .links li a {
+.comment--answer-comment.comment--comment--question-answer > .footer .links li a, .comment--comment.comment--node--question > .footer .links li a, .comment--question-answer.comment--node--question .answer > .content .bottom .links li a, .node--question.view-mode--full .question > .content .bottom .meta-and-links .links li a {
   color: #BDBDBD;
   border-bottom: 1px solid transparent; }
-  .node--question.view-mode--full .question > .content .bottom .meta-and-links .links li a:hover, .comment--comment.comment--node--question > .footer .links li a:hover, .comment--question-answer.comment--node--question .answer > .content .bottom .links li a:hover, .comment--answer-comment.comment--comment--question-answer > .footer .links li a:hover {
+  .comment--answer-comment.comment--comment--question-answer > .footer .links li a:hover, .comment--comment.comment--node--question > .footer .links li a:hover, .comment--question-answer.comment--node--question .answer > .content .bottom .links li a:hover, .node--question.view-mode--full .question > .content .bottom .meta-and-links .links li a:hover {
     color: #333; }
-
-.snippet-footer-logo .logo {
-  margin-bottom: 16px;
-  height: 26px; }
-
-.snippet-footer-logo .description {
-  font-size: 13px; }
-
-.snippet-footer-copyright {
-  color: #9E9E9E; }
 
 .drupal-russian-community {
   background: url("../images/drupal-russian-community--bg.jpg") center center/cover;
@@ -8765,147 +8703,156 @@ th {
   .drupal-russian-community__auth {
     flex: 0 1 50%; }
 
-.comment--comment.comment--node--question {
-  font-size: 90%; }
-  .comment--comment.comment--node--question > .footer {
-    display: flex;
-    margin-top: 8px; }
-    .comment--comment.comment--node--question > .footer .links {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex; }
-      .comment--comment.comment--node--question > .footer .links li:not(:last-child) {
-        margin-right: 8px; }
-      .comment--comment.comment--node--question > .footer .links li.comment-delete a:before {
-        content: "\F1C0";
-        font-family: "Material Design Icons";
-        font-weight: normal;
-        font-style: normal;
-        display: inline-block;
-        text-decoration: inherit;
-        margin-right: 0.4em; }
-      .comment--comment.comment--node--question > .footer .links li.comment-edit a:before {
-        content: "\F3EB";
-        font-family: "Material Design Icons";
-        font-weight: normal;
-        font-style: normal;
-        display: inline-block;
-        text-decoration: inherit;
-        margin-right: 0.4em; }
-      .comment--comment.comment--node--question > .footer .links li.comment-reply a:before {
-        content: "\F45A";
-        font-family: "Material Design Icons";
-        font-weight: normal;
-        font-style: normal;
-        display: inline-block;
-        text-decoration: inherit;
-        margin-right: 0.4em; }
-    .comment--comment.comment--node--question > .footer .date-and-author {
-      margin-left: auto; }
-      .comment--comment.comment--node--question > .footer .date-and-author .created {
-        color: #616161; }
+.snippet-footer-copyright {
+  color: #9E9E9E; }
 
-.comment--question-answer.comment--node--question .answer {
-  display: flex; }
-  .comment--question-answer.comment--node--question .answer > .left {
-    flex: 0 0 50px;
-    margin-right: 16px; }
-  .comment--question-answer.comment--node--question .answer > .content {
-    flex: 0 1 calc(100% - 50px - 16px); }
-    .comment--question-answer.comment--node--question .answer > .content .bottom {
-      margin-top: 16px;
-      display: flex; }
-      .comment--question-answer.comment--node--question .answer > .content .bottom .links {
-        flex: 1 1 auto;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        display: flex;
-        margin-right: 16px;
-        font-size: 90%; }
-        .comment--question-answer.comment--node--question .answer > .content .bottom .links li:not(:last-child) {
-          margin-right: 8px; }
-        .comment--question-answer.comment--node--question .answer > .content .bottom .links li.comment-delete a:before {
-          content: "\F1C0";
-          font-family: "Material Design Icons";
-          font-weight: normal;
-          font-style: normal;
-          display: inline-block;
-          text-decoration: inherit;
-          margin-right: 0.4em; }
-        .comment--question-answer.comment--node--question .answer > .content .bottom .links li.comment-edit a:before {
-          content: "\F3EB";
-          font-family: "Material Design Icons";
-          font-weight: normal;
-          font-style: normal;
-          display: inline-block;
-          text-decoration: inherit;
-          margin-right: 0.4em; }
-        .comment--question-answer.comment--node--question .answer > .content .bottom .links li.comment-reply a:before {
-          content: "\F185";
-          font-family: "Material Design Icons";
-          font-weight: normal;
-          font-style: normal;
-          display: inline-block;
-          text-decoration: inherit;
-          margin-right: 0.4em; }
-      .comment--question-answer.comment--node--question .answer > .content .bottom .date-and-author {
-        flex: 0 1 200px; }
-        .comment--question-answer.comment--node--question .answer > .content .bottom .date-and-author .druio-author-min {
-          margin-bottom: 8px; }
-        .comment--question-answer.comment--node--question .answer > .content .bottom .date-and-author .created {
-          color: #616161;
-          font-size: 80%; }
-    .comment--question-answer.comment--node--question .answer > .content .comments {
-      border-top: 1px solid #EEEEEE;
-      padding-top: 16px;
-      margin-top: 16px; }
-      .comment--question-answer.comment--node--question .answer > .content .comments .comment {
-        margin-bottom: 16px;
-        padding-bottom: 16px;
-        border-bottom: 1px solid #EEEEEE; }
-        .comment--question-answer.comment--node--question .answer > .content .comments .comment:last-child {
-          border: none;
-          margin: 0; }
+.snippet-footer-logo .logo {
+  margin-bottom: 16px;
+  height: 26px; }
 
-.comment--answer-comment.comment--comment--question-answer {
-  font-size: 90%; }
-  .comment--answer-comment.comment--comment--question-answer > .footer {
-    display: flex;
+.snippet-footer-logo .description {
+  font-size: 13px; }
+
+.druio-author-min .link {
+  display: flex;
+  align-items: center; }
+  .druio-author-min .link .avatar {
+    height: 22px;
+    width: 22px;
+    margin-right: 8px;
+    border-radius: 50%; }
+  .druio-author-min .link .username {
+    color: #333;
+    border-bottom: 1px solid rgba(51, 51, 51, 0.3);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    min-width: 0; }
+    .druio-author-min .link .username:hover {
+      border-bottom-color: #333; }
+
+.druio-question-meta-field {
+  display: flex;
+  flex-flow: wrap;
+  margin-top: -8px; }
+  .druio-question-meta-field > .item {
+    flex: 0 0 auto;
+    background: #F5F5F5;
+    padding: 4px 8px;
+    font-size: 12px;
+    margin-right: 8px;
+    -moz-user-select: none;
+    user-select: none;
     margin-top: 8px; }
-    .comment--answer-comment.comment--comment--question-answer > .footer .links {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      display: flex; }
-      .comment--answer-comment.comment--comment--question-answer > .footer .links li:not(:last-child) {
-        margin-right: 8px; }
-      .comment--answer-comment.comment--comment--question-answer > .footer .links li.comment-delete a:before {
-        content: "\F1C0";
-        font-family: "Material Design Icons";
-        font-weight: normal;
-        font-style: normal;
-        display: inline-block;
-        text-decoration: inherit;
-        margin-right: 0.4em; }
-      .comment--answer-comment.comment--comment--question-answer > .footer .links li.comment-edit a:before {
-        content: "\F3EB";
-        font-family: "Material Design Icons";
-        font-weight: normal;
-        font-style: normal;
-        display: inline-block;
-        text-decoration: inherit;
-        margin-right: 0.4em; }
-      .comment--answer-comment.comment--comment--question-answer > .footer .links li.comment-reply a:before {
-        content: "\F45A";
-        font-family: "Material Design Icons";
-        font-weight: normal;
-        font-style: normal;
-        display: inline-block;
-        text-decoration: inherit;
-        margin-right: 0.4em; }
-    .comment--answer-comment.comment--comment--question-answer > .footer .date-and-author {
-      margin-left: auto; }
-      .comment--answer-comment.comment--comment--question-answer > .footer .date-and-author .created {
-        color: #616161; }
+    .druio-question-meta-field > .item.drupal-version:before {
+      content: "\F1E4";
+      font-family: "Material Design Icons";
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: 0.4em; }
+    .druio-question-meta-field > .item.category:before {
+      content: "\F4F9";
+      font-family: "Material Design Icons";
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: 0.4em; }
+    .druio-question-meta-field > .item.project:before {
+      content: "\F431";
+      font-family: "Material Design Icons";
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: 0.4em; }
+
+.druio-rating .vote-up {
+  font-size: 18px;
+  text-align: center; }
+  .druio-rating .vote-up:before {
+    content: "\F143";
+    font-family: "Material Design Icons";
+    font-weight: normal;
+    font-style: normal;
+    display: inline-block;
+    text-decoration: inherit;
+    margin-right: 0; }
+
+.druio-rating .rating {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  color: #757575; }
+
+.druio-rating .vote-up:before {
+  content: "\F143";
+  font-family: "Material Design Icons";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  margin-right: 0; }
+
+.druio-rating .vote-down:before {
+  content: "\F140";
+  font-family: "Material Design Icons";
+  font-weight: normal;
+  font-style: normal;
+  display: inline-block;
+  text-decoration: inherit;
+  margin-right: 0; }
+
+.druio-rating .vote-up,
+.druio-rating .vote-down {
+  font-size: 50px;
+  line-height: 18px;
+  text-align: center;
+  color: #9E9E9E;
+  cursor: pointer; }
+
+.druio-theme-top-line-search .search-input-pane {
+  position: relative; }
+  .druio-theme-top-line-search .search-input-pane .input {
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.8);
+    color: #333;
+    border: none;
+    height: 34px; }
+  .druio-theme-top-line-search .search-input-pane .icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 5;
+    color: #333;
+    line-height: 34px;
+    width: 34px;
+    text-align: center;
+    font-size: 20px; }
+    .druio-theme-top-line-search .search-input-pane .icon:before {
+      content: "\F349";
+      font-family: "Material Design Icons";
+      font-weight: normal;
+      font-style: normal;
+      display: inline-block;
+      text-decoration: inherit;
+      margin-right: 0.4em; }
+    .druio-theme-top-line-search .search-input-pane .icon::before {
+      margin: 0; }
+
+.druio-theme-top-line-user {
+  font-size: 13px; }
+  .druio-theme-top-line-user a {
+    color: white; }
+  .druio-theme-top-line-user.is-authenticated .profile {
+    line-height: 34px; }
+  .druio-theme-top-line-user.is-anonymous {
+    line-height: 34px; }
+
+.view--posts.display-id--page .content > .row {
+  margin-top: 24px; }
+
+.view--questions.display-id--page > .content > .row {
+  margin-top: 32px; }

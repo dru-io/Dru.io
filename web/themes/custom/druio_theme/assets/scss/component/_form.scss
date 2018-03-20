@@ -1,3 +1,19 @@
+$input-bg:                white !default;
+$input-border:            rgba(34,36,38,.15) !default;
+$input-border-focus:      theme-color('primary');
+$input-enable-shadows:    false !default;
+$input-box-shadow:        0 0 0 0 transparent !default;
+$input-focus-box-shadow:  0 0 0 3px rgba(theme-color('primary'), .5) !default;
+$input-border-radius:     $border-radius-small !default;
+
+$input-bg-disabled:     rgb(250, 250, 250) !default;
+$input-color-disabled:  rgba(163, 163, 163, 1) !default;
+
+$label-required-enabled: true !default;
+$label-required-content: '*' !default;
+$label-required-color:   theme-color('error') !default;
+$label-required-margin:  0 0 0 .25rem !default;
+
 input[type="text"],
 input[type="password"],
 input[type="email"],
@@ -114,7 +130,6 @@ html.js {
     }
   }
 }
-
 
 /**
  * Drupal specific styles.

@@ -1,0 +1,186 @@
+$input-btn-padding-y:    8px !default;
+$input-btn-padding-x:    16px !default;
+$input-btn-line-height:  1.25 !default;
+$input-btn-border-width: 1px !default;
+
+// Small button
+$input-btn-padding-y-sm:   4px !default;
+$input-btn-padding-x-sm:   8px !default;
+$input-btn-line-height-sm: 1.5 !default;
+
+// Large buttons
+$input-btn-padding-y-lg:   8px !default;
+$input-btn-padding-x-lg:   16px !default;
+$input-btn-line-height-lg: 1.5 !default;
+
+$btn-font-weight:       normal !default;
+$btn-enable-shadows:    true !default;
+$btn-box-shadow:        0 1px 1px rgba(black, .125) !default;
+$btn-border-radius:     $border-radius-small !default;
+
+$btn-default-color:  #333 !default;
+$btn-default-bg:     #fff !default;
+$btn-default-border: #ccc !default;
+
+$btn-primary-color:  white !default;
+$btn-primary-bg:     theme-color('primary') !default;
+$btn-primary-border: transparent !default;
+
+$btn-success-color:  white !default;
+$btn-success-bg:     theme-color('success') !default;
+$btn-success-border: darken($btn-success-bg, 5%) !default;
+
+$btn-warning-color:  white !default;
+$btn-warning-bg:     theme-color('warning') !default;
+$btn-warning-border: darken($btn-warning-bg, 5%) !default;
+
+$btn-danger-color:  white !default;
+$btn-danger-bg:     theme-color('error') !default;
+$btn-danger-border: darken($btn-danger-bg, 5%) !default;
+
+$btn-info-color:  white !default;
+$btn-info-bg:     theme-color('info') !default;
+$btn-info-border: darken($btn-info-bg, 5%) !default;
+
+/**
+ * Button style generator.
+ */
+@mixin button-variant($color, $background, $border: transparent) {
+  @extend %button;
+  $active-background: darken($background, 10%);
+  $active-border: darken($border, 12%);
+
+  color: $color;
+  background-color: $background;
+  background-image: none;
+  border-color: $border;
+  transition: all .15s ease-in-out;
+  @if ($btn-enable-shadows) {
+    box-shadow: $btn-box-shadow;
+  }
+
+  &:focus,
+  &:hover {
+    color: $color;
+    background-color: $active-background;
+    border-color: $active-border;
+  }
+
+  &:focus {
+    outline: none;
+    @if ($btn-enable-shadows) {
+      box-shadow: 0 0 0 3px rgba($background, .5);
+    }
+  }
+
+  &:disabled {
+    background-color: $background;
+    border-color: $border;
+    opacity: .65;
+  }
+
+  &:active {
+    color: $color;
+    background-color: $active-background;
+    background-image: none;
+    border-color: $active-border;
+    @if ($btn-enable-shadows) {
+      box-shadow: 0 0 0 3px rgba($background, .5);
+    }
+  }
+}
+
+/**
+ * Outline button variant.
+ */
+@mixin button-outline-variant($color, $color-hover: #fff) {
+  @extend %button;
+  color: $color;
+  background-color: transparent;
+  background-image: none;
+  border-color: $color;
+  box-shadow: none;
+  transition: all .15s ease-in-out;
+
+  &:hover,
+  &:focus {
+    color: $color-hover;
+    background-color: $color;
+    border-color: $color;
+  }
+
+  &:focus {
+    @if ($btn-enable-shadows) {
+      box-shadow: 0 0 0 3px rgba($color, .5);
+    }
+  }
+
+  &:disabled {
+    color: $color;
+    background-color: transparent;
+    opacity: .65;
+  }
+}
+
+/**
+ * Generates button base styles.
+ */
+%button {
+  display: inline-block;
+  font-weight: $btn-font-weight;
+  line-height: $input-btn-line-height;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: $input-btn-border-width solid transparent;
+  padding: $input-btn-padding-y $input-btn-padding-x;
+  font-size: $font-size-base;
+  border-radius: $btn-border-radius;
+}
+
+/**
+ * Default button.
+ */
+.button {
+  @include button-variant($btn-default-color, $btn-default-bg, $btn-default-border);
+}
+
+/**
+ * Submit and primary button style.
+ */
+.form-submit,
+.button-primary,
+.button-action {
+  @include button-variant($btn-primary-color, $btn-primary-bg, $btn-primary-border);
+}
+
+/**
+ * Warning and preview buttons style.
+ */
+.button-warning,
+#edit-preview {
+  @include button-variant($btn-warning-color, $btn-warning-bg, $btn-warning-border);
+}
+
+/**
+ * Danger and delete button style.
+ */
+.button-danger,
+#edit-delete {
+  @include button-variant($btn-danger-color, $btn-danger-bg, $btn-danger-border);
+}
+
+/**
+ * Success button style.
+ */
+.button-success {
+  @include button-variant($btn-success-color, $btn-success-bg, $btn-success-border);
+}
+
+/**
+ * Info button style.
+ */
+.button-info {
+  @include button-variant($btn-info-color, $btn-info-bg, $btn-info-border);
+}
