@@ -2,8 +2,7 @@
   border-bottom: 2px solid theme-color('primary');
   background: rgba(color('dark'), .8);
 
-  > .container {
-    @include media-container;
+  .region__container {
     display: grid;
     grid-gap: $grid-gap;
     grid-template-columns: auto 1fr;

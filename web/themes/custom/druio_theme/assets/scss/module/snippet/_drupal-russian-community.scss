@@ -15,7 +15,7 @@
     @include gradient-y(rgba(black, .1), rgba(black, .5));
   }
 
-  > .container {
+  &__container {
     @include media-container();
     display: flex;
     flex-flow: wrap;
@@ -31,16 +31,14 @@
       font-weight: bold;
       font-size: 40px;
     }
+  }
 
-    .drupal-russian-community-links {
-      &__promo {
-        @include button-variant($text-color, theme-color('primary'));
-      }
+  &__link--promo {
+    @include button-variant($text-color, theme-color('primary'));
+  }
 
-      &__download {
-        @include button-variant($text-color, white);
-      }
-    }
+  &__link--download {
+    @include button-variant($text-color, white);
   }
 
   &__auth {

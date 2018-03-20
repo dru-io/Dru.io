@@ -8,19 +8,18 @@
 #}
 
 <div id="app">
-  <div class="region--top-line">
-    <div class="container">
+  <div class="region region--top-line">
+    <div class="region__container">
       <div class="static-menu">
-        <a href="/tracker" class="item tracker">Трекер</a>
-        <a href="https://github.com/dru-io/Dru.io" target="_blank" rel="nofollow" class="item github">GitHub</a>
-        <a href="/chat" class="item chat">Чат</a>
+        <a href="/tracker" class="static-menu__item static-menu__item--tracker">Трекер</a>
+        <a href="https://github.com/dru-io/Dru.io" target="_blank" rel="nofollow" class="static-menu__item static-menu__item--github">GitHub</a>
+        <a href="/chat" class="static-menu__item static-menu__item--chat">Чат</a>
       </div>
       {{ top_line_auth }}
       {{ top_line_search }}
     </div>
   </div>
   {{ page.header }}
-
   <main id="main">
     {{ page.content_top }}
     <div class="content-and-sidebars">

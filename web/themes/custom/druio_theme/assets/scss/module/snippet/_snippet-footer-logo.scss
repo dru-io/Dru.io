@@ -1,10 +1,10 @@
 .snippet-footer-logo {
-  .logo {
+  &__logo {
     margin-bottom: 16px;
     height: 26px;
   }
 
-  .description {
+  &__description {
     font-size: 13px;
   }
 }

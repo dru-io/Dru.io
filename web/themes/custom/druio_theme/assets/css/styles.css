@@ -7259,7 +7259,7 @@ blockquote {
 .button-primary, .ui-dialog .ui-dialog-buttonpane .ui-dialog-buttonset .button,
 .button-action, .button-warning,
 #edit-preview, .button-danger,
-#edit-delete, .button-success, .button-info, .drupal-russian-community__description .drupal-russian-community-links__promo, .drupal-russian-community__description .drupal-russian-community-links__download {
+#edit-delete, .button-success, .button-info, .drupal-russian-community__link--promo, .drupal-russian-community__link--download {
   display: inline-block;
   font-weight: normal;
   line-height: 1.25;
@@ -8013,51 +8013,6 @@ th {
     .region--footer > .container #block-footer-copyright {
       grid-area: copy; }
 
-.region--header {
-  border-bottom: 2px solid #FFB926;
-  background: rgba(24, 24, 24, 0.8); }
-  .region--header > .container {
-    margin-right: auto;
-    margin-left: auto;
-    padding-right: 15px;
-    padding-left: 15px;
-    display: grid;
-    grid-gap: 30px;
-    grid-template-columns: auto 1fr;
-    align-items: center; }
-    @media (min-width: 576px) {
-      .region--header > .container {
-        width: 540px;
-        max-width: 100%; } }
-    @media (min-width: 768px) {
-      .region--header > .container {
-        width: 720px;
-        max-width: 100%; } }
-    @media (min-width: 992px) {
-      .region--header > .container {
-        width: 960px;
-        max-width: 100%; } }
-    @media (min-width: 1200px) {
-      .region--header > .container {
-        width: 1170px;
-        max-width: 100%; } }
-    @media (min-width: 576px) {
-      .region--header > .container {
-        padding-right: 15px;
-        padding-left: 15px; } }
-    @media (min-width: 768px) {
-      .region--header > .container {
-        padding-right: 15px;
-        padding-left: 15px; } }
-    @media (min-width: 992px) {
-      .region--header > .container {
-        padding-right: 15px;
-        padding-left: 15px; } }
-    @media (min-width: 1200px) {
-      .region--header > .container {
-        padding-right: 7.5px;
-        padding-left: 7.5px; } }
-
 /**
  * @file
  * Layout settings.
@@ -8069,58 +8024,69 @@ th {
   margin-top: -32px;
   margin-bottom: 32px; }
 
+.region--header {
+  border-bottom: 2px solid #FFB926;
+  background: rgba(24, 24, 24, 0.8); }
+  .region--header .region__container {
+    display: grid;
+    grid-gap: 30px;
+    grid-template-columns: auto 1fr;
+    align-items: center; }
+
+.region__container {
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: 15px;
+  padding-left: 15px; }
+  @media (min-width: 576px) {
+    .region__container {
+      width: 540px;
+      max-width: 100%; } }
+  @media (min-width: 768px) {
+    .region__container {
+      width: 720px;
+      max-width: 100%; } }
+  @media (min-width: 992px) {
+    .region__container {
+      width: 960px;
+      max-width: 100%; } }
+  @media (min-width: 1200px) {
+    .region__container {
+      width: 1170px;
+      max-width: 100%; } }
+  @media (min-width: 576px) {
+    .region__container {
+      padding-right: 15px;
+      padding-left: 15px; } }
+  @media (min-width: 768px) {
+    .region__container {
+      padding-right: 15px;
+      padding-left: 15px; } }
+  @media (min-width: 992px) {
+    .region__container {
+      padding-right: 15px;
+      padding-left: 15px; } }
+  @media (min-width: 1200px) {
+    .region__container {
+      padding-right: 7.5px;
+      padding-left: 7.5px; } }
+
 .region--top-line {
   background: #181818;
   color: rgba(255, 255, 255, 0.6); }
-  .region--top-line > .container {
-    margin-right: auto;
-    margin-left: auto;
-    padding-right: 15px;
-    padding-left: 15px;
+  .region--top-line .region__container {
     display: grid;
     grid-gap: 30px;
     grid-template-columns: 1fr auto 270px; }
-    @media (min-width: 576px) {
-      .region--top-line > .container {
-        width: 540px;
-        max-width: 100%; } }
-    @media (min-width: 768px) {
-      .region--top-line > .container {
-        width: 720px;
-        max-width: 100%; } }
-    @media (min-width: 992px) {
-      .region--top-line > .container {
-        width: 960px;
-        max-width: 100%; } }
-    @media (min-width: 1200px) {
-      .region--top-line > .container {
-        width: 1170px;
-        max-width: 100%; } }
-    @media (min-width: 576px) {
-      .region--top-line > .container {
-        padding-right: 15px;
-        padding-left: 15px; } }
-    @media (min-width: 768px) {
-      .region--top-line > .container {
-        padding-right: 15px;
-        padding-left: 15px; } }
-    @media (min-width: 992px) {
-      .region--top-line > .container {
-        padding-right: 15px;
-        padding-left: 15px; } }
-    @media (min-width: 1200px) {
-      .region--top-line > .container {
-        padding-right: 7.5px;
-        padding-left: 7.5px; } }
-    .region--top-line > .container .static-menu {
+    .region--top-line .region__container .static-menu {
       display: flex; }
-      .region--top-line > .container .static-menu .item {
+      .region--top-line .region__container .static-menu__item {
         display: block;
         color: rgba(255, 255, 255, 0.6);
         height: 34px;
         padding: 0 8px;
         font-size: 85%; }
-        .region--top-line > .container .static-menu .item.tracker:before {
+        .region--top-line .region__container .static-menu__item--tracker:before {
           content: "\F09C";
           font-family: "Material Design Icons";
           font-weight: normal;
@@ -8128,7 +8094,7 @@ th {
           display: inline-block;
           text-decoration: inherit;
           margin-right: 0.4em; }
-        .region--top-line > .container .static-menu .item.github:before {
+        .region--top-line .region__container .static-menu__item--github:before {
           content: "\F2A4";
           font-family: "Material Design Icons";
           font-weight: normal;
@@ -8136,7 +8102,7 @@ th {
           display: inline-block;
           text-decoration: inherit;
           margin-right: 0.4em; }
-        .region--top-line > .container .static-menu .item.chat:before {
+        .region--top-line .region__container .static-menu__item--chat:before {
           content: "\F369";
           font-family: "Material Design Icons";
           font-weight: normal;
@@ -8144,12 +8110,12 @@ th {
           display: inline-block;
           text-decoration: inherit;
           margin-right: 0.4em; }
-        .region--top-line > .container .static-menu .item:before {
+        .region--top-line .region__container .static-menu__item:before {
           font-size: 135%;
           line-height: 34px; }
-        .region--top-line > .container .static-menu .item:hover {
+        .region--top-line .region__container .static-menu__item:hover {
           color: white; }
-        .region--top-line > .container .static-menu .item:first-child {
+        .region--top-line .region__container .static-menu__item:first-child {
           padding-left: 0; }
 
 #block-druio-theme-page-title {
@@ -8605,7 +8571,7 @@ th {
     left: 0;
     background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.5) 100%);
     background-repeat: repeat-x; }
-  .drupal-russian-community > .container {
+  .drupal-russian-community__container {
     margin-right: auto;
     margin-left: auto;
     padding-right: 15px;
@@ -8615,35 +8581,35 @@ th {
     position: relative;
     z-index: 1; }
     @media (min-width: 576px) {
-      .drupal-russian-community > .container {
+      .drupal-russian-community__container {
         width: 540px;
         max-width: 100%; } }
     @media (min-width: 768px) {
-      .drupal-russian-community > .container {
+      .drupal-russian-community__container {
         width: 720px;
         max-width: 100%; } }
     @media (min-width: 992px) {
-      .drupal-russian-community > .container {
+      .drupal-russian-community__container {
         width: 960px;
         max-width: 100%; } }
     @media (min-width: 1200px) {
-      .drupal-russian-community > .container {
+      .drupal-russian-community__container {
         width: 1170px;
         max-width: 100%; } }
     @media (min-width: 576px) {
-      .drupal-russian-community > .container {
+      .drupal-russian-community__container {
         padding-right: 15px;
         padding-left: 15px; } }
     @media (min-width: 768px) {
-      .drupal-russian-community > .container {
+      .drupal-russian-community__container {
         padding-right: 15px;
         padding-left: 15px; } }
     @media (min-width: 992px) {
-      .drupal-russian-community > .container {
+      .drupal-russian-community__container {
         padding-right: 15px;
         padding-left: 15px; } }
     @media (min-width: 1200px) {
-      .drupal-russian-community > .container {
+      .drupal-russian-community__container {
         padding-right: 7.5px;
         padding-left: 7.5px; } }
   .drupal-russian-community__description {
@@ -8652,65 +8618,65 @@ th {
     .drupal-russian-community__description .title {
       font-weight: bold;
       font-size: 40px; }
-    .drupal-russian-community__description .drupal-russian-community-links__promo {
+  .drupal-russian-community__link--promo {
+    color: #333;
+    background-color: #FFB926;
+    background-image: none;
+    border-color: transparent;
+    transition: all .15s ease-in-out;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125); }
+    .drupal-russian-community__link--promo:focus, .drupal-russian-community__link--promo:hover {
       color: #333;
+      background-color: #f2a400;
+      border-color: transparent; }
+    .drupal-russian-community__link--promo:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255, 185, 38, 0.5); }
+    .drupal-russian-community__link--promo:disabled {
       background-color: #FFB926;
-      background-image: none;
       border-color: transparent;
-      transition: all .15s ease-in-out;
-      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125); }
-      .drupal-russian-community__description .drupal-russian-community-links__promo:focus, .drupal-russian-community__description .drupal-russian-community-links__promo:hover {
-        color: #333;
-        background-color: #f2a400;
-        border-color: transparent; }
-      .drupal-russian-community__description .drupal-russian-community-links__promo:focus {
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(255, 185, 38, 0.5); }
-      .drupal-russian-community__description .drupal-russian-community-links__promo:disabled {
-        background-color: #FFB926;
-        border-color: transparent;
-        opacity: .65; }
-      .drupal-russian-community__description .drupal-russian-community-links__promo:active {
-        color: #333;
-        background-color: #f2a400;
-        background-image: none;
-        border-color: transparent;
-        box-shadow: 0 0 0 3px rgba(255, 185, 38, 0.5); }
-    .drupal-russian-community__description .drupal-russian-community-links__download {
+      opacity: .65; }
+    .drupal-russian-community__link--promo:active {
       color: #333;
-      background-color: white;
+      background-color: #f2a400;
       background-image: none;
       border-color: transparent;
-      transition: all .15s ease-in-out;
-      box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125); }
-      .drupal-russian-community__description .drupal-russian-community-links__download:focus, .drupal-russian-community__description .drupal-russian-community-links__download:hover {
-        color: #333;
-        background-color: #e6e6e6;
-        border-color: transparent; }
-      .drupal-russian-community__description .drupal-russian-community-links__download:focus {
-        outline: none;
-        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5); }
-      .drupal-russian-community__description .drupal-russian-community-links__download:disabled {
-        background-color: white;
-        border-color: transparent;
-        opacity: .65; }
-      .drupal-russian-community__description .drupal-russian-community-links__download:active {
-        color: #333;
-        background-color: #e6e6e6;
-        background-image: none;
-        border-color: transparent;
-        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5); }
+      box-shadow: 0 0 0 3px rgba(255, 185, 38, 0.5); }
+  .drupal-russian-community__link--download {
+    color: #333;
+    background-color: white;
+    background-image: none;
+    border-color: transparent;
+    transition: all .15s ease-in-out;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125); }
+    .drupal-russian-community__link--download:focus, .drupal-russian-community__link--download:hover {
+      color: #333;
+      background-color: #e6e6e6;
+      border-color: transparent; }
+    .drupal-russian-community__link--download:focus {
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5); }
+    .drupal-russian-community__link--download:disabled {
+      background-color: white;
+      border-color: transparent;
+      opacity: .65; }
+    .drupal-russian-community__link--download:active {
+      color: #333;
+      background-color: #e6e6e6;
+      background-image: none;
+      border-color: transparent;
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.5); }
   .drupal-russian-community__auth {
     flex: 0 1 50%; }
 
 .snippet-footer-copyright {
   color: #9E9E9E; }
 
-.snippet-footer-logo .logo {
+.snippet-footer-logo__logo {
   margin-bottom: 16px;
   height: 26px; }
 
-.snippet-footer-logo .description {
+.snippet-footer-logo__description {
   font-size: 13px; }
 
 .druio-author-min .link {

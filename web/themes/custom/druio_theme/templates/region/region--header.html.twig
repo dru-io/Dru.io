@@ -1,0 +1,18 @@
+{#
+/**
+ * @file
+ * Theme override to display a region.
+ *
+ * @see template_preprocess_region()
+ */
+#}
+{% set attributes = attributes.setAttribute('id', 'header') %}
+{% set attributes = attributes.addClass('region') %}
+{% set attributes = attributes.addClass('region--header') %}
+{% if content %}
+  <header{{ attributes }}>
+    <div class="region__container">
+      {{ content }}
+    </div>
+  </header>
+{% endif %}
