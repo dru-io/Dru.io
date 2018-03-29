@@ -209,7 +209,7 @@ class backup_migrate_filter_backup_restore extends backup_migrate_filter {
    */
   function _get_destination_types() {
     backup_migrate_include('destinations');
-    static $destinations = NULL;
+    $destinations = &drupal_static('backup_migrate_filter_backup_restore::_get_destination_types', NULL);
     if (!is_array($destinations)) {
       $destinations = array();
       $types = backup_migrate_get_destination_subtypes();
@@ -230,7 +230,7 @@ class backup_migrate_filter_backup_restore extends backup_migrate_filter {
    */
   function _get_source_types() {
     backup_migrate_include('sources');
-    static $sources = NULL;
+    $sources = &drupal_static('backup_migrate_filter_backup_restore::_get_source_types', NULL);
     if (!is_array($sources)) {
       $sources = array();
       $types = backup_migrate_get_source_subtypes();

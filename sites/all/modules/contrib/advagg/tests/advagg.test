@@ -12,6 +12,14 @@
  * Advanced Aggregates testing functionality.
  */
 
+// Include all files in the project for simple sanity checking.
+$files = file_scan_directory(drupal_get_path('module', 'advagg'), "/.*\.(inc|module|install|php)$/", array(
+  'nomask' => '/(\\.\\.?|CVS|tpl\.php)$/',
+));
+foreach ($files as $file) {
+  include_once DRUPAL_ROOT . '/' . $file->uri;
+}
+
 /**
  * Resets static variables related to adding CSS to a page.
  */
@@ -842,7 +850,7 @@ class AdvAggJavaScriptTestCase extends DrupalWebTestCase {
     // 'javascript_always_use_jquery' variable is set to FALSE, drupal_get_js()
     // should not return jQuery and other standard scripts and settings, nor
     // should it return the requested settings (since they cannot actually be
-    // addded to the page without jQuery).
+    // added to the page without jQuery).
     advagg_test_reset_statics();
     variable_set('javascript_always_use_jquery', FALSE);
     drupal_add_js(array('testJavaScriptSetting' => 'test'), 'setting');

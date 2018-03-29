@@ -134,7 +134,7 @@ function backup_migrate_backup_migrate_destinations() {
  *    'all' - all available destinations should be returned
  */
 function backup_migrate_get_destinations($op = 'all') {
-  static $destinations = NULL;
+  $destinations = &drupal_static('backup_migrate_get_destinations', NULL);
 
   // Get the list of destinations and cache them locally.
   if ($destinations === NULL) {
@@ -319,7 +319,7 @@ function _backup_migrate_ui_destination_display_files($destination = NULL, $limi
 function _backup_migrate_ui_destination_display_file_list($files, $options = array()) {
   drupal_add_css(drupal_get_path('module', 'backup_migrate') .'/backup_migrate.css');
 
-  // Set soem default options
+  // Set some default options
   $options += array(
     'pager' => TRUE,
     'more' => FALSE,
@@ -404,7 +404,7 @@ function _backup_migrate_ui_destination_display_file_list($files, $options = arr
       $start = 0;
 
       if ($options['pager']) {
-        $page = isset($_GET['page']) ? $_GET['page'] : '';
+        $page = isset($_GET['page']) ? intval($_GET['page']) : 0;
         $start = $page * $limit;
 
         $element = 0;
@@ -419,12 +419,12 @@ function _backup_migrate_ui_destination_display_file_list($files, $options = arr
           );
         $pager = theme('pager', $tags, $limit, $element, array(), ceil($total/$limit));
 
-        $end = min($total - 1, $start + $limit);
+        $end = min($total, $start + $limit);
       }
       if ($total > $limit && $options['more']) {
         $more = ' ' . l(t('view all'), $options['more']);
       }
-      $showing = t('Showing @start to @end of @total files.', array('@start' => $start + 1, '@end' => $end + 1, '@total' => $total));
+      $showing = t('Showing @start to @end of @total files.', array('@start' => $start + 1, '@end' => $end, '@total' => $total));
 
       // Limit the number of rows shown.
       $rows = array_slice($rows, $start, $limit, TRUE);

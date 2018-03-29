@@ -212,6 +212,9 @@ function advagg_insert_update_files(array $files, $type) {
           ->insertFields($record)
           ->execute();
         if ($return) {
+          if (variable_get('advagg_debug', ADVAGG_DEBUG) >= 2) {
+            watchdog('advagg-debug', 'Inserting into db <pre>@record</pre>.', array('@record' => print_r($record, TRUE)), WATCHDOG_DEBUG);
+          }
           $write_done = TRUE;
         }
       }
@@ -219,6 +222,13 @@ function advagg_insert_update_files(array $files, $type) {
         // Take changes counter out of the diff equation.
         $changes = $files_in_db[$filename]['changes'];
         unset($files_in_db[$filename]['changes']);
+        // If not in strict mode, only use mtime if newer than the existing one.
+        if (!variable_get('advagg_strict_mtime_check', ADVAGG_STRICT_MTIME_CHECK)) {
+          // Make sure mtime only moves forward.
+          if ($record['mtime'] <= $files_in_db[$filename]['mtime']) {
+            $record['mtime'] = $files_in_db[$filename]['mtime'];
+          }
+        }
 
         // If something is different, update.
         $diff = array_diff_assoc($record, $files_in_db[$filename]);
@@ -247,6 +257,9 @@ function advagg_insert_update_files(array $files, $type) {
             ->fields($diff)
             ->execute();
           if ($return) {
+            if (variable_get('advagg_debug', ADVAGG_DEBUG) >= 2) {
+              watchdog('advagg-debug', 'Updating db <pre>@diff</pre>.', array('@diff' => print_r($diff, TRUE)), WATCHDOG_DEBUG);
+            }
             $write_done = TRUE;
           }
         }
@@ -529,7 +542,7 @@ function &advagg_load_files_info_into_static_cache(array $files) {
   // Get the static cache of this data.
   $cached_data = &drupal_static('advagg_get_info_on_file');
 
-  // Get that staticly cached data for all the given files.
+  // Get the statically cached data for all the given files.
   $cache_ids = array();
   foreach ($files as $file) {
     $cache_id = 'advagg:file:' . advagg_drupal_hash_base64($file);
@@ -817,6 +830,7 @@ function advagg_generate_groups(array $files_to_aggregate, $type) {
     || variable_get('advagg_resource_hints_preconnect', ADVAGG_RESOURCE_HINTS_PRECONNECT)
     || variable_get('advagg_resource_hints_preload', ADVAGG_RESOURCE_HINTS_PRELOAD)
   ) {
+    $filenames = array();
     foreach ($files_to_aggregate as $data) {
       foreach ($data as $values) {
         foreach ($values['items'] as $file_info) {
@@ -1152,7 +1166,7 @@ function advagg_split_css_file(array $file_info, $file_contents = '') {
     // Save file.
     $subfile = advagg_create_subfile($value, $overall_counter, $file_info);
     if (empty($subfile)) {
-      // Somthing broke; do not create a subfile.
+      // Something broke; do not create a subfile.
       watchdog('advagg', 'Spliting up a CSS file failed. File info: <code>@info</code>', array('@info' => var_export($file_info, TRUE)));
       return array();
     }
@@ -1454,14 +1468,34 @@ function advagg_build_aggregate_plans(array $files_to_aggregate, $type) {
     $onload = array();
     $onerror = array();
     $attributes = array();
-    foreach ($values['files'] as $items) {
+    $onloadcss = array();
+    foreach ($values['files'] as &$items) {
       // Get onload.
       if (!empty($items['onload'])) {
         $onload[] = $items['onload'];
       }
+      // Get attributes onload.
+      if (!empty($items['attributes']['onload'])) {
+        $onload[] = $items['attributes']['onload'];
+        unset($items['attributes']['onload']);
+      }
       // Get onerror.
       if (!empty($items['onerror'])) {
         $onload[] = $items['onerror'];
+      }
+      // Get attributes onerror.
+      if (!empty($items['attributes']['onerror'])) {
+        $onload[] = $items['attributes']['onerror'];
+        unset($items['attributes']['onerror']);
+      }
+      // Get attributes onloadCSS.
+      if (!empty($items['onloadCSS'])) {
+        $onloadcss[] = $items['onloadCSS'];
+      }
+      // Get attributes onloadCSS.
+      if (!empty($items['attributes']['onloadCSS'])) {
+        $onloadcss[] = $items['attributes']['onloadCSS'];
+        unset($items['attributes']['onloadCSS']);
       }
       // Get attributes.
       if (!empty($items['attributes'])) {
@@ -1470,6 +1504,7 @@ function advagg_build_aggregate_plans(array $files_to_aggregate, $type) {
     }
     $onload = implode(';', array_unique(array_filter($onload)));
     $onerror = implode(';', array_unique(array_filter($onerror)));
+    $onloadcss = implode(';', array_unique(array_filter($onloadcss)));
 
     $first = reset($values['files']);
     if (!empty($mixed_media)) {
@@ -1477,7 +1512,7 @@ function advagg_build_aggregate_plans(array $files_to_aggregate, $type) {
     }
     $url = ($type === 'css') ? $css_path[0] : $js_path[0];
     $path = ($type === 'css') ? $css_path[1] : $js_path[1];
-    $plans[] = array(
+    $plans[$agg_filename] = array(
       'data' => $url . '/' . $agg_filename,
       'media' => isset($first['media']) ? $first['media'] : '',
       'defer' => isset($first['defer']) ? $first['defer'] : '',
@@ -1492,7 +1527,11 @@ function advagg_build_aggregate_plans(array $files_to_aggregate, $type) {
       'filename' => $agg_filename,
       'attributes' => $attributes,
     );
+    if (!empty($onloadcss)) {
+      $plans[$agg_filename]['attributes']['onloadCSS'] = $onloadcss;
+    }
   }
+  $plans = array_values($plans);
 
   // Create the aggregate files.
   if (variable_get('advagg_pregenerate_aggregate_files', ADVAGG_PREGENERATE_AGGREGATE_FILES)) {
@@ -1501,7 +1540,7 @@ function advagg_build_aggregate_plans(array $files_to_aggregate, $type) {
 
   // Run hooks to modify the plans.
   // Call hook_advagg_build_aggregate_plans_post_alter().
-  drupal_alter('advagg_build_aggregate_plans_post', $plans);
+  drupal_alter('advagg_build_aggregate_plans_post', $plans, $type);
 
   return $plans;
 }
@@ -1759,7 +1798,7 @@ function _advagg_build_css_path(array $matches, $base = '', array $aggregate_set
   if (empty($parsed_url['host'])) {
     $base_url = ltrim($base_url, '/');
   }
-  $base_url = advagg_file_create_url($base_url, $_aggregate_settings, $run_file_create_url);
+  $base_url = advagg_file_create_url($base_url, $_aggregate_settings, $run_file_create_url, 'css');
 
   return 'url(' . $base_url . $query . $fragment . ')';
 }

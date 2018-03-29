@@ -11,6 +11,14 @@
  */
 
 /**
+ * Implements hook_install().
+ */
+function advagg_bundler_install() {
+  // New install gets a locked admin section.
+  variable_set('advagg_bundler_admin_mode', 0);
+}
+
+/**
  * Remove the advagg_bundler_info variable if set.
  */
 function advagg_bundler_update_7201() {

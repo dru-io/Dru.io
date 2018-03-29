@@ -2804,7 +2804,7 @@ $.widget("ui.selectable", $.ui.mouse, {
 					});
 				}
 			} else {
-				// UNSELECT
+				// DESELECT
 				if (selectee.selecting) {
 					if (event.metaKey && selectee.startselected) {
 						selectee.$element.removeClass('ui-selecting');
@@ -3842,7 +3842,7 @@ $.widget("ui.sortable", $.ui.mouse, {
 
 		//Various things done here to improve the performance:
 		// 1. we create a setTimeout, that calls refreshPositions
-		// 2. on the instance, we have a counter variable, that get's higher after every append
+		// 2. on the instance, we have a counter variable, that gets higher after every append
 		// 3. on the local scope, we copy the counter variable, and check in the timeout, if it's still the same
 		// 4. this lets only the last addition to the timeout stack through
 		this.counter = this.counter ? ++this.counter : 1;
@@ -7198,7 +7198,7 @@ function Datepicker() {
 		onChangeMonthYear: null, // Define a callback function when the month or year is changed
 		onClose: null, // Define a callback function when the datepicker is closed
 		numberOfMonths: 1, // Number of months to show at a time
-		showCurrentAtPos: 0, // The position in multipe months at which to show the current month (starting at 0)
+		showCurrentAtPos: 0, // The position in multiple months at which to show the current month (starting at 0)
 		stepMonths: 1, // Number of months to step back/forward
 		stepBigMonths: 12, // Number of months to step back/forward for the big links
 		altField: '', // Selector for an alternate field to store selected dates into
@@ -7803,7 +7803,7 @@ $.extend(Datepicker.prototype, {
 		if (inst == $.datepicker._curInst && $.datepicker._datepickerShowing && inst.input &&
 				inst.input.is(':visible') && !inst.input.is(':disabled'))
 			inst.input.focus();
-		// deffered render of the years select (to avoid flashes on Firefox)
+		// deferred render of the years select (to avoid flashes on Firefox)
 		if( inst.yearshtml ){
 			var origyearshtml = inst.yearshtml;
 			setTimeout(function(){
@@ -11513,5 +11513,5 @@ $.extend( $.ui.tabs.prototype, {
 });
 
 })( jQuery );
-/*eslint-enable */
+/* eslint-enable */
 /* jshint ignore:end */

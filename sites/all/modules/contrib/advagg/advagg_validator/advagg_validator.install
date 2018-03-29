@@ -30,6 +30,45 @@ function advagg_validator_install() {
 }
 
 /**
+ * Implements hook_requirements().
+ */
+function advagg_validator_requirements($phase) {
+  $requirements = array();
+  // Ensure translations don't break at install time.
+  $t = get_t();
+
+  // If not at runtime, return here.
+  if ($phase !== 'runtime') {
+    return $requirements;
+  }
+
+  // Check version.
+  $module_name = 'advagg_validator';
+  $lib_name = 'csslint';
+  list($description, $info) = advagg_get_version_description($lib_name, $module_name, TRUE);
+  if (!empty($description)) {
+    $requirements["{$module_name}_{$lib_name}_updates"] = array(
+      'title' => $t('@module_name', array('@module_name' => $info['name'])),
+      'severity' => REQUIREMENT_WARNING,
+      'value' => $t('The @name library needs to be updated.', array('@name' => $lib_name)),
+      'description' => $description,
+    );
+  }
+  $lib_name = 'jshint';
+  list($description, $info) = advagg_get_version_description($lib_name, $module_name, TRUE);
+  if (!empty($description)) {
+    $requirements["{$module_name}_{$lib_name}_updates"] = array(
+      'title' => $t('@module_name', array('@module_name' => $info['name'])),
+      'severity' => REQUIREMENT_WARNING,
+      'value' => $t('The @name library needs to be updated.', array('@name' => $lib_name)),
+      'description' => $description,
+    );
+  }
+
+  return $requirements;
+}
+
+/**
  * Implements hook_schema().
  */
 function advagg_validator_schema() {

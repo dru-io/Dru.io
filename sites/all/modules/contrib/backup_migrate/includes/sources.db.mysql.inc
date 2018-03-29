@@ -220,7 +220,7 @@ class backup_migrate_source_db_mysql extends backup_migrate_source_db {
     $out = '';
     while ($line = $file->read()) {
       $first2 = substr($line, 0, 2);
-      $first3 = substr($line, 0, 2);
+      $first3 = substr($line, 0, 3);
 
       // Ignore single line comments. This function doesn't support multiline comments or inline comments.
       if ($first2 != '--' && ($first2 != '/*' || $first3 == '/*!')) {

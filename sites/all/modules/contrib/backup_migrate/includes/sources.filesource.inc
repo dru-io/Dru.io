@@ -41,7 +41,7 @@ class backup_migrate_destination_filesource extends backup_migrate_source {
       "#title" => t("Directory path"),
       "#default_value" => $this->get_location(),
       "#required" => TRUE,
-      "#description" => t('Enter the path to the directory to save the backups to. Use a relative path to pick a path relative to your Drupal root directory. The web server must be able to write to this path.'),
+      "#description" => t('Enter the path to the directory to back up. Use a relative path to pick a path relative to your Drupal root directory. The web server must be able to read from this path.'),
     );
     return $form;
   }
@@ -69,7 +69,7 @@ class backup_migrate_destination_filesource extends backup_migrate_source {
    */
   function backup_settings_default() {
      return array(
-      'exclude_filepaths' => "backup_migrate\nstyles\ncss\njs\nctools\nless",
+      'exclude_filepaths' => "backup_migrate\nstyles\ncss\njs\nctools\nless\nlanguages",
     );
   }
 

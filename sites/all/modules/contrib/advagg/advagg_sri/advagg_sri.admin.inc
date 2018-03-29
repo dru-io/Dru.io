@@ -14,8 +14,9 @@
  */
 function advagg_sri_admin_settings_form() {
   drupal_set_title(t('AdvAgg: Subresource Integrity'));
-  $form = array();
+  advagg_display_message_if_requirements_not_met();
 
+  $form = array();
   $form['advagg_sri'] = array(
     '#type' => 'radios',
     '#title' => t('Subresource Integrity Level'),

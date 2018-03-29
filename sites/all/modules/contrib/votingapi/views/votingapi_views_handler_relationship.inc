@@ -6,11 +6,12 @@
  */
 
 /**
- * A custom join handler that connects arbitrary base tables to VotingAPI's data.
+ * A custom join handler that connects arbitrary base tables to VotingAPI's
+ * data.
  *
- * The base relationship handler can only handle a single join. Some relationships
- * are more complex and might require chains of joins; for those, you must
- * utilize a custom relationship handler.
+ * The base relationship handler can only handle a single join. Some
+ * relationships are more complex and might require chains of joins; for those,
+ * you must utilize a custom relationship handler.
  *
  * Definition items:
  * - base: The new base table this relationship will be adding. This does not
@@ -25,6 +26,7 @@
  *   the relationship.
  */
 class votingapi_views_handler_relationship extends views_handler_relationship {
+
   function option_definition() {
     $options = parent::option_definition();
 
@@ -129,7 +131,7 @@ class votingapi_views_handler_relationship extends views_handler_relationship {
           $def['extra'][] = array(
             'field' => $field,
             'value' => $value,
-            'numeric' => FALSE
+            'numeric' => FALSE,
           );
           $alias .= '_' . str_replace(array(' ', '-', '.'), '_', $value);
         }
@@ -140,7 +142,7 @@ class votingapi_views_handler_relationship extends views_handler_relationship {
       $def['extra'][] = array(
         'field' => 'uid',
         'value' => '***CURRENT_USER***',
-        'numeric' => FALSE
+        'numeric' => FALSE,
       );
       $alias .= '_curuser';
     }

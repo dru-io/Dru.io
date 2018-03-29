@@ -18,24 +18,56 @@
  */
 function advagg_admin_settings_form($form, $form_state) {
   drupal_set_title(t('AdvAgg: Configuration'));
+  advagg_display_message_if_requirements_not_met();
   $config_path = advagg_admin_config_root_path();
 
+  $options = array(
+    0 => t('Use default (safe) settings'),
+    2 => t('Use recommended (optimized) settings'),
+    4 => t('Use customized settings'),
+  );
+  $form['advagg_admin_mode'] = array(
+    '#type' => 'radios',
+    '#title' => t('AdvAgg Settings'),
+    '#default_value' => variable_get('advagg_admin_mode', ADVAGG_ADMIN_MODE),
+    '#options' => $options,
+    '#description' => t("Default settings will mirror core as closely as possible. <br>Recommended settings are optimized for speed."),
+  );
+
+  $form['global_container'] = array(
+    '#type' => 'container',
+    '#hidden' => TRUE,
+    '#states' => array(
+      'visible' => array(
+        ':input[name="advagg_admin_mode"]' => array('value' => '4'),
+      ),
+    ),
+  );
+
   // Simple checkbox settings.
-  $form['global'] = array(
+  $form['global_container']['global'] = array(
     '#type' => 'fieldset',
     '#title' => t('Global Options'),
   );
-  $form['global']['advagg_enabled'] = array(
+  $form['global_container']['global']['advagg_enabled'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Enable advanced aggregation'),
+    '#title' => t('Enable advanced aggregation (recommended)'),
     '#default_value' => variable_get('advagg_enabled', ADVAGG_ENABLED),
     '#description' => t('Uncheck this box to completely disable AdvAgg functionality.'),
+    '#recommended_value' => TRUE,
   );
-  $form['global']['advagg_core_groups'] = array(
+  $advagg_core_groups_default = variable_get('advagg_core_groups', ADVAGG_CORE_GROUPS);
+  if (variable_get('advagg_combine_css_media', ADVAGG_COMBINE_CSS_MEDIA)
+    || variable_get('advagg_ie_css_selector_limiter', ADVAGG_IE_CSS_SELECTOR_LIMITER)
+    || (module_exists('advagg_bundler') && variable_get('advagg_bundler_active', ADVAGG_BUNDLER_ACTIVE))) {
+    $advagg_core_groups_default = FALSE;
+  }
+  $form['global_container']['global']['advagg_core_groups'] = array(
     '#type' => 'checkbox',
     '#title' => t('Use cores grouping logic'),
-    '#default_value' => variable_get('advagg_combine_css_media', ADVAGG_COMBINE_CSS_MEDIA) || variable_get('advagg_ie_css_selector_limiter', ADVAGG_IE_CSS_SELECTOR_LIMITER) ? FALSE : variable_get('advagg_core_groups', ADVAGG_CORE_GROUPS),
+    '#default_value' => $advagg_core_groups_default,
     '#description' => t('Will group files just like core does.'),
+    '#recommended_value' => FALSE,
     '#states' => array(
       'enabled' => array(
         '#edit-advagg-combine-css-media' => array('checked' => FALSE),
@@ -43,12 +75,13 @@ function advagg_admin_settings_form($form, $form_state) {
       ),
     ),
   );
-  $form['global']['advagg_use_httprl'] = array(
+  $form['global_container']['global']['advagg_use_httprl'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Use HTTPRL to generate aggregates.'),
+    '#title' => t('Use HTTPRL to generate aggregates (recommended)'),
     '#default_value' => module_exists('httprl') ? variable_get('advagg_use_httprl', ADVAGG_USE_HTTPRL) : FALSE,
     '#disabled' => module_exists('httprl') ? FALSE : TRUE,
     '#description' => t('If <a href="@link">HTTPRL</a> is installed, advagg will use it to generate aggregates on the fly in a background parallel process.', array('@link' => 'http://drupal.org/project/httprl')),
+    '#recommended_value' => TRUE,
   );
 
   $aggressive_cache_conflicts = advagg_aggressive_cache_conflicts();
@@ -61,14 +94,15 @@ function advagg_admin_settings_form($form, $form_state) {
   $options = array(
     -1 => t('Development ~ 300ms'),
     1 => t('Normal ~ 60ms'),
-    3 => t('Render Cache ~ 30ms'),
+    3 => t('Render Cache ~ 30ms (recommended)'),
     5 => t('Aggressive Render Cache ~ 10ms'),
   );
-  $form['global']['advagg_cache_level'] = array(
+  $form['global_container']['global']['advagg_cache_level'] = array(
     '#type' => 'radios',
     '#title' => t('AdvAgg Cache Settings'),
     '#default_value' => variable_get('advagg_cache_level', ADVAGG_CACHE_LEVEL),
     '#options' => $options,
+    '#recommended_value' => 3,
     '#description' => t("As a reference, core takes about 25 ms to run. Development will scan all files for a change on every page load. Normal and the render cache is fine for all use cases. Aggressive should be fine for most use cases. If your inline css/js changes based off of a variable then the cache hit ratio will be low; if that is the case consider using Drupal.settings for a better cache hit ratio when using the render cache. The aggressive render cache will cache the output from js_alter and css_alter. !description", array(
       '@information' => url($config_path . '/advagg/info', array(
         'fragment' => 'edit-hooks-implemented',
@@ -92,7 +126,7 @@ function advagg_admin_settings_form($form, $form_state) {
       ));
     }
     $stream_wrappers_string = implode("<br>\n", $stream_wrappers_string);
-    $form['global']['advagg_root_dir_prefix'] = array(
+    $form['global_container']['global']['advagg_root_dir_prefix'] = array(
       '#type' => 'textfield',
       '#title' => t('Stream wrapper for AdvAgg.'),
       '#default_value' => $prefix,
@@ -102,7 +136,7 @@ function advagg_admin_settings_form($form, $form_state) {
     );
   }
 
-  $form['global']['dev_container'] = array(
+  $form['global_container']['global']['dev_container'] = array(
     '#type' => 'container',
     '#states' => array(
       'visible' => array(
@@ -112,13 +146,13 @@ function advagg_admin_settings_form($form, $form_state) {
   );
   // Show msg about advagg css compress.
   if (module_exists('advagg_css_compress') && (variable_get('advagg_css_compressor', ADVAGG_CSS_COMPRESSOR) > 0 || variable_get('advagg_css_compress_inline', ADVAGG_CSS_COMPRESS_INLINE))) {
-    $form['global']['dev_container']['advagg_css_compress_msg'] = array(
+    $form['global_container']['global']['dev_container']['advagg_css_compress_msg'] = array(
       '#markup' => '<p>' . t('The <a href="@css">AdvAgg CSS Compression module</a> is disabled when in development mode.', array('@css' => url($config_path . '/advagg/css-compress'))) . '</p>',
     );
   }
   // Show msg about advagg js compress.
   if (module_exists('advagg_js_compress') && (variable_get('advagg_js_compressor', ADVAGG_JS_COMPRESSOR) || variable_get('advagg_js_compress_inline', ADVAGG_JS_COMPRESS_INLINE))) {
-    $form['global']['dev_container']['advagg_js_compress_msg'] = array(
+    $form['global_container']['global']['dev_container']['advagg_js_compress_msg'] = array(
       '#markup' => '<p>' . t('The <a href="@js">AdvAgg JS Compression module</a> is disabled when in development mode.', array('@js' => url($config_path . '/advagg/js-compress'))) . '</p>',
     );
   }
@@ -126,14 +160,14 @@ function advagg_admin_settings_form($form, $form_state) {
   // Show msg about the jquery update compression setting.
   if (module_exists('jquery_update')) {
     if (variable_get('jquery_update_compression_type', 'min') === 'min') {
-      $form['global']['dev_container']['advagg_jquery_update_development'] = array(
+      $form['global_container']['global']['dev_container']['advagg_jquery_update_development'] = array(
         '#markup' => '<p>' . t('You might want to change the <a href="!url">jQuery update compression level</a> to "Development" as well.', array(
           '!url' => url('admin/config/development/jquery_update'),
         )) . '</p>',
       );
     }
     else {
-      $form['global']['prod_container'] = array(
+      $form['global_container']['global']['prod_container'] = array(
         '#type' => 'container',
         '#states' => array(
           'visible' => array(
@@ -141,7 +175,7 @@ function advagg_admin_settings_form($form, $form_state) {
           ),
         ),
       );
-      $form['global']['prod_container']['advagg_jquery_update_development'] = array(
+      $form['global_container']['global']['prod_container']['advagg_jquery_update_development'] = array(
         '#markup' => '<p>' . t('You might want to change the <a href="!url">jQuery update compression level</a> to "Production" as well.', array(
           '!url' => url('admin/config/development/jquery_update'),
         )) . '</p>',
@@ -152,32 +186,35 @@ function advagg_admin_settings_form($form, $form_state) {
   $advagg_resource_hints_dns_prefetch = variable_get('advagg_resource_hints_dns_prefetch', ADVAGG_RESOURCE_HINTS_DNS_PREFETCH);
   $advagg_resource_hints_preconnect = variable_get('advagg_resource_hints_preconnect', ADVAGG_RESOURCE_HINTS_PRECONNECT);
   $advagg_resource_hints_preload = variable_get('advagg_resource_hints_preload', ADVAGG_RESOURCE_HINTS_PRELOAD);
-  $form['global']['resource_hints'] = array(
+  $form['global_container']['global']['resource_hints'] = array(
     '#type' => 'fieldset',
     '#title' => t('Resource Hints'),
     '#collapsible' => TRUE,
     '#collapsed' => ($advagg_resource_hints_dns_prefetch || $advagg_resource_hints_preconnect || $advagg_resource_hints_preload) ? FALSE : TRUE,
     '#description' => t('Preemptively get resources (CSS/JS & sub requests).'),
   );
-  $form['global']['resource_hints']['advagg_resource_hints_dns_prefetch'] = array(
+  $form['global_container']['global']['resource_hints']['advagg_resource_hints_dns_prefetch'] = array(
     '#type' => 'checkbox',
-    '#title' => t('DNS Prefetch.'),
+    '#title' => t('DNS Prefetch (recommended).'),
     '#default_value' => $advagg_resource_hints_dns_prefetch,
     '#disabled' => '',
     '#description' => t('Start the DNS lookup for external CSS and JavaScript files as soon as possible.'),
+    '#recommended_value' => TRUE,
   );
-  $form['global']['resource_hints']['advagg_resource_hints_preconnect'] = array(
+  $form['global_container']['global']['resource_hints']['advagg_resource_hints_preconnect'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Preconnect.'),
+    '#title' => t('Preconnect (recommended).'),
     '#default_value' => $advagg_resource_hints_preconnect,
     '#disabled' => '',
     '#description' => t('Start the connection to external resources before an HTTP request is actually sent to the server.'),
+    '#recommended_value' => TRUE,
   );
-  $form['global']['resource_hints']['advagg_resource_hints_location'] = array(
+  $form['global_container']['global']['resource_hints']['advagg_resource_hints_location'] = array(
     '#type' => 'radios',
     '#title' => t('Location of resource hints.'),
     '#default_value' => variable_get('advagg_resource_hints_location', ADVAGG_RESOURCE_HINTS_LOCATION),
     '#description' => t('If you have css and/or js files being loaded right after the "charset=utf-8" meta tag, you need to use the "above charset=utf-8" option in order for some of the resource hints to work; Optimizely is an example that would need this other option. Link headers are not supported in every browser.'),
+    '#recommended_value' => 1,
     '#options' => array(
       1 => t('Below charset=utf-8 (recommended)'),
       3 => t('Above charset=utf-8'),
@@ -191,15 +228,16 @@ function advagg_admin_settings_form($form, $form_state) {
   );
 
   // Preload Section.
-  $form['global']['resource_hints']['preload']['advagg_resource_hints_preload'] = array(
+  $form['global_container']['global']['resource_hints']['preload']['advagg_resource_hints_preload'] = array(
     '#type' => 'checkbox',
     '#title' => t('Preload link http headers.'),
     '#default_value' => $advagg_resource_hints_preload,
     '#disabled' => '',
     '#description' => t('Use link http headers to send out preload hints for local and external resources.'),
+    '#recommended_value' => FALSE,
   );
   $advagg_resource_hints_preload_settings = advagg_get_resource_hints_preload_settings();
-  $form['global']['resource_hints']['preload']['advagg_resource_hints_preload_settings'] = array(
+  $form['global_container']['global']['resource_hints']['preload']['advagg_resource_hints_preload_settings'] = array(
     '#type' => 'fieldset',
     '#title' => t('Preload Ordering and Settings'),
     '#collapsible' => TRUE,
@@ -302,13 +340,13 @@ function advagg_admin_settings_form($form, $form_state) {
   }
 
   // Add the table to the form.
-  $form['global']['resource_hints']['preload']['advagg_resource_hints_preload_settings']['advagg_table'] = array(
+  $form['global_container']['global']['resource_hints']['preload']['advagg_resource_hints_preload_settings']['advagg_table'] = array(
     '#theme' => 'table',
     // The row form elements need to be processed and build,
     // therefore pass them as element children.
     'elements' => $row_elements,
     '#header' => array(
-      // We need two empty columns for the weigth field and the cross.
+      // We need two empty columns for the weight field and the cross.
       array('data' => NULL, 'colspan' => 2),
       t('Name'),
       t('Enabled'),
@@ -320,22 +358,23 @@ function advagg_admin_settings_form($form, $form_state) {
     '#attributes' => array('id' => 'entry-order'),
   );
   drupal_add_tabledrag('entry-order', 'order', 'sibling', 'entry-order-weight');
-  $form['global']['resource_hints']['preload']['advagg_resource_hints_preload_settings']['advagg_resource_hints_preload_reset'] = array(
+  $form['global_container']['global']['resource_hints']['preload']['advagg_resource_hints_preload_settings']['advagg_resource_hints_preload_reset'] = array(
     '#type' => 'submit',
     '#value' => t('Reset'),
     '#submit' => array('advagg_admin_resource_hints_preload_reset'),
   );
-  $form['global']['resource_hints']['advagg_resource_hints_use_immutable'] = array(
+  $form['global_container']['global']['resource_hints']['advagg_resource_hints_use_immutable'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Send immutable header for all aggregated files.'),
+    '#title' => t('Send immutable header for all aggregated files (recommended).'),
     '#default_value' => variable_get('advagg_resource_hints_use_immutable', ADVAGG_RESOURCE_HINTS_USE_IMMUTABLE),
     '#description' => t('Have Apache send <a href="@url1">Cache-Control: immutable</a> for all aggregated files. Current <a href="@url2">browser support</a>', array(
       '@url1' => 'http://bitsup.blogspot.de/2016/05/cache-control-immutable.html',
       '@url2' => 'https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Cache-Control#Browser_compatibility',
     )),
+    '#recommended_value' => TRUE,
   );
 
-  $form['global']['cron'] = array(
+  $form['global_container']['global']['cron'] = array(
     '#type' => 'fieldset',
     '#title' => t('Cron Options'),
     '#collapsible' => TRUE,
@@ -355,6 +394,7 @@ function advagg_admin_settings_form($form, $form_state) {
     60 * 60 * 10, // 10 hours.
     60 * 60 * 12, // 12 hours.
     60 * 60 * 18, // 18 hours.
+    60 * 60 * 23, // 23 hours.
     60 * 60 * 24, // 1 day.
     60 * 60 * 24 * 2, // 2 days.
   ), 'format_interval');
@@ -379,7 +419,8 @@ function advagg_admin_settings_form($form, $form_state) {
   else {
     $last_ran = t('never');
   }
-  $form['global']['cron']['advagg_cron_frequency'] = array(
+
+  $form['global_container']['global']['cron']['advagg_cron_frequency'] = array(
     '#type' => 'select',
     '#options' => $short_times,
     '#title' => 'Minimum amount of time between advagg_cron() runs.',
@@ -389,7 +430,7 @@ function advagg_admin_settings_form($form, $form_state) {
       '%time' => $last_ran,
     )),
   );
-  $form['global']['cron']['drupal_stale_file_threshold'] = array(
+  $form['global_container']['global']['cron']['drupal_stale_file_threshold'] = array(
     '#type' => 'select',
     '#options' => $long_times,
     '#title' => 'Delete aggregates accessed/modified more than a set time ago.',
@@ -397,14 +438,14 @@ function advagg_admin_settings_form($form, $form_state) {
     '#default_value' => variable_get('drupal_stale_file_threshold', 2592000),
     '#description' => t('The default value for this is %value.', array('%value' => format_interval(2592000))),
   );
-  $form['global']['cron']['advagg_remove_missing_files_from_db_time'] = array(
+  $form['global_container']['global']['cron']['advagg_remove_missing_files_from_db_time'] = array(
     '#type' => 'select',
     '#options' => $long_times,
     '#title' => 'How long to wait until unaccessed aggregates with missing files are removed from the database.',
     '#default_value' => variable_get('advagg_remove_missing_files_from_db_time', ADVAGG_REMOVE_MISSING_FILES_FROM_DB_TIME),
     '#description' => t('The default value for this is %value.', array('%value' => format_interval(ADVAGG_REMOVE_MISSING_FILES_FROM_DB_TIME))),
   );
-  $form['global']['cron']['advagg_remove_old_unused_aggregates_time'] = array(
+  $form['global_container']['global']['cron']['advagg_remove_old_unused_aggregates_time'] = array(
     '#type' => 'select',
     '#options' => $long_times,
     '#title' => 'How long to wait until unaccessed aggregates are removed from the database.',
@@ -412,21 +453,21 @@ function advagg_admin_settings_form($form, $form_state) {
     '#description' => t('The default value for this is %value.', array('%value' => format_interval(ADVAGG_REMOVE_OLD_UNUSED_AGGREGATES_TIME))),
   );
 
-  $form['global']['obscure'] = array(
+  $form['global_container']['global']['obscure'] = array(
     '#type' => 'fieldset',
     '#title' => t('Obscure Options'),
     '#collapsible' => TRUE,
     '#collapsed' => TRUE,
     '#description' => t('Some of the more obscure AdvAgg settings. Odds are you do not need to change anything in here.'),
   );
-  $form['global']['obscure']['advagg_gzip'] = array(
+  $form['global_container']['global']['obscure']['advagg_gzip'] = array(
     '#type' => 'checkbox',
     '#title' => t('Create .gz files'),
     '#default_value' => variable_get('advagg_gzip', ADVAGG_GZIP),
     '#description' => t('All aggregated files can be pre-compressed into a .gz file and
    served from Apache. This is faster then gzipping the file on each request.'),
   );
-  $form['global']['obscure']['advagg_brotli'] = array(
+  $form['global_container']['global']['obscure']['advagg_brotli'] = array(
     '#type' => 'checkbox',
     '#title' => t('Create .br files'),
     '#default_value' => variable_get('advagg_brotli', ADVAGG_BROTLI),
@@ -434,29 +475,23 @@ function advagg_admin_settings_form($form, $form_state) {
   served from Apache. This is faster then brotli compressing the file on each request.'),
   );
   if (!function_exists('brotli_compress') || !defined('BROTLI_TEXT')) {
-    $form['global']['obscure']['advagg_brotli']['#default_value'] = FALSE;
-    $form['global']['obscure']['advagg_brotli']['#disabled'] = TRUE;
-    $form['global']['obscure']['advagg_brotli']['#description'] .= ' ' . t('The <a href="@url">PHP brotli extension</a> is needed in order to enable this feature.', array('@url' => 'https://github.com/kjdev/php-ext-brotli'));
+    $form['global_container']['global']['obscure']['advagg_brotli']['#default_value'] = FALSE;
+    $form['global_container']['global']['obscure']['advagg_brotli']['#disabled'] = TRUE;
+    $form['global_container']['global']['obscure']['advagg_brotli']['#description'] .= ' ' . t('The <a href="@url">PHP brotli extension</a> is needed in order to enable this feature.', array('@url' => 'https://github.com/kjdev/php-ext-brotli'));
     if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN') {
-      $form['global']['obscure']['advagg_brotli']['#description'] .= ' ' . t('If running on windows this is a helpful guide on how to compile <a href="@url">PHP extensions</a>. Also noted that <a href="@iis">IIS has a Brotli extension</a>,', array(
+      $form['global_container']['global']['obscure']['advagg_brotli']['#description'] .= ' ' . t('If running on windows this is a helpful guide on how to compile <a href="@url">PHP extensions</a>. Also noted that <a href="@iis">IIS has a Brotli extension</a>,', array(
         '@url' => 'https://wiki.php.net/internals/windows/stepbystepbuild',
         '@iis' => 'https://www.iis.net/downloads/community/2016/03/iis-brotli',
       ));
     }
   }
-  $form['global']['obscure']['advagg_ajax_render_alter'] = array(
+  $form['global_container']['global']['obscure']['advagg_ajax_render_alter'] = array(
     '#type' => 'checkbox',
     '#title' => t('Run advagg_ajax_render_alter()'),
     '#default_value' => variable_get('advagg_ajax_render_alter', ADVAGG_AJAX_RENDER_ALTER),
     '#description' => t('If disabled, AdvAgg will not alter the aggregates returned by ajax requests.'),
   );
-  $form['global']['obscure']['advagg_disable_on_admin'] = array(
-    '#type' => 'checkbox',
-    '#title' => t('Do not use AdvAgg or any aggregation in the admin section.'),
-    '#default_value' => variable_get('advagg_disable_on_admin', ADVAGG_DISABLE_ON_ADMIN),
-    '#description' => t('If checked, AdvAgg will not be used in the /admin section as well as any place the admin theme is used.'),
-  );
-  $form['global']['obscure']['advagg_include_base_url'] = array(
+  $form['global_container']['global']['obscure']['advagg_include_base_url'] = array(
     '#type' => 'checkbox',
     '#title' => t('Include the base_url variable in the hooks hash array.'),
     '#default_value' => variable_get('advagg_include_base_url', ADVAGG_INCLUDE_BASE_URL),
@@ -465,13 +500,13 @@ function advagg_admin_settings_form($form, $form_state) {
       '@issue' => 'https://www.drupal.org/node/2353811',
     )),
   );
-  $form['global']['obscure']['advagg_convert_absolute_to_relative_path'] = array(
+  $form['global_container']['global']['obscure']['advagg_convert_absolute_to_relative_path'] = array(
     '#type' => 'checkbox',
     '#title' => t('Convert absolute paths to be self references.'),
     '#default_value' => variable_get('advagg_convert_absolute_to_relative_path', ADVAGG_CONVERT_ABSOLUTE_TO_RELATIVE_PATH),
     '#description' => t('If the src to a CSS/JS file points to this domain, convert the absolute path to a relative path. Will also convert url() references inside of css files. This is generally safe unless the drupal page will be embedded, like it is when used as an iframe.'),
   );
-  $form['global']['obscure']['advagg_convert_absolute_to_protocol_relative_path'] = array(
+  $form['global_container']['global']['obscure']['advagg_convert_absolute_to_protocol_relative_path'] = array(
     '#type' => 'checkbox',
     '#title' => t('Convert absolute paths to be protocol relative paths.'),
     '#default_value' => variable_get('advagg_convert_absolute_to_protocol_relative_path', ADVAGG_CONVERT_ABSOLUTE_TO_PROTOCOL_RELATIVE_PATH),
@@ -484,7 +519,7 @@ function advagg_admin_settings_form($form, $form_state) {
       ),
     ),
   );
-  $form['global']['obscure']['advagg_force_https_path'] = array(
+  $form['global_container']['global']['obscure']['advagg_force_https_path'] = array(
     '#type' => 'checkbox',
     '#title' => t('Convert http:// to https://.'),
     '#default_value' => variable_get('advagg_force_https_path', ADVAGG_FORCE_HTTPS_PATH),
@@ -495,17 +530,38 @@ function advagg_admin_settings_form($form, $form_state) {
       ),
     ),
   );
-  $form['global']['obscure']['advagg_skip_file_create_url_inside_css'] = array(
+  $form['global_container']['global']['obscure']['advagg_css_absolute_path'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Convert CSS url() to absolute paths if file is outside of the public:// dir.'),
+    '#default_value' => variable_get('advagg_css_absolute_path', ADVAGG_CSS_ABSOLUTE_PATH),
+    '#description' => t('Useful for CSS files hosted on S3 where the referenced files inside of url() is not in the same location as the aggregated CSS file.'),
+  );
+  $form['global_container']['global']['obscure']['advagg_skip_file_create_url_inside_css'] = array(
     '#type' => 'checkbox',
     '#title' => t('Do not run CSS url() values through file_create_url().'),
     '#default_value' => variable_get('advagg_skip_file_create_url_inside_css', ADVAGG_SKIP_FILE_CREATE_URL_INSIDE_CSS),
-    '#description' => t('If checked, the processing of url() values within CSS will be handled more like core than the CDN module. This has the advantage of not converting relative paths in your source CSS to absolute paths in the aggregated CSS.'),
+    '#description' => t('If checked, the processing of url() values within CSS will be handled more like core than the CDN module. This will not convert relative paths in your source CSS to absolute paths in the aggregated CSS.'),
   );
-  $form['global']['obscure']['advagg_htaccess_symlinksifownermatch'] = array(
+  $form['global_container']['global']['obscure']['advagg_htaccess_symlinksifownermatch'] = array(
     '#type' => 'checkbox',
     '#title' => t('Use "Options +SymLinksIfOwnerMatch"'),
     '#default_value' => variable_get('advagg_htaccess_symlinksifownermatch', ADVAGG_HTACCESS_SYMLINKSIFOWNERMATCH),
     '#description' => t('By default the custom .htaccess files are configured to use "<code>Options +FollowSymLinks</code>". Some hosting companies do not support this so "<code>Options +SymLinksIfOwnerMatch</code>" must be used instead.'),
+  );
+  $form['global_container']['global']['obscure']['advagg_disable_on_admin'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Do not use AdvAgg or any aggregation in the admin section.'),
+    '#default_value' => variable_get('advagg_disable_on_admin', ADVAGG_DISABLE_ON_ADMIN),
+    '#description' => t('If checked, AdvAgg will not be used in the /admin section as well as any place the admin theme is used.'),
+  );
+  $form['global_container']['global']['obscure']['advagg_disable_on_listed_pages'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Do not use AdvAgg or any aggregation in the following pages'),
+    '#default_value' => variable_get('advagg_disable_on_listed_pages', ADVAGG_DISABLE_ON_LISTED_PAGES),
+    '#description' => t("Specify pages by using their paths. Enter one path per line. The '*' character is a wildcard. Example paths are %blog for the blog page and %blog-wildcard for every personal blog.", array(
+      '%blog' => 'blog',
+      '%blog-wildcard' => 'blog/*',
+    )),
   );
   // Get core htaccess files.
   $core_htaccess = advagg_htaccess_rewritebase();
@@ -519,7 +575,7 @@ function advagg_admin_settings_form($form, $form_state) {
     $core_htaccess_directive = trim(str_ireplace('RewriteBase ', '', $core_htaccess));
     $new_dir = str_replace('//', '/', $core_htaccess_directive . '/' . dirname($css_path[1]));
 
-    $form['global']['obscure']['advagg_htaccess_rewritebase'] = array(
+    $form['global_container']['global']['obscure']['advagg_htaccess_rewritebase'] = array(
       '#type' => 'textfield',
       '#title' => t('AdvAgg RewriteBase Directive in .htaccess files.'),
       '#default_value' => $advagg_htaccess_rewritebase,
@@ -538,7 +594,7 @@ function advagg_admin_settings_form($form, $form_state) {
     $advagg_css_htaccess = advagg_htaccess_rewritebase($css_path[1]);
     $advagg_js_htaccess = advagg_htaccess_rewritebase($js_path[1]);
     // Offer advice if this setting should be disabled.
-    $form['global']['obscure']['advagg_htaccess_rewritebase'] = array(
+    $form['global_container']['global']['obscure']['advagg_htaccess_rewritebase'] = array(
       '#type' => 'textfield',
       '#title' => t('AdvAgg RewriteBase Directive in .htaccess files.'),
       '#default_value' => $advagg_htaccess_rewritebase,
@@ -549,13 +605,13 @@ function advagg_admin_settings_form($form, $form_state) {
     );
   }
 
-  $form['css'] = array(
+  $form['global_container']['css'] = array(
     '#type' => 'fieldset',
     '#title' => t('CSS Options'),
   );
-  $form['css']['advagg_combine_css_media'] = array(
+  $form['global_container']['css']['advagg_combine_css_media'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Combine CSS files by using media queries'),
+    '#title' => t('Combine CSS files by using media queries (recommended)'),
     '#default_value' => variable_get('advagg_combine_css_media', ADVAGG_COMBINE_CSS_MEDIA),
     '#description' => t('Will combine more CSS files together because different CSS media types can be used in the same file by using media queries. Use cores grouping logic needs to be unchecked in order for this to work. Also noted is that due to an issue with IE9, compatibility mode is forced off if this is enabled.'),
     '#states' => array(
@@ -563,8 +619,9 @@ function advagg_admin_settings_form($form, $form_state) {
         '#edit-advagg-core-groups' => array('checked' => TRUE),
       ),
     ),
+    '#recommended_value' => TRUE,
   );
-  $form['css']['advagg_ie_css_selector_limiter'] = array(
+  $form['global_container']['css']['advagg_ie_css_selector_limiter'] = array(
     '#type' => 'checkbox',
     '#title' => t('Prevent more than %limit CSS selectors in an aggregated CSS file', array('%limit' => variable_get('advagg_ie_css_selector_limiter_value', ADVAGG_IE_CSS_SELECTOR_LIMITER_VALUE))),
     '#default_value' => variable_get('advagg_ie_css_selector_limiter', ADVAGG_IE_CSS_SELECTOR_LIMITER),
@@ -574,8 +631,9 @@ function advagg_admin_settings_form($form, $form_state) {
         '#edit-advagg-core-groups' => array('checked' => TRUE),
       ),
     ),
+    '#recommended_value' => FALSE,
   );
-  $form['css']['advagg_ie_css_selector_limiter_value'] = array(
+  $form['global_container']['css']['advagg_ie_css_selector_limiter_value'] = array(
     '#type' => 'textfield',
     '#title' => t('The selector count the IE CSS limiter should use'),
     '#default_value' => variable_get('advagg_ie_css_selector_limiter_value', ADVAGG_IE_CSS_SELECTOR_LIMITER_VALUE),
@@ -589,44 +647,48 @@ function advagg_admin_settings_form($form, $form_state) {
       ),
     ),
   );
-  $form['css']['advagg_css_fix_type'] = array(
+  $form['global_container']['css']['advagg_css_fix_type'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Fix improperly set type'),
+    '#title' => t('Fix improperly set type (recommended)'),
     '#default_value' => variable_get('advagg_css_fix_type', ADVAGG_CSS_FIX_TYPE),
     '#description' => t('If type is external but does not start with http, https, or // change it to be type file. If type is file but it starts with http, https, or // change type to be external. Note that if this is causing issues, odds are you have a double slash when there should be a single; see <a href="@link">this issue</a>', array(
       '@link' => 'https://www.drupal.org/node/2336217',
     )),
+    '#recommended_value' => TRUE,
   );
-  $form['css']['advagg_css_remove_empty_files'] = array(
+  $form['global_container']['css']['advagg_css_remove_empty_files'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Remove empty CSS files from aggregates'),
+    '#title' => t('Remove empty CSS files from aggregates (recommended)'),
     '#default_value' => variable_get('advagg_css_remove_empty_files', ADVAGG_CSS_REMOVE_EMPTY_FILES),
     '#description' => t('If an empty CSS file ends up being in its own aggregate, that aggregate can end up as a 404.'),
+    '#recommended_value' => TRUE,
   );
 
-  $form['js'] = array(
+  $form['global_container']['js'] = array(
     '#type' => 'fieldset',
     '#title' => t('JS Options'),
   );
-  $form['js']['advagg_js_fix_type'] = array(
+  $form['global_container']['js']['advagg_js_fix_type'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Fix improperly set type'),
+    '#title' => t('Fix improperly set type (recommended)'),
     '#default_value' => variable_get('advagg_js_fix_type', ADVAGG_JS_FIX_TYPE),
     '#description' => t('If type is external but does not start with http, https, or // change it to be type file. If type is file but it starts with http, https, or // change type to be external. Note that if this is causing issues, odds are you have a double slash when there should be a single; see <a href="@link">this issue</a>', array(
       '@link' => 'https://www.drupal.org/node/2336217',
     )),
+    '#recommended_value' => TRUE,
   );
-  $form['js']['advagg_js_remove_empty_files'] = array(
+  $form['global_container']['js']['advagg_js_remove_empty_files'] = array(
     '#type' => 'checkbox',
-    '#title' => t('Remove empty JS files from aggregates'),
+    '#title' => t('Remove empty JS files from aggregates (recommended)'),
     '#default_value' => variable_get('advagg_js_remove_empty_files', ADVAGG_JS_REMOVE_EMPTY_FILES),
     '#description' => t('If an empty JS file ends up being in its own aggregate, that aggregate can end up as a 404.'),
+    '#recommended_value' => TRUE,
   );
-  $form['js']['advagg_scripts_scope_anywhere'] = array(
+  $form['global_container']['js']['advagg_scripts_scope_anywhere'] = array(
     '#type' => 'checkbox',
     '#title' => t('Allow for JS to be added to blocks and views'),
     '#default_value' => variable_get('advagg_scripts_scope_anywhere', ADVAGG_SCRIPTS_SCOPE_ANYWHERE),
-    '#description' => t('The scope key when using drupal_add_js and friends can be used to insert script tags throughout the html body. To see posible insertion points set <code>@theme_debug</code> in your settings.php file and view the page source while looking for @comment html comments. Some example scopes: <p><code>!example</code></p>', array(
+    '#description' => t('The scope key when using drupal_add_js and friends can be used to insert script tags throughout the html body. To see possible insertion points set <code>@theme_debug</code> in your settings.php file and view the page source while looking for @comment html comments. Some example scopes: <p><code>!example</code></p>', array(
       '@theme_debug' => '$conf[\'theme_debug\'] = TRUE;',
       '@comment' => '<!-- AdvAgg * tag -->',
       '!example' => "page_top:prefix<br />block:prefix:system:powered-by<br />view:suffix:frontpage:page",
@@ -644,6 +706,7 @@ function advagg_admin_settings_form($form, $form_state) {
  */
 function advagg_admin_operations_form($form, $form_state) {
   drupal_set_title(t('AdvAgg: Operations'));
+  advagg_display_message_if_requirements_not_met();
 
   // Explain what can be done on this page.
   $form['tip'] = array(
@@ -691,7 +754,11 @@ function advagg_admin_operations_form($form, $form_state) {
   );
   // Add in aggregation bypass cookie javascript.
   $form['#attached']['js'][] = array(
-    'data' => array('advagg' => array('key' => drupal_hash_base64(drupal_get_private_key()))),
+    'data' => array(
+      'advagg' => array(
+        'key' => drupal_hmac_base64('advagg_cookie', drupal_get_private_key() . drupal_get_hash_salt() . variable_get('cron_key', 'drupal')),
+      ),
+    ),
     'type' => 'setting',
   );
   $form['#attached']['js'][] = drupal_get_path('module', 'advagg') . '/advagg.admin.js';
@@ -907,6 +974,62 @@ function advagg_admin_operations_form($form, $form_state) {
     '#submit' => array('advagg_admin_truncate_advagg_files'),
   );
 
+  $form['drastic_measures']['clear_base_file'] = array(
+    '#type' => 'fieldset',
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+    '#title' => t('Delete all aggregates containing this base file.'),
+    '#description' => t('Pinpoint clearing of all aggregates that contain a file.'),
+  );
+  $form['drastic_measures']['clear_base_file']['filename'] = array(
+    '#type' => 'textfield',
+    '#size' => 170,
+    '#maxlength' => 256,
+    '#default_value' => '',
+    '#title' => t('Filename'),
+  );
+  $form['drastic_measures']['clear_base_file']['submit'] = array(
+    '#type' => 'submit',
+    '#value' => t('Delete Select Aggregates'),
+    '#validate' => array('advagg_admin_clear_file_aggregate_validate'),
+    '#submit' => array('advagg_admin_clear_file_aggregate_submit'),
+    '#ajax' => array(
+      'callback' => 'advagg_admin_clear_file_aggregate_callback',
+      'wrapper' => 'advagg-clear-file-aggregate-ajax',
+      'effect' => 'fade',
+    ),
+  );
+  $types = array('css', 'js');
+  $css_file = '';
+  $js_file = '';
+  foreach ($types as $type) {
+    // Get valid filename.
+    $results = db_select('advagg_files', 'af')
+      ->fields('af', array('filename'))
+      ->condition('filetype', $type)
+      ->orderBy('filename', 'ASC')
+      ->execute();
+    while ($row = $results->fetchAssoc()) {
+      if (empty($css_file) && $type === 'css') {
+        $css_file = $row['filename'];
+        break;
+      }
+      if (empty($js_file) && $type === 'js') {
+        $js_file = $row['filename'];
+        break;
+      }
+    }
+  }
+  $form['drastic_measures']['clear_base_file']['tip'] = array(
+    '#markup' => '<p>' . t('Takes input like "@css_file" or "@advagg_js"', array(
+      '@css_file' => $css_file,
+      '@advagg_js' => $js_file,
+    )) . '</p>',
+  );
+  $form['drastic_measures']['clear_base_file']['wrapper'] = array(
+    '#markup' => "<div id='advagg-clear-file-aggregate-ajax'></div>",
+  );
+
   return $form;
 }
 
@@ -917,6 +1040,7 @@ function advagg_admin_operations_form($form, $form_state) {
  */
 function advagg_admin_info_form($form, $form_state) {
   drupal_set_title(t('AdvAgg: Information'));
+  advagg_display_message_if_requirements_not_met();
 
   // Explain what can be done on this page.
   $form['tip'] = array(
@@ -986,6 +1110,7 @@ function advagg_admin_info_form($form, $form_state) {
     $results = db_select('advagg_files', 'af')
       ->fields('af', array('filename', 'filename_hash', 'changes'))
       ->condition('filetype', $type)
+      ->orderBy('filename', 'ASC')
       ->execute();
     while ($row = $results->fetchAssoc()) {
       if (empty($css_file) && $type === 'css') {
@@ -1119,7 +1244,8 @@ function advagg_admin_info_form($form, $form_state) {
 function advagg_admin_system_performance_settings_form(&$form, $form_state) {
   $msg = t('NOTE: If you wish to bypass aggregation for a set amount of time, you can go to the <a href="@operations">AdvAgg operations</a> page and press the "aggregation bypass cookie" button.', array(
     '@operations' => url('admin/config/development/performance/advagg/operations'),
-  )) . ' ';
+  ));
+  $msg .= ' ';
   if (user_access('bypass advanced aggregation')) {
     $msg .= t('You can also selectively bypass aggregation by adding <code>@code</code> to the URL of any page.', array(
       '@code' => '?advagg=0',
@@ -1158,6 +1284,14 @@ function advagg_admin_system_performance_settings_form(&$form, $form_state) {
  * Clear out the advagg cache bin when the save configuration button is pressed.
  */
 function advagg_admin_settings_form_submit($form, &$form_state) {
+  // Remove non variables.
+  if (isset($form_state['values']['advagg_resource_hints_preload_reset'])) {
+    unset($form_state['values']['advagg_resource_hints_preload_reset']);
+  }
+
+  // Reset this form to defaults or recommended values; also show what changed.
+  advagg_set_admin_form_defaults_recommended($form_state, 'advagg_admin_mode');
+
   // Sort and fix values before saving to the db.
   foreach ($form_state['values']['advagg_resource_hints_preload_settings'] as &$entry) {
     if (isset($entry['weight'])) {
@@ -1241,7 +1375,7 @@ function advagg_admin_settings_form_submit($form, &$form_state) {
  */
 function advagg_admin_toggle_bypass_cookie($form, &$form_state) {
   $cookie_name = 'AdvAggDisabled';
-  $key = drupal_hash_base64(drupal_get_private_key());
+  $key = drupal_hmac_base64('advagg_cookie', drupal_get_private_key() . drupal_get_hash_salt() . variable_get('cron_key', 'drupal'));
 
   // If the cookie does exist then remove it.
   if (!empty($_COOKIE[$cookie_name]) && $_COOKIE[$cookie_name] == $key) {
@@ -1498,12 +1632,9 @@ function advagg_admin_clear_all_caches_button() {
 }
 
 /**
- * Clear out all advagg cache bins and clear out all advagg aggregated files.
+ * Clear out all advagg aggregated files.
  */
 function advagg_admin_clear_all_files_button() {
-  // Clear out the cache.
-  advagg_admin_clear_all_caches_button();
-
   // Run the command.
   module_load_include('inc', 'advagg', 'advagg.cache');
   list($css_files, $js_files) = advagg_remove_all_aggregated_files();
@@ -1709,6 +1840,123 @@ function advagg_admin_cleanup_temp_files_button() {
   else {
     drupal_set_message(format_plural($count, '1 leftover temp files from advagg was found. A total of 1 temp files was removed.', 'Some leftover temp files from advagg were found. A total of @count temp files were removed.'));
   }
+}
+
+/**
+ * Verify that the filename is correct.
+ */
+function advagg_admin_clear_file_aggregate_validate($form, &$form_state) {
+  if (empty($form_state['values']['filename'])) {
+    form_set_error('filename', t('Please input a filename.'));
+    $form_state['values']['error'] = TRUE;
+  }
+}
+
+/**
+ * Display what files where deleted in a drupal message.
+ */
+function advagg_admin_clear_file_aggregate_submit($form, &$form_state) {
+  // @codingStandardsIgnoreLine
+  if (!empty($form_state['input']['ajax_page_state'])) {
+    return;
+  }
+  $info = advagg_admin_clear_file_aggregates($form_state['values']['filename']);
+  if (module_exists('httprl')) {
+    $output = httprl_pr($info);
+  }
+  else {
+    $output = '<pre>' . check_plain(print_r($info, TRUE)) . '</pre>';
+  }
+  // @ignore security_dsm
+  drupal_set_message($output);
+}
+
+/**
+ * Display what files where deleted via ajax callback.
+ */
+function advagg_admin_clear_file_aggregate_callback($form, &$form_state) {
+  if (!empty($form_state['values']['error'])) {
+    return '<div id="advagg-clear-file-aggregate-ajax"></div>';
+  }
+  $info = advagg_admin_clear_file_aggregates($form_state['values']['filename']);
+  if (empty($info)) {
+    form_set_error('filename', t('Please input a valid filename.'));
+    return '<div id="advagg-clear-file-aggregate-ajax"></div>';
+  }
+  else {
+    if (module_exists('httprl')) {
+      $output = httprl_pr($info);
+    }
+    else {
+      $output = '<pre>' . print_r($info, TRUE) . '</pre>';
+    }
+    return '<div id="advagg-clear-file-aggregate-ajax">' . $output . '</div>';
+  }
+}
+
+/**
+ * Remove the aggregates that contain the given filename.
+ *
+ * @param string $filename
+ *   Name of file to lookup. Can be a comma separated list.
+ * @param bool $dry_run
+ *   If TRUE, return the regex search string.
+ *
+ * @return array
+ *   Returns an array of the parent file and what children where deleted.
+ */
+function advagg_admin_clear_file_aggregates($filename, $dry_run = FALSE) {
+  module_load_include('inc', 'advagg', 'advagg.cache');
+  list($css_path, $js_path) = advagg_get_root_files_dir();
+  $space = ADVAGG_SPACE;
+  $output = array();
+  $options = array('callback' => 'file_unmanaged_delete');
+  if ($dry_run) {
+    $options = array();
+  }
+
+  // Strip quotes and trim.
+  $filenames = array_map('trim', explode(',', trim(str_replace(array('"', "'"), '', $filename))));
+
+  foreach ($filenames as $filename) {
+    $results = db_select('advagg_files', 'af')
+      ->fields('af')
+      ->condition('filename', $filename)
+      ->execute();
+    while ($row = $results->fetchAssoc()) {
+      // Get aggregates that use this file.
+      $row['aggregates_using_file'] = advagg_get_aggregates_using_file($row['filename_hash']);
+      // Get dir and other info from file.
+      if ($row['filetype'] === 'css') {
+        $dirname = $css_path[0];
+        $basename_prefix = "{$row['filetype']}";
+      }
+      if ($row['filetype'] === 'js') {
+        $dirname = $js_path[0];
+        $basename_prefix = "{$row['filetype']}";
+      }
+
+      // Build regex search string for file_scan_directory().
+      $regex_search = array();
+      foreach ($row['aggregates_using_file'] as $values) {
+        $regex_search[] = preg_quote("{$basename_prefix}{$space}{$values['aggregate_filenames_hash']}{$space}") . '.*';
+      }
+      $regex_search = array_unique($regex_search);
+      $regex_search_string = '/(' . implode('|', $regex_search) . ')/';
+      $files = file_scan_directory($dirname, $regex_search_string, $options);
+
+      // List what files were deleted.
+      $row['aggregates_deleted'] = array();
+      $files_deleted = array_keys($files);
+      if (!empty($files_deleted)) {
+        $row['aggregates_deleted'][] = $files_deleted;
+      }
+
+      $output[$filename] = $row['aggregates_deleted'];
+    }
+  }
+
+  return $output;
 }
 
 /**

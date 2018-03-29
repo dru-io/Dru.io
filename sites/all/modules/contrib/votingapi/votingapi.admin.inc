@@ -9,14 +9,27 @@
  * Administrative settings for VotingAPI.
  */
 function votingapi_settings_form($form_state) {
-  $period = array(0 => t('Immediately')) + drupal_map_assoc(array(300, 900, 1800, 3600, 10800, 21600, 32400, 43200, 86400, 172800, 345600, 604800), 'format_interval') + array(-1 => t('Never'));
+  $period = array(0 => t('Immediately')) + drupal_map_assoc(array(
+      300,
+      900,
+      1800,
+      3600,
+      10800,
+      21600,
+      32400,
+      43200,
+      86400,
+      172800,
+      345600,
+      604800,
+    ), 'format_interval') + array(-1 => t('Never'));
 
   $form['votingapi_anonymous_window'] = array(
     '#type' => 'select',
     '#title' => t('Anonymous vote rollover'),
     '#description' => t('The amount of time that must pass before two anonymous votes from the same computer are considered unique. Setting this to \'never\' will eliminate most double-voting, but will make it impossible for multiple anonymous on the same computer (like internet cafe customers) from casting votes.'),
     '#default_value' => variable_get('votingapi_anonymous_window', 86400),
-    '#options' => $period
+    '#options' => $period,
   );
 
   $form['votingapi_user_window'] = array(
@@ -24,7 +37,7 @@ function votingapi_settings_form($form_state) {
     '#title' => t('Registered user vote rollover'),
     '#description' => t('The amount of time that must pass before two registered user votes from the same user ID are considered unique. Setting this to \'never\' will eliminate most double-voting for registered users.'),
     '#default_value' => variable_get('votingapi_user_window', -1),
-    '#options' => $period
+    '#options' => $period,
   );
 
   $form['votingapi_calculation_schedule'] = array(
@@ -35,7 +48,7 @@ function votingapi_settings_form($form_state) {
     '#options' => array(
       'immediate' => t('Tally results whenever a vote is cast'),
       'cron' => t('Tally results at cron-time'),
-      'manual' => t('Do not tally results automatically: I am using a module that manages its own vote results.')
+      'manual' => t('Do not tally results automatically: I am using a module that manages its own vote results.'),
     ),
   );
 

@@ -12,6 +12,113 @@
  */
 function backup_migrate_requirements($phase) {
   $requirements = array();
+
+  // Ensure translations don't break during installation.
+  $t = get_t();
+
+  if ($phase == 'runtime') {
+    // Get a list of all destinations, make sure none of them are publicly
+    // accessible.
+    // @todo Expand the API to add methods to specifically check this.
+    backup_migrate_include('destinations');
+    foreach (backup_migrate_get_destinations() as $dest_name => $destination) {
+      if (method_exists($destination, 'get_display_location')) {
+        $dest_path = $destination->get_display_location();
+        if (!empty($dest_path) && file_valid_uri($dest_path)) {
+          $scheme = file_uri_scheme($dest_path);
+          // Support public and private storage and raw server paths.
+          if ($scheme === 'private' || $scheme === 'public' || substr($dest_path, 0, 1) == '/') {
+            // Check if the path exists.
+            $path_exists = file_prepare_directory($dest_path, FILE_CREATE_DIRECTORY);
+            if ($path_exists) {
+              $real_path = drupal_realpath($dest_path);
+              // See if the private path is somewhere inside the main Drupal
+              // directory structure.
+              if (strpos($real_path, DRUPAL_ROOT) === 0) {
+                // Extract the relative path from the Drupal root path, and
+                // then add the base URL, theoretically creating a fully
+                // qualified URL to the storage directory.
+                $url = substr($real_path, strlen(DRUPAL_ROOT) + 1);
+                $url = url($url, array('absolute' => TRUE));
+                $result = drupal_http_request($url);
+
+                // If the HTTP request comes back as a status 200 that means
+                // there is a directory listing of some sort; directory paths
+                // should return a 503 error.
+                if (!empty($result->code) && $result->code == 200) {
+                  // Get the human readable information for this destination.
+                  $dest_spec = $destination->get_list_row();
+
+                  // Display a warning message.
+                  $requirements['bmdest_' . $dest_name] = array(
+                    'severity' => REQUIREMENT_ERROR,
+                    'title' => 'Backup Migrate',
+                    'value' => $t('Backup destination "%dest" is publicly accessible!', array('%dest' => $dest_spec['name'])),
+                    'description' => $t('The backup destination, "%dest", stores its files in the "%path" directory. This directory is publicly available from the web server and urgently needs to be secured! Please see the Drupal manual on <a href="@manual">configuring the private directory path</a> on how to fix this problem.',
+                      array(
+                        '%dest' => $dest_spec['name'],
+                        '%path'  => $real_path,
+                        '@manual' => 'https://www.drupal.org/docs/7/core/modules/file/overview',
+                      )),
+                  );
+                }
+
+                // Check an individual file.
+                else {
+                  $files = scandir($real_path);
+                  if (!empty($files)) {
+                    foreach ($files as $file) {
+                      // Skip the base field pointers.
+                      if ($file == '.' || $file == '..') {
+                        continue;
+                      }
+
+                      $result = drupal_http_request($url . '/' . $file);
+
+                      // If the HTTP request comes back as a status 200 that
+                      // means the file is accessible.
+                      if (!empty($result->code) && $result->code == 200) {
+                        // Get the human readable information for this
+                        // destination.
+                        $dest_spec = $destination->get_list_row();
+
+                        // Display a warning message.
+                        $requirements['bmdest_' . $dest_name] = array(
+                          'severity' => REQUIREMENT_ERROR,
+                          'title' => 'Backup Migrate',
+                          'value' => $t('Files in "%dest" are publicly accessible!', array('%dest' => $dest_spec['name'])),
+                          'description' => $t('The backup destination, "%dest", stores its files in the "%path" directory. These file(s) are publicly available from the web server and urgently need to be secured! Please see the Drupal manual on <a href="@manual">configuring the private directory path</a> on how to fix this problem.',
+                            array(
+                              '%dest' => $dest_spec['name'],
+                              '%path'  => $real_path,
+                              '@manual' => 'https://www.drupal.org/docs/7/core/modules/file/overview',
+                            )),
+                        );
+                      }
+
+                      // Only need to check one file.
+                      break;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+    // Leave a note if there were no problems.
+    // @todo No point in displaying this until the API has been expanded.
+    // if (empty($requirements)) {
+    //   $requirements['bmdest_' . $dest_name] = array(
+    //     'severity' => REQUIREMENT_INFO,
+    //     'title' => 'Backup Migrate',
+    //     'value' => $t('Backup destinations are safe'),
+    //     'description' => $t('The backup destinations were all checked and none of them were exposing files to the public. This is a good thing.'),
+    //   );
+    // }
+  }
+
   return $requirements;
 }
 
@@ -167,7 +274,7 @@ function backup_migrate_schema() {
       ),
       'machine_name' => array(
         'type' => 'varchar',
-        'length' => 32,
+        'length' => 255,
         'not null' => TRUE,
         'default' => '0',
         'description' => 'The primary identifier for a source.',
@@ -641,4 +748,31 @@ function backup_migrate_update_7303() {
  */
 function backup_migrate_update_7304() {
   db_query("UPDATE {backup_migrate_schedules} SET cron = 'builtin' WHERE cron = '0'");
+}
+
+/**
+ * Fix schema mismatch after upgrade.
+ */
+function backup_migrate_update_7305() {
+  foreach (array('backup_migrate_profiles', 'backup_migrate_destinations', 'backup_migrate_sources', 'backup_migrate_schedules') as $table) {
+    db_change_field($table, 'machine_name', 'machine_name', array(
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => TRUE,
+      'default' => '0',
+    ));
+  }
+  db_change_field('backup_migrate_schedules', 'cron', 'cron', array(
+    'type' => 'varchar',
+    'length' => 32,
+    'not null' => TRUE,
+    'default' => 'builtin',
+  ));
+}
+
+/**
+ * Leave a message to explain the mixup over the backup option.
+ */
+function backup_migrate_update_7306() {
+  drupal_set_message(t('Please note that release 7.x-3.4 had a bug which caused all backups to be overwritten instead of having a timestamp added. Please review all backup settings to ensure they work as intended.'), 'warning');
 }

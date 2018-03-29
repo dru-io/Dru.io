@@ -6,6 +6,7 @@
  */
 
 class votingapi_views_handler_sort_nullable extends views_handler_sort {
+
   function option_definition() {
     $options = parent::option_definition();
     $options['coalesce'] = array('default' => FALSE);

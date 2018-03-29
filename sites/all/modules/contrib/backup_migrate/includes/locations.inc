@@ -45,7 +45,7 @@ function backup_migrate_backup_migrate_locations() {
  *    'all' - all available locations should be returned
  */
 function backup_migrate_get_locations($op = 'all') {
-  static $locations = NULL;
+  $locations = &drupal_static('backup_migrate_get_locations', NULL);
 
   // Get the list of locations and cache them locally.
   if ($locations === NULL) {
@@ -234,7 +234,7 @@ class backup_migrate_location extends backup_migrate_item {
   function get_list_row() {
     $out = parent::get_list_row();
 
-    // Supress locations with no actions as there's no value in showing them (and they may confuse new users).
+    // Suppress locations with no actions as there's no value in showing them (and they may confuse new users).
     if (empty($out['actions'])) {
       return NULL;
     }
@@ -369,7 +369,7 @@ class backup_migrate_location extends backup_migrate_item {
     return $out;
   }
 
-   /**
+  /**
    * Get a url from the parts.
    */
   function url($hide_password = TRUE) {
@@ -440,44 +440,6 @@ class backup_migrate_location_remote extends backup_migrate_location {
   function set_location($location) {
     $this->location = $location;
     $this->set_url($location);
-  }
-
-  /**
-   * Get a url from the parts.
-   */
-  function url($hide_password = TRUE) {
-    return $this->glue_url($this->dest_url, $hide_password);
-  }
-
-  /**
-   * Glue a URLs component parts back into a URL.
-   */
-  function glue_url($parts, $hide_password = TRUE) {
-    // Obscure the password if we need to.
-    $parts['pass'] = $hide_password ? "" : $parts['pass'];
-
-    // Assemble the URL.
-    $out = "";
-    $out .= $parts['scheme'] .'://';
-    $out .= $parts['user'] ? urlencode($parts['user']) : '';
-    $out .= ($parts['user'] && $parts['pass']) ? ":". urlencode($parts['pass']) : '';
-    $out .= ($parts['user'] || $parts['pass']) ? "@" : "";
-    $out .= $parts['host'];
-    $out .= !empty($parts['port']) ? ':'. $parts['port'] : '';
-    $out .= "/". $parts['path'];
-    return $out;
-  }
-
-  /**
-   * Break a URL into it's component parts.
-   */
-  function set_url($url) {
-    $parts          = (array)parse_url($url);
-    $parts['user'] = urldecode(@$parts['user']);
-    $parts['pass'] = urldecode(@$parts['pass']);
-    $parts['path'] = urldecode(@$parts['path']);
-    $parts['path']  = ltrim(@$parts['path'], "/");
-    $this->dest_url = $parts;
   }
 
   /**

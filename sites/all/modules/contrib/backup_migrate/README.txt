@@ -80,6 +80,10 @@ Do not change the file extension of backup files or the restore function will be
 unable to determine the compression type the file and will not function
 correctly.
 
+The module's permissions should only be given to trusted users due to the
+inherent security vulnerabilities in allowing people access to a site's database
+and/or files backups.
+
 IF A RESTORE FAILS:
 Don't panic, the restore file should work with phpMyAdmin's import function, or
 with the mysql command line tool. If it does not, then it is likely corrupt; you

@@ -208,7 +208,7 @@ class backup_migrate_files_destination_archivesource extends backup_migrate_dest
 
       // Move the files from the temp directory.
       if ($filepath && file_exists($filepath)) {
-        _backup_migrate_move_files($filepath, file_directory_path());
+        _backup_migrate_move_files($filepath, variable_get('file_public_path', conf_path() . '/files') );
       }
       else {
         _backup_migrate_message('Files were not restored because the archive did not seem to contain a files directory or was in a format that Backup and Migrate couldn\'t read', array(), 'warning');
@@ -216,7 +216,7 @@ class backup_migrate_files_destination_archivesource extends backup_migrate_dest
 
       // Restore the sql db.
       if ($sqlfile && file_exists($sqlfile)) {
-        $db_settings = clone($settings);
+        $db_settings = clone $settings;
         $db_settings->source_id = 'db';
         $file = new backup_file(array('filepath' => $sqlfile));
         $success = backup_migrate_filters_restore($file, $db_settings);

@@ -8,7 +8,41 @@
  * data. Modules can cast votes with arbitrary properties and VotingAPI will
  * total them automatically. Support for basic anonymous voting by IP address,
  * multi-criteria voting, arbitrary aggregation functions, etc.
+ *
+ * /**
+ * Implementation of hook_help().
  */
+function votingapi_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#votingapi':
+      $output = '';
+      $text = 'module helps developers who want to use a standardized API';
+      $text .= ' and schema for storing, retrieving, and tabulating votes for';
+      $text .= ' Drupal content. Note that this module does NOT directly';
+      $text .= ' expose any voting mechanisms to end users. It is a framework';
+      $text .= ' designed to make life easier for other developers, and to';
+      $text .= ' standardize voting data for consumption by other modules';
+      $text .= ' (like Views). For more information, see the online';
+      $text .= ' documentation for the ';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('The <a href="@votingapi">VotingAPI</a> ' . $text . ' <a href="@doco">VotingAPI module</a>.',
+          array(
+            '@votingapi' => 'http://drupal.org/project/votingapi',
+            '@doco' => 'https://www.drupal.org/node/68851',
+          )) . '</p>';
+      $output .= '<h3>' . t('Uses') . '</h3>';
+      $output .= '<dl>';
+      $output .= '<dt>' . t('General') . '</dt>';
+      $output .= '<dd>' . t('VotingAPI is used to allow module developers to focus on their ideas (say, providing a "rate this thread" widget at the bottom of each forum post) without worrying about the grunt work of storing votes, preventing ballot-stuffing, calculating the results, and so on.') . '</dd>';
+      $output .= '<dt>' . t('Basic Concepts and Features ') . '</dt>';
+      $output .= '<dd>' . t('VotingAPI does four key jobs for module developers: ') . '</dd>';
+      $output .= '<dd>' . t('1. CRUD: Create/Retrieve/Update/Delete operations for voting data. ') . '</dd>';
+      $output .= '<dd>' . t('2. Calculation: Every time a user casts a vote, VotingAPI calculates the results and caches them for you.  ') . '</dd>';
+      $output .= '<dd>' . t('3. Workflow: By integrating with Actions.module, VotingAPI can trigger workflow steps (like promoting a node to the front page, hiding a comment thathas been flagged as spam, or emailing an administrator) when votes are cast and results are tallied.  ') . '</dd>';
+      $output .= '<dd>' . t('4. Display: VotingAPI integrates with Views.module, allowing you to slice and dice the content of your site based on user consensus.  ') . '</dd>';
+      return $output;
+  }
+}
 
 /**
  * Implements of hook_menu().
@@ -23,7 +57,7 @@ function votingapi_menu() {
     'access callback' => 'user_access',
     'access arguments' => array('administer voting api'),
     'file' => 'votingapi.admin.inc',
-    'type' => MENU_NORMAL_ITEM
+    'type' => MENU_NORMAL_ITEM,
   );
 
   if (module_exists('devel_generate')) {
@@ -45,9 +79,9 @@ function votingapi_menu() {
  */
 function votingapi_permission() {
   return array(
-      'administer voting api' => array(
-          'title' => t('Administer Voting API'),
-      ),
+    'administer voting api' => array(
+      'title' => t('Administer Voting API'),
+    ),
   );
 }
 
@@ -92,7 +126,7 @@ function votingapi_cron() {
  * Modules that need more explicit control can call votingapi_add_votes() and
  * manage the deletion/recalculation tasks manually.
  *
- * @param $votes
+ * @param array $votes
  *   An array of votes, each with the following structure:
  *   $vote['entity_type']  (Optional, defaults to 'node')
  *   $vote['entity_id']    (Required)
@@ -102,7 +136,7 @@ function votingapi_cron() {
  *   $vote['uid']           (Optional, defaults to current user)
  *   $vote['vote_source']   (Optional, defaults to current IP)
  *   $vote['timestamp']     (Optional, defaults to REQUEST_TIME)
- * @param $criteria
+ * @param array $criteria
  *   A keyed array used to determine what votes will be deleted when the current
  *   vote is cast. If no value is specified, all votes for the current content
  *   by the current user will be reset. If an empty array is passed in, no votes
@@ -117,7 +151,8 @@ function votingapi_cron() {
  *   $criteria['vote_source']
  *   $criteria['timestamp']   (If this is set, records with timestamps
  *      GREATER THAN the set value will be selected.)
- * @return
+ *
+ * @return array
  *   An array of vote result records affected by the vote. The values are
  *   contained in a nested array keyed thusly:
  *   $value = $results[$entity_type][$entity_id][$tag][$value_type][$function]
@@ -229,14 +264,16 @@ function votingapi_votingapi_storage_select_votes($criteria, $limit) {
  * Save a collection of votes to the database.
  *
  * This function does most of the heavy lifting for VotingAPI the main
- * votingapi_set_votes() function, but does NOT automatically triger re-tallying
+ * votingapi_set_votes() function, but does NOT automatically triger
+ * re-tallying
  * of results. As such, it's useful for modules that must insert their votes in
  * separate batches without triggering unecessary recalculation.
  *
- * Remember that any module calling this function implicitly assumes responsibility
- * for calling votingapi_recalculate_results() when all votes have been inserted.
+ * Remember that any module calling this function implicitly assumes
+ * responsibility for calling votingapi_recalculate_results() when all votes
+ * have been inserted.
  *
- * @param $votes
+ * @param array $votes
  *   A vote or array of votes, each with the following structure:
  *   $vote['entity_type']  (Optional, defaults to 'node')
  *   $vote['entity_id']    (Required)
@@ -246,7 +283,8 @@ function votingapi_votingapi_storage_select_votes($criteria, $limit) {
  *   $vote['uid']           (Optional, defaults to current user)
  *   $vote['vote_source']   (Optional, defaults to current IP)
  *   $vote['timestamp']     (Optional, defaults to REQUEST_TIME)
- * @return
+ *
+ * @return array
  *   The same votes, with vote_id keys populated.
  *
  * @see votingapi_set_votes()
@@ -274,7 +312,7 @@ function votingapi_add_votes(&$votes) {
  * little use for most third-party modules, unless they manually insert their
  * own result data.
  *
- * @param vote_results
+ * @param array vote_results
  *   An array of vote results, each with the following properties:
  *   $vote_result['entity_type']
  *   $vote_result['entity_id']
@@ -327,7 +365,9 @@ function votingapi_delete_results($vote_results = array()) {
     foreach ($vote_results as $vote) {
       $vids[] = $vote['vote_cache_id'];
     }
-    db_delete('votingapi_cache')->condition('vote_cache_id', $vids, 'IN')->execute();
+    db_delete('votingapi_cache')
+      ->condition('vote_cache_id', $vids, 'IN')
+      ->execute();
   }
 }
 
@@ -348,6 +388,7 @@ function votingapi_delete_results($vote_results = array()) {
  *      GREATER THAN the set value will be selected.)
  * @param $limit
  *   An optional integer specifying the maximum number of votes to return.
+ *
  * @return
  *   An array of votes matching the criteria.
  */
@@ -357,7 +398,8 @@ function votingapi_select_votes($criteria = array(), $limit = 0) {
     if (!empty($criteria['vote_source'])) {
       $window = variable_get('votingapi_anonymous_window', 86400);
     }
-  } else {
+  }
+  else {
     $window = variable_get('votingapi_user_window', -1);
   }
   if ($window >= 0) {
@@ -383,6 +425,7 @@ function votingapi_select_votes($criteria = array(), $limit = 0) {
  *      GREATER THAN the set value will be selected.)
  * @param $limit
  *   An optional integer specifying the maximum number of votes to return.
+ *
  * @return
  *   An array of vote results matching the criteria.
  */
@@ -405,12 +448,14 @@ function votingapi_select_results($criteria = array(), $limit = 0) {
  * responsibility for the full voting cycle: the votingapi_set_vote() function
  * recalculates automatically.
  *
- * @param $entity_type
+ * @param string $entity_type
  *   A string identifying the type of content being rated. Node, comment,
  *   aggregator item, etc.
- * @param $entity_id
+ * @param string $entity_id
  *   The key ID of the content being rated.
- * @return
+ * @param bool $force_calculation
+ *
+ * @return array
  *   An array of the resulting votingapi_cache records, structured thusly:
  *   $value = $results[$ag][$value_type][$function]
  *
@@ -460,22 +505,29 @@ function votingapi_recalculate_results($entity_type, $entity_id, $force_calculat
 
 
 /**
- * Returns metadata about tags, value_types, and results defined by vote modules.
+ * Returns metadata about tags, value_types, and results defined by vote
+ * modules.
  *
  * If your module needs to determine what existing tags, value_types, etc., are
  * being supplied by other modules, call this function. Querying the votingapi
- * tables for this information directly is discouraged, as values may not appear
- * consistently. (For example, 'average' does not appear in the cache table until
- * votes have actually been cast in the cache table.)
+ * tables for this information directly is discouraged, as values may not
+ * appear
+ * consistently. (For example, 'average' does not appear in the cache table
+ * until votes have actually been cast in the cache table.)
  *
  * Three major bins of data are stored: tags, value_types, and functions. Each
  * entry in these bins is keyed by the value stored in the actual VotingAPI
- * tables, and contains an array with (minimally) 'name' and 'description' keys.
+ * tables, and contains an array with (minimally) 'name' and 'description'
+ * keys.
  * Modules can add extra keys to their entries if desired.
  *
- * This metadata can be modified or expanded using hook_votingapi_metadata_alter().
+ * This metadata can be modified or expanded using
+ * hook_votingapi_metadata_alter().
  *
- * @return
+ * @param bool $reset
+ *   A reset status.
+ *
+ * @return array
  *   An array of metadata defined by VotingAPI and altered by vote modules.
  *
  * @see hook_votingapi_metadata_alter()
@@ -529,12 +581,15 @@ function votingapi_metadata($reset = FALSE) {
 function votingapi_votingapi_storage_standard_results($entity_type, $entity_id) {
   $cache = array();
 
-  $sql  = "SELECT v.value_type, v.tag, ";
+  $sql = "SELECT v.value_type, v.tag, ";
   $sql .= "COUNT(v.value) as value_count, SUM(v.value) as value_sum  ";
   $sql .= "FROM {votingapi_vote} v ";
   $sql .= "WHERE v.entity_type = :type AND v.entity_id = :id AND v.value_type IN ('points', 'percent') ";
   $sql .= "GROUP BY v.value_type, v.tag";
-  $results = db_query($sql, array(':type' => $entity_type, ':id' => $entity_id));
+  $results = db_query($sql, array(
+    ':type' => $entity_type,
+    ':id' => $entity_id,
+  ));
 
   foreach ($results as $result) {
     $cache[$result->tag][$result->value_type]['count'] = $result->value_count;
@@ -544,11 +599,14 @@ function votingapi_votingapi_storage_standard_results($entity_type, $entity_id) 
     }
   }
 
-  $sql  = "SELECT v.tag, v.value, v.value_type, COUNT(1) AS score ";
+  $sql = "SELECT v.tag, v.value, v.value_type, COUNT(1) AS score ";
   $sql .= "FROM {votingapi_vote} v ";
   $sql .= "WHERE v.entity_type = :type AND v.entity_id = :id AND v.value_type = 'option' ";
   $sql .= "GROUP BY v.value, v.tag, v.value_type";
-  $results = db_query($sql, array(':type' => $entity_type, ':id' => $entity_id));
+  $results = db_query($sql, array(
+    ':type' => $entity_type,
+    ':id' => $entity_id,
+  ));
 
   foreach ($results as $result) {
     $cache[$result->tag][$result->value_type]['option-' . $result->value] = $result->score;
@@ -580,9 +638,6 @@ function votingapi_select_single_result_value($criteria = array()) {
  *
  * @param $vote
  *   A single vote.
- * @return
- *   A vote object with all required properties filled in with
- *   their default values.
  */
 function _votingapi_prep_vote(&$vote) {
   global $user;
@@ -594,7 +649,7 @@ function _votingapi_prep_vote(&$vote) {
       'uid' => $user->uid,
       'timestamp' => REQUEST_TIME,
       'vote_source' => ip_address(),
-      'prepped' => TRUE
+      'prepped' => TRUE,
     );
   }
 }

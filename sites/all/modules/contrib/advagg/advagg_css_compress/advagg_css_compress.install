@@ -52,6 +52,20 @@ function advagg_css_compress_requirements($phase) {
       );
     }
   }
+
+  // Check version.
+  $lib_name = 'YUI-CSS-compressor-PHP-port';
+  $module_name = 'advagg_css_compress';
+  list($description, $info) = advagg_get_version_description($lib_name, $module_name);
+  if (!empty($description)) {
+    $requirements["{$module_name}_{$lib_name}_updates"] = array(
+      'title' => $t('@module_name', array('@module_name' => $info['name'])),
+      'severity' => REQUIREMENT_WARNING,
+      'value' => $t('The @name library needs to be updated.', array('@name' => $lib_name)),
+      'description' => $description,
+    );
+  }
+
   return $requirements;
 }
 

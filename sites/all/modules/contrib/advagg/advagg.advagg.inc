@@ -308,6 +308,7 @@ function advagg_advagg_get_info_on_files_alter(&$return, $cached_data, $bypass_c
       }
       // Get the file contents.
       $file_contents = (string) @advagg_file_get_contents($info['data']);
+      $file_contents = advagg_load_css_stylesheet($info['data'], FALSE, $aggregate_settings, $file_contents);
 
       // Get domain names and external assets in this css file.
       $hosts = array();
@@ -345,7 +346,6 @@ function advagg_advagg_get_info_on_files_alter(&$return, $cached_data, $bypass_c
 
       // Get local files to preload in this css file.
       if (variable_get('advagg_resource_hints_preload', ADVAGG_RESOURCE_HINTS_PRELOAD)) {
-        $file_contents = advagg_load_css_stylesheet($info['data'], FALSE, $aggregate_settings, $file_contents);
         $matches = array();
         $pattern = '/url\(\s*+[\'"]?(.*?)[\'"\s]?+\)/i';
         preg_match_all($pattern, $file_contents, $matches);
@@ -615,7 +615,7 @@ function _advagg_locale_changed_files(array $files, array $types) {
       if ($lang->enabled) {
         $GLOBALS['language'] = $lang;
         $javascript = $javascript_before;
-        locale_js_alter($javascript);
+        _advagg_locale_js_alter($javascript);
       }
     }
     $GLOBALS['language'] = $language_before;

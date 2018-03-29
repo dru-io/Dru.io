@@ -6,6 +6,7 @@
  */
 
 class VotingAPITestCase extends DrupalWebTestCase {
+
   public static function getInfo() {
     return array(
       'name' => 'Voting API',
@@ -50,15 +51,14 @@ class VotingAPITestCase extends DrupalWebTestCase {
     // entity_id and value.
     $vote = array(
       'entity_id' => $nid,
-      'value' => $value
+      'value' => $value,
     );
     try {
       $result = votingapi_add_votes($vote);
       // Test that the result has its fields set appropriately.
       $this->validateVote('testMinimalAdd()', $result, $nid, array($value));
       $this->assertTrue(REQUEST_TIME - $result[0]['timestamp'] < 2, t('The timestamp should be less than 2 seconds ago.'));
-    }
-    catch (Exception $e) {
+    } catch (Exception $e) {
       $this->fail(t('Could not add a vote with only entity_id and value.'));
       return;
     }
@@ -71,16 +71,17 @@ class VotingAPITestCase extends DrupalWebTestCase {
     global $user;
     $value = '7';
     $nid = variable_get('votingapi_nid1', NULL);
-    $vote = array('entity_id' => $nid,
+    $vote = array(
+      'entity_id' => $nid,
       'value' => $value,
-      'entity_type' => 'node');
+      'entity_type' => 'node',
+    );
     try {
       $result = votingapi_add_votes($vote);
       // Test that the result has its fields set appropriately.
       $this->validateVote("testAddVote()", $result, $nid, $value, 'node', $user->uid);
       $this->assertTrue(REQUEST_TIME - $result[0]['timestamp'] < 2, t('The timestamp should be less than 2 seconds ago.'));
-    }
-    catch (Exception $e) {
+    } catch (Exception $e) {
       $this->fail('The votingapi_add_votes threw an error during the "votingapi_add_votes" call.');
       return;
     }
@@ -111,8 +112,7 @@ class VotingAPITestCase extends DrupalWebTestCase {
       $result = votingapi_add_votes($votes);
       // Test that the result has its fields set appropriately.
       $this->validateVote("testAddMultipleVotes()", $result, $nid, $values);
-    }
-    catch (Exception $e) {
+    } catch (Exception $e) {
       $this->fail('The votingapi_add_votes threw an error during the "votingapi_add_votes" call.');
       return;
     }
@@ -122,7 +122,7 @@ class VotingAPITestCase extends DrupalWebTestCase {
   }
 
   function validateVote($prefix, $vote, $entity_id, $value, $entity_type = 'node',
-    $uid = NULL, $value_type = 'percent', $tag = 'vote', $vote_source = NULL) {
+                        $uid = NULL, $value_type = 'percent', $tag = 'vote', $vote_source = NULL) {
     global $user;
     if ($vote_source == NULL) {
       $vote_source = ip_address();
@@ -142,37 +142,37 @@ class VotingAPITestCase extends DrupalWebTestCase {
   }
 
   function validateVoteCounts($prefix, $votes, $entity_id, $values, $entity_type = 'node',
-    $value_type = 'percent', $tag = 'vote') {
-      $count_summary = 0;
-      $average_summary = 1;
-      $count = 0.0;
-      $sum = 0.0;
-      foreach ($values as $value) {
-        $sum += $value;
-        $count++;
+                              $value_type = 'percent', $tag = 'vote') {
+    $count_summary = 0;
+    $average_summary = 1;
+    $count = 0.0;
+    $sum = 0.0;
+    foreach ($values as $value) {
+      $sum += $value;
+      $count++;
+    }
+    $average = $sum / $count;
+    $prefix_array = array('@prefix' => $prefix);
+    foreach ($votes as $summary) {
+      if ($summary['function'] == 'count') {
+        $summary_desc = 'count summary';
+        $prefix_array['@summary_desc'] = $summary_desc;
+        $this->assertTrue($summary['value'] == $count,
+          t('@prefix: (@summary_desc) value should match the number of values.', $prefix_array));
       }
-      $average = $sum / $count;
-      $prefix_array = array('@prefix' => $prefix);
-      foreach ($votes as $summary) {
-        if ($summary['function'] == 'count') {
-          $summary_desc = 'count summary';
-          $prefix_array['@summary_desc'] = $summary_desc;
-          $this->assertTrue($summary['value'] == $count,
-            t('@prefix: (@summary_desc) value should match the number of values.', $prefix_array));
-        }
-        elseif ($summary['function'] == 'average') {
-          $summary_desc = 'average summary';
-          $prefix_array['@summary_desc'] = $summary_desc;
-          $this->assertTrue($summary['value'] == $average,
-            t('@prefix: (@summary_desc) value should match the average of values', $prefix_array));
-        }
-        else {
-          $prefix_array['@summary'] = $summary['function'];
-          $prefix_array['@summary_desc'] = $summary['function'] . ' summary';
-          $this->assertFalse(TRUE, t('@prefix: Unknown summary type @summary.', $prefix_array));
-        }
-        $this->assertTrue($summary['entity_type'] == $entity_type,
-          t('@prefix: (@summary_desc) entity_type should match, default = "node"', $prefix_array));
+      elseif ($summary['function'] == 'average') {
+        $summary_desc = 'average summary';
+        $prefix_array['@summary_desc'] = $summary_desc;
+        $this->assertTrue($summary['value'] == $average,
+          t('@prefix: (@summary_desc) value should match the average of values', $prefix_array));
+      }
+      else {
+        $prefix_array['@summary'] = $summary['function'];
+        $prefix_array['@summary_desc'] = $summary['function'] . ' summary';
+        $this->assertFalse(TRUE, t('@prefix: Unknown summary type @summary.', $prefix_array));
+      }
+      $this->assertTrue($summary['entity_type'] == $entity_type,
+        t('@prefix: (@summary_desc) entity_type should match, default = "node"', $prefix_array));
       $this->assertTrue($summary['entity_id'] == $entity_id,
         t('@prefix: (@summary_desc) entity_id should match', $prefix_array));
       $this->assertTrue($summary['value_type'] == $value_type,

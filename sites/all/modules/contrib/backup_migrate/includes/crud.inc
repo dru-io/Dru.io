@@ -166,7 +166,7 @@ function backup_migrate_crud_ui_list($type) {
  * Page callback to list all items.
  */
 function backup_migrate_crud_ui_list_all() {
-  $out = '';
+  $out = array();
   foreach (backup_migrate_crud_types() as $type => $info) {
     $type = backup_migrate_crud_type_load($type);
     $out[] = theme('backup_migrate_group', array('title' => t($type->title_plural), 'body' => $type->get_list()));
@@ -908,7 +908,6 @@ class backup_migrate_item {
    * Get all of the given items.
    */
   function all_items() {
-    static $cache = array();
     $items = array();
 
     // Get any items stored as a variable. This allows destinations to be defined in settings.php

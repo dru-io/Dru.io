@@ -303,26 +303,32 @@ function backup_migrate_permission() {
     'access backup and migrate' => array(
       'title' => t('Access Backup and Migrate'),
       'description' => t('Access the Backup and Migrate admin section.'),
+      'restrict access' => TRUE,
     ),
     'perform backup' => array(
       'title' => t('Perform a backup'),
       'description' => t('Back up any of the available databases.'),
+      'restrict access' => TRUE,
     ),
     'access backup files' => array(
       'title' => t('Access backup files'),
       'description' => t('Access and download the previously created backup files.'),
+      'restrict access' => TRUE,
     ),
     'delete backup files' => array(
       'title' => t('Delete backup files'),
       'description' => t('Delete the previously created backup files.'),
+      'restrict access' => TRUE,
     ),
     'restore from backup' => array(
       'title' => t('Restore the site'),
       'description' => t('Restore the site\'s database from a backup file.'),
+      'restrict access' => TRUE,
     ),
     'administer backup and migrate' => array(
       'title' => t('Administer Backup and Migrate'),
       'description' => t('Edit Backup and Migrate profiles, schedules and destinations.'),
+      'restrict access' => TRUE,
     ),
   );
 }
@@ -1347,7 +1353,7 @@ function backup_migrate_ui_export_form($form, &$form_state, $item) {
 }
 
 /**
- * List the previously created backups from accross multiple destinations.
+ * List the previously created backups from across multiple destinations.
  */
 function backup_migrate_ui_saved_backups() {
   backup_migrate_include('profiles', 'destinations', 'sources');
@@ -1389,7 +1395,7 @@ function backup_migrate_ui_saved_backups() {
 }
 
 /**
- * List the previously created backups from accross multiple destinations.
+ * List the previously created backups from across multiple destinations.
  */
 function backup_migrate_get_saved_backups($refresh = FALSE) {
   backup_migrate_include('profiles', 'destinations', 'sources');
@@ -1440,8 +1446,8 @@ function backup_migrate_perform_backup(&$settings) {
   timer_start('backup_migrate_backup');
 
   // If not in 'safe mode', increase the maximum execution time:
-  if (!ini_get('safe_mode') && strpos(ini_get('disable_functions'), 'set_time_limit') === FALSE && ini_get('max_execution_time') < 1200) {
-    set_time_limit(variable_get('backup_migrate_backup_max_time', 1200));
+  if (!ini_get('safe_mode') && ini_get('max_execution_time') < variable_get('backup_migrate_backup_max_time', 1200)) {
+    drupal_set_time_limit(variable_get('backup_migrate_backup_max_time', 1200));
   }
 
   // Confirm the destinations are valid
@@ -1519,7 +1525,7 @@ function backup_migrate_perform_restore($destination_id, $file, $settings = arra
 
   // If not in 'safe mode', increase the maximum execution time:
   if (!ini_get('safe_mode') && ini_get('max_execution_time') < variable_get('backup_migrate_backup_max_time', 1200)) {
-    set_time_limit(variable_get('backup_migrate_restore_max_time', 1200));
+    drupal_set_time_limit(variable_get('backup_migrate_restore_max_time', 1200));
   }
 
   // Make the settings into a default profile.
@@ -1591,7 +1597,7 @@ function backup_migrate_backup_fail($message, $params, $settings) {
 }
 
 /**
- * Clean up when a backup operation suceeds.
+ * Clean up when a backup operation succeeds.
  */
 function backup_migrate_backup_succeed($message, $params, $settings) {
   backup_migrate_include('filters', 'files');
@@ -1613,7 +1619,7 @@ function backup_migrate_restore_fail($message, $params, $settings) {
 }
 
 /**
- * Clean up when a restore operation suceeds.
+ * Clean up when a restore operation succeeds.
  */
 function backup_migrate_restore_succeed($message, $params, $settings) {
   backup_migrate_include('filters', 'files');
@@ -1867,5 +1873,20 @@ function backup_migrate_format_size($size, $langcode = LANGUAGE_NONE) {
     }
     return t($string, array('@size' => round($size/$multiply, $precision)), array('langcode' => $langcode));
   }
+}
 
+/**
+ * Implements hook_mail().
+ */
+function backup_migrate_mail($key, &$message, $params) {
+  if ($key == 'backup_succeed') {
+    $message['id'] = 'backup_migrate_backup_succeed';
+    $message['subject'] = t('!site backup succeeded', array('!site' => variable_get('site_name', 'Drupal site')));
+    $message['body'][] = $params['body'];
+  }
+  elseif ($key == 'backup_fail') {
+    $message['id'] = 'backup_migrate_backup_fail';
+    $message['subject'] = t('!site backup failed', array('!site' => variable_get('site_name', 'Drupal site')));
+    $message['body'][] = $params['body'];
+  }
 }

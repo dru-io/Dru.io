@@ -115,6 +115,95 @@ function advagg_css_compress_advagg_modify_css_pre_render_alter(&$children, &$el
  */
 
 /**
+ * @addtogroup 3rd_party_hooks
+ * @{
+ */
+
+/**
+ * Implements hook_libraries_info().
+ */
+function advagg_css_compress_libraries_info() {
+  $libraries['YUI-CSS-compressor-PHP-port'] = array(
+    // Only used in administrative UI of Libraries API.
+    'name' => 'YUI CSS compressor PHP port',
+    'vendor url' => 'https://github.com/tubalmartin/YUI-CSS-compressor-PHP-port',
+    'download url' => 'https://github.com/tubalmartin/YUI-CSS-compressor-PHP-port/archive/master.zip',
+    'version callback' => 'advagg_css_compress_libraries_get_version',
+    'version arguments' => array(
+      'file' => 'README.md',
+      'pattern' => '/###\s+v([0-9a-zA-Z\.-]+)/',
+      'lines' => 1000,
+      'cols' => 20,
+      'default_version' => '2.4.8',
+    ),
+    'local version' => '2.4.8-p10',
+    'remote' => array(
+      'callback' => 'advagg_get_github_version_txt',
+      'url' => 'https://rawgit.com/tubalmartin/YUI-CSS-compressor-PHP-port/master/README.md',
+    ),
+    'versions' => array(
+      '2' => array(
+        'files' => array(
+          'php' => array(
+            'cssmin.php',
+            'data/hex-to-named-color-map.php',
+            'data/named-to-hex-color-map.php',
+          ),
+        ),
+      ),
+      '3' => array(
+        'files' => array(
+          'php' => array(
+            'src/Minifier.php',
+            'src/Utils.php',
+            'src/Colors.php',
+            'src/data/hex-to-named-color-map.php',
+            'src/data/named-to-hex-color-map.php',
+          ),
+        ),
+      ),
+      '4' => array(
+        'files' => array(
+          'php' => array(
+            'src/Minifier.php',
+            'src/Utils.php',
+            'src/Colors.php',
+          ),
+        ),
+      ),
+    ),
+  );
+
+  return $libraries;
+}
+
+/**
+ * @} End of "addtogroup 3rd_party_hooks".
+ */
+
+/**
+ * Try libraries_get_version(), on failure use the passed in default_version.
+ *
+ * @param array $library
+ *   An associative array containing all information about the library.
+ * @param array $options
+ *   An associative array containing options for the version parser.
+ *
+ * @return string
+ *   Version number.
+ */
+function advagg_css_compress_libraries_get_version(array $library, array $options) {
+  $return = libraries_get_version($library, $options);
+  if (empty($return) && !empty($options['default_version'])) {
+    $file = DRUPAL_ROOT . '/' . $library['library path'] . '/' . $options['file'];
+    if (is_readable($file)) {
+      return $options['default_version'];
+    }
+  }
+  return $return;
+}
+
+/**
  * Generate the js compress configuration.
  *
  * @return array

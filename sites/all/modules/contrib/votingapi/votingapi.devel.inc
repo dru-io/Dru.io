@@ -79,4 +79,3 @@ function _votingapi_cast_votes($etype, $eid, $timestamp = 0, $uids = array(), $s
   }
   votingapi_set_votes($votes, array());
 }
-

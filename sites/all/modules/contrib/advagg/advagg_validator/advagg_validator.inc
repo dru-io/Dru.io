@@ -16,7 +16,7 @@ function advagg_validator_test_advagg_css($options = array()) {
   $query_files = db_select('advagg_files', 'af')
     ->fields('af', array('filename_hash', 'filename'))
     ->condition('af.filetype', 'css')
-    ->orderBy('filename', 'DESC')
+    ->orderBy('filename', 'ASC')
     ->execute()
     ->fetchAllKeyed();
   $files = array_values($query_files);

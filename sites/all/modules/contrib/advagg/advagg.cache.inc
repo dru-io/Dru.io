@@ -95,6 +95,9 @@ function advagg_push_new_changes(array $files = array()) {
   // Scan the file system for changes to CSS/JS files.
   if (empty($files)) {
     $files = advagg_scan_for_changes();
+    if (variable_get('advagg_debug', ADVAGG_DEBUG) >= 2) {
+      watchdog('advagg-debug', 'Changes detected in <pre>@files</pre>.', array('@files' => print_r($files, TRUE)), WATCHDOG_DEBUG);
+    }
   }
 
   // Clear some static caches.
@@ -102,6 +105,12 @@ function advagg_push_new_changes(array $files = array()) {
   drupal_static_reset('advagg_drupal_hash_base64');
   drupal_static_reset('advagg_current_hooks_hash_array');
   drupal_static_reset('advagg_get_current_hooks_hash');
+
+  if (variable_get('advagg_debug', ADVAGG_DEBUG) >= 2) {
+    // Exception used to get a compact stack trace.
+    $e = new Exception();
+    watchdog('advagg-debug', 'New changes called by: <pre>@changes</pre>', array('@changes' => print_r($e->getTraceAsString(), TRUE)), WATCHDOG_DEBUG);
+  }
 
   // If something changed, flush the correct caches so that change goes out.
   if (!empty($files)) {
@@ -117,6 +126,9 @@ function advagg_push_new_changes(array $files = array()) {
       if (!empty($cache_ids)) {
         $cache_hits = cache_get_multiple($cache_ids, 'cache_advagg_info');
         foreach ($cache_hits as $cid => $data) {
+          if (variable_get('advagg_debug', ADVAGG_DEBUG) >= 2) {
+            watchdog('advagg-debug', 'Clearing cache @cid.', array('@cid' => $cid), WATCHDOG_DEBUG);
+          }
           cache_clear_all($cid, 'cache_advagg_info', FALSE);
         }
       }
@@ -147,6 +159,9 @@ function advagg_push_new_changes(array $files = array()) {
 
     // Clear out the full aggregates cache.
     foreach ($types as $ext => $bool) {
+      if (variable_get('advagg_debug', ADVAGG_DEBUG) >= 2) {
+        watchdog('advagg-debug', 'Clearing cache advagg:@ext: in cache_advagg_aggregates.', array('@ext' => print_r($ext, TRUE)), WATCHDOG_DEBUG);
+      }
       cache_clear_all('advagg:' . $ext . ':', 'cache_advagg_aggregates', TRUE);
     }
   }
@@ -904,7 +919,7 @@ function advagg_detect_subfile_changes($filename, array $subfiles, $keyname, $sa
       );
     }
 
-    // Set the info incase a save happens.
+    // Set the info in case a save happens.
     $info[$keyname][$subfile] = $current_file_info;
 
     // Check for any differences.

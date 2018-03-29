@@ -12,7 +12,7 @@ define('BACKUP_MIGRATE_FILENAME_MAXLENGTH', 255);
  * Add a file to the temporary files list for deletion when we're done.
  */
 function backup_migrate_temp_files_add($filepath = NULL) {
-  static $files = array();
+  $files = &drupal_static('backup_migrate_temp_files_add', array());
   if (!$filepath) {
     return $files;
   }
@@ -154,7 +154,7 @@ function _backup_migrate_construct_filename($settings) {
 
   // Generate a timestamp if needed.
   $timestamp = '';
-  if ($settings->append_timestamp && $settings->timestamp_format) {
+  if ($settings->append_timestamp == 1 && $settings->timestamp_format) {
     $timestamp = format_date(time(), 'custom', $settings->timestamp_format);
   }
 
@@ -213,7 +213,7 @@ class backup_file {
   /**
    * Construct a file object given a file path, or create a temp file for writing.
    */
-  function backup_file($params = array()) {
+  function __construct($params = array()) {
     if (isset($params['filepath']) && file_exists($params['filepath'])) {
       $this->set_filepath($params['filepath']);
     }

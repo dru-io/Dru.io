@@ -40,7 +40,8 @@ function votingapi_drush_command() {
   );
   $items['votingapi-recalculate'] = array(
     'description' => 'Regenerates voting results from raw vote data.',
-    'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_LOGIN, // Various D7 code assumes we have a uid.
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_LOGIN,
+    // Various D7 code assumes we have a uid.
     'arguments' => array(
       'entity_type' => 'The type of entity to recalculate vote results for.',
     ),
@@ -48,7 +49,8 @@ function votingapi_drush_command() {
   );
   $items['votingapi-flush'] = array(
     'description' => 'Deletes all existing voting data.',
-    'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_LOGIN, // Various D7 code assumes we have a uid.
+    'bootstrap' => DRUSH_BOOTSTRAP_DRUPAL_LOGIN,
+    // Various D7 code assumes we have a uid.
     'arguments' => array(
       'entity_type' => 'The type of entity whose voting data should be flushed.',
     ),
@@ -70,7 +72,10 @@ function drush_votingapi_generate_votes($entity_type = 'node', $vote_type = 'per
   require_once(drupal_get_path('module', 'votingapi') . '/votingapi.devel.inc');
   votingapi_generate_votes($entity_type, $vote_type, $options);
 
-  drush_log(t('Generating @vtype votes for @etype entities.', array('@vtype' => $vote_type, '@etype' => $entity_type)), 'success');
+  drush_log(t('Generating @vtype votes for @etype entities.', array(
+    '@vtype' => $vote_type,
+    '@etype' => $entity_type,
+  )), 'success');
 }
 
 /**
@@ -84,7 +89,7 @@ function drush_votingapi_recalculate($entity_type = 'node', $entity_id = NULL) {
       ->fields('vv', array('entity_type', 'entity_id'))
       ->condition('entity_type', $entity_type, '=')->distinct(TRUE)
       ->execute()->fetchAll(PDO::FETCH_ASSOC);
-      $message = t('Rebuilt voting results for @type votes.', array('@type' => $entity_type));
+    $message = t('Rebuilt voting results for @type votes.', array('@type' => $entity_type));
   }
   else {
     $votes[] = array('entity_type' => $entity_type, 'entity_id' => $entity_id);

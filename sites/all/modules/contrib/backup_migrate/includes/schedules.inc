@@ -67,7 +67,7 @@ function backup_migrate_schedules_run() {
  */
 function backup_migrate_schedule_run($schedule_id) {
   backup_migrate_include('profiles');
-  if ($schedule = backup_migrate_get_schedule($schedule_id)) {
+  if (($schedule = backup_migrate_get_schedule($schedule_id)) && $schedule->is_enabled()) {
     $schedule->run();
   }
   backup_migrate_cleanup();
@@ -77,7 +77,7 @@ function backup_migrate_schedule_run($schedule_id) {
  * Get all the available backup schedules.
  */
 function backup_migrate_get_schedules() {
-  static $schedules = NULL;
+  $schedules = &drupal_static('backup_migrate_get_schedules');
   // Get the list of schedules and cache them locally.
   if ($schedules === NULL) {
     $schedules = backup_migrate_crud_get_items('schedule');
@@ -474,7 +474,7 @@ class backup_migrate_schedule extends backup_migrate_item {
       "#default_value" => $cron ? $cron : BACKUP_MIGRATE_CRON_BUILTIN,
       '#parents' => array('cron'),
     );
-    if (!module_exists('elysia_cron')) {
+    if (!module_exists('elysia_cron') && !module_exists('ultimate_cron')) {
       $form['cron_settings']['cron_elysia']['#disabled'] = TRUE;
       $form['cron_settings']['cron_elysia']['#description'] .= ' ' . t('Install !elysia to enable this option.', array('!elysia' => l(t('Elysia Cron'), 'http://drupal.org/project/elysia_cron')));
     }
@@ -636,6 +636,10 @@ class backup_migrate_schedule extends backup_migrate_item {
    * Run the actual schedule.
    */
   function run() {
+    // Clear cached profile data which could have been altered by previous
+    // schedule run; see #2672478
+    drupal_static_reset('backup_migrate_get_profiles');
+
     if ($settings = $this->get_profile()) {
       $settings->source_id = $this->get('source_id');
       $settings->destination_id = $this->get('destination_ids');

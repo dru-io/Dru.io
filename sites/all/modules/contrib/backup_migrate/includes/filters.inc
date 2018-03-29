@@ -10,7 +10,7 @@
  * Get the available destination types.
  */
 function backup_migrate_get_filters($op = NULL) {
-  static $filters = NULL;
+  $filters = &drupal_static('backup_migrate_get_filters', NULL);
   if ($filters === NULL) {
     $filters = array();
     $definitions = module_invoke_all('backup_migrate_filters');
