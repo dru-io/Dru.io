@@ -7,7 +7,7 @@ sites/*/private
 
 **/*.log
 **/.sass-cache
-**/node-modules
+**/node_modules
 
 docker-compose.yml
 /.idea/
