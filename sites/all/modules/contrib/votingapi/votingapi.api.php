@@ -132,7 +132,7 @@ function hook_votingapi_views_formatters($field) {
  *   defaults loaded from votingapi_prep_vote().
  */
 function hook_votingapi_storage_add_vote(&$vote) {
-  _mongodb_votingapi_prepare_vote($criteria);
+  _mongodb_votingapi_prepare_vote($vote);
   mongodb_collection('votingapi_vote')->insert($vote);
 }
 

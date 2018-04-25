@@ -45,6 +45,7 @@ class UltimateCronDatabaseLogger extends UltimateCronLogger {
     $jobs = _ultimate_cron_job_load_all();
     $current = 1;
     $max = 0;
+    $count_deleted = array();
     foreach ($jobs as $job) {
       if ($job->getPlugin($this->type)->name === $this->name) {
         $max++;
@@ -52,13 +53,23 @@ class UltimateCronDatabaseLogger extends UltimateCronLogger {
     }
     foreach ($jobs as $job) {
       if ($job->getPlugin($this->type)->name === $this->name) {
-        $this->cleanupJob($job);
+        $deleted_logs = $this->cleanupJob($job);
         $class = _ultimate_cron_get_class('job');
         if ($class::$currentJob) {
           $class::$currentJob->setProgress($current / $max);
           $current++;
         }
+        if ($deleted_logs > 0) {
+          // Store number of deleted messages for each job.
+          $count_deleted[$job->name] = $deleted_logs;
+        }
       }
+    }
+    if (!empty($count_deleted)) {
+      watchdog('database_logger', '@count_entries log entries removed for @jobs_count jobs', array(
+          '@count_entries' => array_sum($count_deleted),
+          '@jobs_count' => count($count_deleted),
+      ), WATCHDOG_INFO);
     }
   }
 
@@ -70,7 +81,7 @@ class UltimateCronDatabaseLogger extends UltimateCronLogger {
 
     switch ($settings['method']) {
       case ULTIMATE_CRON_DATABASE_LOGGER_CLEANUP_METHOD_DISABLED:
-        return;
+        return 0;
 
       case ULTIMATE_CRON_DATABASE_LOGGER_CLEANUP_METHOD_EXPIRE:
         $expire = $settings['expire'];
@@ -86,7 +97,7 @@ class UltimateCronDatabaseLogger extends UltimateCronLogger {
         ))->fetchField();
         $max -= $settings['retain'];
         if ($max <= 0) {
-          return;
+          return 0;
         }
         $chunk = min($max, 100);
         break;
@@ -95,7 +106,7 @@ class UltimateCronDatabaseLogger extends UltimateCronLogger {
         watchdog('ultimate_cron', 'Invalid cleanup method: @method', array(
           '@method' => $settings['method'],
         ));
-        return;
+        return 0;
     }
 
     // Chunked delete.
@@ -119,12 +130,8 @@ class UltimateCronDatabaseLogger extends UltimateCronLogger {
           ->execute();
       }
     } while ($lids && $max > 0);
-    if ($count) {
-      watchdog('database_logger', '@count log entries removed for job @name', array(
-        '@count' => $count,
-        '@name' => $job->name,
-      ), WATCHDOG_INFO);
-    }
+
+    return $count;
   }
 
   /**

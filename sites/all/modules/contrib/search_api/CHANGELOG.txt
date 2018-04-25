@@ -1,3 +1,29 @@
+Search API 1.24 (2018-04-05):
+-----------------------------
+- #2958201 by jcnventura, drunken monkey: Reverted issue #2566529: Added
+  support for the "Content access" processor for "Multiple types" indexes.
+
+Search API 1.23 (2018-03-31):
+-----------------------------
+- #2949562 by DamienMcKenna, drunken monkey: Fixed stemming of multi-word
+  tokens.
+- #1903004 by AndyF, joseph.olstad, drunken monkey: Fixed errors at feature
+  module installation in certain edge cases.
+- #2889989 by kevineinarsson, drunken monkey, kristofferwiklund: Fixed
+  highlighting for text with multi-byte characters.
+- #1393064 by xlyz, drunken monkey, jannis: Fixed handling of empty facet
+  filters.
+- #2927692 by drunken monkey, Kristi Wachter: Fixed exposed grouped Views
+  options filters.
+- #2928769 by jannis, drunken monkey: Fixed Views cache not being cleared when
+  enabling indexes.
+- #2566529 by Dylan Donkersgoed, drunken monkey, joachim, swirt: Added support
+  for the "Content access" processor for "Multiple types" indexes.
+- #2905445 by ciss, drunken monkey: Fixed error handling in Views term filter
+  handler.
+- #2904268 by pobster, drunken monkey: Added support for language hierarchy in
+  Views.
+
 Search API 1.22 (2017-07-18):
 -----------------------------
 - #1710212 by drunken monkey: Added a data alteration for indexing a user's

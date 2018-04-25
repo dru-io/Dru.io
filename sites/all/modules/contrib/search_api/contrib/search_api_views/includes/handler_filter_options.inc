@@ -257,6 +257,32 @@ class SearchApiViewsHandlerFilterOptions extends SearchApiViewsHandlerFilter {
   }
 
   /**
+   * {@inheritdoc}
+   */
+  function accept_exposed_input($input) {
+    $accepted = parent::accept_exposed_input($input);
+
+    // Grouped filters will have the raw form values structure from the
+    // checkboxes as the value here. Convert that into the correct array of
+    // values instead.
+    if ($accepted && is_array($this->value) && $this->is_a_group()) {
+      // For some reason, Views thinks it's a good idea to nest the form values
+      // into a second array in some cases. That one will be numerically indexed
+      // with just a single entry, though, so it should be relatively easy to
+      // spot.
+      if (count($this->value) && isset($this->value[0])) {
+        $this->value = reset($this->value);
+      }
+      $this->value = array_keys(array_filter($this->value));
+      if (!$this->value) {
+        return FALSE;
+      }
+    }
+
+    return $accepted;
+  }
+
+  /**
    * Add this filter to the query.
    */
   public function query() {

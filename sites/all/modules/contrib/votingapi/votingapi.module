@@ -71,6 +71,22 @@ function votingapi_menu() {
     );
   }
 
+  $items['admin/config/search/votingapi/general'] = array(
+    'title' => 'General Settings',
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+  );
+  $items['admin/config/search/votingapi/rebuild'] = array(
+    'title' => t('Rebuild voting results'),
+    'description' => t('Allows rebuilding of voting results cache'),
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('votingapi_rebuild_form'),
+    'access callback' => 'user_access',
+    'access arguments' => array('administer voting api'),
+    'file' => 'votingapi.admin.inc',
+    'type' => MENU_LOCAL_TASK,
+  );
+
   return $items;
 }
 

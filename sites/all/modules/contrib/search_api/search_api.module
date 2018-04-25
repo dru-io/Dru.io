@@ -1026,6 +1026,28 @@ function search_api_search_api_item_type_info() {
 }
 
 /**
+ * Implements hook_module_implements_alter().
+ *
+ * Ensures the item type and service class static caches are invalidated at the
+ * right time.
+ */
+function search_api_module_implements_alter(array &$implementations, $hook) {
+  switch ($hook) {
+    case 'modules_enabled':
+      $group = $implementations['search_api'];
+      unset($implementations['search_api']);
+      $implementations = array('search_api' => $group) + $implementations;
+      break;
+
+    case 'modules_disabled':
+      $group = $implementations['search_api'];
+      unset($implementations['search_api']);
+      $implementations['search_api'] = $group;
+      break;
+  }
+}
+
+/**
  * Implements hook_modules_enabled().
  */
 function search_api_modules_enabled() {
