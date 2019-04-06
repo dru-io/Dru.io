@@ -72,7 +72,7 @@ module:
   pathauto: 1
   views: 10
   paragraphs: 11
-  standard: 1000
+  minimal: 1000
 theme:
   stable: 0
   classy: 0
@@ -80,7 +80,7 @@ theme:
   seven: 0
   glisseo: 0
   druio_theme: 0
-profile: standard
+profile: minimal
 _core:
   default_config_hash: R4IF-ClDHXxblLcG0L7MgsLvfBIMAvi_skumNFQwkDc
 langcode: ru
